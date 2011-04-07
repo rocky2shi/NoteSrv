@@ -1,0 +1,610 @@
+<title>预览</title> 
+<input type=hidden id='user' value='<!--$CurrentUser$GLOBAL$-->'> 
+<input type=hidden id='user_ip' value='<!--$ClientIp$GLOBAL$-->'>
+<input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
+<script src='/general/global.js'></script>
+<style> 
+#date_list li{
+    color:#FA8072;
+    margin-top:3px;
+    white-space: nowrap;
+}
+</style> 
+ 
+<script> 
+function LoadTime(name, ti)
+{
+    if(null==name)
+        return;
+    if('' == ti)
+        ti = "19700101000000";
+    var i=0;
+    var tiPattern = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/;
+    var tiArray = ti.match(tiPattern);
+    if(null == tiArray)
+    {
+        tiArray = ('1970', '01', '01', '00', '00', '00');
+    }
+ 
+    LoadItem(name+'1', tiArray[1], 2000, 2050);Print(" 年 ");//年
+    LoadItem(name+'2', tiArray[2], 1, 12);Print(" 月 ");//月
+    LoadItem(name+'3', tiArray[3], 1, 31);Print(" 日 ");//日
+    LoadItem(name+'4', tiArray[4], 0, 23);Print(" 时 ");//时
+    LoadItem(name+'5', tiArray[5], 0, 59);Print(" 分 ");//分
+}
+ 
+function LoadItem(name, ti, begin, end)
+{
+    var n='';
+    Print("<select size=1 name='" + name + "'>");
+    for(var i=begin ; i<=end ; i++)
+    {
+        n = i<10 ? '0'+i : i;
+        Print("<option value='" + n + "'" + (ti==i?"selected":"")+ ">" + n);
+    }
+    Print("</option></select>");
+}
+ 
+//设置起始时间状态
+function SetStatusTimeBegin()
+{
+    var obj = GetObj('timebeginchk');
+    if(null != obj[0])
+        SetStatusRange('form_query', 'hidden_t1', 'hidden_t2', obj[0].checked);
+}
+ 
+//设置终止时间状态
+function SetStatusTimeEnd()
+{
+    var obj = GetObj('timeendchk');
+    if(null != obj[0])
+        SetStatusRange('form_query', 'hidden_t3', 'hidden_t4', obj[0].checked);
+}
+ 
+function SetStatus()
+{
+    SetStatusTimeBegin();
+    SetStatusTimeEnd();
+}
+ 
+function Esc()
+{
+    OverLayer.Close();
+    ShowToCenter.Close();
+    ShortKey.Unlock();
+}
+ 
+function D()
+{
+    ShortKey.Lock();
+    OverLayer.Open();
+    ShowToCenter.Open('div_dosome');
+    $('choice')[0].focus();
+}
+ 
+function F()
+{
+    ShortKey.Lock();
+    OverLayer.Open();
+    ShowToCenter.Open('div_query');
+    $('timebeginchk')[0].focus();
+}
+ 
+function EditMsg(index)
+{
+    var key = null==index?'':one_obj.value;
+    if(null == index)
+        index = '0';
+    users     = GetObj('user');
+    if(null == users)
+        alert('出错，原因未明。');
+    OpenPage('edit?username=' + users.value + '&key=' + key + '&index=' + index);
+}
+ 
+function AltN()
+{
+    EditMsg();
+}
+ 
+function Delete()
+{
+    var sel = more_obj.value.split(' ');
+    var key = sel[0];
+    if(null==key || ''==key)
+    {
+        alert("请选双击选中要删除的记录！");
+        return;
+    }
+    else if(sel.length > 2)
+    {
+        // alert("按Del键一次只能删除一条记录，删多条请按D键进行操作！");
+        alert("暂一支持一次删除多条记录");
+        return;
+    }
+    if(confirm("确定要删除选中的记录吗?"))
+    {
+        // OpenPage('browse?delete_data=1&key=' + key);
+        DoDelete();
+    }
+
+
+    // 发送删除请示
+    function DoDelete()
+    {
+        var url = "browse";
+
+        /* 组装Post参数
+         */
+        var post = "";
+        post += "delete_data=1";
+        post += "&key=" + key;
+        
+        // 发送请求到服务端
+        SubmitToServer(url, post, Response); 
+        // 处理回应
+        function Response(str)
+        {
+            if("OK" == str)
+            {
+                // 不刷新页面，只加一删除线来表示；
+                $(key).innerHTML = $(key).innerHTML.strike();
+            }
+            else
+            {
+                alert(str);
+            }
+        }
+    }
+}
+ 
+//重载此函数，设置菜单
+function LoadSetting()
+{
+    var span = GetObj('menu_html');
+    var str='';
+    str += '<a href="javascript:F();">查找　 　F</a>';
+    str += '<a href="javascript:D();">操作　 　D</a>';
+    str += '<a href="javascript:EditMsg();">新增　Alt+N</a>';
+    str += '<a href="javascript:BackupWin();">导入导出　V</a>';
+    str += '<a href="javascript:Help();">帮助</a>';
+    span.innerHTML = str;;
+}
+ 
+function Choice(c)
+{
+    var li_ary = document.getElementsByTagName('li');
+    for(var i=0 ; i<li_ary.length ; i++)
+    {
+        if(0 == c)
+            li_ary[i].bChoice = false;
+        li_ary[i].ondblclick();
+    }
+}
+ 
+ 
+//以下两函数在library.js的SetTagAttrib()调用
+function liDoSome1(th)
+{
+    one_obj.value = th.id;
+}
+function liDoSome2(th)
+{
+    if(th.bChoice)
+    {
+        if(more_obj.value.indexOf(th.id) < 0)
+            more_obj.value += th.id + ' ';//增
+    }
+    else
+    {
+        var re = new RegExp(th.id+' ', "g");
+        more_obj.value = more_obj.value.replace(re, '');//删
+    }
+}
+ 
+function BackupSelect()
+{
+    var li_ary = $("date_list").getElementsByTagName('li');
+    var key = $("backup_date_key");
+    var li = "";
+ 
+    key.value = "";
+    for(var i=0; (li = li_ary[i]); i++)
+    {
+        li.ondblclick();
+        if(li.bChoice)
+        {
+            key.value += li.id + " ";
+        }
+    }
+}
+ 
+// Rocky 2009-11-24 11:34:21
+function SelectData()
+{
+    // 比较函数（从小到大）
+    function cmp(a, b)
+    {
+        return b - a;
+    }
+    
+    // 取出选中的，并排序
+    var sel = more_obj.value.split(' ').sort(cmp);
+    var li_ary = $("date_list").getElementsByTagName('li');
+    var i;
+    // 跳过前面的
+    for(i=0; (li = li_ary[i]); i++)
+    {
+        if(sel[0] == li.id)
+        {
+            i++;
+            break;
+        }
+    }
+    // 设置选中
+    for(; (li = li_ary[i]); i++)
+    {
+        if(sel[1] == li.id) // 已达选中的最后一个，结束选中操作
+        {
+            break;
+        }
+        li.ondblclick(); // 双击即为选中
+    }
+}
+ 
+function BackupReverseButton(bEnable)
+{
+    SetStatusRange('form_backup', 'backup_reverse', 'backup_reverse', bEnable)
+    if(bEnable)
+    {
+        var li_ary = $("date_list").getElementsByTagName('li');
+        var key = $("backup_date_key");
+        var li = "";
+ 
+        key.value = "";
+        for(var i=0; (li = li_ary[i]); i++)
+        {
+            if(li.bChoice)
+            {
+                key.value += li.id + " ";
+            }
+        }
+    }
+}
+ 
+function BackupSelectCheck()
+{
+ 
+    if( $('backup_date_key').value == ''
+        && $('backup_range')[0].checked == false)
+    {
+        alert("请先选中要导出的数据，或选“所有数据”选项。");
+        return false;
+    }
+    return true;
+}
+ 
+function BackupWin()
+{
+    // 注意，在IE里，这里取不到，name和id有冲突，待改。[2008-11-18 22:38:40]
+    $("backup_range")[0].checked = $("backup_range")[1].checked = false;
+    ShortKey.Lock();
+    OverLayer.Open();
+    ShowToCenter.Open('div_backup');
+    $('backup_range1').focus();
+}
+ 
+function Help()
+{
+    ShortKey.Lock();
+    OverLayer.Open();
+    ShowToCenter.Open("div_help");
+}
+ 
+// 设置书签
+function SetBookMark()
+{
+    var key = one_obj.value;
+    if('' == key)
+    {
+        return;
+    }
+    var title = $(key).getElementsByTagName('a')[2].innerHTML;
+    Bookmark.Set(key, title);
+}
+ 
+// 查找正文标记对应的书签
+function FindBookMark()
+{
+    var key = GetObj("choice_one").value;
+    Bookmark.Find(key);
+}
+ 
+// 定时执行函数
+function PageLoopRun()
+{
+    // 闪动当前书签键
+    Bookmark.Flash();
+}
+ 
+function Init()
+{
+    DefaultInitProc();
+    SetStatus();
+    one_obj = GetObj('choice_one');
+    more_obj = GetObj('choice_more');
+ 
+    ShowToCenter.MoveToCenter('div_query');
+    ShowToCenter.MoveToCenter('div_dosome');
+    ShowToCenter.MoveToCenter('div_backup');
+ 
+    ShortKey.Register({key:KEY_V}, BackupWin);
+    ShortKey.Register({key:KEY_D}, D);
+    ShortKey.Register({key:KEY_F}, F);
+    ShortKey.Register({key:KEY_ESC}, Esc);
+    ShortKey.Register({key:KEY_DELETE}, Delete);
+    ShortKey.Register({alt:true, key:KEY_N}, AltN);
+    ShortKey.Register({alt:true, key:KEY_1}, SelectData);     // 选把两条记录之间的记录
+ 
+    ShortKey.Register({key:KEY_F2}, SetBookMark);               // 书签设置
+    ShortKey.Register({ctrl:true, key:KEY_F2}, FindBookMark);   // 反查书签
+ 
+    TypeSelectMenu({id:"input_type_select", show:'index'}, {id:"span_type_select"}, {id:"query_type"});
+    Bookmark("bookmark_data");
+ 
+    return true;
+}
+ 
+</script>
+
+<!-- 数据列表 -->
+<ol id='date_list' class='DISCOLOR'>
+<!--$BrowseList$-->
+</ol>
+
+
+<!-- 搜索对话框 -->
+<div id="div_query" class="window" style="display:none;width:589px;">
+<form id="form_query" action="browse" method="POST" target="<!--$result_win$-->">
+<input type="hidden" name="query_type" id="query_type" size="100">
+<table border="1" cellspacing="1" bgcolor="#FFFFFF">
+<tr>
+<td>
+<table border="0" cellpadding="2" cellspacing="1">
+<td>
+<span class="tit">查询</span><hr>
+<span class="content">
+
+<table border="0" height="163">
+    <tr>
+        <td nowrap valign="middle">时　间：</td>
+        <td>
+            起始 <input type=hidden id=hidden_t1><script>LoadTime('qtbegin', '<!--$qtbegin$-->')</script><input type=hidden id=hidden_t2>
+            <input type=checkbox name=timebeginchk value=1 onClick='SetStatusTimeBegin()' <!--$timebeginchk$-->>启用<p />
+            终止 <input type=hidden id=hidden_t3><script>LoadTime('qtend', '<!--$qtend$-->')</script><input type=hidden id=hidden_t4>
+            <input type=checkbox name=timeendchk value=1 onClick='SetStatusTimeEnd()' <!--$timeendchk$-->>启用
+        </td>
+    </tr>
+    <tr>
+        <td>关键词：</td>
+        <td>
+            <input type="text" name="query_keyword" size="40" value='<!--$query_keyword$-->' title="支持Perl正则表达式">
+            <input type="radio" name="query_scope" value="title" <!--$chk_title$-->>标题
+            <input type="radio" name="query_scope" value="content" <!--$chk_content$-->>内容
+            <!-- 取消 [Rocky 2010-05-21 16:14:02]
+            <input type="radio" name="query_scope" value="all" <!--$chk_all$-->>两者 
+            -->
+        </td>
+    </tr>
+    <tr>
+        <td>类　型：</td>
+        <td>
+            <input id="input_type_select" type="button" value="请选择"
+                    title="单击打开归类选择窗口，再次单击关闭">(注意：同时满足所有钩选项)
+        </td>
+    </tr>
+    <tr>
+        <td>结　果：</td>
+        <td><input id="result_win1" name="result_win" type="radio" value="_self" OnClick="this.form.target=this.value" <!--$chk_self$-->>
+                <label for="result_win1">在当前窗口中显示</label>
+            <input id="result_win2" name="result_win" type="radio" value="_blank" OnClick="this.form.target=this.value" <!--$chk_blank$-->>
+                <label for="result_win2">在新的窗口中显示</label>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="right"> <input type="checkbox" name="save_query_setting" value="1">保存以上设置</td>
+    </tr>
+</table>
+
+</span>
+<hr>
+</td>
+</tr>
+<tr>
+<td align="right">
+    <input name="save_query" type="submit" class="button" value="确定">
+    <input type="reset" class="button TABTO_timebeginchk" value="取消" onClick="Esc()" title="快捷键：Esc">
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</form>
+</div><!-- end of <div id="div_query"> -->
+
+
+
+
+
+
+
+
+
+<!----------------------------------------- 操作 begin------------------------------------------>
+<div id="div_dosome" class="window" style="display:none;position:absolute;width:530px; top:0px; z-index:50;">
+<form method=post>
+<input type=hidden id="choice_one"> <!--临时存放单击的li条目，不须提交，所以没有name字段-->
+<textarea id="choice_more" name="selects" style="display:none;"></textarea> <!--存放选中的li条目-->
+<table border="1" cellspacing="1" bgcolor="#FFFFFF">
+<tr>
+<td>
+<table border="0" cellpadding="2" cellspacing="1">
+<td>
+<span class="tit">操作</span><hr>
+<span class="content">
+选择：<input type="radio" name="choice" onClick="Choice(0)">全选<input type="radio" name="choice" onClick="Choice(1)">反选
+<p /><p />
+对所选条目进行操作：<br>
+    　<input type=radio name=sel_do value="delete">册除（提示：按Del键可快捷删除一条记录。）<br>
+    　<input type=radio name=sel_do value="copy">复制给用户：<input type=text name=to_user>　(用户名)<br>
+</span>
+<hr>
+</td>
+</tr>
+<tr>
+<td align="right">
+    <input type="submit" name="save_dosome" class=button value="确定">
+    <input type="button" class="button TABTO_choice" value="取消" onClick="Esc()" title="快捷键：Esc">
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</form>
+</div><!-- end of <div id="div_dosome"> -->
+<!----------------------------------------- 操作 end-------------------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+<!----------------------------------------- 导入导出 begin------------------------------------------>
+<div id="div_backup" class="window" style="display:none;position:absolute;width:560px; top:0px; z-index:50;">
+<form id="form_backup" method="POST" action="DataExport" target="tmp_iframe">
+<textarea id="backup_date_key" name="select_key" style="display:none;"></textarea> <!-- 存放选中的li条目' -->
+<table border="1" cellspacing="1" bgcolor="#FFFFFF">
+<tr>
+<td>
+<table border="0" cellpadding="2" cellspacing="1">
+<td>
+<span class="tit">导入导出</span><hr>
+<span class="content"><p />
+范围：<input type="radio" id="backup_range1" name="backup_range" value="all" OnClick="BackupReverseButton(false)">
+            <label for="backup_range1">所有数据</label>
+      <input type="radio" id="backup_range2" name="backup_range" value="select" OnClick="BackupReverseButton(true)">
+            <label for="backup_range2">选中数据</label>
+      （<input type="button" id="backup_reverse" value="反选" OnClick="BackupSelect()" disabled>） 
+      <input type="checkbox" id="include_attach" name="include_attach" value="yes" checked>
+            <label for="include_attach">包含附件</label> 
+      <p /><p />
+导出：<input type="submit" name="backup_export" value="另存为文件" OnClick="return BackupSelectCheck()">
+      <p />
+</form>
+
+<form method="POST" action="DataImport" ENCTYPE="multipart/form-data" target=tmp_iframe>
+导入：<input type=file name="pack" size=50> <input type=submit name="backup_import" value="上传"><p />
+</form>
+</span>
+<hr>
+</td>
+</tr>
+<tr>
+<td align="right">
+    <input type="button" class="button TABTO_backup_range1" value="关闭" onClick="Esc()" title="快捷键：Esc">
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div><!-- end of <div id="div_backup"> -->
+<!----------------------------------------- 导入导出 end-------------------------------------------->
+
+
+
+
+<!-- 类型选择菜单 -->
+<span id="span_type_select" class="type_select_menu" style="position:absolute; visibility:hidden; left:0px; top:0px;">
+<!--$TypeDropBoxMenu$GLOBAL$-->
+</span>
+
+
+
+
+
+<!----------------------------------------- 书签 begin ----------------------------------------->
+<!-- 书签提交 -->
+<form method="POST" action="browse" target="tmp_iframe" style="display:none">
+<input id="bookmark_data" name="bookmark_data" type="text" value="<!--$BrowseBookmark$-->" size="100">
+<input name="bookmark_save" value="提交">
+</form>
+<!----------------------------------------- 书签 end ------------------------------------------>
+
+
+
+
+
+<!----------------------------------------- 帮助 begin------------------------------------------>
+<div id="div_help" class="window" style="display:none;position:absolute;width:530px; top:0px; z-index:50;">
+<input type=hidden id="choice_one">                             <!--临时存放单击的li条目，不须提交，所以没有name字段-->
+<table border="1" cellspacing="1" bgcolor="#FFFFFF">
+<tr>
+<td>
+<table border="0" cellpadding="2" cellspacing="1">
+<td>
+<span class="tit">帮助</span><hr> <!--------- 标题 ---------------->
+<span class="content">
+<!--------- 内容 begin ---------------->
+<br>
+[书签]<br>
+
+<ol>
+    <li>设置书签：鼠标移到要设书签的记录上（这时会标白），按F2；</li>
+    <li>Ctrl+F2，反查对应的书签；</li>
+    <li>上箭头</li>
+        <ul>
+            <li>单击：跳到前一个书签处</li>
+            <li>Ctrl+单击：当前书签上移一个位置</li>
+        </ul>
+    <li>书签按钮</li>
+        <ul>
+            <li>单击：转跳</li>
+            <li>单击+Ctrl：修改书签标</li>
+            <li>右击：删除书签</li>
+        </ul>
+    <li>下箭头</li>
+        <ul>
+            <li>单击：跳到下一个书签处</li>
+            <li>Ctrl+单击：当前书签下移一个位置</li>
+        </ul>
+</ol>
+
+<br>
+[选择]<br>
+
+<ol>
+    <li> 先在记录上双击，选中两条，再按Alt+1键，可选中这两条之间的所有记录；
+</ol>
+<!--------- 内容 end ------------------>
+<hr>
+</td>
+</tr>
+<tr>
+<td align="right">
+    <input type="button" class="button" value="关闭" onClick="Esc()" title="快捷键：Esc">
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div><!-- end of <div id="div_help"> -->
+<!----------------------------------------- 帮助 end-------------------------------------------->
+

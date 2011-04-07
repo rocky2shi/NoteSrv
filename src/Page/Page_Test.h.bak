@@ -1,0 +1,37 @@
+#ifndef __PAGE_TEST_H_20100504__
+#define __PAGE_TEST_H_20100504__
+#include "Page.h"
+namespace PAGE_TEST_SPACE
+{
+
+
+
+
+
+// ≤‚ ‘
+class Page_Test : public Page
+{
+protected:
+    virtual int OutBody();
+
+
+
+public:
+    Page_Test();
+    virtual ~Page_Test();
+
+protected:
+    virtual int DoInit();
+    virtual Page *DoNew();
+};
+
+
+
+
+
+
+
+
+}// end of PAGE_TEST_SPACE
+//using namespace PAGE_TEST_SPACE;
+#endif // end of __PAGE_TEST_H_20100504__

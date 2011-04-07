@@ -1,0 +1,191 @@
+<title>管理员</title>
+<input type=hidden id='user' value='<!--$CurrentUser$GLOBAL$-->'>
+<input type=hidden id='user_ip' value='<!--$ClientIp$GLOBAL$-->'>
+<input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
+<script src='/general/global.js'></script>
+<style>
+fieldset{
+    width:73%;
+}
+</style>
+
+
+<script>
+
+// 发送删除命令（url）到服务器
+function DeleteUser(user, button)
+{
+    var user2 = prompt("确定删除[" + user + "]？请再次输入用户名：");
+    if( user2 != user )
+    {
+        return;
+    }
+
+    var url = "administrator";
+
+    /* 组装Post参数
+     */
+    var post = "";
+    post += "&delete_user=" + user;
+    
+    // 发送请求到服务端
+    SubmitToServer(url, post, Response); 
+    // 处理回应
+    function Response(str)
+    {
+        if("OK" == str)
+        {
+            // 不刷新页面，只加一删除线来表示；
+            var obj = $('ID_USER_' + user);
+            obj.innerHTML = obj.innerHTML.strike();
+            // 设置提示
+            button.disabled = true;
+            button.title = "已删除";
+        }
+        else
+        {
+            alert(str);
+        }
+    }
+}
+
+// 系统在线时间
+function SysOnlineTime()
+{
+    var sec = <!--$OnlineTime$-->; 
+
+    SysOnlineTime.Step = function()
+    {
+        sec++;
+
+        var h = parseInt(sec / 3600);
+        var m = parseInt((sec % 3600) / 60);
+        var s = parseInt(sec % 60);
+        var d = parseInt(h / 24);
+        var str = "";
+
+        h = h % 24;
+        str = h + "小时" + m + "分" + s + "秒";
+
+        if(d > 0)
+        {
+            str = d + "天" + str;
+        }
+
+        $("online_time").innerHTML = str; 
+    }
+}
+
+// 取cpu使用率
+// http://notesrv:17891/SystemInfo?field=CpuUsed
+function GetCpuUsed()
+{
+    var url = "SystemInfo";
+
+    /* 组装Post参数
+     */
+    var post = "";
+    post += "&field=CpuUsed";
+    
+    // 发送请求到服务端
+    SubmitToServer(url, post, Response); 
+    // 处理回应
+    function Response(str)
+    {
+        $("cpu_used").innerHTML = str + "%"; 
+    }
+}
+
+// 页面循环
+function PageLoopRun()
+{
+    // 递增秒数
+    SysOnlineTime.Step();
+    
+    // cpu使用率
+    GetCpuUsed();
+}
+
+function Init()
+{
+    DefaultInitProc();
+    SysOnlineTime();
+    return true;
+}
+
+</script>
+
+<body>
+
+
+
+<!-- 系统在线时间 -->
+<fieldset align="left">
+<legend>系统信息</legend>
+<table>
+    <tr>
+        <td align="right">版本：</td>
+        <td><!--$Version$GLOBAL$--></td>
+    </tr>
+    <tr>
+        <td align="right">CPU使用：</td>
+        <td><span id=cpu_used>加载中...</span></td>
+    </tr>
+    <tr>
+        <td align="right">启动时间：</td>
+        <td><!--$BootTime$--></td>
+    </tr>
+    <tr>
+        <td align="right">在线时长：</td>
+        <td><span id=online_time>加载中...</span></td>
+    </tr>
+</table>
+</fieldset>
+
+<br>
+
+<!-- 日志配置 -->
+<fieldset align="left">
+<legend>日志配置</legend>
+<form method="POST" target="tmp_iframe">
+<pre>
+调试日志：<input type=radio name=level_debug value="open" <!--$debug_open$-->>开 <input type=radio name=level_debug value="close" <!--$debug_close$-->>关
+一般日志：<input type=radio name=level_info value="open" <!--$info_open$-->>开 <input type=radio name=level_info value="close" <!--$info_close$-->>关
+错误日志：<input type=radio name=level_error value="open" <!--$error_open$-->>开 <input type=radio name=level_error value="close" <!--$error_close$-->>关
+
+<input type=submit name=log_save value="更改">
+</pre>
+</form>
+</fieldset>
+
+<br>
+
+<!-- 计数器列表 -->
+<fieldset><legend>页面访问计数</legend>
+<table border='1'>
+<tr>
+<td>页面名</td>
+<td>计数值</td>
+</tr>
+<!--$CounterList$-->
+</table>
+</fieldset>
+
+<br>
+
+<!-- 用户列表 -->
+<fieldset><legend>用户列表</legend>
+<table border='1'>
+<tr>
+<td>用户名</td>
+<td>注册时间</td>
+<td>最后登录时间</td>
+<td>登录次数</td>
+<td>操作</td>
+</tr>
+<!--$UserList$-->
+</table>
+</fieldset>
+
+
+</body>

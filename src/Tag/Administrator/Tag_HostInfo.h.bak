@@ -1,0 +1,34 @@
+#ifndef __TAG_HOSTINFO_H_20100604__
+#define __TAG_HOSTINFO_H_20100604__
+#include "Tag.h"
+namespace TAG_HOSTINFO_SPACE
+{
+
+
+
+
+
+
+// 显示系统信息：cpu使用率等
+class Tag_HostInfo : public Tag
+{
+protected:
+    virtual string Get(Page *page);
+
+public:
+    Tag_HostInfo(const string &page, const string &tag);
+    virtual ~Tag_HostInfo();
+
+protected:
+    Tag_HostInfo();
+    virtual int DoInit();
+    virtual Tag *DoNew();
+};
+
+
+
+
+
+}// end of TAG_HOSTINFO_SPACE
+//using namespace TAG_HOSTINFO_SPACE;
+#endif // end of __TAG_HOSTINFO_H_20100604__

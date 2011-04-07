@@ -1,0 +1,48 @@
+<title>分类设置</title>
+<input type=hidden id='user' value='<!--$CurrentUser$GLOBAL$-->'>
+<input type=hidden id='user_ip' value='<!--$ClientIp$GLOBAL$-->'>
+<input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
+<script src='/general/global.js'></script>
+
+<style>
+.width{
+    width: 286px;
+}
+</style>
+
+<script>
+
+function Init()
+{
+    DefaultInitProc();
+    SetStatusRange("form_new", "type_title", "submit_new", false);
+    return true;
+}
+</script>
+
+<table border="0" width="100%" height="73%"><tr><td align="center" valign="middle">
+<table border="0"><tr><td>
+<!-----------------------------------居中 begin----------------------------------->
+
+<form method="POST" action="TypeDropBoxMenuSetting">
+<b>归类菜单设置</b>
+<hr width="120%">
+
+<ol id="ol_type"> <!-- 滚动条： class="DISCOLOR" style="width:110%; height:500px; overflow-y:scroll;" -->
+    <!--$TypeDropItemList$-->
+    <li>
+      <input name="type_title" class="width FOCUS">
+      <input name="submit_new" type="submit" value=" 新增 ">
+    </li>
+</ol>
+<hr width="120%">
+
+<table border="0" width="100%"><tr><td align="right">
+<input name="submit_modify" type="submit" class="button" value="确定">
+<input type="button" class="button" value="返回" OnClick="OpenPage('edit')">
+</td></tr></table>
+</form>
+
+<!-----------------------------------居中 end-------------------------------------->
+</td></tr></table>
+</td></tr></table>

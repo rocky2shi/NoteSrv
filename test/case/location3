@@ -1,0 +1,7 @@
+HTTP/1.0 302 Moved Temporarily
+Date: Fri, 7 May 2010 19:27:00 GMT
+Server: MiniServ/0.01
+Connection: close
+Status: 302 Found
+Location: http://www.21cn.com
+

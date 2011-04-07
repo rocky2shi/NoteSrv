@@ -1,0 +1,77 @@
+// Rocky 2010-06-04 19:34:51
+#include "Tag_HostInfo.h"
+namespace TAG_HOSTINFO_SPACE
+{
+
+// 标明模块
+//static const string THIS_MODULE = "OnlineTime";
+
+
+Tag_HostInfo::Tag_HostInfo()
+{
+    FUNCTION_TRACK(); // 函数轨迹跟综
+}
+
+Tag_HostInfo::Tag_HostInfo(const string &page, const string &tag) : Tag(page, tag)
+{
+    FUNCTION_TRACK(); // 函数轨迹跟综
+}
+
+Tag_HostInfo::~Tag_HostInfo()
+{
+    FUNCTION_TRACK(); // 函数轨迹跟踪
+}
+
+
+
+
+int Tag_HostInfo::DoInit()
+{
+    FUNCTION_TRACK(); // 函数轨迹跟综
+
+    return Tag::DoInit();
+}
+
+// 子类对象创建器
+Tag *Tag_HostInfo::DoNew()
+{
+    FUNCTION_TRACK(); // 函数轨迹跟综
+    return new Tag_HostInfo;
+}
+
+
+
+
+
+
+
+
+/******************************** 业务代码 ********************************/
+
+
+
+
+
+// 取标题 [2010-05]
+string Tag_HostInfo::Get(Page *page)
+{
+    FUNCTION_TRACK(); // 函数轨迹跟综
+
+    if("CpuUsed" == m_id)
+    {
+        return IntToString( GetCpuUsed() ) + "%";
+    }
+
+    return "";
+}
+
+
+
+
+
+
+
+
+static Tag_HostInfo tmp1("administrator", "CpuUsed");
+
+}// end of TAG_HOSTINFO_SPACE

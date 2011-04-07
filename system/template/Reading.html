@@ -1,0 +1,923 @@
+<title>阅读（<!--$Title$GLOBAL$-->）</title>
+<input type=hidden id='user' value='<!--$CurrentUser$GLOBAL$-->'>
+<input type=hidden id='user_ip' value='<!--$ClientIp$GLOBAL$-->'>
+<input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
+<script src='/general/global.js'></script>
+<style>
+pre {
+    line-height: 130%;
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+}
+* html pre {
+    line-height: 130%;
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    white-space : normal ;       /* Internet Explorer 5.5+ */
+}
+.input_font {
+    width: 237px;
+}
+/* delete [Rocky 2009-12-01 18:52:42]
+.title a {
+    text-decoration: underline;
+}
+*/
+#content span{color:#FA8072}
+/*
+#content a{text-decoration:none;color:#006500; cursor:text;}
+#content a:visited{text-decoration:none;}
+#content a:active{text-decoration:none;}
+#content a:hover{text-decoration:none; background-color:#C3C3C3}
+*/
+</style>
+<script>
+function AltEnter()
+{
+    OpenPage('browse?<!--$Key$GLOBAL$-->');
+}
+
+function E()
+{
+    OpenPage('edit?key=<!--$Key$GLOBAL$-->');
+}
+
+function S()
+{
+    OverLayer.Open();
+    ShowToCenter.Open('div_setting');
+    $("font_weight")[0].focus();
+}
+
+// 导出
+function Export()
+{
+    $('backup_export')[0].click();
+}
+
+function Esc()
+{
+<!--$Esc$GLOBAL$-->
+}
+
+function FontSizeUp(yes)
+{
+    var obj = GetObj("font_size");
+    var content = GetObj("content");
+    if('' == obj[0].value)
+    {
+        obj[0].value = parseInt('12');
+    }
+    yes ? obj[0].value++ : obj[0].value--;
+    content.style.fontSize = obj[0].value + 'pt';
+}
+
+// 粗体
+function FontWeight()
+{
+    $("content").style.fontWeight = ($("font_weight")[0].checked) ? 'bold' : 'normal';
+    $("content").style.fontStyle = ($("font_style")[0].checked) ? 'oblique' : 'normal';
+    $("content").style.textDecoration = ($("font_text_decoration")[0].checked) ? 'underline' : 'none';
+}
+
+// 转换当前数据为新格式 [Rocky 2010-05-25 18:02:52]
+function DataConversion()
+{
+    var url = "reading";
+
+    /* 组装Post参数
+     */
+    var post = "";
+    post += "&key=<!--$Key$GLOBAL$-->";
+    post += "&DataConversion=1";
+    
+    // 发送请求到服务端
+    SubmitToServer(url, post, Response); 
+    // 处理回应
+    function Response(str)
+    {
+        if("OK" == str)
+        {
+            alert("转换成功，请刷新页面");
+        }
+        else
+        {
+            alert(str);
+        }
+    }
+}
+
+//重载此函数，设置菜单
+function LoadSetting()
+{
+    var span = GetObj('menu_html');
+    var str='';
+    str += '<a href="javascript:E();">编辑　E</a>';
+    str += '<a href="javascript:S();">字体　S</a>';
+    str += '<a href="javascript:Export();" title="导出当前数据">导出　V</a>';
+    str += '<a href="javascript:DataConversion();" title="转换当前数据为新格式">数据转换</a>';
+    str += '<a href="javascript:AltEnter();">返回　Alt+Enter</a>';
+    str += '<a href="javascript:Help();">帮助</a>';
+    span.innerHTML = str;;
+}
+
+function FormatPre()
+{
+}
+
+function SetFont(font)
+{
+    $('content').style.fontFamily = font;
+}
+
+function SetColor(color)
+{
+    $('content').style.color = color;
+}
+
+function SetBgColor(color)
+{
+    $('content').style.backgroundColor = color;
+}
+
+// 定时执行函数
+function PageLoopRun()
+{
+    // 闪动当前书签键
+    Bookmark.Flash();
+}
+
+// 扫描正文中的<span>标记，为书签设置动作；
+function SetMark()
+{
+    var pre = GetObj("content");
+    var spans = pre.getElementsByTagName("span");
+    var i;
+
+    for(i=0; i<spans.length; i++)
+    {
+        // [Rocky 2009-11-29 23:15:12]
+        spans[i].onclick = function(event) // 单击时显示书签
+        {
+            event = event || window.event;
+            if(event.ctrlKey)
+            {
+                Bookmark.Find(this.id);
+                window.status = this.id;
+            }
+        }
+        // // delete [Rocky 2009-11-29 23:15:12]
+        // spans[i].onmouseover = function(event)
+        // {
+        //     // 2009-08-21 14:05:02
+        //     event = event || window.event;
+        //     // 显示书签标记
+        //     if(event.ctrlKey)
+        //     {
+        //         this.oldCssText = this.style.cssText;
+        //         this.style.background = "#939393";
+        //     }
+        //     find.value = this.id;   // 放到input，以便书签操作时提取；
+        //     window.status = this.id;
+        // }
+        // spans[i].onmouseout = function()
+        // {
+        //     // 还原
+        //     this.style.cssText = ""; //this.oldCssText; // [Rocky 2009-11-30 23:44:52]
+        // }
+    }
+}
+
+// 设置书签
+function SetBookMark()
+{
+    var id = "mark_v3_" + GetKeyStr();
+
+    function ModifyWebSource()
+    {
+        if(document.selection) // ie
+        {
+            var sel = document.selection.createRange();
+            sel.pasteHTML("<span id='" + id + "'>" + sel.htmlText + "</span>");    // 加上一个包装
+            sel.collapse(true);
+        }
+        else
+        {
+            var range = window.getSelection().getRangeAt(0);
+
+            var span = document.createElement("span");
+            span.id = id;
+            range.surroundContents(span);
+        }
+    }
+
+    function Save()
+    {
+
+        var url = "reading";
+
+        /* 组装发送容
+         *      bug: 在firfox中，每次提交会自动在post串后加一回车符 [Rocky 2009-11-29 22:58:26]
+         */
+        var post = "";
+        post += "&key=<!--$Key$GLOBAL$-->";
+        post += "&operate=InsertObj";   // 指定操作
+        post += "&type=bookmark";       // 指定类型
+        post += "&password=<!--$CurrentPassword$GLOBAL$-->";
+
+        // 取书签数据
+        post += "&bookmark_data=" + encodeURIComponent( GetObj('bookmark_data').value );
+
+        /*
+         *      以下查找正文中插入的书签起始标记 <span id=...>等，然后进行增量
+         *      操作
+         */
+
+
+        // 正文内容
+        var text = GetObj('content').innerHTML.replace(/\r|^\n*|\n*$/g, "");
+        // 正则式分三段：<span ...> + 选中部分 + </span>
+        var attach_mark_rex =  "((?:.|\n){0,60})";
+        var mark_rex = attach_mark_rex + "(<span [^>]*" + id + "[^>]*>)" + "([^<]*)" + "(</span>)" + attach_mark_rex;
+        var re = new RegExp(mark_rex, "ig");
+
+        // 执行正则式
+        if(re.exec(text) == null)
+        {
+            alert("查找正文中插入的书签标记出错");
+            return;
+        }
+
+        var data = {
+            A: RegExp.$1,
+            B: RegExp.$2,
+            C: RegExp.$3,
+            D: RegExp.$4,
+            E: RegExp.$5
+        }
+
+        Try1();
+
+        //
+        function Try1()
+        {
+            // 组装数据
+            post += "&find=" + encodeURIComponent(data.C);   // 原字段
+            post += "&replace=" + encodeURIComponent(data.B + data.C + data.D);   // 替换字段
+            Msg("正保存到服务端．．．");
+            // 发送请求到服务端
+            SubmitToServer(url, post, Try2);    // 回应转到Try2()
+        }
+
+        function Try2(response)
+        {
+            if( OK(response) )
+            {
+                // 提示
+                End(response);
+                return;
+            }
+            Msg("出错，再次尝试1．．．");
+            // 再次组装数据
+            post += "&find=" + encodeURIComponent(data.A + data.C + data.E);    // 扩大字段来确定唯一性
+            post += "&replace=" + encodeURIComponent(data.A + data.B + data.C + data.D + data.E);  // 替换字段
+
+            // 发送请求到服务端
+            SubmitToServer(url, post, Try3);    // 回应转到Try3()
+        }
+
+        function Try3(response)
+        {
+            if( OK(response) )
+            {
+                // 提示
+                End(response);
+                return;
+            }
+            Msg("出错，再次尝试2．．．");
+            // 经过两次尝试均出错，全文发送；
+            post += "&text=" + encodeURIComponent(text);
+            // 发送请求到服务端
+            SubmitToServer(url, post, End);
+        }
+
+        // 结束处理
+        function End(response)
+        {
+            // 输出提示
+            OK(response) ? Msg("已提交") : Msg("<font color=red>提交出错</font>");
+        }
+
+        function OK(str)
+        {
+            return str == '[OK]';
+        }
+    }
+
+    Bookmark.Set(id);
+    ModifyWebSource();
+    SetMark();
+    Save();
+}
+
+// Rocky 2009-11-30 19:09:24
+function Alt1()
+{
+    Picture.SetSelect(); // 在ie中，当对话框出现后，被选中部分可能会消失（当有鼠标点击其它处时），所以要先保存被选区域；
+    ShortKey.Lock();
+    OverLayer.Open();
+    ShowToCenter.Open('div_image');
+}
+
+// Rocky 2009-12-14 15:22:16
+function Alt2()
+{
+    // 显示小板
+    SmallBoard();
+}
+
+// Rocky 2009-12-01 17:33:22
+function Picture()
+{
+    var img_id = null;
+    var sel_obj = null;
+
+    /*
+     *  对外接口
+     */
+    // 设置选中的对象
+    Picture.SetSelect = function()
+    {
+        if(document.selection)    // ie
+        {
+            sel_obj = document.selection.createRange();
+        }
+        else    // firefox
+        {
+            sel_obj = window.getSelection().getRangeAt(0);
+        }
+    }
+    // 插入
+    Picture.Insert = function()
+    {
+        if(null == sel_obj)
+        {
+            alert("未选插入点");
+            return;
+        }
+
+        /*
+         * 加一id，用于查找（区分）控件
+         *
+         *   注，在ie中，当id等值是连续的字符时，使用innerHTML取得到的内容不
+         *       包含双引号，而在firefox或chrome中是有的，如：
+         *
+         *      页面源码：<img id="img_v3_20091204211557">
+         *      使用innerHTML取内容得：
+         *          ie：<IMG id=img_v3_20091204211557>
+         *          firefox：<img id="img_v3_20091204211557">
+         *          chrome：<img id="img_v3_20091204211557">
+         *
+         *   这将使后台保存时计算插入点出错，所以只好在这个id后再加一空格，使
+         *   得ie中也会在id中加一双引号。
+         */
+        img_id = "img_v3_" + GetKeyStr();
+        ModifyWebSource();
+        Save();
+    }
+
+
+    function ModifyWebSource()
+    {
+        var picture = img_iframe.window.GetImgInfo();
+
+        if(document.selection)    // ie
+        {
+            var insert = '<div><img id="' + img_id + '" title="' + picture.name + ' " src="' + picture.src + ' "></div>';
+            sel_obj.pasteHTML(insert + sel_obj.htmlText);
+        }
+        else    // firefox
+        {
+            var div = document.createElement("div");
+            var img = document.createElement("img");
+            img.src = picture.src;
+            img.title = picture.name;
+            img.id = img_id;
+            div.appendChild(img);
+            sel_obj.insertNode(div);
+        }
+    }
+
+    function Save()
+    {
+        var url = "reading";
+
+        /* 组装发送容
+         *      bug: 在firfox中，每次提交会自动在post串后加一回车符 [Rocky 2009-11-29 22:58:26]
+         */
+        var post = "";
+        post += "&key=<!--$Key$GLOBAL$-->";
+        post += "&operate=InsertObj";
+        post += "&password=<!--$CurrentPassword$GLOBAL$-->";
+
+        // 正文内容（删去开头结尾的的回车符，及所有的\r符）
+        var text = GetObj('content').innerHTML.replace(/\r|^\n*|\n*$/g, "");
+        // 正则式分三段：<span ...> + 选中部分 + </span>
+        var attach_mark_rex =  "((?:.|\n){0,60})";
+        var mark_rex = attach_mark_rex + "(<div><img [^>]*" + img_id + "[^>]*></div>)" + attach_mark_rex;
+        var re = new RegExp(mark_rex, "ig");
+
+        // 执行正则式
+        if(re.exec(text) == null)
+        {
+            alert("查找正文中插入的书签标记出错");
+            return;
+        }
+
+        var data = {
+            A: RegExp.$1,
+            B: RegExp.$2,
+            C: RegExp.$3
+        }
+
+        Try1();
+
+        //
+        function Try1()
+        {
+            // 组装数据
+            post += "&find=" + encodeURIComponent(data.A + data.C);   // 原字段
+            post += "&replace=" + encodeURIComponent(data.A + data.B + data.C);   // 替换字段
+            Msg("正保存到服务端．．．");
+            // 发送请求到服务端
+            SubmitToServer(url, post, Try2);    // 回应转到Try2()
+        }
+
+        function Try2(response)
+        {
+            if( OK(response) )
+            {
+                // 提示
+                End(response);
+                return;
+            }
+            Msg("出错，再次尝试．．．");
+            // 经过两次尝试均出错，全文发送；
+            post += "&text=" + encodeURIComponent(text);
+            // 发送请求到服务端
+            SubmitToServer(url, post, End);
+        }
+
+        // 结束处理
+        function End(response)
+        {
+            // 输出提示
+            OK(response) ? Msg("已提交") : Msg("<font color=red>提交出错</font>");
+        }
+
+        function OK(str)
+        {
+            return str == '[OK]';
+        }
+    }
+}
+
+// 显示提示
+function Msg(content)
+{
+    var win = Tips.GetWin();
+    win.style.right = '1px';
+    win.style.top =  document.body.scrollTop + document.body.clientHeight - 50 + 'px';
+    win.style.width = '150px';
+    win.style.height = '50px';
+    MoveLayer(Tips.GetWin());   // 设置移动
+    Tips.Open("<br>&nbsp;" + content + "<br>").Close(3000); // 3秒后关闭
+}
+
+// 显示临时小窗口
+function SmallBoard()
+{
+    var win;
+    var display;
+    var control;
+    var close;  // 关闭按钮
+    var menu;   // 菜单
+    var move;   // 移动控制
+
+
+
+    // 菜单 [Rocky 2010-01-21 18:32:27]
+    function Menu()
+    {
+        var This = (window == this) ? Menu : this;
+        var handler = null;
+        var item = [];
+
+        This.Open = function()
+        {
+            OpenWin(handler);
+        }
+
+        This.Close = function()
+        {
+            CloseWin(handler);
+        }
+
+        This.IsOpen = function()
+        {
+            return "" == handler.style.visibility;
+        }
+
+        This.GetHandler = function()
+        {
+            return handler;
+        }
+
+
+        // 初始化
+        function Init()
+        {
+            item[0] = {
+                type:'checkbox',
+                title:'鼠标移动窗口',
+                action: function(){
+                            var obj = item[0].obj;
+                            var chk = obj.getElementsByTagName("input")[0];
+                            move.AllowMove(chk.checked);
+                        }
+            };
+            item[1] = {
+                type:'checkbox',
+                title:'随屏幕滚动',
+                action: function(){
+                            var obj = item[1].obj;
+                            var chk = obj.getElementsByTagName("input")[0];
+                            move.AllowScroll(chk.checked);
+                        }
+            };
+        }
+
+        // 创建下接列表（菜单）
+        function Create()
+        {
+            // 在主界面上创建ul，再在ul中加入li来放菜单信息；
+            var body = document.getElementsByTagName('body')[0];
+            var ul = document.createElement("ul");
+
+            ul.style.cssText = "position:absolute; visibility:hidden; "
+                               + "top:0px; left:0px; "
+                               + "margin:0px; padding:5px; "
+                               + "border:#006500 1px solid; "
+                               + "list-style-type: none; "
+                               + "background-color:#D8DAFE; "
+                               + "line-height:22px;"
+                               + "cursor:pointer;";
+
+            var mark = GetKeyStr();
+
+            for(var i=0; i<item.length; i++)
+            {
+                var li = document.createElement("li");
+                var id = "C" + mark + "_" + i;
+                li.index = i;   // Rocky 2010-02-09 16:00:00
+                if("checkbox" == item[i].type)
+                {
+                    li.innerHTML = '<input type="checkbox" id="' + id + '" checked><label for="' + id + '">' + item[i].title + '</lable>';
+                }
+                else
+                {
+                    li.innerHTML = item[i].title;
+                }
+                li.onclick = function()
+                {
+                    item[this.index].action();
+                }
+                li.onmouseover = function()
+                {
+                    this.style.background = "#528F52";
+                }
+                li.onmouseout = function()
+                {
+                    this.style.background = "";
+                }
+                item[i].obj = li;
+                // 插入
+                ul.appendChild(li);
+            }
+            body.appendChild(ul);
+
+            ul.onmouseover = function()
+            {
+                This.Open();
+            }
+            ul.onmouseout = function()
+            {
+                This.Close();
+            }
+
+            handler = ul;
+        }
+
+        Init();
+        Create();
+    }
+
+    function Open()
+    {
+        OpenWin(win);
+    }
+
+    function Close()
+    {
+        CloseWin(win);
+    }
+
+    function Create()
+    {
+        // 创建显示的小板面
+        var body = document.getElementsByTagName('body')[0];
+        win = document.createElement("pre");
+        display = document.createElement("div");
+        control = document.createElement("div");
+        close = document.createElement("a");
+        menu = document.createElement("a");
+
+        win.style.cssText = "position:absolute; visibility:;"
+                            + "padding:4px;"
+                            + "background-color:#C3C3C3; color:#075F40; ";
+        Opacity(win, 92);   // 设置透明度
+        win.style.top = document.body.scrollTop + 'px';
+        control.appendChild(menu);
+        control.appendChild(close);
+        win.appendChild(control);
+        win.appendChild(display);
+        body.appendChild(win);
+    }
+
+    // 设置内容（以在页面上选定的文本为内容）
+    function SetText()
+    {
+        var content = GetSelectHtml().replace(/\r/g, '').replace(/\n/g, '<br>').replace(/  /g, '　');
+        display.innerHTML = content;
+    }
+
+    function SetControl()
+    {
+        control.style.cssText = "position:absolute; right:0px; margin-top:-4px; height:15px; font-weight:bold; cursor:pointer;"
+                              + "background-color:#A3B3B3;";
+        control.onmouseover = function(event)
+        {
+            Opacity(this, 100);
+        }
+        control.onmouseout = function(event)
+        {
+            Opacity(this, 20);
+        }
+        Opacity(control, 20);
+
+        // 关闭
+        close.innerHTML = "×";
+        close.title = "关闭";
+        close.style.cssText = "text-decoration:none;";
+        close.onclick = function()
+        {
+            Close();
+        }
+        close.onmouseover = function()
+        {
+            this.style.color = "#FA8072";
+        }
+        close.onmouseout = function()
+        {
+            this.style.color = "";
+        }
+
+        // 设置
+        menu.body = new Menu;   // 菜单主体
+        menu.innerHTML = "＋";
+        menu.style.cssText = close.style.cssText;
+        menu.title = "更多操作";
+        menu.onmouseover =  close.onmouseover;
+        menu.onmouseout =  close.onmouseout;
+        menu.onclick = function()
+        {
+            if( menu.body.IsOpen() )
+            {
+                menu.body.Close();
+            }
+            else
+            {
+                // 调整位置
+                var body = menu.body.GetHandler();
+                var posButton = GetPos(control);
+                var posBody = GetPos(body);
+                body.style.top = posButton.y + posButton.h + "px";
+                body.style.left = posButton.x - (posBody.w - posButton.w) + "px";
+
+                // 显示
+                menu.body.Open();
+            }
+        }
+    }
+
+    function Init()
+    {
+        // 创建窗口
+        Create();
+
+        // 填充内容
+        SetText();
+
+        // 控制按钮（关闭等）
+        SetControl();
+
+        // 设置最大宽度
+        var maxWidth = 510;
+        if( GetPos(win).w > maxWidth )
+        {
+            win.style.width = maxWidth + 'px';
+        }
+
+        // 设置移动
+        move = new MoveLayer(win);
+
+        // 显示
+        Open();
+    }
+
+
+    Init();
+}
+
+function Init()
+{
+    DefaultInitProc();
+    FormatPre();
+    ShowToCenter.MoveToCenter("div_setting"); // 居中显示
+    if($('div_pasd') != null)
+    {
+        OverLayer.Open();
+        ShowToCenter.Open("div_pasd");
+        ShortKey.Lock();    // 避免在输入密码时触发快捷键
+    }
+    ShowToCenter.MoveToCenter("div_image");
+    ShortKey.Register({key:KEY_ADD}, FontSizeUp, 1);
+    ShortKey.Register({key:KEY_SUB}, FontSizeUp, 0);
+    ShortKey.Register({key:KEY_E}, E);
+    ShortKey.Register({key:KEY_S}, S);
+    ShortKey.Register({key:KEY_V}, Export);
+    ShortKey.Register({key:KEY_ESC}, Esc);
+    ShortKey.Register({key:KEY_F2}, SetBookMark);               // 书签设置
+    ShortKey.Register({alt:true, key:KEY_ENTER}, AltEnter);
+    ShortKey.Register({alt:false, key:KEY_1}, Alt1);             // 插入图片
+    ShortKey.Register({alt:false, key:KEY_2}, Alt2);             // 临时小板
+
+
+    Bookmark("bookmark_data", "coord");
+    SetMark();
+
+    TypeSelectMenu({id:"input_font_select"}, {id:"span_type_select", click:SetFont}, {id:"input_font_select"});
+    TypeSelectMenu({id:"input_color_select"}, {id:"span_color_select", click:SetColor}, {id:"input_color_select"});
+    TypeSelectMenu({id:"input_bgcolor_select"}, {id:"span_bgcolor_select", click:SetBgColor}, {id:"input_bgcolor_select"});
+
+    Picture();  // 初始化在正文中插入图片的操作
+}
+
+</script>
+
+
+
+
+
+<span class="title">
+<b title="标题">[<!--$Title$GLOBAL$-->]</b>  <i>归类[<u><!--$TypeDropBoxMenuSelecedItems$--></u>] 附件[<!--$AttachList$GLOBAL$-->] </i>
+</span>
+
+
+
+
+<!-- 正文显示风格 --> <!-- 正文内容 -->
+<pre id="content" style="<!--$TextStyle$-->"><!--$Text$GLOBAL$--></pre>
+
+
+
+
+
+
+<!-- 查看加密数据输入窗口 -->
+<!--$AuthenticationPrompt$GLOBAL$-->
+
+
+
+
+
+<!-- 备选图片等（插入正文中显示）-->
+<div id="div_image" class="window" style="display:none;width:561px;">
+<table border="1" cellspacing=1 bgcolor="#FFFFFF"><tr><td>
+<table border="0" cellpadding=2 cellspacing=1>
+<td>
+<span class="tit">备选图片</span><hr>
+<span class="content">
+    <iframe name="img_iframe" src="ImageList?key=<!--$Key$GLOBAL$-->"
+            frameborder=0 scrolling=auto width="96%" height="236" allowTransparency="true">
+    </iframe>
+</span>
+<hr>
+</td></tr>
+<tr>
+<td align="right">
+    <input type=button class="button TABTO_upfile" value="确定" onClick="Picture.Insert(); Esc();" title="">
+    <input type=button class="button TABTO_upfile" value="取消" onClick="Esc()" title="快捷键：Esc">
+</td>
+</tr>
+</table>
+</td></tr></table>
+</div>
+
+
+
+
+
+<!----------------------------------------- 书签 begin ----------------------------------------->
+<!-- 书签提交 -->
+<form method="POST" action="browse" target="tmp_iframe" style="display:none">
+<input name="key" value="<!--$Key$GLOBAL$-->">
+<textarea id="bookmark_data" name="bookmark_data"><!--$BookmarkData$--></textarea>
+<input name="bookmark_save" value="提交">
+</form>
+<!----------------------------------------- 书签 end ------------------------------------------>
+
+
+
+<!-- 字体、颜色设置 -->
+<div id="div_setting" class="window" style="display:none;width:451px;">
+<form method="POST" target="tmp_iframe">
+<input type="hidden" name="key" value="<!--$Key$GLOBAL$-->">
+<table border="1" cellspacing=1><tr><td>
+<table border="0" cellpadding=2 cellspacing=1>
+<td>
+
+<span class="tit">字体设置</span><hr>
+<span class="content">
+<br>
+风格：<input type="checkbox" name="font_weight" value="bold" onClick="FontWeight()" <!--$chk_font_weight$-->>粗体
+      <input type="checkbox" name="font_style" value="oblique" onClick="FontWeight()" <!--$chk_font_style$-->>斜体
+      <input type="checkbox" name="font_text_decoration" value="underline" onClick="FontWeight()" <!--$chk_font_text_decoration$-->>下划线
+      <p>
+字号：<input type=text class="input_font" name=font_size value="<!--$font_size$-->" title="(默认12)" > <!--readonly-->
+<input type=button value=" + " onClick="FontSizeUp(1)" title="增大字体，快捷键：＋">
+<input type=button value=" - " onClick="FontSizeUp(0)" title="减小字体，快捷键：－"><p>
+颜色：<input type="text" class="input_font" id="input_color_select" name="font_color" value="<!--$font_color$-->" autocomplete="off"><p>
+背景：<input type="text" class="input_font" id="input_bgcolor_select" name="font_bgcolor" value="<!--$font_bgcolor$-->" autocomplete="off"><p>
+字体：<input type="text" class="input_font hand" id="input_font_select" name="font_family" value="<!--$font_family$-->" autocomplete="off"><p>
+
+<hr width=100%>
+</td></tr>
+<tr>
+<td align="right">
+    <input name="set_text_style" type="submit" class="button" value="确定" onClick="Esc()">
+    <input name="close" type="button" class="button TABTO_font_weight" value="关闭" onClick="Esc()" title="快捷键：Esc">
+</td>
+</tr>
+</table>
+</td></tr></table>
+</form>
+</div>
+
+
+
+<!-- 导出当前数据 [2008-11-10] -->
+<form method="POST" action="DataExport" target="tmp_iframe" style="display:none;">
+<input name="select_key" value="<!--$Key$GLOBAL$-->">
+<input name="backup_range" value="select">
+<input name="export_name" value="<!--$Key$GLOBAL$-->">
+<input type="submit" name="backup_export" value="另存为文件">
+</form>
+
+
+
+
+
+<!-- 字体下拉菜单 -->
+<span id="span_type_select" class="type_select_menu" style="position:absolute; visibility:hidden; top:0px;">
+<!--$FontDropBoxMenu$-->
+</span>
+
+
+
+<!-- 颜色下拉菜单 -- 前景色 -->
+<span id="span_color_select" class="type_select_menu" style="position:absolute; visibility:hidden; top:0px; width:153px;">
+<!--$TextColorDropBoxMenu$-->
+</span>
+
+
+
+
+
+
+<!-- 颜色下拉菜单 -- 背景色 -->
+<span id="span_bgcolor_select" class="type_select_menu" style="position:absolute; visibility:hidden; top:0px; width:153px;">
+<!--$TextBgColorDropBoxMenu$-->
+</span>
+

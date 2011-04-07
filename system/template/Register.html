@@ -1,0 +1,210 @@
+<title>注册</title>
+<input type=hidden id='user' value='<!--$CurrentUser$GLOBAL$-->'>
+<input type=hidden id='user_ip' value='<!--$ClientIp$GLOBAL$-->'>
+<input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
+<script src='/general/global.js'></script>
+
+
+<style>
+.input_text{
+    width:254px;
+    height:20px;
+}
+.input_textarea{
+    width:400;
+    height:160px;
+}
+.tagBoxBody {
+    background: #8C8C8C;
+}
+.tagBoxBody tr {
+    height:39px;
+}
+</style>
+<script>
+//重载此函数，设置菜单
+function LoadSetting()
+{
+    var span = GetObj('menu_html');
+    var str='';
+    str += '<a href="javascript:OpenPage(\'login\')">登录</a>';
+    span.innerHTML = str;;
+}
+
+function Setting()
+{
+}
+
+// SetTagBox的回调函数
+function TagDo(o, p)
+{
+    // 动态设置提交按键指向
+    $('submit_tagx').onclick = function()
+    {
+        $(o.body).getElementsByTagName('form')[0]['tag'].click();
+    }
+}
+
+function Init()
+{
+    DefaultInitProc();
+    SetTagBox( {head:"tag_head1", body:"tag_body1", fun:TagDo, on:<!--$tag_register$-->},
+               {head:"tag_head2", body:"tag_body2", fun:TagDo, on:<!--$tag_retrieve$-->},
+               {head:"tag_head3", body:"tag_body3", fun:TagDo, on:<!--$tag_modify$-->} );
+    return true;
+}
+</script>
+<input type=hidden id="button_status" value="return*OK">
+
+<br>
+
+
+<table border="0" width="100%" height="73%"><tr><td align="center" valign="middle">
+<!-----------------------------------居中 begin----------------------------------->
+
+<div style="width:700px;">
+    <div class="tagBoxHead">
+        <ul>
+            <li><a href="#" id="tag_head1">用户注册</a></li>
+            <li><a href="#" id="tag_head2">找回密码</a></li>
+            <li><a href="#" id="tag_head3">修改密码</a></li>
+        </ul>
+    </div>
+    <div class="tagBoxBody" style="height:436px">
+        <table border="0" width="100%"><tr><td align="center" valign="top">
+        <!-----------------------------------居中 begin----------------------------------->
+
+        <div id="tag_body1">    <!-- 用户注册 -->
+            <form method="post" action="register" target="tmp_iframe">
+            <input type="submit" class="hidden" name="tag" value="register">
+            <table border="0" width="100%">
+              <tr>
+                <td align="right" width="129">用户名<span class="xing">*</span>：</td>
+                <td><input name="username" class="NOTEMPTY USERNAME input_text" size="30" maxlength="26" value=""></td>
+              </tr>
+              <tr>
+                <td align="right">密　码 ：</td>
+                <td><input type="password" name="password" class="input_text" size="30" maxlength="18" value=""></td>
+              </tr>
+              <tr>
+                <td align="right">确认密码 ：</td>
+                <td><input type="password" name="password1" size="30" class="input_text" maxlength="18" value=""></td>
+              </tr>
+              <tr>
+                <td align="right">问　题 ：</td>
+                <td><input name="question" class="input_text" size="30" maxlength="50" value=""></td>
+              </tr>
+              <tr>
+                <td align="right">答　案 ：</td>
+                <td><input name="answer" class="input_text" size="30" maxlength="50" value=""></td>
+              </tr>
+              <tr>
+                <td valign="top" align="right">备　注 ：</td>
+                <td valign="top"><textarea class="input_textarea" name="comment"></textarea></td>
+              </tr>
+            </table>
+            </form>
+        </div>
+
+        <div id="tag_body2">    <!-- 找回密码 -->
+            <!-- 找回密码 Step2：找回密码 -->
+            <table border="0" width="100%" style="display:<!--$stet2_display$-->;">
+            <form method="post" action="register" target="tmp_iframe">
+            <input type="submit" class="hidden" name="tag" value="retrieve">
+              <tr>
+                <td align="right" width="129">用户名<span class="xing">*</span>：</td>
+                <td>
+                    <input name="username" class="input_text readonly" size="30" maxlength="26" value="<!--$username$-->" readonly autocomplete="off">
+                </td>
+              </tr>
+              <tr>
+                <td align="right">问　题 ：</td>
+                <td>
+                    <input size="30" maxlength="50" class="input_text readonly" name="question" value="<!--$question$-->" readonly autocomplete="off">
+                </td>
+              </tr>
+              <tr>
+                <td align="right">答　案 ：</td>
+                <td><input name="answer" size="30" maxlength="50" value=""></td>
+              </tr>
+              <tr>
+                <td align="right" valign="top">取回的密码 ：</td>
+                <td valign="top">
+                    <input id="get_password" size="30" class="red" value="" readonly autocomplete="off">
+            　  </td>
+              </tr>
+            </form>
+            <form method="post" action="register">
+            <input type="hidden" name="stet1_display" value="1">
+            <input type="hidden" name="username" value="<!--$username$-->">
+              <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" name="prev_step" value="上一步"></td>
+              </tr>
+            </form>
+              <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <br><br><br><br><br>
+                    <span class="comment" style="border:1px solid #ADD8E6; display:table; width:299px; padding:8px;line-height:17px;">
+                        注意：原密码无法找回，取回的是系统重新设置的密码，请在取得后，到『修改密码』标签页重新设置为您所需要的新密码。
+                    </span>
+                </td>
+              </tr>
+            </table>
+
+            <!-- 找回密码 Step1：输入用户名 -->
+            <form method="post" action="register">
+            <table border="0" width="100%" style="display:<!--$stet1_display$-->;">
+              <tr>
+                <td align="right" width="129">用户名<span class="xing">*</span>：</td>
+                <td><input name="username" class="NOTEMPTY USERNAME input_text" size="30" maxlength="26" value="<!--$username$-->"></td>
+              </tr>
+              <tr>
+                <td align="right">&nbsp;</td>
+                <td><input type="submit" name="next_step" value="下一步"></td>
+              </tr>
+            </table>
+            </form>
+        </div>
+
+        <div id="tag_body3">    <!-- 修改密码 -->
+            <form method="post" action="register" target="tmp_iframe">
+            <input type="submit" class="hidden" name="tag" value="modify">
+            <table border="0" width="100%">
+              <tr>
+                <td align="right" width="129">用户名<span class="xing">*</span>：</td>
+                <td><input name="username" class="NOTEMPTY USERNAME input_text" size="30" maxlength="26" value="<!--$username$-->"></td>
+              </tr>
+              <tr>
+                <td align="right">原密码 ：</td>
+                <td><input type="password" name="old_password" class="input_text" size="30" maxlength="18" value=""></td>
+              </tr>
+              <tr>
+                <td align="right">新密码 ：</td>
+                <td><input type="password" name="new_password1" class="input_text" size="30" maxlength="18" value=""></td>
+              </tr>
+              <tr>
+                <td align="right">确认密码 ：</td>
+                <td><input type="password" name="new_password2" size="30" class="input_text" maxlength="18" value=""></td>
+              </tr>
+            </table>
+            </form>
+        </div>
+
+
+        <!-----------------------------------居中 end-------------------------------------->
+        </td></tr></table>
+    </div>
+    <table width="100%">
+        <tr>
+            <td>　<span class="comment">(注：标<span class="xing">*</span>的为必填项。)</span></td>
+            <td align="right">
+                <input id="submit_tagx" type="button" class="button" value="提交">
+                <input type="button" value="返回" OnClick="OpenPage('browse')" title="返回登录页">
+            </td>
+        </tr>
+    </table>
+</div>
+<!-----------------------------------居中 end-------------------------------------->
+</td></tr></table>

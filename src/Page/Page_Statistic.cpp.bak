@@ -1,0 +1,120 @@
+// Rocky 2010-04-28 12:13:39
+#include "Page_Statistic.h"
+#include "ThreadPool.h"
+namespace PAGE_STATISTIC_SPACE
+{
+
+
+
+
+
+
+
+
+
+
+// 标明模块
+static const string THIS_MODULE = "statistic";
+
+
+
+
+Page_Statistic::Page_Statistic()
+{
+    FUNCTION_TRACK(); // 函数轨迹跟综
+}
+
+Page_Statistic::~Page_Statistic()
+{
+    FUNCTION_TRACK(); // 函数轨迹跟综
+}
+
+
+int Page_Statistic::DoInit()
+{
+    FUNCTION_TRACK(); // 函数轨迹跟综
+
+    return Page::DoInit();
+}
+
+// 子类对象创建器
+Page *Page_Statistic::DoNew()
+{
+    FUNCTION_TRACK(); // 函数轨迹跟综
+    return new Page_Statistic;
+}
+
+
+
+
+
+
+
+
+/******************************** 业务代码 ********************************/
+
+
+
+
+int Page_Statistic::OutBody()
+{
+    FUNCTION_TRACK(); // 函数轨迹跟综
+
+    assert(NULL != m_request);
+
+    string html;
+
+    /*
+     * 线程、任务列表
+     */
+    {
+        html = "<fieldset><legend>线程、任务列表</legend>\n"
+               "<table border='1'>\n"
+               "  <tr>\n"
+               "    <td>序号</td>\n"
+               "    <td>线程池编号</td>\n"
+               "    <td>线程数</td>\n"
+               "    <td>任务数据数</td>\n"
+               "  </tr>\n"
+               "";
+
+        int i;
+        ThreadPool::iterator it;
+
+        // 扫描各个程序池对象
+        for(i=0; it.next(); i++)
+        {
+            ThreadPool * const pool = it();
+
+            html += "  <tr>\n"
+                    "    <td>" + IntToString( i ) + "</td>\n"
+                    "    <td>" + IntToString( pool->GetId() ) + "</td>\n"
+                    "    <td>" + IntToString( pool->GetPoolSize() ) + "</td>\n"
+                    "    <td>" + IntToString( pool->GetTaskCount() ) + "</td>\n"
+                    "  </tr>";
+        }
+
+        html += "</table>\n"
+                "</fieldset>\n";
+
+        m_request->GetConnect()->Send(html.c_str(), html.length());
+    }
+
+    return OK;
+}
+
+
+
+
+
+
+
+
+
+
+
+// 定义动态库入口
+DefinitinoDllEnter(Page_Statistic, THIS_MODULE)
+
+}// end of PAGE_STATISTIC_SPACE
+

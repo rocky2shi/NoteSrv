@@ -1,0 +1,115 @@
+<script>function $(id){var o=document.getElementById(id);if(null==o){alert('id error: '+id);}else{return o;}}</script>
+<input type=hidden id='current_username' value='<!--$CurrentUser$GLOBAL$-->'>
+<input type=hidden id='current_ip' value='<!--$ClientIp$GLOBAL$-->'>
+<input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
+<script src='/general/global.js'></script>
+
+
+<script>
+function SetCookie(name, value, expire)
+{
+    expire = expire || 1000*24*3600*1000; // 默认1000天过期
+    var exp  = new Date();
+    exp.setTime(exp.getTime() + expire);
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}
+
+function GetCookie(name)
+{
+    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+    if(arr != null) return unescape(arr[2]); return null;
+}
+
+
+
+// 打开登录窗品
+function OpenLoginWin()
+{
+//    ShortKey.Lock();
+//    OverLayer.Open();
+    
+    // ShowToCenter.Open("table_login"); // 打开 
+
+    LoginWin.Open();
+
+}
+
+
+
+function Init()
+{
+    DefaultInitProc();
+//    ShowToCenter.MoveToCenter("table_login"); // 居中
+//    SetCookie("name", "Rocky");
+//    SetCookie("id", "es360");
+//    ShowToCenter.MoveToCenter('table_login');
+}
+
+</script>
+<style>
+#username, #password{
+    width:154px;
+    height:20px;
+}
+#table_login{
+    width:281px;
+    height:100px;
+}
+</style>
+
+
+<body onload=Init()>
+
+<br>
+<br>
+<hr>
+
+[--[&lt;]--[&lt]--[&lt;&lt;]--[&lt&lt]--]
+<br>
+
+<form method="get" action="http://192.168.0.230:17890/login.cgi?user=rocky" target=tmp_iframe> 
+<input type="hidden" name="window.screen.width"> 
+<input type="hidden" name="window.screen.height"> 
+<input name='username' id='username' class='USERNAME FOCUS' value='abcdefghijklmnopqrstuvwxyz中国人'>
+<input type=submit name=login class="button" value="GET"> 
+<input type=button class="button TABTO_username" value="关于" OnClick="About()"> 
+</form> 
+
+<br>
+
+<form method="post" action="http://192.168.0.230:17890/login.cgi?user=rocky" target=tmp_iframe> 
+<input type="hidden" name="window.screen.width"> 
+<input type="hidden" name="window.screen.height"> 
+<input name='username' id='username' class='USERNAME FOCUS' value='0123456789中国人'>
+<input type=submit name=login class="button" value="POST"> 
+<input type=button class="button TABTO_username" value="关于" OnClick="About()"> 
+</form> 
+
+<hr>
+
+
+
+<form action="http://192.168.0.230:17890/Login.cgi?user=rocky" method="POST" ENCTYPE="multipart/form-data" target="iframe_attach"> 
+<input type="hidden" name="username" value="abcdefghijklmnopqrstuvwxyz中国人"> 
+<input type="hidden" name="key" value="20100419194646"> 
+上传：<input type=file name="attach" size="38" class="NOTEMPTY"> <input type=submit name=upfile value="上传"> 
+</form> 
+
+
+<hr>
+<form method="get"> 
+<input name='username' id='username' class='USERNAME FOCUS' value=''>
+<input type=submit name=login class="button" value="GET"> 
+<input type=button class="button TABTO_username" value="关于" OnClick="About()"> 
+</form> 
+
+<hr>
+<input id=cookie> 
+<input type=button value="设置Cookie" OnClick='SetCookie("id", $("cookie").value)'> 
+<input type=button value="获取Cookie" OnClick='alert( GetCookie("id") )'>
+
+<br>
+<hr>
+<br>
+<input type=button onclick="OpenLoginWin()" value="login win">
+

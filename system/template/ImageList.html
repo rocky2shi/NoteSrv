@@ -1,0 +1,72 @@
+<style>
+body{
+    font-family: "Arial", "Helvetica", "sans-serif";
+    font-style: normal;
+    font-size:14px;
+    background-color:transparent;
+}
+input, label{
+    cursor: pointer;
+}
+</style>
+
+
+<script>
+// 动态地把图像加载到<img>上
+function PreviewImg(url, name)
+{
+    var img = document.getElementById("img_preview");
+    img.src = "/image?key=<!--$Key$GLOBAL$-->&file=" + url;
+    img.name = name;
+}
+
+// 取图像信息（src，名等）
+function GetImgInfo()
+{
+    var img = document.getElementById("img_preview");
+    var info = {};
+    info.src = img.src.replace(/^http:\/\/[^\/]*/, '');  // 去掉浏览器自动加上的域名等前缀
+    info.name = img.name;
+    return info;
+}
+
+function Esc()
+{
+    if(parent == window)
+    {
+        return;
+    }
+    // 调父窗口的函数
+    parent.Esc();
+}
+
+// Rocky 2009-12-02 12:50:32
+function Init()
+{
+    DefaultInitProc();
+    
+    ShortKey.Register({key:KEY_ESC}, Esc);
+    
+}
+</script>
+
+<body>
+
+<!-- 列出图片列表 -->
+<table width=100% border=0 cellpadding=0 cellspacing=0>
+  <tr>
+    <td align=left valign=top>
+        <ol>
+<!----------------------------- list begin ------------------------------------->
+<!--$ImageList$-->
+<!----------------------------- list end --------------------------------------->
+        </ol>
+    </td>
+    <td align=right>
+        <img id="img_preview" src="" width="200px" border="1" style="display:<!--$ImgDisplay$-->;" title="预览小窗口" alt="预览小窗口">
+    </td>
+  </tr>
+</table>
+
+</body>
+

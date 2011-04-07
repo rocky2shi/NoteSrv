@@ -1,0 +1,95 @@
+<script src='/global.js'></script>
+<style>
+body{
+    font-family: "Arial", "Helvetica", "sans-serif";
+    font-style: normal;
+    font-size:14px;
+    background-color:transparent;
+}
+a:link{text-decoration:none; color:#686868}
+a:visited{text-decoration:none; color:#686868}
+a:active{text-decoration:none; color:#686868}
+a:hover{text-decoration:none; color:#FAEE0E;background-color:#212001;}
+</style>
+<script>
+
+// 发送删除命令（url）到服务器
+function Delete(obj, key, urlfilename, filename)
+{
+    if( "" == obj.title )
+    {
+        alert("文件[" + filename + "]已经被删除");
+        return;
+    }
+    
+    if( ! confirm("确定删除[" + filename + "]?") )
+    {
+        return;
+    }
+
+    var url = "attach";
+
+    /* 组装Post参数
+     */
+    var post = "";
+    post += "&key=" + key;
+    post += "&file=" + urlfilename;
+    post += "&delete_attach=1";
+    
+    // 发送请求到服务端
+    SubmitToServer(url, post, Response); 
+    // 处理回应
+    function Response(str)
+    {
+        if("OK" == str)
+        {
+            obj.title = "";
+            // 不刷新页面，只加一删除线来表示；
+            obj.parentNode.innerHTML = obj.parentNode.innerHTML.strike();
+        }
+        else
+        {
+            alert(str);
+        }
+    }
+}
+
+function Init()
+{
+    DefaultInitProc();
+}
+
+</script>
+<body>
+
+
+<!-- 列出内容 -->
+<ol>
+<!----------------------------- list begin ------------------------------------->
+<!--$AttachList$GLOBAL$-->
+<!----------------------------- list end --------------------------------------->
+</ol>
+
+
+
+
+
+
+
+
+
+<!--在父页面显示附件数-->
+<script>
+var obj = parent.document.getElementById('attach_count');
+if(null != obj)
+{
+    if('SPAN' == obj.nodeName)
+    {
+        obj.innerHTML = '附件数[<!--$AttachCount$-->]';
+    }
+    else
+    {
+        obj.value = '附件数[<!--$AttachCount$-->]';
+    }
+}
+</script>

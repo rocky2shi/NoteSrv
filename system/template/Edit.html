@@ -1,0 +1,295 @@
+<title>编辑（<!--$Title$GLOBAL$-->）</title>
+<input type=hidden id='user' value='<!--$CurrentUser$GLOBAL$-->'>
+<input type=hidden id='user_ip' value='<!--$ClientIp$GLOBAL$-->'>
+<input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
+<script src='/general/global.js'></script>
+
+<style>
+.margin{
+    margin-right:10px;
+}
+textarea{
+    font-size:13px;
+    width:862px;
+    height:518px;
+    letter-spacing:1px;
+}
+</style>
+
+<script>
+var mod_obj = '';
+var bModify = false;
+var txt_len = 0;
+var g_bShortKeyOk = false;
+
+function CtrlEnter()
+{
+    g_bShortKeyOk = true;
+    var obj = GetObj('edit_form');
+    obj['save_text'].click();
+}
+
+function AltEnter()
+{
+    if(bModify && !IsSure("未保存，确定退出吗？"))
+        return;
+    var obj = GetObj('edit_form');
+    obj['return'].click();
+}
+
+function AltB(key)
+{
+    ShortKey.Lock();
+    if(bModify && !IsSure("未保存，确定退出吗？"))
+        return;
+    OpenPage('reading?key=<!--$Key$GLOBAL$-->');
+}
+
+function AltN()
+{
+    ShortKey.Lock();
+    var obj = GetObj('edit_form');
+    obj['operate'].value = "new";
+    obj['save_text'].click();
+}
+
+function AltS()
+{
+    ShortKey.Lock();
+    OverLayer.Open();
+    ShowToCenter.Open("div_set_pasd"); // 居中显示
+    form_obj['opr'].value = 'set';
+    form_obj['msg_pasd_new'].focus();
+}
+
+function Alt1()
+{
+    ShortKey.Lock();
+    OverLayer.Open();
+    ShowToCenter.Open('div_attach');
+    $('attach')[0].focus();
+}
+
+function Esc()
+{
+<!--$Esc$GLOBAL$-->
+}
+
+//重载此函数，设置菜单
+function LoadSetting()
+{
+    var span = GetObj('menu_html');
+    var str='';
+    str += '<a href="javascript:Alt1()">附件　Alt+1</a>';
+    str += '<a href="javascript:AltS();">加密　Alt+S</a>';
+    str += '<a href="TypeDropBoxMenuSetting">归类设置</a>';
+    str += '<a href="javascript:AltEnter();">返回　Alt+Enter</a>';
+    span.innerHTML = str;;
+}
+
+function OnTextKeyUp(ts)
+{
+    if(ts.value.length != txt_len)
+    {
+        bModify = true;
+        mod_obj.innerHTML = '(未保存)';
+    }
+    else
+    {
+        bModify = false;
+        mod_obj.innerHTML = '';
+    }
+}
+
+// 恢复初始状态
+function ClearStatus()
+{
+    txt_len = GetObj('text')[0].value.length;
+    bModify = false;
+}
+
+function Init()
+{
+    DefaultInitProc();
+    mod_obj = GetObj('error');
+    txt_len = GetObj('text')[0].value.length;
+    form_obj = GetObj('form_set');
+    edit_form_obj = GetObj('edit_form');
+    ShowToCenter.MoveToCenter("div_set_pasd");
+    ShowToCenter.MoveToCenter("div_attach");
+    if(GetObj('div_pasd') != null)
+    {
+        OverLayer.Open();
+        ShowToCenter.Open("div_pasd");
+    }
+
+    ShortKey.Register({key:KEY_ESC}, Esc);
+    ShortKey.Register({key:KEY_F2}, AltN);  // 因为新增操作较多，故再加一个比较方便的快捷键；
+    ShortKey.Register({alt:true, key:KEY_1}, Alt1);
+    ShortKey.Register({alt:true, key:KEY_B}, AltB);
+    ShortKey.Register({alt:true, key:KEY_N}, AltN);
+    ShortKey.Register({alt:true, key:KEY_S}, AltS);
+    ShortKey.Register({alt:true, key:KEY_ENTER}, AltEnter);
+    ShortKey.Register({ctrl:true, key:KEY_ENTER}, CtrlEnter);
+
+    TypeSelectMenu({id:"input_type_select", show:'index'}, {id:"span_type_select"}, {id:"msg_type"});
+
+    $('attach_count').onkeydown = function(event)
+    {
+        event = event || window.event;
+        if(13 == event.keyCode)
+        {
+            Alt1();
+            return false;
+        }
+    }
+}
+</script>
+<br>
+
+
+
+
+<!-- 正文数据 -->
+<form id="edit_form" action="edit" method="POST" target="tmp_iframe">
+<table border="0" width="100%" height="73%">
+    <tr>
+        <td align="center" valign="middle">
+<!------------------------------------------------------------------------------>
+
+<table align=center valign=middle id="table_edit">
+<input type="hidden" name="key" value="<!--$Key$GLOBAL$-->">
+<input type="hidden" name="operate" value=""> <!--值取"new"时，则提交后转新页面；-->
+<input type="hidden" name="password" value="<!--$CurrentPassword$GLOBAL$-->"> <!--当其不为空时，说明当前数据是被加密的；-->
+<input type="hidden" name="msg_type" id="msg_type" size="100"> <!--下拉菜单中选中的类型列表-->
+    <tr>
+        <td nowrap>标题：</td>
+        <td>
+            <input name="title" class="NOTEMPTY FOCUS" size="51" value="<!--$Title$GLOBAL$-->" maxlength="60" autocomplete="off"> <!-- $status －－February 22, 2007 -->
+
+            <input id="input_type_select" size="15" value="归类选择" title="单击打开归类选择窗口，再次单击关闭" readonly autocomplete="off"
+                    class="disabled input_text input_text_center hand">
+
+            <input id="attach_count" size="9" value="附件：0" OnClick="Alt1()" title="单击打开附件窗口" readonly autocomplete="off"
+                    class="disabled input_text input_text_center hand">
+
+            <span id="error" class="font12 blue"></span>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top">内容：</td>
+        <td>
+            <textarea name="text" wrap="VIRTUAL" onKeyUp="OnTextKeyUp(this)"
+                        class="input_text "><!--$Text$--></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align=right>
+            <span class="note margin">快捷键：提交[Ctrl+Enter]，提交并新增[Alt+N]，返回[Alt+Enter]</span>
+            <input type="submit" name="save_text" class="button TABTO_title" value=" 提 交 ">
+            <input type="button" id="return" onClick="OpenPage('browse')" value=" 返 回 ">
+        </td>
+    </tr>
+</table>
+
+<!------------------------------------------------------------------------------>
+        </td>
+    </tr>
+</table>
+</form>
+
+
+
+
+
+
+
+
+<!-- 加密设置 -->
+<div id="div_set_pasd" class="window" style="display:none; position:absolute; width:491px;">
+<form method="POST" id="form_set">
+<input type="hidden" name="key" value="<!--$Key$GLOBAL$-->">
+<table border="1" cellspacing=1 bgcolor="#FFFFFF"><tr><td>
+<table border="0" cellpadding=2 cellspacing=1>
+<td>
+
+<span class="tit">加密本条消息</span><hr>
+<span class="content">
+<br>
+<input type=hidden name="msg_pasd_old" value="<!--$CurrentPassword$GLOBAL$-->">  <!-- 原密码 -->
+<table>
+    <tr>
+        <td width="70">设置密码：</td>
+        <td><input type=password name=msg_pasd_new size=46 value="" autocomplete="off"></td>
+    </tr>
+    <tr>
+        <td width="70">确认密码：</td>
+        <td><input type=password name=msg_pasd_new size=46 value="" autocomplete="off"></td>
+    </tr>
+    <tr>
+        <td>密码提示：</td>
+        <td><input type=text name=msg_pasd_prompt size=46 value="<!--$CurrentDataPasswordPrompt$GLOBAL$-->" autocomplete="off"></td>
+    </tr>
+</table>
+</span>
+
+<hr>
+</td></tr>
+<tr>
+<td align="right">
+    <input name="set_password" type="submit" class="button" value="确定">
+    <input type="reset" class="button TABTO_msg_pasd_new" value="取消" onClick="Esc()" title="快捷键：Esc">
+</td>
+</tr>
+</table>
+</td></tr></table>
+</form>
+</div>
+
+
+
+
+
+
+<!-- 查看加密数据输入窗口 -->
+<!--$AuthenticationPrompt$GLOBAL$-->
+
+
+
+<!--文件附件-->
+<div id="div_attach" class="window" style="display:none;width:491px;">
+<form action="attach" method="POST" ENCTYPE="multipart/form-data" target="iframe_attach">
+<input type="hidden" name="key" value="<!--$Key$GLOBAL$-->">
+<table border="1" cellspacing=1 bgcolor="#FFFFFF"><tr><td>
+<table border="0" cellpadding=2 cellspacing=1>
+<td>
+<span class="tit">附件</span><hr>
+<span class="content">
+    <iframe name="iframe_attach"
+            src="attach?key=<!--$Key$GLOBAL$-->"
+            frameborder=0 scrolling=auto width="96%" height="96" allowTransparency="true">
+    </iframe>
+    <br>
+    上传：<input type=file name="attach" size="38" class="NOTEMPTY"> <input type=submit name=upfile value="上传">
+    <br>
+    <br>
+</span>
+<hr>
+</td></tr>
+<tr>
+<td align="right">
+    <input type=button class="button TABTO_upfile" value="关闭" onClick="Esc()" title="快捷键：Esc">
+</td>
+</tr>
+</table>
+</td></tr></table>
+</form>
+</div>
+
+
+<!-- 类型选择菜单 -->
+<span id="span_type_select" class="type_select_menu" style="position:absolute; visibility:hidden; left:0px; top:0px;">
+<!--$TypeDropBoxMenu$GLOBAL$-->
+</span>
+
