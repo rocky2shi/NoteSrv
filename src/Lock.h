@@ -7,11 +7,11 @@ namespace LOCK_SPACE
 
 
 
-// Ê¹ÓÃboost¿â£¬°ü×°¹²Ïí-¶ÀÕ¼Ëø£»
+// ä½¿ç”¨booståº“ï¼ŒåŒ…è£…å…±äº«-ç‹¬å é”ï¼›
 class Lock
 {
 public:
-    // ¹²ÏíËø
+    // å…±äº«é”
     class Share
     {
     public:
@@ -27,7 +27,7 @@ public:
         Lock &m_lock;
     };
 
-    // ¶ÀÕ¼Ëø
+    // ç‹¬å é”
     class Unique
     {
     public:

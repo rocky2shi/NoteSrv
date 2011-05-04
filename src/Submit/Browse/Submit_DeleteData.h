@@ -7,7 +7,7 @@ namespace SUBMIT_DELETEDATA_SPACE
 
 
 
-// É¾³ıä¯ÀÀÒ³Ò³ÉÏÑ¡¶¨µÄÊı¾İ
+// åˆ é™¤æµè§ˆé¡µé¡µä¸Šé€‰å®šçš„æ•°æ®
 class Submit_DeleteData : public Submit
 {
 protected:

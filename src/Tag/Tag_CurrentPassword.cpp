@@ -8,7 +8,7 @@ namespace TAG_CURRENTPASSWORD_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜Žæ¨¡å—
 static const string THIS_MODULE = "CurrentPassword";
 
 
@@ -17,17 +17,17 @@ static const string THIS_MODULE = "CurrentPassword";
 
 Tag_CurrentPassword::Tag_CurrentPassword()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_CurrentPassword::Tag_CurrentPassword(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_CurrentPassword::~Tag_CurrentPassword()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -35,15 +35,15 @@ Tag_CurrentPassword::~Tag_CurrentPassword()
 
 int Tag_CurrentPassword::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_CurrentPassword::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_CurrentPassword;
 }
 
@@ -54,7 +54,7 @@ Tag *Tag_CurrentPassword::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -63,9 +63,9 @@ Tag *Tag_CurrentPassword::DoNew()
 //
 string Tag_CurrentPassword::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    // password×Ö¶ÎÀ´×Ô¡°´ËÌõÐÅÏ¢ÒÑ¼ÓÃÜ£¬²é¿´ÇëÊäÈëÃÜÂë¡±´°¿Ú
+    // passwordå­—æ®µæ¥è‡ªâ€œæ­¤æ¡ä¿¡æ¯å·²åŠ å¯†ï¼ŒæŸ¥çœ‹è¯·è¾“å…¥å¯†ç â€çª—å£
     const string &password = page->GetRequest()->GetField("password");
     const string &decryption = page->GetRequest()->GetField("decryption");
 
@@ -95,7 +95,7 @@ string Tag_CurrentPassword::Get(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_CurrentPassword tmp(TAG_GLOBAL, THIS_MODULE);
 
 }// end of TAG_CURRENTPASSWORD_SPACE

@@ -6,7 +6,7 @@ namespace DLLLOAD_LINUX_SPACE
 
 
 
-// linuxÉÏ¶¯Ì¬¿â¼ÓÔØÀà
+// linuxä¸ŠåŠ¨æ€åº“åŠ è½½ç±»
 class DllLoad_Linux : public DllLoad
 {
 public:

@@ -5,7 +5,7 @@ namespace TAG_TEXTTEXTAREA_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "Text";
 
 
@@ -14,17 +14,17 @@ static const string THIS_MODULE = "Text";
 
 Tag_TextTextarea::Tag_TextTextarea()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_TextTextarea::Tag_TextTextarea(const string &page, const string &tag) : Tag_Text(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_TextTextarea::~Tag_TextTextarea()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -32,15 +32,15 @@ Tag_TextTextarea::~Tag_TextTextarea()
 
 int Tag_TextTextarea::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_TextTextarea::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_TextTextarea;
 }
 
@@ -51,7 +51,7 @@ Tag *Tag_TextTextarea::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -62,7 +62,7 @@ string Tag_TextTextarea::Get(Page *page)
 }
 
 
-// ×ª»»º¯Êı
+// è½¬æ¢å‡½æ•°
 const string Tag_TextTextarea::ThisTextToWeb(const string &txt) const
 {
     return ::TextToWebEdit(txt);

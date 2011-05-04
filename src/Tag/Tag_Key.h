@@ -8,7 +8,7 @@ namespace TAG_KEY_SPACE
 
 
 
-// ½âÎökey×Ö¶Î
+// è§£ækeyå­—æ®µ
 class Tag_Key : public Tag
 {
 protected:

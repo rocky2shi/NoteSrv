@@ -7,7 +7,7 @@ namespace SUBMIT_BROWSEINSERTBOOKMARK_SPACE
 
 
 
-// ±êÃ÷Ä£¿é£¨¶ÔÓ¦ÓÚÒ³ÃæÖĞµÄÌá½»×Ö¶Î£©
+// æ ‡æ˜æ¨¡å—ï¼ˆå¯¹åº”äºé¡µé¢ä¸­çš„æäº¤å­—æ®µï¼‰
 static const string THIS_MODULE = "BrowseInsertBookmark";
 
 
@@ -16,18 +16,18 @@ static const string THIS_MODULE = "BrowseInsertBookmark";
 
 Submit_BrowseInsertBookmark::Submit_BrowseInsertBookmark()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_BrowseInsertBookmark::Submit_BrowseInsertBookmark(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_BrowseInsertBookmark::~Submit_BrowseInsertBookmark()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -35,15 +35,15 @@ Submit_BrowseInsertBookmark::~Submit_BrowseInsertBookmark()
 
 int Submit_BrowseInsertBookmark::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_BrowseInsertBookmark::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_BrowseInsertBookmark;
 }
 
@@ -51,7 +51,7 @@ Submit *Submit_BrowseInsertBookmark::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -61,16 +61,16 @@ int Submit_BrowseInsertBookmark::Deal(Page *page)
 {
     const string &username = page->GetRequest()->GetCurrentUser();
     User *user = User::Get(username);
-    const string &cfg = user->UserDir() + "browse.txt"; // µ±Ç°Ò³ÃæµÄÅäÖÆ¡¢Êı¾İÎÄ¼ş [XXX]
+    const string &cfg = user->UserDir() + "browse.txt"; // å½“å‰é¡µé¢çš„é…åˆ¶ã€æ•°æ®æ–‡ä»¶ [XXX]
 
     /*
-     * Êı¾İ´ò°ü
+     * æ•°æ®æ‰“åŒ…
      */
     Ini data(cfg);
-    const string &bookmark = page->GetRequest()->GetField("bookmark_data"); // ÊéÇ©Êı¾İ
+    const string &bookmark = page->GetRequest()->GetField("bookmark_data"); // ä¹¦ç­¾æ•°æ®
     data.Set("data", "bookmark", bookmark);
 
-    // ±£´æ
+    // ä¿å­˜
     return data.Write();
 }
 

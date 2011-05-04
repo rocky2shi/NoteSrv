@@ -6,7 +6,7 @@ namespace TAG_CURRENTUSER_SPACE
 
 
 
-// 当前登录的用户名
+// 褰撳墠鐧诲綍鐨勭敤鎴峰悕
 class Tag_CurrentUser : public Tag
 {
 protected:

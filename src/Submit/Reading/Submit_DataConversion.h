@@ -8,7 +8,7 @@ namespace SUBMIT_DATACONVERSION_SPACE
 
 
 
-// 用于新老格式间的数据转换（调用正则式代码）
+// 鐢ㄤ簬鏂拌�佹牸寮忛棿鐨勬暟鎹浆鎹紙璋冪敤姝ｅ垯寮忎唬鐮侊級
 class Submit_DataConversion : public Submit
 {
 protected:

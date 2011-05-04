@@ -6,7 +6,7 @@ namespace TAG_TXT_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "";
 
 
@@ -15,17 +15,17 @@ static const string THIS_MODULE = "";
 
 Tag_Txt::Tag_Txt()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_Txt::Tag_Txt(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_Txt::~Tag_Txt()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -33,15 +33,15 @@ Tag_Txt::~Tag_Txt()
 
 int Tag_Txt::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_Txt::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_Txt;
 }
 
@@ -52,16 +52,16 @@ Tag *Tag_Txt::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±ê¼Ç¶ÔÏóµÄÄÚÈİ
+// å–æ ‡è®°å¯¹è±¡çš„å†…å®¹
 string Tag_Txt::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return m_tag;
 }
 
@@ -81,7 +81,7 @@ string Tag_Txt::Get(Page *page)
 
 
 
-// ÎÄ±¾Ö±½ÓÊä³ö£»
+// æ–‡æœ¬ç›´æ¥è¾“å‡ºï¼›
 static Tag_Txt tmp(THIS_MODULE, "TXT");
 
 }// end of TAG_TXT_SPACE

@@ -10,25 +10,25 @@ using namespace std;
 
 
 
-// Ö´ĞĞÀàµÄ³õÊ¼»¯
+// æ‰§è¡Œç±»çš„åˆå§‹åŒ–
 class ClassInit
 {
 public:
     typedef int (*ExeFunc)();
     typedef enum {
-        INIT_HIGH,  // ¸ßÓÅÏÈ¼¶±êÖ¾
-        INIT_LOW,   // µÍÓÅÏÈ¼¶±êÖ¾
+        INIT_HIGH,  // é«˜ä¼˜å…ˆçº§æ ‡å¿—
+        INIT_LOW,   // ä½ä¼˜å…ˆçº§æ ‡å¿—
     }InitLevel;
 
 public:
     ClassInit(ExeFunc init, InitLevel level=INIT_LOW);
 
-    // µ÷ÓÃÃû¸ö×¢²áµÄ³õÊ¼»¯
+    // è°ƒç”¨åä¸ªæ³¨å†Œçš„åˆå§‹åŒ–
     static int init();
 
     //
-    static int RegisterHL(const ExeFunc exector);   // ¸ßÓÅÏÈ¼¶
-    static int RegisterLL(const ExeFunc exector);   // µÍÓÅÏÈ¼¶
+    static int RegisterHL(const ExeFunc exector);   // é«˜ä¼˜å…ˆçº§
+    static int RegisterLL(const ExeFunc exector);   // ä½ä¼˜å…ˆçº§
 
 private:
     static list<ExeFunc> m_HighQueue;

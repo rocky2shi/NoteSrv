@@ -13,32 +13,32 @@ namespace PAGE_TEXT_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "text";
 
 
 
 Page_Text::Page_Text()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Text::~Page_Text()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Text::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Text::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Text;
 }
 
@@ -49,13 +49,13 @@ Page *Page_Text::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
-// Êä³öÊı¾İÌå
+// è¾“å‡ºæ•°æ®ä½“
 int Page_Text::Deal()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
@@ -80,10 +80,10 @@ int Page_Text::Deal()
                   "Content-Type: text/html; charset=GB2312\n"
                   "\n";
 
-    // ·¢ËÍhttpÍ·
+    // å‘é€httpå¤´
     ret = connect->Send(head);
 
-    // ·¢ËÍÒ³Ãæ´úÂë
+    // å‘é€é¡µé¢ä»£ç 
     ret = SendFile(file, connect);
 
     return file.Size() == ret ? OK : ERR;
@@ -101,7 +101,7 @@ int Page_Text::Deal()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Text, THIS_MODULE)
 
 }// end of PAGE_DOWNLOAD_SPACE

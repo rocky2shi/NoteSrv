@@ -11,26 +11,26 @@ namespace USERDATA_SPACE
 
 
 
-// È¡³ö¸ø¶¨ÓÃ»§µÄÊı¾İ£¨ÎÄ±¾¡¢¸½¼ş¡¢Í¼Æ¬µÈ£©
+// å–å‡ºç»™å®šç”¨æˆ·çš„æ•°æ®ï¼ˆæ–‡æœ¬ã€é™„ä»¶ã€å›¾ç‰‡ç­‰ï¼‰
 class UserData
 {
 public:
-    // ±éÀúÈ¡³öËùÓĞÊı¾İ
+    // éå†å–å‡ºæ‰€æœ‰æ•°æ®
     class iterator
     {
     public:
-        // ¶ÁÈ¡pathÏÂËùÓĞÎÄ¼şÄÚµÄÊı¾İ
+        // è¯»å–pathä¸‹æ‰€æœ‰æ–‡ä»¶å†…çš„æ•°æ®
         iterator(const string &path);
 
-        // Ö¸ÏòÏÂÒ»×éÊı¾İ
+        // æŒ‡å‘ä¸‹ä¸€ç»„æ•°æ®
         bool next();
 
-        // È¡µ±Ç°[key/pack]¶Ô
+        // å–å½“å‰[key/pack]å¯¹
         int Get(string &key, Conf *&pack);
 
 
     private:
-        Ini m_Curent;   // µ±Ç°ÕıÔÚ¶ÁÈ¡µÄÎÄ¼ş
+        Ini m_Curent;   // å½“å‰æ­£åœ¨è¯»å–çš„æ–‡ä»¶
         Ini::reverse_iterator m_itCurrent;
         GetFileList m_FilsList;
         GetFileList::file_iterator m_itFile;
@@ -42,30 +42,30 @@ public:
     ~UserData();
 
     /*
-     * ¶ÁÈ¡¸ø¶¨¾ßÌåÎ»ÖÃÊı¾İ
+     * è¯»å–ç»™å®šå…·ä½“ä½ç½®æ•°æ®
      */
-    const string Get(const string &key, const string &item);  // µ¥ÌõÊı¾İ
-    int Get(Ini &pack);    // £¨´ÓÎÄ¼şÖĞ£©È¡Êı¾İ£¬Ìî³äpackÖĞkey¶ÔÓ¦µÄÖµ
+    const string Get(const string &key, const string &item);  // å•æ¡æ•°æ®
+    int Get(Ini &pack);    // ï¼ˆä»æ–‡ä»¶ä¸­ï¼‰å–æ•°æ®ï¼Œå¡«å……packä¸­keyå¯¹åº”çš„å€¼
 
     /*
-     * Ğ´Êı¾İÈë¶ÔÏó
-     * £¨×¢£ºÈôÊÇÉ¾³ıÄ³Êı¾İ£¬Ö»ĞèÖÃÆä×´Ì¬Îª"delete"£¬ÔÙÒÔforce==trueÀ´
-     *   µ÷ÓÃSet()¼´¿É£¬¼ûº¯ÊıÄÚ²¿£©£»
+     * å†™æ•°æ®å…¥å¯¹è±¡
+     * ï¼ˆæ³¨ï¼šè‹¥æ˜¯åˆ é™¤æŸæ•°æ®ï¼Œåªéœ€ç½®å…¶çŠ¶æ€ä¸º"delete"ï¼Œå†ä»¥force==trueæ¥
+     *   è°ƒç”¨Set()å³å¯ï¼Œè§å‡½æ•°å†…éƒ¨ï¼‰ï¼›
      */
-    int Set(const string &key, const string &item, const string &value); // µ¥ÌõÊı¾İ
-    int Set(const Ini &pack, bool force=false);    // Ò»×éÊı¾İ
+    int Set(const string &key, const string &item, const string &value); // å•æ¡æ•°æ®
+    int Set(const Ini &pack, bool force=false);    // ä¸€ç»„æ•°æ®
 
     /*
-     * È¡key¶ÔÓ¦Êı¾İµÄ¸½¼şÃûÁĞ±íµ½attachsÖĞ
+     * å–keyå¯¹åº”æ•°æ®çš„é™„ä»¶ååˆ—è¡¨åˆ°attachsä¸­
      */
     int GetAttachList(const string &key, vector<string> &attachs) const;
 
-    // È¡²Ù×÷½á¹û
+    // å–æ“ä½œç»“æœ
     const string GetResult(const string &field) const;
 
 private:
     const string m_username;
-    Conf m_result;  // ÊÂ¼ş²Ù×÷½á¹ûµÈ¼ÇÂ¼
+    Conf m_result;  // äº‹ä»¶æ“ä½œç»“æœç­‰è®°å½•
 //    Cache m_cache;
 //    File m_file;
 };

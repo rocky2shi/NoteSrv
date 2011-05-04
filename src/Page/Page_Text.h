@@ -9,7 +9,7 @@ namespace PAGE_TEXT_SPACE
 
 
 
-// ÎÄ±¾´¦ÀíÀà£ºhtml¡¢js¡¢css¡¢txtµÈ
+// æ–‡æœ¬å¤„ç†ç±»ï¼šhtmlã€jsã€cssã€txtç­‰
 class Page_Text : public Page
 {
 protected:

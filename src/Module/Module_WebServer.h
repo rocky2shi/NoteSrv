@@ -9,7 +9,7 @@ namespace MODULE_WEBSERVER_SPACE
 
 
 
-// 创建web服务器类
+// 鍒涘缓web鏈嶅姟鍣ㄧ被
 class Module_WebServer : public Module
 {
 protected:

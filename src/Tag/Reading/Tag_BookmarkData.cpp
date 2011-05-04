@@ -7,7 +7,7 @@ namespace TAG_BOOKMARKDATA_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜Žæ¨¡å—
 static const string THIS_MODULE = "BookmarkData";
 
 
@@ -16,17 +16,17 @@ static const string THIS_MODULE = "BookmarkData";
 
 Tag_BookmarkData::Tag_BookmarkData()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_BookmarkData::Tag_BookmarkData(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_BookmarkData::~Tag_BookmarkData()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -34,15 +34,15 @@ Tag_BookmarkData::~Tag_BookmarkData()
 
 int Tag_BookmarkData::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_BookmarkData::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_BookmarkData;
 }
 
@@ -53,18 +53,18 @@ Tag *Tag_BookmarkData::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±êÌâ [2010-05]
+// å–æ ‡é¢˜ [2010-05]
 string Tag_BookmarkData::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    const Conf *pack = page->GetCurrentPack();          // µ±Ç°key¶ÔÓ¦Êý¾Ý¼¯
+    const Conf *pack = page->GetCurrentPack();          // å½“å‰keyå¯¹åº”æ•°æ®é›†
     const string &bookmark = pack->Get("bookmark");
     return TextToWeb( bookmark );
 }
@@ -85,7 +85,7 @@ string Tag_BookmarkData::Get(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_BookmarkData tmp("reading", THIS_MODULE);
 
 }// end of TAG_BOOKMARKDATA_SPACE

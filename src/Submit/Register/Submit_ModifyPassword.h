@@ -10,7 +10,7 @@ namespace SUBMIT_MODIFYPASSWORD_SPACE
 
 
 
-// ĞŞ¸ÄÓÃ»§ÃÜÂë
+// ä¿®æ”¹ç”¨æˆ·å¯†ç 
 class Submit_ModifyPassword : public Submit
 {
 protected:

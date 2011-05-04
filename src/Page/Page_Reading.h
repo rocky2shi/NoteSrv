@@ -9,7 +9,7 @@ namespace PAGE_READING_SPACE
 
 
 
-// ÔÄ¶ÁÒ³Ãæ
+// é˜…è¯»é¡µé¢
 class Page_Reading : public Page
 {
 protected:

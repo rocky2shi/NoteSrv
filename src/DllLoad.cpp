@@ -12,16 +12,16 @@ namespace DLLLOAD_SPACE
 
 DllLoad::DllLoad()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 DllLoad::~DllLoad()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
-// ¸ú¾Ý´«ÈëµÄid´Ó¹¤³§ÖÐ²úÉúÒ»¸ö´¦Àí¶ÔÏó
+// è·Ÿæ®ä¼ å…¥çš„idä»Žå·¥åŽ‚ä¸­äº§ç”Ÿä¸€ä¸ªå¤„ç†å¯¹è±¡
 DllLoad *DllLoad::New(const string &id/*="linux"*/)
 {
     return new DllLoad_Linux;
@@ -29,27 +29,27 @@ DllLoad *DllLoad::New(const string &id/*="linux"*/)
 
 
 
-// ´ò¿ª¶¯Ì¬¿âÎÄ¼þ
+// æ‰“å¼€åŠ¨æ€åº“æ–‡ä»¶
 int DllLoad::Open(const string &file)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
-    LOG_ERROR("Ó¦ÔÚ×ÓÀàÖÐÊµÏÖ");
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
+    LOG_ERROR("åº”åœ¨å­ç±»ä¸­å®žçŽ°");
     return ERR;
 }
 
-// ¹Ø±Õ¶¯Ì¬¿â
+// å…³é—­åŠ¨æ€åº“
 int DllLoad::Close()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
-    LOG_ERROR("Ó¦ÔÚ×ÓÀàÖÐÊµÏÖ");
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
+    LOG_ERROR("åº”åœ¨å­ç±»ä¸­å®žçŽ°");
     return ERR;
 }
 
-// È¡Ö´ÐÐ¶ÔÏó
+// å–æ‰§è¡Œå¯¹è±¡
 void *DllLoad::GetSymbol(const string &sym)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
-    LOG_ERROR("Ó¦ÔÚ×ÓÀàÖÐÊµÏÖ");
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
+    LOG_ERROR("åº”åœ¨å­ç±»ä¸­å®žçŽ°");
     return NULL;
 }
 

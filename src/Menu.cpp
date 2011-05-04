@@ -23,14 +23,14 @@ Menu::Cache::~Cache()
 {
     map< string, map<string, Menu*> >::iterator itUser;
 
-    // ±éÀúÃ¿¸öÓÃ»§
+    // éå†æ¯ä¸ªç”¨æˆ·
     for(itUser=m_MenuList.begin(); m_MenuList.end() != itUser; itUser++)
     {
-        // µ±Ç°ÓÃ»§ÏÂµÄ²Ëµ¥
+        // å½“å‰ç”¨æˆ·ä¸‹çš„èœå•
         map<string, Menu*> &menu = itUser->second;
         map<string, Menu*>::iterator itMenu;
 
-        // ±éÀúÃ¿¸ö²Ëµ¥
+        // éå†æ¯ä¸ªèœå•
         for(itMenu=menu.begin(); menu.end() != itMenu; itMenu++)
         {
             delete itMenu->second;
@@ -39,16 +39,16 @@ Menu::Cache::~Cache()
 }
 
 
-// È¡²Ëµ¥¶ÔÓ¦µÄĞÅÏ¢
+// å–èœå•å¯¹åº”çš„ä¿¡æ¯
 Menu *Menu::Cache::Get(const string &username, const string &menuname)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
-    // ´æÔÚ¶àÏß³Ì²Ù×÷£¬Ğè¼ÓËø£»£¨×¢Òâ´¦ÀíËø¶¨·¶Î§£¬±ÜÃâ³åÍ»£»£©
+    // å­˜åœ¨å¤šçº¿ç¨‹æ“ä½œï¼Œéœ€åŠ é”ï¼›ï¼ˆæ³¨æ„å¤„ç†é”å®šèŒƒå›´ï¼Œé¿å…å†²çªï¼›ï¼‰
     {
         SHARE_LOCK(m_lock);
 
-        // ²Ëµ¥ÊÇ·ñ´æÔÚÓÚ»º´æÖĞ£¬ÇÒÓĞĞ§
+        // èœå•æ˜¯å¦å­˜åœ¨äºç¼“å­˜ä¸­ï¼Œä¸”æœ‰æ•ˆ
         map< string, map<string, Menu*> >::iterator itUser = m_MenuList.find( username );
         if( m_MenuList.end() != itUser )
         {
@@ -62,14 +62,14 @@ Menu *Menu::Cache::Get(const string &username, const string &menuname)
     }
 
     {
-        // ´æÔÚ¶àÏß³Ì²Ù×÷£¬Ğè¼ÓËø£»
+        // å­˜åœ¨å¤šçº¿ç¨‹æ“ä½œï¼Œéœ€åŠ é”ï¼›
         UNIQUE_LOCK(m_lock);
 
-        // »º´æ²»´æÔÚ¸Ã²Ëµ¥ĞÅÏ¢£¬ÔòÖØ¼ÓÔØ£»
+        // ç¼“å­˜ä¸å­˜åœ¨è¯¥èœå•ä¿¡æ¯ï¼Œåˆ™é‡åŠ è½½ï¼›
         Menu *menu = Load(username, menuname);
         if(NULL == menu)
         {
-            // ·µ»ØÎŞÊı¾İ¶ÔÏó£¨ÒÔ±ÜÃâÍâ²¿×öNULLÖ¸Ê²¼ì²â£©
+            // è¿”å›æ— æ•°æ®å¯¹è±¡ï¼ˆä»¥é¿å…å¤–éƒ¨åšNULLæŒ‡é’ˆæ£€æµ‹ï¼‰
             struct Empty : public Menu
             {
                 Empty(): Menu("", "")
@@ -83,12 +83,12 @@ Menu *Menu::Cache::Get(const string &username, const string &menuname)
     }
 }
 
-// ´Ó»º´æÖĞÈ¥³ı²Ëµ¥ĞÅÏ¢
+// ä»ç¼“å­˜ä¸­å»é™¤èœå•ä¿¡æ¯
 void Menu::Cache::Del(const string &username, const string &menuname)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
-    // ´æÔÚ¶àÏß³Ì²Ù×÷£¬Ğè¼ÓËø£»
+    // å­˜åœ¨å¤šçº¿ç¨‹æ“ä½œï¼Œéœ€åŠ é”ï¼›
     UNIQUE_LOCK(m_lock);
 
     map< string, map<string, Menu*> >::iterator itUser = m_MenuList.find( username );
@@ -109,23 +109,23 @@ void Menu::Cache::Del(const string &username, const string &menuname)
     }
 }
 
-// ¼ÓÔØ²Ëµ¥ĞÅÏ¢£¨´ÓÎÄ¼ş£©
+// åŠ è½½èœå•ä¿¡æ¯ï¼ˆä»æ–‡ä»¶ï¼‰
 Menu *Menu::Cache::Load(const string &username, const string &menuname)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     Menu *menu = new Menu(username, menuname);
     if(NULL == menu)
     {
         return NULL;
     }
-    // ÎŞĞ§£¨»ò¿Õ²Ëµ¥£©
+    // æ— æ•ˆï¼ˆæˆ–ç©ºèœå•ï¼‰
     if( ! menu->isValid() )
     {
         delete menu;
         return NULL;
     }
-    // ÏÈÈ¥µô¾ÉÊı¾İ£¨×¢£º¼´Ê¹m_MenuList[ username ] [ menuname ]ÎªNULL£¬delete NULLÒ²²»»á³ö´í£»£©
+    // å…ˆå»æ‰æ—§æ•°æ®ï¼ˆæ³¨ï¼šå³ä½¿m_MenuList[ username ] [ menuname ]ä¸ºNULLï¼Œdelete NULLä¹Ÿä¸ä¼šå‡ºé”™ï¼›ï¼‰
     delete m_MenuList[ username ] [ menuname ];
     m_MenuList[ username ] [ menuname ] = menu;
     LOG_DEBUG("[%s:%s] Loading... ok", username.c_str(), menuname.c_str());
@@ -140,10 +140,10 @@ Menu *Menu::Cache::Load(const string &username, const string &menuname)
 
 
 
-// name: ²Ëµ¥ÅäÖÃÎÄ¼şÃû£¬ÈçTypeDropBox.cfg£»
+// name: èœå•é…ç½®æ–‡ä»¶åï¼Œå¦‚TypeDropBox.cfgï¼›
 Menu::Menu(const string &username, const string &menuname) : m_valid( true )
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     if("" == username || "" == menuname)
     {
@@ -158,16 +158,16 @@ Menu::Menu(const string &username, const string &menuname) : m_valid( true )
         return;
     }
 
-    // ²Ëµ¥ÅäÖÃÎÄ¼ş
+    // èœå•é…ç½®æ–‡ä»¶
     m_cfg = user->MenuDir() + menuname;
-    // ¼ÓÔØ
+    // åŠ è½½
     if( m_menu.Read(m_cfg) < 0 )
     {
         LOG_ERROR("Loading file error: [%s]", m_cfg.c_str());
         return;
     }
 
-    // ¶Á³öÃ¿Ò»Ïî£¬´æµ½m_itemsÖĞ
+    // è¯»å‡ºæ¯ä¸€é¡¹ï¼Œå­˜åˆ°m_itemsä¸­
     Ini::iterator itIni( &m_menu );
     list< Node >::iterator itMenu;
 
@@ -177,7 +177,7 @@ Menu::Menu(const string &username, const string &menuname) : m_valid( true )
         const char *key = itIni.GetKey();
         // LOG_DEBUG("[%s]", key);
 
-        // ÏÈ²åÈëÒ»¿ÕÏî
+        // å…ˆæ’å…¥ä¸€ç©ºé¡¹
         itMenu = m_items.insert(m_items.begin(), Node());
 
         Conf::iterator itConf(conf);
@@ -185,13 +185,13 @@ Menu::Menu(const string &username, const string &menuname) : m_valid( true )
         {
             //LOG_DEBUG("%s=%s", itConf.GetName(), itConf.GetValue());
 
-            // ÔÙÉèÖÃÖµ
+            // å†è®¾ç½®å€¼
             itMenu->key = key;
             itMenu->item[ itConf.GetName() ] = itConf.GetValue();
         }
     }// end of while( itIni.next()...
 
-    // ÅÅĞò
+    // æ’åº
     m_items.sort();
 
 }// end of Menu::Menu(const string...
@@ -200,7 +200,7 @@ Menu::~Menu()
 {
 }
 
-// Àà³õÊ¼»¯
+// ç±»åˆå§‹åŒ–
 int Menu::init()
 {
     int ret;
@@ -218,12 +218,12 @@ int Menu::init()
 
 Menu *Menu::Get(const string &username, const string &menuname)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     return instance()->Get(username, menuname);
 }
 
-// ĞèÒªÍ¬²½»º´æ£¨Ê¹»º´æÎŞĞ§£¬ÒÔÏñÏÂ´Î¶ÁÈ¡ÊÇÖØĞÂ¼ÓÔØ²Ëµ¥Êı¾İ£©
+// éœ€è¦åŒæ­¥ç¼“å­˜ï¼ˆä½¿ç¼“å­˜æ— æ•ˆï¼Œä»¥åƒä¸‹æ¬¡è¯»å–æ˜¯é‡æ–°åŠ è½½èœå•æ•°æ®ï¼‰
 void Menu::Syn()
 {
     m_valid = false;
@@ -235,17 +235,17 @@ bool Menu::isValid()
     return m_items.size() != 0 && m_valid;
 }
 
-// È¡²Ëµ¥Ïî
+// å–èœå•é¡¹
 const string Menu::GetItem(const string &key, const string &field)
 {
     return m_menu.Get(key, field);
 }
 
-// ÉèÖÃ²Ëµ¥Ïî
+// è®¾ç½®èœå•é¡¹
 int Menu::SetItem(const string &key, const string &field, const string &value)
 {
     /*
-     * ×¢Òâ£¬ÒªÍ¬Ê±¶Ô¸üĞÂm_itemsºÍm_menu£»
+     * æ³¨æ„ï¼Œè¦åŒæ—¶å¯¹æ›´æ–°m_itemså’Œm_menuï¼›
      */
     list< Node >::iterator it;
     it = std::find(m_items.begin(), m_items.end(), Node(key));
@@ -255,20 +255,20 @@ int Menu::SetItem(const string &key, const string &field, const string &value)
     }
     else
     {
-        // ²åÈëĞÂÏî£¨ÏÈ²åÈëÒ»¿ÕÏî£©
+        // æ’å…¥æ–°é¡¹ï¼ˆå…ˆæ’å…¥ä¸€ç©ºé¡¹ï¼‰
         it = m_items.insert(m_items.begin(), Node());
-        // ÔÙÉèÖÃÖµ
+        // å†è®¾ç½®å€¼
         it->key = key;
         it->item[ field ] = value;
     }
     return m_menu.Set(key, field, value);
 }
 
-// É¾³ı²Ëµ¥Ïî
+// åˆ é™¤èœå•é¡¹
 int Menu::DelItem(const string &key)
 {
     /*
-     * ×¢Òâ£¬ÒªÍ¬Ê±¶Ôm_itemsºÍm_menu²Ù×÷£»
+     * æ³¨æ„ï¼Œè¦åŒæ—¶å¯¹m_itemså’Œm_menuæ“ä½œï¼›
      */
     list< Node >::iterator it;
     it = std::find(m_items.begin(), m_items.end(), Node(key));
@@ -280,15 +280,15 @@ int Menu::DelItem(const string &key)
     return OK;
 }
 
-// ±£´æ²Ëµ¥Ïî£¨µ½ÎÄ¼ş£©
+// ä¿å­˜èœå•é¡¹ï¼ˆåˆ°æ–‡ä»¶ï¼‰
 int Menu::Save()
 {
-    // Ö´ĞĞÉèÖÃÍêºó£¬Ö´ĞĞÅÅĞò£»
+    // æ‰§è¡Œè®¾ç½®å®Œåï¼Œæ‰§è¡Œæ’åºï¼›
     m_items.sort();
     return m_menu.Write(m_cfg);
 }
 
-// ²éÕÒÖ¸¶¨µÄ×Ö¶Î£¨Ä¬ÈÏÎªtitle£©£¬ÕÒµ½Ôò·µ»ØkeyÖµ£¬·ñÔò·µ»Ø¿Õ´®£»
+// æŸ¥æ‰¾æŒ‡å®šçš„å­—æ®µï¼ˆé»˜è®¤ä¸ºtitleï¼‰ï¼Œæ‰¾åˆ°åˆ™è¿”å›keyå€¼ï¼Œå¦åˆ™è¿”å›ç©ºä¸²ï¼›
 const string Menu::Find(const string &value, const string &field/*="title"*/) const
 {
     list< Node >::const_iterator it;

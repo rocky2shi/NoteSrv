@@ -10,11 +10,11 @@ namespace MODULE_SPACE
 
 
 
-// Êı¾İ±í²Ù×÷»ùÀà
+// æ•°æ®è¡¨æ“ä½œåŸºç±»
 class Module
 {
 public:
-    // µü´úÆ÷£¬ÓÃÓÚÁĞ³öËùÓĞÄ£¿é¡£×¢Òâ£¬µü´úÆ÷Ö¸ÏòµÄÊÇModule::m_Factory¶ÔÏó£»
+    // è¿­ä»£å™¨ï¼Œç”¨äºåˆ—å‡ºæ‰€æœ‰æ¨¡å—ã€‚æ³¨æ„ï¼Œè¿­ä»£å™¨æŒ‡å‘çš„æ˜¯Module::m_Factoryå¯¹è±¡ï¼›
     class iterator
     {
     public:
@@ -23,10 +23,10 @@ public:
             it = Module::m_Factory.begin();
         }
 
-        // Ö¸ÏòÏÂÒ»¸öÔªËØ
+        // æŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
         bool next()
         {
-            if(first)   // ÈçÊÇµÚÒ»´Îµ÷ÓÃnext()£¬Ôò²»×ö¼Ó¼Ó£»
+            if(first)   // å¦‚æ˜¯ç¬¬ä¸€æ¬¡è°ƒç”¨next()ï¼Œåˆ™ä¸åšåŠ åŠ ï¼›
             {
                 first = false;
             }
@@ -37,7 +37,7 @@ public:
             return Module::m_Factory.end() != it;
         }
 
-        // ÖØÔØ()²Ù×÷·û£¬·µ»ØÄ£¿é¶ÔÏóµØÖ·£»
+        // é‡è½½()æ“ä½œç¬¦ï¼Œè¿”å›æ¨¡å—å¯¹è±¡åœ°å€ï¼›
         Module * operator()()
         {
             return it->second;
@@ -50,53 +50,53 @@ public:
 
 
 public:
-    // Ñ­»·µ÷ÓÃDeal()
+    // å¾ªç¯è°ƒç”¨Deal()
     virtual int Run();
 
-    // ÒµÎñ´¦ÀíÈë¿Ú£¬ÓÉ¸÷×ÓÀàÊµÏÖ£»
+    // ä¸šåŠ¡å¤„ç†å…¥å£ï¼Œç”±å„å­ç±»å®ç°ï¼›
     virtual int Deal();
 
-    // È¡Ä£¿éÃû
+    // å–æ¨¡å—å
     const string GetName() const;
 
 
 protected:
-    string m_module;  // ±¾Ä£¿éÃû³Æ£¨id£©
+    string m_module;  // æœ¬æ¨¡å—åç§°ï¼ˆidï¼‰
 
 
 
 /*
- * ÒÔÏÂ´úÂëÖ÷ÒªÓÃÓÚ¹¤³§´¦ÀíÉèÖÃ
+ * ä»¥ä¸‹ä»£ç ä¸»è¦ç”¨äºå·¥å‚å¤„ç†è®¾ç½®
  */
 public:
     virtual ~Module();
 
-    // ³õÊ¼»¯
+    // åˆå§‹åŒ–
     static int init();
 
 
 protected:
     Module();
-    Module(const string &id); // ×ÓÀàµ÷ÓÃÀ´½øĞĞ³õ´Î×¢²á
+    Module(const string &id); // å­ç±»è°ƒç”¨æ¥è¿›è¡Œåˆæ¬¡æ³¨å†Œ
 
-    // ×¢²á£¨°Ñ×ÓÀà¶ÔÏó¼ÓÈëm_Factory£©¡£×¢£º½Ó¿ÚÉèÎªstaticÒÔ·ÀÖ¹Register()ÄÚ²¿
-    // ²»ĞÄĞŞ¸ÄÁËÀà³ÉÔ±¡£
+    // æ³¨å†Œï¼ˆæŠŠå­ç±»å¯¹è±¡åŠ å…¥m_Factoryï¼‰ã€‚æ³¨ï¼šæ¥å£è®¾ä¸ºstaticä»¥é˜²æ­¢Register()å†…éƒ¨
+    // ä¸å¿ƒä¿®æ”¹äº†ç±»æˆå‘˜ã€‚
     static int Register(const string &id, Module *sub);
-    // ¹Ø±ÕÄ£¿é
+    // å…³é—­æ¨¡å—
     static int UnRegister(const string &id);
 
-    // ¸÷×ÓÀà¸ºÔğÊµÏÖ×ÔÒÑ³õÊ¼»¯²Ù×÷
+    // å„å­ç±»è´Ÿè´£å®ç°è‡ªå·²åˆå§‹åŒ–æ“ä½œ
     virtual int DoInit() = 0 ;
 
 private:
     typedef map<string, Module *> Factory;
 
     /*
-     * ÔÚ½øÈëmain()º¯ÊıÖ®Ç°£¬¸÷¶ÔÏóÒÑ°Ñ×ÔÒÑ²åÈëµ½m_Factory£¬¶øºóÔÙ
-     * ÔÚmain()ÖĞµ÷ÓÃinit()Ê±£¬ÔÙ´Îµ÷ÓÃm_FactoryÖĞ×Ó¶ÔÏóµÄ³õÊ¼»¯º¯
-     * Êı£»
+     * åœ¨è¿›å…¥main()å‡½æ•°ä¹‹å‰ï¼Œå„å¯¹è±¡å·²æŠŠè‡ªå·²æ’å…¥åˆ°m_Factoryï¼Œè€Œåå†
+     * åœ¨main()ä¸­è°ƒç”¨init()æ—¶ï¼Œå†æ¬¡è°ƒç”¨m_Factoryä¸­å­å¯¹è±¡çš„åˆå§‹åŒ–å‡½
+     * æ•°ï¼›
      */
-    static Factory m_Factory;   // ³õÊ¼»¯ºóÌî³äµÄ²úÉú×Ó¶ÔÏó¹¤³§
+    static Factory m_Factory;   // åˆå§‹åŒ–åå¡«å……çš„äº§ç”Ÿå­å¯¹è±¡å·¥å‚
 };
 
 

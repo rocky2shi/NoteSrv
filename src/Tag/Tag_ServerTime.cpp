@@ -4,7 +4,7 @@ namespace TAG_SERVERTIME_SPACE
 {
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "ServerTime";
 
 
@@ -13,17 +13,17 @@ static const string THIS_MODULE = "ServerTime";
 
 Tag_ServerTime::Tag_ServerTime()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_ServerTime::Tag_ServerTime(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_ServerTime::~Tag_ServerTime()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -31,15 +31,15 @@ Tag_ServerTime::~Tag_ServerTime()
 
 int Tag_ServerTime::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_ServerTime::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_ServerTime;
 }
 
@@ -50,16 +50,16 @@ Tag *Tag_ServerTime::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±ê¼Ç¶ÔÏóµÄÄÚÈİ
+// å–æ ‡è®°å¯¹è±¡çš„å†…å®¹
 string Tag_ServerTime::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     char buf[64] = "";
     sprintf(buf, "%ld", time(NULL));
     return buf;
@@ -81,7 +81,7 @@ string Tag_ServerTime::Get(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_ServerTime tmp(TAG_GLOBAL, THIS_MODULE);
 
 

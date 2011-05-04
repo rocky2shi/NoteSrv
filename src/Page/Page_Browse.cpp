@@ -8,33 +8,33 @@ namespace PAGE_BROWSE_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "browse";
 
 
 
 Page_Browse::Page_Browse()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Browse::~Page_Browse()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Browse::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     m_html = GlobalConfig::instance()->TemplateDir() + "Browse.html";
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Browse::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Browse;
 }
 
@@ -45,19 +45,19 @@ Page *Page_Browse::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 int Page_Browse::OutBody()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
     /*
-     * ´¦ÀíÊéÇ©Ìá½»ÊÂ¼ş
+     * å¤„ç†ä¹¦ç­¾æäº¤äº‹ä»¶
      */
     const string &bookmark_save = m_request->GetField("bookmark_save");
     if("" != bookmark_save)
@@ -73,7 +73,7 @@ int Page_Browse::OutBody()
     }
 
     /*
-     * ´¦Àí²éÑ¯¹ıÂËÌá½»ÊÂ¼ş
+     * å¤„ç†æŸ¥è¯¢è¿‡æ»¤æäº¤äº‹ä»¶
      */
     const string &save_query = m_request->GetField("save_query");
     if("" != save_query)
@@ -83,7 +83,7 @@ int Page_Browse::OutBody()
     }
 
     /*
-     * ´¦ÀíÉ¾³ıÌá½»ÊÂ¼ş
+     * å¤„ç†åˆ é™¤æäº¤äº‹ä»¶
      */
     const string &delete_data = m_request->GetField("delete_data");
     if("" != delete_data)
@@ -111,7 +111,7 @@ int Page_Browse::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Browse, THIS_MODULE)
 
 }// end of PAGE_BROWSE_SPACE

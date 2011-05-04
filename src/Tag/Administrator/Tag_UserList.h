@@ -9,7 +9,7 @@ namespace TAG_USERLIST_SPACE
 
 
 
-// 显示用户信息
+// 鏄剧ず鐢ㄦ埛淇℃伅
 class Tag_UserList : public Tag
 {
 protected:

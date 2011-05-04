@@ -9,7 +9,7 @@ namespace SUBMIT_SAVETEXT_SPACE
 
 
 
-// 处理正文内容提交事件
+// 澶勭悊姝ｆ枃鍐呭鎻愪氦浜嬩欢
 class Submit_SaveText : public Submit
 {
 protected:

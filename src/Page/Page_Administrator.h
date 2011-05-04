@@ -9,7 +9,7 @@ namespace PAGE_ADMINISTRATOR_SPACE
 
 
 
-// นÜภําณรๆ
+// ็ฎก็้กต้ข
 class Page_Administrator : public Page
 {
 protected:

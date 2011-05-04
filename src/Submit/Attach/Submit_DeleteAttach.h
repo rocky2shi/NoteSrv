@@ -6,7 +6,7 @@ namespace SUBMIT_DELETEATTACH_SPACE
 
 
 
-// É¾³ý¸½¼þ
+// åˆ é™¤é™„ä»¶
 class Submit_DeleteAttach : public Submit
 {
 protected:

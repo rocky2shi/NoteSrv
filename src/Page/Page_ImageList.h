@@ -9,7 +9,7 @@ namespace PAGE_IMAGELIST_SPACE
 
 
 
-// ��ʾ�Ķ�ҳ��ı�ѡͼƬ�б�
+// 显示阅读页里的备选图片列表
 class Page_ImageList : public Page
 {
 protected:

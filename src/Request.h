@@ -9,69 +9,69 @@ namespace REQUEST_SPACE
 
 
 
-// ¿Í»§¶Ë·¢À´µÄÇëÇóÊı¾İÀà
+// å®¢æˆ·ç«¯å‘æ¥çš„è¯·æ±‚æ•°æ®ç±»
 class Request
 {
 public:
     Request(Connect *connect);
     ~Request();
 
-    // È¡ÇëÇóÍ·ÖĞ×Ö¶Î¶ÔÓ¦Öµ£¨²»Çø·Ö´óĞ¡Ğ´£©
+    // å–è¯·æ±‚å¤´ä¸­å­—æ®µå¯¹åº”å€¼ï¼ˆä¸åŒºåˆ†å¤§å°å†™ï¼‰
     const string GetHead(const string &field) const;
 
-    // Ò»°ã×Ö¶Î¶ÔÓ¦Öµ£¨²»Çø·Ö´óĞ¡Ğ´£©
+    // ä¸€èˆ¬å­—æ®µå¯¹åº”å€¼ï¼ˆä¸åŒºåˆ†å¤§å°å†™ï¼‰
     const string GetField(const string &field) const;
 
-    // È¡×Ö¶Î¶ÔÓ¦ÎÄ¼ş¶ÔÏó
+    // å–å­—æ®µå¯¹åº”æ–‡ä»¶å¯¹è±¡
     FileObj *GetFileObj(const string &field);
 
-    // ·µ»ØÇëÇóÒ³ÃæÃû
+    // è¿”å›è¯·æ±‚é¡µé¢å
     const string GetPageName();
 
-    // È¡Á¬½Ó
+    // å–è¿æ¥
     Connect *GetConnect();
 
-    // ÊÇ·ñÎªÍ¼Æ¬£ºjpg, jpeg, png, gif, ...
+    // æ˜¯å¦ä¸ºå›¾ç‰‡ï¼šjpg, jpeg, png, gif, ...
     bool isImage();
 
-    // ÊÇ·ñÎªÎÄ±¾ÎÄ¼ş£ºtxt, js, css, html, htm, ...
+    // æ˜¯å¦ä¸ºæ–‡æœ¬æ–‡ä»¶ï¼štxt, js, css, html, htm, ...
     bool isText();
 
-    // ÊÇ·ñÎªcgi´¦ÀíÒ³Ãæ
+    // æ˜¯å¦ä¸ºcgiå¤„ç†é¡µé¢
     bool isCgi();
 
-    // ½âÎöµÈÊÇ·ñÕıÈ·´¦Àí
+    // è§£æç­‰æ˜¯å¦æ­£ç¡®å¤„ç†
     bool ok();
 
-    // È¡µ±Ç°µÇÂ¼ÓÃ»§Ãû
+    // å–å½“å‰ç™»å½•ç”¨æˆ·å
     const string GetCurrentUser() const;
 
-    // È¡CookieÖĞµÄÖµ
+    // å–Cookieä¸­çš„å€¼
     const string GetCookie(const string &key) const;
 
 
 private:
-    void Parse();       // ½âÎöÇëÇó´®
-    void ParseHead();   // ´¦ÀíÇëÇóÍ·²¿
-    void ParseAttach(); // ´¦Àí¸½¼şµÄÇé¿ö
-    void ParsePost();   // ´¦ÀíPOSTµÄÇé¿ö
-    void ParseGet(char *str);        // ´¦ÀíGETµÄÇé¿ö
-    void ParseUrlParam(char *param); // ½âÎöurl²ÎÊı´®
-    void ParseCookie();              // ½âÎöCookie´®
+    void Parse();       // è§£æè¯·æ±‚ä¸²
+    void ParseHead();   // å¤„ç†è¯·æ±‚å¤´éƒ¨
+    void ParseAttach(); // å¤„ç†é™„ä»¶çš„æƒ…å†µ
+    void ParsePost();   // å¤„ç†POSTçš„æƒ…å†µ
+    void ParseGet(char *str);        // å¤„ç†GETçš„æƒ…å†µ
+    void ParseUrlParam(char *param); // è§£æurlå‚æ•°ä¸²
+    void ParseCookie();              // è§£æCookieä¸²
 
-    int GetLine(char *buf, unsigned int max);   // È¡Ò»ĞĞ
+    int GetLine(char *buf, unsigned int max);   // å–ä¸€è¡Œ
 
 private:
-    string m_page;      // Ò³ÃûÃû
-    string m_boundary;  // post¸½¼şÊ±ËùÓÃµÄ·Ö¸ô´®
-    string m_type;      // ÇëÇóµÄÀàĞÍ£¨Ä¿Ç°´¦ÀíÈıÖÖÇé¿ö£©
-    Connect * const m_connect;          // ¿Í»§¶ËÁ¬½Ó
-    string m_PageType;                  // Ò³ÃæÃûºó×º
-    map<string, string> m_HeadFieldAry; // ÇëÇóÍ·×Ö¶ÎÁĞ±í
-    map<string, string> m_FieldAry;     // ×Ö¶ÎÁĞ±í
-    map<string, FileObj*> m_FileObjAry; // ¸½¼şµÈÎÄ¼şÁĞ±í
-    map<string, string> m_Cookie;       // CookieÖĞµÄ[¼ü/Öµ]¶Ô
-    string m_ErrMsg;                    // ´æ·Å´íÎóĞÅÏ¢£¬´¦ÀíÈ«ÕıÈ·Ê±£¬¸ÃÖµÓ¦Îª¿Õ£»
+    string m_page;      // é¡µåå
+    string m_boundary;  // posté™„ä»¶æ—¶æ‰€ç”¨çš„åˆ†éš”ä¸²
+    string m_type;      // è¯·æ±‚çš„ç±»å‹ï¼ˆç›®å‰å¤„ç†ä¸‰ç§æƒ…å†µï¼‰
+    Connect * const m_connect;          // å®¢æˆ·ç«¯è¿æ¥
+    string m_PageType;                  // é¡µé¢ååç¼€
+    map<string, string> m_HeadFieldAry; // è¯·æ±‚å¤´å­—æ®µåˆ—è¡¨
+    map<string, string> m_FieldAry;     // å­—æ®µåˆ—è¡¨
+    map<string, FileObj*> m_FileObjAry; // é™„ä»¶ç­‰æ–‡ä»¶åˆ—è¡¨
+    map<string, string> m_Cookie;       // Cookieä¸­çš„[é”®/å€¼]å¯¹
+    string m_ErrMsg;                    // å­˜æ”¾é”™è¯¯ä¿¡æ¯ï¼Œå¤„ç†å…¨æ­£ç¡®æ—¶ï¼Œè¯¥å€¼åº”ä¸ºç©ºï¼›
 };
 
 

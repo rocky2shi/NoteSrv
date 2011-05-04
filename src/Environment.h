@@ -10,21 +10,21 @@ using namespace std;
 
 
 
-// �������ݣ���ģ�顢��̬��֮�䣩
+// 环境传递（在模块、动态库之间）
 class Environment
 {
 public:
     inline static Environment *instance(Environment *exterior=NULL)
     {
         /*
-         * ptrָ������������
+         * ptr指向初情况而定：
          *
-         *   (1). ����ģ�飨main()������ʱ����һ�ε�instance()���޴���������envʹ
-         *        ��Ĭ�ϵ�NULLֵ����ʱinstance()���ý������ڲ��ľ�̬����������ã�
+         *   (1). 在主模块（main()）中用时，第一次调instance()，无传参数，即env使
+         *        用默认的NULL值，这时instance()调用将返回内部的静态定义对象引用；
          *
-         *   (2). ��������ģ����ʹ��ʱ����һ�ε�instance()����Ҫ���������������
-         *        ��Ӧ����(1)�з��صĲ������Ա������������У�������ģ��ָ����ͬ��
-         *        ִ�д��루�����ݣ���
+         *   (2). 当是在子模块中使用时，第一次调instance()，需要传入参数（正常情
+         *        下应传入(1)中返回的参数，以便在整个程序中，主、子模块指向相同的
+         *        执行代码（及数据）；
          */
         static Environment interior;
         static Environment *ptr = exterior ? : &interior;
@@ -34,7 +34,7 @@ public:
     int Insert(const string &id, void *obj);
     void *Get(const string &id);
 
-    // ��ʼ��ȫ����
+    // 初始化全局类
     void *ClassInit(const string &id, void *obj);
 
 private:
@@ -48,12 +48,12 @@ private:
 
 
 /*
-�÷�ʾ��˵����
+用法示例说明：
 
------------------------------------ �������� -----------------------------------
+----------------------------------- 主程序中 -----------------------------------
 
---------------Step 1: �����ȡ�����ã���ȫ��ʵ��
-// ���û��ȡ����
+--------------Step 1: 定义获取（设置）类全局实例
+// 设置或获取单例
 inline static GlobalConfig *GlobalConfig::instance(GlobalConfig *config=NULL)
 {
     static GlobalConfig *obj = (GlobalConfig *)(Environment::instance()->ClassInit("GlobalConfig", config));
@@ -61,8 +61,8 @@ inline static GlobalConfig *GlobalConfig::instance(GlobalConfig *config=NULL)
 }
 
 
---------------Step 2: �ڳ����ʼ��ʱ������ȫ��ʵ������¼�У��Ա�����ģ�飨��̬�⣩��ȡ����ʹ�ã�
-// ���ʼ��
+--------------Step 2: 在程序初始化时设置类全局实例到记录中，以便在子模块（动态库）中取出来使用；
+// 类初始化
 int GlobalConfig::init()
 {
     int ret;
@@ -78,25 +78,25 @@ int GlobalConfig::init()
 }
 
 
-�����磺
+调用如：
     GlobalConfig::instance()->Get(...);
 
-    ��instance()�е����Ϊ�գ�
+    即instance()中的入参为空；
 
 
 
 
------------------------------------ ��ģ�飨��̬�⣩�� -------------------------
-�����ʼ����ֱ�ӵ��ã��磺
+----------------------------------- 子模块（动态库）中 -------------------------
+无需初始化，直接调用，如：
 
     GlobalConfig::instance()->Get(...);
 
-    ��instance()�е����Ϊ�գ�
+    即instance()中的入参为空；
 
-��ʱ�����ǵ�һ�ε��ã����ڲ�����ã�
+这时，如是第一次调用，它内部会调用：
     Environment::instance()->ClassInit()
-����ʼ�����ڲ��ľ�̬��������ʹ����ģ���д���Ķ���ʵ��Ϊִ�в������Դﵽ������ģ
-��ͳһ��Ŀ�ģ�
+来初始化它内部的静态变量，即使用主模块中传入的对象实例为执行操作，以达到主、子模
+块统一的目的；
 
 
 

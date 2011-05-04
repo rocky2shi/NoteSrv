@@ -6,22 +6,22 @@ namespace PAGE_SPACE
 
 
 
-// ×¢²á£¨°Ñ×ÓÀà¶ÔÏó¼ÓÈëm_queue£©
+// æ³¨å†Œï¼ˆæŠŠå­ç±»å¯¹è±¡åŠ å…¥m_queueï¼‰
 int Submit::Manage::Register(const string &page, const string &element, Submit *sub)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
-    assert(NULL == m_queue[ page ][ element ]);   // ÕâÊ±µÄÎ»ÖÃÓ¦Îª¿Õ
-    m_queue[ page ][ element ] = sub;  // ¼ÓÈë¶ÓÁĞ
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
+    assert(NULL == m_queue[ page ][ element ]);   // è¿™æ—¶çš„ä½ç½®åº”ä¸ºç©º
+    m_queue[ page ][ element ] = sub;  // åŠ å…¥é˜Ÿåˆ—
     sub->m_page = page;
     sub->m_element = element;
-    // ÕâÊ±ÈÕÖ¾Ä£¿é»¹²»¿ÉÓÃ [XXX]
+    // è¿™æ—¶æ—¥å¿—æ¨¡å—è¿˜ä¸å¯ç”¨ [XXX]
     //printf("Register: page=[%s], element=[%s], obj=[%p]... [OK]\n",
     //                                page.c_str(), element.c_str(), sub);
     return OK;
 }
 
 
-// È¡´¦ÀíÔªËØ
+// å–å¤„ç†å…ƒç´ 
 Submit *Submit::Manage::Get(const string &page, const string &element)
 {
     Factory::iterator it = m_queue.find( page );
@@ -59,26 +59,16 @@ Submit::~Submit()
 
 
 
-// Àà³õÊ¼»¯£¨µÄ³ÌĞòÆô¶¯Ê±Ö´ĞĞÒ»´Î£©
+// ç±»åˆå§‹åŒ–ï¼ˆçš„ç¨‹åºå¯åŠ¨æ—¶æ‰§è¡Œä¸€æ¬¡ï¼‰
 int Submit::init()
 {
-    static Manage factory;
-
-    // // ×¢²áµ½È«¾Ö»·¾³¼ÇÂ¼   // [XXX:8982516]
-    // Manage *obj = instance( &factory );
-    // if(NULL == obj)
-    // {
-    //     LOG_ERROR("Submit::instance() error.");
-    //     return ERR;
-    // }
-
     return OK;
 }
 
-// ¸ú¾İ´«ÈëµÄid[page,tag]´Ó¹¤³§ÖĞ²úÉúÒ»¸ö´¦Àí¶ÔÏó
+// è·Ÿæ®ä¼ å…¥çš„id[page,tag]ä»å·¥å‚ä¸­äº§ç”Ÿä¸€ä¸ªå¤„ç†å¯¹è±¡
 Submit *Submit::New(const string &page, const string &element)
 {
-    // ÔÚ¹¤³§ÖĞÕÒ´´½¨Æ÷£¬²¢´´½¨×ÓÀà¶ÔÏó£»
+    // åœ¨å·¥å‚ä¸­æ‰¾åˆ›å»ºå™¨ï¼Œå¹¶åˆ›å»ºå­ç±»å¯¹è±¡ï¼›
     Submit *parent = instance()->Get(page, element);
     if(NULL == parent)
     {
@@ -90,21 +80,21 @@ Submit *Submit::New(const string &page, const string &element)
     {
         return NULL;
     }
-    // ´«µİÖµµ½×Ó¶ÔÏó
+    // ä¼ é€’å€¼åˆ°å­å¯¹è±¡
     sub->m_page = parent->m_page;
     sub->m_element = parent->m_element;
     return sub;
 }
 
 
-// ¸÷×ÓÀà¸ºÔğÊµÏÖ×ÔÒÑ³õÊ¼»¯²Ù×÷£¨×ÓÀàÓ¦ÖØÊµÏÖ´Ë½Ó¿Ú£©
+// å„å­ç±»è´Ÿè´£å®ç°è‡ªå·²åˆå§‹åŒ–æ“ä½œï¼ˆå­ç±»åº”é‡å®ç°æ­¤æ¥å£ï¼‰
 int Submit::DoInit()
 {
     LOG_ERROR("Must implement on child class");
     return ERR;
 }
 
-// ¸÷×ÓÀà¸ºÔğÊµÏÖ×ÔÒÑµÄ¶ÔÏó´´½¨Æ÷£¨×ÓÀàÓ¦ÖØÊµÏÖ´Ë½Ó¿Ú£©
+// å„å­ç±»è´Ÿè´£å®ç°è‡ªå·²çš„å¯¹è±¡åˆ›å»ºå™¨ï¼ˆå­ç±»åº”é‡å®ç°æ­¤æ¥å£ï¼‰
 Submit *Submit::DoNew()
 {
     LOG_ERROR("Must implement on child class");
@@ -117,11 +107,11 @@ Submit *Submit::DoNew()
 
 
 /*
- * ========================== ÒÔÏÂÎªÒµÎñ´¦Àí´úÂë ==========================
+ * ========================== ä»¥ä¸‹ä¸ºä¸šåŠ¡å¤„ç†ä»£ç  ==========================
  */
 
 
-// ´¦ÀíÇëÇó
+// å¤„ç†è¯·æ±‚
 int Submit::Deal(Page *page)
 {
     return ERR;

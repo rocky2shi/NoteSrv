@@ -7,7 +7,7 @@ namespace TAG_TXT_SPACE
 
 
 
-// 页面中一般的文本（即普通的html代码）处理类
+// 椤甸潰涓竴鑸殑鏂囨湰锛堝嵆鏅�氱殑html浠ｇ爜锛夊鐞嗙被
 class Tag_Txt : public Tag
 {
 protected:

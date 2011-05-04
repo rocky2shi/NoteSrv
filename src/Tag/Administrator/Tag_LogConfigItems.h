@@ -8,7 +8,7 @@ namespace TAG_LOGCONFIGITEMS_SPACE
 
 
 
-// 日志配制子项
+// 鏃ュ織閰嶅埗瀛愰」
 class Tag_LogConfigItems : public Tag
 {
 protected:

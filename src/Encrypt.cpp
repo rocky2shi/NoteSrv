@@ -11,18 +11,18 @@ namespace ENCRYPT_SPACE
 /******************************************************************************/
 
 /*
- * ¹¦ÄÜ£º´òÂÒ¼°»¹Ô­×Ö·û´®
- * ±àĞ´£ºRocky 2010-05-14 10:42:45
+ * åŠŸèƒ½ï¼šæ‰“ä¹±åŠè¿˜åŸå­—ç¬¦ä¸²
+ * ç¼–å†™ï¼šRocky 2010-05-14 10:42:45
  */
 class Swap
 {
 public:
-    // °ÑstrË³Ğò´òÂÒ
+    // æŠŠstré¡ºåºæ‰“ä¹±
     static const string doit(int seed, const string &str)
     {
         string result = str;
         const int len = str.length();
-        seed += len; // ÔÙ¼Ó´®µÄ³¤¶È×öÏà¹ØĞÔ
+        seed += len; // å†åŠ ä¸²çš„é•¿åº¦åšç›¸å…³æ€§
         int i;
 
         for(i=0; i<len; i++)
@@ -38,12 +38,12 @@ public:
         return result;
     }
 
-    // ¶ÔÓ¦ÓÚSwap0()£¬¼´»¹Ô­str´®£»
+    // å¯¹åº”äºSwap0()ï¼Œå³è¿˜åŸsträ¸²ï¼›
     static const string undo(int seed, const string &str)
     {
         string result = str;
         const int len = str.length();
-        seed += len; // ÔÙ¼Ó´®µÄ³¤¶È×öÏà¹ØĞÔ
+        seed += len; // å†åŠ ä¸²çš„é•¿åº¦åšç›¸å…³æ€§
         int i;
 
         for(i=len-1; i>=0; i--)
@@ -60,7 +60,7 @@ public:
     }
 
 private:
-    // È¡Ëæ»úÊı£¨Î±£©
+    // å–éšæœºæ•°ï¼ˆä¼ªï¼‰
     static unsigned int Rand(int seed, int n, int min, int max)
     {
         unsigned int m = ~(seed * 262147 * n);
@@ -71,13 +71,13 @@ private:
 static const string encrypt0(string password, const char *data)
 {
     password = Crypt(password, CRYPT_VERSION);
-    const int nPasswdLen = password.length();   // ÃÜÂë±àÂëºóµÄ³¤¶È
-    const int nDataLen = strlen(data);          // Êı¾İ³¤¶È
+    const int nPasswdLen = password.length();   // å¯†ç ç¼–ç åçš„é•¿åº¦
+    const int nDataLen = strlen(data);          // æ•°æ®é•¿åº¦
     int iData = 0;
     int iPaswd = 0;
     const int BUF_MAX = 256;
-    char buf[BUF_MAX];  // ³¤¶ÈÓ¦¸Ã×ã¹»±ÈnPasswdLen´óÁË
-    int iBuf = 0;   // bufµÄÏÂ±ê
+    char buf[BUF_MAX];  // é•¿åº¦åº”è¯¥è¶³å¤Ÿæ¯”nPasswdLenå¤§äº†
+    int iBuf = 0;   // bufçš„ä¸‹æ ‡
     string result;
 
     if(nPasswdLen > BUF_MAX / 2)
@@ -87,13 +87,13 @@ static const string encrypt0(string password, const char *data)
     }
 
     /*
-     * Ã÷ÎÄºÍÃÜÂë×öÒì»ò£¬Ò»¶ÎÒ»¶ÎµØ°Ñ½á¹û·Åµ½resultÖĞ£»
+     * æ˜æ–‡å’Œå¯†ç åšå¼‚æˆ–ï¼Œä¸€æ®µä¸€æ®µåœ°æŠŠç»“æœæ”¾åˆ°resultä¸­ï¼›
      */
     for(iData=0; iData<nDataLen; iData++)
     {
         int num = (unsigned char )data[iData] ^ (unsigned char )password[iPaswd];
 
-        AsciiToString(num, buf + iBuf); // ±àÂëÎª¿É¼û×Ö·û£¬¼´£ºnum ×Ö·û×ªÎª ASCII
+        AsciiToString(num, buf + iBuf); // ç¼–ç ä¸ºå¯è§å­—ç¬¦ï¼Œå³ï¼šnum å­—ç¬¦è½¬ä¸º ASCII
         iBuf += 2;
 
         iPaswd++;
@@ -119,13 +119,13 @@ static const string encrypt0(string password, const string &data)
 static const string decrypt0(string password, const char *data)
 {
     password = Crypt(password, CRYPT_VERSION);
-    const int nPasswdLen = password.length();   // ÃÜÂë±àÂëºóµÄ³¤¶È
-    const int nDataLen = strlen(data);          // Êı¾İ³¤¶È
+    const int nPasswdLen = password.length();   // å¯†ç ç¼–ç åçš„é•¿åº¦
+    const int nDataLen = strlen(data);          // æ•°æ®é•¿åº¦
     int iData = 0;
     int iPaswd = 0;
     const int BUF_MAX = 256;
-    char buf[BUF_MAX];  // ³¤¶ÈÓ¦¸Ã×ã¹»±ÈnPasswdLen´óÁË
-    int iBuf = 0;   // bufµÄÏÂ±ê
+    char buf[BUF_MAX];  // é•¿åº¦åº”è¯¥è¶³å¤Ÿæ¯”nPasswdLenå¤§äº†
+    int iBuf = 0;   // bufçš„ä¸‹æ ‡
     string result;
 
     if(nDataLen % 2 != 0)
@@ -142,7 +142,7 @@ static const string decrypt0(string password, const char *data)
     Debug("data=[%s] [%d]", data, nDataLen);
 
     /*
-     * Ã÷ÎÄºÍÃÜÂë×öÒì»ò£¬Ò»¶ÎÒ»¶ÎµØ°Ñ½á¹û·Åµ½resultÖĞ£»
+     * æ˜æ–‡å’Œå¯†ç åšå¼‚æˆ–ï¼Œä¸€æ®µä¸€æ®µåœ°æŠŠç»“æœæ”¾åˆ°resultä¸­ï¼›
      */
     for(iData=0; iData<nDataLen; iData+=2)
     {
@@ -190,14 +190,14 @@ Encrypt::Encrypt(const string &password)
 {
 }
 
-// ¼ÓÃÜ
+// åŠ å¯†
 const string Encrypt::encrypt(const string &data)
 {
     const string &s1 = encrypt0(m_password, data);
     return Swap::doit(m_seed, s1);
 }
 
-// ½âÃÜ
+// è§£å¯†
 const string Encrypt::decrypt(const string &data)
 {
     const string &s1 = Swap::undo(m_seed, data);

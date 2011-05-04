@@ -7,7 +7,7 @@ namespace PAGECFG_SPACE
 
 
 
-// Ö¸¶¨ÓÃ»§Ãû¡¢ÅäÖÃÎÄ¼ş
+// æŒ‡å®šç”¨æˆ·åã€é…ç½®æ–‡ä»¶
 PageCfg::PageCfg(const string &username, const string &cfg)
 {
     if("" == username || "" == cfg)
@@ -23,25 +23,25 @@ PageCfg::PageCfg(const string &username, const string &cfg)
         return;
     }
 
-    m_fullname = user->UserDir() + cfg; // µ±Ç°Ò³ÃæµÄÅäÖÆ¡¢Êı¾İÎÄ¼ş
+    m_fullname = user->UserDir() + cfg; // å½“å‰é¡µé¢çš„é…åˆ¶ã€æ•°æ®æ–‡ä»¶
 
-    // È¡³öÊı¾İ
+    // å–å‡ºæ•°æ®
     m_data.Read(m_fullname);
 }
 
-// È¡Ä³ÏîÅäÖÆÖµ
+// å–æŸé¡¹é…åˆ¶å€¼
 const string PageCfg::Get(const string &key, const string &item) const
 {
-    return m_data.Get(key, item); // ÕâÀï¿ÉÓÃ»º´æ £¨¼°Menu.cppÀà£©[XXX]
+    return m_data.Get(key, item); // è¿™é‡Œå¯ç”¨ç¼“å­˜ ï¼ˆåŠMenu.cppç±»ï¼‰[XXX]
 }
 
-// ÉèÖÃÄ³ÏîÅäÖÆÖµ
+// è®¾ç½®æŸé¡¹é…åˆ¶å€¼
 const int PageCfg::Set(const string &key, const string &item, const string &value)
 {
     return m_data.Set(key, item, value);
 }
 
-// ±£´æ£¨Ğ´ÈëÎÄ¼ş£©
+// ä¿å­˜ï¼ˆå†™å…¥æ–‡ä»¶ï¼‰
 int PageCfg::Save()
 {
     return m_data.Write(m_fullname);

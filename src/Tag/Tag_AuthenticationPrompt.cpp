@@ -9,7 +9,7 @@ namespace TAG_AUTHENTICATIONPROMPT_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "AuthenticationPrompt";
 
 
@@ -18,17 +18,17 @@ static const string THIS_MODULE = "AuthenticationPrompt";
 
 Tag_AuthenticationPrompt::Tag_AuthenticationPrompt()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_AuthenticationPrompt::Tag_AuthenticationPrompt(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_AuthenticationPrompt::~Tag_AuthenticationPrompt()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -36,15 +36,15 @@ Tag_AuthenticationPrompt::~Tag_AuthenticationPrompt()
 
 int Tag_AuthenticationPrompt::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_AuthenticationPrompt::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_AuthenticationPrompt;
 }
 
@@ -55,20 +55,20 @@ Tag *Tag_AuthenticationPrompt::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±êÌâ [2010-05]
+// å–æ ‡é¢˜ [2010-05]
 string Tag_AuthenticationPrompt::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     const string &key = page->GetCurrentKey();
-    const Conf *pack = page->GetCurrentPack();  // µ±Ç°key¶ÔÓ¦Êı¾İ¼¯
-    const string &text = pack->Get("text");     // È¡³öÕıÎÄÊı¾İ
+    const Conf *pack = page->GetCurrentPack();  // å½“å‰keyå¯¹åº”æ•°æ®é›†
+    const string &text = pack->Get("text");     // å–å‡ºæ­£æ–‡æ•°æ®
     const string &password = pack->Get("password");
     const string &prompt = pack->Get("prompt");
     const string &decryption = page->GetResult("decryption");
@@ -91,7 +91,7 @@ string Tag_AuthenticationPrompt::Get(Page *page)
                 "                <td height=10 colspan='2'></td>\n"
                 "            </tr>\n"
                 "            <tr align='center'>\n"
-                "                <td colspan='2'>´ËÌõĞÅÏ¢ÒÑ¼ÓÃÜ£¬²é¿´ÇëÊäÈëÃÜÂë£º</td>\n"
+                "                <td colspan='2'>æ­¤æ¡ä¿¡æ¯å·²åŠ å¯†ï¼ŒæŸ¥çœ‹è¯·è¾“å…¥å¯†ç ï¼š</td>\n"
                 "            </tr>\n"
                 "            <tr align='center'>\n"
                 "                <td colspan='2'><input name='password' id='password' size='25' class='FOCUS' type='password' autocomplete='off'></td>\n"
@@ -100,11 +100,11 @@ string Tag_AuthenticationPrompt::Get(Page *page)
                 "                <td height=5 colspan='2'></td>\n"
                 "            </tr>\n"
                 "            <tr align='center'>\n"
-                "                <td align=left>¡¡<span class='font12 red'>" + auth_msg + "</span></td>\n"
+                "                <td align=left>ã€€<span class='font12 red'>" + auth_msg + "</span></td>\n"
                 "                <td align=right>\n"
-                "                    <input type=submit name=decryption class=button value='È·¶¨'>\n"
-                "                    <input type=button onClick=alert('" + prompt + "') value='ÌáÊ¾'>\n"
-                "                    <input type=button class='TABTO_password' onClick=OpenPage('browse') value='·µ»Ø'>\n"
+                "                    <input type=submit name=decryption class=button value='ç¡®å®š'>\n"
+                "                    <input type=button onClick=alert('" + prompt + "') value='æç¤º'>\n"
+                "                    <input type=button class='TABTO_password' onClick=OpenPage('browse') value='è¿”å›'>\n"
                 "                </td>\n"
                 "            </tr>\n"
                 "        </table>\n"
@@ -135,7 +135,7 @@ string Tag_AuthenticationPrompt::Get(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_AuthenticationPrompt tmp(TAG_GLOBAL, THIS_MODULE);
 
 }// end of TAG_AUTHENTICATIONPROMPT_SPACE

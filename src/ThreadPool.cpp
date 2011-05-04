@@ -17,42 +17,42 @@ ThreadPool::ThreadPool(Func func, int min/*=THREAD_COUNT_MIN*/, int max/*=THREAD
                   m_bStopCreateThread( false ),
                   m_id( 0 )
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
-    // ¼ÓÈë¹ÜÀíÁĞ±í
+    // åŠ å…¥ç®¡ç†åˆ—è¡¨
     ThreadPool::instance()->Insert( this );
     LOG_DEBUG("ThreadPool>>> insert: %u  %p", this->m_id, this);
 
     int i;
 
-    // Æô¶¯¹¤×÷Ïß³Ì£¨×é£©
+    // å¯åŠ¨å·¥ä½œçº¿ç¨‹ï¼ˆç»„ï¼‰
     for(i=0; i<min; i++)
     {
         m_ThreadQueue.create_thread( boost::bind( &Run, this ) );
     }
 
-    // Ò»°ãÇé¿öÏÂ£¬Ó¦µ±ÔÚÍâ²¿µ÷ÖĞÖ´ĞĞ³õÊ¼»¯£¬²¢²âÊÔ³õÊ¼»¯ÊÇ·ñ³É¹¦£»
+    // ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œåº”å½“åœ¨å¤–éƒ¨è°ƒä¸­æ‰§è¡Œåˆå§‹åŒ–ï¼Œå¹¶æµ‹è¯•åˆå§‹åŒ–æ˜¯å¦æˆåŠŸï¼›
     Init();
 }
 
 ThreadPool::~ThreadPool()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
     m_bStopCreateThread = true;
     m_StatusQueue.SetFinishAll();
-    m_lock.Wake(); // ·¢ËÍÖ´ĞĞÍ¨Öª
+    m_lock.Wake(); // å‘é€æ‰§è¡Œé€šçŸ¥
     m_ThreadQueue.join_all();
     ThreadPool::instance()->Delete( this );
     LOG_DEBUG("ThreadPool>>> quit: %u  %p", this->m_id, this);
 }
 
-// Àà³õÊ¼»¯
+// ç±»åˆå§‹åŒ–
 int ThreadPool::init()
 {
-    // Æô¶¯¹ÜÀíÏß³Ì
+    // å¯åŠ¨ç®¡ç†çº¿ç¨‹
     static boost::thread t( boost::bind(&WatchThread) );
 
-    // ¹ÜÀíÀà³õÊ¼»¯
+    // ç®¡ç†ç±»åˆå§‹åŒ–
     static ThreadPool::Manage pool;
     Manage *obj = ThreadPool::instance( &pool );
     if(NULL == obj)
@@ -64,10 +64,10 @@ int ThreadPool::init()
     return OK;
 }
 
-// ¶ÔÏó³õÊ¼»¯
+// å¯¹è±¡åˆå§‹åŒ–
 int ThreadPool::Init()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     if( m_bInit )
     {
@@ -76,7 +76,7 @@ int ThreadPool::Init()
 
     int ret;
 
-    // ³õÊ¼»¯Ìõ¼ş±äÁ¿Ëø
+    // åˆå§‹åŒ–æ¡ä»¶å˜é‡é”
     ret = m_lock.Init();
     if(ret < 0)
     {
@@ -84,7 +84,7 @@ int ThreadPool::Init()
         return ERR;
     }
 
-    // ³õÊ¼»¯ÈÎÎñ¶ÓÁĞ
+    // åˆå§‹åŒ–ä»»åŠ¡é˜Ÿåˆ—
     ret = m_TaskList.Init();
     if(ret < 0)
     {
@@ -96,34 +96,34 @@ int ThreadPool::Init()
     return OK;
 }
 
-// È¡µ±Ç°Ïß³Ì³ØÖĞÏß³ÌÊı
+// å–å½“å‰çº¿ç¨‹æ± ä¸­çº¿ç¨‹æ•°
 int ThreadPool::GetPoolSize()
 {
     return m_StatusQueue.size();
 }
 
-// È¡µ±Ç°Ïß³Ì³ØÖĞÈÎÎñÊı
+// å–å½“å‰çº¿ç¨‹æ± ä¸­ä»»åŠ¡æ•°
 int ThreadPool::GetTaskCount()
 {
     return m_TaskList.size();
 }
 
-// È¡Ïß³Ì³Ø±àºÅ
+// å–çº¿ç¨‹æ± ç¼–å·
 unsigned int ThreadPool::GetId()
 {
     return m_id;
 }
 
-// Çå³ıÎŞĞ§Ïß³Ì¼ÇÂ¼
+// æ¸…é™¤æ— æ•ˆçº¿ç¨‹è®°å½•
 int ThreadPool::ClearInavlidThread()
 {
     return m_StatusQueue.ClearInavlidStatus();
 }
 
-// ¸øÏß³Ì³ØËÍÈÎÎñÊı¾İ
+// ç»™çº¿ç¨‹æ± é€ä»»åŠ¡æ•°æ®
 int ThreadPool::push(void *task)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     int ret;
 
@@ -133,14 +133,14 @@ int ThreadPool::push(void *task)
         return ERR;
     }
     usleep(10000);
-    m_lock.Wake();  // »½ĞÑ´¦ÀíÏß³Ì
+    m_lock.Wake();  // å”¤é†’å¤„ç†çº¿ç¨‹
     return OK;
 }
 
-// ÈÎÎñÖ÷Ñ­»·£¨Ñ­»·µ÷ÓÃÍâ²¿´«ÈëµÄº¯Êı£©
+// ä»»åŠ¡ä¸»å¾ªç¯ï¼ˆå¾ªç¯è°ƒç”¨å¤–éƒ¨ä¼ å…¥çš„å‡½æ•°ï¼‰
 void ThreadPool::Run(ThreadPool *pool)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     if( pool->m_bStopCreateThread )
     {
@@ -151,7 +151,7 @@ void ThreadPool::Run(ThreadPool *pool)
     const long tid = pthread_self();
 
     /*
-     * ¼ÇÂ¼µ±Ç°Ïß³ÌĞÅÏ¢£¨¼ÓÈë×´Ì¬¶ÓÁĞ£©
+     * è®°å½•å½“å‰çº¿ç¨‹ä¿¡æ¯ï¼ˆåŠ å…¥çŠ¶æ€é˜Ÿåˆ—ï¼‰
      */
     Status * const myself = new Status;
     if(NULL == myself)
@@ -164,14 +164,14 @@ void ThreadPool::Run(ThreadPool *pool)
     LOG_DEBUG("[%d]. start thread, tid=[%lu]", pool->m_StatusQueue.size(), tid);
 
     /*
-     * Ö´ĞĞÑ­»·
+     * æ‰§è¡Œå¾ªç¯
      */
     while( !SignalDeal::exit() )
     {
-        // ²é¿´×ÔÒÑ£¨µ±Ç°Ïß³Ì£©µÄ×´Ì¬
+        // æŸ¥çœ‹è‡ªå·²ï¼ˆå½“å‰çº¿ç¨‹ï¼‰çš„çŠ¶æ€
         if( Status::FINISH == myself->status )
         {
-            pool->m_StatusQueue.del( tid ); // ÍË³öÇ°£¬ÏÈ´Ó×´Ì¬¼ÇÂ¼¶ÓÁĞÖĞÉ¾³ı±¾Ïß³ÌĞÅÏ¢£»
+            pool->m_StatusQueue.del( tid ); // é€€å‡ºå‰ï¼Œå…ˆä»çŠ¶æ€è®°å½•é˜Ÿåˆ—ä¸­åˆ é™¤æœ¬çº¿ç¨‹ä¿¡æ¯ï¼›
             LOG_DEBUG("thread[tid:%lu] finish, quit...", tid);
             break;
         }
@@ -179,31 +179,31 @@ void ThreadPool::Run(ThreadPool *pool)
         //LOG_DEBUG("pool->m_TaskList.size=[%d], myself->status=[%d]", pool->m_TaskList.size(), myself->status);
 
         /*
-         * Ö´ĞĞÈÎÎñ´¦Àí£¬Ö±µ½ÈÎÎñ¶ÓÁĞ¿Õ£»
+         * æ‰§è¡Œä»»åŠ¡å¤„ç†ï¼Œç›´åˆ°ä»»åŠ¡é˜Ÿåˆ—ç©ºï¼›
          */
         void *task;
         while( (task = pool->m_TaskList.pop()) != NULL )
         {
             //LOG_DEBUG("[%p]", task);
-            // Ö´ĞĞÈÎÎñ
+            // æ‰§è¡Œä»»åŠ¡
             (*pool->m_execute)( task );
         }
 
 
         /*
-         * ´¦ÀíÍê±Ï£¬½øÈëË¯Ãß£¬µÈ´ı±»»½ĞÑ£»
+         * å¤„ç†å®Œæ¯•ï¼Œè¿›å…¥ç¡çœ ï¼Œç­‰å¾…è¢«å”¤é†’ï¼›
          */
         pool->m_lock.Wait();
     }
 }
 
 
-// ¹ÜÀíÏß³Ì£¬¶¨Ê±É¨ÃèÊı¾İ¶ÓÁĞ£¬¿´¿´ÊÇ·ñĞèÒªÆô¶¯ĞÂÏß³Ì£¬»òÊÍ·Å²¿·Ö¿ÕÏĞÏß³Ì£»
+// ç®¡ç†çº¿ç¨‹ï¼Œå®šæ—¶æ‰«ææ•°æ®é˜Ÿåˆ—ï¼Œçœ‹çœ‹æ˜¯å¦éœ€è¦å¯åŠ¨æ–°çº¿ç¨‹ï¼Œæˆ–é‡Šæ”¾éƒ¨åˆ†ç©ºé—²çº¿ç¨‹ï¼›
 void ThreadPool::WatchThread()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
-    const unsigned int USEC_MAX = 3000000; // 3Ãë
+    const unsigned int USEC_MAX = 3000000; // 3ç§’
     const unsigned int USEC_MIN = 200000;
     unsigned int interval = USEC_MAX;
 
@@ -218,13 +218,13 @@ void ThreadPool::WatchThread()
             interval = USEC_MIN;
         }
 
-        usleep( interval );   // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Ó¦¿ÉÅäÖÆ
+        usleep( interval );   // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< åº”å¯é…åˆ¶
 
         // LOG_DEBUG("m_PoolList.size=[%d]", m_PoolList.size());
 
         ThreadPool::iterator it;
 
-        // É¨Ãè¸÷¸ö³ÌĞò³Ø¶ÔÏó
+        // æ‰«æå„ä¸ªçº¿ç¨‹æ± å¯¹è±¡
         while( it.next() )
         {
             ThreadPool * const pool = it();
@@ -241,31 +241,31 @@ void ThreadPool::WatchThread()
             //LOG_DEBUG("Clear inavlid thread number: %d", ret);
 
 
-            /* ¼ì²éµ±Ç°ÈÎÎñÊÇ·ñ·±Ã¦£¬¿ÉÄÜĞèÒª´´½¨¸ü¶àµÄ´¦ÀíÏß³Ì£»
+            /* æ£€æŸ¥å½“å‰ä»»åŠ¡æ˜¯å¦ç¹å¿™ï¼Œå¯èƒ½éœ€è¦åˆ›å»ºæ›´å¤šçš„å¤„ç†çº¿ç¨‹ï¼›
              *
-             *      µ±£º1. ÎñÈÎ¸öÊı > Ïß³ÌÊı£¬ÇÒ
-             *          2. Ïß³ÌÊı²»µ½´ï×î´óÏŞÖÆÊ±
+             *      å½“ï¼š1. åŠ¡ä»»ä¸ªæ•° > çº¿ç¨‹æ•°ï¼Œä¸”
+             *          2. çº¿ç¨‹æ•°ä¸åˆ°è¾¾æœ€å¤§é™åˆ¶æ—¶
              *
-             *      ´´½¨Ò»ĞÂÏß³Ì£»
+             *      åˆ›å»ºä¸€æ–°çº¿ç¨‹ï¼›
              */
             if( pool->m_TaskList.size() > pool->m_StatusQueue.size()
                 && pool->m_StatusQueue.size() <= THREAD_COUNT_MAX
               )
             {
-                // ´´½¨Ò»ĞÂÏß³Ì
+                // åˆ›å»ºä¸€æ–°çº¿ç¨‹
                 pool->m_ThreadQueue.create_thread( boost::bind( &ThreadPool::Run, pool ) );
-                interval -= 200000; // ÔÚÈÎÎñÃ¦Ê±£¬Ó¦¿ìËÙÆô¶¯ĞÂÏß³Ì£»
+                interval -= 200000; // åœ¨ä»»åŠ¡å¿™æ—¶ï¼Œåº”å¿«é€Ÿå¯åŠ¨æ–°çº¿ç¨‹ï¼›
             }
 
             /*
-             * ¿ÕÏĞÏß³Ì¹ı¶àÊ±£¬ÃüÁî¶àÓàÏß³ÌÍË³ö£»
+             * ç©ºé—²çº¿ç¨‹è¿‡å¤šæ—¶ï¼Œå‘½ä»¤å¤šä½™çº¿ç¨‹é€€å‡ºï¼›
              */
             if( pool->m_TaskList.size() < pool->m_StatusQueue.size()
                 && pool->m_StatusQueue.size() > THREAD_COUNT_MIN
               )
             {
-                pool->m_StatusQueue.SetFinish(); // ÉèÖÃÈÎÒ»ÌõÏß³ÌÎªÍê³ÉÌ¬£»
-                pool->m_lock.Wake(); // ·¢ËÍÖ´ĞĞÍ¨Öª
+                pool->m_StatusQueue.SetFinish(); // è®¾ç½®ä»»ä¸€æ¡çº¿ç¨‹ä¸ºå®Œæˆæ€ï¼›
+                pool->m_lock.Wake(); // å‘é€æ‰§è¡Œé€šçŸ¥
                 interval += 300000;
             }
         }// while( it.next()...

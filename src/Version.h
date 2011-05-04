@@ -6,7 +6,7 @@ namespace VERSION_SPACE
 
 
 
-// °æ±¾ºÅ
+// ç‰ˆæœ¬å·
 #define VV      "v0.6.12"
 
 

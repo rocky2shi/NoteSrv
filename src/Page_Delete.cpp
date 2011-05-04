@@ -9,33 +9,33 @@ namespace PAGE_DELETE_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "delete";
 
 
 
 Page_Delete::Page_Delete()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Delete::~Page_Delete()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Delete::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     m_html = "";
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Delete::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Delete;
 }
 
@@ -46,13 +46,13 @@ Page *Page_Delete::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
-// Êä³öÊı¾İ
+// è¾“å‡ºæ•°æ®
 int Page_Delete::Deal()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
@@ -63,7 +63,7 @@ int Page_Delete::Deal()
 
 
     /*
-     * É¾³ıÓÃ»§ÎÄ¼ş£¬Èç£º
+     * åˆ é™¤ç”¨æˆ·æ–‡ä»¶ï¼Œå¦‚ï¼š
      *  http://192.168.1.100:17890/delete?file=logo.gif
      */
     const string &username = m_request->GetCurrentUser();
@@ -78,19 +78,19 @@ int Page_Delete::Deal()
     {
         Page::OutHead();
 
-        const string str = "É¾³ıÎÄ¼ş³ö´í£¬ÎÄ¼şÃû: <font color='red'>" + filename + "</font>";
+        const string str = "åˆ é™¤æ–‡ä»¶å‡ºé”™ï¼Œæ–‡ä»¶å: <font color='red'>" + filename + "</font>";
         LOG_ERROR("Can't delete file: [%s]", fullpath.c_str());
-        // ·¢ËÍµ½ä¯ÀÀÆ÷
+        // å‘é€åˆ°æµè§ˆå™¨
         connect->Send(str);
         return ERR;
     }
 
     /*
-     * ¸üĞÂ¸½¼şÊı×Ö¶Î
+     * æ›´æ–°é™„ä»¶æ•°å­—æ®µ
      */
     Ini data;
     vector<string> attachs;
-    UserData(username).GetAttachList(key, attachs);     // ¸½¼şÁĞ±í
+    UserData(username).GetAttachList(key, attachs);     // é™„ä»¶åˆ—è¡¨
 
     data.Set(key, "modify", NowTime("%Y%m%d%H%M%S"));
     data.Set(key, "attach_num", IntToString(attachs.size()));
@@ -109,7 +109,7 @@ int Page_Delete::Deal()
 }
 
 
-// Êä³öÊı¾İÌå
+// è¾“å‡ºæ•°æ®ä½“
 int Page_Delete::OutBody()
 {
     return m_request->GetConnect()->Send("OK");
@@ -125,7 +125,7 @@ int Page_Delete::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Delete, THIS_MODULE)
 
 }// end of PAGE_DELETE_SPACE

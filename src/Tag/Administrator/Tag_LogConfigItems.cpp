@@ -3,7 +3,7 @@
 namespace TAG_LOGCONFIGITEMS_SPACE
 {
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 //static const string THIS_MODULE = "";
 
 
@@ -11,17 +11,17 @@ namespace TAG_LOGCONFIGITEMS_SPACE
 
 Tag_LogConfigItems::Tag_LogConfigItems()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_LogConfigItems::Tag_LogConfigItems(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_LogConfigItems::~Tag_LogConfigItems()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -29,15 +29,15 @@ Tag_LogConfigItems::~Tag_LogConfigItems()
 
 int Tag_LogConfigItems::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_LogConfigItems::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_LogConfigItems;
 }
 
@@ -48,18 +48,18 @@ Tag *Tag_LogConfigItems::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±êÌâ [2010-05]
+// å–æ ‡é¢˜ [2010-05]
 string Tag_LogConfigItems::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    // µ÷ÊÔÈÕÖ¾
+    // è°ƒè¯•æ—¥å¿—
     if("debug_open" == m_id)
     {
         return Log::instance()->GetLevel(Log::DEBUG) ? "checked" : "";
@@ -68,7 +68,7 @@ string Tag_LogConfigItems::Get(Page *page)
     {
         return Log::instance()->GetLevel(Log::DEBUG) ? "" : "checked";
     }
-    // Ò»°ãÈÕÖ¾
+    // ä¸€èˆ¬æ—¥å¿—
     else if("info_open" == m_id)
     {
         return Log::instance()->GetLevel(Log::INFO) ? "checked" : "";
@@ -77,7 +77,7 @@ string Tag_LogConfigItems::Get(Page *page)
     {
         return Log::instance()->GetLevel(Log::INFO) ? "" : "checked";
     }
-    // ´íÎóÈÕÖ¾
+    // é”™è¯¯æ—¥å¿—
     else if("error_open" == m_id)
     {
         return Log::instance()->GetLevel(Log::ERROR) ? "checked" : "";
@@ -97,7 +97,7 @@ string Tag_LogConfigItems::Get(Page *page)
 
 
 
-// ´¦Àí¶à¸öÏî
+// å¤„ç†å¤šä¸ªé¡¹
 static Tag_LogConfigItems tmp1("administrator", "debug_open");
 static Tag_LogConfigItems tmp2("administrator", "debug_close");
 static Tag_LogConfigItems tmp3("administrator", "info_open");

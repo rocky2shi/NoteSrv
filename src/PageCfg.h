@@ -9,25 +9,25 @@ namespace PAGECFG_SPACE
 
 
 
-// µ±Ç°Ò³ÃæÅäÖÆ£¨Êı¾İ£©´¦ÀíÀà
+// å½“å‰é¡µé¢é…åˆ¶ï¼ˆæ•°æ®ï¼‰å¤„ç†ç±»
 class PageCfg
 {
 public:
-    // Ö¸¶¨ÓÃ»§Ãû¡¢ÅäÖÃÎÄ¼ş
+    // æŒ‡å®šç”¨æˆ·åã€é…ç½®æ–‡ä»¶
     PageCfg(const string &username, const string &cfg);
 
-    // È¡Ä³ÏîÅäÖÆÖµ
+    // å–æŸé¡¹é…åˆ¶å€¼
     const string Get(const string &key, const string &item) const;
 
-    // ÉèÖÃÄ³ÏîÅäÖÆÖµ
+    // è®¾ç½®æŸé¡¹é…åˆ¶å€¼
     const int Set(const string &key, const string &item, const string &value);
 
-    // ±£´æ£¨Ğ´ÈëÎÄ¼ş£©
+    // ä¿å­˜ï¼ˆå†™å…¥æ–‡ä»¶ï¼‰
     int Save();
 
 public:
-    Ini m_data; // µ±Ç°Ò³ÅäÖÃÊı¾İ
-    string m_fullname; // ÅäÖÃÎÄ¼şÈ«Â·¾¶
+    Ini m_data; // å½“å‰é¡µé…ç½®æ•°æ®
+    string m_fullname; // é…ç½®æ–‡ä»¶å…¨è·¯å¾„
 };
 
 

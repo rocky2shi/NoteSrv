@@ -11,7 +11,7 @@ namespace SUBMIT_SAVETEXT_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "SaveText";
 
 
@@ -20,18 +20,18 @@ static const string THIS_MODULE = "SaveText";
 
 Submit_SaveText::Submit_SaveText()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_SaveText::Submit_SaveText(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_SaveText::~Submit_SaveText()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -39,15 +39,15 @@ Submit_SaveText::~Submit_SaveText()
 
 int Submit_SaveText::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_SaveText::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_SaveText;
 }
 
@@ -55,14 +55,14 @@ Submit *Submit_SaveText::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
-// ±£´æÕıÎÄ
+// ä¿å­˜æ­£æ–‡
 int Submit_SaveText::Save(Page *page)
 {
     /*
-     * È¡³öÊı¾İ
+     * å–å‡ºæ•°æ®
      */
     Request * const &request = page->GetRequest();
     const string &key = page->GetCurrentKey();
@@ -74,17 +74,17 @@ int Submit_SaveText::Save(Page *page)
         return ERR;
     }
 
-    const Conf *pack = page->GetCurrentPack();      // µ±Ç°key¶ÔÓ¦Êı¾İ¼¯
-    const string &text = WebEditToText( request->GetField("text") );  // ×¢Òâ£¬Ö»´¦Àí»Ø³µ»»ĞĞ·û£»
-    const string &modify = NowTime("%Y%m%d%H%M%S"); // ĞŞ¸ÄÊ±¼äÎªµ±Ç°Ê±¼ä
+    const Conf *pack = page->GetCurrentPack();      // å½“å‰keyå¯¹åº”æ•°æ®é›†
+    const string &text = WebEditToText( request->GetField("text") );  // æ³¨æ„ï¼Œåªå¤„ç†å›è½¦æ¢è¡Œç¬¦ï¼›
+    const string &modify = NowTime("%Y%m%d%H%M%S"); // ä¿®æ”¹æ—¶é—´ä¸ºå½“å‰æ—¶é—´
     const string &msg_type = request->GetField("msg_type");
     const string &password = request->GetField("password");
 
     /*
-     * Êı¾İ´ò°ü
+     * æ•°æ®æ‰“åŒ…
      */
     Ini data;
-    // ¼ÓÃÜ²¿·Ö
+    // åŠ å¯†éƒ¨åˆ†
     if("" != password)
     {
         data.Set(key, "text", Encrypt(password).encrypt(text));
@@ -97,34 +97,34 @@ int Submit_SaveText::Save(Page *page)
     data.Set(key, "modify", modify);
     data.Set(key, "msg_type", msg_type);
 
-    // Ğ´Èë
+    // å†™å…¥
     page->Save( data );
 
-    // µ÷ÕûÀà±ğÏÔÊ¾Ë³Ğò
+    // è°ƒæ•´ç±»åˆ«æ˜¾ç¤ºé¡ºåº
     AdjustType(page, msg_type);
 
     return OK;
 }
 
-// µ÷ÕûÀà±ğ£¬Ê¹³£ÓÃµÄ¿¿Ç°£»types:µ±Ç°Ñ¡ÖĞµÄÀà±ğ
+// è°ƒæ•´ç±»åˆ«ï¼Œä½¿å¸¸ç”¨çš„é å‰ï¼›types:å½“å‰é€‰ä¸­çš„ç±»åˆ«
 int Submit_SaveText::AdjustType(Page *page, const string &types)
 {
     const string &username = page->GetRequest()->GetCurrentUser();
     Menu *menu = Menu::Get(username, "TypeDropBox.cfg");    // [XXX:56425820]
     vector<string> items;
     vector<string>::iterator it;
-    Split(types, ",", items); // ·Ö¸î£º20081004213824,20081004213826,20081004213827,20081004214214
+    Split(types, ",", items); // åˆ†å‰²ï¼š20081004213824,20081004213826,20081004213827,20081004214214
     for(it = items.begin(); items.end() != it; it++)
     {
         const string &key = *it;
-        // ¸üĞÂÅÅĞòËùÓÃµÄindex×Ö¶ÎÎªµ±Ç°µÄ×î´óÖµ£¨ÃëÊıÊÇÒ»Ë³ĞòÖµ£©£¬Ê¹Ö®¿¿Ç°£»
+        // æ›´æ–°æ’åºæ‰€ç”¨çš„indexå­—æ®µä¸ºå½“å‰çš„æœ€å¤§å€¼ï¼ˆç§’æ•°æ˜¯ä¸€é¡ºåºå€¼ï¼‰ï¼Œä½¿ä¹‹é å‰ï¼›
         menu->SetItem(key, "index", NowTime(""));
     }
-    // ±£´æ
+    // ä¿å­˜
     return menu->Save();
 }
 
-// ÈÏÖ¤Í¨¹ı£¬·µ»ØµÄ["decryption"]Îª¿Õ´®£¬²»Í¨¹ıÔò·µ»Ø³ö´íĞÅÏ¢£»
+// è®¤è¯é€šè¿‡ï¼Œè¿”å›çš„["decryption"]ä¸ºç©ºä¸²ï¼Œä¸é€šè¿‡åˆ™è¿”å›å‡ºé”™ä¿¡æ¯ï¼›
 int Submit_SaveText::Deal(Page *page)
 {
     int ret = Save(page);
@@ -133,13 +133,13 @@ int Submit_SaveText::Deal(Page *page)
     string err;
     string html;
 
-    err = (OK == ret) ? "Ìá½»³É¹¦£¡[" + key + "]"
-                      : "±£´æÊ§°Ü£¡¿ÉÄÜÄúĞèÒªÖØĞÂµÇÂ¼¡£";
+    err = (OK == ret) ? "æäº¤æˆåŠŸï¼[" + key + "]"
+                      : "ä¿å­˜å¤±è´¥ï¼å¯èƒ½æ‚¨éœ€è¦é‡æ–°ç™»å½•ã€‚";
 
-    // ±£´æ³É¹¦£¬ÇÒÊÇĞÂ½¨Ê±£¬´ò¿ªĞÂÒ³Ãæ£»
+    // ä¿å­˜æˆåŠŸï¼Œä¸”æ˜¯æ–°å»ºæ—¶ï¼Œæ‰“å¼€æ–°é¡µé¢ï¼›
     if(OK == ret && "new" == operate)
     {
-        // ±£´æ£¬²¢Ë¢ĞÂÒ³Ãæ£¨ĞÂ½¨£©
+        // ä¿å­˜ï¼Œå¹¶åˆ·æ–°é¡µé¢ï¼ˆæ–°å»ºï¼‰
         html = "<script>\n"
                "if(parent)\n"
                "{\n"
@@ -149,9 +149,9 @@ int Submit_SaveText::Deal(Page *page)
                "\n";
     }
     else
-    // ÏÔÊ¾µ±Ç°ĞÅÏ¢
+    // æ˜¾ç¤ºå½“å‰ä¿¡æ¯
     {
-        // ±£´æ£¬ÁôÔÚµ±Ç°Ò³Ãæ£¨²»Ë¢ĞÂ£©
+        // ä¿å­˜ï¼Œç•™åœ¨å½“å‰é¡µé¢ï¼ˆä¸åˆ·æ–°ï¼‰
         html = "<script>\n"
                "var tmp = parent.document.getElementById('error');\n"
                "if(null != tmp)\n"
@@ -165,7 +165,7 @@ int Submit_SaveText::Deal(Page *page)
 
     LOG_INFO("%s", err.c_str());
 
-    // ·¢ËÍÒ³Ãæ´úÂë
+    // å‘é€é¡µé¢ä»£ç 
     page->GetRequest()->GetConnect()->Send(html);
     return OK;
 }
@@ -182,7 +182,7 @@ int Submit_SaveText::Deal(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Submit_SaveText tmp("edit", THIS_MODULE);
 
 }// end of SUBMIT_SAVETEXT_SPACE

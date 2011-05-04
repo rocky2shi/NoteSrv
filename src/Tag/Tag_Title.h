@@ -9,7 +9,7 @@ namespace TAG_TITLE_SPACE
 
 
 
-// ±à¼­Ò³Ãæ£º±êÌâ
+// ç¼–è¾‘é¡µé¢ï¼šæ ‡é¢˜
 class Tag_Title : public Tag
 {
 protected:

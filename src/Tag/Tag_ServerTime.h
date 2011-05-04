@@ -7,7 +7,7 @@ namespace TAG_SERVERTIME_SPACE
 
 
 
-// 取服务器时间（秒数）
+// 鍙栨湇鍔″櫒鏃堕棿锛堢鏁帮級
 class Tag_ServerTime : public Tag
 {
 protected:

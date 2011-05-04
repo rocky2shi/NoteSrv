@@ -10,7 +10,7 @@ namespace SUBMIT_TEXTINSERTIMAGE_SPACE
 
 
 
-// ±êÃ÷Ä£¿é£¨¶ÔÓ¦ÓÚÒ³ÃæÖĞµÄÌá½»×Ö¶Î£©
+// æ ‡æ˜æ¨¡å—ï¼ˆå¯¹åº”äºé¡µé¢ä¸­çš„æäº¤å­—æ®µï¼‰
 static const string THIS_MODULE = "TextInsertImage";
 
 
@@ -19,18 +19,18 @@ static const string THIS_MODULE = "TextInsertImage";
 
 Submit_TextInsertImage::Submit_TextInsertImage()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_TextInsertImage::Submit_TextInsertImage(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_TextInsertImage::~Submit_TextInsertImage()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -38,15 +38,15 @@ Submit_TextInsertImage::~Submit_TextInsertImage()
 
 int Submit_TextInsertImage::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_TextInsertImage::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_TextInsertImage;
 }
 
@@ -54,24 +54,24 @@ Submit *Submit_TextInsertImage::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 /*
- * ´¦ÀíÔÚreadingÒ³ÃæÌá½»µÄÊÂ¼ş£¬Ä¿Ç°´¦Àí£º
- *   1. ²åÈëÍ¼Æ¬£¨operate=InsertObj£¬type=""£©£¨×¢£ºÖ»ĞŞ¸ÄÕıÎÄ×Ö¶Î£©
- *   2. ²åÈëÊéÇ©£¨operate=InsertObj£¬type=bookmark£©£¨×¢£ºĞŞ¸ÄÕıÎÄ¡¢¼°ÊéÇ©×Ö¶Î£©
+ * å¤„ç†åœ¨readingé¡µé¢æäº¤çš„äº‹ä»¶ï¼Œç›®å‰å¤„ç†ï¼š
+ *   1. æ’å…¥å›¾ç‰‡ï¼ˆoperate=InsertObjï¼Œtype=""ï¼‰ï¼ˆæ³¨ï¼šåªä¿®æ”¹æ­£æ–‡å­—æ®µï¼‰
+ *   2. æ’å…¥ä¹¦ç­¾ï¼ˆoperate=InsertObjï¼Œtype=bookmarkï¼‰ï¼ˆæ³¨ï¼šä¿®æ”¹æ­£æ–‡ã€åŠä¹¦ç­¾å­—æ®µï¼‰
  */
 int Submit_TextInsertImage::Deal(Page *page)
 {
     const string &key = page->GetCurrentKey();
     const string &password = page->GetRequest()->GetField("password");
-    const Conf *pack = page->GetCurrentPack();          // µ±Ç°key¶ÔÓ¦Êı¾İ¼¯
+    const Conf *pack = page->GetCurrentPack();          // å½“å‰keyå¯¹åº”æ•°æ®é›†
 
     /*
-     * ÏÈºË¶ÔÃÜÂë
+     * å…ˆæ ¸å¯¹å¯†ç 
      */
     if( "" != pack->Get("password")
         && Crypt(password, CRYPT_VERSION) != pack->Get("password")
@@ -83,17 +83,17 @@ int Submit_TextInsertImage::Deal(Page *page)
     }
 
     /*
-     * ÔÚÕıÎÄÖĞ²åÈëÍ¼Æ¬²Ù×÷£¬ÎªÌá¸ßĞÔÄÜ£¬ÏÈ³¢ÊÔÔÚ²åÈëµã´¦ĞŞ¸Ä£¬Îª·ÀÖ¹
-     * ÖØ¸´£¬ËùÒÔĞèÒª¶à´Î£¨À©´óÆ¥Åä´®£©²éÕÒ£¬ÔÙ´æÔÚÖØ¸´Ê±£¬ÔòÖ´ĞĞÈ«ÎÄ
-     * ±£´æ£¬Òò´ËºÍ¿Í»§¶ËÖ®¼ä»áÓĞ¶à´Î½»»¥£»
+     * åœ¨æ­£æ–‡ä¸­æ’å…¥å›¾ç‰‡æ“ä½œï¼Œä¸ºæé«˜æ€§èƒ½ï¼Œå…ˆå°è¯•åœ¨æ’å…¥ç‚¹å¤„ä¿®æ”¹ï¼Œä¸ºé˜²æ­¢
+     * é‡å¤ï¼Œæ‰€ä»¥éœ€è¦å¤šæ¬¡ï¼ˆæ‰©å¤§åŒ¹é…ä¸²ï¼‰æŸ¥æ‰¾ï¼Œå†å­˜åœ¨é‡å¤æ—¶ï¼Œåˆ™æ‰§è¡Œå…¨æ–‡
+     * ä¿å­˜ï¼Œå› æ­¤å’Œå®¢æˆ·ç«¯ä¹‹é—´ä¼šæœ‰å¤šæ¬¡äº¤äº’ï¼›
      */
 
-    // È¡³öÊı¾İ
+    // å–å‡ºæ•°æ®
     string text = page->GetRequest()->GetField("text");
-    string find = page->GetRequest()->GetField("find");        // Ìæ»»Ç°µÄ´®
-    string replace = page->GetRequest()->GetField("replace");  // Ìæ»»ºóµÄ´®
+    string find = page->GetRequest()->GetField("find");        // æ›¿æ¢å‰çš„ä¸²
+    string replace = page->GetRequest()->GetField("replace");  // æ›¿æ¢åçš„ä¸²
 
-    // ±àÂë×ª»»£ºutf8 => gbk
+    // ç¼–ç è½¬æ¢ï¼šutf8 => gbk
     ChineseCoding code("utf-8", "gb18030");
     int ret;
 
@@ -106,10 +106,10 @@ int Submit_TextInsertImage::Deal(Page *page)
         return ERR;
     }
 
-    // text¿Õ£¬ËµÃ÷¿Í»§¶Ë·¢À´µÄÊÇ²¿·Ö´®£¬¼´µÈĞŞ¸Ä²¿·Ö£¬ÔòÖ´ĞĞÔöÁ¿±£´æ£»
+    // textç©ºï¼Œè¯´æ˜å®¢æˆ·ç«¯å‘æ¥çš„æ˜¯éƒ¨åˆ†ä¸²ï¼Œå³ç­‰ä¿®æ”¹éƒ¨åˆ†ï¼Œåˆ™æ‰§è¡Œå¢é‡ä¿å­˜ï¼›
     if("" == text)
     {
-        // ¶ÁÈ¡ÕıÎÄÊı¾İ£¨¶ÁµÄÊÇºóÌ¨Êı¾İ£©£¬¼ÓÃÜµÄÔòÏÈ½âÃÜ£»
+        // è¯»å–æ­£æ–‡æ•°æ®ï¼ˆè¯»çš„æ˜¯åå°æ•°æ®ï¼‰ï¼ŒåŠ å¯†çš„åˆ™å…ˆè§£å¯†ï¼›
         text = pack->Get("text");
         if("" != password)
         {
@@ -117,11 +117,11 @@ int Submit_TextInsertImage::Deal(Page *page)
             text = Encrypt(password).decrypt(text);
         }
 
-        // ×ª»»³ÉwebÏÔÊ¾¸ñÊ½£¬ÒÔ±ãÆ¥Åä£»
+        // è½¬æ¢æˆwebæ˜¾ç¤ºæ ¼å¼ï¼Œä»¥ä¾¿åŒ¹é…ï¼›
         text = TextToWeb( text );
 
         /*
-         * ÔÚÕıÎÄÖĞ²éÕÒ£¬ÈçÁ½´Î¶¼ÕÒµ½£¬ËµÃ÷ÓĞÖØ¸´µÄ"$find"£¬Ôò³ö´í£»
+         * åœ¨æ­£æ–‡ä¸­æŸ¥æ‰¾ï¼Œå¦‚ä¸¤æ¬¡éƒ½æ‰¾åˆ°ï¼Œè¯´æ˜æœ‰é‡å¤çš„"$find"ï¼Œåˆ™å‡ºé”™ï¼›
          */
         const unsigned int pos = text.find(find);
         if(pos == text.npos)
@@ -129,7 +129,7 @@ int Submit_TextInsertImage::Deal(Page *page)
             LOG_DEBUG("Can't find: [%s]", find.c_str());
             return ERR;
         }
-        // ÔÙ´Î²éÕÒ
+        // å†æ¬¡æŸ¥æ‰¾
         const unsigned int pos2 = text.find(find, pos + find.length());
         if(pos2 != text.npos)
         {
@@ -139,11 +139,11 @@ int Submit_TextInsertImage::Deal(Page *page)
         }
 
         /*
-         * Êı¾İÕı³££¬ÓÃreplaceÌæ»»find£»
-         *  £¨ÖØĞÂ×é×°Èı¶Î£©
+         * æ•°æ®æ­£å¸¸ï¼Œç”¨replaceæ›¿æ¢findï¼›
+         *  ï¼ˆé‡æ–°ç»„è£…ä¸‰æ®µï¼‰
          */
-        const string &before = text.substr(0, pos);             // Ô­ÎÄÖĞ£¬Ìæ»»´®Ö®Ç°²¿·Ö
-        const string &after = text.substr(pos + find.length()); // Ô­ÎÄÖĞ£¬Ìæ»»´®Ö®ºó²¿·Ö
+        const string &before = text.substr(0, pos);             // åŸæ–‡ä¸­ï¼Œæ›¿æ¢ä¸²ä¹‹å‰éƒ¨åˆ†
+        const string &after = text.substr(pos + find.length()); // åŸæ–‡ä¸­ï¼Œæ›¿æ¢ä¸²ä¹‹åéƒ¨åˆ†
 
         text = before + replace + after;
     }
@@ -154,24 +154,24 @@ int Submit_TextInsertImage::Deal(Page *page)
 
     text = WebHtmlToText( text );   // [XXX]
 
-    // Ô­ÊÇ¼ÓÃÜÊı¾İ£¬ÔòÖ´ĞĞ¼ÓÃÜ£»
+    // åŸæ˜¯åŠ å¯†æ•°æ®ï¼Œåˆ™æ‰§è¡ŒåŠ å¯†ï¼›
     if("" != password)
     {
         text = Encrypt(password).encrypt( text );
     }
 
     /*
-     * Êı¾İ´ò°ü
+     * æ•°æ®æ‰“åŒ…
      */
     Ini data;
-    data.Set(key, "text", text);                      // ÕıÎÄ
-    data.Set(key, "modify", NowTime("%Y%m%d%H%M%S")); // ×îºóĞŞ¸ÄÊ±¼ä
+    data.Set(key, "text", text);                      // æ­£æ–‡
+    data.Set(key, "modify", NowTime("%Y%m%d%H%M%S")); // æœ€åä¿®æ”¹æ—¶é—´
 
     /*
-     * ¿É´¦ÀíµÄ²Ù×÷
+     * å¯å¤„ç†çš„æ“ä½œ
      */
     const string &type = page->GetRequest()->GetField("type");
-    // ²åÈëÊéÇ©
+    // æ’å…¥ä¹¦ç­¾
     if("bookmark" == type)
     {
         string bookmark = page->GetRequest()->GetField("bookmark_data");
@@ -180,10 +180,10 @@ int Submit_TextInsertImage::Deal(Page *page)
             LOG_ERROR("Converter error");
             return ERR;
         }
-        data.Set(key, "bookmark", bookmark);    // ÊéÇ©Êı¾İ
+        data.Set(key, "bookmark", bookmark);    // ä¹¦ç­¾æ•°æ®
     }
 
-    // ±£´æ
+    // ä¿å­˜
     return page->Save(data);
 }
 

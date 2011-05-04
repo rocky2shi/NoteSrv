@@ -10,10 +10,10 @@ namespace MENU_SPACE
 
 
 
-// ²Ëµ¥Ïà¹Ø²Ù×÷
+// èœå•ç›¸å…³æ“ä½œ
 class Menu
 {
-    // Ã¿¸ö²Ëµ¥ÏîÊı¾İ
+    // æ¯ä¸ªèœå•é¡¹æ•°æ®
     struct Node
     {
         string key;
@@ -28,39 +28,39 @@ class Menu
             return GetMapValue(item, name);
         }
 
-        // Ö¸¶¨ÅÅĞòÏîÎª¡°index¡±×Ö¶Î£¨´Ó´óµ½Ğ¡£©
+        // æŒ‡å®šæ’åºé¡¹ä¸ºâ€œindexâ€å­—æ®µï¼ˆä»å¤§åˆ°å°ï¼‰
         bool operator<(Node& rhs) const
         {
             int a = atol( GetMapValue(item, "index").c_str() );
             int b = atol( GetMapValue(rhs.item, "index").c_str() );
             return a > b;
         }
-        // °´key²éÕÒ
+        // æŒ‰keyæŸ¥æ‰¾
         bool operator==(const Node& rhs) const
         {
             return (key == rhs.key);
         }
     };
 
-    // »º´æ¸÷¸ö²Ëµ¥
+    // ç¼“å­˜å„ä¸ªèœå•
     class Cache
     {
     public:
         Cache();
         ~Cache();
 
-        // È¡²Ëµ¥ĞÅÏ¢
+        // å–èœå•ä¿¡æ¯
         Menu *Get(const string &username, const string &menuname);
 
-        // ´Ó»º´æÖĞÈ¥³ı²Ëµ¥ĞÅÏ¢
+        // ä»ç¼“å­˜ä¸­å»é™¤èœå•ä¿¡æ¯
         void Del(const string &username, const string &menuname);
 
     private:
-        // ¼ÓÔØ²Ëµ¥ĞÅÏ¢£¨´ÓÎÄ¼ş£©
+        // åŠ è½½èœå•ä¿¡æ¯ï¼ˆä»æ–‡ä»¶ï¼‰
         Menu *Load(const string &username, const string &menuname);
 
     private:
-        // [ÓÃ»§, ²Ëµ¥Ãû] => ²Ëµ¥
+        // [ç”¨æˆ·, èœå•å] => èœå•
         map< string, map<string, Menu*> > m_MenuList;
         Lock m_lock;
     };
@@ -81,7 +81,7 @@ public:
             return m_menu->m_items.end() != m_itItem;
         }
 
-        // ÖØÔØ
+        // é‡è½½
         Node * operator->()
         {
             return &(*m_itItem);
@@ -95,38 +95,38 @@ public:
 public:
     ~Menu();
 
-    // Àà³õÊ¼»¯£¨³ÌĞòÆô¶¯Ê±µÄ³õÊ¼»¯£©
+    // ç±»åˆå§‹åŒ–ï¼ˆç¨‹åºå¯åŠ¨æ—¶çš„åˆå§‹åŒ–ï¼‰
     static int init();
 
-    // È¡ÌØ¶¨²Ëµ¥£¨username--ÓÃ»§Ãû£¬menuname--²Ëµ¥Ãû£©
+    // å–ç‰¹å®šèœå•ï¼ˆusername--ç”¨æˆ·åï¼Œmenuname--èœå•åï¼‰
     static Menu *Get(const string &username, const string &menuname);
 
-    // È¡²Ëµ¥Ïî
+    // å–èœå•é¡¹
     const string GetItem(const string &key, const string &field);
 
-    // ÉèÖÃ²Ëµ¥Ïî
+    // è®¾ç½®èœå•é¡¹
     int SetItem(const string &key, const string &field, const string &value);
 
-    // É¾³ı²Ëµ¥Ïî
+    // åˆ é™¤èœå•é¡¹
     int DelItem(const string &key);
 
-    // ±£´æ²Ëµ¥Ïî£¨µ½ÎÄ¼ş£©
+    // ä¿å­˜èœå•é¡¹ï¼ˆåˆ°æ–‡ä»¶ï¼‰
     int Save();
 
-    // ²Ëµ¥ÓĞĞ§£¨·Ç¿ÕµÈ£©·µ»Øtrue£»
+    // èœå•æœ‰æ•ˆï¼ˆéç©ºç­‰ï¼‰è¿”å›trueï¼›
     bool isValid();
 
-    // ĞèÒªÍ¬²½»º´æ
+    // éœ€è¦åŒæ­¥ç¼“å­˜
     void Syn();
 
-    // ²éÕÒÖ¸¶¨µÄ×Ö¶Î£¨Ä¬ÈÏÎªtitle£©£¬ÕÒµ½Ôò·µ»ØkeyÖµ£¬·ñÔò·µ»Ø¿Õ´®£»
+    // æŸ¥æ‰¾æŒ‡å®šçš„å­—æ®µï¼ˆé»˜è®¤ä¸ºtitleï¼‰ï¼Œæ‰¾åˆ°åˆ™è¿”å›keyå€¼ï¼Œå¦åˆ™è¿”å›ç©ºä¸²ï¼›
     const string Find(const string &value, const string &field="title") const;
 
 
 private:
     Menu(const string &username, const string &menuname);
 
-    // »º´æµ¥ÀıÉèÖÃ
+    // ç¼“å­˜å•ä¾‹è®¾ç½®
     inline static Cache *instance(Cache *cache=NULL)
     {
         static Cache *obj = (Cache *)(Environment::instance()->ClassInit("Menu::Cache", cache));
@@ -136,10 +136,10 @@ private:
 
 
 private:
-    list< Node > m_items;   // ²Ëµ¥Ïî£¨Ö÷ÒªÓÃÓÚÏÔÊ¾£¬ĞèÒªÅÅĞòµÈ£©
-    Ini m_menu;             // ²Ëµ¥Ïî£¨ºÍm_itemsÄÚÈİÏàÍ¬£¬µ«Ö÷ÒªÓÃÓÚ²Ù×÷£¬²éÕÒµÈ£©
-    string m_cfg;           // µ±Ç°²Ëµ¥¶ÔÓ¦µÄÊı¾İÎÄ¼ş
-    bool m_valid;           // ²Ëµ¥ÊÇ·ñ»¹ÓĞĞ§
+    list< Node > m_items;   // èœå•é¡¹ï¼ˆä¸»è¦ç”¨äºæ˜¾ç¤ºï¼Œéœ€è¦æ’åºç­‰ï¼‰
+    Ini m_menu;             // èœå•é¡¹ï¼ˆå’Œm_itemså†…å®¹ç›¸åŒï¼Œä½†ä¸»è¦ç”¨äºæ“ä½œï¼ŒæŸ¥æ‰¾ç­‰ï¼‰
+    string m_cfg;           // å½“å‰èœå•å¯¹åº”çš„æ•°æ®æ–‡ä»¶
+    bool m_valid;           // èœå•æ˜¯å¦è¿˜æœ‰æ•ˆ
 };
 
 

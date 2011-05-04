@@ -8,7 +8,7 @@ namespace SUBMIT_DELETEUSER_SPACE
 
 
 
-// É¾³ýÓÃ»§
+// åˆ é™¤ç”¨æˆ·
 class Submit_DeleteUser : public Submit
 {
 protected:

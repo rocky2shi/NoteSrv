@@ -12,11 +12,11 @@ namespace COUNTER_SPACE
 
 
 
-// ¼ÆÊıÆ÷Àà
+// è®¡æ•°å™¨ç±»
 class Counter
 {
 public:
-    // µü´úÆ÷£¬ÓÃÓÚÁĞ³öËùÓĞ¼ÆÊıÆ÷¶ÔÏó£¨Öµ£©£»
+    // è¿­ä»£å™¨ï¼Œç”¨äºåˆ—å‡ºæ‰€æœ‰è®¡æ•°å™¨å¯¹è±¡ï¼ˆå€¼ï¼‰ï¼›
     class iterator
     {
     public:
@@ -24,14 +24,14 @@ public:
         {
         }
 
-        // Ö¸ÏòÏÂÒ»¸öÔªËØ
+        // æŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
         bool next()
         {
             m_index++;
             return m_index < Counter::instance()->m_list.size();
         }
 
-        // ÖØÔØ"->"²Ù×÷·û£¬·µ»ØÄ£¿é¶ÔÏóµØÖ·£»
+        // é‡è½½"->"æ“ä½œç¬¦ï¼Œè¿”å›æ¨¡å—å¯¹è±¡åœ°å€ï¼›
         Counter * operator->()
         {
             return Counter::instance()->m_list[ m_index ];
@@ -50,34 +50,34 @@ private:
             UNIQUE_LOCK(m_lock);
             m_list.push_back(counter);
         }
-        vector<Counter *> m_list;  // ¼ÆÊıÆ÷ÁĞ±í£¨¼ÇÂ¼ËùÓĞÒÑ·ÖÅä¶ÔÏó£©
-        Lock m_lock;       // ½¨´´¼ÆÊıÆ÷Ê±²åÈëÁĞ±í±£»¤Ëø
+        vector<Counter *> m_list;  // è®¡æ•°å™¨åˆ—è¡¨ï¼ˆè®°å½•æ‰€æœ‰å·²åˆ†é…å¯¹è±¡ï¼‰
+        Lock m_lock;       // å»ºåˆ›è®¡æ•°å™¨æ—¶æ’å…¥åˆ—è¡¨ä¿æŠ¤é”
     };
 
 public:
-    // count: Ö¸¶¨³õÊ¼¼ÆÊıÖµ
+    // count: æŒ‡å®šåˆå§‹è®¡æ•°å€¼
     Counter(const string &name="", const string &type="", unsigned int count=0);
 
-    // Àà³õÊ¼»¯
+    // ç±»åˆå§‹åŒ–
     static int init();
 
-    // Ôö¼Ó¼ÆÊı
+    // å¢åŠ è®¡æ•°
     void Inc();
 
-    // È¡¼ÆÊıÆ÷Öµ
+    // å–è®¡æ•°å™¨å€¼
     unsigned int GetCount() const ;
 
-    // È¡¼ÆÊıÆ÷Ãû³Æ
+    // å–è®¡æ•°å™¨åç§°
     const string GetName() const ;
 
-    // È¡ÀàĞÍ
+    // å–ç±»å‹
     const string GetType() const;
 
-    // ¸´Î»¼ÆÊıÆ÷£¨ÇåÁã£©
+    // å¤ä½è®¡æ•°å™¨ï¼ˆæ¸…é›¶ï¼‰
     void Reset();
 
 
-    // µ¥Ä£Ê½ÖĞÓÃµÄÈ¡ÊµÀı½Ó¿Ú
+    // å•æ¨¡å¼ä¸­ç”¨çš„å–å®ä¾‹æ¥å£
     inline static Record *instance(Record *counter=NULL)
     {
         static Record *obj = (Record *)(Environment::instance()->ClassInit("Counter::Record", counter));
@@ -88,10 +88,10 @@ public:
 
 
 private:
-    unsigned int m_count;           // ¼ÆÊıÆ÷Öµ
-    const string m_name;            // ¼ÆÊıÆ÷Ãû
-    const string m_type;            // ÀàĞÍ£¨·ÖÀà£©
-    Lock m_lock;                    // ¶ÁĞ´Ëø£¨¶à¶Á¶ÀĞ´£©
+    unsigned int m_count;           // è®¡æ•°å™¨å€¼
+    const string m_name;            // è®¡æ•°å™¨å
+    const string m_type;            // ç±»å‹ï¼ˆåˆ†ç±»ï¼‰
+    Lock m_lock;                    // è¯»å†™é”ï¼ˆå¤šè¯»ç‹¬å†™ï¼‰
 };
 
 

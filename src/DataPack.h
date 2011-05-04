@@ -9,62 +9,62 @@ namespace DATAPACK_SPACE
 
 
 
-// Êý¾Ý´ò°ü£¨ÓÃ»§Êý¾Ý¡¢¸½¼þµÈ£¬×Ô¶¨Òå½á¹¹£©
+// æ•°æ®æ‰“åŒ…ï¼ˆç”¨æˆ·æ•°æ®ã€é™„ä»¶ç­‰ï¼Œè‡ªå®šä¹‰ç»“æž„ï¼‰
 class DataPack
 {
-    // Ð£ÑéÊý
+    // æ ¡éªŒæ•°
     static const unsigned int MAGIC = 0xCC57EE9D;
-    // µ±Ç°°æ±¾ºÅ£¨°üÄÚ¼ÇÂ¼°æºÅ£¬¾ö¶¨Ê¹ÓÃÄÄ¸ö°æ±¾´¦Àí´úÂë£©
+    // å½“å‰ç‰ˆæœ¬å·ï¼ˆåŒ…å†…è®°å½•ç‰ˆå·ï¼Œå†³å®šä½¿ç”¨å“ªä¸ªç‰ˆæœ¬å¤„ç†ä»£ç ï¼‰
     static const string CURRENT_VERSION; // = "20100519100025";
 
-    // °üÄÚ£¨¸÷¸öÎÄ¼þ£©µÄÀàÐÍ
+    // åŒ…å†…ï¼ˆå„ä¸ªæ–‡ä»¶ï¼‰çš„ç±»åž‹
     typedef enum{
-        FT_DATA,            // Êý¾ÝÎÄ¼þ
-        FT_ATTACH,          // ¸½¼þÎÄ¼þ
-        FT_MENU_CFG,        // ¸÷£¨ÏÂÀ­£©²Ëµ¥Êý¾Ý
-        FT_PAGE_CFG,        // ¸÷Ò³Ãæ£¨ÅäÖÃ£©Êý¾Ý
+        FT_DATA,            // æ•°æ®æ–‡ä»¶
+        FT_ATTACH,          // é™„ä»¶æ–‡ä»¶
+        FT_MENU_CFG,        // å„ï¼ˆä¸‹æ‹‰ï¼‰èœå•æ•°æ®
+        FT_PAGE_CFG,        // å„é¡µé¢ï¼ˆé…ç½®ï¼‰æ•°æ®
     } FileType;
 
-    // µ±Ç°²Ù×÷µÄÀàÐÍ
+    // å½“å‰æ“ä½œçš„ç±»åž‹
     typedef enum{
-        OPR_UNKNOWN,        // Î´È·¶¨²Ù×÷£¨³ö´í£©
-        OPR_MAKEPACK,       // ´ò°ü
-        OPR_UNPACK,         // ½â°ü
-        OPR_FINISH,         // ´ò°ü£¨»ò½â°ü£©²Ù×÷Íê³É
+        OPR_UNKNOWN,        // æœªç¡®å®šæ“ä½œï¼ˆå‡ºé”™ï¼‰
+        OPR_MAKEPACK,       // æ‰“åŒ…
+        OPR_UNPACK,         // è§£åŒ…
+        OPR_FINISH,         // æ‰“åŒ…ï¼ˆæˆ–è§£åŒ…ï¼‰æ“ä½œå®Œæˆ
     } OprType;
 
-    // °üÀïÃ¿¸öÎÄ¼þµÄÍ·²¿
+    // åŒ…é‡Œæ¯ä¸ªæ–‡ä»¶çš„å¤´éƒ¨
     struct Head
     {
-        int type;               // Êý¾ÝÀàÐÍ£¨Êý¾ÝÎÄ¼þ¡¢¸½¼þµÈ£©£¨¼ûÉÏ±ßFileType¶¨Òå£©
-        char basename[256];     // ÎÄ¼þÃû
-        unsigned int filesize;  // Êý¾Ý²¿·Ö³¤¶È£¨×Ö½ÚÊý£©
-        long mtime;             // ×îºóÐÞ¸ÄÊ±¼ä
-        char reserve[16];       // ±£Áô£¨¿ÉÄÜÒÔºóÓÃÓÚ´æ·ÅÎÄ¼þÊôÐÔµÈ£©
+        int type;               // æ•°æ®ç±»åž‹ï¼ˆæ•°æ®æ–‡ä»¶ã€é™„ä»¶ç­‰ï¼‰ï¼ˆè§ä¸Šè¾¹FileTypeå®šä¹‰ï¼‰
+        char basename[256];     // æ–‡ä»¶å
+        unsigned int filesize;  // æ•°æ®éƒ¨åˆ†é•¿åº¦ï¼ˆå­—èŠ‚æ•°ï¼‰
+        long mtime;             // æœ€åŽä¿®æ”¹æ—¶é—´
+        char reserve[16];       // ä¿ç•™ï¼ˆå¯èƒ½ä»¥åŽç”¨äºŽå­˜æ”¾æ–‡ä»¶å±žæ€§ç­‰ï¼‰
         unsigned int magic;
 
         Head()
         {
-            memset(this, 0, sizeof(*this)); // ¸÷×Ö¶ÎÇåÁã
-            magic = MAGIC;      // ÉèÖÃÐ£ÑéÖµ
+            memset(this, 0, sizeof(*this)); // å„å­—æ®µæ¸…é›¶
+            magic = MAGIC;      // è®¾ç½®æ ¡éªŒå€¼
         }
-        // Í·²¿ÓÐÐ§·µ»Øtrue£¨½â°üÊ±ÓÃ£©
+        // å¤´éƒ¨æœ‰æ•ˆè¿”å›žtrueï¼ˆè§£åŒ…æ—¶ç”¨ï¼‰
         bool isValid()
         {
             return MAGIC == magic;
         }
     };
 
-    // °æ±¾ÐÅÏ¢
+    // ç‰ˆæœ¬ä¿¡æ¯
     struct Version
     {
         char key[32];
         Version()
         {
-            // ÒÔµ±Ç°Ê±¼ä´®Îª°æ±¾±ê¼Ç
+            // ä»¥å½“å‰æ—¶é—´ä¸²ä¸ºç‰ˆæœ¬æ ‡è®°
             strcpy(key, CURRENT_VERSION.c_str());
         }
-        // °æ±¾Æ¥Åä·µ»Øtrue
+        // ç‰ˆæœ¬åŒ¹é…è¿”å›žtrue
         bool isValid()
         {
             return CURRENT_VERSION == key;
@@ -72,12 +72,12 @@ class DataPack
     };
 
 public:
-    // ´ò°üÊôÐÔ
+    // æ‰“åŒ…å±žæ€§
     typedef enum
     {
-        A_EXCLUDE_ATTACH,   // ÅÅ³ý¸½¼þ£¨Òò¸½¼þ½Ï´ó£¬ÓÐÊ±²»Ðè´ò°ü£©
+        A_EXCLUDE_ATTACH,   // æŽ’é™¤é™„ä»¶ï¼ˆå› é™„ä»¶è¾ƒå¤§ï¼Œæœ‰æ—¶ä¸éœ€æ‰“åŒ…ï¼‰
         //
-        // ÐÂ¼ÓÊôÐÔµÄÕâÀï¼Ó
+        // æ–°åŠ å±žæ€§çš„è¿™é‡ŒåŠ 
         //
         A_MAX
     } Attrib;
@@ -88,57 +88,57 @@ public:
     ~DataPack();
 
     /*
-     * ========== ´ò°ü´¦Àí ==========
+     * ========== æ‰“åŒ…å¤„ç† ==========
      */
-    // ÉèÖÃ´ò°üÐÅÏ¢
+    // è®¾ç½®æ‰“åŒ…ä¿¡æ¯
     int MakePack();
 
-    // ¼ÓÈëÐèÒª´ò°üµÄÓÃ»§Êý¾Ý£¨¼°¸½¼þ£©
+    // åŠ å…¥éœ€è¦æ‰“åŒ…çš„ç”¨æˆ·æ•°æ®ï¼ˆåŠé™„ä»¶ï¼‰
     int Add(const Ini &pack);
 
-    // ´ò°üËùÓÐÓÃ»§Êý¾Ý
+    // æ‰“åŒ…æ‰€æœ‰ç”¨æˆ·æ•°æ®
     int AddAll();
 
-    // ´ò°üÆäËüÏî£º²Ëµ¥¡¢¸÷Ò³ÃæÅäÖÃµÈ£»
+    // æ‰“åŒ…å…¶å®ƒé¡¹ï¼šèœå•ã€å„é¡µé¢é…ç½®ç­‰ï¼›
     int OtherPack();
 
-    // ½áÊø´ò°ü£¬²¢·µ»Ø°üÎÄ¼þÃû£»
+    // ç»“æŸæ‰“åŒ…ï¼Œå¹¶è¿”å›žåŒ…æ–‡ä»¶åï¼›
     const string PackFinish();
 
-    // ÉèÖÃ£¨»òÇå³ý£©´ò°üÊôÐÔ
+    // è®¾ç½®ï¼ˆæˆ–æ¸…é™¤ï¼‰æ‰“åŒ…å±žæ€§
     void SetAttrib(Attrib type, bool valid=true);
 
     /*
-     * ========== ½â°ü´¦Àí ==========
+     * ========== è§£åŒ…å¤„ç† ==========
      */
-    // ÉèÖÃ½â°üÐÅÏ¢£¨pack: ´ý½âµÄ°üÎÄ¼þÃû£©
+    // è®¾ç½®è§£åŒ…ä¿¡æ¯ï¼ˆpack: å¾…è§£çš„åŒ…æ–‡ä»¶åï¼‰
     int UnPack(const string &pack);
 
     /*
-     * ========== ÆäËü²Ù×÷ ==========
+     * ========== å…¶å®ƒæ“ä½œ ==========
      */
-    // È¡´¦Àí½á¹û
+    // å–å¤„ç†ç»“æžœ
     const string GetResult(const string &field) const;
 
 private:
-    // ´ò°üÒ»¸öÎÄ¼þ£¨°ÑfilenameÎÄ¼þ¼ÓÈë°üÖÐ£©
+    // æ‰“åŒ…ä¸€ä¸ªæ–‡ä»¶ï¼ˆæŠŠfilenameæ–‡ä»¶åŠ å…¥åŒ…ä¸­ï¼‰
     int FilePack(const string &filelname, FileType type);
 
-    // ÎÄ¼þ½â°ü£»
+    // æ–‡ä»¶è§£åŒ…ï¼›
     int FileUnPack();
 
-    // ÇåÀí
+    // æ¸…ç†
     void Clear();
 
 
 private:
-    FileObj m_pack;          // ´ò°üÎÄ¼þ
-    FileObj m_ini;           // ÁÙÊ±ÓÃ»§Êý¾ÝÎÄ¼þ
-    UserData m_UserData;     // µ±Ç°²Ù×÷µÄÓÃ»§Êý¾Ý
-    const string m_username; // µ±Ç°²Ù×÷µÄÓÃ»§Ãû
-    OprType m_opr;           // µ±Ç°¶ÔÏóÖ´ÐÐµÄ²Ù×÷£º1:´ò°ü 2:½â°ü
-    bool m_attribs[A_MAX];   // ´ò°üÊôÐÔ±êÖ¾×é
-    Conf m_result;           // ¼ÇÂ¼²Ù×÷½á¹û
+    FileObj m_pack;          // æ‰“åŒ…æ–‡ä»¶
+    FileObj m_ini;           // ä¸´æ—¶ç”¨æˆ·æ•°æ®æ–‡ä»¶
+    UserData m_UserData;     // å½“å‰æ“ä½œçš„ç”¨æˆ·æ•°æ®
+    const string m_username; // å½“å‰æ“ä½œçš„ç”¨æˆ·å
+    OprType m_opr;           // å½“å‰å¯¹è±¡æ‰§è¡Œçš„æ“ä½œï¼š1:æ‰“åŒ… 2:è§£åŒ…
+    bool m_attribs[A_MAX];   // æ‰“åŒ…å±žæ€§æ ‡å¿—ç»„
+    Conf m_result;           // è®°å½•æ“ä½œç»“æžœ
 };
 
 

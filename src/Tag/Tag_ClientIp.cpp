@@ -7,7 +7,7 @@ namespace TAG_CLIENTIP_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "ClientIp";
 
 
@@ -16,17 +16,17 @@ static const string THIS_MODULE = "ClientIp";
 
 Tag_ClientIp::Tag_ClientIp()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_ClientIp::Tag_ClientIp(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_ClientIp::~Tag_ClientIp()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -34,15 +34,15 @@ Tag_ClientIp::~Tag_ClientIp()
 
 int Tag_ClientIp::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_ClientIp::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_ClientIp;
 }
 
@@ -53,19 +53,19 @@ Tag *Tag_ClientIp::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±ê¼Ç¶ÔÏóµÄÄÚÈİ
+// å–æ ‡è®°å¯¹è±¡çš„å†…å®¹
 string Tag_ClientIp::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     Connect * const connect = page->GetRequest()->GetConnect();
-    return connect->GetPeerAddr(); // È¡³ö¿Í»§¶ËÁ¬½Óip
+    return connect->GetPeerAddr(); // å–å‡ºå®¢æˆ·ç«¯è¿æ¥ip
 }
 
 
@@ -84,7 +84,7 @@ string Tag_ClientIp::Get(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_ClientIp tmp(TAG_GLOBAL, THIS_MODULE);
 
 }// end of TAG_CLIENTIP_SPACE

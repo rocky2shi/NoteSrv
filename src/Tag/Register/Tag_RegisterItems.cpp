@@ -7,7 +7,7 @@ namespace TAG_REGISTERITEMS_SPACE
 {
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 //static const string THIS_MODULE = "BrowseFilterItems";
 
 
@@ -15,17 +15,17 @@ namespace TAG_REGISTERITEMS_SPACE
 
 Tag_RegisterItems::Tag_RegisterItems()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_RegisterItems::Tag_RegisterItems(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_RegisterItems::~Tag_RegisterItems()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -33,15 +33,15 @@ Tag_RegisterItems::~Tag_RegisterItems()
 
 int Tag_RegisterItems::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_RegisterItems::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_RegisterItems;
 }
 
@@ -52,31 +52,31 @@ Tag *Tag_RegisterItems::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±êÌâ [2010-05]
+// å–æ ‡é¢˜ [2010-05]
 string Tag_RegisterItems::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     const Request *request = page->GetRequest();
     const string &username = request->GetField("username");
 
-    // ÓÃ»§Ãû
+    // ç”¨æˆ·å
     if("username" == m_id)
     {
         return username;
     }
-    // ÕÒ»ØÃÜÂë Step1£ºÊäÈëÓÃ»§Ãû
+    // æ‰¾å›å¯†ç  Step1ï¼šè¾“å…¥ç”¨æˆ·å
     else if("stet1_display" == m_id)
     {
         return "" == request->GetField("next_step") ? "" : "none";
     }
-    // ÕÒ»ØÃÜÂë Step2£ºÕÒ»ØÃÜÂë
+    // æ‰¾å›å¯†ç  Step2ï¼šæ‰¾å›å¯†ç 
     else if("stet2_display" == m_id)
     {
         return "" == request->GetField("next_step") ? "none" : "";
@@ -89,7 +89,7 @@ string Tag_RegisterItems::Get(Page *page)
             return user->GetInfo(m_id);
         }
     }
-    // ÉèÖÃ±êÇ©Ò³ÏÔÊ¾
+    // è®¾ç½®æ ‡ç­¾é¡µæ˜¾ç¤º
     else if("tag_register" == m_id)
     {
         if("register" == request->GetField("tag")
@@ -142,7 +142,7 @@ string Tag_RegisterItems::Get(Page *page)
 
 
 
-// ´¦Àí¶à¸öÏî
+// å¤„ç†å¤šä¸ªé¡¹
 static Tag_RegisterItems tmp1("register", "stet1_display");
 static Tag_RegisterItems tmp2("register", "stet2_display");
 static Tag_RegisterItems tmp3("register", "question");

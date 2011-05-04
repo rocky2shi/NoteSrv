@@ -13,7 +13,7 @@ namespace TAG_IMAGELIST_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "ImageList";
 
 
@@ -22,17 +22,17 @@ static const string THIS_MODULE = "ImageList";
 
 Tag_ImageList::Tag_ImageList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_ImageList::Tag_ImageList(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_ImageList::~Tag_ImageList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -40,15 +40,15 @@ Tag_ImageList::~Tag_ImageList()
 
 int Tag_ImageList::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_ImageList::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_ImageList;
 }
 
@@ -59,25 +59,25 @@ Tag *Tag_ImageList::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡ÁĞ±í [2010-05]
+// å–åˆ—è¡¨ [2010-05]
 string Tag_ImageList::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    // È¡µ±Ç°ÓÃ»§
+    // å–å½“å‰ç”¨æˆ·
     const string &username = page->GetRequest()->GetCurrentUser();
     User *user = User::Get(username);
-    // µ±Ç°Êı¾İÌõÄ¿
+    // å½“å‰æ•°æ®æ¡ç›®
     const string &key = page->GetCurrentKey();
-    // Í¼Æ¬´æÓÚ¸½¼şÄ¿Â¼
+    // å›¾ç‰‡å­˜äºé™„ä»¶ç›®å½•
     const string &path = user->AttachDir();
-    // ´ò¿ªÄ¿Â¼£¬È¡ÎÄ¼şÁĞ±í£»
+    // æ‰“å¼€ç›®å½•ï¼Œå–æ–‡ä»¶åˆ—è¡¨ï¼›
     GetFileList image( path );
     GetFileList::file_iterator it( image );
     string html = "";
@@ -87,21 +87,21 @@ string Tag_ImageList::Get(Page *page)
     {
         const char *basename = GetBaseName( it.name() );
 
-        // Ìø¹ı²»ÊôÓÚ±¾ÌõÄ¿µÄÎÄ¼ş
+        // è·³è¿‡ä¸å±äºæœ¬æ¡ç›®çš„æ–‡ä»¶
         if(strncmp(key.c_str(), basename, key.length()) != 0)
         {
             //LOG_DEBUG("Ignore: key=[%s], basename=[%s]", key.c_str(), basename);
             continue;
         }
 
-        // Ìø¹ıÇ°×º(key + '.')
+        // è·³è¿‡å‰ç¼€(key + '.')
         basename += key.length() + 1;
 
-        // ÎÄ¼şÃû×ªÎªurl±àÂë
-        const string sFileOrg = FilenameDecode(basename);  // ÎÄ¼şÃû£¬½âÂëÎª¿ÉÏÔÊ¾ĞÎÊ½£»
-        const string sFileUrl = UrlCode(basename);         // ÎÄ¼şÃû£¬url¸ñÊ½£»
+        // æ–‡ä»¶åè½¬ä¸ºurlç¼–ç 
+        const string sFileOrg = FilenameDecode(basename);  // æ–‡ä»¶åï¼Œè§£ç ä¸ºå¯æ˜¾ç¤ºå½¢å¼ï¼›
+        const string sFileUrl = UrlCode(basename);         // æ–‡ä»¶åï¼Œurlæ ¼å¼ï¼›
 
-        // Ìø¹ı·ÇÍ¼Æ¬ÎÄ¼ş
+        // è·³è¿‡éå›¾ç‰‡æ–‡ä»¶
         const char *type = GetFileType( sFileOrg.c_str() );
         if( ! isImage(type) )
         {
@@ -122,14 +122,14 @@ string Tag_ImageList::Get(Page *page)
     if(0 == nImageCount)
     {
         html =  ""
-                "<h1>ÎŞ±¸Ñ¡Í¼Æ¬</h1><br>"
-                "£¨¿ÉÏÈÔÚ±à¼­Ò³ÃæÀïÉÏ´«Í¼Æ¬ºó£¬ÔÙË¢ĞÂ±¾Ò³Ãæ£»£©"
+                "<h1>æ— å¤‡é€‰å›¾ç‰‡</h1><br>"
+                "ï¼ˆå¯å…ˆåœ¨ç¼–è¾‘é¡µé¢é‡Œä¸Šä¼ å›¾ç‰‡åï¼Œå†åˆ·æ–°æœ¬é¡µé¢ï¼›ï¼‰"
                 "\n";
     }
 
     LOG_DEBUG("nImageCount=[%d]", nImageCount);
 
-    // ÉèÖÃÊÇ·ñÏÔ±êÖ¾
+    // è®¾ç½®æ˜¯å¦æ˜¾æ ‡å¿—
     page->SetResult("ImageListCount", IntToString(nImageCount));
 
     return html;
@@ -151,7 +151,7 @@ string Tag_ImageList::Get(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_ImageList tmp("ImageList", THIS_MODULE);
 
 }// end of TAG_IMAGELIST_SPACE

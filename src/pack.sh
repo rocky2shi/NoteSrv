@@ -1,12 +1,12 @@
 #!/bin/bash
 # Rocky 2010-06-03 10:42:56
 #
-#   打包程序文件
+#   鎵撳寘绋嬪簭鏂囦欢
 #
 
 
 
-# 打包临时目录
+# 鎵撳寘涓存椂鐩綍
 PACK_DIR="tmp.pack.$RANDOM"
 
 mkdir $PACK_DIR || exit

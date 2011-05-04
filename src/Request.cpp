@@ -19,11 +19,11 @@ Request::Request(Connect *connect) : m_connect(connect)
 
 Request::~Request()
 {
-    // ÊÍ·ÅÎÄ¼ş¶ÔÏó£¨²¢É¾³ı¶ÔÓ¦ÎÄ¼ş£©
+    // é‡Šæ”¾æ–‡ä»¶å¯¹è±¡ï¼ˆå¹¶åˆ é™¤å¯¹åº”æ–‡ä»¶ï¼‰
     map<string, FileObj*>::iterator it;
     for(it = m_FileObjAry.begin(); m_FileObjAry.end() != it; it++)
     {
-        // ×¢Òâ£¬m_FieldAryÀïÒ²¼ÇÂ¼ÎÄ¼şÃû£¬µ«²»°üº¬Â·¾¶£¬ËùÒÔ²»ÄÜÓÃ£ºm_FieldAry[it->first]
+        // æ³¨æ„ï¼Œm_FieldAryé‡Œä¹Ÿè®°å½•æ–‡ä»¶åï¼Œä½†ä¸åŒ…å«è·¯å¾„ï¼Œæ‰€ä»¥ä¸èƒ½ç”¨ï¼šm_FieldAry[it->first]
         const string &filename = it->second->Fullname();
         if("" != filename)
         {
@@ -34,112 +34,112 @@ Request::~Request()
     }
 }
 
-// È¡ÇëÇóÍ·ÖĞ×Ö¶Î¶ÔÓ¦Öµ£¨²»Çø·Ö´óĞ¡Ğ´£©
+// å–è¯·æ±‚å¤´ä¸­å­—æ®µå¯¹åº”å€¼ï¼ˆä¸åŒºåˆ†å¤§å°å†™ï¼‰
 const string Request::GetHead(const string &field) const
 {
     return GetMapValue(m_HeadFieldAry, field);
 }
 
-// Ò»°ã×Ö¶Î¶ÔÓ¦Öµ£¨²»Çø·Ö´óĞ¡Ğ´£©
+// ä¸€èˆ¬å­—æ®µå¯¹åº”å€¼ï¼ˆä¸åŒºåˆ†å¤§å°å†™ï¼‰
 const string Request::GetField(const string &field) const
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
     return GetMapValue(m_FieldAry, field);
 }
 
-// È¡×Ö¶Î¶ÔÓ¦ÎÄ¼ş¶ÔÏó
+// å–å­—æ®µå¯¹åº”æ–‡ä»¶å¯¹è±¡
 FileObj *Request::GetFileObj(const string &field)
 {
-    static FileObj s("");   // ±ÜÃâNULLÖ¸Õë¼ì²â
+    static FileObj s("");   // é¿å…NULLæŒ‡é’ˆæ£€æµ‹
     map< string, FileObj* >::iterator it = m_FileObjAry.find(field);
     return m_FileObjAry.end() != it ? it->second : &s;
 }
 
-// ·µ»ØÇëÇóÒ³ÃæÃû
+// è¿”å›è¯·æ±‚é¡µé¢å
 const string Request::GetPageName()
 {
     return m_page;
 }
 
-// È¡Á¬½Ó
+// å–è¿æ¥
 Connect *Request::GetConnect()
 {
     return m_connect;
 }
 
-// È¡µ±Ç°µÇÂ¼ÓÃ»§Ãû
+// å–å½“å‰ç™»å½•ç”¨æˆ·å
 const string Request::GetCurrentUser() const
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
     return Session::Get( this )->GetUser();
 }
 
-// È¡CookieÖĞµÄÖµ
+// å–Cookieä¸­çš„å€¼
 const string Request::GetCookie(const string &key) const
 {
     return GetMapValue(m_Cookie, key);
 }
 
-// ÊÇ·ñÎªÍ¼Æ¬£ºjpg, jpeg, png, gif, ...
+// æ˜¯å¦ä¸ºå›¾ç‰‡ï¼šjpg, jpeg, png, gif, ...
 bool Request::isImage()
 {
     return ::isImage(m_PageType);
 }
 
-// ÊÇ·ñÎªÎÄ±¾ÎÄ¼ş£ºtxt, js, css, html, htm, ...
+// æ˜¯å¦ä¸ºæ–‡æœ¬æ–‡ä»¶ï¼štxt, js, css, html, htm, ...
 bool Request::isText()
 {
     return ::isText(m_PageType);
 }
 
-// ÊÇ·ñÎªcgi´¦ÀíÒ³Ãæ
+// æ˜¯å¦ä¸ºcgiå¤„ç†é¡µé¢
 bool Request::isCgi()
 {
-    // ³ıÁËÎÄ±¾¡¢Í¼Æ¬Íâ£¬¶¼ÈÏÎªÊÇcgi´¦ÀíÒ³
+    // é™¤äº†æ–‡æœ¬ã€å›¾ç‰‡å¤–ï¼Œéƒ½è®¤ä¸ºæ˜¯cgiå¤„ç†é¡µ
     return !isText() && !isImage();
 }
 
-// ½âÎöµÈÊÇ·ñÕıÈ·´¦Àí
+// è§£æç­‰æ˜¯å¦æ­£ç¡®å¤„ç†
 bool Request::ok()
 {
-    // ÎŞ³ö´íÊ±£¬m_ErrMsgÓ¦Îª¿Õ£»
+    // æ— å‡ºé”™æ—¶ï¼Œm_ErrMsgåº”ä¸ºç©ºï¼›
     return "" == m_ErrMsg;
 }
 
-// È¡Ò»ĞĞ
+// å–ä¸€è¡Œ
 int Request::GetLine(char *buf, unsigned int max)
 {
-    //FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    //FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
     int ret = m_connect->GetLine(buf, max - 1);
     return ret <= 0 ? 0 : ret;
 }
 
 /*
- * ¹¦ÄÜ£º½âÎöCookie´®
- * ±àĞ´£ºRocky 2010-04-21 13:42:27
+ * åŠŸèƒ½ï¼šè§£æCookieä¸²
+ * ç¼–å†™ï¼šRocky 2010-04-21 13:42:27
  */
 void Request::ParseCookie()
 {
     /*
      * Cookie:
      *
-     *  ¡°d=xqtp5CMiojlXfhoyFH51JNaarbngn6dS; path=/;¡±
+     *  â€œd=xqtp5CMiojlXfhoyFH51JNaarbngn6dS; path=/;â€
      */
     char buf[512];
-    // Cookie×Ö¶ÎÔÚÍ·²¿ÖĞ
+    // Cookieå­—æ®µåœ¨å¤´éƒ¨ä¸­
     const string &cookie = GetHead("Cookie");
-    // ÒòÎªParseStr()µÄµÚÒ»¸ö²ÎÊı×Ö¶Î±ØĞëÊÇ¿ÉĞ´µÄÄÚ´æ£¬ËùÒÔcopyÒ»·İ£»
+    // å› ä¸ºParseStr()çš„ç¬¬ä¸€ä¸ªå‚æ•°å­—æ®µå¿…é¡»æ˜¯å¯å†™çš„å†…å­˜ï¼Œæ‰€ä»¥copyä¸€ä»½ï¼›
     strncpy(buf, cookie.c_str(), sizeof(buf) - 1);
     ParseStr(buf, m_Cookie, ';', '=');
 }
 
 /*
- * ¹¦ÄÜ£º½âÎöurl²ÎÊı´®
- * ±àĞ´£ºRocky 2010-04-21 13:42:27
+ * åŠŸèƒ½ï¼šè§£æurlå‚æ•°ä¸²
+ * ç¼–å†™ï¼šRocky 2010-04-21 13:42:27
  */
 void Request::ParseUrlParam(char *param)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     char *begin;
     char *end;
@@ -147,7 +147,7 @@ void Request::ParseUrlParam(char *param)
     char *value;
 
     /*
-     * ´¦Àí¼¸ÖÖÇé¿ö£º
+     * å¤„ç†å‡ ç§æƒ…å†µï¼š
      *
      * 1 => [window.screen.width=1024&window.screen.height=&username=abcdefghijklmnopqrstuvwxyz&login=GET\0]
      * 2 => [user\0]
@@ -157,12 +157,12 @@ void Request::ParseUrlParam(char *param)
     ParseStr(param, m_FieldAry, '&', '=');
 }
 
-// ´¦ÀíÇëÇóÍ·²¿
+// å¤„ç†è¯·æ±‚å¤´éƒ¨
 void Request::ParseHead()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
-    static char EMPYT[2]; // ·ÀÖ¹³ö´íÓÃ
+    static char EMPYT[2]; // é˜²æ­¢å‡ºé”™ç”¨
     char buf[BUF_MAX_LEN + 1] = "";
     char *begin;
     char *end;
@@ -170,7 +170,7 @@ void Request::ParseHead()
     int ret;
 
 
-    /* Ñ­»·´¦ÀíhttpÍ·²¿¸÷×Ö¶Î£¬Èç
+    /* å¾ªç¯å¤„ç†httpå¤´éƒ¨å„å­—æ®µï¼Œå¦‚
      *      Host: 192.168.0.230:17890\n\
      *      Accept: application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png;q=0.5\n\
      *      Accept-Encoding: gzip,deflate,sdch\n\
@@ -180,10 +180,10 @@ void Request::ParseHead()
         char *name = EMPYT;
         char *value = EMPYT;
 
-        // Ö¸¶¨¿Õ´®£¬ÒÔ·ÀĞ´ÁË²»¿ÉĞ´µÄÎ»ÖÃ£»
+        // æŒ‡å®šç©ºä¸²ï¼Œä»¥é˜²å†™äº†ä¸å¯å†™çš„ä½ç½®ï¼›
         begin = end = tmp = EMPYT;
 
-        // È¡Ò»ĞĞ£¬ÔÙ·ÖÎöÕâĞĞ£»
+        // å–ä¸€è¡Œï¼Œå†åˆ†æè¿™è¡Œï¼›
         ret = GetLine(buf, BUF_MAX_LEN);
         if( ret <= 0 || IS_CR(*buf))
         {
@@ -193,7 +193,7 @@ void Request::ParseHead()
 
         begin = buf;
 
-        // È¡¼üÃû
+        // å–é”®å
         name = begin;
         end = strchr(begin, ':');
         if(NULL == end)
@@ -206,7 +206,7 @@ void Request::ParseHead()
         name = begin;
         //LOG_DEBUG("[%s]", name);
 
-        // È¡¼üÖµ
+        // å–é”®å€¼
         begin = end + 1;
         IGNORE_BLANK(begin);
         value = begin;
@@ -217,34 +217,34 @@ void Request::ParseHead()
 
         if( strcasecmp("Content-Type", name) == 0 )
         {
-            // ÊÇContent-Type£¬ÔÙÈ¡³öboundary£»
+            // æ˜¯Content-Typeï¼Œå†å–å‡ºboundaryï¼›
             char BOUNDARY_KEY[] = "boundary=";
             char *pBoundary = strstr(value, BOUNDARY_KEY);
             if(NULL != pBoundary)
             {
                 pBoundary += (sizeof(BOUNDARY_KEY) - 1);
                 m_boundary = pBoundary;
-                m_boundary = "--" + m_boundary; // httpĞ­ÒéÄÚ£¬boundary×Ö¶ÎÇ°¼Ó¡®--¡¯
+                m_boundary = "--" + m_boundary; // httpåè®®å†…ï¼Œboundaryå­—æ®µå‰åŠ â€˜--â€™
             }
             LOG_DEBUG("boundary=[%s]", m_boundary.c_str());
         }
-        //toLower(name); // ÊÇ·ñĞè×ªĞ¡Ğ´£¿[XXX]
+        //toLower(name); // æ˜¯å¦éœ€è½¬å°å†™ï¼Ÿ[XXX]
         m_HeadFieldAry[name] = value;
         //LOG_DEBUG("[%s]=[%s]", name, value);
     }// end of while(1)...
 }// end of void Request::ParseHead()...
 
-// ´¦ÀíGETµÄÇé¿ö
+// å¤„ç†GETçš„æƒ…å†µ
 void Request::ParseGet(char *str)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
     ParseUrlParam(str);
 }
 
-// ´¦ÀíPOSTµÄÇé¿ö
+// å¤„ç†POSTçš„æƒ…å†µ
 void Request::ParsePost()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     const unsigned long len = atol( m_HeadFieldAry["Content-Length"].c_str() );
     LOG_DEBUG("len=[%ld]", len);
@@ -257,24 +257,24 @@ void Request::ParsePost()
     char *buf = new char[len + 1];
     if(NULL == buf)
     {
-        LOG_ERROR("È¡´æ·ÅpostÊı¾İÄÚ´æ³ö´í£¬len=[%ld]", len);
+        LOG_ERROR("å–å­˜æ”¾postæ•°æ®å†…å­˜å‡ºé”™ï¼Œlen=[%ld]", len);
         return;
     }
     const int ret = m_connect->GetLine(buf, len);
     buf[ret] = '\0';
-    if(ret == len) // È¡µÄÊı¾İÍêÕûÊ±²Å×ö½âÎö
+    if(ret == len) // å–çš„æ•°æ®å®Œæ•´æ—¶æ‰åšè§£æ
     {
         ParseUrlParam(buf);
     }
     delete [] buf;
 }
 
-// ´¦Àí¸½¼şµÄÇé¿ö
+// å¤„ç†é™„ä»¶çš„æƒ…å†µ
 void Request::ParseAttach()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
-    static char EMPYT[2]; // ·ÀÖ¹³ö´íÓÃ
+    static char EMPYT[2]; // é˜²æ­¢å‡ºé”™ç”¨
     char buf[BUF_MAX_LEN + 1] = "";
     char *begin;
     char *end;
@@ -282,14 +282,14 @@ void Request::ParseAttach()
     int ret;
 
 
-    /* ·ÖÎöÒ³ÃæÄÚÈİ£¬Êı¾İÈç£º
+    /* åˆ†æé¡µé¢å†…å®¹ï¼Œæ•°æ®å¦‚ï¼š
      *
      *      ------WebKitFormBoundaryiGleMlTLa04QAWIX
      *      Content-Disposition: form-data; name="key"
      *
      *      20100419194646
      *      ------WebKitFormBoundaryiGleMlTLa04QAWIX
-     *      Content-Disposition: form-data; name="attach"; filename="12347890[ÖĞ¹úÈË].txt"
+     *      Content-Disposition: form-data; name="attach"; filename="12347890[ä¸­å›½äºº].txt"
      *      Content-Type: text/plain
      *
      *      abcdefg
@@ -298,72 +298,72 @@ void Request::ParseAttach()
      *      ------WebKitFormBoundaryiGleMlTLa04QAWIX
      *      Content-Disposition: form-data; name="upfile"
      *
-     *      ÉÏ´«
+     *      ä¸Šä¼ 
      *      ------WebKitFormBoundaryiGleMlTLa04QAWIX--
      *
      */
 
-    // Ìø¹ıboundary
+    // è·³è¿‡boundary
     ret = GetLine(buf, BUF_MAX_LEN);
     CUT_CR(buf, ret);
 
-    // ÄÚ¿ÕµÄµÚÒ»ĞĞÓ¦ÊÇboundary£¬·ñÔò³ö´í£»
+    // å†…ç©ºçš„ç¬¬ä¸€è¡Œåº”æ˜¯boundaryï¼Œå¦åˆ™å‡ºé”™ï¼›
     if(m_boundary != buf)
     {
-        LOG_ERROR("Êı¾İ¸ñÊ½³ö´í£¬[%s]", buf);
+        LOG_ERROR("æ•°æ®æ ¼å¼å‡ºé”™ï¼Œ[%s]", buf);
         return;
     }
 
-    const string BOUNDARY_END = m_boundary + "--"; // ½áÊø±êÖ¾Îª¡®boundary + "--"¡¯
+    const string BOUNDARY_END = m_boundary + "--"; // ç»“æŸæ ‡å¿—ä¸ºâ€˜boundary + "--"â€™
 
     while(1)
     {
-        // Ö¸¶¨¿Õ´®£¬ÒÔ·ÀĞ´ÁË²»¿ÉĞ´µÄÎ»ÖÃ£»
+        // æŒ‡å®šç©ºä¸²ï¼Œä»¥é˜²å†™äº†ä¸å¯å†™çš„ä½ç½®ï¼›
         begin = end = tmp = EMPYT;
 
-        // È¡Ò»ĞĞ£¬ÔÙ·ÖÎöÕâĞĞ£»
+        // å–ä¸€è¡Œï¼Œå†åˆ†æè¿™è¡Œï¼›
         ret = GetLine(buf, BUF_MAX_LEN);
         if( (ret <= 0) || (strncmp(buf, BOUNDARY_END.c_str(), BOUNDARY_END.length()) == 0) )
         {
-            LOG_DEBUG("Êı¾İÌå·ÖÎö½áÊø");
+            LOG_DEBUG("æ•°æ®ä½“åˆ†æç»“æŸ");
             break;
         }
 
 
-        /* È¡¿Ø¼şÃû³Æ
-         *  Content-Disposition: form-data; name="attach"; filename="12347890[ÖĞ¹úÈË].txt"
+        /* å–æ§ä»¶åç§°
+         *  Content-Disposition: form-data; name="attach"; filename="12347890[ä¸­å›½äºº].txt"
          *  Content-Disposition: form-data; name="username"
          */
 
         CUT_CR(buf, ret);
 
 
-        // È¡ÎÄ¼şÃû×Ö¶Îfilename£¨µ±²»ÊÇÎÄ¼şÉÏ´«Ê±£¬Ã»ÓĞfilename×Ö¶Î£©£¨¿ÉÑ¡Ïî£©
+        // å–æ–‡ä»¶åå­—æ®µfilenameï¼ˆå½“ä¸æ˜¯æ–‡ä»¶ä¸Šä¼ æ—¶ï¼Œæ²¡æœ‰filenameå­—æ®µï¼‰ï¼ˆå¯é€‰é¡¹ï¼‰
         const char NAMEFILE_KEY[] = "filename=";
-        string filename; // ¸½¼şÎÄ¼şÃû
+        string filename; // é™„ä»¶æ–‡ä»¶å
         begin = strstr(buf, NAMEFILE_KEY);
         if(NULL != begin)
         {
-            begin = begin + (sizeof(NAMEFILE_KEY) - 1); // Ìø¹ıNAMEFILE_KEY±ê¼Ç×Ö¶Î
+            begin = begin + (sizeof(NAMEFILE_KEY) - 1); // è·³è¿‡NAMEFILE_KEYæ ‡è®°å­—æ®µ
             end = begin;
             JUMP_TO_LINE_END(end);
             *end = '\0';
-            /* ½âÂëºó´æÈë
-             * ×¢Òâ£¬ÔÚieÖĞ£¬ÉÏ´«À´µÄÎÄ¼ş×Ö¶Îfilename="xxx"ÖĞµÄxxx°üº¬ÁË¿Í»§¶Ë
-             * ÎÄ¼şÂ·¾¶£¬ÒªÈ¥µô£¬Ö»ÁôÎÄ¼şÃû£»
+            /* è§£ç åå­˜å…¥
+             * æ³¨æ„ï¼Œåœ¨ieä¸­ï¼Œä¸Šä¼ æ¥çš„æ–‡ä»¶å­—æ®µfilename="xxx"ä¸­çš„xxxåŒ…å«äº†å®¢æˆ·ç«¯
+             * æ–‡ä»¶è·¯å¾„ï¼Œè¦å»æ‰ï¼Œåªç•™æ–‡ä»¶åï¼›
              */
             filename = GetBaseName( UrlDecode( CUT_QUOTE(begin) ) );
             LOG_DEBUG("filename=[%s]", filename.c_str());
         }
 
-        // È¡¿Ø¼şÃû³Æ
+        // å–æ§ä»¶åç§°
         const char NAME_KEY[] = "name=";
         string element;
         begin = strstr(buf, NAME_KEY);
         if(NULL == begin)
         {
-            // nameÊÇ±ØÑ¡×Ö¶Î£¬Ã»ÓĞÔò³ö´í£»
-            LOG_ERROR("Êı¾İ¸ñÊ½³ö´í£¬[%s]", buf);
+            // nameæ˜¯å¿…é€‰å­—æ®µï¼Œæ²¡æœ‰åˆ™å‡ºé”™ï¼›
+            LOG_ERROR("æ•°æ®æ ¼å¼å‡ºé”™ï¼Œ[%s]", buf);
             return;
         }
         begin = begin + (sizeof(NAME_KEY) - 1);
@@ -378,55 +378,55 @@ void Request::ParseAttach()
         LOG_DEBUG("element=[%s]", element.c_str());
 
 
-        // ¶¨Î»µ½¿ÕĞĞ£¨Ğ­ÒéÖĞÒÔ¿ÕĞĞ·Ö¸ôÊı¾İÍ·¡¢Êı¾İÌå£©
+        // å®šä½åˆ°ç©ºè¡Œï¼ˆåè®®ä¸­ä»¥ç©ºè¡Œåˆ†éš”æ•°æ®å¤´ã€æ•°æ®ä½“ï¼‰
         while( (GetLine(buf, BUF_MAX_LEN) > 0) && !IS_CR(*buf) );
 
-        /* È¡¿Ø¼ş¶ÔÓ¦µÄÖµ£¨»òÎÄ¼şÄÚÈİ£©£¬µ±filename²»¿ÕÊ±ÎªÎÄ¼ş£»
+        /* å–æ§ä»¶å¯¹åº”çš„å€¼ï¼ˆæˆ–æ–‡ä»¶å†…å®¹ï¼‰ï¼Œå½“filenameä¸ç©ºæ—¶ä¸ºæ–‡ä»¶ï¼›
          */
         char buf2[BUF_MAX_LEN + 1] = "";
         struct {
             char *buf;
             int len;
-        } prev, next, tmp;   // prev¡¢nextÂÖÁ÷Ö¸Ïòbuf¡¢buf2£¬ÒÔ´¦ÀíÏÂĞĞÊÇ·ñÎªboundaryµÄ²âÊÔ
+        } prev, next, tmp;   // prevã€nextè½®æµæŒ‡å‘bufã€buf2ï¼Œä»¥å¤„ç†ä¸‹è¡Œæ˜¯å¦ä¸ºboundaryçš„æµ‹è¯•
 
         prev.buf = buf;
         prev.len = 0;
         next.buf = buf2;
         next.len = 0;
 
-        // È¡µÚÒ»ĞĞ
+        // å–ç¬¬ä¸€è¡Œ
         prev.len = GetLine(prev.buf, BUF_MAX_LEN);
         if( prev.len <= 0 )
         {
-            LOG_ERROR("Êı¾İ¸ñÊ½³ö´í£¬[%s]", prev.buf);
+            LOG_ERROR("æ•°æ®æ ¼å¼å‡ºé”™ï¼Œ[%s]", prev.buf);
             break;
         }
 
 
 
-        /* ÏÂÃæÇø·ÖÁ½ÖÖÇé¿ö£¬¶ÁÈ¡µÄ´úÂëÏàÍ¬£¬µ«Ğ´ÈëµÄ´úÂë²»Í¬£¬ÊÇÎÄ¼şÉÏ´«
-         * µÄ£¬ÔòĞ´ÈëÎÄ¼ş¡£·ñÔòÊÇÒ»°ãÌá½»ÄÚÈİ£¬ÔòÖ»´æµ½±äÁ¿£¨ÄÚ´æ£©ÖĞ£»
+        /* ä¸‹é¢åŒºåˆ†ä¸¤ç§æƒ…å†µï¼Œè¯»å–çš„ä»£ç ç›¸åŒï¼Œä½†å†™å…¥çš„ä»£ç ä¸åŒï¼Œæ˜¯æ–‡ä»¶ä¸Šä¼ 
+         * çš„ï¼Œåˆ™å†™å…¥æ–‡ä»¶ã€‚å¦åˆ™æ˜¯ä¸€èˆ¬æäº¤å†…å®¹ï¼Œåˆ™åªå­˜åˆ°å˜é‡ï¼ˆå†…å­˜ï¼‰ä¸­ï¼›
          */
         if("" != filename)
         {
-            /* ÊÇÎÄ¼ş£¬ÏÈÔİ´æµ½ÓÃ»§ÁÙÊ±Ä¿Â¼
+            /* æ˜¯æ–‡ä»¶ï¼Œå…ˆæš‚å­˜åˆ°ç”¨æˆ·ä¸´æ—¶ç›®å½•
              */
             const string &username = Session::Get(this)->GetUser();
             User *user = User::Get(username);
-            const string &fullpath = user->TmpDir() + "." + GetRandomString(); /* ÕâÀïÁÙÊ±ÃûÖĞ²»°üº¬Ô­
-                                                                                * ÎÄ¼şÃû£¬ÒÔ·À²»Í¬ÏµÍ³
-                                                                                * ÖĞºº×ÖÂÒÂë¡£[XXX]
+            const string &fullpath = user->TmpDir() + "." + GetRandomString(); /* è¿™é‡Œä¸´æ—¶åä¸­ä¸åŒ…å«åŸ
+                                                                                * æ–‡ä»¶åï¼Œä»¥é˜²ä¸åŒç³»ç»Ÿ
+                                                                                * ä¸­æ±‰å­—ä¹±ç ã€‚[XXX]
                                                                                 */
             FileObj file;
 
-            // ÎÄ¼ş×Ö¶Î <==> ÎÄÃû
+            // æ–‡ä»¶å­—æ®µ <==> æ–‡å
             m_FieldAry[element] = filename;
 
             LOG_DEBUG("fullpath=[%s]", fullpath.c_str());
             if( ! file.Open(fullpath, FileObj::W) )
             {
-                LOG_ERROR("²»ÄÜ´ò¿ªÎÄ¼ş£º[%s]", fullpath.c_str());
-                return; // Ö±½Ó·µ»Ø
+                LOG_ERROR("ä¸èƒ½æ‰“å¼€æ–‡ä»¶ï¼š[%s]", fullpath.c_str());
+                return; // ç›´æ¥è¿”å›
             }
 
             while( ((next.len=GetLine(next.buf, BUF_MAX_LEN)) > 0)
@@ -437,29 +437,29 @@ void Request::ParseAttach()
                 file.Write(prev.buf, prev.len);
                 prev.buf[0] = '\0';
 
-                // Ç°ºóÖ¸Ïò½»»»
+                // å‰åæŒ‡å‘äº¤æ¢
                 tmp = prev;
                 prev = next;
                 next = tmp;
             }
-            int n = CUT_CR(prev.buf, prev.len); // ×¢Òâ£¬²»Í¬µÄÏµÍ³£¬¿ÉÄÜ×·¼Ó¡®\r¡¯¡®\r\n¡¯µÈ£»
+            int n = CUT_CR(prev.buf, prev.len); // æ³¨æ„ï¼Œä¸åŒçš„ç³»ç»Ÿï¼Œå¯èƒ½è¿½åŠ â€˜\râ€™â€˜\r\nâ€™ç­‰ï¼›
             // LOG_DEBUG("[%d]", prev.len - n);
             file.Write(prev.buf, prev.len - n);
             file.Close();
 
-            // ¼ÇÈëm_FileObjAry
+            // è®°å…¥m_FileObjAry
             FileObj *obj = new FileObj(fullpath);
             if(NULL == obj)
             {
-                LOG_ERROR("·ÖÅäÎÄ¼ş¶ÔÏóÄÚ´æ³ö´í: [%s]", fullpath.c_str());
+                LOG_ERROR("åˆ†é…æ–‡ä»¶å¯¹è±¡å†…å­˜å‡ºé”™: [%s]", fullpath.c_str());
                 return;
             }
             m_FileObjAry[element] = obj;
-            LOG_DEBUG("¼ÓÈë£º m_FileObjAry[\"%s\"]=[%p]", element.c_str(), obj);
+            LOG_DEBUG("åŠ å…¥ï¼š m_FileObjAry[\"%s\"]=[%p]", element.c_str(), obj);
         }
         else
         {
-            /* ÊÇÒ»°ãµÄÌá½»ÄÚÈİ
+            /* æ˜¯ä¸€èˆ¬çš„æäº¤å†…å®¹
              */
             string &field = m_FieldAry[element]; //
             while( ((next.len=GetLine(next.buf, BUF_MAX_LEN)) > 0) && (strncmp(next.buf, m_boundary.c_str(), m_boundary.length()) != 0) )
@@ -468,7 +468,7 @@ void Request::ParseAttach()
                 field =+ prev.buf;
                 prev.buf[0] = '\0';
 
-                // Ç°ºóÖ¸Ïò½»»»
+                // å‰åæŒ‡å‘äº¤æ¢
                 tmp = prev;
                 prev = next;
                 next = tmp;
@@ -479,7 +479,7 @@ void Request::ParseAttach()
         }
 
 
-        // ÊÇ·ñµ½½áÊø±ê¼Ç
+        // æ˜¯å¦åˆ°ç»“æŸæ ‡è®°
         if( ('\0' == next.buf[0]) || (strncmp(next.buf, m_boundary.c_str(), m_boundary.length()) != 0) )
         {
             break;
@@ -488,7 +488,7 @@ void Request::ParseAttach()
     }// end of while(1)...
 }// end of void Request::ParseAttach()...
 
-// ½âÎöÇëÇó´®
+// è§£æè¯·æ±‚ä¸²
 //
 // GET / HTTP/1.1
 // Host: 192.168.1.100:17890
@@ -501,41 +501,41 @@ void Request::ParseAttach()
 // Accept-Charset: gb18030,utf-8;q=0.7,*;q=0.3
 void Request::Parse()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
-    static char EMPYT[2] = ""; // ·ÀÖ¹³ö´íÓÃ
+    static char EMPYT[2] = ""; // é˜²æ­¢å‡ºé”™ç”¨
     char buf[BUF_MAX_LEN + 1] = "";
     char *begin;
     char *end;
     char *tmp;
-    char *param = NULL; // urlÇëÇóÖĞµÄ²ÎÊı
+    char *param = NULL; // urlè¯·æ±‚ä¸­çš„å‚æ•°
     int ret;
 
 
-    // È¡µÚÒ»ĞĞ
+    // å–ç¬¬ä¸€è¡Œ
     ret = GetLine(buf, BUF_MAX_LEN);
     CUT_CR(buf, ret);
     LOG_DEBUG("buf=[%s]", buf);
 
     /*
-     * ´ÓºóÍù£¬ÏÈÈ¡urlÇëÇóÖĞµÄ²ÎÊı£»¡®?¡¯ºó²¿·Ö¾ÍÊÇ²ÎÊı£º
+     * ä»åå¾€ï¼Œå…ˆå–urlè¯·æ±‚ä¸­çš„å‚æ•°ï¼›â€˜?â€™åéƒ¨åˆ†å°±æ˜¯å‚æ•°ï¼š
      *      GET /login.cgi?window.screen.width=&window.screen.height=&username=abcdef&login=GET HTTP/1.1
      */
     begin = strchr(buf, '?');
     if(NULL != begin)
     {
-        end = strchr(begin, ' '); // Óöµ½¿Õ¸ñÎª½áÊø
+        end = strchr(begin, ' '); // é‡åˆ°ç©ºæ ¼ä¸ºç»“æŸ
         if(NULL != end)
         {
             *end = '\0';
-            *begin = '\0'; // Çåµô¡®?¡¯£¬¶ÏĞĞ£»
+            *begin = '\0'; // æ¸…æ‰â€˜?â€™ï¼Œæ–­è¡Œï¼›
             param = begin + 1;
         }
     }
     //LOG_DEBUG("param=[%s]", param);
 
     /*
-     * È¡ÇëÇóÀàĞÍ£º
+     * å–è¯·æ±‚ç±»å‹ï¼š
      *      GET /cgi-bin/login.cgi?user=rocky HTTP/1.1\n\
      */
     begin = buf;
@@ -546,60 +546,60 @@ void Request::Parse()
         return;
     }
     *end = '\0';
-    toUpper(begin); // ×ªÎª´óĞ´
+    toUpper(begin); // è½¬ä¸ºå¤§å†™
     m_type = begin;
     LOG_DEBUG("type=[%s]", m_type.c_str());
 
     /*
-     * È¡Ò³ÃæÃû
+     * å–é¡µé¢å
      *      GET /cgi-bin/login.cgi?user=rocky HTTP/1.1\n\
      *      GET /cgi-bin/login.cgi HTTP/1.1\n\
      */
-    begin = end + 1;    // ÇëÇóÀàĞÍºó¾ÍÊÇÒ³ÃæÃû
+    begin = end + 1;    // è¯·æ±‚ç±»å‹åå°±æ˜¯é¡µé¢å
     IGNORE_BLANK(begin);
     tmp = begin;
-    /* Ìøµ½×îºóÒ»¸ö¡®/¡¯
-     *   ²»ÊÇ£º1. ¿Õ¸ñ
-     *         2. »Ø³µ»»ĞĞ·û£¨\r¡¢\n£©
-     *         3. ²»ÊÇ´®Î²
+    /* è·³åˆ°æœ€åä¸€ä¸ªâ€˜/â€™
+     *   ä¸æ˜¯ï¼š1. ç©ºæ ¼
+     *         2. å›è½¦æ¢è¡Œç¬¦ï¼ˆ\rã€\nï¼‰
+     *         3. ä¸æ˜¯ä¸²å°¾
      */
     while(' ' != *tmp && !IS_CR(*tmp) && '\0' != *tmp)
     {
         if('/' == *tmp)
         {
-            begin = tmp + 1; // ¼ÇÂ¼×îºóÒ»¸ö¡®/¡¯
+            begin = tmp + 1; // è®°å½•æœ€åä¸€ä¸ªâ€˜/â€™
         }
         tmp++;
     }
-    // ÕÒ½áÎ²Î»ÖÃ
+    // æ‰¾ç»“å°¾ä½ç½®
     if( (end = strchr(begin, '?')) != NULL
         || (end = strchr(begin, ' ')) != NULL
       )
     {
         *end = '\0';
     }
-    // toLower(begin); // ×ªÎªĞ¡Ğ´
+    // toLower(begin); // è½¬ä¸ºå°å†™
     m_page =  begin;
     LOG_DEBUG("page=[%s]", m_page.c_str());
 
-    // È¡ºó×º
+    // å–åç¼€
     m_PageType = GetFileType(m_page.c_str());
     LOG_DEBUG("m_PageType=[%s]", m_PageType.c_str());
 
     /*
-     * ·ÖÎöÇëÇóÍ·²¿ĞÅÏ¢
+     * åˆ†æè¯·æ±‚å¤´éƒ¨ä¿¡æ¯
      */
     ParseHead();
 
     /*
-     * ´¦ÀíCookie×Ö¶Î
+     * å¤„ç†Cookieå­—æ®µ
      */
     ParseCookie();
 
 
     /*
-     * ÔÚÕâÀïÖ´ĞĞÈÏÖ¤£¬ÒÔ±ÜÃâ×öÎŞÓÃ·ÖÎö£»
-     * £¨µÇÂ¼Ò³ÃæÎŞ×÷ÈÏÖ¤£©
+     * åœ¨è¿™é‡Œæ‰§è¡Œè®¤è¯ï¼Œä»¥é¿å…åšæ— ç”¨åˆ†æï¼›
+     * ï¼ˆç™»å½•é¡µé¢æ— ä½œè®¤è¯ï¼‰
      */
     if( "login" != m_page
         && "register" != m_page
@@ -617,10 +617,10 @@ void Request::Parse()
 
 
     /*
-     * °´ÀàĞÍ·ÖÇé¿ö´¦Àí
+     * æŒ‰ç±»å‹åˆ†æƒ…å†µå¤„ç†
      */
 
-    // ´¦ÀíGETÇëÇó£¨×¢Òâ£¬ÔÚPOSTÖĞÒ²¿ÉÄÜ°üº¬GETµÄ´¦Àí£»
+    // å¤„ç†GETè¯·æ±‚ï¼ˆæ³¨æ„ï¼Œåœ¨POSTä¸­ä¹Ÿå¯èƒ½åŒ…å«GETçš„å¤„ç†ï¼›
     if(NULL != param)
     {
         ParseGet(param);
@@ -628,12 +628,12 @@ void Request::Parse()
 
     if("" != m_boundary)
     {
-        // ´¦Àí¸½¼şÌá½»
+        // å¤„ç†é™„ä»¶æäº¤
         ParseAttach();
     }
     else if("POST" == m_type)
     {
-        // ´¦ÀíÒ»°ãµÄPOSTÇëÇó
+        // å¤„ç†ä¸€èˆ¬çš„POSTè¯·æ±‚
         ParsePost();
     }
 

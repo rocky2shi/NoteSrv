@@ -39,43 +39,43 @@
 
 int main(int argc, char *argv[])
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
 
-    {/****************************** ³õÊ¼»¯ ¿ªÊ¼ ******************************/
+    {/****************************** åˆå§‹åŒ– å¼€å§‹ ******************************/
 
     int ret;
 
-    // ÈÕÖ¾ÏÔµ½µ½Ç°Ì¨
+    // æ—¥å¿—æ˜¾åˆ°åˆ°å‰å°
     setenv("LOG_TERMINAL", "1", 1);
-    // ¹Ø±ÕÈÕÖ¾Êä³ö
+    // å…³é—­æ—¥å¿—è¾“å‡º
     setenv("LOG_DEBUG", "0", 1);
     setenv("LOG_INFO", "0", 1);
     setenv("LOG_ERROR", "0", 1);
 
-    // ³õÊ¼»¯È«¾ÖÅäÖÃÀà
+    // åˆå§‹åŒ–å…¨å±€é…ç½®ç±»
     ret = GlobalConfig::init(argc, argv);
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯È«¾ÖÅäÖÃÀà³ö´í [%d] \n", ret);
+        LOG_ERROR("åˆå§‹åŒ–å…¨å±€é…ç½®ç±»å‡ºé”™ [%d] \n", ret);
         return ret;
     }
 
 
-    // ³õÊ¼»¯ÈÕÖ¾´¦ÀíÀà
+    // åˆå§‹åŒ–æ—¥å¿—å¤„ç†ç±»
     ret = Log::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯ÈÕÖ¾´¦ÀíÀà³ö´í [%d] \n", ret);
+        LOG_ERROR("åˆå§‹åŒ–æ—¥å¿—å¤„ç†ç±»å‡ºé”™ [%d] \n", ret);
         return ret;
     }
 
 
 
-    }/****************************** ³õÊ¼»¯ ½áÊø ******************************/
+    }/****************************** åˆå§‹åŒ– ç»“æŸ ******************************/
 
 
-    {// ²âÊÔ ¹¤¾ß£ºÎÄ¼şÃû×ªÎªurl±àÂë·½Ê½£»[Rocky 2010-06-04 16:09:49]
+    {// æµ‹è¯• å·¥å…·ï¼šæ–‡ä»¶åè½¬ä¸ºurlç¼–ç æ–¹å¼ï¼›[Rocky 2010-06-04 16:09:49]
     #if 1
 
 
@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
         if(bToUrl)
         {
             /*
-             * ÎÄ¼şÃû×ªÎªurl±àÂëĞÎÊ½
+             * æ–‡ä»¶åè½¬ä¸ºurlç¼–ç å½¢å¼
              */
 
             while( file.next() )
@@ -116,12 +116,12 @@ int main(int argc, char *argv[])
                 string now;
                 int ret = sscanf(old.c_str(), "%[^.]%c", key, &dot);
 
-                // Ö»×ª»»·ûºÏ¸ñÊ½µÄ
+                // åªè½¬æ¢ç¬¦åˆæ ¼å¼çš„
                 if(2 == ret && strlen(key) == 14 && '.' == dot)
                 {
-                    // È¥µôÇ°×º
+                    // å»æ‰å‰ç¼€
                     string old2 = old.substr(15);
-                    // ÏÈ³¢×ªÎªgb18330±àÂë£¬×ª»»³ö´íÔò±£ÁôÔ­Öµ£»
+                    // å…ˆå°è½¬ä¸ºgb18330ç¼–ç ï¼Œè½¬æ¢å‡ºé”™åˆ™ä¿ç•™åŸå€¼ï¼›
                     ChineseCoding("utf-8", "gb18030").Converter(old2, old2);
                     now = key + string(".") + FilenameEncode(old2);
                     printf("[%s] => [%s]\n", old.c_str(), now.c_str());
@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
         else
         {
             /*
-             * ÎÄ¼şÃûÓÉurl±àÂëĞÎÊ½×ªÎª¿É¶ÁĞÎÊ½
+             * æ–‡ä»¶åç”±urlç¼–ç å½¢å¼è½¬ä¸ºå¯è¯»å½¢å¼
              */
 
             while( file.next() )
@@ -142,10 +142,10 @@ int main(int argc, char *argv[])
                 const string old = GetBaseName( file.name() );
                 int ret = sscanf(old.c_str(), "%[^.]%c", key, &dot);
 
-                // Ö»×ª»»·ûºÏ¸ñÊ½µÄ
+                // åªè½¬æ¢ç¬¦åˆæ ¼å¼çš„
                 if(2 == ret && strlen(key) == 14 && '.' == dot)
                 {
-                    // È¥µôÇ°×º
+                    // å»æ‰å‰ç¼€
                     const string now = key + string(".") + FilenameDecode(old.substr(15));
                     printf("[%s] => [%s]\n", old.c_str(), now.c_str());
                     rename(old.c_str(), now.c_str());

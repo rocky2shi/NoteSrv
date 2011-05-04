@@ -6,23 +6,23 @@ namespace CONNECT_TCP_SPACE
 
 Connect_TCP::Connect_TCP() : m_bClose(false)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Connect_TCP::~Connect_TCP()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 
-// ¹Ø±Õ
+// å…³é—­
 int Connect_TCP::Close()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     if( m_bClose )
     {
-        LOG_ERROR("¾¯¸æ£ºÖØ¸´Ö´ĞĞ¹Ø±Õ²Ù×÷£¡");
+        LOG_ERROR("è­¦å‘Šï¼šé‡å¤æ‰§è¡Œå…³é—­æ“ä½œï¼");
         return ERR;
     }
     delete this;
@@ -30,13 +30,13 @@ int Connect_TCP::Close()
     return OK;
 }
 
-// ×öÎª·şÎñ¶Ë£¨ÔÚportÉÏÕìÌı£©
+// åšä¸ºæœåŠ¡ç«¯ï¼ˆåœ¨portä¸Šä¾¦å¬ï¼‰
 int Connect_TCP::InitAsServer(int port)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     /*
-     *  Ö´ĞĞ½¨Á¢tcp·şÎñµÄ±ê×¼²½Öè£º
+     *  æ‰§è¡Œå»ºç«‹tcpæœåŠ¡çš„æ ‡å‡†æ­¥éª¤ï¼š
      */
 
     if(!m_tcp.Open())
@@ -60,12 +60,12 @@ int Connect_TCP::InitAsServer(int port)
     return OK;
 }
 
-// ½ÓÊÜÁ¬½Ó
+// æ¥å—è¿æ¥
 Connect *Connect_TCP::Accept()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    // ĞÂÁ¬½Ó
+    // æ–°è¿æ¥
     int n = m_tcp.Accept();
     if(n < 0)
     {
@@ -73,12 +73,12 @@ Connect *Connect_TCP::Accept()
         return NULL;
     }
 
-    // ·µ»ØµÄĞÂ¶ÔÏó
-    Connect_TCP *pNew = new Connect_TCP;    // ×¢Òâ£¬´Ë²Ù×÷½«ÔÚ
+    // è¿”å›çš„æ–°å¯¹è±¡
+    Connect_TCP *pNew = new Connect_TCP;    // æ³¨æ„ï¼Œæ­¤æ“ä½œå°†åœ¨
     if(NULL == pNew)
     {
         yCTcp(n).Close();
-        LOG_ERROR("´´½¨Connect_TCP¶ÔÏó³ö´í");
+        LOG_ERROR("åˆ›å»ºConnect_TCPå¯¹è±¡å‡ºé”™");
         return NULL;
     }
     pNew->m_tcp = n;
@@ -86,10 +86,10 @@ Connect *Connect_TCP::Accept()
     return pNew;
 }
 
-// Ğ´Êı¾İÈëÁ¬½ÓÖĞ£¬·µ»ØÊµ¼ÊĞ´ÈëµÄ×Ö½ÚÊı£»
+// å†™æ•°æ®å…¥è¿æ¥ä¸­ï¼Œè¿”å›å®é™…å†™å…¥çš„å­—èŠ‚æ•°ï¼›
 int Connect_TCP::Send(const char *buf, unsigned int len)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     if( len <= 0 )
     {
@@ -101,30 +101,30 @@ int Connect_TCP::Send(const char *buf, unsigned int len)
     return ret > 0 ? ret : 0;
 }
 
-// ´ÓÁ¬½ÓÉÏ¶ÁÊı¾İ£¬·µ»ØÊµ¼ÊÈ¡µÃµÄ×Ö½ÚÊı£»
+// ä»è¿æ¥ä¸Šè¯»æ•°æ®ï¼Œè¿”å›å®é™…å–å¾—çš„å­—èŠ‚æ•°ï¼›
 int Connect_TCP::Recv(char *buf, unsigned int len)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     int ret = m_tcp.Recv(buf, len);//, TCP_TIMEOUT*20);
 
     return ret > 0 ? ret : 0;
 }
 
-// È¡¶Ô¶Ëip
+// å–å¯¹ç«¯ip
 const string Connect_TCP::GetPeerAddr() const
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     char buf[20] = "";
     m_tcp.GetPeerAddr(buf);
     return buf;
 }
 
-// È¡Ò»ĞĞ£¬·µ»ØÈ¡µÃµÄ×Ö½ÚÊı£»
+// å–ä¸€è¡Œï¼Œè¿”å›å–å¾—çš„å­—èŠ‚æ•°ï¼›
 int Connect_TCP::GetLine(char *buf, unsigned int max)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return m_tcp.RecvLine_n(buf, max); //, TCP_TIMEOUT*20);
 }

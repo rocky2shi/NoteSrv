@@ -10,7 +10,7 @@ namespace PAGE_EDIT_SPACE
 
 
 
-// �༭ҳ��
+// 编辑页面
 class Page_Edit : public Page
 {
 protected:

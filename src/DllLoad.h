@@ -6,27 +6,27 @@ namespace DLLLOAD_SPACE
 
 
 
-// Æ½Ì¨ÎŞ¹Ø¶¯Ì¬¿â¼ÓÔØÀà
+// å¹³å°æ— å…³åŠ¨æ€åº“åŠ è½½ç±»
 class DllLoad
 {
 public:
-    // ¶¨ÒåÖÇÄÜÖ¸ÕëÀàĞÍ
+    // å®šä¹‰æ™ºèƒ½æŒ‡é’ˆç±»å‹
     typedef AutoPtr<DllLoad> Ptr;
 
 public:
     virtual ~DllLoad();
 
-    // ´ò¿ª¶¯Ì¬¿âÎÄ¼ş
+    // æ‰“å¼€åŠ¨æ€åº“æ–‡ä»¶
     virtual int Open(const string &file);
 
-    // ¹Ø±Õ¶¯Ì¬¿â
+    // å…³é—­åŠ¨æ€åº“
     virtual int Close();
 
-    // È¡Ö´ĞĞ¶ÔÏó
+    // å–æ‰§è¡Œå¯¹è±¡
     virtual void *GetSymbol(const string &sym);
 
 
-    // ¸ú¾İ´«ÈëµÄid´Ó¹¤³§ÖĞ²úÉúÒ»¸ö´¦Àí¶ÔÏó
+    // è·Ÿæ®ä¼ å…¥çš„idä»å·¥å‚ä¸­äº§ç”Ÿä¸€ä¸ªå¤„ç†å¯¹è±¡
     static DllLoad *New(const string &id="linux");
 
 protected:

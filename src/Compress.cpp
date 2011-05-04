@@ -14,11 +14,11 @@ Compress::~Compress()
 {
 }
 
-// Àà³õÊ¼»¯
+// ç±»åˆå§‹åŒ–
 int Compress::init()
 {
     int ret;
-    static Compress executor; // Ö´ĞĞ¾ßÌå´¦ÀíµÄ¶ÔÏóÊµÀı
+    static Compress executor; // æ‰§è¡Œå…·ä½“å¤„ç†çš„å¯¹è±¡å®ä¾‹
 
     Compress *obj = Compress::instance( &executor );
     if(NULL == obj)
@@ -30,7 +30,7 @@ int Compress::init()
     return OK;
 }
 
-// ÄÚ´æÑ¹Ëõ£¨³É¹¦·µ»ØOK£©
+// å†…å­˜å‹ç¼©ï¼ˆæˆåŠŸè¿”å›OKï¼‰
 int Compress::Do(const void *pSrc, int nSrcLen, void *pDest, int nDestLen)
 {
     assert(NULL != pSrc && NULL != pDest);
@@ -38,7 +38,7 @@ int Compress::Do(const void *pSrc, int nSrcLen, void *pDest, int nDestLen)
     return OK;
 }
 
-// ÄÚ´æ½âÑ¹Ëõ£¨³É¹¦·µ»ØOK£©
+// å†…å­˜è§£å‹ç¼©ï¼ˆæˆåŠŸè¿”å›OKï¼‰
 int Compress::Undo(const void *pSrc, int nSrcLen, void *pDest, int nDestLen)
 {
     assert(NULL != pSrc && NULL != pDest);
@@ -46,7 +46,7 @@ int Compress::Undo(const void *pSrc, int nSrcLen, void *pDest, int nDestLen)
     return OK;
 }
 
-// ÎÄ¼şÑ¹Ëõ
+// æ–‡ä»¶å‹ç¼©
 int Compress::Do(const FileObj &src, FileObj &dest)
 {
     const int len = src.Size();
@@ -61,7 +61,7 @@ int Compress::Do(const FileObj &src, FileObj &dest)
     return OK;
 }
 
-// ÎÄ½â¼şÑ¹Ëõ
+// æ–‡è§£ä»¶å‹ç¼©
 int Compress::Undo(const FileObj &src, FileObj &dest)
 {
     return Do(src, dest);

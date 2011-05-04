@@ -11,28 +11,28 @@ namespace GLOBALCONFIG_SPACE
 GlobalConfig::GlobalConfig(int argc, char *argv[])
 {
     /*
-     * ²é¿´»·¾³ÅäÖÃ
+     * æŸ¥çœ‹ç¯å¢ƒé…ç½®
      */
     m_option["::RootDir"] = getenv("RootDir") ? : ".";
     m_option["::ServicePort"] = getenv("ServicePort") ? : "80";
 
     /*
-     * ²é¿´ÃüÁîĞĞ£¨±È»·¾³±äÁ¿ÓÅÏÈ£©
+     * æŸ¥çœ‹å‘½ä»¤è¡Œï¼ˆæ¯”ç¯å¢ƒå˜é‡ä¼˜å…ˆï¼‰
      */
-    // µÚÒ»¸ö²ÎÊıÎª·şÎñ¶Ë¿Ú
+    // ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºæœåŠ¡ç«¯å£
     if(argc > 1)
     {
         m_option["::ServicePort"] = argv[1];
     }
 
-    // µÚ¶ş¸ö²ÎÊıÎª³ÌĞò¸ùÄ¿Â¼
+    // ç¬¬äºŒä¸ªå‚æ•°ä¸ºç¨‹åºæ ¹ç›®å½•
     if(argc > 2)
     {
         m_option["::RootDir"] = argv[2];
     }
 }
 
-// Àà³õÊ¼»¯
+// ç±»åˆå§‹åŒ–
 int GlobalConfig::init(int argc, char *argv[])
 {
     int ret;
@@ -47,69 +47,69 @@ int GlobalConfig::init(int argc, char *argv[])
     return OK;
 }
 
-// ÏµÍ³¸ùÄ¿Â¼
+// ç³»ç»Ÿæ ¹ç›®å½•
 const string GlobalConfig::Root() const
 {
-    // ÈôÓÃ»§Î´ÅäÖÃ£¬ÔòÄ¬ÈÏÎªµ±Ç°Ä¿Â¼£»
+    // è‹¥ç”¨æˆ·æœªé…ç½®ï¼Œåˆ™é»˜è®¤ä¸ºå½“å‰ç›®å½•ï¼›
     return GetOption("::RootDir", ".") + "/";
 }
 
-// ÓÃ»§Ä¿Â¼´æ·ÅµØ
+// ç”¨æˆ·ç›®å½•å­˜æ”¾åœ°
 const string GlobalConfig::UserRootDir() const
 {
     return Root() + "data/user/";
 }
 
-// Ò³Ãæ´¦Àí¶¯Ì¬¿â£¨Ä£¿é£©Ä¿Â¼
+// é¡µé¢å¤„ç†åŠ¨æ€åº“ï¼ˆæ¨¡å—ï¼‰ç›®å½•
 const string GlobalConfig::CgiDir() const
 {
     return Root() + "cgi/";
 }
 
-// ÎÄ±¾Ò³ÃæÄ¿Â¼£¨´æ·Åhtml¡¢js¡¢txt¡¢cssµÈÄÜÖ±½ÓÔÚÒ³ÃæÉÏÏÔÊ¾µÄÎÄ¼ş£©
+// æ–‡æœ¬é¡µé¢ç›®å½•ï¼ˆå­˜æ”¾htmlã€jsã€txtã€cssç­‰èƒ½ç›´æ¥åœ¨é¡µé¢ä¸Šæ˜¾ç¤ºçš„æ–‡ä»¶ï¼‰
 const string GlobalConfig::HtmlDir() const
 {
     return Root() + "html/";
 }
 
-// Ä£°åÎÄ¼şÄ¿Â¼
+// æ¨¡æ¿æ–‡ä»¶ç›®å½•
 const string GlobalConfig::TemplateDir() const
 {
     return Root() + "template/";
 }
 
 
-// ÏµÍ³ÈÕÖ¾Ä¿Â¼
+// ç³»ç»Ÿæ—¥å¿—ç›®å½•
 const string GlobalConfig::SystemLogDir() const
 {
     return Root() + "log/";
 }
 
-// ÏµÍ³ÁÙÊ±Ä¿Â¼
+// ç³»ç»Ÿä¸´æ—¶ç›®å½•
 const string GlobalConfig::SystemTmpDir() const
 {
     return Root() + "tmp/";
 }
 
-// È«¾ÖÊı¾İÄ¿Â¼
+// å…¨å±€æ•°æ®ç›®å½•
 const string GlobalConfig::SystemDataDir() const
 {
     return Root() + "data/";
 }
 
-// ´æ·Å¹¤¾ß¡¢Íâ²¿´¦Àí³ÌĞòµÈµÄÄ¿Â¼
+// å­˜æ”¾å·¥å…·ã€å¤–éƒ¨å¤„ç†ç¨‹åºç­‰çš„ç›®å½•
 const string GlobalConfig::ToolDir() const
 {
     return Root() + "tool/";
 }
 
-// È«¾Ö¼ÆÊıÆ÷Ä¿Â¼
+// å…¨å±€è®¡æ•°å™¨ç›®å½•
 const string GlobalConfig::CounterDir() const
 {
     return Root() + "data/counter/";
 }
 
-// »ñÈ¡ÃüÁîĞĞ²ÎÊıµÈÅäÖÃÑ¡Ïî£¨»ñÈ¡field×Ö¶Î¶ÔÓ¦µÄ²ÎÊı£¬²»´æÔÚÔò·µ»ØÄ¬ÈÏµÄdefÖµ£©
+// è·å–å‘½ä»¤è¡Œå‚æ•°ç­‰é…ç½®é€‰é¡¹ï¼ˆè·å–fieldå­—æ®µå¯¹åº”çš„å‚æ•°ï¼Œä¸å­˜åœ¨åˆ™è¿”å›é»˜è®¤çš„defå€¼ï¼‰
 const string GlobalConfig::GetOption(const string &field, const string def/*=""*/) const
 {
     return GetMapValue(m_option, field, def);

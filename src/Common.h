@@ -27,7 +27,7 @@ using namespace std;
 
 
 
-// Ìø¹ı¿Õ°××Ö·û
+// è·³è¿‡ç©ºç™½å­—ç¬¦
 inline static void IGNORE_BLANK(char *&str)
 {
     while( ('\0' != *str) && (' ' == *str) )
@@ -36,13 +36,13 @@ inline static void IGNORE_BLANK(char *&str)
     }
 }
 
-// ÊÇ»Ø³µ»»ĞĞ·û·µ»Øtrue
+// æ˜¯å›è½¦æ¢è¡Œç¬¦è¿”å›true
 inline static bool IS_CR(char ch)
 {
     return '\r' == ch || '\n' == ch;
 }
 
-// Ìøµ½ĞĞÎ²£¨Ö¸Ïò»»ĞĞ·û´¦£º¡®\r¡¯»ò¡®\n¡¯»ò¡®\0¡¯£©
+// è·³åˆ°è¡Œå°¾ï¼ˆæŒ‡å‘æ¢è¡Œç¬¦å¤„ï¼šâ€˜\râ€™æˆ–â€˜\nâ€™æˆ–â€˜\0â€™ï¼‰
 inline static void JUMP_TO_LINE_END(char *&str)
 {
     while( ('\r' != *str) && ('\n' != *str) && ('\0' != *str) )
@@ -51,7 +51,7 @@ inline static void JUMP_TO_LINE_END(char *&str)
     }
 }
 
-// É¾³ı»Ø³µ·û
+// åˆ é™¤å›è½¦ç¬¦
 inline static int CUT_CR(char *str, int len)
 {
     int n = 0;
@@ -73,28 +73,28 @@ inline static int CUT_CR(char *str)
     return CUT_CR(str, n);
 }
 
-// È¥µôË«ÒıºÅ£º "xxx.txt" > xxx.txt
-// µ±µ÷Ê±²»´«Èë³¤¶ÈlenÊ±£¬Òª¼ÆËã¡°ºóÒıºÅ¡±£¨¼´ĞĞÎ²£©Î»ÖÃ
+// å»æ‰åŒå¼•å·ï¼š "xxx.txt" > xxx.txt
+// å½“è°ƒæ—¶ä¸ä¼ å…¥é•¿åº¦lenæ—¶ï¼Œè¦è®¡ç®—â€œåå¼•å·â€ï¼ˆå³è¡Œå°¾ï¼‰ä½ç½®
 inline static char *CUT_QUOTE(char * const str, int len=0)
 {
-    if(0 == len)    // µ÷ÓÃÊ±²»´«Èë´®³¤¶È
+    if(0 == len)    // è°ƒç”¨æ—¶ä¸ä¼ å…¥ä¸²é•¿åº¦
     {
         char *quote = strchr(str+1, '"');
         if(NULL == quote)
         {
             return str;
         }
-        len = quote - str + 1; // ×¢Òâ£¬ÕâÀï´®³¤¶ÈµÄ¼ÆËã£»
+        len = quote - str + 1; // æ³¨æ„ï¼Œè¿™é‡Œä¸²é•¿åº¦çš„è®¡ç®—ï¼›
     }
     if('"' == str[0] && '"' == str[len-1])
     {
-        str[len-1] = '\0';  // ºóÒıºÅÖÃ¿Õ
-        return str + 1;     // Ìø¹ıÇ°Ò»ÒıºÅ
+        str[len-1] = '\0';  // åå¼•å·ç½®ç©º
+        return str + 1;     // è·³è¿‡å‰ä¸€å¼•å·
     }
     return str;
 }
 
-// Ê¹Ö®³ÉÎªÒ»¸ö´®£¨¼´¼Ó½áÊø·û'\0'£©
+// ä½¿ä¹‹æˆä¸ºä¸€ä¸ªä¸²ï¼ˆå³åŠ ç»“æŸç¬¦'\0'ï¼‰
 inline static void TO_STR(char *str, int len)
 {
     str[len] = '\0';
@@ -163,8 +163,8 @@ const string Inc(const string &num);
 const string DeleteHtmlLable(const string &html);
 time_t GetFileModifyTime(const string &filename);
 int SettFileModifyTime(const string &filename, long second);
-int ZipCompress(const string &src, const string &dest);   // ¶¨ÒåÓÚlib/zip.cppÖĞ
-int ZipDecompress(const string &src, const string &dest); // ¶¨ÒåÓÚlib/zip.cppÖĞ
+int ZipCompress(const string &src, const string &dest);   // å®šä¹‰äºlib/zip.cppä¸­
+int ZipDecompress(const string &src, const string &dest); // å®šä¹‰äºlib/zip.cppä¸­
 const string HtmlSetParentInputValue(const string &element, const string &value);
 const string HtmlSetParentInnerhtmlValue(const string &element, const string &value);
 const string HtmlAlert(const string &value);

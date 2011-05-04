@@ -24,34 +24,39 @@ User::Cache::~Cache()
     }
 }
 
-// È¡ÓÃ»§Ãû¶ÔÓ¦µÄÓÃ»§ĞÅÏ¢
+// å–ç”¨æˆ·åå¯¹åº”çš„ç”¨æˆ·ä¿¡æ¯
 User *User::Cache::Get(const string &username)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
-
-    // ´æÔÚ¶àÏß³Ì²Ù×÷£¬Ğè¼ÓËø£»£¨×¢Òâ´¦ÀíËø¶¨·¶Î§£¬±ÜÃâ³åÍ»£»£©
+    // å­˜åœ¨å¤šçº¿ç¨‹æ“ä½œï¼Œéœ€åŠ é”ï¼›ï¼ˆæ³¨æ„å¤„ç†é”å®šèŒƒå›´ï¼Œé¿å…å†²çªï¼›ï¼‰
     {
         SHARE_LOCK(m_lock);
 
         map<string, User*>::iterator it = m_UserList.find( username );
-        // ÓÃ»§ÊÇ·ñ´æÔÚÓÚ»º´æÖĞ£¬ÇÒÓĞĞ§£¨Î´³¬Ê±£©
+        // ç”¨æˆ·æ˜¯å¦å­˜åœ¨äºç¼“å­˜ä¸­ï¼Œä¸”æœ‰æ•ˆï¼ˆæœªè¶…æ—¶ï¼‰
         if(m_UserList.end() != it && it->second->m_valid)
         {
             return it->second;
         }
     }
 
-
     {
-        // ´æÔÚ¶àÏß³Ì²Ù×÷£¬Ğè¼ÓËø£»
+        // å­˜åœ¨å¤šçº¿ç¨‹æ“ä½œï¼Œéœ€åŠ é”ï¼›
         UNIQUE_LOCK(m_lock);
 
-        // »º´æ²»´æÔÚ¸ÃÓÃ»§ĞÅÏ¢£¬ÔòÖØ¼ÓÔØ£»
+        // å†æ¬¡æµ‹è¯•
+        map<string, User*>::iterator it = m_UserList.find( username );
+        if(m_UserList.end() != it && it->second->m_valid)
+        {
+            return it->second;
+        }
+
+        // ç¼“å­˜ä¸å­˜åœ¨è¯¥ç”¨æˆ·ä¿¡æ¯ï¼Œåˆ™é‡åŠ è½½ï¼›
         User *info = Load(username);
         if(NULL == info)
         {
-            // ·µ»ØÎŞÊı¾İ¶ÔÏó£¨ÒÔ±ÜÃâÍâ²¿×öNULLÖ¸Ê²¼ì²â£©
+            // è¿”å›æ— æ•°æ®å¯¹è±¡ï¼ˆä»¥é¿å…å¤–éƒ¨åšNULLæŒ‡é’ˆæ£€æµ‹ï¼‰
             struct Empty : public User
             {
                 Empty(): User("")
@@ -65,22 +70,22 @@ User *User::Cache::Get(const string &username)
     }
 }
 
-// ´Ó»º´æÖĞÈ¥³ıÓÃ»§ĞÅÏ¢
+// ä»ç¼“å­˜ä¸­å»é™¤ç”¨æˆ·ä¿¡æ¯
 void User::Cache::Del(const string &username)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
-    // ´æÔÚ¶àÏß³Ì²Ù×÷£¬Ğè¼ÓËø£»
+    // å­˜åœ¨å¤šçº¿ç¨‹æ“ä½œï¼Œéœ€åŠ é”ï¼›
     UNIQUE_LOCK(m_lock);
 
     delete m_UserList[username];
     m_UserList.erase(username);
 }
 
-// ¼ÓÔØÓÃ»§ĞÅÏ¢£¨´ÓÎÄ¼ş£©
+// åŠ è½½ç”¨æˆ·ä¿¡æ¯ï¼ˆä»æ–‡ä»¶ï¼‰
 User *User::Cache::Load(const string &username)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     User *info = new User(username);
     if(NULL == info)
@@ -89,15 +94,7 @@ User *User::Cache::Load(const string &username)
         return NULL;
     }
 
-    // ×¢£º¼´Ê¹ÓÃ»§ÎŞĞ§£¬µ«ÄËĞè¼ÓÔØÆäĞÅÏ¢¡£
-    //if( ! info->isValid() )
-    //{
-    //    LOG_DEBUG("Invalid user: [%s]", username.c_str());
-    //    delete info;
-    //    return NULL;
-    //}
-
-    // ÏÈÈ¥µô¾ÉÊı¾İ£¨×¢£º¼´Ê¹m_UserList[ username ]ÎªNULL£¬delete NULLÒ²²»»á³ö´í£»£©
+    // å…ˆå»æ‰æ—§æ•°æ®ï¼ˆæ³¨ï¼šå³ä½¿m_UserList[ username ]ä¸ºNULLï¼Œdelete NULLä¹Ÿä¸ä¼šå‡ºé”™ï¼›ï¼‰
     delete m_UserList[ username ];
     m_UserList[ username ] = info;
     LOG_DEBUG("Loading user: [%s]... OK", username.c_str());
@@ -112,13 +109,13 @@ User *User::Cache::Load(const string &username)
 
 
 
-// Ò»°ãĞÔÊ¹ÓÃµÄ¹¹Ôìº¯Êı
+// ä¸€èˆ¬æ€§ä½¿ç”¨çš„æ„é€ å‡½æ•°
 User::User(const string &username) : m_username( username ), m_valid( true )
 {
-    // ÓÃ»§Ö÷ÅäÖÃÎÄ¼ş
+    // ç”¨æˆ·ä¸»é…ç½®æ–‡ä»¶
     const string &cfg = GetCfgFile();
 
-    // ¼ÓÔØ
+    // åŠ è½½
     if( "" != username && m_mycfg.Read(cfg) < 0 )
     {
         m_valid = false;
@@ -126,7 +123,7 @@ User::User(const string &username) : m_username( username ), m_valid( true )
     }
 }
 
-// Ö»ÔÚ×¢²áĞÂÓÃ»§Ê±ÓÃµÄ¹¹Ôìº¯Êı£¨int²ÎÊıÖ»×ö±ê¼ÇÓÃ£©
+// åªåœ¨æ³¨å†Œæ–°ç”¨æˆ·æ—¶ç”¨çš„æ„é€ å‡½æ•°ï¼ˆintå‚æ•°åªåšæ ‡è®°ç”¨ï¼‰
 User::User(const string &username, int) : m_username( username ), m_valid( false )
 {
 }
@@ -135,7 +132,7 @@ User::~User()
 {
 }
 
-// Àà³õÊ¼»¯
+// ç±»åˆå§‹åŒ–
 int User::init()
 {
     int ret;
@@ -151,20 +148,23 @@ int User::init()
     return OK;
 }
 
-// È¡ÓÃ»§Ãû¶ÔÓ¦µÄÓÃ»§¶ÔÏó
+// å–ç”¨æˆ·åå¯¹åº”çš„ç”¨æˆ·å¯¹è±¡
 User *User::Get(const string &username)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     return instance()->Get(username);
 }
 
-// ³õÊ¼»¯ÓÃ»§¿Õ¼ä£¨×¢²áÊ±ÓÃ£©
+/* åˆå§‹åŒ–ç”¨æˆ·ç©ºé—´ï¼ˆæ³¨å†Œæ—¶ç”¨ï¼‰
+ * æ³¨ï¼šåªæœ‰å¯æ³¨å†Œçš„ç”¨æˆ·æ‰èƒ½è°ƒåˆ°æ­¤å‡½æ•°ï¼Œæ‰€ä»¥æ— éœ€å†æµ‹
+ * è¯•ç©ºç”¨æˆ·ï¼›
+ */
 int User::Init()
 {
     int ret;
     int i;
-    // ÓÃ»§»ù±¾Ä¿Â¼ÁĞ±í
+    // ç”¨æˆ·åŸºæœ¬ç›®å½•åˆ—è¡¨
     const string dirs[] = {
         UserDir(),
         DataDir(),
@@ -175,7 +175,7 @@ int User::Init()
         ""
     };
 
-    // ´´½¨¸÷Ä¿Â¼
+    // åˆ›å»ºå„ç›®å½•
     for(i = 0; "" != dirs[i]; i++)
     {
         const string &dir = dirs[i];
@@ -191,11 +191,19 @@ int User::Init()
     return OK;
 }
 
-/* ´´½¨ÓÃ»§£¨³É¹¦£º·µ»ØÖ¸ÏòÓÃ»§¶ÔÏóÖ¸Õë£¬Ê§°Ü·µ»ØNULL£©
- * £¨×¢Òâ£ºÔÚ¶à³ÌÏß²Ù×÷Ê±£¬Íâ²¿µ÷ÓÃÓ¦¼ÓËø£»£©
+/* åˆ›å»ºç”¨æˆ·ï¼ˆæˆåŠŸï¼šè¿”å›æŒ‡å‘ç”¨æˆ·å¯¹è±¡æŒ‡é’ˆï¼Œå¤±è´¥è¿”å›NULLï¼‰
+ * ï¼ˆæ³¨æ„ï¼šåœ¨å¤šç¨‹çº¿æ“ä½œæ—¶ï¼Œå¤–éƒ¨è°ƒç”¨åº”åŠ é”ï¼›ï¼‰
  */
 User *User::Create(const string &username)
 {
+    // æ˜¯å¦ä¸ºå·²å­˜åœ¨çš„ç”¨æˆ·
+    if( User::Get(username)->isValid() )
+    {
+        LOG_ERROR("Username exist: [%s]", username.c_str());
+        return NULL;
+    }
+
+    // ç¬¬äºŒä¸ªå‚æ•°ç”¨äºåŒ¹é…ç”¨äºç”¨æˆ·æ³¨å†Œçš„æ„é€ å‡½æ•°
     User user(username, 0);
     int ret = user.Init();
     if(ret < 0)
@@ -204,7 +212,7 @@ User *User::Create(const string &username)
         return NULL;
     }
 
-    // Ğ´±ê¼ÇĞÅÏ¢
+    // å†™æ ‡è®°ä¿¡æ¯
     user.SetInfo("status", "enable");
     ret = user.Save();
     if(ret < 0)
@@ -213,7 +221,7 @@ User *User::Create(const string &username)
         return NULL;
     }
 
-    // ¼ÓÔØ
+    // åŠ è½½
     User *p = User::Get(username);
     if( ! p->isValid() )
     {
@@ -222,57 +230,58 @@ User *User::Create(const string &username)
     return p;
 }
 
-// ÓÃ»§Ö÷ÅäÖÃÎÄ¼ş£¨¶à´¦Ê¹ÓÃ£¬ËùÒÔ°ü·âµ½Ò»º¯ÊıÖĞ£©
+// ç”¨æˆ·ä¸»é…ç½®æ–‡ä»¶ï¼ˆå¤šå¤„ä½¿ç”¨ï¼Œæ‰€ä»¥åŒ…å°åˆ°ä¸€å‡½æ•°ä¸­ï¼‰
 const string User::GetCfgFile() const
 {
     return UserDir() + "my.cfg";   // [XXX]
 }
 
-// µ±Ç°ÓÃ»§Ä¿Â¼
+// å½“å‰ç”¨æˆ·ç›®å½•
 const string User::UserDir() const
 {
     return GlobalConfig::instance()->UserRootDir() + m_username + "/";
 }
 
-// È¡ÓÃ»§Êı¾İÂ·¾¶
+// å–ç”¨æˆ·æ•°æ®è·¯å¾„
 const string User::DataDir() const
 {
     return UserDir() + "data/";
 }
 
-// È¡¸½¼şÊı¾İÂ·¾¶
+// å–é™„ä»¶æ•°æ®è·¯å¾„
 const string User::AttachDir() const
 {
     return UserDir() + "attach/";
 }
 
-// È¡»º´æÄ¿Â¼
+// å–ç¼“å­˜ç›®å½•
 const string User::CacheDir() const
 {
     return UserDir() + "cache/";
 }
 
-// È¡ÓÃ»§ÁÙÊ±Ä¿Â¼
+// å–ç”¨æˆ·ä¸´æ—¶ç›®å½•
 const string User::TmpDir() const
 {
     return UserDir() + "tmp/";
 }
 
-// È¡´æ·Å²Ëµ¥Ïà¹ØĞÅÏ¢µÄÄ¿Â¼
+// å–å­˜æ”¾èœå•ç›¸å…³ä¿¡æ¯çš„ç›®å½•
 const string User::MenuDir() const
 {
     return UserDir() + "menu/";
 }
 
-// ÊÇÓĞĞ§µÄÓÃ»§·µ»Øtrue;
+// æ˜¯æœ‰æ•ˆçš„ç”¨æˆ·è¿”å›true;
 bool User::isValid() const
 {
-    // Èô²»´æÔÚregtime×Ö¶Î£¬ÔòËµÃ÷m_mycfgÎŞÊı¾İ£¬¼´ÓÃ»§²»´æÔÚ£¨ÎŞĞ§£©£»
-    return (m_valid && "enable" == m_mycfg.Get("userinfo", "status"))
-           ? true : false;
+    return ("" != m_username
+            && m_valid
+            && "enable" == m_mycfg.Get("userinfo", "status")
+           ) ? true : false;
 }
 
-// È¡ÓÃ»§ĞÅÏ¢£¨ÓÉ×Ö¶ÎÖ¸¶¨£©
+// å–ç”¨æˆ·ä¿¡æ¯ï¼ˆç”±å­—æ®µæŒ‡å®šï¼‰
 const string User::GetInfo(const string &field) const
 {
     return m_mycfg.Get("userinfo", field);
@@ -282,7 +291,7 @@ const string User::GetInfo(const string &section, const string &field) const
     return m_mycfg.Get(section, field);
 }
 
-// ÉèÖÃÓÃ»§ĞÅÏ¢£¨ÓÉ×Ö¶ÎÖ¸¶¨£©
+// è®¾ç½®ç”¨æˆ·ä¿¡æ¯ï¼ˆç”±å­—æ®µæŒ‡å®šï¼‰
 int User::SetInfo(const string &field, const string &value)
 {
     return m_mycfg.Set("userinfo", field, value);
@@ -292,28 +301,28 @@ int User::SetInfo(const string &section, const string &field, const string &valu
     return m_mycfg.Set(section, field, value);
 }
 
-// ±£´æ
+// ä¿å­˜
 int User::Save()
 {
-    // ÓÃ»§Ö÷ÅäÖÃÎÄ¼ş
+    // ç”¨æˆ·ä¸»é…ç½®æ–‡ä»¶
     const string &cfg = GetCfgFile();
     if(m_mycfg.Write( cfg ) < 0)
     {
         LOG_ERROR("Save user cfg error: [%s]", m_username.c_str());
         return ERR;
     }
-    // ¸üĞÂ»º´æ
+    // æ›´æ–°ç¼“å­˜
     Syn();
     return OK;
 }
 
-// ĞèÒªÍ¬²½»º´æ£¨Ê¹»º´æÎŞĞ§£¬ÒÔ±ãÏÂ´Î¶ÁÈ¡Ê±ÖØĞÂ¼ÓÔØÓÃ»§Êı¾İ£©
+// éœ€è¦åŒæ­¥ç¼“å­˜ï¼ˆä½¿ç¼“å­˜æ— æ•ˆï¼Œä»¥ä¾¿ä¸‹æ¬¡è¯»å–æ—¶é‡æ–°åŠ è½½ç”¨æˆ·æ•°æ®ï¼‰
 void User::Syn()
 {
     m_valid = false;
 }
 
-// ·µ»ØËø£¨×¢Òâ£¬ÊÇÒıÓÃ£©£¨Ó¦ÅäºÏUNIQUE_LOCKºêµÈÀ´Ê¹ÓÃ£©
+// è¿”å›é”ï¼ˆæ³¨æ„ï¼Œæ˜¯å¼•ç”¨ï¼‰ï¼ˆåº”é…åˆUNIQUE_LOCKå®ç­‰æ¥ä½¿ç”¨ï¼‰
 Lock &User::GetLock()
 {
     return m_lock;

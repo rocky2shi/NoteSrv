@@ -9,7 +9,7 @@ namespace TAG_TEXTSTYLE_SPACE
 
 
 
-// ÔÄ¶ÁÕıÎÄµÄ·ç¸ñÏÔÊ¾ÉèÖÃ
+// é˜…è¯»æ­£æ–‡çš„é£æ ¼æ˜¾ç¤ºè®¾ç½®
 class Tag_TextStyle : public Tag
 {
 protected:

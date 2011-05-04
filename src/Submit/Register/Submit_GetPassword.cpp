@@ -7,7 +7,7 @@
 namespace SUBMIT_GETPASSWORD_SPACE
 {
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "GetPassword";
 
 
@@ -16,18 +16,18 @@ static const string THIS_MODULE = "GetPassword";
 
 Submit_GetPassword::Submit_GetPassword()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_GetPassword::Submit_GetPassword(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_GetPassword::~Submit_GetPassword()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -35,15 +35,15 @@ Submit_GetPassword::~Submit_GetPassword()
 
 int Submit_GetPassword::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_GetPassword::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_GetPassword;
 }
 
@@ -51,7 +51,7 @@ Submit *Submit_GetPassword::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -68,21 +68,21 @@ int Submit_GetPassword::Deal(Page *page)
     try
     {
         /*
-         * ÑéÖ¤ÓÃ»§ÊäÈë
+         * éªŒè¯ç”¨æˆ·è¾“å…¥
          */
         User *user = User::Get(username);
         if( ! user->isValid() )
         {
             LOG_ERROR("Username exist: [%s]", username.c_str());
-            msg = "¸ÃÓÃ»§²»´æÔÚ";
+            msg = "è¯¥ç”¨æˆ·ä¸å­˜åœ¨";
             throw 1;
         }
 
-        // µ±ĞèÒªĞŞ¸ÄÓÃ»§ĞÅÏ¢Ê±£¬Ğè¼ÓËø£»
+        // å½“éœ€è¦ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯æ—¶ï¼Œéœ€åŠ é”ï¼›
         UNIQUE_LOCK( user->GetLock() );
 
         /*
-         * ÒÔ¿Í»§¶Ë´«À´µÄ´ğ°¸Îªkey£¬½âÃÜÅäÖÃÖĞ¼ÇÂ¼µÄÃÜÎÄ¼ş´ğ°¸
+         * ä»¥å®¢æˆ·ç«¯ä¼ æ¥çš„ç­”æ¡ˆä¸ºkeyï¼Œè§£å¯†é…ç½®ä¸­è®°å½•çš„å¯†æ–‡ä»¶ç­”æ¡ˆ
          */
         const string &cfg_answer = user->GetInfo("answer");
         const string &cli_answer = request->GetField("answer");
@@ -93,13 +93,13 @@ int Submit_GetPassword::Deal(Page *page)
         if(cfg_answer != Crypt(cli_answer, CRYPT_VERSION))
         {
             LOG_ERROR("Answer password, username=[%s]", username.c_str());
-            msg = "´ğ°¸´íÎó";
+            msg = "ç­”æ¡ˆé”™è¯¯";
             throw 2;
         }
 
         /*
-         * ´ğ°¸ÕıÈ·£¬ÖØÖÃÃÜÂëÎªÒ»Ëæ»ú´®£¬ÓÃ»§È¡µÃ¸ÃÃÜÂëºó£¬¿Éµ½¡°ĞŞ¸ÄÃÜÂë¡±Ò³
-         * ÔÙ¸ÄÎª×ÔÒÑĞèÒªµÄÃÜÂë£»
+         * ç­”æ¡ˆæ­£ç¡®ï¼Œé‡ç½®å¯†ç ä¸ºä¸€éšæœºä¸²ï¼Œç”¨æˆ·å–å¾—è¯¥å¯†ç åï¼Œå¯åˆ°â€œä¿®æ”¹å¯†ç â€é¡µ
+         * å†æ”¹ä¸ºè‡ªå·²éœ€è¦çš„å¯†ç ï¼›
          */
         const string &password = IntToString( GetRandomInt(10000000, 99999999) );
         user->SetInfo("password", Crypt(password, CRYPT_VERSION));
@@ -108,7 +108,7 @@ int Submit_GetPassword::Deal(Page *page)
         if( user->Save() < 0 )
         {
             LOG_ERROR("Save user cfg error: [%s]", username.c_str());
-            msg = "ÄÚ²¿´íÎó[´úÂë:SR6]";
+            msg = "å†…éƒ¨é”™è¯¯[ä»£ç :SR6]";
             throw 6;
         }
 

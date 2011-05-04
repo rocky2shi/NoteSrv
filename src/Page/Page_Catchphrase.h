@@ -7,7 +7,7 @@ namespace PAGE_CATCHPHRASE_SPACE
 
 
 
-// 在页头随机显示名言警句
+// 鍦ㄩ〉澶撮殢鏈烘樉绀哄悕瑷�璀﹀彞
 class Page_Catchphrase : public Page
 {
 protected:
@@ -24,7 +24,7 @@ protected:
     virtual Page *DoNew();
 
 private:
-    static vector<string> m_sentence; // 存放句子
+    static vector<string> m_sentence; // 瀛樻斁鍙ュ瓙
 };
 
 

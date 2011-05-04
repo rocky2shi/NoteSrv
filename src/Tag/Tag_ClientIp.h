@@ -7,7 +7,7 @@ namespace TAG_CLIENTIP_SPACE
 
 
 
-// ¿Í»§¶Ëip
+// å®¢æˆ·ç«¯ip
 class Tag_ClientIp : public Tag
 {
 protected:

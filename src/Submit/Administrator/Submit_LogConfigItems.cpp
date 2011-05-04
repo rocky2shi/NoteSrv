@@ -6,7 +6,7 @@ namespace SUBMIT_LOGCONFIGITEMS_SPACE
 
 
 
-// ±êÃ÷Ä£¿é£¨¶ÔÓ¦ÓÚÒ³ÃæÖÐµÄÌá½»×Ö¶Î£©
+// æ ‡æ˜Žæ¨¡å—ï¼ˆå¯¹åº”äºŽé¡µé¢ä¸­çš„æäº¤å­—æ®µï¼‰
 static const string THIS_MODULE = "LogConfigItems";
 
 
@@ -15,18 +15,18 @@ static const string THIS_MODULE = "LogConfigItems";
 
 Submit_LogConfigItems::Submit_LogConfigItems()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_LogConfigItems::Submit_LogConfigItems(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_LogConfigItems::~Submit_LogConfigItems()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -34,15 +34,15 @@ Submit_LogConfigItems::~Submit_LogConfigItems()
 
 int Submit_LogConfigItems::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_LogConfigItems::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_LogConfigItems;
 }
 
@@ -50,24 +50,24 @@ Submit *Submit_LogConfigItems::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 // [Rocky 2010-05-28 15:04:36]
 int Submit_LogConfigItems::Deal(Page *page)
 {
-    // µ÷ÊÔÈÕÖ¾
+    // è°ƒè¯•æ—¥å¿—
     const string &level_debug = page->GetRequest()->GetField("level_debug");
     Log::instance()->SetLevel( Log::DEBUG, ("open" == level_debug ? true : false) );
     LOG_DEBUG("level_debug=[%s]", level_debug.c_str());
 
-    // Ò»°ãÈÕÖ¾
+    // ä¸€èˆ¬æ—¥å¿—
     const string &level_info = page->GetRequest()->GetField("level_info");
     Log::instance()->SetLevel( Log::INFO, ("open" == level_info ? true : false) );
     LOG_DEBUG("level_info=[%s]", level_info.c_str());
 
-    // ´íÎóÈÕÖ¾
+    // é”™è¯¯æ—¥å¿—
     const string &level_error = page->GetRequest()->GetField("level_error");
     Log::instance()->SetLevel( Log::ERROR, ("open" == level_error ? true : false) );
     LOG_DEBUG("level_error=[%s]", level_error.c_str());

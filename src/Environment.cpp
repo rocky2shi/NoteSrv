@@ -10,16 +10,16 @@ namespace ENVIRONMENT_SPACE
 
 Environment::Environment()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
 /*
- * °ÑÐèÒªÈ«¾Ö£¨Ö÷¡¢×ÓÄ£¿é£©¶ÔÏó´æÈë£¨»·¾³£©¼ÇÂ¼Á´ÖÐ£»
+ * æŠŠéœ€è¦å…¨å±€ï¼ˆä¸»ã€å­æ¨¡å—ï¼‰å¯¹è±¡å­˜å…¥ï¼ˆçŽ¯å¢ƒï¼‰è®°å½•é“¾ä¸­ï¼›
  */
 int Environment::Insert(const string &id, void *obj)
 {
-    // Õý³£Çé¿öÏÂ£¬²»»áÖØ¸´²åÈëÍ¬Ò»¶ÔÏó£»
+    // æ­£å¸¸æƒ…å†µä¸‹ï¼Œä¸ä¼šé‡å¤æ’å…¥åŒä¸€å¯¹è±¡ï¼›
     if( NULL != instance()->Get( id ) )
     {
         LOG_ERROR("object exist: [%s]", id.c_str());
@@ -31,7 +31,7 @@ int Environment::Insert(const string &id, void *obj)
 }
 
 /*
- * ´Ó¼ÇÂ¼ÖÐ»ñÈ¡id¶ÔÓ¦µÄ¶ÔÏó
+ * ä»Žè®°å½•ä¸­èŽ·å–idå¯¹åº”çš„å¯¹è±¡
  */
 void *Environment::Get(const string &id)
 {
@@ -44,27 +44,27 @@ void *Environment::Get(const string &id)
 }
 
 /*
- * Àà³õÊ¼»¯
- *  id : Ààid¸÷Ààid²»¿ÉÖØ¸´£¬¿ÉÊ¹ÓÃÀàÃû£»
- *  obj: Òª¼ÇÈëÈ«¾Ö»·¾³µÄÀà£¨ÓÃÒ»¶ÔÏóÀ´´ú±í£©
+ * ç±»åˆå§‹åŒ–
+ *  id : ç±»idå„ç±»idä¸å¯é‡å¤ï¼Œå¯ä½¿ç”¨ç±»åï¼›
+ *  obj: è¦è®°å…¥å…¨å±€çŽ¯å¢ƒçš„ç±»ï¼ˆç”¨ä¸€å¯¹è±¡æ¥ä»£è¡¨ï¼‰
  */
 void *Environment::ClassInit(const string &id, void *obj)
 {
     if(NULL != obj)
     {
-        // ²åÈë»·¾³¼ÇÂ¼£¬ÒÔ±ãÔÚÆäËüÄ£¿éÖÐ»Ö¸´£¨¹²ÓÃÍ¬Ò»¶ÔÏó£©
+        // æ’å…¥çŽ¯å¢ƒè®°å½•ï¼Œä»¥ä¾¿åœ¨å…¶å®ƒæ¨¡å—ä¸­æ¢å¤ï¼ˆå…±ç”¨åŒä¸€å¯¹è±¡ï¼‰
         int ret = instance()->Insert(id, obj);
         if(ret < 0)
         {
             LOG_ERROR("Environment::instance()->Insert() error");
             return NULL;
         }
-        // ·µ»Ø
+        // è¿”å›ž
         return obj;
     }
     else
     {
-        // ´Ó»·¾³¼ÇÂ¼Àï²éÕÒ
+        // ä»ŽçŽ¯å¢ƒè®°å½•é‡ŒæŸ¥æ‰¾
         void *p = instance()->Get( id );
         if(NULL == p)
         {

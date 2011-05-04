@@ -10,7 +10,7 @@ namespace TAG_ATTACHLIST_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "AttachList";
 
 
@@ -19,17 +19,17 @@ static const string THIS_MODULE = "AttachList";
 
 Tag_AttachList::Tag_AttachList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_AttachList::Tag_AttachList(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_AttachList::~Tag_AttachList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -37,15 +37,15 @@ Tag_AttachList::~Tag_AttachList()
 
 int Tag_AttachList::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_AttachList::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_AttachList;
 }
 
@@ -56,75 +56,75 @@ Tag *Tag_AttachList::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡ÁĞ±í [Rocky 2010-05-20]
+// å–åˆ—è¡¨ [Rocky 2010-05-20]
 string Tag_AttachList::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    const Conf *pack = page->GetCurrentPack();  // µ±Ç°key¶ÔÓ¦Êı¾İ¼¯
+    const Conf *pack = page->GetCurrentPack();  // å½“å‰keyå¯¹åº”æ•°æ®é›†
     const string &password = pack->Get("password");
     const string &decryption = page->GetResult("decryption");
 
-    // Èôµ±Ç°ÓÃ»§¼ÓÃÜÁËÊı¾İ£¬Ôò²»ÏÔÊ¾¸½¼şÁĞ±í£»
+    // è‹¥å½“å‰ç”¨æˆ·åŠ å¯†äº†æ•°æ®ï¼Œåˆ™ä¸æ˜¾ç¤ºé™„ä»¶åˆ—è¡¨ï¼›
     if( "" != password && "YES" != decryption )
     {
         LOG_DEBUG("User data have been encrypted.");
         return "";
     }
 
-    // È¡µ±Ç°ÓÃ»§
+    // å–å½“å‰ç”¨æˆ·
     const string &username = page->GetRequest()->GetCurrentUser();
-    // µ±Ç°Êı¾İÌõÄ¿
+    // å½“å‰æ•°æ®æ¡ç›®
     const string &key = page->GetCurrentKey();
     const string &pagename = page->GetRequest()->GetPageName();
     vector<string> attachs;
     vector<string>::iterator it;
-    UserData(username).GetAttachList(key, attachs);   // È¡¸½¼şÁĞ±í
+    UserData(username).GetAttachList(key, attachs);   // å–é™„ä»¶åˆ—è¡¨
     string html = "";
 
     for(it = attachs.begin(); attachs.end() != it; it++)
     {
         const char *basename = GetBaseName( it->c_str() );
 
-        // Ìø¹ı²»ÊôÓÚ±¾ÌõÄ¿µÄÎÄ¼ş
+        // è·³è¿‡ä¸å±äºæœ¬æ¡ç›®çš„æ–‡ä»¶
         if(strncmp(key.c_str(), basename, key.length()) != 0)
         {
             //LOG_DEBUG("Ignore: key=[%s], basename=[%s]", key.c_str(), basename);
             continue;
         }
 
-        // È¡ÎÄ¼ş´óĞ¡
+        // å–æ–‡ä»¶å¤§å°
         FileObj file( *it );
         const string &sFileSize = ByteSizeFormat( file.Size() );
 
-        // Ìø¹ıÇ°×º(key + '.')
+        // è·³è¿‡å‰ç¼€(key + '.')
         basename += key.length() + 1;
 
-        // ÎÄ¼şÃû×ªÎªurl±àÂë
-        const string sFileOrg = FilenameDecode(basename);  // ÎÄ¼şÃû£¬½âÂëÎª¿ÉÏÔÊ¾ĞÎÊ½£»
-        const string sFileUrl = UrlCode(basename);         // ÎÄ¼şÃû£¬url¸ñÊ½£»
+        // æ–‡ä»¶åè½¬ä¸ºurlç¼–ç 
+        const string sFileOrg = FilenameDecode(basename);  // æ–‡ä»¶åï¼Œè§£ç ä¸ºå¯æ˜¾ç¤ºå½¢å¼ï¼›
+        const string sFileUrl = UrlCode(basename);         // æ–‡ä»¶åï¼Œurlæ ¼å¼ï¼›
 
         /*
-         * ²»Í¬µÄÒ³ÃæÊä³ö²»Í¬µÄ´¦ÀíĞÎÊ½
+         * ä¸åŒçš„é¡µé¢è¾“å‡ºä¸åŒçš„å¤„ç†å½¢å¼
          */
         if("reading" == pagename)
         {
-            // readingÒ³Ãæ£¨¶¥ÉÏµÄ¸½¼şÁĞ±í£©
+            // readingé¡µé¢ï¼ˆé¡¶ä¸Šçš„é™„ä»¶åˆ—è¡¨ï¼‰
             // <a href='download?key=20100521163715&file=logo%2Egif%2Epng' title='2.29KB' target='tmp_iframe'>logo.gif.png </a>
             html += " <a href='download?key=" + key + "&file=" + sFileUrl + "' title='" + sFileSize + "' target='tmp_iframe'>" + sFileOrg + " </a>\n";
         }
         else
         {
-            // ÆäËü£¨¸½¼ş£©Ò³ÃæµÄÊä³ö
+            // å…¶å®ƒï¼ˆé™„ä»¶ï¼‰é¡µé¢çš„è¾“å‡º
             html += "  <li>\n"
                     "    <a href='download?key=" + key + "&file=" + sFileUrl + "' title='" + sFileSize + "' target='tmp_iframe'>" + sFileOrg + " </a>\n"
-                    "    <a href='#' title='É¾³ıÎÄ¼ş' OnClick=\"Delete(this, '" + key + "', '" + sFileUrl + "', '" + sFileOrg + "')\">¡Á</a>\n"
+                    "    <a href='#' title='åˆ é™¤æ–‡ä»¶' OnClick=\"Delete(this, '" + key + "', '" + sFileUrl + "', '" + sFileOrg + "')\">Ã—</a>\n"
                     "  </li>\n"
                     "\n";
         }
@@ -145,7 +145,7 @@ string Tag_AttachList::Get(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_AttachList tmp(TAG_GLOBAL, THIS_MODULE);
 
 }// end of TAG_ATTACHLIST_SPACE

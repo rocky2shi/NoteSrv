@@ -6,7 +6,7 @@ namespace TAG_TEXTSTYLE_SPACE
 {
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜Žæ¨¡å—
 static const string THIS_MODULE = "TextStyle";
 
 
@@ -15,17 +15,17 @@ static const string THIS_MODULE = "TextStyle";
 
 Tag_TextStyle::Tag_TextStyle()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_TextStyle::Tag_TextStyle(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_TextStyle::~Tag_TextStyle()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -33,15 +33,15 @@ Tag_TextStyle::~Tag_TextStyle()
 
 int Tag_TextStyle::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_TextStyle::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_TextStyle;
 }
 
@@ -52,24 +52,24 @@ Tag *Tag_TextStyle::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±êÌâ [2010-05]
+// å–æ ‡é¢˜ [2010-05]
 string Tag_TextStyle::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    const Conf *pack = page->GetCurrentPack();          // µ±Ç°key¶ÔÓ¦Êý¾Ý¼¯
+    const Conf *pack = page->GetCurrentPack();          // å½“å‰keyå¯¹åº”æ•°æ®é›†
     const string &font_weight = pack->Get("font_weight");
     const string &font_style = pack->Get("font_style");
     const string &font_text_decoration = pack->Get("font_text_decoration");
     const string &font_size = EmptyStringToDefault(pack->Get("font_size"), "18");
     const string &font_color = EmptyStringToDefault(pack->Get("font_color"), "#FFFFFF");
-    const string &font_family = EmptyStringToDefault(pack->Get("font_family"), "¿¬Ìå_GB2312");
+    const string &font_family = EmptyStringToDefault(pack->Get("font_family"), "æ¥·ä½“_GB2312");
     const string &font_bgcolor = EmptyStringToDefault(pack->Get("font_bgcolor"), "#000000");
 
     string html = "margin: 13px 20px; padding:6px; "

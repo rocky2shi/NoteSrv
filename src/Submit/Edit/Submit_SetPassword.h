@@ -10,7 +10,7 @@ namespace SUBMIT_SETPASSWORD_SPACE
 
 
 
-// 设置当前数据加密密码
+// 璁剧疆褰撳墠鏁版嵁鍔犲瘑瀵嗙爜
 class Submit_SetPassword : public Submit
 {
 protected:

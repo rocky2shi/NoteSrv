@@ -7,7 +7,7 @@ namespace TAG_STYLEITEMSETTING_SPACE
 
 
 
-// ÕıÎÄµÄ·ç¸ñÏÔÊ¾ÉèÖÃ×ÓÏî
+// æ­£æ–‡çš„é£æ ¼æ˜¾ç¤ºè®¾ç½®å­é¡¹
 class Tag_StyleItemSetting : public Tag
 {
 protected:

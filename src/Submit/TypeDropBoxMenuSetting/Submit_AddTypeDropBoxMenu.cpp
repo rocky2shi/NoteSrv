@@ -7,7 +7,7 @@ namespace SUBMIT_ADDTYPEDROPBOXMENU_SPACE
 {
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "AddTypeDropBoxMenu";
 
 
@@ -16,18 +16,18 @@ static const string THIS_MODULE = "AddTypeDropBoxMenu";
 
 Submit_AddTypeDropBoxMenu::Submit_AddTypeDropBoxMenu()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_AddTypeDropBoxMenu::Submit_AddTypeDropBoxMenu(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_AddTypeDropBoxMenu::~Submit_AddTypeDropBoxMenu()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -35,15 +35,15 @@ Submit_AddTypeDropBoxMenu::~Submit_AddTypeDropBoxMenu()
 
 int Submit_AddTypeDropBoxMenu::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_AddTypeDropBoxMenu::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_AddTypeDropBoxMenu;
 }
 
@@ -51,7 +51,7 @@ Submit *Submit_AddTypeDropBoxMenu::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -64,7 +64,7 @@ int Submit_AddTypeDropBoxMenu::Deal(Page *page)
     const string &key = page->GetCurrentKey();
     const string &type_title = request->GetField("type_title");
 
-    // ±êÌâ×Ö¶Î²»ÄÜ¿Õ£¬Ò²²»ÄÜÖØ¸´£»
+    // æ ‡é¢˜å­—æ®µä¸èƒ½ç©ºï¼Œä¹Ÿä¸èƒ½é‡å¤ï¼›
     if("" == type_title || "" != menu->Find(type_title, "title"))
     {
         LOG_ERROR("Title error, repeat or empty: [%s]", type_title.c_str());
@@ -75,7 +75,7 @@ int Submit_AddTypeDropBoxMenu::Deal(Page *page)
     menu->SetItem(key, "status", "enable");
     menu->SetItem(key, "hotspot", "0");
 
-    // ±£´æ
+    // ä¿å­˜
     return menu->Save();
 }
 

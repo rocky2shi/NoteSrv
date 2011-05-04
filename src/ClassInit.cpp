@@ -32,7 +32,7 @@ int ClassInit::init()
     list<ExeFunc>::iterator it;
     int ret;
 
-    // 先执行高优先级初始化
+    // 鍏堟墽琛岄珮浼樺厛绾у垵濮嬪寲
     for(it = m_HighQueue.begin(); m_HighQueue.end() != it; it++)
     {
         ret = (*it)();
@@ -44,7 +44,7 @@ int ClassInit::init()
         // printf("Hight init [%p] OK\n", *it);
     }
 
-    // 再执行低优先级初始化
+    // 鍐嶆墽琛屼綆浼樺厛绾у垵濮嬪寲
     for(it = m_LowQueue.begin(); m_LowQueue.end() != it; it++)
     {
         ret = (*it)();

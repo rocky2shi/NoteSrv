@@ -10,33 +10,33 @@ namespace CONNECTQUEUE_SPACE
 
 
 
-// а╛╫с╤сапё╗╣╔дёй╫ё╘
+// Х©·Ф▌╔И≤÷Е┬≈О╪┬Е█∙Ф╗║Е╪▐О╪┴
 class ConnectQueue
 {
 public:
-    // ЁУй╪╩╞ё╗╥жеД╩╥пн╤сапдз╢Ф╣хё╘
+    // Е┬²Е╖▀Е▄√О╪┬Е┬├И┘█Г▌╞Е╫╒И≤÷Е┬≈Е├┘Е╜≤Г╜┴О╪┴
     static int init();
 
-    // жьть()╡ывВ╥Шё╛╥╣╩ьдё©И╤тоС╣ьж╥ё╩
+    // И┤█Х╫╫()Ф⌠█Д╫°Г╛╕О╪▄Х©■Е⌡·Ф╗║Е²≈Е╞╧Х╠║Е°╟Е²─О╪⌡
     inline static ConnectQueue * instance()
     {
-        FUNCTION_TRACK(); // ╨╞йЩ╧Л╪ё╦Звш
+        FUNCTION_TRACK(); // Е┤╫Ф∙╟Х╫╗Х©╧Х╥÷Г╩╪
         static ConnectQueue s;
         return &s;
     }
 
-    // а╛╫с╤тоСё╗ж╦уКё╘╪схК╤сап
+    // Х©·Ф▌╔Е╞╧Х╠║О╪┬Ф▄┤И▓┬О╪┴Е┼═Е┘╔И≤÷Е┬≈
     int push(Connect *&connect);
 
-    // х║ЁЖа╛╫с╤тоСё╗м╛й╠╟я╦ц╤тоС╢с╤сапжпи╬ЁЩё╘
+    // Е▐√Е┤╨Х©·Ф▌╔Е╞╧Х╠║О╪┬Е░▄Ф≈╤Ф┼┼Х╞╔Е╞╧Х╠║Д╩▌И≤÷Е┬≈Д╦╜Е┬═И≥╓О╪┴
     Connect *pop();
 
 private:
     ConnectQueue();
 
 private:
-    RingQueueOfInt m_queue; // а╛╫с╤сап
-    CondLock m_lock;        // лУ╪Ч╠Да©кЬё╛╣╠спйЩ╬щ╢╕юМй╠ё╛╩╫пя╢╕юМоъЁлё╩
+    RingQueueOfInt m_queue; // Х©·Ф▌╔И≤÷Е┬≈
+    CondLock m_lock;        // Ф²║Д╩╤Е▐≤И┤▐И■│О╪▄Е╫⌠Ф°┴Ф∙╟Ф█╝Е╓└Г░├Ф≈╤О╪▄Е■╓И├▓Е╓└Г░├Г╨©Г╗▀О╪⌡
 };
 
 

@@ -8,33 +8,33 @@ namespace PAGE_PING_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "ping";
 
 
 
 Page_Ping::Page_Ping()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Ping::~Page_Ping()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Ping::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     m_html = "";
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Ping::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Ping;
 }
 
@@ -45,19 +45,19 @@ Page *Page_Ping::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
-// Êä³öÊı¾İÌå
+// è¾“å‡ºæ•°æ®ä½“
 int Page_Ping::OutBody()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
     const string &page = m_request->GetPageName();
 
-    // ¶ÔµÇÂ¼Ò³Ãæ£¬²»×ö²âÊÔ£¨·µ»ØOKÔò²»ÏÔÊ¾ÑéÖ¤ÊäÈë¿ò)£»
+    // å¯¹ç™»å½•é¡µé¢ï¼Œä¸åšæµ‹è¯•ï¼ˆè¿”å›OKåˆ™ä¸æ˜¾ç¤ºéªŒè¯è¾“å…¥æ¡†)ï¼›
     if("login" == page)
     {
         m_request->GetConnect()->Send("OK");
@@ -69,11 +69,11 @@ int Page_Ping::OutBody()
     else
     {
         /*
-         * ²é¿´ÊÇ·ñÓĞÆäËûÈËÊ¹ÓÃ´ËÕËºÅÔÚ±ğ´¦ÀíµÇÂ¼
+         * æŸ¥çœ‹æ˜¯å¦æœ‰å…¶ä»–äººä½¿ç”¨æ­¤è´¦å·åœ¨åˆ«å¤„ç†ç™»å½•
          *
-         *   ×¢Òâ£¬ÈôÒÑÓĞÓÃ»§ÔÚ±ğ´¦µÇÂ¼£¬Ôò²»ÄÜÔÙÊ¹
-         *   ÓÃm_request->GetCurrentUser()À´»ñÈ¡ÓÃ
-         *   »§Ãû¡£
+         *   æ³¨æ„ï¼Œè‹¥å·²æœ‰ç”¨æˆ·åœ¨åˆ«å¤„ç™»å½•ï¼Œåˆ™ä¸èƒ½å†ä½¿
+         *   ç”¨m_request->GetCurrentUser()æ¥è·å–ç”¨
+         *   æˆ·åã€‚
          */
         const string &username = m_request->GetField("username");
         User *user = User::Get(username);
@@ -83,13 +83,13 @@ int Page_Ping::OutBody()
 
         if( session->isValid() )
         {
-            // È¡¶Ô·½µÇÂ¼ip
+            // å–å¯¹æ–¹ç™»å½•ip
             const string &ip = Session::Get( id )->GetIp();
-            msg = "´ËÕËºÅÔÚ±ğ´¦µÇÂ¼£¬¶Ô·½IP: " + ip;
+            msg = "æ­¤è´¦å·åœ¨åˆ«å¤„ç™»å½•ï¼Œå¯¹æ–¹IP: " + ip;
         }
         else
         {
-            msg = "Î´Öª´íÎó£¨¿ÉÄÜÒÑ³¬Ê±£©£¬ÇëÖØĞÂµÇÂ¼¡£";
+            msg = "æœªçŸ¥é”™è¯¯ï¼ˆå¯èƒ½å·²è¶…æ—¶ï¼‰ï¼Œè¯·é‡æ–°ç™»å½•ã€‚";
         }
 
         m_request->GetConnect()->Send(msg);
@@ -105,7 +105,7 @@ int Page_Ping::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Ping, THIS_MODULE)
 
 

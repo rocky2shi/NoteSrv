@@ -8,7 +8,7 @@ namespace PAGE_DATAIMPORT_SPACE
 
 
 
-// 处理导入数据
+// 澶勭悊瀵煎叆鏁版嵁
 class Page_DataImport : public Page
 {
 protected:

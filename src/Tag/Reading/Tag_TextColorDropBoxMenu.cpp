@@ -13,7 +13,7 @@ namespace TAG_TEXTCOLORDROPBOXMENU_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "TextColorDropBoxMenu";
 
 
@@ -22,17 +22,17 @@ static const string THIS_MODULE = "TextColorDropBoxMenu";
 
 Tag_TextColorDropBoxMenu::Tag_TextColorDropBoxMenu()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_TextColorDropBoxMenu::Tag_TextColorDropBoxMenu(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_TextColorDropBoxMenu::~Tag_TextColorDropBoxMenu()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -40,15 +40,15 @@ Tag_TextColorDropBoxMenu::~Tag_TextColorDropBoxMenu()
 
 int Tag_TextColorDropBoxMenu::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_TextColorDropBoxMenu::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_TextColorDropBoxMenu;
 }
 
@@ -59,7 +59,7 @@ Tag *Tag_TextColorDropBoxMenu::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -67,12 +67,12 @@ Tag *Tag_TextColorDropBoxMenu::DoNew()
 
 string Tag_TextColorDropBoxMenu::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    const Conf *pack = page->GetCurrentPack();          // µ±Ç°key¶ÔÓ¦Êı¾İ¼¯
+    const Conf *pack = page->GetCurrentPack();          // å½“å‰keyå¯¹åº”æ•°æ®é›†
     const string &username = page->GetRequest()->GetCurrentUser();
     Menu *menu = Menu::Get(username, "TextColorDropBox.cfg");   // [XXX:56425820]
-    const string &sSelectedItem = pack->Get("font_color");      // µ±Ç°±»Ñ¡ÖĞµÄÏÂ½Ó²Ëµ¥Ïî
+    const string &sSelectedItem = pack->Get("font_color");      // å½“å‰è¢«é€‰ä¸­çš„ä¸‹æ¥èœå•é¡¹
 
     Menu::iterator it(menu);
     string html = "";
@@ -110,7 +110,7 @@ string Tag_TextColorDropBoxMenu::Get(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_TextColorDropBoxMenu tmp("reading", THIS_MODULE);
 
 }// end of TAG_TEXTCOLORDROPBOXMENU_SPACE

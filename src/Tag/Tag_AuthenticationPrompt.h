@@ -11,7 +11,7 @@ namespace TAG_AUTHENTICATIONPROMPT_SPACE
 
 
 
-// 查看加密数据输入窗口
+// 鏌ョ湅鍔犲瘑鏁版嵁杈撳叆绐楀彛
 class Tag_AuthenticationPrompt : public Tag
 {
 protected:

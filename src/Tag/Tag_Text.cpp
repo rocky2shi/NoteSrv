@@ -9,7 +9,7 @@ namespace TAG_TEXT_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "Text";
 
 
@@ -18,17 +18,17 @@ static const string THIS_MODULE = "Text";
 
 Tag_Text::Tag_Text()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_Text::Tag_Text(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_Text::~Tag_Text()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -36,15 +36,15 @@ Tag_Text::~Tag_Text()
 
 int Tag_Text::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_Text::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_Text;
 }
 
@@ -55,11 +55,11 @@ Tag *Tag_Text::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
-// ×ª»»º¯Êı
+// è½¬æ¢å‡½æ•°
 const string Tag_Text::ThisTextToWeb(const string &txt) const
 {
     return ::TextToWebHtml(txt);
@@ -68,18 +68,18 @@ const string Tag_Text::ThisTextToWeb(const string &txt) const
 
 string Tag_Text::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    const Conf *pack = page->GetCurrentPack();   // µ±Ç°key¶ÔÓ¦Êı¾İ¼¯
-    const string &text = pack->Get("text");     // È¡³öÕıÎÄÊı¾İ
+    const Conf *pack = page->GetCurrentPack();   // å½“å‰keyå¯¹åº”æ•°æ®é›†
+    const string &text = pack->Get("text");     // å–å‡ºæ­£æ–‡æ•°æ®
     const string &password = pack->Get("password");
     const string &decryption = page->GetResult("decryption");
 
     LOG_DEBUG("[%s] [%s]", password.c_str(), decryption.c_str());
 
-    /* ¼ÓÃÜÊı¾İÊÇ·ñÔÊĞíÏÔÊ¾£¨Ò»°ãÇé¿öÏÂ£¬´Ë×Ö¶ÎÎª¿Õ£¬Ö»ÓĞµÄÊı
-     * ¾İÊÇ¼ÓÃÜµÄ¡¢ÇÒ½âÃØ³É¹¦Ê±£¬decryption²Å±»ÖÃÎª"YES"£©
-     * £¨×¢£º¸ÃÖµÔÚSubmit_Decryption::Deal()ÀàÖĞ´¦Àí£»
+    /* åŠ å¯†æ•°æ®æ˜¯å¦å…è®¸æ˜¾ç¤ºï¼ˆä¸€èˆ¬æƒ…å†µä¸‹ï¼Œæ­¤å­—æ®µä¸ºç©ºï¼Œåªæœ‰çš„æ•°
+     * æ®æ˜¯åŠ å¯†çš„ã€ä¸”è§£ç§˜æˆåŠŸæ—¶ï¼Œdecryptionæ‰è¢«ç½®ä¸º"YES"ï¼‰
+     * ï¼ˆæ³¨ï¼šè¯¥å€¼åœ¨Submit_Decryption::Deal()ç±»ä¸­å¤„ç†ï¼›
      */
     if( "" != password && "YES" != decryption )
     {
@@ -87,10 +87,10 @@ string Tag_Text::Get(Page *page)
         return "";
     }
 
-    // ÊÇ¼ÓÃÜÊı¾İ£¬½âÃÜºóÊä³ö£»
+    // æ˜¯åŠ å¯†æ•°æ®ï¼Œè§£å¯†åè¾“å‡ºï¼›
     if("" != password)
     {
-        // ¸Ãkey¶ÔÓ¦Êı¾İµÄÃÜÂë£¨×¢Òâ£¬ÊÇ¿Í»§¶Ë´«À´µÄÃ÷ÎÄÃÜÂë£©
+        // è¯¥keyå¯¹åº”æ•°æ®çš„å¯†ç ï¼ˆæ³¨æ„ï¼Œæ˜¯å®¢æˆ·ç«¯ä¼ æ¥çš„æ˜æ–‡å¯†ç ï¼‰
         const string &paswd = page->GetRequest()->GetField("password");
         const string &str = Encrypt(paswd).decrypt( text );
         LOG_DEBUG("Decrypt...");
@@ -99,7 +99,7 @@ string Tag_Text::Get(Page *page)
 
     LOG_DEBUG("Not need to decrypt...");
 
-    // Î´¼ÓÃÜÊı¾İ
+    // æœªåŠ å¯†æ•°æ®
     return ThisTextToWeb( text );
 }
 
@@ -119,7 +119,7 @@ string Tag_Text::Get(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_Text tmp(TAG_GLOBAL, THIS_MODULE);
 
 }// end of TAG_TEXT_SPACE

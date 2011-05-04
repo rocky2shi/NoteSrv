@@ -9,7 +9,7 @@ namespace PAGE_DOWNLOAD_SPACE
 
 
 
-// ÎÄ¼şÏÂÔØ´¦ÀíÀà
+// æ–‡ä»¶ä¸‹è½½å¤„ç†ç±»
 class Page_Download : public Page
 {
 protected:

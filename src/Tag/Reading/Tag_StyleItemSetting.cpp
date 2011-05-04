@@ -6,7 +6,7 @@ namespace TAG_STYLEITEMSETTING_SPACE
 {
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 //static const string THIS_MODULE = "Tag_StyleItemSetting";
 
 
@@ -15,17 +15,17 @@ namespace TAG_STYLEITEMSETTING_SPACE
 
 Tag_StyleItemSetting::Tag_StyleItemSetting()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_StyleItemSetting::Tag_StyleItemSetting(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_StyleItemSetting::~Tag_StyleItemSetting()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -33,15 +33,15 @@ Tag_StyleItemSetting::~Tag_StyleItemSetting()
 
 int Tag_StyleItemSetting::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_StyleItemSetting::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_StyleItemSetting;
 }
 
@@ -52,21 +52,21 @@ Tag *Tag_StyleItemSetting::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±êÌâ [2010-05]
+// å–æ ‡é¢˜ [2010-05]
 string Tag_StyleItemSetting::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    const Conf *pack = page->GetCurrentPack();          // µ±Ç°key¶ÔÓ¦Êı¾İ¼¯
-    const string &text = pack->Get("text");             // È¡³öÕıÎÄÊı¾İ
+    const Conf *pack = page->GetCurrentPack();          // å½“å‰keyå¯¹åº”æ•°æ®é›†
+    const string &text = pack->Get("text");             // å–å‡ºæ­£æ–‡æ•°æ®
 
-    // ÊÇ·ñÎª·ç¸ñµ¥Ñ¡¶¥
+    // æ˜¯å¦ä¸ºé£æ ¼å•é€‰é¡¶
     if("chk_font_weight" == m_id)
     {
         const string &font_weight = pack->Get("font_weight");
@@ -83,31 +83,31 @@ string Tag_StyleItemSetting::Get(Page *page)
         return "" == font_text_decoration ? "" : "checked";
     }
 
-    // ÊÇ·ñÎª×ÖºÅ
+    // æ˜¯å¦ä¸ºå­—å·
     else if("font_size" == m_id)
     {
         const string &font_size = EmptyStringToDefault(pack->Get("font_size"), "18");
         return font_size;
     }
 
-    // ÊÇ·ñÎªÑÕÉ«
+    // æ˜¯å¦ä¸ºé¢œè‰²
     else if("font_color" == m_id)
     {
         const string &font_color = EmptyStringToDefault(pack->Get("font_color"), "#FFFFFF");
         return font_color;
     }
 
-    // ÊÇ·ñÎª±³¾°
+    // æ˜¯å¦ä¸ºèƒŒæ™¯
     else if("font_bgcolor" == m_id)
     {
         const string &font_bgcolor = EmptyStringToDefault(pack->Get("font_bgcolor"), "#000000");
         return font_bgcolor;
     }
 
-    // ÊÇ·ñÎª×ÖÌå
+    // æ˜¯å¦ä¸ºå­—ä½“
     else if("font_family" == m_id)
     {
-        const string &font_family = EmptyStringToDefault(pack->Get("font_family"), "¿¬Ìå_GB2312");
+        const string &font_family = EmptyStringToDefault(pack->Get("font_family"), "æ¥·ä½“_GB2312");
         return font_family;
     }
 
@@ -130,7 +130,7 @@ string Tag_StyleItemSetting::Get(Page *page)
 
 
 
-// ´¦Àí¶à¸öÏî
+// å¤„ç†å¤šä¸ªé¡¹
 static Tag_StyleItemSetting tmp1("reading", "chk_font_weight");
 static Tag_StyleItemSetting tmp2("reading", "chk_font_style");
 static Tag_StyleItemSetting tmp3("reading", "chk_font_text_decoration");

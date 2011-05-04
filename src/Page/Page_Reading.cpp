@@ -15,33 +15,33 @@ namespace PAGE_READING_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "reading";
 
 
 
 Page_Reading::Page_Reading()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Reading::~Page_Reading()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Reading::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     m_html = GlobalConfig::instance()->TemplateDir() + "Reading.html";
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Reading::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Reading;
 }
 
@@ -52,17 +52,17 @@ Page *Page_Reading::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 int Page_Reading::OutBody()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
 
     /*
-     * ´¦ÀíÕıÎÄÏÔÊ¾·ç¸ñÉèÖÃÌá½»ÊÂ¼ş
+     * å¤„ç†æ­£æ–‡æ˜¾ç¤ºé£æ ¼è®¾ç½®æäº¤äº‹ä»¶
      */
     const string &set_text_style = m_request->GetField("set_text_style");
     if("" != set_text_style)
@@ -74,7 +74,7 @@ int Page_Reading::OutBody()
     LOG_DEBUG("set_text_style=[%s]", set_text_style.c_str());
 
     /*
-     * ´¦ÀíÕıÎÄÖĞ²åÈëÍ¼Æ¬¡¢ÊéÇ©µÈÌá½»ÊÂ¼ş
+     * å¤„ç†æ­£æ–‡ä¸­æ’å…¥å›¾ç‰‡ã€ä¹¦ç­¾ç­‰æäº¤äº‹ä»¶
      */
     const string &operate = m_request->GetField("operate");
     if("InsertObj" == operate)
@@ -91,21 +91,21 @@ int Page_Reading::OutBody()
     LOG_DEBUG("operate=[%s]", operate.c_str());
 
     /*
-     * ÊÇ·ñÎª½âÃÜÌá½»ÊÂ¼ş
+     * æ˜¯å¦ä¸ºè§£å¯†æäº¤äº‹ä»¶
      */
     const string &decryption = m_request->GetField("decryption");
     if("" != decryption)
     {
         Submit::Ptr submit( Submit::New(SUBMIT_GLOBAL, "decryption") );
         /*
-         * ÈÏÖ¤Î´Í¨¹ı£¬Ôòsubmit->Deal()´¦ÀíÄÚ²¿ÉèÖÃencryptionÎª"YES"£¬
-         * ÕıÎÄÏÔÊ¾µÈ´úÂë¸ù¾İ´ËÖµ¾ö¶¨ÊÇ·ñÏÔÊ¾ÄÚÈİ¡£
+         * è®¤è¯æœªé€šè¿‡ï¼Œåˆ™submit->Deal()å¤„ç†å†…éƒ¨è®¾ç½®encryptionä¸º"YES"ï¼Œ
+         * æ­£æ–‡æ˜¾ç¤ºç­‰ä»£ç æ ¹æ®æ­¤å€¼å†³å®šæ˜¯å¦æ˜¾ç¤ºå†…å®¹ã€‚
          */
         submit->Deal(this);
     }
 
     /*
-     * ´¦ÀíÊı¾İ×ª»»£¨ĞÂ¡¢¾ÉÊı¾İ¼ä£©Ìá½»ÊÂ¼ş
+     * å¤„ç†æ•°æ®è½¬æ¢ï¼ˆæ–°ã€æ—§æ•°æ®é—´ï¼‰æäº¤äº‹ä»¶
      */
     const string &conversion = m_request->GetField("DataConversion");
     if("" != conversion)
@@ -131,7 +131,7 @@ int Page_Reading::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Reading, THIS_MODULE)
 
 }// end of PAGE_READING_SPACE

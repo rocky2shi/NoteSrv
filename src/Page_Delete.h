@@ -11,7 +11,7 @@ namespace PAGE_DELETE_SPACE
 
 
 
-// É¾³ýÎÄ¼þ
+// åˆ é™¤æ–‡ä»¶
 class Page_Delete : public Page
 {
 protected:

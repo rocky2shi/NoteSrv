@@ -10,7 +10,7 @@ namespace SUBMIT_REGISTERUSER_SPACE
 
 
 
-// ÓÃ»§×¢²á
+// ç”¨æˆ·æ³¨å†Œ
 class Submit_RegisterUser : public Submit
 {
 protected:

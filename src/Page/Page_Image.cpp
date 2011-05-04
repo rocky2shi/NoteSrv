@@ -9,32 +9,32 @@ namespace PAGE_IMAGE_SPACE
 
 
 
-// ±êÃ÷Ä£¿é£¨×¢Òâ£¬¶¨Òå"original"ÔÚPage::New()ÖĞµ½£¬²»¿ÉËæÒâ¸ü¸Ä£»£©
+// æ ‡æ˜æ¨¡å—ï¼ˆæ³¨æ„ï¼Œå®šä¹‰"original"åœ¨Page::New()ä¸­åˆ°ï¼Œä¸å¯éšæ„æ›´æ”¹ï¼›ï¼‰
 static const string THIS_MODULE = "image";
 
 
 
 Page_Image::Page_Image()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Image::~Page_Image()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Image::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Image::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Image;
 }
 
@@ -45,13 +45,13 @@ Page *Page_Image::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
-// Êä³öhttpĞ­ÒéÍ·²¿
+// è¾“å‡ºhttpåè®®å¤´éƒ¨
 int Page_Image::OutHead()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     Connect * const connect = m_request->GetConnect();
     string filename = m_request->GetField("file");
@@ -60,7 +60,7 @@ int Page_Image::OutHead()
     if("" == filename)
     {
         /*
-         * ÊÇÖ±½ÓÇëÇóÍ¼Æ¬£¬Èç£º
+         * æ˜¯ç›´æ¥è¯·æ±‚å›¾ç‰‡ï¼Œå¦‚ï¼š
          * http://192.168.1.100:17890/logo.gif
          */
         filename = m_request->GetPageName();
@@ -69,13 +69,13 @@ int Page_Image::OutHead()
     else
     {
         /*
-         * ´ò¿ªÓÃ»§Í¼Æ¬£¬Èç£º
+         * æ‰“å¼€ç”¨æˆ·å›¾ç‰‡ï¼Œå¦‚ï¼š
          *  http://192.168.1.100:17890/image?file=logo.gif
          */
         const string &username = m_request->GetCurrentUser();
         const string &key = GetCurrentKey();
         User *user = User::Get( username );
-        fullpath = user->AttachDir() + key + "." + filename; // Í¼Æ¬´æÓÚ¸½¼şÄ¿Â¼ÖĞ
+        fullpath = user->AttachDir() + key + "." + filename; // å›¾ç‰‡å­˜äºé™„ä»¶ç›®å½•ä¸­
     }
 
     LOG_DEBUG("file=[%s]", fullpath.c_str());
@@ -85,15 +85,15 @@ int Page_Image::OutHead()
     {
         Page::OutHead();
 
-        const string str = "Ã»ÓĞÍ¼Æ¬: <font color='red'>" + filename + "</font>";
+        const string str = "æ²¡æœ‰å›¾ç‰‡: <font color='red'>" + filename + "</font>";
         LOG_ERROR("Can't open file: [%s]", fullpath.c_str());
-        // ·¢ËÍµ½ä¯ÀÀÆ÷
+        // å‘é€åˆ°æµè§ˆå™¨
         connect->Send(str);
         return ERR;
     }
 
     const string &size = IntToString(m_file.Size());
-    // Í¼ÏñÏÔÊ¾
+    // å›¾åƒæ˜¾ç¤º
     const string html = ""
                         "HTTP/1.1 200 OK\n"
                         "Accept-Ranges: bytes\n"
@@ -102,14 +102,14 @@ int Page_Image::OutHead()
                         "Content-Type: image/png jpg jpeg gif bmp\n"
                         "\n";
 
-    // ·¢ËÍ
+    // å‘é€
     return connect->Send(html) == html.length() ? OK : ERR;
 }
 
-// Êä³öÊı¾İÌå
+// è¾“å‡ºæ•°æ®ä½“
 int Page_Image::OutBody()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
@@ -132,7 +132,7 @@ int Page_Image::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Image, THIS_MODULE)
 
 }// end of PAGE_DOWNLOAD_SPACE

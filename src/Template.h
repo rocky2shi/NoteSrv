@@ -10,12 +10,12 @@ using namespace std;
 
 /*
  *
- *      ͨ�ã����ã�ģ�嶨��
+ *      通用（共用）模板定义
  *
  */
 
 
-// ������������ģ���д��ݻ����õĶ���
+// 用于在主、子模块中传递环境用的定义
 template<class Type, ENV_OBJ_ID id>
 class EnvInit
 {
@@ -24,13 +24,13 @@ public:
     {
         if( bNew )
         {
-            // ʹ���µĶ���ʵ��
+            // 使用新的对象实例
             static Type obj;
             return &obj;
         }
         else
         {
-            // �ָ�Ϊ����ʹ�õĶ���
+            // 恢复为正在使用的对象
             return (Type *)( Environment::instance()->Get( id ) );
         }
     }

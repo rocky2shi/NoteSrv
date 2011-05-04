@@ -3,28 +3,28 @@
 namespace TAG_ONLINETIME_SPACE
 {
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 //static const string THIS_MODULE = "OnlineTime";
 
 
-// ³ÌĞò»ØÔØÊ±¿ªÈç¼ÆÊ±
+// ç¨‹åºå›è½½æ—¶å¼€å¦‚è®¡æ—¶
 static unsigned long f_boottime = time(NULL);
 
 
 
 Tag_OnlineTime::Tag_OnlineTime()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_OnlineTime::Tag_OnlineTime(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_OnlineTime::~Tag_OnlineTime()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -32,15 +32,15 @@ Tag_OnlineTime::~Tag_OnlineTime()
 
 int Tag_OnlineTime::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_OnlineTime::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_OnlineTime;
 }
 
@@ -51,16 +51,16 @@ Tag *Tag_OnlineTime::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±êÌâ [2010-05]
+// å–æ ‡é¢˜ [2010-05]
 string Tag_OnlineTime::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     if("OnlineTime" == m_id)
     {

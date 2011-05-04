@@ -9,7 +9,7 @@ namespace CONNECT_TCP_SPACE
 
 
 
-// TCPÁ¬½ÓÀà
+// TCPè¿žæŽ¥ç±»
 class Connect_TCP : public Connect
 {
 public:

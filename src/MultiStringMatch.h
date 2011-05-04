@@ -15,14 +15,14 @@ using namespace std;
 
 
 /*
- * ¹¦ÄÜ£º¶àÄ£×Ö·û´®Æ¥Åä£¨²éÕÒ¡¢Ìæ»»£©
- * ±àĞ´£ºRocky 2010-05-21 10:46:59
- * °æ±¾£ºv0.3
+ * åŠŸèƒ½ï¼šå¤šæ¨¡å­—ç¬¦ä¸²åŒ¹é…ï¼ˆæŸ¥æ‰¾ã€æ›¿æ¢ï¼‰
+ * ç¼–å†™ï¼šRocky 2010-05-21 10:46:59
+ * ç‰ˆæœ¬ï¼šv0.3
  */
 class MultiStringMatch
 {
-    static const int INIT = 1;              // ³õÌ¬
-    static const int STATE_MAX = 100000;    // ÌØÊâ±ê¼Ç£¬¼ÙÉèËùÓĞ×´Ì¬¶¼Ğ¡ÓÚ´ËÖµ£»
+    static const int INIT = 1;              // åˆæ€
+    static const int STATE_MAX = 100000;    // ç‰¹æ®Šæ ‡è®°ï¼Œå‡è®¾æ‰€æœ‰çŠ¶æ€éƒ½å°äºæ­¤å€¼ï¼›
     struct Back
     {
         int state;
@@ -30,51 +30,51 @@ class MultiStringMatch
     };
 
 public:
-    // ÓÃÓÚ²éÕÒ£¬strings×Ó´®¼¯
+    // ç”¨äºæŸ¥æ‰¾ï¼Œstringså­ä¸²é›†
     MultiStringMatch(vector<string> &strings);
 
-    // ÓÃÓÚÌæ»»£¬°ÑfromÖĞµÄ×Ó´®»»³É¶ÔÓ¦µÄtoÖĞµÄ´®£»
+    // ç”¨äºæ›¿æ¢ï¼ŒæŠŠfromä¸­çš„å­ä¸²æ¢æˆå¯¹åº”çš„toä¸­çš„ä¸²ï¼›
     MultiStringMatch(vector<string> &from, vector<string> &to);
 
-    // ÓÃÓÚÌæ»»£¬°Ñkey¶ÔÓ¦¼¯ºÏ×ªÎªvalue¶ÔÓ¦¼¯ºÏ£»
+    // ç”¨äºæ›¿æ¢ï¼ŒæŠŠkeyå¯¹åº”é›†åˆè½¬ä¸ºvalueå¯¹åº”é›†åˆï¼›
     MultiStringMatch(map<string, string> &key2value);
 
-    // Ìæ»»£º°ÑstrÖĞµÄÆ¥Åä×Ó´®£¨m_from£©Ìæ»»ÎªÁíÒ»¶ÔÓ¦×Ó´®£¨m_to£©
+    // æ›¿æ¢ï¼šæŠŠsträ¸­çš„åŒ¹é…å­ä¸²ï¼ˆm_fromï¼‰æ›¿æ¢ä¸ºå¦ä¸€å¯¹åº”å­ä¸²ï¼ˆm_toï¼‰
     const string Replace(const string &str);
 
-    // ²éÕÒ£ºÖ»ÒªÆ¥ÅäÖĞÒ»¸ö¹Ø¼ü×Ö£¬·µ»Øtrue
+    // æŸ¥æ‰¾ï¼šåªè¦åŒ¹é…ä¸­ä¸€ä¸ªå…³é”®å­—ï¼Œè¿”å›true
     bool MatchOneKey(const string &str);
 
-    // ²éÕÒ£º±ØĞëÆ¥ÅäËùÓĞ¸ø¶¨¹Ø¼ü×Ö²Å·µ»Øtrue
+    // æŸ¥æ‰¾ï¼šå¿…é¡»åŒ¹é…æ‰€æœ‰ç»™å®šå…³é”®å­—æ‰è¿”å›true
     bool MatchAllKey(const string &str);
 
 
 private:
-    // ³õÊ¼»¯
+    // åˆå§‹åŒ–
     int Init();
 
-    // É¨Ãèm_fromÖĞ¸÷×Ó´®£¬¹¹Ôì¸÷×´Ì¬×ª»»±í£»
+    // æ‰«æm_fromä¸­å„å­ä¸²ï¼Œæ„é€ å„çŠ¶æ€è½¬æ¢è¡¨ï¼›
     void MarkStateTable();
 
-    // È¡µ±´¦ÓÚ×´Ì¬state¡¢Æ¥Åäµ±Ç°×Ö·û³ö´íÊ±µÄ´®£»
+    // å–å½“å¤„äºçŠ¶æ€stateã€åŒ¹é…å½“å‰å­—ç¬¦å‡ºé”™æ—¶çš„ä¸²ï¼›
     const string GetBackStr(int state);
 
-    // ¼ÆËã²»Æ¥ÅäÊ±£¬µ±Ç°×´Ì¬¶ÔÓ¦µÄ´®¡£
+    // è®¡ç®—ä¸åŒ¹é…æ—¶ï¼Œå½“å‰çŠ¶æ€å¯¹åº”çš„ä¸²ã€‚
     void NotMatchTable();
 
-    // Êä³ö×´Ì¬±í
+    // è¾“å‡ºçŠ¶æ€è¡¨
     void PrintStateTable();
 
-    // ¹Ø¼ü×ÖÆ¥ÅäÖ´ĞĞº¯Êı
+    // å…³é”®å­—åŒ¹é…æ‰§è¡Œå‡½æ•°
     bool MatchKey(const string &str, bool once=true);
 
 private:
-    map<int, Back> m_BackTable;             // »ØÍË¸ú×Ù±í£¨¼´¼ÇÂ¼µ±Ç°×´À´µÄÀ´Ô´£©
-    map< int, map<int, int> > m_StateTable; // ×´Ì¬±í
-    unsigned int m_CharTable[256];          // ×Ö·û±í
-    vector<string> m_from;                  // Ô´×Ó´®¼¯
-    vector<string> m_to;                    // Ä¿µÄ×Ó´®¼¯
-    map<int, string> m_NotMatchTable;       // µ±²»Æ¥ÅäÊ±£¬µ±Ç°×´Ì¬Ó¦×ªÎªµÄ´®£»
+    map<int, Back> m_BackTable;             // å›é€€è·Ÿè¸ªè¡¨ï¼ˆå³è®°å½•å½“å‰çŠ¶æ¥çš„æ¥æºï¼‰
+    map< int, map<int, int> > m_StateTable; // çŠ¶æ€è¡¨
+    unsigned int m_CharTable[256];          // å­—ç¬¦è¡¨
+    vector<string> m_from;                  // æºå­ä¸²é›†
+    vector<string> m_to;                    // ç›®çš„å­ä¸²é›†
+    map<int, string> m_NotMatchTable;       // å½“ä¸åŒ¹é…æ—¶ï¼Œå½“å‰çŠ¶æ€åº”è½¬ä¸ºçš„ä¸²ï¼›
 };
 
 
@@ -99,8 +99,8 @@ using namespace MULTISTRINGMATCH_SPACE;
 
 history:
  2010-05-21: v0.1
- 2010-05-21: v0.2£¬Ôö¼ÓMatchOneKey()¡¢MatchAllKey()½Ó¿Ú£»
- 2010-05-21: v0.3£¬ĞŞ¸ÄMultiStringMatch::MatchKey()ÖĞµÄint ch¸ÄÎªunsigned char ch£»
+ 2010-05-21: v0.2ï¼Œå¢åŠ MatchOneKey()ã€MatchAllKey()æ¥å£ï¼›
+ 2010-05-21: v0.3ï¼Œä¿®æ”¹MultiStringMatch::MatchKey()ä¸­çš„int chæ”¹ä¸ºunsigned char chï¼›
 
 
 ***/

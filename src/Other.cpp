@@ -11,18 +11,18 @@ namespace OTHER_SPACE
 
 
 /*
- * ÇåÀíÁÙÊ±Ä¿Â¼£¨ÓÉ¶¨Ê±Æ÷Ñ­»·µ÷ÓÃ£©
+ * æ¸…ç†ä¸´æ—¶ç›®å½•ï¼ˆç”±å®šæ—¶å™¨å¾ªç¯è°ƒç”¨ï¼‰
  */
 static void ClearTmpDir(const string &path)
 {
-    // ±éÀúÄ¿Â¼
+    // éå†ç›®å½•
     GetFileList dir( path );
     GetFileList::file_iterator it(dir);
-    const int LONG_TIME = 259200; // = 3 * 24 * 3600Ãë£¨ÈıÌìÇ°£© [XXX]
+    const int LONG_TIME = 259200; // = 3 * 24 * 3600ç§’ï¼ˆä¸‰å¤©å‰ï¼‰ [XXX]
 
     while( it.next() )
     {
-        // É¾³ı±È½ÏÔçµÄÎÄ¼ş
+        // åˆ é™¤æ¯”è¾ƒæ—©çš„æ–‡ä»¶
         if(time(NULL) - GetFileModifyTime(it.name()) > LONG_TIME)
         {
             LOG_DEBUG("Delete file: [%s]", it.name());
@@ -32,7 +32,7 @@ static void ClearTmpDir(const string &path)
 }
 
 /*
- * ÇåÀíÈ«¾ÖÁÙÊ±Ä¿Â¼
+ * æ¸…ç†å…¨å±€ä¸´æ—¶ç›®å½•
  */
 static void ClearGlobalTmpDir(void *)
 {
@@ -42,37 +42,37 @@ static void ClearGlobalTmpDir(void *)
 }
 
 
-// ¼ì²éÊÇ·ñÎªĞèÒªÇåÀí£¨É¾³ıµÄÓÃ»§£©£¬ÊÇÔòÉ¾³ıÓÃ»§Ä¿Â¼£¨¼°ËùÓĞÊı¾İ£©
+// æ£€æŸ¥æ˜¯å¦ä¸ºéœ€è¦æ¸…ç†ï¼ˆåˆ é™¤çš„ç”¨æˆ·ï¼‰ï¼Œæ˜¯åˆ™åˆ é™¤ç”¨æˆ·ç›®å½•ï¼ˆåŠæ‰€æœ‰æ•°æ®ï¼‰
 static int DealDeleteUser(User *user)
 {
     /*
-     * ¼ì²âÓÃ»§×´Ì¬
+     * æ£€æµ‹ç”¨æˆ·çŠ¶æ€
      */
 
     if("delete" != user->GetInfo("status"))
     {
         LOG_DEBUG("Ignore...");
-        // ²»ÊÇ±»É¾³ıµÄÓÃ»§£¬·µ»ØERR£¨Ôò½Ó×ÅÖ´ĞĞÏÂ²½²Ù×÷£©
+        // ä¸æ˜¯è¢«åˆ é™¤çš„ç”¨æˆ·ï¼Œè¿”å›ERRï¼ˆåˆ™æ¥ç€æ‰§è¡Œä¸‹æ­¥æ“ä½œï¼‰
         return ERR;
     }
 
-    const int MAX_DEADLINE = 1800; // °ëĞ¡Ê±
-    long modify = KeyToSecond( user->GetInfo("modify") ); // ĞŞ¸Ä£¨É¾³ı£©Ê±¼ä
+    const int MAX_DEADLINE = 1800; // åŠå°æ—¶
+    long modify = KeyToSecond( user->GetInfo("modify") ); // ä¿®æ”¹ï¼ˆåˆ é™¤ï¼‰æ—¶é—´
     if(time(NULL) - modify < MAX_DEADLINE)
     {
         LOG_DEBUG("Ignore...");
-        // ²»µ½´ï×îºóÆÚÏŞ£¬±£Áô£»£¨·µ»ØOKÔò±íÊ¾²»ĞèÒªÔÙÖ´ĞĞÏÂ²½²Ù×÷£©
+        // ä¸åˆ°è¾¾æœ€åæœŸé™ï¼Œä¿ç•™ï¼›ï¼ˆè¿”å›OKåˆ™è¡¨ç¤ºä¸éœ€è¦å†æ‰§è¡Œä¸‹æ­¥æ“ä½œï¼‰
         return OK;
     }
 
     /*
-     * Ö´ĞĞÇåÀí±»É¾³ıÓÃ»§£¨¼°Êı¾İ£©
+     * æ‰§è¡Œæ¸…ç†è¢«åˆ é™¤ç”¨æˆ·ï¼ˆåŠæ•°æ®ï¼‰
      */
 
-    // Ëø¶¨
+    // é”å®š
     UNIQUE_LOCK( user->GetLock() );
 
-    // È¡ÓÃ»§Ä¿Â¼
+    // å–ç”¨æˆ·ç›®å½•
     const string dir = user->UserDir();
     int ret;
 
@@ -84,20 +84,20 @@ static int DealDeleteUser(User *user)
     }
     LOG_INFO("Delete OK, user: [%s]", dir.c_str());
 
-    // ¸üĞÂ»º´æ
+    // æ›´æ–°ç¼“å­˜
     user->Syn();
 
     return OK;
 }
 
 /*
- * ±éÀúÃ¿¸öÓÃ»§£¬Ö´ĞĞÇåÀí£º¶ÔÓÃ»§ÁÙÊ±Ä¿Â¼µ÷ÓÃÇåÀíº¯Êı£¬»òÉ¾³ıÓÃ»§£»
+ * éå†æ¯ä¸ªç”¨æˆ·ï¼Œæ‰§è¡Œæ¸…ç†ï¼šå¯¹ç”¨æˆ·ä¸´æ—¶ç›®å½•è°ƒç”¨æ¸…ç†å‡½æ•°ï¼Œæˆ–åˆ é™¤ç”¨æˆ·ï¼›
  */
 static void ClearUser(void *)
 {
-    // È¡ÓÃ»§´æ·ÅÄ¿Â¼
+    // å–ç”¨æˆ·å­˜æ”¾ç›®å½•
     const string &users = GlobalConfig::instance()->UserRootDir();
-    // ±éÀú
+    // éå†
     GetFileList dir( users );
     GetFileList::dir_iterator it(dir);
 
@@ -106,21 +106,21 @@ static void ClearUser(void *)
         const string &username = GetBaseName(it.name());
 
         /*
-         * ÇåÀíµ±Ç°Ä¿Â¼
+         * æ¸…ç†å½“å‰ç›®å½•
          *
-         *      1. ÓÃ»§Ïà¹ØÊı¾İµÄ²Ù×÷Ò»ÂÉÍ¨¹ıUserÀà²Ù×÷£¬²»Ó¦Ê¹ÓÃÓ²±àÂë£»
-         *      2. Ä¿Â¼Ãû¼´ÎªÓÃ»§Ãû
+         *      1. ç”¨æˆ·ç›¸å…³æ•°æ®çš„æ“ä½œä¸€å¾‹é€šè¿‡Userç±»æ“ä½œï¼Œä¸åº”ä½¿ç”¨ç¡¬ç¼–ç ï¼›
+         *      2. ç›®å½•åå³ä¸ºç”¨æˆ·å
          */
         User *user = User::Get( username );
 
-        // ²é¿´µ±Ç°ÓÃ»§×´Ì¬£¬ÈôÎªÉ¾³ı×´£¬ÔòÇåÀíÖ®£»
+        // æŸ¥çœ‹å½“å‰ç”¨æˆ·çŠ¶æ€ï¼Œè‹¥ä¸ºåˆ é™¤çŠ¶ï¼Œåˆ™æ¸…ç†ä¹‹ï¼›
         if( DealDeleteUser(user) == OK )
         {
             LOG_DEBUG("Ignore... [%s]", username.c_str());
             continue;
         }
 
-        // Ìø¹ıÎŞĞ§ÓÃ»§
+        // è·³è¿‡æ— æ•ˆç”¨æˆ·
         if( ! user->isValid() )
         {
             LOG_DEBUG("Ignore... [%s]", username.c_str());
@@ -133,10 +133,10 @@ static void ClearUser(void *)
     }
 }
 
-// ¼ì²éÏµÍ³Ä¿Â¼£¬²»´æÔÚÔò±¨¾¯£¬²¢´´½¨£»
+// æ£€æŸ¥ç³»ç»Ÿç›®å½•ï¼Œä¸å­˜åœ¨åˆ™æŠ¥è­¦ï¼Œå¹¶åˆ›å»ºï¼›
 static int CheckSystemDir(const string &dir)
 {
-    // ÊÇ·ñÎªÄ¿Â¼
+    // æ˜¯å¦ä¸ºç›®å½•
     if( ! isDir(dir) )
     {
         printf("Directory [%s] lost.\n", dir.c_str());
@@ -145,41 +145,41 @@ static int CheckSystemDir(const string &dir)
     return OK;
 }
 
-// ±£´æÒ³Ãæ¼ÆÊıÆ÷
+// ä¿å­˜é¡µé¢è®¡æ•°å™¨
 static void SavePageCounter(void *)
 {
-    // ¼ÆÊıÆ÷ÁĞ±í
+    // è®¡æ•°å™¨åˆ—è¡¨
     Counter::iterator it;
-    // È¡Ò³Ãæ¼ÆÊıÆ÷´æ·ÅÎÄ¼ş
+    // å–é¡µé¢è®¡æ•°å™¨å­˜æ”¾æ–‡ä»¶
     const string &cfg = GlobalConfig::instance()->CounterDir() + "page.txt";
 
-    // ÏÈ¶Á³öÔ­Êı¾İ
+    // å…ˆè¯»å‡ºåŸæ•°æ®
     Ini data( cfg );
 
-    // ¼ì²éËùÓĞ¼ÆÊıÆ÷
+    // æ£€æŸ¥æ‰€æœ‰è®¡æ•°å™¨
     while( it.next() )
     {
-        // Ìø¹ı²»ÊôÓÚÒ³ÃæµÄ¼ÆÊıÆ÷
+        // è·³è¿‡ä¸å±äºé¡µé¢çš„è®¡æ•°å™¨
         if("page" != it->GetType())
         {
             continue;
         }
 
-        // ÉèÖÃ
+        // è®¾ç½®
         data.Set("page", it->GetName(), IntToString(it->GetCount()));
     }
 
-    // ±£´æ
+    // ä¿å­˜
     data.Write();
 }
 
 
-// main()ÖĞµ÷ÓÃµÄ³õÊ¼»¯
+// main()ä¸­è°ƒç”¨çš„åˆå§‹åŒ–
 int OtherInit()
 {
     int ret;
 
-    // ×¢²á[ÇåÀíÈ«¾ÖÁÙÊ±Ä¿Â¼¹¦ÄÜ]µ½¶¨Ê±Æ÷
+    // æ³¨å†Œ[æ¸…ç†å…¨å±€ä¸´æ—¶ç›®å½•åŠŸèƒ½]åˆ°å®šæ—¶å™¨
     ret = Timer::Register(ClearGlobalTmpDir, NULL, "Clear global temp dir.");
     if(ret < 0)
     {
@@ -187,7 +187,7 @@ int OtherInit()
         return ERR;
     }
 
-    // ×¢²á[ÇåÀíÓÃ»§ÁÙÊ±Ä¿Â¼¹¦ÄÜ]µ½¶¨Ê±Æ÷
+    // æ³¨å†Œ[æ¸…ç†ç”¨æˆ·ä¸´æ—¶ç›®å½•åŠŸèƒ½]åˆ°å®šæ—¶å™¨
     ret = Timer::Register(ClearUser, NULL, "Clear users temp dir.");
     if(ret < 0)
     {
@@ -195,7 +195,7 @@ int OtherInit()
         return ERR;
     }
 
-    // ×¢²á[±£´æÒ³Ãæ¼ÆÊıÆ÷]µ½¶¨Ê±Æ÷
+    // æ³¨å†Œ[ä¿å­˜é¡µé¢è®¡æ•°å™¨]åˆ°å®šæ—¶å™¨
     ret = Timer::Register(SavePageCounter, NULL, "Save page counter.");
     if(ret < 0)
     {
@@ -207,10 +207,10 @@ int OtherInit()
 }
 
 
-// ÏµÍ³³õÊ¼»¯£¨¼ì²é¡¢´´½¨ÏµÍ³Ä¿Â¼µÈ£©
+// ç³»ç»Ÿåˆå§‹åŒ–ï¼ˆæ£€æŸ¥ã€åˆ›å»ºç³»ç»Ÿç›®å½•ç­‰ï¼‰
 int SystemInit()
 {
-    // ÉèÖÃ¹¤×÷Ä¿Â¼
+    // è®¾ç½®å·¥ä½œç›®å½•
     if( CheckSystemDir( GlobalConfig::instance()->Root() ) < 0
         // || ChangeDir( GlobalConfig::instance()->Root() ) < 0
       )
@@ -218,7 +218,7 @@ int SystemInit()
         return ERR;
     }
 
-    // ×¢ÒâÕâÀïµÄÖ´ĞĞË³Ğò£¨Èç£ºÏÈÓĞSystemDataDir()£¬²ÅÄÜÓĞUserRootDir()£©
+    // æ³¨æ„è¿™é‡Œçš„æ‰§è¡Œé¡ºåºï¼ˆå¦‚ï¼šå…ˆæœ‰SystemDataDir()ï¼Œæ‰èƒ½æœ‰UserRootDir()ï¼‰
     if( CheckSystemDir( GlobalConfig::instance()->CgiDir() ) < 0
         || CheckSystemDir( GlobalConfig::instance()->HtmlDir() ) < 0
         || CheckSystemDir( GlobalConfig::instance()->TemplateDir() ) < 0

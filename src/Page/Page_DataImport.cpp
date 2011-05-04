@@ -11,32 +11,32 @@ namespace PAGE_DATAIMPORT_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "DataImport";
 
 
 
 Page_DataImport::Page_DataImport()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_DataImport::~Page_DataImport()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_DataImport::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_DataImport::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_DataImport;
 }
 
@@ -47,13 +47,13 @@ Page *Page_DataImport::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
-// Êä³öÊı¾İÌå
+// è¾“å‡ºæ•°æ®ä½“
 int Page_DataImport::OutBody()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
@@ -61,14 +61,14 @@ int Page_DataImport::OutBody()
     if("" != backup_import)
     {
         /*
-         * È¡ÉÏ´«µÄ´ò°üÎÄ¼ş
+         * å–ä¸Šä¼ çš„æ‰“åŒ…æ–‡ä»¶
          */
         FileObj *attach = m_request->GetFileObj("pack");
         const string &pack = attach->Fullname();
         LOG_DEBUG("pack=[%s]", pack.c_str());
 
         /*
-         * ½â°ü
+         * è§£åŒ…
          */
         const string &username = m_request->GetCurrentUser();
         DataPack unpack(username);
@@ -79,17 +79,17 @@ int Page_DataImport::OutBody()
         }
 
         /*
-         * ´¦ÀíÍê±Ï£¬ÇåÀí°üÎÄ¼ş£»
+         * å¤„ç†å®Œæ¯•ï¼Œæ¸…ç†åŒ…æ–‡ä»¶ï¼›
          */
         LOG_DEBUG("Delete file: [%s]", pack.c_str());
         DeleteFile(pack);
 
         /*
-         * È¡µ¼Èë½á¹û
+         * å–å¯¼å…¥ç»“æœ
          */
         const string &success1 = unpack.GetResult("success.data");
         const string &success2 = unpack.GetResult("success.attach");
-        const string msg = "³É¹¦µ¼Èë£ºÊı¾İ[" + success1 + "]Ìõ£¬¸½¼ş[" + success2 + "]¸ö¡£";
+        const string msg = "æˆåŠŸå¯¼å…¥ï¼šæ•°æ®[" + success1 + "]æ¡ï¼Œé™„ä»¶[" + success2 + "]ä¸ªã€‚";
         m_request->GetConnect()->Send( HtmlAlert(msg) );
         return OK;
     }
@@ -103,7 +103,7 @@ int Page_DataImport::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_DataImport, THIS_MODULE)
 
 }// end of PAGE_DATAIMPORT_SPACE

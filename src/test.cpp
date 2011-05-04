@@ -40,133 +40,133 @@
 
 int main(int argc, char *argv[])
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
 
-    {/****************************** ³õÊ¼»¯ ¿ªÊ¼ ******************************/
+    {/****************************** åˆå§‹åŒ– å¼€å§‹ ******************************/
 
     int ret;
 
-    // ÈÕÖ¾ÏÔµ½µ½Ç°Ì¨
+    // æ—¥å¿—æ˜¾åˆ°åˆ°å‰å°
     setenv("LOG_TERMINAL", "1", 1);
 
-    // ³õÊ¼»¯È«¾ÖÅäÖÃÀà
+    // åˆå§‹åŒ–å…¨å±€é…ç½®ç±»
     ret = GlobalConfig::init(argc, argv);
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯È«¾ÖÅäÖÃÀà³ö´í [%d] \n", ret);
+        LOG_ERROR("åˆå§‹åŒ–å…¨å±€é…ç½®ç±»å‡ºé”™ [%d] \n", ret);
         return ret;
     }
 
-//    // ³õÊ¼»¯ÏµÍ³ÉèÖÃ
+//    // åˆå§‹åŒ–ç³»ç»Ÿè®¾ç½®
 //    ret = SystemInit();
 //    if(ret < 0)
 //    {
-//        printf("³õÊ¼»¯³õÊ¼»¯ÏµÍ³ÉèÖÃ³ö´í [%d] \n", ret);
+//        printf("åˆå§‹åŒ–åˆå§‹åŒ–ç³»ç»Ÿè®¾ç½®å‡ºé”™ [%d] \n", ret);
 //        return ret;
 //    }
 
-    // ³õÊ¼»¯ÈÕÖ¾´¦ÀíÀà
+    // åˆå§‹åŒ–æ—¥å¿—å¤„ç†ç±»
     ret = Log::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯ÈÕÖ¾´¦ÀíÀà³ö´í [%d] \n", ret);
+        LOG_ERROR("åˆå§‹åŒ–æ—¥å¿—å¤„ç†ç±»å‡ºé”™ [%d] \n", ret);
         return ret;
     }
 
-//    // ³õÊ¼»¯¼ÆÊıÆ÷Àà
+//    // åˆå§‹åŒ–è®¡æ•°å™¨ç±»
 //    ret = Counter::init();
 //    if(ret < 0)
 //    {
-//        LOG_ERROR("³õÊ¼»¯³õÊ¼»¯¼ÆÊıÆ÷Àà³ö´í [%d]", ret);
+//        LOG_ERROR("åˆå§‹åŒ–åˆå§‹åŒ–è®¡æ•°å™¨ç±»å‡ºé”™ [%d]", ret);
 //        return ret;
 //    }
 //
-//    // ³õÊ¼»¯¶¨Ê±Æ÷´¦ÀíÀà
+//    // åˆå§‹åŒ–å®šæ—¶å™¨å¤„ç†ç±»
 //    ret = Timer::init();
 //    if(ret < 0)
 //    {
-//        LOG_ERROR("³õÊ¼»¯¶¨Ê±Æ÷´¦ÀíÀà³ö´í [%d] ", ret);
+//        LOG_ERROR("åˆå§‹åŒ–å®šæ—¶å™¨å¤„ç†ç±»å‡ºé”™ [%d] ", ret);
 //        return ret;
 //    }
 //
-//    // ³õÊ¼»¯Ïß³Ì³ØÀà
+//    // åˆå§‹åŒ–çº¿ç¨‹æ± ç±»
 //    ret = ThreadPool::init();
 //    if(ret < 0)
 //    {
-//        LOG_ERROR("³õÊ¼»¯Ïß³Ì³ØÀà³ö´í [%d] ", ret);
+//        LOG_ERROR("åˆå§‹åŒ–çº¿ç¨‹æ± ç±»å‡ºé”™ [%d] ", ret);
 //        return ret;
 //    }
 //
-//    // // ³õÊ¼»¯ÏµÍ³ĞÅºÅÀà
+//    // // åˆå§‹åŒ–ç³»ç»Ÿä¿¡å·ç±»
 //    // ret = SignalDeal::init();
 //    // if(ret < 0)
 //    // {
-//    //     LOG_ERROR("³õÊ¼»¯ÏµÍ³ĞÅºÅÀà³ö´í [%d] ", ret);
+//    //     LOG_ERROR("åˆå§‹åŒ–ç³»ç»Ÿä¿¡å·ç±»å‡ºé”™ [%d] ", ret);
 //    //     return ret;
 //    // }
 //
-//    // ³õÊ¼»¯Ä£¿éµ÷ÓÃÀà
+//    // åˆå§‹åŒ–æ¨¡å—è°ƒç”¨ç±»
 //    ret = Module::init();
 //    if(ret < 0)
 //    {
-//        LOG_ERROR("³õÊ¼»¯Ä£¿éµ÷ÓÃÀà³ö´í [%d] ", ret);
+//        LOG_ERROR("åˆå§‹åŒ–æ¨¡å—è°ƒç”¨ç±»å‡ºé”™ [%d] ", ret);
 //        return ret;
 //    }
 //
-//    // ³õÊ¼»¯Ò³Ãæ´¦ÀíÀà
+//    // åˆå§‹åŒ–é¡µé¢å¤„ç†ç±»
 //    ret = Page::init();
 //    if(ret < 0)
 //    {
-//        LOG_ERROR("³õÊ¼»¯Ò³Ãæ´¦ÀíÀà³ö´í [%d] ", ret);
+//        LOG_ERROR("åˆå§‹åŒ–é¡µé¢å¤„ç†ç±»å‡ºé”™ [%d] ", ret);
 //        return ret;
 //    }
 //
-//    // ³õÊ¼»¯»á»°Àà
+//    // åˆå§‹åŒ–ä¼šè¯ç±»
 //    ret = Session::init();
 //    if(ret < 0)
 //    {
-//        LOG_ERROR("³õÊ¼»¯»á»°Àà³ö´í [%d] ", ret);
+//        LOG_ERROR("åˆå§‹åŒ–ä¼šè¯ç±»å‡ºé”™ [%d] ", ret);
 //        return ret;
 //    }
 //
-//    // ³õÊ¼»¯ÓÃ»§ĞÅÏ¢Àà
+//    // åˆå§‹åŒ–ç”¨æˆ·ä¿¡æ¯ç±»
 //    ret = User::init();
 //    if(ret < 0)
 //    {
-//        LOG_ERROR("³õÊ¼»¯ÓÃ»§ĞÅÏ¢Àà³ö´í [%d] ", ret);
+//        LOG_ERROR("åˆå§‹åŒ–ç”¨æˆ·ä¿¡æ¯ç±»å‡ºé”™ [%d] ", ret);
 //        return ret;
 //    }
 //
-//    // ³õÊ¼»¯²Ëµ¥´¦ÀíÀà
+//    // åˆå§‹åŒ–èœå•å¤„ç†ç±»
 //    ret = Menu::init();
 //    if(ret < 0)
 //    {
-//        LOG_ERROR("³õÊ¼»¯²Ëµ¥´¦ÀíÀà³ö´í [%d] ", ret);
+//        LOG_ERROR("åˆå§‹åŒ–èœå•å¤„ç†ç±»å‡ºé”™ [%d] ", ret);
 //        return ret;
 //    }
 //
-//    // ³õÊ¼»¯Ñ¹Ëõ´¦ÀíÀà
+//    // åˆå§‹åŒ–å‹ç¼©å¤„ç†ç±»
 //    ret = Compress::init();
 //    if(ret < 0)
 //    {
-//        LOG_ERROR("³õÊ¼»¯Ñ¹Ëõ´¦ÀíÀà³ö´í [%d] ", ret);
+//        LOG_ERROR("åˆå§‹åŒ–å‹ç¼©å¤„ç†ç±»å‡ºé”™ [%d] ", ret);
 //        return ret;
 //    }
 //
-//    // ³õÊ¼»¯Ìá½»ÊÂ¼ş´¦ÀíÀà
+//    // åˆå§‹åŒ–æäº¤äº‹ä»¶å¤„ç†ç±»
 //    ret = Submit::init();
 //    if(ret < 0)
 //    {
-//        LOG_ERROR("³õÊ¼»¯Ìá½»ÊÂ¼ş´¦ÀíÀà³ö´í [%d] ", ret);
+//        LOG_ERROR("åˆå§‹åŒ–æäº¤äº‹ä»¶å¤„ç†ç±»å‡ºé”™ [%d] ", ret);
 //        return ret;
 //    }
 //
-//    // ³õÊ¼»¯ÆäËü´¦Àí²Ù×÷
+//    // åˆå§‹åŒ–å…¶å®ƒå¤„ç†æ“ä½œ
 //    ret = OtherInit();
 //    if(ret < 0)
 //    {
-//        LOG_ERROR("³õÊ¼»¯ÆäËü´¦Àí²Ù×÷³ö´í [%d] ", ret);
+//        LOG_ERROR("åˆå§‹åŒ–å…¶å®ƒå¤„ç†æ“ä½œå‡ºé”™ [%d] ", ret);
 //        return ret;
 //    }
 
@@ -175,13 +175,13 @@ int main(int argc, char *argv[])
 
 
 
-    }/****************************** ³õÊ¼»¯ ½áÊø ******************************/
+    }/****************************** åˆå§‹åŒ– ç»“æŸ ******************************/
 
 
 
 
 
-    {// ²âÊÔ ÍøÂçÁ¬½Ó·şÎñ¶Ë(TCP)
+    {// æµ‹è¯• ç½‘ç»œè¿æ¥æœåŠ¡ç«¯(TCP)
     #if 0
 
         int ret;
@@ -190,7 +190,7 @@ int main(int argc, char *argv[])
         ret = server->InitAsServer(17890);
         if(ret < 0)
         {
-            LOG_ERROR("³õÊ¼»¯³ö´í");
+            LOG_ERROR("åˆå§‹åŒ–å‡ºé”™");
             return -1;
         }
 
@@ -199,7 +199,7 @@ int main(int argc, char *argv[])
             Connect * const pConnect = server->Accept();
             if(NULL == pConnect)
             {
-                LOG_ERROR("Á¬½Ó³ö´í");
+                LOG_ERROR("è¿æ¥å‡ºé”™");
                 continue;
             }
 
@@ -220,7 +220,7 @@ int main(int argc, char *argv[])
 
             pConnect->Close();
 
-            LOG_DEBUG("ÒÑ¶Ï¿ª");
+            LOG_DEBUG("å·²æ–­å¼€");
 
 
             if( strstr(buf, "exit") != NULL )
@@ -231,7 +231,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ ConnectQueue
+    {// æµ‹è¯• ConnectQueue
     #if 0
 
         ConnectQueue::init();
@@ -260,7 +260,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ FileObj
+    {// æµ‹è¯• FileObj
     #if 0
 
         FileObj file;
@@ -285,7 +285,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ DirList
+    {// æµ‹è¯• DirList
     #if 0
 
         GetFileList list("../tmp/Data");
@@ -311,7 +311,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ Ini
+    {// æµ‹è¯• Ini
     #if 0
 
         Ini ini("../tmp/a.ini");
@@ -342,18 +342,18 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ UserData::iterator
+    {// æµ‹è¯• UserData::iterator
     #if 0
 
         UserData::iterator it( "../tmp/data2" );
 
-        // ÁĞ³öËùÓĞÊı¾İ
+        // åˆ—å‡ºæ‰€æœ‰æ•°æ®
         while( it.next() )
         {
             string key;
             Conf *pack = NULL;
 
-            // È¡³öµ±Ç°ËùÖ¸µÄkeyºÍPack
+            // å–å‡ºå½“å‰æ‰€æŒ‡çš„keyå’ŒPack
             it.Get(key, pack);
 
             printf("\n[%s]\n", key.c_str());
@@ -371,7 +371,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ Escape
+    {// æµ‹è¯• Escape
     #if 0
 
         string s = "1234567890-------{&}---{<}----{>}--";
@@ -387,7 +387,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ GlobalConfig
+    {// æµ‹è¯• GlobalConfig
     #if 0
 
         int ret = GlobalConfig::init();
@@ -417,7 +417,7 @@ int main(int argc, char *argv[])
     }
 
 
-    {// ²âÊÔ TextToWeb
+    {// æµ‹è¯• TextToWeb
     #if 0
 
         string str = "-&-<->-1234567890-=\\";
@@ -433,7 +433,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ WebToText
+    {// æµ‹è¯• WebToText
     #if 0
 
         string str = "--[&lt;]--[&lt]--[&lt;&lt;]--[&lt&lt]--[&lt;&lt]--[&lt&lt;]";
@@ -449,10 +449,10 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ UrlDecode
+    {// æµ‹è¯• UrlDecode
     #if 0
 
-        char str[512] = "ÖĞ¹úÈË1234567890%5B%24v+%3D%7E+s%2F%5C%2B%2F+%2Fg%3B%5D%0D%0A";
+        char str[512] = "ä¸­å›½äºº1234567890%5B%24v+%3D%7E+s%2F%5C%2B%2F+%2Fg%3B%5D%0D%0A";
 
         Debug("[%s]", str);
 
@@ -462,7 +462,7 @@ int main(int argc, char *argv[])
     }
 
 
-    {// ²âÊÔ ThreadPool
+    {// æµ‹è¯• ThreadPool
     #if 0
 
         struct BackCall
@@ -482,7 +482,7 @@ int main(int argc, char *argv[])
     }
 
 
-    {// ²âÊÔ KeyToSecond
+    {// æµ‹è¯• KeyToSecond
     #if 0
 
         Debug("[%lu]", KeyToSecond(argv[1]?argv[1]:"20011112183101"));
@@ -491,7 +491,7 @@ int main(int argc, char *argv[])
     }
 
 
-    {// ²âÊÔ User       [2010-05-06 14:52:12]
+    {// æµ‹è¯• User       [2010-05-06 14:52:12]
     #if 0
 
         {
@@ -499,7 +499,7 @@ int main(int argc, char *argv[])
 
             Debug("[%s]", user->DataDir().c_str());
             Debug("[%s]", user->GetInfo("password").c_str());
-            Debug("[%s]", user->isValid()?"ÓĞĞ§":"ÎŞĞ§ÓÃ»§");
+            Debug("[%s]", user->isValid()?"æœ‰æ•ˆ":"æ— æ•ˆç”¨æˆ·");
         }
 
 
@@ -508,14 +508,14 @@ int main(int argc, char *argv[])
 
             Debug("[%s]", user->DataDir().c_str());
             Debug("[%s]", user->GetInfo("password").c_str());
-            Debug("[%s]", user->isValid()?"ÓĞĞ§":"ÎŞĞ§ÓÃ»§");
+            Debug("[%s]", user->isValid()?"æœ‰æ•ˆ":"æ— æ•ˆç”¨æˆ·");
         }
 
     #endif
     }
 
 
-    {// ²âÊÔ Menu   [2010-05-06 18:45:11]
+    {// æµ‹è¯• Menu   [2010-05-06 18:45:11]
     #if 0
 
         {
@@ -554,7 +554,7 @@ int main(int argc, char *argv[])
     }
 
 
-    {// ²âÊÔ XXX
+    {// æµ‹è¯• XXX
     #if 0
 
         Debug("[%s]", Crypt(argv[1]?:"123").c_str());
@@ -563,7 +563,7 @@ int main(int argc, char *argv[])
     }
 
 
-    {// ²âÊÔ UrlCode
+    {// æµ‹è¯• UrlCode
     #if 0
 //        char from[] = "Invalid user: ";
 //        char to[256];
@@ -578,19 +578,19 @@ int main(int argc, char *argv[])
 //        Debug("[%s]", s.c_str());
 
         {
-            const string from = "Í¼3 HTTPSÍ¨ĞÅÊ±ĞòÍ¼.png";
+            const string from = "å›¾3 HTTPSé€šä¿¡æ—¶åºå›¾.png";
             string to = UrlCode(from);
 
             Debug("[%s]", to.c_str());
         }
         {
-            const string from = "Í¼1 ¶Ô³Æ¼ÓÃÜ.png";
+            const string from = "å›¾1 å¯¹ç§°åŠ å¯†.png";
             string to = UrlCode(from);
 
             Debug("[%s]", to.c_str());
         }
         {
-            const string from = "Í¼2 ·Ç¶Ô³Æ¼ÓÃÜ.png";
+            const string from = "å›¾2 éå¯¹ç§°åŠ å¯†.png";
             string to = UrlCode(from);
 
             Debug("[%s]", to.c_str());
@@ -599,7 +599,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ Conf Ïà»¥¸³Öµ¡¡¸²¸Ç    [2010-05-10 16:20:50]
+    {// æµ‹è¯• Conf ç›¸äº’èµ‹å€¼ã€€è¦†ç›–    [2010-05-10 16:20:50]
     #if 0
 
 
@@ -625,7 +625,7 @@ int main(int argc, char *argv[])
             Conf pack2;
 
             pack2.Set("b1", "777");
-            pack2.Set("a2", "88");  // Ô­key¶ÔÓ¦ÖµÈôÏàÍ¬£¬½«±»¸²¸Ç
+            pack2.Set("a2", "88");  // åŸkeyå¯¹åº”å€¼è‹¥ç›¸åŒï¼Œå°†è¢«è¦†ç›–
             pack2.Set("b3", "9999999");
 
             {
@@ -642,7 +642,7 @@ int main(int argc, char *argv[])
 
             pack3.Set("ip", "1.2.3.4");
             pack3.Set(pack1);
-            pack3.Set(pack2);// Ô­"a2"¶ÔÓ¦Öµ½«±»¸²¸Ç
+            pack3.Set(pack2);// åŸ"a2"å¯¹åº”å€¼å°†è¢«è¦†ç›–
 
 
             {
@@ -670,12 +670,12 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ Encrypt
+    {// æµ‹è¯• Encrypt
     #if 0
 
 //        Encrypt data("123");
 //
-//        string s = "abcdefghijklmnopqrstuvwxyzÖĞ¹ú0123456789[!@#$%^&*()_+|~<>?;:'\\/><()[]{}\"]";
+//        string s = "abcdefghijklmnopqrstuvwxyzä¸­å›½0123456789[!@#$%^&*()_+|~<>?;:'\\/><()[]{}\"]";
 //
 //        string s1 = data.encrypt(s);
 //
@@ -697,12 +697,12 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ Encrypt 2
+    {// æµ‹è¯• Encrypt 2
     #if 0
 
         Encrypt data("123");
 
-        string s = "ÈËµÄÒ»Éú¿ÉÄÜÈ¼ÉÕÒ²¿ÉÄÜ¸¯Ğà£¬ÎÒ²»ÄÜ¸¯Ğà£¬ÎÒÔ¸ÒâÈ¼ÉÕÆğÀ´£¡ ¡ª¡ª °ÂË¹ÌØÂå·òË¹»ù";
+        string s = "äººçš„ä¸€ç”Ÿå¯èƒ½ç‡ƒçƒ§ä¹Ÿå¯èƒ½è…æœ½ï¼Œæˆ‘ä¸èƒ½è…æœ½ï¼Œæˆ‘æ„¿æ„ç‡ƒçƒ§èµ·æ¥ï¼ â€”â€” å¥¥æ–¯ç‰¹æ´›å¤«æ–¯åŸº";
 
         string s1 = Encrypt("123").encrypt(s); // data.encrypt(s);
 
@@ -719,7 +719,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ Join
+    {// æµ‹è¯• Join
     #if 0
         vector<string> v;
 
@@ -735,7 +735,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ XXX
+    {// æµ‹è¯• XXX
     #if 0
 
         string s = ChineseCoding::Converter(argv[1], argv[2], argv[3]);
@@ -753,7 +753,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ XXX
+    {// æµ‹è¯• XXX
     #if 0
         sleep(1);
 
@@ -764,7 +764,7 @@ int main(int argc, char *argv[])
 
         UserData user("rocky");
 
-        user.Get( pack ); // ÕâÊ±½«Ìî³ätitle¡¢text£»
+        user.Get( pack ); // è¿™æ—¶å°†å¡«å……titleã€textï¼›
 
         pack.Dump();
 
@@ -772,7 +772,7 @@ int main(int argc, char *argv[])
 
         Ini all;
         all.Set("20100515020544", Conf());
-        user.Get( all ); // ¶Á³öËùÓĞÊı¾İ
+        user.Get( all ); // è¯»å‡ºæ‰€æœ‰æ•°æ®
         all.Dump();
 
         LOG_DEBUG("------------------------");
@@ -780,7 +780,7 @@ int main(int argc, char *argv[])
         {
         Ini all;
         all.Set("20100515020511", Conf());
-        user.Get( all ); // ¶Á³öËùÓĞÊı¾İ
+        user.Get( all ); // è¯»å‡ºæ‰€æœ‰æ•°æ®
         all.Dump();
         }
 
@@ -789,7 +789,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ XXX
+    {// æµ‹è¯• XXX
     #if 0
 
         FileObj file(argv[1]);
@@ -817,7 +817,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ PageCfg
+    {// æµ‹è¯• PageCfg
     #if 0
 
         PageCfg cfg("rocky2", "browse.txt");
@@ -830,12 +830,12 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ UserData::GetAttachList        [Rocky 2010-05-18 17:52:24]
+    {// æµ‹è¯• UserData::GetAttachList        [Rocky 2010-05-18 17:52:24]
     #if 0
 
         UserData user("rocky");
 
-        // ÁĞ³öËùÓĞÊı¾İ
+        // åˆ—å‡ºæ‰€æœ‰æ•°æ®
         vector<string> list;
         vector<string>::iterator it;
         user.GetAttachList("20100129130823", list);
@@ -849,9 +849,9 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ DataPack
+    {// æµ‹è¯• DataPack
     #if 0
-        if(1 == argc)   // ´ò°ü
+        if(1 == argc)   // æ‰“åŒ…
         {
             DataPack pack("rocky");
 
@@ -859,7 +859,7 @@ int main(int argc, char *argv[])
 
             Ini data;
 
-            data.Set("20100408133333", "title", "ÖĞ»ªÈËÃñ¹²ºÍ¹ú");
+            data.Set("20100408133333", "title", "ä¸­åäººæ°‘å…±å’Œå›½");
 
             //pack.Add(data);
             pack.AddAll();
@@ -867,7 +867,7 @@ int main(int argc, char *argv[])
             FileObj *file = pack.GetPack();
             Debug("[%s]", file->Fullname().c_str());
         }
-        else    // ½â°ü
+        else    // è§£åŒ…
         {
             const string filename = argv[1];
 
@@ -881,7 +881,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ SettFileModifyTime
+    {// æµ‹è¯• SettFileModifyTime
     #if 0
 
         long sec = atol(argv[2]?:"1274079728");
@@ -907,7 +907,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ ZipCompress() ZipDecompress()
+    {// æµ‹è¯• ZipCompress() ZipDecompress()
     #if 0
         int ret;
 
@@ -927,7 +927,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ MultiStringMatch
+    {// æµ‹è¯• MultiStringMatch
     #if 0
 
         vector<string> from;
@@ -936,7 +936,7 @@ int main(int argc, char *argv[])
         from.push_back("<");
         from.push_back(">");
         from.push_back("\n");
-        from.push_back("¹ú");
+        from.push_back("å›½");
 
         to.push_back("[");
         to.push_back("]");
@@ -945,7 +945,7 @@ int main(int argc, char *argv[])
 
         MultiStringMatch DelHtml(from ,to);
 
-        string s = "abcdeÖĞ¹úÈË--<-->--\n--";
+        string s = "abcdeä¸­å›½äºº--<-->--\n--";
         string s1;
 
         s1 = DelHtml.Replace(s);
@@ -957,7 +957,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ get password
+    {// æµ‹è¯• get password
     #if 0
 
         {
@@ -996,7 +996,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ Timer  £ÛRocky 2010-05-25 14:43:44£İ
+    {// æµ‹è¯• Timer  ï¼»Rocky 2010-05-25 14:43:44ï¼½
     #if 0
 
         struct doit
@@ -1035,7 +1035,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ StringFilter
+    {// æµ‹è¯• StringFilter
     #if 0
 
 //        {
@@ -1084,7 +1084,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ MergeBookmark.pl   [Rocky 2010-05-26 15:42:37]
+    {// æµ‹è¯• MergeBookmark.pl   [Rocky 2010-05-26 15:42:37]
     #if 0
 
         if(argc < 3)
@@ -1125,7 +1125,7 @@ int main(int argc, char *argv[])
                 Debug("[%s]", tmpfile2.c_str());
                 Debug("[%s]", tmpfile3.c_str());
 
-                // µ÷Íâ²¿ÃüÁî´¦Àí´ËÎÄ¼ş
+                // è°ƒå¤–éƒ¨å‘½ä»¤å¤„ç†æ­¤æ–‡ä»¶
                 const string cmd = "../tool/MergeBookmark.pl "
                                    "'" + tmpfile1 + "' "
                                    "'" + tmpfile2 + "' "
@@ -1158,10 +1158,10 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ XXX
+    {// æµ‹è¯• XXX
     #if 0
 
-        const string query_keyword = "½¨Òé";
+        const string query_keyword = "å»ºè®®";
 
         map<string, MultiStringMatch *> matchs;
         vector<string> query_keyword_set;
@@ -1169,12 +1169,12 @@ int main(int argc, char *argv[])
         Debug("[%s]", Join(query_keyword_set, ",").c_str());
         matchs["query_keyword"] = new MultiStringMatch( query_keyword_set );
 
-        // È¡¶ÔÓ¦Æ¥Åä»ú
+        // å–å¯¹åº”åŒ¹é…æœº
         MultiStringMatch *match = &abc;// matchs["query_keyword"];
-        const string &text = "ÖĞ»ªÈËÃñ¹²ºÍ¹ú½¨ÒéÖĞ»ªÈËÃñ¹²ºÍ¹ú";
+        const string &text = "ä¸­åäººæ°‘å…±å’Œå›½å»ºè®®ä¸­åäººæ°‘å…±å’Œå›½";
         if("" != text && NULL != match)
         {
-            // ²é¿´textÖĞÊÇ·ñ´æµÄËùÒªµÄ¹Ø¼ü×Ö£¬²»´æµÄ·µ»Øfalse£¬±íÊ¾Òª¹ıÂË´ËÊı¾İ£»
+            // æŸ¥çœ‹textä¸­æ˜¯å¦å­˜çš„æ‰€è¦çš„å…³é”®å­—ï¼Œä¸å­˜çš„è¿”å›falseï¼Œè¡¨ç¤ºè¦è¿‡æ»¤æ­¤æ•°æ®ï¼›
             if( !match->MatchOneKey( text ) )
             {
                 Debug("Filter ...");
@@ -1187,7 +1187,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ MultiStringMatch   [Rocky 2010-06-01 12:18:02]
+    {// æµ‹è¯• MultiStringMatch   [Rocky 2010-06-01 12:18:02]
     #if 0
 
     {
@@ -1196,14 +1196,14 @@ int main(int argc, char *argv[])
 //        from.push_back("<");
 //        from.push_back(">");
 //        from.push_back("\n");
-//        from.push_back("½¨Òé");
+//        from.push_back("å»ºè®®");
 //        to.push_back("[");
 //        to.push_back("]");
 //        to.push_back("\\n");
-//        to.push_back("£½¡·");
+//        to.push_back("ï¼ã€‹");
 //        MultiStringMatch DelHtml(from ,to);
 //
-//        string s = "ÖĞ»ªÈËÃñ¹²ºÍ¹ú½¨ÒéÖĞ»ªÈËÃñ¹²ºÍ¹ú";
+//        string s = "ä¸­åäººæ°‘å…±å’Œå›½å»ºè®®ä¸­åäººæ°‘å…±å’Œå›½";
 //        string s1;
 //
 //        s1 = DelHtml.Replace(s);
@@ -1215,11 +1215,11 @@ int main(int argc, char *argv[])
     {
         vector<string> from;
         vector<string> to;
-        from.push_back("ÖĞ»ª");
-        from.push_back("½¨Òé");
+        from.push_back("ä¸­å");
+        from.push_back("å»ºè®®");
         MultiStringMatch DelHtml(from ,to);
 
-        string s = "ÖĞ»ªÈËÃñ¹²ºÍ¹ú½¨ ÒéÖĞ»ªÈËÃñ¹²ºÍ¹ú";
+        string s = "ä¸­åäººæ°‘å…±å’Œå›½å»º è®®ä¸­åäººæ°‘å…±å’Œå›½";
 
         Debug("one=[%d]", DelHtml.MatchOneKey(s));
         Debug("all=[%d]", DelHtml.MatchAllKey(s));
@@ -1231,7 +1231,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ ¹¤¾ß£ºÎÄ¼şÃû×ªÎªurl±àÂë·½Ê½£»[Rocky 2010-06-04 16:09:49]
+    {// æµ‹è¯• å·¥å…·ï¼šæ–‡ä»¶åè½¬ä¸ºurlç¼–ç æ–¹å¼ï¼›[Rocky 2010-06-04 16:09:49]
     #if 0
 
 
@@ -1268,7 +1268,7 @@ int main(int argc, char *argv[])
                 string now;
                 int ret = sscanf(old.c_str(), "%[^.]%c", key, &dot);
 
-                // ²»·ûºÏ¸ñÊ½µÄ²»×ö×ª»»
+                // ä¸ç¬¦åˆæ ¼å¼çš„ä¸åšè½¬æ¢
                 if(2 == ret && strlen(key) == 14 && '.' == dot)
                 {
                     now = key + string(".") + UrlCode(old.substr(15));
@@ -1291,10 +1291,10 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ XXX
+    {// æµ‹è¯• XXX
     #if 0
 
-        string s = argv[1]?:"abcÖĞ¹úÈË123";
+        string s = argv[1]?:"abcä¸­å›½äºº123";
 
         string s1 = FilenameEncode(s);
         string s2 = FilenameDecode(s1);
@@ -1306,7 +1306,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ XXX
+    {// æµ‹è¯• XXX
     #if 0
 
 
@@ -1314,7 +1314,7 @@ int main(int argc, char *argv[])
     #endif
     }
 
-    {// ²âÊÔ WebHtmlToText
+    {// æµ‹è¯• WebHtmlToText
     #if 1
 
         // string s = "s<span id=\"rk_v3_20100611191030\">sss&lt;papas-lt--mspss[pa]ssssAs</span>d";

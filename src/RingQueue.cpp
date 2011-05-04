@@ -16,14 +16,14 @@ namespace RINGQUEUE_SPACE
 
 
 /*
- *   »·ĞÎ¶ÓÁĞÊı¾İ½á¹¹¡£
+ *   ç¯å½¢é˜Ÿåˆ—æ•°æ®ç»“æ„ã€‚
  *
  */
 
 
 
-// »·ĞÎ¶ÓÁĞÄ¬ÈÏ³¤¶È
-const int RingQueue::QUEUE_DEFAULT_LEN = 1024*1024*8;    // 8M »·ĞÎ¶ÓÁĞ¿Õ¼ä
+// ç¯å½¢é˜Ÿåˆ—é»˜è®¤é•¿åº¦
+const int RingQueue::QUEUE_DEFAULT_LEN = 1024*1024*8;    // 8M ç¯å½¢é˜Ÿåˆ—ç©ºé—´
 
 
 
@@ -40,12 +40,12 @@ RingQueue::~RingQueue()
 }
 
 /*
- * ÉèÖÃ¶ÓÁĞÍ·Êı¾İ³õÊ¼Öµ
- * ·µ»Ø£º³É¹¦·µ»Ø0£¬³ö´í·µ»Ø·Ç0¡£
+ * è®¾ç½®é˜Ÿåˆ—å¤´æ•°æ®åˆå§‹å€¼
+ * è¿”å›ï¼šæˆåŠŸè¿”å›0ï¼Œå‡ºé”™è¿”å›é0ã€‚
  */
 int RingQueue::Init()
 {
-    // È¡ÄÚ´æ
+    // å–å†…å­˜
     if(GetMemory() < 0)
     {
         perror("Init()");
@@ -57,11 +57,11 @@ int RingQueue::Init()
 
 
 /*
- * ÏÔÊ¾ÄÚ´æ£¨Ö÷ÒªÓÃÓÚµ÷ÊÔ£©
+ * æ˜¾ç¤ºå†…å­˜ï¼ˆä¸»è¦ç”¨äºè°ƒè¯•ï¼‰
  */
 void RingQueue::Display()
 {
-    Debug("¶ÁĞ´Î»ÖÃ£ºw:%u, r:%u, max:%u, mark:%u",
+    Debug("è¯»å†™ä½ç½®ï¼šw:%u, r:%u, max:%u, mark:%u",
                 m_head->nWriteSeekPos,
                 m_head->nReadSeekPos,
                 m_head->nMaxLen,
@@ -69,7 +69,7 @@ void RingQueue::Display()
 }
 
 /*
- * ·ÖÅäÄÚ´æ
+ * åˆ†é…å†…å­˜
  */
 int RingQueue::GetMemory()
 {
@@ -78,7 +78,7 @@ int RingQueue::GetMemory()
 }
 
 /*
- * ºÍÅäÌ×GetMemory()
+ * å’Œé…å¥—GetMemory()
  */
 void RingQueue::FreeMemory()
 {
@@ -86,7 +86,7 @@ void RingQueue::FreeMemory()
     m_head = NULL;
 }
 
-// ÖØÖÃÄÚ´æÇø£¨Í·²¿µÈ£©
+// é‡ç½®å†…å­˜åŒºï¼ˆå¤´éƒ¨ç­‰ï¼‰
 void RingQueue::Reset()
 {
     assert(NULL != m_head);
@@ -94,44 +94,44 @@ void RingQueue::Reset()
     m_head->nMaxLen = m_MemSize - sizeof(Head);
 }
 
-// È¡µ±Ç°Ğ´Î»ÖÃ
+// å–å½“å‰å†™ä½ç½®
 void *RingQueue::WritePos()
 {
     assert(NULL != m_head);
     return (m_head->buf + m_head->nWriteSeekPos);
 }
 
-// È¡µ±Ç°¶ÁÎ»ÖÃ
+// å–å½“å‰è¯»ä½ç½®
 void *RingQueue::ReadPos()
 {
     assert(NULL != m_head);
     return (m_head->buf + m_head->nReadSeekPos);
 }
 
-// ÄÚ´æ¿Õ¼äÂú·µtrue£¬·ñÔò·µfalse£»
+// å†…å­˜ç©ºé—´æ»¡è¿”trueï¼Œå¦åˆ™è¿”falseï¼›
 bool RingQueue::isFull(unsigned int nDataLen)
 {
     assert(NULL != m_head);
 
-    // Êı¾İ³¤¶È»¹Òª¼ÓÉÏµ¥ÔªÍ·²¿³¤¶È
+    // æ•°æ®é•¿åº¦è¿˜è¦åŠ ä¸Šå•å…ƒå¤´éƒ¨é•¿åº¦
     const unsigned int nPackLen = nDataLen + sizeof(CellHead);
 
-    /* Çé¿öÒ»£º
-     *      Ğ´ < ¶Á £¬ÇÒÊ£Óà¿Õ¼ä²»×ã£¬ÔòÎªÂú£»
+    /* æƒ…å†µä¸€ï¼š
+     *      å†™ < è¯» ï¼Œä¸”å‰©ä½™ç©ºé—´ä¸è¶³ï¼Œåˆ™ä¸ºæ»¡ï¼›
      */
     if( m_head->nReadSeekPos > m_head->nWriteSeekPos
-        && m_head->nReadSeekPos - m_head->nWriteSeekPos <= nPackLen // ×¢ÊÇ¡°<=¡±
+        && m_head->nReadSeekPos - m_head->nWriteSeekPos <= nPackLen // æ³¨æ˜¯â€œ<=â€
       )
     {
         return true;
     }
 
-    /* Çé¿ö¶ş£º
-     *      ¶Á < Ğ´£¬ÇÒÎ²²¿¿Õ¼ä²»×ã£¬ÇÒ£¨»ØÈÆµ½£©¿ªÊ¼´¦¿Õ¼äÒ²²»×ã£¬ÔòÎªÂú£»
+    /* æƒ…å†µäºŒï¼š
+     *      è¯» < å†™ï¼Œä¸”å°¾éƒ¨ç©ºé—´ä¸è¶³ï¼Œä¸”ï¼ˆå›ç»•åˆ°ï¼‰å¼€å§‹å¤„ç©ºé—´ä¹Ÿä¸è¶³ï¼Œåˆ™ä¸ºæ»¡ï¼›
      */
     if( m_head->nWriteSeekPos > m_head->nReadSeekPos
         && m_head->nMaxLen - m_head->nWriteSeekPos < nPackLen   //
-        && m_head->nReadSeekPos <= nPackLen    // ×¢ÊÇ¡°<=¡±
+        && m_head->nReadSeekPos <= nPackLen    // æ³¨æ˜¯â€œ<=â€
       )
     {
         return true;
@@ -140,96 +140,96 @@ bool RingQueue::isFull(unsigned int nDataLen)
     return false;
 }
 
-// ÄÚ´æ¿Õ¼äÎŞÊı¾İ·µtrue£¬·ñÔò·µfalse£»
+// å†…å­˜ç©ºé—´æ— æ•°æ®è¿”trueï¼Œå¦åˆ™è¿”falseï¼›
 bool RingQueue::isEmpty()
 {
     assert(NULL != m_head);
-    // £¨¶Á¡¢Ğ´´¦ÓÚÍ¬Ò»Î»ÖÃÊ±Îª¿Õ£©
+    // ï¼ˆè¯»ã€å†™å¤„äºåŒä¸€ä½ç½®æ—¶ä¸ºç©ºï¼‰
     return m_head->nReadSeekPos == m_head->nWriteSeekPos;
 }
 
-// È¡µ±Ç°´¦µ¥ÔªÊı¾İ³¤¶È
+// å–å½“å‰å¤„å•å…ƒæ•°æ®é•¿åº¦
 int RingQueue::GetCurrentDataLen()
 {
-    // È¡µ±Ç°¶ÁÎ»ÖÃ
+    // å–å½“å‰è¯»ä½ç½®
     CellHead *cell = (CellHead *)ReadPos();
     return cell->nBodyLen;
 }
 
 /*
- * °ÑpPackBuf·Åµ½¶ÓÁĞ¡£×¢Òâ£¬³¤¶ÈÔÚ°üÍ·ÀïÖ¸¶¨¡£
- * ·µ»Ø£º³É¹¦·µ»Ø0£¬³ö´í·µ»Ø·Ç0¡£
+ * æŠŠpPackBufæ”¾åˆ°é˜Ÿåˆ—ã€‚æ³¨æ„ï¼Œé•¿åº¦åœ¨åŒ…å¤´é‡ŒæŒ‡å®šã€‚
+ * è¿”å›ï¼šæˆåŠŸè¿”å›0ï¼Œå‡ºé”™è¿”å›é0ã€‚
  */
 int RingQueue::PutPackToQueue(const void *pData, unsigned int nDataLen)
 {
-    // Êı¾İ³¤¶È»¹Òª¼ÓÉÏµ¥ÔªÍ·²¿³¤¶È
+    // æ•°æ®é•¿åº¦è¿˜è¦åŠ ä¸Šå•å…ƒå¤´éƒ¨é•¿åº¦
     const unsigned int nPackLen = nDataLen + sizeof(CellHead);
 
-    // ¼ì²éÊ£Óà¿Õ¼ä
+    // æ£€æŸ¥å‰©ä½™ç©ºé—´
     if( isFull(nPackLen) )
     {
-        // Debug("¿Õ¼äÂú");
-        return -1;  // ÒÑÎŞ×ã¹»¿Õ¼ä
+        // Debug("ç©ºé—´æ»¡");
+        return -1;  // å·²æ— è¶³å¤Ÿç©ºé—´
     }
 
-    /* ¼ì²éµ±Ç°Ğ´µÄÎ»ÖÃ£¬ÓĞ¿Õ£¨²»Âú£©µÄ¿Õ¼ä¿ÉÄÜÔÚÊı¾İÇøÇ°£¬Ò²¿ÉÄÜÔÚºó£»
-     * ÕâÖÖ¼ì²éÖ»ÓĞÔÚĞ´ÈëÊı¾İÊ±²ÅÄÜ×ö²âÊÔ£¬ÒòÎª³¤¶È²»È·¶¨£»
+    /* æ£€æŸ¥å½“å‰å†™çš„ä½ç½®ï¼Œæœ‰ç©ºï¼ˆä¸æ»¡ï¼‰çš„ç©ºé—´å¯èƒ½åœ¨æ•°æ®åŒºå‰ï¼Œä¹Ÿå¯èƒ½åœ¨åï¼›
+     * è¿™ç§æ£€æŸ¥åªæœ‰åœ¨å†™å…¥æ•°æ®æ—¶æ‰èƒ½åšæµ‹è¯•ï¼Œå› ä¸ºé•¿åº¦ä¸ç¡®å®šï¼›
      */
     if(m_head->nMaxLen - m_head->nWriteSeekPos < nPackLen)
     {
-        m_head->nMarkPosOfEndWrite = m_head->nWriteSeekPos; // ¼ÇÂ¼»ØÈÆÇ°£¬Ä©Î²´¦ÄÚÊı¾İÎ»ÖÃ£»
-        m_head->nWriteSeekPos = 0; // ÒÆµ½Êı¾İÇøÆğÊ¼´¦
+        m_head->nMarkPosOfEndWrite = m_head->nWriteSeekPos; // è®°å½•å›ç»•å‰ï¼Œæœ«å°¾å¤„å†…æ•°æ®ä½ç½®ï¼›
+        m_head->nWriteSeekPos = 0; // ç§»åˆ°æ•°æ®åŒºèµ·å§‹å¤„
     }
 
-    // Ğ´µÄÎ»ÖÃ
+    // å†™çš„ä½ç½®
     CellHead *cell = (CellHead *)WritePos();
 
-    // ±êÃ÷³¤¶È
+    // æ ‡æ˜é•¿åº¦
     cell->nBodyLen = nDataLen;
 
-    // Êı¾İ·Åµ½¶ÓÁĞ
+    // æ•°æ®æ”¾åˆ°é˜Ÿåˆ—
     memcpy(cell->data, pData, nDataLen);
 
-    // ÒÆ¶¯Ğ´Î»ÖÃ£¨Êı¾İ³¤¶È + µ¥ÔªÍ·³¤¶È£©
+    // ç§»åŠ¨å†™ä½ç½®ï¼ˆæ•°æ®é•¿åº¦ + å•å…ƒå¤´é•¿åº¦ï¼‰
     m_head->nWriteSeekPos += nPackLen;
 
     return 0;
 }
 
 /*
- * ´Ó¶ÓÁĞÖĞÈ¡Ò»¸ö°ü£¬·Åµ½pPackBufÖĞ¡£
- * ·µ»Ø£º³É¹¦·µ»Ø0£¬³ö´í·µ»Ø·Ç0¡£
+ * ä»é˜Ÿåˆ—ä¸­å–ä¸€ä¸ªåŒ…ï¼Œæ”¾åˆ°pPackBufä¸­ã€‚
+ * è¿”å›ï¼šæˆåŠŸè¿”å›0ï¼Œå‡ºé”™è¿”å›é0ã€‚
  */
 int RingQueue::GetPackFromQueue(void *pBuf, unsigned int nBufLen)
 {
     if( isEmpty() )
     {
-        // Debug("ÎŞÊı¾İ");
+        // Debug("æ— æ•°æ®");
         return -1;
     }
 
-    // ²é¿´ÉÏ´Î¶ÁÎ»ÖÃÊÇ·ñÒÑ´¦ÓÚÊı¾İÄ©Î²
+    // æŸ¥çœ‹ä¸Šæ¬¡è¯»ä½ç½®æ˜¯å¦å·²å¤„äºæ•°æ®æœ«å°¾
     if(m_head->nReadSeekPos == m_head->nMarkPosOfEndWrite)
     {
-        m_head->nReadSeekPos = 0;  // ÒÆµ½Êı¾İÇøÆğÊ¼´¦
+        m_head->nReadSeekPos = 0;  // ç§»åˆ°æ•°æ®åŒºèµ·å§‹å¤„
     }
 
-    // È¡µ±Ç°¶ÁÎ»ÖÃ
+    // å–å½“å‰è¯»ä½ç½®
     CellHead *cell = (CellHead *)ReadPos();
 
-    // ¼ì²é³¤¶È
+    // æ£€æŸ¥é•¿åº¦
     if(nBufLen < cell->nBodyLen)
     {
-        return -2; // ´«ÈëµÄ»º³åÇøÌ«Ğ¡
+        return -2; // ä¼ å…¥çš„ç¼“å†²åŒºå¤ªå°
     }
 
-    // ¸´ÖÆÊı¾İ
+    // å¤åˆ¶æ•°æ®
     memcpy(pBuf, cell->data, cell->nBodyLen);
 
-    // Êı¾İ³¤¶È»¹Òª¼ÓÉÏµ¥ÔªÍ·²¿³¤¶È
+    // æ•°æ®é•¿åº¦è¿˜è¦åŠ ä¸Šå•å…ƒå¤´éƒ¨é•¿åº¦
     const unsigned int nPackLen = cell->nBodyLen + sizeof(CellHead);
 
-    // ÒÆ¶¯¶ÁÎ»ÖÃ
+    // ç§»åŠ¨è¯»ä½ç½®
     m_head->nReadSeekPos += nPackLen;
 
     return 0;

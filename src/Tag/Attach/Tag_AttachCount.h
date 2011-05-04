@@ -8,7 +8,7 @@ namespace TAG_ATTACHCOUNT_SPACE
 
 
 
-// 显示附件个数
+// 鏄剧ず闄勪欢涓暟
 class Tag_AttachCount : public Tag
 {
 protected:

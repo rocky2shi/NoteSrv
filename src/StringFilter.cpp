@@ -31,15 +31,15 @@ StringFilter::~StringFilter()
     }
 }
 
-// Çå¿Õ
+// æ¸…ç©º
 void StringFilter::Clear()
 {
     memset(m_Node, 0, sizeof(m_Node));
     m_nCount = 0;
 }
 
-// ´ò¿ª¹ıÂË±í´ïÊ½µÄÅäÖÃÎÄ¼ş£¬²¢³õÊ¼»¯±í´ïÊ½£»
-// ·µ»Ø£º³É¹¦·µ0£¬³ö´í·µ·Ç0£»
+// æ‰“å¼€è¿‡æ»¤è¡¨è¾¾å¼çš„é…ç½®æ–‡ä»¶ï¼Œå¹¶åˆå§‹åŒ–è¡¨è¾¾å¼ï¼›
+// è¿”å›ï¼šæˆåŠŸè¿”0ï¼Œå‡ºé”™è¿”é0ï¼›
 int StringFilter::OpenConfig(const char *pFile)
 {
     assert(NULL != pFile);
@@ -60,32 +60,32 @@ int StringFilter::OpenConfig(const char *pFile)
     }
 
     /*
-     *  ±éÀúÎÄ¼ş£¬È¡³öÕıÔòÊ½¶Ô£¬Èç£º
+     *  éå†æ–‡ä»¶ï¼Œå–å‡ºæ­£åˆ™å¼å¯¹ï¼Œå¦‚ï¼š
      *
      *      REGEXP1=([0-9]+).([0-9]+).([0-9]+).([0-9]+)
      *      TARGET1=$1.$2.$3.$4
      *
-     *  ³öÈ¡ÅäÖÃµÄÖµ¶Ôºó£¬µ÷ÓÃRegcomp()¼ÓÈëÅäÖÃÊı×é¡£
+     *  å‡ºå–é…ç½®çš„å€¼å¯¹åï¼Œè°ƒç”¨Regcomp()åŠ å…¥é…ç½®æ•°ç»„ã€‚
      */
     while( fgets(szBuf, sizeof(szBuf), fp) )
     {
-        // Ìø¹ı×¢ÊÍ¼°¿ÕĞĞ
+        // è·³è¿‡æ³¨é‡ŠåŠç©ºè¡Œ
         if('#' == szBuf[0] || '\r' == szBuf[0] || '\n' == szBuf[0]  )
         {
             continue;
         }
-        // ¸´ÖÆ£¬²¢Ìø¹ıĞĞÎ²½áÊø·û¡£
+        // å¤åˆ¶ï¼Œå¹¶è·³è¿‡è¡Œå°¾ç»“æŸç¬¦ã€‚
         if(sscanf(szBuf, "REGEXP%[0-9]=%[^'\r''\n']", s[0], szLine[0]) != 2
            && sscanf(szBuf, "TARGET%[0-9]=%[^'\r''\n']", s[1], szLine[1]) != 2)
         {
             continue;
         }
-        // ÒÑÈ¡µ½Á½ĞĞ
+        // å·²å–åˆ°ä¸¤è¡Œ
         if(nLine> 0 && strcmp(s[0], s[1]) == 0)
         {
             // printf("[%s]\n[%s]\n\n", szLine[0], szLine[1]);
 
-            // ¼ÓÈë
+            // åŠ å…¥
             Regcomp(szLine[0], szLine[1]);
             memset(s, 0, sizeof(s));
             memset(szLine, 0, sizeof(szLine));
@@ -93,17 +93,17 @@ int StringFilter::OpenConfig(const char *pFile)
         }
         nLine++;
     }
-    if(0 == m_nCount) // µ±µ÷ÓÃRegcomp()Ê±£¬m_nCountÔö¼Ó£»
+    if(0 == m_nCount) // å½“è°ƒç”¨Regcomp()æ—¶ï¼Œm_nCountå¢åŠ ï¼›
     {
         return -13;
     }
     return 0;
 }
 
-// ±àÒë±í´ïÊ½£¬´æÈëÊı×é£¨×·¼Ó£©£¬ÓÃÓÚÆ¥Åä¡£
-// pRegex : ÕıÔòÊ½´®
-// pTarget: ½«Òª×ª»»³ÉµÄÄ¿±êĞÎÊ½±í´ïÊ½
-// ·µ»Ø£º³É¹¦·µ0£¬³ö´í·µ·Ç0£»
+// ç¼–è¯‘è¡¨è¾¾å¼ï¼Œå­˜å…¥æ•°ç»„ï¼ˆè¿½åŠ ï¼‰ï¼Œç”¨äºåŒ¹é…ã€‚
+// pRegex : æ­£åˆ™å¼ä¸²
+// pTarget: å°†è¦è½¬æ¢æˆçš„ç›®æ ‡å½¢å¼è¡¨è¾¾å¼
+// è¿”å›ï¼šæˆåŠŸè¿”0ï¼Œå‡ºé”™è¿”é0ï¼›
 int StringFilter::Regcomp(const char *pRegex, const char *pTarget)
 {
     assert(NULL != pRegex && NULL != pTarget);
@@ -113,7 +113,7 @@ int StringFilter::Regcomp(const char *pRegex, const char *pTarget)
         return -2;
     }
 
-    // ±àÒë
+    // ç¼–è¯‘
     if(regcomp(&m_Node[m_nCount].regex, pRegex, CFLAGS) != 0)
     {
         return -1;
@@ -127,9 +127,9 @@ int StringFilter::Regcomp(const char *pRegex, const char *pTarget)
     return 0;
 }
 
-// ¸ù¾İÉè¶¨µÄÖµ£¬×ª»»pSrc´®£¬½á¹û·Åµ½pDestÖĞ£»
-// ×¢Òâ£¬ÒªÈ·±£pDest×ã¹»³¤£»
-// ·µ»Ø£º³É¹¦·µ»Ø´óÓÚ0µÄÖµ£¬Ê§°Ü·µ-1£»
+// æ ¹æ®è®¾å®šçš„å€¼ï¼Œè½¬æ¢pSrcä¸²ï¼Œç»“æœæ”¾åˆ°pDestä¸­ï¼›
+// æ³¨æ„ï¼Œè¦ç¡®ä¿pDestè¶³å¤Ÿé•¿ï¼›
+// è¿”å›ï¼šæˆåŠŸè¿”å›å¤§äº0çš„å€¼ï¼Œå¤±è´¥è¿”-1ï¼›
 int StringFilter::ChangTo(const char *pSrc, char *pDest)
 {
     assert(NULL != pSrc);
@@ -139,7 +139,7 @@ int StringFilter::ChangTo(const char *pSrc, char *pDest)
     const size_t nmatch = 10;
 
     /*
-     *  ±éÀúÕıÔòÊ½Êı×ém_Node£¬µ±ÓĞÒ»ÏîÆ¥ÅäÖĞÊ±£¬Êä³ö²¢·µ»Ø£¨ÂÔ¹ıºó¼ÌÏî£©£»
+     *  éå†æ­£åˆ™å¼æ•°ç»„m_Nodeï¼Œå½“æœ‰ä¸€é¡¹åŒ¹é…ä¸­æ—¶ï¼Œè¾“å‡ºå¹¶è¿”å›ï¼ˆç•¥è¿‡åç»§é¡¹ï¼‰ï¼›
      */
     for(i=0; i<m_nCount; i++)
     {
@@ -149,30 +149,30 @@ int StringFilter::ChangTo(const char *pSrc, char *pDest)
             char *p = m_Node[i].pTarget;
             char *q = pDest;
 
-            // Öğ¸ö×Ö·ûÊä³ö£¬Óöµ½$1,$2,$3,...£¬Ôò×ª»»£»
+            // é€ä¸ªå­—ç¬¦è¾“å‡ºï¼Œé‡åˆ°$1,$2,$3,...ï¼Œåˆ™è½¬æ¢ï¼›
             while('\0' != *p)
             {
                 if('$' == *p && isdigit(*(p+1)))
                 {
-                    x = *(p+1) - '0'; // ×ÖÄ¸×ªÎªÊı×Ö
+                    x = *(p+1) - '0'; // å­—æ¯è½¬ä¸ºæ•°å­—
                     nLen = pm[x].rm_eo-pm[x].rm_so;
                     strncpy(q, pSrc+pm[x].rm_so, nLen);
                     q += nLen;
-                    p += 2; // Ìø¹ı'$x'
+                    p += 2; // è·³è¿‡'$x'
                 }
                 else
                 {
                     *q++ = *p++;
                 }
             }
-            return i+1; // ·µ»ØÃüÖĞµÄÊÇµÚ¼¸ÏîÕıÔòÊ½£¨´Ó1¿ªÊ±Ëã£©
+            return i+1; // è¿”å›å‘½ä¸­çš„æ˜¯ç¬¬å‡ é¡¹æ­£åˆ™å¼ï¼ˆä»1å¼€æ—¶ç®—ï¼‰
         }
     }
     return -1;
 }
 
-// pSrcÖĞ´æÔÚ·ûºÏÅäÖÃÖĞÖ¸¶¨µÄ´®
-// ·µ»Ø£º³É¹¦·µ»Ø´óÓÚ0µÄÖµ£¬Ê§°Ü·µ-1£»
+// pSrcä¸­å­˜åœ¨ç¬¦åˆé…ç½®ä¸­æŒ‡å®šçš„ä¸²
+// è¿”å›ï¼šæˆåŠŸè¿”å›å¤§äº0çš„å€¼ï¼Œå¤±è´¥è¿”-1ï¼›
 int StringFilter::IsExist(const char *pSrc)
 {
     assert(NULL != pSrc);

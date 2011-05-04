@@ -7,7 +7,7 @@ namespace TAG_BROWSEFILTERITEMS_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 //static const string THIS_MODULE = "BrowseFilterItems";
 
 
@@ -15,17 +15,17 @@ namespace TAG_BROWSEFILTERITEMS_SPACE
 
 Tag_BrowseFilterItems::Tag_BrowseFilterItems()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_BrowseFilterItems::Tag_BrowseFilterItems(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_BrowseFilterItems::~Tag_BrowseFilterItems()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -33,15 +33,15 @@ Tag_BrowseFilterItems::~Tag_BrowseFilterItems()
 
 int Tag_BrowseFilterItems::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_BrowseFilterItems::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_BrowseFilterItems;
 }
 
@@ -52,22 +52,22 @@ Tag *Tag_BrowseFilterItems::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±êÌâ [2010-05]
+// å–æ ‡é¢˜ [2010-05]
 string Tag_BrowseFilterItems::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     const string &filter = "filter";
     PageCfg * const cfg = page->GetCurrentPageCfg();
 
     /*
-     * Ê±¼ä¹ıÂËÏî
+     * æ—¶é—´è¿‡æ»¤é¡¹
      */
     if("timebeginchk" == m_id)
     {
@@ -87,7 +87,7 @@ string Tag_BrowseFilterItems::Get(Page *page)
     }
 
     /*
-     * ¹Ø¼ü×Ö¹ıÂËÏî
+     * å…³é”®å­—è¿‡æ»¤é¡¹
      */
     else if("query_keyword" == m_id)
     {
@@ -110,15 +110,15 @@ string Tag_BrowseFilterItems::Get(Page *page)
     }
 
     /*
-     * ÀàĞÍ
+     * ç±»å‹
      */
-    // ÓÉ²Ëµ¥Àà´¦Àí¡£¡£¡£
+    // ç”±èœå•ç±»å¤„ç†ã€‚ã€‚ã€‚
     //
 
     /*
-     * ½á¹ûÏÔÊ¾´°¿Ú
-     *   _blank: ¹ıÂË½á¹ûÔÚĞÂ´°¿Ú´ò¿ª
-     *   _self : ¹ıÂË½á¹ûÔÚµ±Ç°´°¿Ú´ò¿ª
+     * ç»“æœæ˜¾ç¤ºçª—å£
+     *   _blank: è¿‡æ»¤ç»“æœåœ¨æ–°çª—å£æ‰“å¼€
+     *   _self : è¿‡æ»¤ç»“æœåœ¨å½“å‰çª—å£æ‰“å¼€
      */
     else if("chk_blank" == m_id)
     {
@@ -154,7 +154,7 @@ string Tag_BrowseFilterItems::Get(Page *page)
 
 
 
-// ´¦Àí¶à¸öÏî
+// å¤„ç†å¤šä¸ªé¡¹
 static Tag_BrowseFilterItems tmp1("browse", "timebeginchk");
 static Tag_BrowseFilterItems tmp2("browse", "timeendchk");
 static Tag_BrowseFilterItems tmp3("browse", "qtbegin");

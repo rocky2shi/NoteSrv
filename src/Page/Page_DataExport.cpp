@@ -12,32 +12,32 @@ namespace PAGE_DATAEXPORT_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "DataExport";
 
 
 
 Page_DataExport::Page_DataExport()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_DataExport::~Page_DataExport()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_DataExport::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_DataExport::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_DataExport;
 }
 
@@ -48,33 +48,33 @@ Page *Page_DataExport::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
-// Êä³öhttpĞ­ÒéÍ·²¿
+// è¾“å‡ºhttpåè®®å¤´éƒ¨
 int Page_DataExport::OutHead()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     Connect * const connect = m_request->GetConnect();
     const string &username = m_request->GetCurrentUser();
-    const string &backup_range = m_request->GetField("backup_range"); // µ¼³ö·¶Î§
+    const string &backup_range = m_request->GetField("backup_range"); // å¯¼å‡ºèŒƒå›´
     const string &include_attach = m_request->GetField("include_attach");
     DataPack pack(username);
     string fullpath;
-    string filename; // ´«µ½¿Í»§¶ËµÄÎÄ¼şÃû
+    string filename; // ä¼ åˆ°å®¢æˆ·ç«¯çš„æ–‡ä»¶å
 
-    // ÊÇ·ñĞèÊÇµ¼³ö¸½¼ş
+    // æ˜¯å¦éœ€æ˜¯å¯¼å‡ºé™„ä»¶
     if("yes" != include_attach)
     {
-        // ÅÅ³ı¸½¼ş
+        // æ’é™¤é™„ä»¶
         pack.SetAttrib(DataPack::A_EXCLUDE_ATTACH);
     }
 
     if("all" == backup_range)
     {
         /*
-         * µ¼³öËùÓĞÊı¾İ
+         * å¯¼å‡ºæ‰€æœ‰æ•°æ®
          */
         if( pack.MakePack() == ERR
             || pack.AddAll() == ERR
@@ -87,13 +87,13 @@ int Page_DataExport::OutHead()
     else if("select" == backup_range)
     {
         /*
-         * µ¼³öÑ¡¶¨µÄÊı¾İ
+         * å¯¼å‡ºé€‰å®šçš„æ•°æ®
          */
         int i;
         vector<string> keys;
         vector<string>::iterator it;
         UserData data( username );
-        Split(m_request->GetField("select_key"), " ", keys); // ·Ö¸î´®ÎªÊı×é
+        Split(m_request->GetField("select_key"), " ", keys); // åˆ†å‰²ä¸²ä¸ºæ•°ç»„
 
         LOG_DEBUG("keys.size=[%d]", keys.size());
         LOG_DEBUG("keys=[%s]", m_request->GetField("select_key").c_str());
@@ -114,7 +114,7 @@ int Page_DataExport::OutHead()
 
             Ini group;
 
-            // ÒÔ50¸öÎªÒ»×é
+            // ä»¥50ä¸ªä¸ºä¸€ç»„
             for(i=0; i<50 && keys.end() != it; it++)
             {
                 const string &key = *it;
@@ -122,11 +122,11 @@ int Page_DataExport::OutHead()
                 {
                     continue;
                 }
-                group.Set(key, Conf()); // ÏÈÌî³äÒ»¿ÕµÄConf()
+                group.Set(key, Conf()); // å…ˆå¡«å……ä¸€ç©ºçš„Conf()
                 LOG_DEBUG("key=[%s]", key.c_str());
             }
 
-            // È¡key×é¶ÔÓ¦Êı¾İ
+            // å–keyç»„å¯¹åº”æ•°æ®
             if( data.Get( group ) < 0 )
             {
                 LOG_ERROR("Get data error, username=[%s]", username.c_str());
@@ -146,11 +146,11 @@ int Page_DataExport::OutHead()
         return OK;
     }
 
-    filename = username + "." + GetCurrentKey() + ".pkg";   // ·¢ËÍµ½¿Í»§¶ËµÄÎÄ¼şÃû
-    fullpath = pack.PackFinish(); // ´ò°üÍê³É£¬È¡°üÃû£»
+    filename = username + "." + GetCurrentKey() + ".pkg";   // å‘é€åˆ°å®¢æˆ·ç«¯çš„æ–‡ä»¶å
+    fullpath = pack.PackFinish(); // æ‰“åŒ…å®Œæˆï¼Œå–åŒ…åï¼›
     LOG_DEBUG("fullpath=[%s] filename=[%s]", fullpath.c_str(), filename.c_str());
 
-    // ÔÙ´Î´ò¿ª´ò°üÎÄ¼ş
+    // å†æ¬¡æ‰“å¼€æ‰“åŒ…æ–‡ä»¶
     if( !m_file.Open(fullpath) )
     {
         Page::OutHead();
@@ -160,7 +160,7 @@ int Page_DataExport::OutHead()
 
     const string &size = IntToString(m_file.Size());
 
-    // ÎÄ¼şÏÂÔØÍ·²¿¸ñÊ½
+    // æ–‡ä»¶ä¸‹è½½å¤´éƒ¨æ ¼å¼
     const string html = ""
                         "HTTP/1.1 200 OK\n"
                         "Accept-Ranges: bytes\n"
@@ -170,21 +170,21 @@ int Page_DataExport::OutHead()
                         "Content-Type: application/ms-excel\n"
                         "\n";
 
-    // ·¢ËÍ
+    // å‘é€
     return connect->Send(html) == html.length() ? OK : ERR;
 }
 
-// Êä³öÊı¾İÌå
+// è¾“å‡ºæ•°æ®ä½“
 int Page_DataExport::OutBody()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
     Connect * const connect = m_request->GetConnect();
     int ret = SendFile(m_file, connect);
 
-    // ´¦ÀíÍê±Ï£¬Çå³ı°üÎÄ¼ş£»
+    // å¤„ç†å®Œæ¯•ï¼Œæ¸…é™¤åŒ…æ–‡ä»¶ï¼›
     DeleteFile(m_file.Fullname());
 
     return OK;
@@ -196,7 +196,7 @@ int Page_DataExport::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_DataExport, THIS_MODULE)
 
 }// end of PAGE_DATAEXPORT_SPACE

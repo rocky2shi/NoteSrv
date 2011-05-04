@@ -8,7 +8,7 @@ namespace LOG_SPACE
 
 
 // -----------------------------------------------------
-// ÈÕÖ¾´æÔÚ±¾µØÎÄ¼ş
+// æ—¥å¿—å­˜åœ¨æœ¬åœ°æ–‡ä»¶
 class Log_Local : public Log
 {
 public:
@@ -38,7 +38,7 @@ public:
 
     virtual void Out(Level level, const Log *logger, const char *format, va_list ap)
     {
-        FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+        FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
         fprintf(m_log, "[%s] [%s] [%s:%d] [%lu]>>> ",
                             logger->m_time,
@@ -83,22 +83,22 @@ Log::~Log()
 {
 }
 
-// Àà³õÊ¼»¯
+// ç±»åˆå§‹åŒ–
 int Log::init()
 {
     int ret;
     Log *logger = NULL;
     char *which = getenv("LOG_TERMINAL");
 
-    // ÓÉ»·¾³±äÁ¿¾ö¶¨ÈÕÖ¾Êä³öµ½ÄÄ   [Rocky 2010-06-04 16:05:30]
+    // ç”±ç¯å¢ƒå˜é‡å†³å®šæ—¥å¿—è¾“å‡ºåˆ°å“ª   [Rocky 2010-06-04 16:05:30]
     if(NULL != which && '1' == *which)
     {
-        static Log log;         // Êä³öµ½ÖÕ¶Ë
+        static Log log;         // è¾“å‡ºåˆ°ç»ˆç«¯
         logger = &log;
     }
     else
     {
-        static Log_Local log;    // Êä³öµ½±¾µØÎÄ¼ş
+        static Log_Local log;    // è¾“å‡ºåˆ°æœ¬åœ°æ–‡ä»¶
         logger = &log;
     }
 
@@ -112,21 +112,21 @@ int Log::init()
     return Log::instance()->Init();
 }
 
-// Ö´ĞĞ¶ÔÏó³õÊ¼»¯£¬ÉèÖÃÔËĞĞ¼¶±ğµÈÊı¾İ½á¹¹£»
+// æ‰§è¡Œå¯¹è±¡åˆå§‹åŒ–ï¼Œè®¾ç½®è¿è¡Œçº§åˆ«ç­‰æ•°æ®ç»“æ„ï¼›
 int Log::Init()
 {
     m_level = new char[LEVEL_MAX + 1];
     if(NULL == m_level)
     {
         printf("new char[] error\n");
-        assert(0);  // ÕâÊÇÏµÍ³±ØĞëÍê³ÉµÄ³õÊ¼»¯
+        assert(0);  // è¿™æ˜¯ç³»ç»Ÿå¿…é¡»å®Œæˆçš„åˆå§‹åŒ–
         return ERR;
     }
     m_lock = new Lock;
     if(NULL == m_lock)
     {
         printf("new Lock() error\n");
-        assert(0);  // ÕâÊÇÏµÍ³±ØĞëÍê³ÉµÄ³õÊ¼»¯
+        assert(0);  // è¿™æ˜¯ç³»ç»Ÿå¿…é¡»å®Œæˆçš„åˆå§‹åŒ–
         return ERR;
     }
 
@@ -137,13 +137,13 @@ int Log::Init()
     return OK;
 }
 
-// ÉèÖÃÈÕÖ¾¼¶±ğ
+// è®¾ç½®æ—¥å¿—çº§åˆ«
 void Log::SetLevel(Level level, bool open/*=true*/)
 {
     m_level[ level ] = (open ? 1 : 0);
 }
 
-// »ñÈ¡ÈÕÖ¾¼¶±ğ£ºtrueÎª¿ª£¬falseÎª¹Ø
+// è·å–æ—¥å¿—çº§åˆ«ï¼štrueä¸ºå¼€ï¼Œfalseä¸ºå…³
 bool Log::GetLevel(Level level)
 {
     return m_level[ level ] == 1 ? true : false;
@@ -163,7 +163,7 @@ void Log::Out(Level level, const Log *logger, const char *format, va_list ap)
 }
 
 
-// µ÷ÊÔĞÅÏ¢
+// è°ƒè¯•ä¿¡æ¯
 void Log::DebugLog(const char * format, ...)
 {
     if( 0 == Log::instance()->m_level[ DEBUG ] )
@@ -171,7 +171,7 @@ void Log::DebugLog(const char * format, ...)
         return;
     }
 
-    // ×¢Òâ£¬ÓĞ¶àÏß³ÌĞ´ÈÕÖ¾£¬Ğë¼ÓËø£»
+    // æ³¨æ„ï¼Œæœ‰å¤šçº¿ç¨‹å†™æ—¥å¿—ï¼Œé¡»åŠ é”ï¼›
     UNIQUE_LOCK( *(Log::instance()->m_lock) );
 
     va_list ap;
@@ -180,7 +180,7 @@ void Log::DebugLog(const char * format, ...)
     va_end(ap);
 }
 
-// Ò»°ãĞÔÌáÊ¾ĞÅÏ¢
+// ä¸€èˆ¬æ€§æç¤ºä¿¡æ¯
 void Log::InfoLog(const char * format, ...)
 {
     if( 0 == Log::instance()->m_level[ INFO ] )
@@ -188,7 +188,7 @@ void Log::InfoLog(const char * format, ...)
         return;
     }
 
-    // ×¢Òâ£¬ÓĞ¶àÏß³ÌĞ´ÈÕÖ¾£¬Ğë¼ÓËø£»
+    // æ³¨æ„ï¼Œæœ‰å¤šçº¿ç¨‹å†™æ—¥å¿—ï¼Œé¡»åŠ é”ï¼›
     UNIQUE_LOCK( *(Log::instance()->m_lock) );
 
     va_list ap;
@@ -197,7 +197,7 @@ void Log::InfoLog(const char * format, ...)
     va_end(ap);
 }
 
-// ³ö´íĞÅÏ¢
+// å‡ºé”™ä¿¡æ¯
 void Log::ErrorLog(const char * format, ...)
 {
     if( 0 == Log::instance()->m_level[ ERROR ] )
@@ -205,7 +205,7 @@ void Log::ErrorLog(const char * format, ...)
         return;
     }
 
-    // ×¢Òâ£¬ÓĞ¶àÏß³ÌĞ´ÈÕÖ¾£¬Ğë¼ÓËø£»
+    // æ³¨æ„ï¼Œæœ‰å¤šçº¿ç¨‹å†™æ—¥å¿—ï¼Œé¡»åŠ é”ï¼›
     UNIQUE_LOCK( *(Log::instance()->m_lock) );
 
     va_list ap;

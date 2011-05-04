@@ -12,7 +12,7 @@ const int BUF_MAX_LEN = 512;
 
 /*
  *  [Rocky 2010-04-09 15:17:47]
- *  Ä£¿é´íÎóÂë
+ *  æ¨¡å—é”™è¯¯ç 
  */
 enum
 {
@@ -22,16 +22,16 @@ enum
 
 
 /*
- * Ò³Ãæ±ê¼Ç×÷ÓÃÓò£»
+ * é¡µé¢æ ‡è®°ä½œç”¨åŸŸï¼›
  */
-const string TAG_GLOBAL = "GLOBAL"; // È«¾Ö×÷ÓÃÓò
+const string TAG_GLOBAL = "GLOBAL"; // å…¨å±€ä½œç”¨åŸŸ
 
 
 
 /*
- * Ò³ÃæÌá½»´¦Àí±ê¼Ç×÷ÓÃÓò£»
+ * é¡µé¢æäº¤å¤„ç†æ ‡è®°ä½œç”¨åŸŸï¼›
  */
-const string SUBMIT_GLOBAL = "GLOBAL"; // È«¾Ö×÷ÓÃÓò
+const string SUBMIT_GLOBAL = "GLOBAL"; // å…¨å±€ä½œç”¨åŸŸ
 
 
 
@@ -40,16 +40,16 @@ const string SUBMIT_GLOBAL = "GLOBAL"; // È«¾Ö×÷ÓÃÓò
 
 /*
  *  [Rocky 2010-04-22 11:36:19]
- *  Ò³ÃæÄÚ²¿±ê¼Ç¶¨Òå
+ *  é¡µé¢å†…éƒ¨æ ‡è®°å®šä¹‰
  */
-const char TAG_LEFT[] = "<!--$"; // ×óÀ¨ºÅ
-const char TAG_RIGHT[] = "$-->"; // ÓÒÀ¨ºÅ
+const char TAG_LEFT[] = "<!--$"; // å·¦æ‹¬å·
+const char TAG_RIGHT[] = "$-->"; // å³æ‹¬å·
 
 
 
 /*
  * [Rocky 2010-05-13 16:58:23]
- * ¼ÓÃÜËã·¨°æ±¾±àºÅ£¨ÒÔºó»á¸ù¾Ý´ËºÅµ÷¶ÔÓ¦°æ±¾¼Ó½âÃÜ´¦Àí½Ó¿Ú£©
+ * åŠ å¯†ç®—æ³•ç‰ˆæœ¬ç¼–å·ï¼ˆä»¥åŽä¼šæ ¹æ®æ­¤å·è°ƒå¯¹åº”ç‰ˆæœ¬åŠ è§£å¯†å¤„ç†æŽ¥å£ï¼‰
  */
 const string CRYPT_VERSION = "S1";
 

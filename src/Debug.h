@@ -13,7 +13,7 @@
 
 
 
-// ÑÕÉ«¶¨Òå
+// é¢œè‰²å®šä¹‰
 #define COLOR_RED           "\033[31;1m"
 #define COLOR_GREEN         "\033[32;1m"
 #define COLOR_YELLOW        "\033[33;1m"
@@ -32,12 +32,12 @@ static const char *COLOR[] = {
 
 
 
-// ÓÃÓÚµ÷ÊÔ£¬¼ÇÂ¼º¯Êıµ÷ÓÃ¹ì¼£¡£
-// £¨µ±½øÈë¡¢ÍË³öº¯ÊıÊ±£¬µ÷ÓÃ¹¹Ôìº¯ÊıÀ´´òÓ¡£¨µ÷ÓÃ£©ĞÅÏ¢¡££©
-// ½áºÏºê¶¨ÒåFUNCTION_TRACK()À´Ê¹ÓÃ£¬ÀıÈç:
+// ç”¨äºè°ƒè¯•ï¼Œè®°å½•å‡½æ•°è°ƒç”¨è½¨è¿¹ã€‚
+// ï¼ˆå½“è¿›å…¥ã€é€€å‡ºå‡½æ•°æ—¶ï¼Œè°ƒç”¨æ„é€ å‡½æ•°æ¥æ‰“å°ï¼ˆè°ƒç”¨ï¼‰ä¿¡æ¯ã€‚ï¼‰
+// ç»“åˆå®å®šä¹‰FUNCTION_TRACK()æ¥ä½¿ç”¨ï¼Œä¾‹å¦‚:
 //      void Init()
 //      {
-//          FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+//          FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 //          ......
 //          ......
 //      }
@@ -54,31 +54,31 @@ public:
                                 str( s )
     {
         assert(NULL != pFunName && NULL != pFileName);
-        color = nCount % (sizeof(COLOR)/sizeof(COLOR[0])); // Ë³ĞòÈ¡ÑÕÉ«×éÖĞµÄÔªËØ
+        color = nCount % (sizeof(COLOR)/sizeof(COLOR[0])); // é¡ºåºå–é¢œè‰²ç»„ä¸­çš„å…ƒç´ 
         nL = nLine;
-        nIndex = nCount++;  // ËùÓĞº¯Êıµ÷ÓÃĞòºÅ
-        nCallCount++;       // µ±Ç°º¯Êıµ÷ÓÃ¼ÆÊı(×Ü´ÎÊı)
+        nIndex = nCount++;  // æ‰€æœ‰å‡½æ•°è°ƒç”¨åºå·
+        nCallCount++;       // å½“å‰å‡½æ•°è°ƒç”¨è®¡æ•°(æ€»æ¬¡æ•°)
         printf("%s:%d: +++into %s%s()%s... [%d]<%d> %s\n",
                 pFile, nL, COLOR[color], pFun, COLOR_NONE, nIndex, nCallCount, str);
-        // Print7(" +++ÒÑ½øÈë%s()... [%d]<%d>", pFun, nIndex, nCallCount);
+        // Print7(" +++å·²è¿›å…¥%s()... [%d]<%d>", pFun, nIndex, nCallCount);
         fflush(stdout);
     }
     ~CODE_TRACK()
     {
         printf("%s:%d: ---out  %s%s()%s... [%d] %s\n",
             pFile, nL, COLOR[color], pFun, COLOR_NONE, nIndex, str);
-        // Print7(" ---ÍË³ö  %s()... [%d]", pFun, nIndex);
+        // Print7(" ---é€€å‡º  %s()... [%d]", pFun, nIndex);
         fflush(stdout);
     }
-    const char *pFile;  // ÎÄ¼şÃû
-    int nL;             // ĞĞºÅ
-    const char *pFun;   // º¯ÊıÃû
-    int nIndex;         // ¼ÆÊı
-    int color;          // Ëæ»úµÄÑÕÉ«Êı×éË÷Òı
-    const char *str;    // ±¸×¢ĞÅÏ¢
-    static int nCount;  // ËùÓĞµ÷ÓÃ¼ÆÊı
+    const char *pFile;  // æ–‡ä»¶å
+    int nL;             // è¡Œå·
+    const char *pFun;   // å‡½æ•°å
+    int nIndex;         // è®¡æ•°
+    int color;          // éšæœºçš„é¢œè‰²æ•°ç»„ç´¢å¼•
+    const char *str;    // å¤‡æ³¨ä¿¡æ¯
+    static int nCount;  // æ‰€æœ‰è°ƒç”¨è®¡æ•°
 };
-// º¯Êı¹ì¼£¸ú×Û
+// å‡½æ•°è½¨è¿¹è·Ÿç»¼
 #ifdef _DEBUG
 #define FUNCTION_TRACK()                                                       \
         static int nFunctionCallCount;                                         \

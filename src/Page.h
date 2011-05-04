@@ -17,116 +17,116 @@ namespace PAGE_SPACE
 
 
 
-// cgiÒ³Ãæ´¦Àí»ùÀà
+// cgié¡µé¢å¤„ç†åŸºç±»
 class Page
 {
 /*
- *      ======================= ÒµÎñ½Ó¿Ú´úÂë =======================
+ *      ======================= ä¸šåŠ¡æ¥å£ä»£ç  =======================
  */
 public:
-    // ´¦ÀíÒ³ÇóÇëÇó
+    // å¤„ç†é¡µæ±‚è¯·æ±‚
     virtual int Deal();
 
-    // ÉèÖÃÁ¬½Ó
+    // è®¾ç½®è¿æ¥
     void SetRequest(Request * request);
 
-    // È¡³öÒ³Ãæµ±Ç°ËùÓÃµÄÇëÇó£¨Á¬½Ó£©
+    // å–å‡ºé¡µé¢å½“å‰æ‰€ç”¨çš„è¯·æ±‚ï¼ˆè¿æ¥ï¼‰
     Request *GetRequest();
 
-    // µ¥Ä£Ê½ÖĞÓÃµÄÈ¡ÊµÀı½Ó¿Ú
+    // å•æ¨¡å¼ä¸­ç”¨çš„å–å®ä¾‹æ¥å£
     inline static Page *instance(Page *page=NULL)
     {
         static Page *obj = (Page *)(Environment::instance()->ClassInit("Page", page));
         return obj;
     }
 
-    // ÉèÖÃ¡¢»ñÈ¡tag¼ä´¦Àí½á¹û´«µİ
+    // è®¾ç½®ã€è·å–tagé—´å¤„ç†ç»“æœä¼ é€’
     const string GetResult(const string &key);
     void SetResult(const string &key, const string &value);
 
-    // È¡µ±Ç°µÄKEY
+    // å–å½“å‰çš„KEY
     const string GetCurrentKey();
 
-    // È¡µ±Ç°KEY¶ÔÓ¦µÄÊı¾İ£¨°ü£©
+    // å–å½“å‰KEYå¯¹åº”çš„æ•°æ®ï¼ˆåŒ…ï¼‰
     Conf *GetCurrentPack();
 
-    // È¡µ±Ç°Ò³ÃæÉèÖÃ
+    // å–å½“å‰é¡µé¢è®¾ç½®
     PageCfg *GetCurrentPageCfg();
 
-    // Í³Ò»´¦Àí±£´æ£¨³ö±ãÓÚÍ¬²½´¦Àí»º´æ¸üĞÂ£©
+    // ç»Ÿä¸€å¤„ç†ä¿å­˜ï¼ˆå‡ºä¾¿äºåŒæ­¥å¤„ç†ç¼“å­˜æ›´æ–°ï¼‰
     int Save(const Ini &pack);
 
 protected:
-    // Êä³öhttpĞ­ÒéÍ·²¿
+    // è¾“å‡ºhttpåè®®å¤´éƒ¨
     virtual int OutHead();
 
-    // Êä³öÊı¾İÌå
+    // è¾“å‡ºæ•°æ®ä½“
     virtual int OutBody();
 
-    // Ò³ÃæÌø×ª
+    // é¡µé¢è·³è½¬
     void ChangeTo(const string &url);
 
 
 private:
 
-    // ½âÎöÒ³ÃæÄ£°å
+    // è§£æé¡µé¢æ¨¡æ¿
     int Parse();
 
 
 protected:
-    string m_id;                    // Ä£¿éid
-    string m_html;                  // Ò³ÃæÎÄ¼ş£¨ÓÉ×ÓÀàÖ¸¶¨£©
-    Request * m_request;            // ¿Í»§¶ËÇëÇóĞÅÏ¢£¨Íâ²¿ÒÑ¾­½âÎö£©
-    vector< Tag * > *m_TagList;     // Ò³ÃæËùÓĞ±ê¼ÇÁĞ±í£¨×¢Òâ£¬m_listÊÇÖ¸Õë£©£¨Í¬Àà¶ÔÏó¹²Ïí£©
-    Counter *m_VisitCounter;        // Ò³Ãæ·ÃÎÊ¼ÆÊıÆ÷
-    bool m_bParent;                 // Ö÷¶ÔÏó±ê¼Ç£¨ËùÓĞ×Ó¶ÔÏó¶¼ÓÉ¸¸¶ÔÏónew³öÀ´£©
-    map<string, string> m_result;   // Ò³´¦Àí½á¹û¼ä´«ĞÅÏ¢
-    string m_key;                   // Ã¿ÌõÊı¾İ¶¼¶ÔÓ¦ÓĞÒ»¸öKEY
-    Conf *m_pack;                   // µ±Ç°KEY¶ÔÓ¦µÄÊı¾İ£¨ÓÃÓÚÎª±ÜÃâ¶à´Î¶ÁÎÄ¼şÓÃ£©
-    PageCfg *m_PageCfg;             // µ±Ç°Ò³ÃæÉèÖÃ
+    string m_id;                    // æ¨¡å—id
+    string m_html;                  // é¡µé¢æ–‡ä»¶ï¼ˆç”±å­ç±»æŒ‡å®šï¼‰
+    Request * m_request;            // å®¢æˆ·ç«¯è¯·æ±‚ä¿¡æ¯ï¼ˆå¤–éƒ¨å·²ç»è§£æï¼‰
+    vector< Tag * > *m_TagList;     // é¡µé¢æ‰€æœ‰æ ‡è®°åˆ—è¡¨ï¼ˆæ³¨æ„ï¼Œm_listæ˜¯æŒ‡é’ˆï¼‰ï¼ˆåŒç±»å¯¹è±¡å…±äº«ï¼‰
+    Counter *m_VisitCounter;        // é¡µé¢è®¿é—®è®¡æ•°å™¨
+    bool m_bParent;                 // ä¸»å¯¹è±¡æ ‡è®°ï¼ˆæ‰€æœ‰å­å¯¹è±¡éƒ½ç”±çˆ¶å¯¹è±¡newå‡ºæ¥ï¼‰
+    map<string, string> m_result;   // é¡µå¤„ç†ç»“æœé—´ä¼ ä¿¡æ¯
+    string m_key;                   // æ¯æ¡æ•°æ®éƒ½å¯¹åº”æœ‰ä¸€ä¸ªKEY
+    Conf *m_pack;                   // å½“å‰KEYå¯¹åº”çš„æ•°æ®ï¼ˆç”¨äºä¸ºé¿å…å¤šæ¬¡è¯»æ–‡ä»¶ç”¨ï¼‰
+    PageCfg *m_PageCfg;             // å½“å‰é¡µé¢è®¾ç½®
 
 
 
 
 
 /*
- *      ========== ÒÔÏÂ´úÂëÖ÷ÒªÓÃÓÚ¹¤³§´¦ÀíÉèÖÃ£¨Ä£°å´úÂë£©=========
+ *      ========== ä»¥ä¸‹ä»£ç ä¸»è¦ç”¨äºå·¥å‚å¤„ç†è®¾ç½®ï¼ˆæ¨¡æ¿ä»£ç ï¼‰=========
  */
 public:
     Page();
     virtual ~Page();
 
-    // ³õÊ¼»¯
+    // åˆå§‹åŒ–
     static int init();
 
 
-    // ¸ú¾İ´«ÈëµÄid[page,tag]´Ó¹¤³§ÖĞ²úÉúÒ»¸ö´¦Àí¶ÔÏó
+    // è·Ÿæ®ä¼ å…¥çš„id[page,tag]ä»å·¥å‚ä¸­äº§ç”Ÿä¸€ä¸ªå¤„ç†å¯¹è±¡
     static Page *New(const string &page);
 
-    // ×¢²á£¨°Ñ×ÓÀà¶ÔÏó¼ÓÈëm_Factory£©
+    // æ³¨å†Œï¼ˆæŠŠå­ç±»å¯¹è±¡åŠ å…¥m_Factoryï¼‰
     int Register(const string &page, Page *sub);
 
-    // ×¢Ïú
+    // æ³¨é”€
     int UnRegister(const string &page);
 
 protected:
 
-    // ¸÷×ÓÀà¸ºÔğÊµÏÖ×ÔÒÑ³õÊ¼»¯²Ù×÷£¨×ÓÀàÓ¦ÖØÊµÏÖ´Ë½Ó¿Ú£©
+    // å„å­ç±»è´Ÿè´£å®ç°è‡ªå·²åˆå§‹åŒ–æ“ä½œï¼ˆå­ç±»åº”é‡å®ç°æ­¤æ¥å£ï¼‰
     virtual int DoInit();
 
-    // ¸÷×ÓÀà¸ºÔğÊµÏÖ×ÔÒÑµÄ¶ÔÏó´´½¨Æ÷£¨×ÓÀàÓ¦ÖØÊµÏÖ´Ë½Ó¿Ú£©
+    // å„å­ç±»è´Ÿè´£å®ç°è‡ªå·²çš„å¯¹è±¡åˆ›å»ºå™¨ï¼ˆå­ç±»åº”é‡å®ç°æ­¤æ¥å£ï¼‰
     virtual Page *DoNew();
 
 private:
     typedef map< string, Page * > Factory;
 
-    // ×ÓÀà¶ÔÏó¹¤³§
+    // å­ç±»å¯¹è±¡å·¥å‚
     Factory m_Factory;
 
 
 
 public:
-    // ¶¨ÒåÖÇÄÜÖ¸ÕëÀàĞÍ
+    // å®šä¹‰æ™ºèƒ½æŒ‡é’ˆç±»å‹
     typedef AutoPtr<Page> Ptr;
 };
 
@@ -139,7 +139,7 @@ public:
 
 
 /*
- * ÓÃÓÚPage_*Ä£¿éµÄ×Ô¶¯¼ÓÔØ£¬²¢ÔÚÄ£¿é¹Ø±Õºó×Ô¶¯×¢Ïú£»
+ * ç”¨äºPage_*æ¨¡å—çš„è‡ªåŠ¨åŠ è½½ï¼Œå¹¶åœ¨æ¨¡å—å…³é—­åè‡ªåŠ¨æ³¨é”€ï¼›
  * [Rocky 2010-04-27 09:55:40]
  */
 template<typename Type>
@@ -163,25 +163,25 @@ private:
 
 
 /*
- * ÕâÀï¶¨ÒåÁ½ÖÖ´¦Àí·½Ê½£º
- *   1. ¶¯Ì¬¿â´¦Àí·½Ê½
- *   2. Ö±½ÓÇ¶Èë³ÌĞò·½Ê½£¨Ä¬ÈÏ£©£¬¿ÉÒÔÊ¹ÓÃ¶¯Ì¬¿â¼ÓÔØÀ´¸²¸ÇÄ¬ÈÏ´¦Àí´úÂë£»
+ * è¿™é‡Œå®šä¹‰ä¸¤ç§å¤„ç†æ–¹å¼ï¼š
+ *   1. åŠ¨æ€åº“å¤„ç†æ–¹å¼
+ *   2. ç›´æ¥åµŒå…¥ç¨‹åºæ–¹å¼ï¼ˆé»˜è®¤ï¼‰ï¼Œå¯ä»¥ä½¿ç”¨åŠ¨æ€åº“åŠ è½½æ¥è¦†ç›–é»˜è®¤å¤„ç†ä»£ç ï¼›
  */
 
 #if 0
-// ÔİÊ±È¡Ïû´Ë´¦Àí·½Ê½£¨×¢ÒâºÍMakefileÏà¶ÔÓ¦£©[Rocky 2010-06-04 17:13:44] [XXX]
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// æš‚æ—¶å–æ¶ˆæ­¤å¤„ç†æ–¹å¼ï¼ˆæ³¨æ„å’ŒMakefileç›¸å¯¹åº”ï¼‰[Rocky 2010-06-04 17:13:44] [XXX]
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 #define DefinitinoDllEnter(Type, id)                        \
 extern "C" void DllEnter(void *param)                       \
 {                                                           \
     Environment::instance( (Environment*)param );           \
                                                             \
-    /* ¶¨ÒåÒ»¾²Ì¬¶ÔÏó£¬ÒÔ±ãÔÚ¹¹ÔìÊ±×¢²á£¬Îö¹¹Ê±×¢Ïú£»*/     \
+    /* å®šä¹‰ä¸€é™æ€å¯¹è±¡ï¼Œä»¥ä¾¿åœ¨æ„é€ æ—¶æ³¨å†Œï¼Œææ„æ—¶æ³¨é”€ï¼›*/     \
     static AutoLoadPageDll< Type > tmp( id );               \
 }
 #endif
 
-/* ÓÉ³õÊ¼»¯ÀàClassInitµ÷ÓÃµÄ½Ó¿Ú */
+/* ç”±åˆå§‹åŒ–ç±»ClassInitè°ƒç”¨çš„æ¥å£ */
 #define DefinitinoDllEnter(Type, id)                        \
 static int ModuleInit()                                     \
 {                                                           \

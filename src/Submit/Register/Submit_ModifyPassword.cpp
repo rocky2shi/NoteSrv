@@ -7,7 +7,7 @@
 namespace SUBMIT_MODIFYPASSWORD_SPACE
 {
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "ModifyPassword";
 
 
@@ -16,18 +16,18 @@ static const string THIS_MODULE = "ModifyPassword";
 
 Submit_ModifyPassword::Submit_ModifyPassword()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_ModifyPassword::Submit_ModifyPassword(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_ModifyPassword::~Submit_ModifyPassword()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -35,15 +35,15 @@ Submit_ModifyPassword::~Submit_ModifyPassword()
 
 int Submit_ModifyPassword::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_ModifyPassword::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_ModifyPassword;
 }
 
@@ -51,7 +51,7 @@ Submit *Submit_ModifyPassword::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -67,17 +67,17 @@ int Submit_ModifyPassword::Deal(Page *page)
     try
     {
         /*
-         * ÑéÖ¤ÓÃ»§ÊäÈë
+         * éªŒè¯ç”¨æˆ·è¾“å…¥
          */
         User *user = User::Get(username);
         if( ! user->isValid() )
         {
             LOG_ERROR("Username exist: [%s]", username.c_str());
-            msg = "¸ÃÓÃ»§²»´æÔÚ";
+            msg = "è¯¥ç”¨æˆ·ä¸å­˜åœ¨";
             throw 1;
         }
 
-        // µ±ĞèÒªĞŞ¸ÄÓÃ»§ĞÅÏ¢Ê±£¬Ğè¼ÓËø£»
+        // å½“éœ€è¦ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯æ—¶ï¼Œéœ€åŠ é”ï¼›
         UNIQUE_LOCK( user->GetLock() );
 
         const string &new_password1 = request->GetField("new_password1");
@@ -85,24 +85,24 @@ int Submit_ModifyPassword::Deal(Page *page)
         if("" != new_password1 && new_password1 != new_password2)
         {
             LOG_ERROR("Password no match on twice input.");
-            msg = "Á½´ÎÊäÈëµÄÃÜÂë²»Ò»Ñù";
+            msg = "ä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ä¸€æ ·";
             throw 2;
         }
 
         /*
-         * °ÑÓÃ»§ÅäÖÃÎÄ¼şºÍ¿Í»§¶Ë´«À´µÄ×ö±È½Ï
+         * æŠŠç”¨æˆ·é…ç½®æ–‡ä»¶å’Œå®¢æˆ·ç«¯ä¼ æ¥çš„åšæ¯”è¾ƒ
          */
-        const string &cfg_password = user->GetInfo("password");         // ÃÜÎÄ
-        const string &old_password = request->GetField("old_password"); // Ã÷ÎÄ
+        const string &cfg_password = user->GetInfo("password");         // å¯†æ–‡
+        const string &old_password = request->GetField("old_password"); // æ˜æ–‡
         if("" != cfg_password && cfg_password != Crypt(old_password, CRYPT_VERSION))
         {
             LOG_ERROR("Old password, username=[%s]", username.c_str());
-            msg = "Ô­ÃÜÂë³ö´í";
+            msg = "åŸå¯†ç å‡ºé”™";
             throw 3;
         }
 
         /*
-         * ĞŞ¸ÄÓÃ»§ĞÅÏ¢
+         * ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯
          */
         user->SetInfo("password", ("" == new_password1 ? "" : Crypt(new_password1, CRYPT_VERSION)));
         user->SetInfo("modify", NowTime("%Y%m%d%H%M%S"));
@@ -110,11 +110,11 @@ int Submit_ModifyPassword::Deal(Page *page)
         if( user->Save() < 0 )
         {
             LOG_ERROR("Save user cfg error: [%s]", username.c_str());
-            msg = "ÄÚ²¿´íÎó[´úÂë:SM6]";
+            msg = "å†…éƒ¨é”™è¯¯[ä»£ç :SM6]";
             throw 6;
         }
 
-        msg = "ĞŞ¸Ä³É¹¦";
+        msg = "ä¿®æ”¹æˆåŠŸ";
     }
     catch(int)
     {

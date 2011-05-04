@@ -17,26 +17,26 @@ RingQueueOfInt::RingQueueOfInt(int max)
                       m_read(0),
                       m_write(0)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 RingQueueOfInt::~RingQueueOfInt()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
     free(m_buf);
 }
 
 //
 int RingQueueOfInt::Init()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
     return NULL != m_buf ? OK : ERR;
 }
 
-// ×¡¶ÓÁÐÖÐ´æÈëÒ»¸öÔªËØ
+// ä½é˜Ÿåˆ—ä¸­å­˜å…¥ä¸€ä¸ªå…ƒç´ 
 int RingQueueOfInt::Push(void *element)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     if( isFull() )
     {
@@ -54,10 +54,10 @@ int RingQueueOfInt::Push(void *element)
     return OK;
 }
 
-// È¡Ò»¸öÔªËØ
+// å–ä¸€ä¸ªå…ƒç´ 
 int RingQueueOfInt::Pop(void *&element)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     if( isEmpty() )
     {
@@ -75,45 +75,45 @@ int RingQueueOfInt::Pop(void *&element)
     return OK;
 }
 
-// µ±Ç°¶ÓÁÐÔªËØ¸öÊý
+// å½“å‰é˜Ÿåˆ—å…ƒç´ ä¸ªæ•°
 int RingQueueOfInt::Size()
 {
-    // FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    // FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     if( m_write >= m_read )
     {
-        // ¶ÁÖ¸ÕëÔÚÇ°£¬Ö±½ÓÇó²îÖµ£»
+        // è¯»æŒ‡é’ˆåœ¨å‰ï¼Œç›´æŽ¥æ±‚å·®å€¼ï¼›
         return m_write - m_read;
     }
     else
     {
-        // Ð´Ö¸ÕëÔÚÇ°£¬ÔòÒª¼ÆËã¡°»ØÈÄ¡±£»
+        // å†™æŒ‡é’ˆåœ¨å‰ï¼Œåˆ™è¦è®¡ç®—â€œå›žé¥¶â€ï¼›
         return m_write - m_read + m_max;
     }
 }
 
-// ¶ÓÁÐÂú·µ»Øtrue
+// é˜Ÿåˆ—æ»¡è¿”å›žtrue
 bool RingQueueOfInt::isFull()
 {
-    // FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    // FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
     /*
-     * ÂúÐè·ÖÇé¿ö´¦Àí£º
+     * æ»¡éœ€åˆ†æƒ…å†µå¤„ç†ï¼š
      */
-    if( m_write + 1 == m_read)  // 1. Ð´ < ¶Á
+    if( m_write + 1 == m_read)  // 1. å†™ < è¯»
     {
         return true;
     }
-    else if( 0 == m_read && (m_write + 1) == m_max) // 2. ¶Á < Ð´
+    else if( 0 == m_read && (m_write + 1) == m_max) // 2. è¯» < å†™
     {
         return true;
     }
     return false;
 }
 
-// ¶ÓÁÐ¿Õ·µ»Øtrue
+// é˜Ÿåˆ—ç©ºè¿”å›žtrue
 bool RingQueueOfInt::isEmpty()
 {
-    // FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    // FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
     return m_read == m_write;
 }
 

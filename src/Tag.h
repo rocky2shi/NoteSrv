@@ -11,27 +11,27 @@ class Page;
 
 
 
-// ±ê¼Ç´¦Àí»ùÀà
+// æ ‡è®°å¤„ç†åŸºç±»
 class Tag
 {
 /*
- *      ======================= ÒµÎñ½Ó¿Ú´úÂë =======================
+ *      ======================= ä¸šåŠ¡æŽ¥å£ä»£ç  =======================
  */
 public:
-    // tagÀàÐÍ¶¨Òå£º1. µ±ÊÇTXT£¬Ö±½ÓÊä³öm_tag£» 2. µ±ÊÇTAGÊ±£¬ÔòÊä³öm_tag¶ÔÓ¦µÄÊý¾Ý£»
+    // tagç±»åž‹å®šä¹‰ï¼š1. å½“æ˜¯TXTï¼Œç›´æŽ¥è¾“å‡ºm_tagï¼› 2. å½“æ˜¯TAGæ—¶ï¼Œåˆ™è¾“å‡ºm_tagå¯¹åº”çš„æ•°æ®ï¼›
     typedef enum{TXT, TAG} Type;
 
-    // È¡±ê¼Ç¶ÔÏóµÄÄÚÈÝ
+    // å–æ ‡è®°å¯¹è±¡çš„å†…å®¹
     virtual string Get(Page *page) = 0;
 
-    // ÉèÖÃÎÄ±¾£¨¼°ÀàÐÍ£©
+    // è®¾ç½®æ–‡æœ¬ï¼ˆåŠç±»åž‹ï¼‰
     virtual void Set(const char *tag, Type type=TAG);
 
 
 protected:
-    string m_id;    // ±¾Ä£¿éid
-    string m_tag;   // ¶ÔÓ¦µÄ´¦Àí±ê¼Ç
-    Type m_type;    // ´ÓÊôÓÚÄÄ¸öÒ³£¨»òÈ«¾ÖÓÐÐ§£©
+    string m_id;    // æœ¬æ¨¡å—id
+    string m_tag;   // å¯¹åº”çš„å¤„ç†æ ‡è®°
+    Type m_type;    // ä»Žå±žäºŽå“ªä¸ªé¡µï¼ˆæˆ–å…¨å±€æœ‰æ•ˆï¼‰
 
 
 
@@ -40,40 +40,40 @@ protected:
 
 
 /*
- *      ========== ÒÔÏÂ´úÂëÖ÷ÒªÓÃÓÚ¹¤³§´¦ÀíÉèÖÃ£¨Ä£°å´úÂë£©=========
+ *      ========== ä»¥ä¸‹ä»£ç ä¸»è¦ç”¨äºŽå·¥åŽ‚å¤„ç†è®¾ç½®ï¼ˆæ¨¡æ¿ä»£ç ï¼‰=========
  */
 public:
     virtual ~Tag();
 
-    // ³õÊ¼»¯
+    // åˆå§‹åŒ–
     static int init();
 
-    // ¸ú¾Ý´«ÈëµÄid[page,tag]´Ó¹¤³§ÖÐ²úÉúÒ»¸ö´¦Àí¶ÔÏó
+    // è·Ÿæ®ä¼ å…¥çš„id[page,tag]ä»Žå·¥åŽ‚ä¸­äº§ç”Ÿä¸€ä¸ªå¤„ç†å¯¹è±¡
     static Tag *New(const string &page="", const string &tag="");
 
 protected:
     Tag();
-    Tag(const string &page, const string &tag); // ×ÓÀàµ÷ÓÃÀ´½øÐÐ³õ´Î×¢²á
+    Tag(const string &page, const string &tag); // å­ç±»è°ƒç”¨æ¥è¿›è¡Œåˆæ¬¡æ³¨å†Œ
 
-    // ×¢²á£¨°Ñ×ÓÀà¶ÔÏó¼ÓÈëm_Factory£©
+    // æ³¨å†Œï¼ˆæŠŠå­ç±»å¯¹è±¡åŠ å…¥m_Factoryï¼‰
     int Register(const string &page, const string &tag, Tag *sub);
 
-    // ¸÷×ÓÀà¸ºÔðÊµÏÖ×ÔÒÑ³õÊ¼»¯²Ù×÷£¨×ÓÀàÓ¦ÖØÊµÏÖ´Ë½Ó¿Ú£©
+    // å„å­ç±»è´Ÿè´£å®žçŽ°è‡ªå·²åˆå§‹åŒ–æ“ä½œï¼ˆå­ç±»åº”é‡å®žçŽ°æ­¤æŽ¥å£ï¼‰
     virtual int DoInit() = 0;
 
-    // ¸÷×ÓÀà¸ºÔðÊµÏÖ×ÔÒÑµÄ¶ÔÏó´´½¨Æ÷£¨×ÓÀàÓ¦ÖØÊµÏÖ´Ë½Ó¿Ú£©
+    // å„å­ç±»è´Ÿè´£å®žçŽ°è‡ªå·²çš„å¯¹è±¡åˆ›å»ºå™¨ï¼ˆå­ç±»åº”é‡å®žçŽ°æ­¤æŽ¥å£ï¼‰
     virtual Tag *DoNew() = 0;
 
 private:
-    // £ÛÒ³ÃæÃû£¬Ò³ÄÚÔªËØ±ê¼Ç] => ´¦Àí¶ÔÏó
+    // ï¼»é¡µé¢åï¼Œé¡µå†…å…ƒç´ æ ‡è®°] => å¤„ç†å¯¹è±¡
     typedef map< string, map<string, Tag *> > Factory;
 
     /*
-     * ÔÚ½øÈëmain()º¯ÊýÖ®Ç°£¬¸÷¶ÔÏóÒÑ°Ñ×ÔÒÑ²åÈëµ½m_TmpFactory£¬¶øºóÔÙ
-     * ÔÚmain()ÖÐµ÷ÓÃinit()Ê±£¬¸ù¾Ý²ÊÖÖid£¬°Ñ¶ÔÏó²åÈëµ½m_Factory£¬Êµ¼Ê
-     * µÄ²Ù×÷ÓÃµ½µÄ½«ÊÇm_Factory£»
+     * åœ¨è¿›å…¥main()å‡½æ•°ä¹‹å‰ï¼Œå„å¯¹è±¡å·²æŠŠè‡ªå·²æ’å…¥åˆ°m_TmpFactoryï¼Œè€ŒåŽå†
+     * åœ¨main()ä¸­è°ƒç”¨init()æ—¶ï¼Œæ ¹æ®å½©ç§idï¼ŒæŠŠå¯¹è±¡æ’å…¥åˆ°m_Factoryï¼Œå®žé™…
+     * çš„æ“ä½œç”¨åˆ°çš„å°†æ˜¯m_Factoryï¼›
      */
-    static Factory m_Factory;   // ³õÊ¼»¯ºóÌî³äµÄ²úÉú×Ó¶ÔÏó¹¤³§
+    static Factory m_Factory;   // åˆå§‹åŒ–åŽå¡«å……çš„äº§ç”Ÿå­å¯¹è±¡å·¥åŽ‚
 };
 
 

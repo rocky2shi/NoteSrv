@@ -7,32 +7,32 @@ namespace TASKQUEUE_SPACE
 
 
 
-// max: ×î´óÈÎÎñÊý
+// max: æœ€å¤§ä»»åŠ¡æ•°
 TaskQueue::TaskQueue(int max) : m_queue(max)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 int TaskQueue::Init()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return m_queue.Init();
 }
 
-// ·ÅÈëÒ»¸öÈÎÎñ£¨¿ÉÄÜÓÐ¶àÏß³Ì²Ù×÷£¬Ðë¼ÓËø£©
+// æ”¾å…¥ä¸€ä¸ªä»»åŠ¡ï¼ˆå¯èƒ½æœ‰å¤šçº¿ç¨‹æ“ä½œï¼Œé¡»åŠ é”ï¼‰
 int TaskQueue::push(void *task)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     UNIQUE_LOCK(m_PushLock);
 
     return m_queue.Push( task );
 }
 
-// È¡³öÒ»¸öÈÎÎñ£¨ÓÐ¶àÏß³Ì²Ù×÷£¬Ðë¼ÓËø£©
+// å–å‡ºä¸€ä¸ªä»»åŠ¡ï¼ˆæœ‰å¤šçº¿ç¨‹æ“ä½œï¼Œé¡»åŠ é”ï¼‰
 void *TaskQueue::pop()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     UNIQUE_LOCK(m_PopLock);
 
@@ -41,10 +41,10 @@ void *TaskQueue::pop()
     return element;
 }
 
-// µ±Ç°¶ÓÁÐÈÎÎñÊý
+// å½“å‰é˜Ÿåˆ—ä»»åŠ¡æ•°
 int TaskQueue::size()
 {
-    //FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    //FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return m_queue.Size();
 }
 

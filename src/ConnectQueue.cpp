@@ -6,14 +6,14 @@ namespace CONNECTQUEUE_SPACE
 
 
 
-ConnectQueue::ConnectQueue() : m_queue( 100000 )     // 100000н╙м╛╢Ф╥е╥еа╛╫сйЩиооч
+ConnectQueue::ConnectQueue() : m_queue( 100000 )     // 100000Д╦╨Е░▄Е╜≤Ф■╬Ф■╬Х©·Ф▌╔Ф∙╟Д╦┼И≥░
 {
-    FUNCTION_TRACK(); // ╨╞йЩ╧Л╪ё╦Звш
+    FUNCTION_TRACK(); // Е┤╫Ф∙╟Х╫╗Х©╧Х╥÷Г╩╪
 
-    // ЁУй╪╩╞ё╗╥жеД╩╥пн╤сапдз╢Ф╣хё╘
+    // Е┬²Е╖▀Е▄√О╪┬Е┬├И┘█Г▌╞Е╫╒И≤÷Е┬≈Е├┘Е╜≤Г╜┴О╪┴
     if( m_queue.Init() < 0 )
     {
-        LOG_ERROR("яожь╢МнСё╨ЁУй╪╩╞а╛╫с╤сапЁЖ╢М!!!!!!!!!!!!!!!!!!");
+        LOG_ERROR("Д╦╔И┤█И■≥Х╞╞О╪ Е┬²Е╖▀Е▄√Х©·Ф▌╔И≤÷Е┬≈Е┤╨И■≥!!!!!!!!!!!!!!!!!!");
         exit(ERR);
     }
 }
@@ -21,33 +21,33 @@ ConnectQueue::ConnectQueue() : m_queue( 100000 )     // 100000н╙м╛╢Ф╥е╥еа╛╫сйЩио
 
 int ConnectQueue::init()
 {
-    FUNCTION_TRACK(); // ╨╞йЩ╧Л╪ё╦Звш
+    FUNCTION_TRACK(); // Е┤╫Ф∙╟Х╫╗Х©╧Х╥÷Г╩╪
     ConnectQueue::instance();
 }
 
-// а╛╫с╤тоСё╗ж╦уКё╘╪схК╤сап
+// Х©·Ф▌╔Е╞╧Х╠║О╪┬Ф▄┤И▓┬О╪┴Е┼═Е┘╔И≤÷Е┬≈
 int ConnectQueue::push(Connect *&connect)
 {
-    FUNCTION_TRACK(); // ╨╞йЩ╧Л╪ё╦Звш
+    FUNCTION_TRACK(); // Е┤╫Ф∙╟Х╫╗Х©╧Х╥÷Г╩╪
 
-    // ╟я║╟ж╦уК║╠╢ФхК╤сап
+    // Ф┼┼Б─°Ф▄┤И▓┬Б─²Е╜≤Е┘╔И≤÷Е┬≈
     if( m_queue.Push( connect ) < 0 )
     {
         return ERR;
     }
 
-    m_lock.Wake(); // ╩╫пя╢╕юМоъЁл
+    m_lock.Wake(); // Е■╓И├▓Е╓└Г░├Г╨©Г╗▀
     return OK;
 }
 
-// х║ЁЖа╛╫с╤тоСё╗м╛й╠╟я╦ц╤тоС╢с╤сапжпи╬ЁЩё╘
+// Е▐√Е┤╨Х©·Ф▌╔Е╞╧Х╠║О╪┬Е░▄Ф≈╤Ф┼┼Х╞╔Е╞╧Х╠║Д╩▌И≤÷Е┬≈Д╦╜Е┬═И≥╓О╪┴
 Connect *ConnectQueue::pop()
 {
-    FUNCTION_TRACK(); // ╨╞йЩ╧Л╪ё╦Звш
+    FUNCTION_TRACK(); // Е┤╫Ф∙╟Х╫╗Х©╧Х╥÷Г╩╪
 
     if( m_queue.isEmpty() )
     {
-        m_lock.Wait();  // нчйЩ╬щё╛╣х╢Щё╗Ё╛й╠пнй╫ё╘ё╩
+        m_lock.Wait();  // Ф≈═Ф∙╟Ф█╝О╪▄Г╜┴Е╬┘О╪┬Х╤┘Ф≈╤Е╫╒Е╪▐О╪┴О╪⌡
     }
     void *element = NULL;
     m_queue.Pop( element );

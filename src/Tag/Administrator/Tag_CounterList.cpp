@@ -4,7 +4,7 @@
 namespace TAG_COUNTERLIST_SPACE
 {
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "CounterList";
 
 
@@ -13,17 +13,17 @@ static const string THIS_MODULE = "CounterList";
 
 Tag_CounterList::Tag_CounterList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_CounterList::Tag_CounterList(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_CounterList::~Tag_CounterList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -31,15 +31,15 @@ Tag_CounterList::~Tag_CounterList()
 
 int Tag_CounterList::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_CounterList::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_CounterList;
 }
 
@@ -50,7 +50,7 @@ Tag *Tag_CounterList::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -59,15 +59,15 @@ Tag *Tag_CounterList::DoNew()
 //
 string Tag_CounterList::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     /*
-     * ¼ÆÊıÆ÷ÁĞ±í
+     * è®¡æ•°å™¨åˆ—è¡¨
      */
     string html;
     Counter::iterator it;
 
-    // ÁĞ³öËùÓĞ¼ÆÊıÆ÷
+    // åˆ—å‡ºæ‰€æœ‰è®¡æ•°å™¨
     while( it.next() )
     {
         html += "  <tr>\n"

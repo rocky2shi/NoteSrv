@@ -14,14 +14,14 @@ namespace MULTISTRINGMATCH_SPACE
 #endif
 
 
-// ÓÃÓÚ²éÕÒ£¬strings×Ó´®¼¯
+// ç”¨äºæŸ¥æ‰¾ï¼Œstringså­ä¸²é›†
 MultiStringMatch::MultiStringMatch(vector<string> &strings)
                     : m_from( strings )
 {
     Init();
 }
 
-// ÓÃÓÚÌæ»»£¬°ÑfromÖĞµÄ×Ó´®»»³É¶ÔÓ¦µÄtoÖĞµÄ´®£»
+// ç”¨äºæ›¿æ¢ï¼ŒæŠŠfromä¸­çš„å­ä¸²æ¢æˆå¯¹åº”çš„toä¸­çš„ä¸²ï¼›
 MultiStringMatch::MultiStringMatch(vector<string> &from, vector<string> &to)
                     : m_from(from),
                       m_to(to)
@@ -29,7 +29,7 @@ MultiStringMatch::MultiStringMatch(vector<string> &from, vector<string> &to)
     Init();
 }
 
-// ÓÃÓÚÌæ»»£¬°Ñkey¶ÔÓ¦¼¯ºÏ×ªÎªvalue¶ÔÓ¦¼¯ºÏ£»
+// ç”¨äºæ›¿æ¢ï¼ŒæŠŠkeyå¯¹åº”é›†åˆè½¬ä¸ºvalueå¯¹åº”é›†åˆï¼›
 MultiStringMatch::MultiStringMatch(map<string, string> &key2value)
 {
     map<string, string>::iterator it;
@@ -42,58 +42,58 @@ MultiStringMatch::MultiStringMatch(map<string, string> &key2value)
     Init();
 }
 
-// ³õÊ¼»¯
+// åˆå§‹åŒ–
 int MultiStringMatch::Init()
 {
     memset(m_CharTable, 0, sizeof(m_CharTable));
 
-    // ¹¹Ôì×´Ì¬×ª»»±í
+    // æ„é€ çŠ¶æ€è½¬æ¢è¡¨
     MarkStateTable();
 
-    // ¹¹ÔìÊ§Åä×ª»»±í
+    // æ„é€ å¤±é…è½¬æ¢è¡¨
     NotMatchTable();
 
-    // Êä³ö¸÷×´Ì¬
+    // è¾“å‡ºå„çŠ¶æ€
     //PrintStateTable();
 }
 
-// É¨Ãèm_fromÖĞ¸÷×Ó´®£¬¹¹Ôì¸÷×´Ì¬×ª»»±í£»
+// æ‰«æm_fromä¸­å„å­ä¸²ï¼Œæ„é€ å„çŠ¶æ€è½¬æ¢è¡¨ï¼›
 void MultiStringMatch::MarkStateTable()
 {
     unsigned int i;
-    int current = INIT;     // µ±Ç°Ì¬×´
-    int index = 0;          // m_from´®±àºÅ£¨ÏÂ±ê£©
-    int nNewState = INIT;   // µ±×´Ì¬µÄ×î´óÖµ£¨¼´ĞèÒªÒ»¸öĞÂµÄ×´Ì¬À´±íÊ¾µ±Ç°Á¿£¬µİÔö£©
+    int current = INIT;     // å½“å‰æ€çŠ¶
+    int index = 0;          // m_fromä¸²ç¼–å·ï¼ˆä¸‹æ ‡ï¼‰
+    int nNewState = INIT;   // å½“çŠ¶æ€çš„æœ€å¤§å€¼ï¼ˆå³éœ€è¦ä¸€ä¸ªæ–°çš„çŠ¶æ€æ¥è¡¨ç¤ºå½“å‰é‡ï¼Œé€’å¢ï¼‰
 
     /*
-     * ´¦Àí¸÷¸ö×Ó·û´®
+     * å¤„ç†å„ä¸ªå­ç¬¦ä¸²
      */
     for(i=0; i<m_from.size(); i++)
     {
         /*
-         * È¡³öÒ»¸ö×Ö·û´®£¬É¨Ãèµ±Ç°×Ö·û´®£»
+         * å–å‡ºä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œæ‰«æå½“å‰å­—ç¬¦ä¸²ï¼›
          */
 
-        const string &str = m_from[i]; // µ±Ç°×Ó´®
+        const string &str = m_from[i]; // å½“å‰å­ä¸²
         unsigned int n;
         for(n=0; n<str.length(); n++)
         {
-            int ch = (unsigned char)str[n]; /* µ±Ç°×Ö·û£¨×¢£ºÈô²»×ªÎªÎŞ
-                                             * ·ûºÅÀàĞÍ£¬ÔòÔÚ´¦ÀíÓĞºº
-                                             * ×ÖÊ±½«³öÏÖÎÊÌâ£¨Õı¸ºÊıµÄ
-                                             * ×ª»»£©£»
+            int ch = (unsigned char)str[n]; /* å½“å‰å­—ç¬¦ï¼ˆæ³¨ï¼šè‹¥ä¸è½¬ä¸ºæ— 
+                                             * ç¬¦å·ç±»å‹ï¼Œåˆ™åœ¨å¤„ç†æœ‰æ±‰
+                                             * å­—æ—¶å°†å‡ºç°é—®é¢˜ï¼ˆæ­£è´Ÿæ•°çš„
+                                             * è½¬æ¢ï¼‰ï¼›
                                              */
 
             /*
-             * µ±Ç°×´Ì¬current£¬Óöµ½×Ö·ûchÊ±£¬Ó¦£º
+             * å½“å‰çŠ¶æ€currentï¼Œé‡åˆ°å­—ç¬¦chæ—¶ï¼Œåº”ï¼š
              *
-             *    1) ²»ÔÚ×´Ì¬¼ÇÂ¼ÖĞ£¬Ôò¼ÇÈë×´Ì¬±ím_StateTableÖĞ£»
-             *          a. ĞÂ×´Ì¬µİÔö±íÊ¾
-             *          b. Èôµ±Ç°×Ö·ûÊÇ´®µÄ×îºóÒ»×Ö·ûÊ±£¨¼´ËüµÄÏÂÒ»¸ö×Ö
-             *             ·ûstr[n + 1]Îª¿Õ£©£¬×öÒ»±ê¼ÇÖµ£¬±íÊ¾Æ¥Åä³É¹¦£¬
-             *             µ«ÒòËü¿ÉÄÜ²»ÊÇ×î³¤´®£¬ËùÒÔ²»°ÑËü×öÎªÖÕÌ¬£»
+             *    1) ä¸åœ¨çŠ¶æ€è®°å½•ä¸­ï¼Œåˆ™è®°å…¥çŠ¶æ€è¡¨m_StateTableä¸­ï¼›
+             *          a. æ–°çŠ¶æ€é€’å¢è¡¨ç¤º
+             *          b. è‹¥å½“å‰å­—ç¬¦æ˜¯ä¸²çš„æœ€åä¸€å­—ç¬¦æ—¶ï¼ˆå³å®ƒçš„ä¸‹ä¸€ä¸ªå­—
+             *             ç¬¦str[n + 1]ä¸ºç©ºï¼‰ï¼Œåšä¸€æ ‡è®°å€¼ï¼Œè¡¨ç¤ºåŒ¹é…æˆåŠŸï¼Œ
+             *             ä½†å› å®ƒå¯èƒ½ä¸æ˜¯æœ€é•¿ä¸²ï¼Œæ‰€ä»¥ä¸æŠŠå®ƒåšä¸ºç»ˆæ€ï¼›
              *
-             *    2) ÒÑÔÚ¼ÇÂ¼ÖĞ£¬Ôò×ª»»µ±Ç°×´Ì¬£¬¼ÌĞøÉ¨Ãè£»
+             *    2) å·²åœ¨è®°å½•ä¸­ï¼Œåˆ™è½¬æ¢å½“å‰çŠ¶æ€ï¼Œç»§ç»­æ‰«æï¼›
              */
 
 
@@ -101,11 +101,11 @@ void MultiStringMatch::MarkStateTable()
             {
                 if('\0' == str[n + 1])
                 {
-                    // Æ¥Åä³É¹¦£¬±ê¼ÇÒ»ÌØÊâÖµ£»
+                    // åŒ¹é…æˆåŠŸï¼Œæ ‡è®°ä¸€ç‰¹æ®Šå€¼ï¼›
                     int id = STATE_MAX + index;
                     m_StateTable[ current ][ ch ] = id;
 
-                    // ¼ÇÂ¼µ±Ç°×´Ì¬µÄÀ´Ô´
+                    // è®°å½•å½“å‰çŠ¶æ€çš„æ¥æº
                     Back &source = m_BackTable[ id ];
                     source.state = current;
                     source.ch = ch;
@@ -115,20 +115,20 @@ void MultiStringMatch::MarkStateTable()
                 }
                 else
                 {
-                    // ³öÏÖĞÂµÄ×´Ì¬
+                    // å‡ºç°æ–°çš„çŠ¶æ€
                     nNewState++;
                     m_StateTable[ current ][ ch ] = nNewState;
 
-                    // ¼ÇÂ¼µ±Ç°×´Ì¬µÄÀ´Ô´
+                    // è®°å½•å½“å‰çŠ¶æ€çš„æ¥æº
                     Back &source = m_BackTable[ nNewState ];
                     source.state = current;
                     source.ch = ch;
 
-                    // Ö¸ÏòĞÂµÄ×´Ì¬
+                    // æŒ‡å‘æ–°çš„çŠ¶æ€
                     current = nNewState;
                 }
 
-                // ¼ÇÂ¼³öÏÖµÄ×Ö·û
+                // è®°å½•å‡ºç°çš„å­—ç¬¦
                 m_CharTable[ch]++;
             }
             else
@@ -139,7 +139,7 @@ void MultiStringMatch::MarkStateTable()
     }
 }
 
-// È¡µ±´¦ÓÚ×´Ì¬state¡¢Æ¥Åäµ±Ç°×Ö·û³ö´íÊ±µÄ´®£»
+// å–å½“å¤„äºçŠ¶æ€stateã€åŒ¹é…å½“å‰å­—ç¬¦å‡ºé”™æ—¶çš„ä¸²ï¼›
 const string MultiStringMatch::GetBackStr(int state)
 {
     if(m_from.size() != m_to.size())
@@ -151,13 +151,13 @@ const string MultiStringMatch::GetBackStr(int state)
     string str = "";
 
     /*
-     * ²éÕÒµ±Ç°×´Ì¬µÄÀ´Ô´£¬È¡³ö´ï´Ë×´Ì¬Ê±£¬ËüËù¾­¹ıµÄ×Ö·û£¬×é³É´®ºó·µ»Ø£»
-     * £¨ÒòËüÊÇÄæĞò²Ù×÷£¬ËùÒÔÒª·´×ª×Ö·û´®£©
+     * æŸ¥æ‰¾å½“å‰çŠ¶æ€çš„æ¥æºï¼Œå–å‡ºè¾¾æ­¤çŠ¶æ€æ—¶ï¼Œå®ƒæ‰€ç»è¿‡çš„å­—ç¬¦ï¼Œç»„æˆä¸²åè¿”å›ï¼›
+     * ï¼ˆå› å®ƒæ˜¯é€†åºæ“ä½œï¼Œæ‰€ä»¥è¦åè½¬å­—ç¬¦ä¸²ï¼‰
      */
     while(state > INIT)
     {
         Back &cur = m_BackTable[ state ];
-        // ÕÒµ½Ò»±È½Ï¶ÌµÄÆ¥Åä×Ó´®
+        // æ‰¾åˆ°ä¸€æ¯”è¾ƒçŸ­çš„åŒ¹é…å­ä¸²
         if(state >= STATE_MAX)
         {
             string s = m_to[ state - STATE_MAX ];
@@ -172,7 +172,7 @@ const string MultiStringMatch::GetBackStr(int state)
     return str;
 }
 
-// ¼ÆËã²»Æ¥ÅäÊ±£¬µ±Ç°×´Ì¬¶ÔÓ¦µÄ´®¡£
+// è®¡ç®—ä¸åŒ¹é…æ—¶ï¼Œå½“å‰çŠ¶æ€å¯¹åº”çš„ä¸²ã€‚
 void MultiStringMatch::NotMatchTable()
 {
     map<int, Back>::iterator itBack;
@@ -183,10 +183,10 @@ void MultiStringMatch::NotMatchTable()
     }
 }
 
-// Êä³ö×´Ì¬±í
+// è¾“å‡ºçŠ¶æ€è¡¨
 void MultiStringMatch::PrintStateTable()
 {
-    Debug("-----------×´Ì¬×ª»»±í------------");
+    Debug("-----------çŠ¶æ€è½¬æ¢è¡¨------------");
     map< int, map<int, int> >::iterator itFirst;
     for(itFirst = m_StateTable.begin(); m_StateTable.end() != itFirst; itFirst++)
     {
@@ -201,7 +201,7 @@ void MultiStringMatch::PrintStateTable()
         }
     }
 
-    Debug("-----------×´Ì¬À´Ô´±í------------");
+    Debug("-----------çŠ¶æ€æ¥æºè¡¨------------");
     map<int, Back>::iterator itBack;
     for(itBack = m_BackTable.begin(); m_BackTable.end() != itBack; itBack++)
     {
@@ -210,7 +210,7 @@ void MultiStringMatch::PrintStateTable()
         Debug("[%d] <-- [%d, '%c']", cur, src.state, src.ch);
     }
 
-    Debug("-----------Ê§Åä×ª»»±í------------");
+    Debug("-----------å¤±é…è½¬æ¢è¡¨------------");
     map<int, string>::iterator itNotMatch;
     for(itNotMatch = m_NotMatchTable.begin(); m_NotMatchTable.end() != itNotMatch; itNotMatch++)
     {
@@ -222,10 +222,10 @@ void MultiStringMatch::PrintStateTable()
     Debug("-----------------------\n");
 }
 
-// Ìæ»»£¨°ÑstrÖĞµÄÆ¥Åä×Ó´®£¨m_from£©Ìæ»»ÎªÁíÒ»¶ÔÓ¦×Ó´®£¨m_to£©
+// æ›¿æ¢ï¼ˆæŠŠsträ¸­çš„åŒ¹é…å­ä¸²ï¼ˆm_fromï¼‰æ›¿æ¢ä¸ºå¦ä¸€å¯¹åº”å­ä¸²ï¼ˆm_toï¼‰
 const string MultiStringMatch::Replace(const string &str)
 {
-    // ÊäÈë³ö´í»òÎŞ×ª»»¹Ø¼ü×ÖÊ±£¬±£³ÖÔ­´®¡£[Rocky 2010-06-01 12:16:33]
+    // è¾“å…¥å‡ºé”™æˆ–æ— è½¬æ¢å…³é”®å­—æ—¶ï¼Œä¿æŒåŸä¸²ã€‚[Rocky 2010-06-01 12:16:33]
     if(m_from.size() != m_to.size()
        || m_from.size() == 0)
     {
@@ -234,7 +234,7 @@ const string MultiStringMatch::Replace(const string &str)
     }
 
     /*
-     * Ö´ĞĞ´®×ª»»
+     * æ‰§è¡Œä¸²è½¬æ¢
      */
     string result;
     unsigned int i;
@@ -244,8 +244,8 @@ const string MultiStringMatch::Replace(const string &str)
         unsigned char ch = str[i];
 
         /*
-         * Èôµ±Ç°´¦ÓÚ³õÊ¼×´Ì¬£¬ÇÒ×Ö·ûch²»ÔÚ²éÕÒ×ÖÄ¸±íÖĞ£¬»òÕßÔÚ³õÊ¼×´Ì¬
-         * ¾ÍÊ§Åä£¬ÔòÖ±½Ó×·¼Óµ½Ä¿±ê´®£» [Rocky 2010-06-12 10:52:15]
+         * è‹¥å½“å‰å¤„äºåˆå§‹çŠ¶æ€ï¼Œä¸”å­—ç¬¦chä¸åœ¨æŸ¥æ‰¾å­—æ¯è¡¨ä¸­ï¼Œæˆ–è€…åœ¨åˆå§‹çŠ¶æ€
+         * å°±å¤±é…ï¼Œåˆ™ç›´æ¥è¿½åŠ åˆ°ç›®æ ‡ä¸²ï¼› [Rocky 2010-06-12 10:52:15]
          */
         if( INIT == state
             && (0 == m_CharTable[ ch ] || 0 == m_StateTable[ state ][ ch ])
@@ -255,25 +255,25 @@ const string MultiStringMatch::Replace(const string &str)
             continue;
         }
 
-        // ²éÕÒ×´Ì¬×ª»»
+        // æŸ¥æ‰¾çŠ¶æ€è½¬æ¢
         if(0 != m_StateTable[ state ][ ch ])
         {
-            // ×´Ì¬×ªÌø
+            // çŠ¶æ€è½¬è·³
             state = m_StateTable[ state ][ ch ];
-            // ×´Ì¬ÊÇÒ»ÌØÊâÖµ£¨´óÓÚSTATE_MAX£©£¬±íÊ¾Æ¥ÅäÖĞÒ»×Ó´®£»
+            // çŠ¶æ€æ˜¯ä¸€ç‰¹æ®Šå€¼ï¼ˆå¤§äºSTATE_MAXï¼‰ï¼Œè¡¨ç¤ºåŒ¹é…ä¸­ä¸€å­ä¸²ï¼›
             if(state >= STATE_MAX)
             {
-                // Æ¥Åä×ÅÒ»¸ö×Ó´®£¨¿ÉÄÜ²»ÊÇ×î³¤×Ó´®£¬Ëù³ö¼ÌĞø¡£¡£¡££©
+                // åŒ¹é…ç€ä¸€ä¸ªå­ä¸²ï¼ˆå¯èƒ½ä¸æ˜¯æœ€é•¿å­ä¸²ï¼Œæ‰€ä»¥ç»§ç»­ã€‚ã€‚ã€‚ï¼‰
                 // Debug("match..., [%d] [%c]", state, ch);
             }
         }
         else
         {
-            // Ê§ÅäÊ±£¬È¡³öµ±Ç°×´Ì¬¶ÔÓ¦µÄ×Ö·û´®Öµ£»
+            // å¤±é…æ—¶ï¼Œå–å‡ºå½“å‰çŠ¶æ€å¯¹åº”çš„å­—ç¬¦ä¸²å€¼ï¼›
             result += m_NotMatchTable[ state ];
             if(INIT != state)
             {
-                // ²»ÍùÏÂÒÆ£¨±£³ÖµÄµ±Ç°×Ö·ûÎ»ÖÃ£©
+                // ä¸å¾€ä¸‹ç§»ï¼ˆä¿æŒçš„å½“å‰å­—ç¬¦ä½ç½®ï¼‰
                 i--;
             }
             state = INIT;
@@ -286,13 +286,13 @@ const string MultiStringMatch::Replace(const string &str)
 }
 
 /*
- * once==true : ²éÕÒ£ºÖ»ÒªÆ¥ÅäÖĞÒ»¸ö¹Ø¼ü×Ö£¬·µ»Øtrue
- * once==false: ²éÕÒ£º±ØĞëÆ¥ÅäËùÓĞ¸ø¶¨¹Ø¼ü×Ö²Å·µ»Øtrue
+ * once==true : æŸ¥æ‰¾ï¼šåªè¦åŒ¹é…ä¸­ä¸€ä¸ªå…³é”®å­—ï¼Œè¿”å›true
+ * once==false: æŸ¥æ‰¾ï¼šå¿…é¡»åŒ¹é…æ‰€æœ‰ç»™å®šå…³é”®å­—æ‰è¿”å›true
  */
 bool MultiStringMatch::MatchKey(const string &str, bool once/*=true*/)
 {
     /*
-     * µ±Ã»ÓĞÊäÈë¹Ø¼ü×ÖÊ±£¬ÔòÈÏÎªÈÎºÎ´®¶¼¿ÉÆ¥Åä£»
+     * å½“æ²¡æœ‰è¾“å…¥å…³é”®å­—æ—¶ï¼Œåˆ™è®¤ä¸ºä»»ä½•ä¸²éƒ½å¯åŒ¹é…ï¼›
      */
     if(m_from.size() == 0)
     {
@@ -301,7 +301,7 @@ bool MultiStringMatch::MatchKey(const string &str, bool once/*=true*/)
     }
 
     /*
-     * µ±ÊäÈë´®Îª¿ÕÊ±£¬ÔòÈÏÎªÈÎºÎ¹Ø¼ü¶ÔËü¶¼ÊÇ²»Æ¥ÅäµÄ£»
+     * å½“è¾“å…¥ä¸²ä¸ºç©ºæ—¶ï¼Œåˆ™è®¤ä¸ºä»»ä½•å…³é”®å¯¹å®ƒéƒ½æ˜¯ä¸åŒ¹é…çš„ï¼›
      */
     if("" == str)
     {
@@ -311,7 +311,7 @@ bool MultiStringMatch::MatchKey(const string &str, bool once/*=true*/)
 
     unsigned int i;
     int state = INIT;
-    map<string, int> hit; // ¼ÇÂ¼ÒÑÃüÖĞµÄ¹Ø¼ü×Ö
+    map<string, int> hit; // è®°å½•å·²å‘½ä¸­çš„å…³é”®å­—
     for(i=0; i<str.length(); i++)
     {
         unsigned char ch = str[i];
@@ -320,16 +320,16 @@ bool MultiStringMatch::MatchKey(const string &str, bool once/*=true*/)
             state = INIT;
             continue;
         }
-        else if(0 != m_StateTable[ state ][ ch ]) // ²éÕÒ×´Ì¬×ª»»
+        else if(0 != m_StateTable[ state ][ ch ]) // æŸ¥æ‰¾çŠ¶æ€è½¬æ¢
         {
-            // ×´Ì¬×ªÌø
+            // çŠ¶æ€è½¬è·³
             state = m_StateTable[ state ][ ch ];
-            // ×´Ì¬ÊÇÒ»ÌØÊâÖµ£¨´óÓÚSTATE_MAX£©£¬±íÊ¾Æ¥ÅäÖĞÒ»×Ó´®£»
+            // çŠ¶æ€æ˜¯ä¸€ç‰¹æ®Šå€¼ï¼ˆå¤§äºSTATE_MAXï¼‰ï¼Œè¡¨ç¤ºåŒ¹é…ä¸­ä¸€å­ä¸²ï¼›
             if(state >= STATE_MAX)
             {
                 Debug("match..., [%d] [%c]", state, ch);
 
-                // ÊÇ·ñÔÚµÚÒ»´ÎÆ¥Åä×ÅÊ±¼´·µ»Øtrue
+                // æ˜¯å¦åœ¨ç¬¬ä¸€æ¬¡åŒ¹é…ç€æ—¶å³è¿”å›true
                 if( once )
                 {
                     return true;
@@ -338,7 +338,7 @@ bool MultiStringMatch::MatchKey(const string &str, bool once/*=true*/)
                 const string &key = m_from[ state - STATE_MAX ];
                 hit[ key ] ++;
 
-                // ÈôËùÓĞ¹Ø¼ü×Ö´®¶¼ÒÑ±»Æ¥Åä¹ı£¬·µ»Øtrue
+                // è‹¥æ‰€æœ‰å…³é”®å­—ä¸²éƒ½å·²è¢«åŒ¹é…è¿‡ï¼Œè¿”å›true
                 if(hit.size() == m_from.size())
                 {
                     return true;
@@ -358,13 +358,13 @@ bool MultiStringMatch::MatchKey(const string &str, bool once/*=true*/)
     return false;
 }
 
-// ²éÕÒ£ºÖ»ÒªÆ¥ÅäÖĞÒ»¸ö¹Ø¼ü×Ö£¬·µ»Øtrue
+// æŸ¥æ‰¾ï¼šåªè¦åŒ¹é…ä¸­ä¸€ä¸ªå…³é”®å­—ï¼Œè¿”å›true
 bool MultiStringMatch::MatchOneKey(const string &str)
 {
     return MatchKey(str, true);
 }
 
-// ²éÕÒ£º±ØĞëÆ¥ÅäËùÓĞ¸ø¶¨¹Ø¼ü×Ö²Å·µ»Øtrue
+// æŸ¥æ‰¾ï¼šå¿…é¡»åŒ¹é…æ‰€æœ‰ç»™å®šå…³é”®å­—æ‰è¿”å›true
 bool MultiStringMatch::MatchAllKey(const string &str)
 {
     return MatchKey(str, false);

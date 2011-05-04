@@ -8,20 +8,20 @@ namespace FILEOBJ_SPACE
 using namespace std;
 
 
-// ¼òµ¥µÄÎÄ¼ş¶ÁĞ´
+// ç®€å•çš„æ–‡ä»¶è¯»å†™
 class FileObj
 {
 public:
-    // ÎÄ¼ş²Ù×÷Ä£Ê½
+    // æ–‡ä»¶æ“ä½œæ¨¡å¼
     static const string R;
     static const string W;
     static const string RW;
 
-    // ÎÄ¼şÆ«ÒÆÄ£Ê½£¨²Î¿´fseek()º¯Êı£©
+    // æ–‡ä»¶åç§»æ¨¡å¼ï¼ˆå‚çœ‹fseek()å‡½æ•°ï¼‰
     typedef enum{
-        SET = SEEK_SET,     // ´ÓÎÄ¼şÍ·Æ«ÒÆ
-        CUR = SEEK_CUR,     // ´Óµ±Ç°Î»ÖÃÆ«ÒÆ
-        END = SEEK_END,     // ´ÓÎÄ¼şÎ²Æ«ÒÆ£¨Æ«ÒÆÁ¿¿ÉÎª¸ºÖµ£©
+        SET = SEEK_SET,     // ä»æ–‡ä»¶å¤´åç§»
+        CUR = SEEK_CUR,     // ä»å½“å‰ä½ç½®åç§»
+        END = SEEK_END,     // ä»æ–‡ä»¶å°¾åç§»ï¼ˆåç§»é‡å¯ä¸ºè´Ÿå€¼ï¼‰
     } SEEK;
 
 public:
@@ -29,34 +29,34 @@ public:
     FileObj(const string &file);
     ~FileObj();
 
-    // ´ò¿ªÎÄ¼ş£¨Ä¬ÈÏÎªÖ»¶ÁĞÎÊ½£©
+    // æ‰“å¼€æ–‡ä»¶ï¼ˆé»˜è®¤ä¸ºåªè¯»å½¢å¼ï¼‰
     bool Open(const string &file, const string &mode=R);
 
-    // ¹Ø±ÕÎÄ¼ş
+    // å…³é—­æ–‡ä»¶
     int Close();
 
-    // ¶ÁÖ¸¶¨×Ö½Ú
+    // è¯»æŒ‡å®šå­—èŠ‚
     int Read(void *buf, const int len) const;
 
-    // Ğ´ÈëÖ¸¶¨³¤¶È×Ö½Ú
+    // å†™å…¥æŒ‡å®šé•¿åº¦å­—èŠ‚
     int Write(const void *buf, const int len) const;
 
-    // ¶ÁÈ¡È¡Ò»ĞĞ£¨ÏŞ¶¨×î³¤Öµ£¬¼´·µ»ØÖµ£º0 <= ret <= max£©£¨·µ»ØÒÑ¶ÁÈ¡µÄ×Ö½ÚÊı£¬³ö´í·µ»Ø0£©
+    // è¯»å–å–ä¸€è¡Œï¼ˆé™å®šæœ€é•¿å€¼ï¼Œå³è¿”å›å€¼ï¼š0 <= ret <= maxï¼‰ï¼ˆè¿”å›å·²è¯»å–çš„å­—èŠ‚æ•°ï¼Œå‡ºé”™è¿”å›0ï¼‰
     int GetLine(char * const buf, const int max) const;
 
-    // ÎÄ¼ş³¤¶È£¨×Ö½ÚÊı£©
+    // æ–‡ä»¶é•¿åº¦ï¼ˆå­—èŠ‚æ•°ï¼‰
     int Size() const;
 
-    // ·µ»Øµ±Ç°ÎÄ¼şÈ«Â·¾¶Ãû
+    // è¿”å›å½“å‰æ–‡ä»¶å…¨è·¯å¾„å
     const string Fullname() const;
 
-    // ÉèÖÃÎÄ¼şÆ«ÒÆ£¨³É¹¦·µ»ØOK£¬³ö´í·µ»ØERR£©
+    // è®¾ç½®æ–‡ä»¶åç§»ï¼ˆæˆåŠŸè¿”å›OKï¼Œå‡ºé”™è¿”å›ERRï¼‰
     int SetSeek(SEEK whence=SET, int offset=0);
 
 
 private:
     FILE *m_file;
-    string m_fullname;  // ÎÄ¼şÈ«Â·¾¶Ãû
+    string m_fullname;  // æ–‡ä»¶å…¨è·¯å¾„å
 };
 
 

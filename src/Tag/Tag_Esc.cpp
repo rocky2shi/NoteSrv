@@ -10,7 +10,7 @@ namespace TAG_ESC_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜Žæ¨¡å—
 static const string THIS_MODULE = "Esc";
 
 
@@ -19,17 +19,17 @@ static const string THIS_MODULE = "Esc";
 
 Tag_Esc::Tag_Esc()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_Esc::Tag_Esc(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_Esc::~Tag_Esc()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -37,15 +37,15 @@ Tag_Esc::~Tag_Esc()
 
 int Tag_Esc::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_Esc::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_Esc;
 }
 
@@ -56,7 +56,7 @@ Tag *Tag_Esc::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -64,9 +64,9 @@ Tag *Tag_Esc::DoNew()
 
 string Tag_Esc::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    const Conf *pack = page->GetCurrentPack();   // µ±Ç°key¶ÔÓ¦Êý¾Ý¼¯
+    const Conf *pack = page->GetCurrentPack();   // å½“å‰keyå¯¹åº”æ•°æ®é›†
     const string &password = pack->Get("password");
     const string &decryption = page->GetResult("decryption");
     string html;
@@ -99,7 +99,7 @@ string Tag_Esc::Get(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_Esc tmp(TAG_GLOBAL, THIS_MODULE);
 
 }// end of TAG_ESC_SPACE

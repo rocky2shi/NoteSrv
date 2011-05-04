@@ -10,7 +10,7 @@ namespace SUBMIT_SETPASSWORD_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜Žæ¨¡å—
 static const string THIS_MODULE = "SetPassword";
 
 
@@ -19,18 +19,18 @@ static const string THIS_MODULE = "SetPassword";
 
 Submit_SetPassword::Submit_SetPassword()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_SetPassword::Submit_SetPassword(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_SetPassword::~Submit_SetPassword()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -38,15 +38,15 @@ Submit_SetPassword::~Submit_SetPassword()
 
 int Submit_SetPassword::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_SetPassword::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_SetPassword;
 }
 
@@ -54,27 +54,27 @@ Submit *Submit_SetPassword::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
-// ÈÏÖ¤Í¨¹ý£¬·µ»ØµÄ["decryption"]Îª¿Õ´®£¬²»Í¨¹ýÔò·µ»Ø³ö´íÐÅÏ¢£»
+// è®¤è¯é€šè¿‡ï¼Œè¿”å›žçš„["decryption"]ä¸ºç©ºä¸²ï¼Œä¸é€šè¿‡åˆ™è¿”å›žå‡ºé”™ä¿¡æ¯ï¼›
 int Submit_SetPassword::Deal(Page *page)
 {
     const string &key = page->GetCurrentKey();
-    const Conf *pack = page->GetCurrentPack();          // µ±Ç°key¶ÔÓ¦Êý¾Ý¼¯
-    const string &text = pack->Get("text");             // È¡³öÕýÎÄÊý¾Ý
+    const Conf *pack = page->GetCurrentPack();          // å½“å‰keyå¯¹åº”æ•°æ®é›†
+    const string &text = pack->Get("text");             // å–å‡ºæ­£æ–‡æ•°æ®
     const string &password = pack->Get("password");
-    const string &modify = NowTime("%Y%m%d%H%M%S");     // ÐÞ¸ÄÊ±¼äÎªµ±Ç°Ê±¼ä
-    const string &sOldPassword = page->GetRequest()->GetField("msg_pasd_old");      // Ô­ÃÜÂë
-    const string &sNewPassword = page->GetRequest()->GetField("msg_pasd_new");      // ÐÂÃÜÂë
-    const string &msg_pasd_prompt = page->GetRequest()->GetField("msg_pasd_prompt");// ÃÜÂëÌáÊ¾
+    const string &modify = NowTime("%Y%m%d%H%M%S");     // ä¿®æ”¹æ—¶é—´ä¸ºå½“å‰æ—¶é—´
+    const string &sOldPassword = page->GetRequest()->GetField("msg_pasd_old");      // åŽŸå¯†ç 
+    const string &sNewPassword = page->GetRequest()->GetField("msg_pasd_new");      // æ–°å¯†ç 
+    const string &msg_pasd_prompt = page->GetRequest()->GetField("msg_pasd_prompt");// å¯†ç æç¤º
     string html = "";
     Ini save;
 
     /*
-     * ÑéÖ¤Ô­ÃÜÂë
+     * éªŒè¯åŽŸå¯†ç 
      */
     if( "" != password && password != Crypt(sOldPassword, CRYPT_VERSION))
     {
@@ -83,21 +83,21 @@ int Submit_SetPassword::Deal(Page *page)
     }
 
     /*
-     * Êý¾Ý´ò°ü
-     *   Èôµ±Ç°Êý¾ÝÊÇ¼ÓÃÜµÄ£¬ÔòÏÈ½âÃÜµ±Ç°Êý¾Ý£»
+     * æ•°æ®æ‰“åŒ…
+     *   è‹¥å½“å‰æ•°æ®æ˜¯åŠ å¯†çš„ï¼Œåˆ™å…ˆè§£å¯†å½“å‰æ•°æ®ï¼›
      */
-    const string *pText = &text; // ¸ù¾ÝÊÇ·ñÐèÊÇ¼ÓÃÜ£¬Ö¸ÏòÃÜÎÄ»òÃ÷ÎÄ£»
+    const string *pText = &text; // æ ¹æ®æ˜¯å¦éœ€æ˜¯åŠ å¯†ï¼ŒæŒ‡å‘å¯†æ–‡æˆ–æ˜Žæ–‡ï¼›
     string txt;
     if("" != password)
     {
-        // ×¢Òâ£¬ÊÇÊ¹ÓÃ¿Í»§¶Ë´«À´µÄÐÞ¸ÄÇ°µÄÃÜÂë£¬Ã÷ÎÄÃÜÂë¡£
+        // æ³¨æ„ï¼Œæ˜¯ä½¿ç”¨å®¢æˆ·ç«¯ä¼ æ¥çš„ä¿®æ”¹å‰çš„å¯†ç ï¼Œæ˜Žæ–‡å¯†ç ã€‚
         txt = Encrypt( sOldPassword ).decrypt( text );
         pText = &txt;
     }
 
     if("" != sNewPassword)
     {
-        // ÐÂÃÜÂë·Ç¿Õ£¬Ôò¼ÓÃÜºó·ÅÈë°üÖÐ£¨Ê¹ÓÃÐÂÃÜÂë£©
+        // æ–°å¯†ç éžç©ºï¼Œåˆ™åŠ å¯†åŽæ”¾å…¥åŒ…ä¸­ï¼ˆä½¿ç”¨æ–°å¯†ç ï¼‰
         save.Set(key, "text", Encrypt( sNewPassword ).encrypt( *pText ));
         save.Set(key, "password", Crypt(sNewPassword, CRYPT_VERSION));
     }
@@ -109,7 +109,7 @@ int Submit_SetPassword::Deal(Page *page)
     save.Set(key, "modify", modify);
     save.Set(key, "prompt", msg_pasd_prompt);
 
-    // ±£´æ
+    // ä¿å­˜
     return page->Save( save );
 }
 
@@ -125,7 +125,7 @@ int Submit_SetPassword::Deal(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Submit_SetPassword tmp("edit", THIS_MODULE);
 
 }// end of SUBMIT_SETPASSWORD_SPACE

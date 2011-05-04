@@ -10,33 +10,33 @@ namespace PAGE_LOGIN_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "login";
 
 
 
 Page_Login::Page_Login()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Login::~Page_Login()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Login::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     m_html = GlobalConfig::instance()->TemplateDir() + "Login.html";
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Login::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Login;
 }
 
@@ -47,26 +47,26 @@ Page *Page_Login::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 int Page_Login::Deal()
 {
     /*
-     * ´¦Àí×¢ÏúÊÂ¼ş
+     * å¤„ç†æ³¨é”€äº‹ä»¶
      */
     const string &logout = m_request->GetField("logout");
     if("" != logout)
     {
         Submit::Ptr submit( Submit::New("login", "Logout") );
         submit->Deal(this);
-        // Êä³öµÇÂ¼Ò³Ãæ
+        // è¾“å‡ºç™»å½•é¡µé¢
         return Page::Deal();
     }
 
     /*
-     * ÈôÒÑµÇÂ¼¹ı£¬Ö±½ÓÌø×ª£¬²»ĞèÔÙÑéÖ¤£»
+     * è‹¥å·²ç™»å½•è¿‡ï¼Œç›´æ¥è·³è½¬ï¼Œä¸éœ€å†éªŒè¯ï¼›
      */
     if( Session::Get(m_request)->CheckLogin(m_request) )
     {
@@ -76,9 +76,9 @@ int Page_Login::Deal()
         if("" != login)
         {
             /*
-             * ×¢£¬ÈôÒ³ÃæÒÑµÇÂ¼£¬ÓÃ»§ÔÚµÇÂ¼Ò³µã»÷µÇ
-             * Â¼°´Å¥£¬½«·µ»Ø²»ÕıÈ·µÄÌáÊ¾¡£ËùÒÔÕâÒª
-             * ·µ"OK"ÒÔÊ¹¿Í»§¶ËÖ´ĞĞÌø×ª£»[XXX]
+             * æ³¨ï¼Œè‹¥é¡µé¢å·²ç™»å½•ï¼Œç”¨æˆ·åœ¨ç™»å½•é¡µç‚¹å‡»ç™»
+             * å½•æŒ‰é’®ï¼Œå°†è¿”å›ä¸æ­£ç¡®çš„æç¤ºã€‚æ‰€ä»¥è¿™è¦
+             * è¿”"OK"ä»¥ä½¿å®¢æˆ·ç«¯æ‰§è¡Œè·³è½¬ï¼›[XXX]
              */
             Page::OutHead();
             m_request->GetConnect()->Send("OK");
@@ -86,7 +86,7 @@ int Page_Login::Deal()
         }
         else
         {
-            // ²»ÊÇµÇÂ¼Ò³Ãæ£¬Ö±½Ó×ªÌø£»
+            // ä¸æ˜¯ç™»å½•é¡µé¢ï¼Œç›´æ¥è½¬è·³ï¼›
             const string &username = m_request->GetCurrentUser();
             string page;
             if("administrator" == username)
@@ -103,34 +103,34 @@ int Page_Login::Deal()
     }
 
     /*
-     * ÊÇ·ñÎªÓÃ»§Ìá½»µÄµÇÂ¼Êı¾İ£¨ÓÃ»§ÃÜÂëµÈ£©
+     * æ˜¯å¦ä¸ºç”¨æˆ·æäº¤çš„ç™»å½•æ•°æ®ï¼ˆç”¨æˆ·å¯†ç ç­‰ï¼‰
      */
     if( m_request->GetField("login") != "")
     {
         string msg = "";
 
-        // Ê¹ÓÃtryÀ´×öÌø×ª£¬µ±ÑéÖ¤²½ÖèÖĞ¼äÓĞ´íÊ±£¬Ìø¹ıÆäËü²Ù×÷£»
+        // ä½¿ç”¨tryæ¥åšè·³è½¬ï¼Œå½“éªŒè¯æ­¥éª¤ä¸­é—´æœ‰é”™æ—¶ï¼Œè·³è¿‡å…¶å®ƒæ“ä½œï¼›
         try
         {
-            // È¡ÓÃ»§Ãû£¨²»ÄÜÊ¹ÓÃRequest::GetCurrentUser()½Ó¿Ú£¬¿ÉÄÜÕâÀï»¹Î´µÇÂ¼£¬ÔòSessionÖĞÎŞ¼ÇÂ¼£©
+            // å–ç”¨æˆ·åï¼ˆä¸èƒ½ä½¿ç”¨Request::GetCurrentUser()æ¥å£ï¼Œå¯èƒ½è¿™é‡Œè¿˜æœªç™»å½•ï¼Œåˆ™Sessionä¸­æ— è®°å½•ï¼‰
             const string &username = m_request->GetField("username");
             User *user = User::Get(username);
             if( ! user->isValid() )
             {
                 LOG_ERROR("Invalid user: [%s]", username.c_str());
-                msg = "ÓÃ»§²»´æÔÚ";
+                msg = "ç”¨æˆ·ä¸å­˜åœ¨";
                 throw 1;
             }
 
-            // ±È¶ÔÃÜÂë
-            const string &passwd1 = m_request->GetField("password");  // ¿Í»§¶Ë´«À´µÄÃÜÂë£¨Ã÷ÎÄ£©
-            const string &passwd2 = user->GetInfo("password");        // ¼ÓºóµÄÃÜÂë£¨ÃÜÎÄ£©
+            // æ¯”å¯¹å¯†ç 
+            const string &passwd1 = m_request->GetField("password");  // å®¢æˆ·ç«¯ä¼ æ¥çš„å¯†ç ï¼ˆæ˜æ–‡ï¼‰
+            const string &passwd2 = user->GetInfo("password");        // åŠ åçš„å¯†ç ï¼ˆå¯†æ–‡ï¼‰
             if( ("" != passwd1 || "" != passwd2) && (passwd2 != Crypt(passwd1, CRYPT_VERSION)) )
             {
                 LOG_DEBUG("[%s] [%s] [%s]",
                             passwd1.c_str(), passwd2.c_str(), Crypt(passwd1, CRYPT_VERSION).c_str());
                 LOG_ERROR("Password error");
-                msg = "ÃÜÂë´í";
+                msg = "å¯†ç é”™";
                 throw 2;
             }
 
@@ -138,42 +138,42 @@ int Page_Login::Deal()
             LOG_INFO("Login ok, user:%s, ip:%s", username.c_str(), ip.c_str());
 
             /*
-             * OK£¬µÇÂ¼³É¹¦£¬¼ÇÂ¼µÇÂ¼ĞÅÏ¢£»
+             * OKï¼Œç™»å½•æˆåŠŸï¼Œè®°å½•ç™»å½•ä¿¡æ¯ï¼›
              */
             const string &id = GetRandomString();
             LOG_DEBUG("Cookie=[%s]", id.c_str());
 
-            {// µ±ÓĞ¶àÈËÍ¬Ê±µÇÂ¼Ê±£¬Ğè¼ÓËø
+            {// å½“æœ‰å¤šäººåŒæ—¶ç™»å½•æ—¶ï¼Œéœ€åŠ é”
 
                 UNIQUE_LOCK( user->GetLock() );
 
-                // Ê¹Ç°¸öµÇÂ¼sessionÎŞĞ§£¬¼´ºóµÇÂ¼Õß±ÈÇ°µÇÂ¼ÕßÓÅÏÈ£»
+                // ä½¿å‰ä¸ªç™»å½•sessionæ— æ•ˆï¼Œå³åç™»å½•è€…æ¯”å‰ç™»å½•è€…ä¼˜å…ˆï¼›
                 const string &oldid = user->GetInfo("login", "session");
                 LOG_DEBUG("old Cookie=[%s]", oldid.c_str());
                 Session::Get( oldid )->SetInvalid();
 
-                // ±£´æµ±Ç°µÇÂ¼ĞÅÏ¢
+                // ä¿å­˜å½“å‰ç™»å½•ä¿¡æ¯
                 const string &counter = user->GetInfo("login", "counter");
-                user->SetInfo("login", "counter", Inc(counter)); // Ôö¼ÓµÇÂ¼¼ÆÊı
-                user->SetInfo("login", "session", id);  /* ¼ÇÂ¼sessionµÄid£¬ºóµÇÂ¼
-                                                         * ÓÃ»§½«¸ù¾İ´ËidÀ´Ê¹Ç°µÇ
-                                                         * Â¼ÓÃ»§sessionÎŞĞ§¡£ÈôĞè
-                                                         * ÒªµÇÂ¼Ê±¼ä¡¢ipµÈĞÅÏ¢£¬Ò²
-                                                         * ¿ÉÓÉ´ËÈ¡³ö£¬Èç£º
+                user->SetInfo("login", "counter", Inc(counter)); // å¢åŠ ç™»å½•è®¡æ•°
+                user->SetInfo("login", "session", id);  /* è®°å½•sessionçš„idï¼Œåç™»å½•
+                                                         * ç”¨æˆ·å°†æ ¹æ®æ­¤idæ¥ä½¿å‰ç™»
+                                                         * å½•ç”¨æˆ·sessionæ— æ•ˆã€‚è‹¥éœ€
+                                                         * è¦ç™»å½•æ—¶é—´ã€ipç­‰ä¿¡æ¯ï¼Œä¹Ÿ
+                                                         * å¯ç”±æ­¤å–å‡ºï¼Œå¦‚ï¼š
                                                          *   id --> session --> ip
                                                          */
-                user->SetInfo("login", "lasttime", NowTime("%Y%m%d%H%M%S")); // ×îºóµÇÂ¼Ê±¼ä
+                user->SetInfo("login", "lasttime", NowTime("%Y%m%d%H%M%S")); // æœ€åç™»å½•æ—¶é—´
 
-                // ±£´æµ½ÎÄ¼ş£¨¸ßĞÔ³ÌĞò²»Ó¦Á¢¼´±£´æ£¬¶øÓ¦ÓÉ¶¨Ê±Æ÷À´×ö [XXX]£©
+                // ä¿å­˜åˆ°æ–‡ä»¶ï¼ˆé«˜æ€§ç¨‹åºä¸åº”ç«‹å³ä¿å­˜ï¼Œè€Œåº”ç”±å®šæ—¶å™¨æ¥åš [XXX]ï¼‰
                 if(user->Save() < 0)
                 {
                     LOG_ERROR("Save user info error: [%s]", username.c_str());
-                    msg = "Î´Öª´íÎó[´úÂë:PD20]"; // ´ËÀàĞÅÏ¢²»Ó¦¸øÓÃ»§¿´£¬Ö»ĞèÒ»Ä£ºıÌáÊ¾£»
+                    msg = "æœªçŸ¥é”™è¯¯[ä»£ç :PD20]"; // æ­¤ç±»ä¿¡æ¯ä¸åº”ç»™ç”¨æˆ·çœ‹ï¼Œåªéœ€ä¸€æ¨¡ç³Šæç¤ºï¼›
                     throw 20;
                 }
             }
 
-            // ¹¹ÔìCookieºÍÌø×ªÍ·
+            // æ„é€ Cookieå’Œè·³è½¬å¤´
             const string html = "HTTP/1.1 200 OK\n"
                                 "Date: " + GmgTime() + "\n"
                                 "Server: NoteSrv v0.6\n"
@@ -183,7 +183,7 @@ int Page_Login::Deal()
                                 "\n"
                                 "OK";
 
-            // ÈÏÖ¤Í¨¹ı£¬¼Çµ½»º´æ£»
+            // è®¤è¯é€šè¿‡ï¼Œè®°åˆ°ç¼“å­˜ï¼›
             Session::Set(id, m_request);
 
             m_request->GetConnect()->Send(html);
@@ -194,7 +194,7 @@ int Page_Login::Deal()
         }
 
         /*
-         * ·¢ËÍ³ö´íÌáÊ¾ĞÅÏ¢
+         * å‘é€å‡ºé”™æç¤ºä¿¡æ¯
          */
         ChineseCoding("gb18030", "utf-8").Converter(msg, msg);
         m_request->GetConnect()->Send( msg );
@@ -208,7 +208,7 @@ int Page_Login::Deal()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Login, THIS_MODULE)
 
 }// end of PAGE_DOWNLOAD_SPACE

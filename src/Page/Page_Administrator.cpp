@@ -6,7 +6,7 @@ namespace PAGE_ADMINISTRATOR_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "administrator";
 
 
@@ -14,26 +14,26 @@ static const string THIS_MODULE = "administrator";
 
 Page_Administrator::Page_Administrator()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Administrator::~Page_Administrator()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Administrator::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     m_html = GlobalConfig::instance()->TemplateDir() + "Administrator.html";
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Administrator::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Administrator;
 }
 
@@ -44,28 +44,28 @@ Page *Page_Administrator::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 int Page_Administrator::OutBody()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
-    // ±¾Ò³ÃæÖ»ÔÊĞí¹ÜÀíÔ±²Ù×÷£¨»ò¾ßÓĞ¹ÜÀíÔ±È¨ÏŞ [XXX]£©
+    // æœ¬é¡µé¢åªå…è®¸ç®¡ç†å‘˜æ“ä½œï¼ˆæˆ–å…·æœ‰ç®¡ç†å‘˜æƒé™ [XXX]ï¼‰
     if("administrator" != m_request->GetCurrentUser())
     {
-        const string &html = "[<a href='javascript:history.back();'>·µ»Ø</a>]"
-                           + HtmlAlert("È¨ÏŞ²»×ã£¬Ö»ÓĞ¹ÜÀíÔ±ÄÜ·ÃÎÊ´ËÒ³Ãæ¡£");
+        const string &html = "[<a href='javascript:history.back();'>è¿”å›</a>]"
+                           + HtmlAlert("æƒé™ä¸è¶³ï¼Œåªæœ‰ç®¡ç†å‘˜èƒ½è®¿é—®æ­¤é¡µé¢ã€‚");
         m_request->GetConnect()->Send(html);
         return ERR;
     }
 
     /*
-     * ÈÕÖ¾ÅäÖÆÌá½»ÊÂ¼ş
+     * æ—¥å¿—é…åˆ¶æäº¤äº‹ä»¶
      */
     const string &log_save = m_request->GetField("log_save");
     if("" != log_save)
@@ -77,7 +77,7 @@ int Page_Administrator::OutBody()
     }
 
     /*
-     * É¾³ıÓÃ»§Ìá½»ÊÂ¼ş
+     * åˆ é™¤ç”¨æˆ·æäº¤äº‹ä»¶
      */
     const string &delete_user = m_request->GetField("delete_user");
     if("" != delete_user)
@@ -109,7 +109,7 @@ int Page_Administrator::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Administrator, THIS_MODULE)
 
 }// end of PAGE_ADMINISTRATOR_SPACE

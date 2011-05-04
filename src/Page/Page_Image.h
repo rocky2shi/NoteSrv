@@ -9,7 +9,7 @@ namespace PAGE_IMAGE_SPACE
 
 
 
-// Í¼Æ¬´¦ÀíÀà£ºpng¡¢jpg¡¢gifµÈ
+// å›¾ç‰‡å¤„ç†ç±»ï¼špngã€jpgã€gifç­‰
 class Page_Image : public Page
 {
 protected:

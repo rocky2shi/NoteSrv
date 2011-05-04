@@ -9,7 +9,7 @@ namespace PAGE_ERROR_SPACE
 
 
 
-// 出错提示页面
+// 鍑洪敊鎻愮ず椤甸潰
 class Page_Error : public Page
 {
 protected:
