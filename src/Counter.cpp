@@ -12,10 +12,10 @@ namespace COUNTER_SPACE
 Counter::Counter(const string &name/*=""*/, const string &type/*=""*/, unsigned int count/*=0*/)
             : m_count(count), m_name(name), m_type(type)
 {
-    Counter::instance()->Insert(this); // ¼ÇÂ¼Ã¿¸ö¼ÆÊıÆ÷¶ÔÏó
+    Counter::instance()->Insert(this); // è®°å½•æ¯ä¸ªè®¡æ•°å™¨å¯¹è±¡
 }
 
-// Àà³õÊ¼»¯
+// ç±»åˆå§‹åŒ–
 int Counter::init()
 {
     int ret;
@@ -31,35 +31,35 @@ int Counter::init()
     return OK;
 }
 
-// Ôö¼Ó¼ÆÊı
+// å¢åŠ è®¡æ•°
 void Counter::Inc()
 {
-    UNIQUE_LOCK(m_lock);    // ¿ÉÄÜÓĞ¶àÏß³Ì²Ù×÷
+    UNIQUE_LOCK(m_lock);    // å¯èƒ½æœ‰å¤šçº¿ç¨‹æ“ä½œ
     m_count++;
 }
 
-// È¡¼ÆÊıÆ÷Öµ
+// å–è®¡æ•°å™¨å€¼
 unsigned int Counter::GetCount() const
 {
     return m_count;
 }
 
-// È¡¼ÆÊıÆ÷Ãû³Æ
+// å–è®¡æ•°å™¨åç§°
 const string Counter::GetName() const
 {
     return m_name;
 }
 
-// È¡ÀàĞÍ
+// å–ç±»å‹
 const string Counter::GetType() const
 {
     return m_type;
 }
 
-// ¸´Î»¼ÆÊıÆ÷£¨ÇåÁã£©
+// å¤ä½è®¡æ•°å™¨ï¼ˆæ¸…é›¶ï¼‰
 void Counter::Reset()
 {
-    UNIQUE_LOCK(m_lock);    // ¿ÉÄÜºÍInc()ÓĞ³åÍ»£¬Ğè¼ÓËø£»
+    UNIQUE_LOCK(m_lock);    // å¯èƒ½å’ŒInc()æœ‰å†²çªï¼Œéœ€åŠ é”ï¼›
     m_count = 0;
 }
 

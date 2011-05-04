@@ -10,7 +10,7 @@ namespace TAG_BROWSEBOOKMARK_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "BrowseBookmark";
 
 
@@ -19,17 +19,17 @@ static const string THIS_MODULE = "BrowseBookmark";
 
 Tag_BrowseBookmark::Tag_BrowseBookmark()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_BrowseBookmark::Tag_BrowseBookmark(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_BrowseBookmark::~Tag_BrowseBookmark()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -37,15 +37,15 @@ Tag_BrowseBookmark::~Tag_BrowseBookmark()
 
 int Tag_BrowseBookmark::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_BrowseBookmark::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_BrowseBookmark;
 }
 
@@ -56,22 +56,22 @@ Tag *Tag_BrowseBookmark::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// ä¯ÀÀÊı¾İ£¨±íÁĞ£©
+// æµè§ˆæ•°æ®ï¼ˆè¡¨åˆ—ï¼‰
 string Tag_BrowseBookmark::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     const string &username = page->GetRequest()->GetCurrentUser();
     User *user = User::Get(username);
-    const string &cfg = user->UserDir() + "browse.txt"; // µ±Ç°Ò³ÃæµÄÅäÖÆ¡¢Êı¾İÎÄ¼ş
+    const string &cfg = user->UserDir() + "browse.txt"; // å½“å‰é¡µé¢çš„é…åˆ¶ã€æ•°æ®æ–‡ä»¶
 
-    // È¡³öÊı¾İ
+    // å–å‡ºæ•°æ®
     Ini data(cfg);
 
     return data.Get("data", "bookmark");

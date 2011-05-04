@@ -8,7 +8,7 @@ namespace TAG_IMGDISPLAY_SPACE
 
 
 
-// 图片显示列表为空时的处理
+// 鍥剧墖鏄剧ず鍒楄〃涓虹┖鏃剁殑澶勭悊
 class Tag_ImgDisplay : public Tag
 {
 protected:

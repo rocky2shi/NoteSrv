@@ -7,7 +7,7 @@ namespace PAGE_BROWSE_SPACE
 
 
 
-// Êı¾İ¼ÇÂ¼Ô¤ÀÀ
+// æ•°æ®è®°å½•é¢„è§ˆ
 class Page_Browse : public Page
 {
 protected:

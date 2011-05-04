@@ -3,23 +3,23 @@
 #include <signal.h>
 
 
-// ĞÅºÅ´¦ÀíÀà
+// ä¿¡å·å¤„ç†ç±»
 class SignalDeal
 {
 public:
     enum {
-        SIG_EXIT = 63,  // ÍË³öĞÅºÅ£¬Öµ63
+        SIG_EXIT = 63,  // é€€å‡ºä¿¡å·ï¼Œå€¼63
     };
 
 public:
-    // ³õÊ¼»¯£¬°²×°ĞÅºÅµÈ£»
+    // åˆå§‹åŒ–ï¼Œå®‰è£…ä¿¡å·ç­‰ï¼›
     static int init();
 
-    // ½ø³ÌÍË³ö¼ì²â
+    // è¿›ç¨‹é€€å‡ºæ£€æµ‹
     static int exit();
 
 private:
-    // ĞÅºÅ´¦Àíº¯Êı
+    // ä¿¡å·å¤„ç†å‡½æ•°
     static void deal(int signo, siginfo_t*, void*);
 
 private:

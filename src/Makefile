@@ -1,13 +1,13 @@
 
-# ִ�б���ǰ�Ĵ��� [Rocky 2009-10-21 14:53:45]
+# 执行编释前的处理 [Rocky 2009-10-21 14:53:45]
 $(shell sh format.sh >/dev/null 2>&1)
 
-## ����Ŀ������·��
+## 定义目标搜索路径
 #vpath %.cpp Connect
 
 
 #
-# ����αĿ¼���������統ǰĿ¼����ͬ���ļ�ʱ��Ҳ��ȷ�������������ļ�Ϊ׼��
+# 定义伪目录，作用是如当前目录下有同名文件时能也正确处理（否则将以文件为准）
 #
 .PHONY: all
 
@@ -25,19 +25,19 @@ sub_dir_file=$(patsubst %.cpp, %.o, $(wildcard */*/*.cpp))
 sub_dir_file+=$(patsubst %.cpp, %.o, $(wildcard */*.cpp))
 
 
-# ���˵�����Ҫ�Ĳ���
+# 过滤掉不需要的部分
 OBJ_MAIN = $(filter-out Page/%, $(sub_dir_file))
 
 
-# ��̬�����
+# 动态库对象
 OBJ_DLL=$(patsubst %.cpp, %.o, $(wildcard Page/*.cpp))
 EXE_DLL=$(patsubst %.o, %.so, $(OBJ_DLL))
 
 
 
 #
-# $(patsubst %.cpp, %.o, $(wildcard Table_*.cpp)) : ȡ��ǰĿ¼����Table_Ϊ
-# ǰ׺��.cpp�ļ���Ȼ����ļ���׺.cppתΪ.o��ΪĿ���ļ���
+# $(patsubst %.cpp, %.o, $(wildcard Table_*.cpp)) : 取当前目录下以Table_为
+# 前缀的.cpp文件，然后把文件后缀.cpp转为.o作为目标文件；
 #
 SOBJS_PUBLIC=   $(OBJ_MAIN)                                                    \
                 Common.o                                                       \
@@ -84,29 +84,29 @@ SOBJS_PUBLIC=   $(OBJ_MAIN)                                                    \
 
 
 
-BOOST_INC=-I ~/arm/include/boost
-BOOST_LIB=-L ~/arm/lib/boost
-ZIP_INC=-I ~/arm/include
-ZIP_LIB=-L ~/arm/lib
+BOOST_INC=-I /opt/boost_1_46_1/x86/include
+BOOST_LIB=-L /opt/boost_1_46_1/x86/lib 
+#ZIP_INC=-I ~/arm/include
+#ZIP_LIB=-L ~/arm/lib
 
 
 
 #
-# $(DEBUG) ���Ի�����������Ϊ��export DEBUG=-D_DEBUG
+# $(DEBUG) 调试环境变量，设为：export DEBUG=-D_DEBUG
 #
-CPPFLAGS:= -g -I. $(CPPFLAGS) $(DEBUG) $(BOOST_INC) $(ZIP_INC)
+CPPFLAGS:= -g -O2 -I. $(CPPFLAGS) $(DEBUG) $(BOOST_INC) $(ZIP_INC)
 LIBS:= -lboost_thread -ldl -lz $(BOOST_LIB) $(ZIP_LIB)
 
 
 
 
-# ���գ��ռ���Ŀ��
+# 最终（终极）目标
 all:  exe #dll
 
 
 #
-# ��ȡ�����ɶ�̬����ʽ��ע�⣬����Ҫ����ʱ��ͬ��ȥ����
-# ��SOBJS_PUBLIC�е�$(OBJ_DLL)�������ظ���[Rocky 2010-06-04 17:00:16]
+# 暂取消生成动态动方式，注意，当需要启用时，同步去掉上
+# 面SOBJS_PUBLIC中的$(OBJ_DLL)，以免重复；[Rocky 2010-06-04 17:00:16]
 #
 exe: $(TARGETS)
 dll: $(EXE_DLL)
@@ -119,7 +119,7 @@ dll: $(EXE_DLL)
 
 
 
-# ��ִ�����
+# 可执行序程
 $(TARGETS): % : $(SOBJS_PUBLIC) %.o
 	$(CXX) $(LDFLAGS) $(LIBS) $^ -o $@
 	@echo --------------------------$@ OK--------------------------
@@ -127,7 +127,7 @@ $(TARGETS): % : $(SOBJS_PUBLIC) %.o
 
 
 
-# ��̬��
+# 动态库
 $(EXE_DLL): %.so : $(SOBJS_PUBLIC) %.o
 	$(CXX) $(LDFLAGS) $(LIBS) -shared -fPIC $^ -o $@
 	@echo --------------------------$@ OK--------------------------
@@ -148,6 +148,6 @@ $(EXE_DLL): %.so : $(SOBJS_PUBLIC) %.o
 
 clean:
 	$(RM) *.o $(SOBJS_PUBLIC) $(TARGETS) Changes.h $(OBJ_DLL) $(EXE_DLL)
-	$(RM) core core.*
+	$(RM) a.out core core.*
 	$(RM) NoteSrv.*.tar
 

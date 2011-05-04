@@ -8,7 +8,7 @@ namespace SUBMIT_DATACONVERSION_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "DataConversion";
 
 
@@ -17,18 +17,18 @@ static const string THIS_MODULE = "DataConversion";
 
 Submit_DataConversion::Submit_DataConversion()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_DataConversion::Submit_DataConversion(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_DataConversion::~Submit_DataConversion()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -36,15 +36,15 @@ Submit_DataConversion::~Submit_DataConversion()
 
 int Submit_DataConversion::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_DataConversion::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_DataConversion;
 }
 
@@ -52,7 +52,7 @@ Submit *Submit_DataConversion::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -72,7 +72,7 @@ int Submit_DataConversion::Deal(Page *page)
 
     const string tmpfile = StringToTempFile(text);
 
-    // µ÷Íâ²¿ÃüÁî´¦Àí´ËÎÄ¼ş
+    // è°ƒå¤–éƒ¨å‘½ä»¤å¤„ç†æ­¤æ–‡ä»¶
     const string cmd = GlobalConfig::instance()->ToolDir() + "DataConversion.pl " + tmpfile;
     ret = system(cmd.c_str());
     LOG_DEBUG("ret=[%d] cmd=[%s]", ret, cmd.c_str());
@@ -82,18 +82,18 @@ int Submit_DataConversion::Deal(Page *page)
         return ERR;
     }
 
-    // ·Å³ö×ª»»ºóµÄÊı¾İ
+    // æ”¾å‡ºè½¬æ¢åçš„æ•°æ®
     text = FileToStr(tmpfile);
 
-    // ´¦ÀíÍê±Ï£¬É¾³ıÁÙÊ±ÎÄ¼ş£»
+    // å¤„ç†å®Œæ¯•ï¼Œåˆ é™¤ä¸´æ—¶æ–‡ä»¶ï¼›
     DeleteFile(tmpfile);
 
-    // ´ò°ü
+    // æ‰“åŒ…
     Ini item;
     item.Set(key, "text", WebToText(text));
     item.Set(key, "modify", NowTime("%Y%m%d%H%M%S"));
 
-    // ±£´æ
+    // ä¿å­˜
     return page->Save( item );
 }
 

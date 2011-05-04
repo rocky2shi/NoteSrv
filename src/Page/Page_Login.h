@@ -9,7 +9,7 @@ namespace PAGE_LOGIN_SPACE
 
 
 
-// µÇÂ¼´¦ÀíÀà
+// ç™»å½•å¤„ç†ç±»
 class Page_Login : public Page
 {
 protected:

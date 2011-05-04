@@ -11,7 +11,7 @@ namespace MODULE_CGI_SPACE
 
 
 
-// ´¦Àíweb´æÈë¶ÓÁĞµÄÇëÇó
+// å¤„ç†webå­˜å…¥é˜Ÿåˆ—çš„è¯·æ±‚
 class Module_Cgi : public Module
 {
 protected:

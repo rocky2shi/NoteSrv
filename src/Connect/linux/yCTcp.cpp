@@ -31,27 +31,27 @@ const int yCTcp::SOCK_ERROR = -100;
 const int yCTcp::SOCK_TIMEOUT = -101;
 const long yCTcp::TCP_TIMEOUT = 500000;
 
-//¹¹Ôìº¯Êı
+//æ„é€ å‡½æ•°
 yCTcp::yCTcp ()
 {
     m_nSock = -1;
 }
 
-//¹¹Ôìº¯Êı
+//æ„é€ å‡½æ•°
 yCTcp::yCTcp (int nSock)
 {
     m_nSock = nSock;
 }
 
-//Îö¹¹º¯Êı
+//ææ„å‡½æ•°
 yCTcp::~yCTcp ()
 {
     Close ();
 }
 
-/*¸³Öµ
-  Èë²Î£ºnSockfd - socket¾ä±ú
-  ³ö²Î£º¸³ÖµºóµÄsocket¾ä±ú
+/*èµ‹å€¼
+  å…¥å‚ï¼šnSockfd - socketå¥æŸ„
+  å‡ºå‚ï¼šèµ‹å€¼åçš„socketå¥æŸ„
 */
 int yCTcp::operator = (int nSockfd)
 {
@@ -61,36 +61,36 @@ int yCTcp::operator = (int nSockfd)
     return m_nSock;
 }
 
-/*ÅĞ¶ÏÁ½¸ösocket¾ä±úÊÇ·ñ²»ÏàµÈ
-  Èë²Î£ºn - "!="ÓÒ±ßµÄsocket¾ä±ú
-  ³ö²Î£º1£º²»ÏàµÈ£»0£ºÏàµÈ
+/*åˆ¤æ–­ä¸¤ä¸ªsocketå¥æŸ„æ˜¯å¦ä¸ç›¸ç­‰
+  å…¥å‚ï¼šn - "!="å³è¾¹çš„socketå¥æŸ„
+  å‡ºå‚ï¼š1ï¼šä¸ç›¸ç­‰ï¼›0ï¼šç›¸ç­‰
 */
 int yCTcp::operator != (int n) const
 {
     return (m_nSock != n);
 }
 
-/*ÅĞ¶ÏÁ½¸ösocket¾ä±úÊÇ·ñÏàµÈ
-  Èë²Î£ºn - "=="ÓÒ±ßµÄsocket¾ä±ú
-  ³ö²Î£º1£ºÏàµÈ£»0£º²»ÏàµÈ
+/*åˆ¤æ–­ä¸¤ä¸ªsocketå¥æŸ„æ˜¯å¦ç›¸ç­‰
+  å…¥å‚ï¼šn - "=="å³è¾¹çš„socketå¥æŸ„
+  å‡ºå‚ï¼š1ï¼šç›¸ç­‰ï¼›0ï¼šä¸ç›¸ç­‰
 */
 int yCTcp::operator == (int n) const
 {
     return (m_nSock == n);
 }
 
-/*È¡³ösocket¾ä±ú
-  Èë²Î£ºÎŞ
-  ³ö²Î£ºÈ¡³öµÄsocket¾ä±ú
+/*å–å‡ºsocketå¥æŸ„
+  å…¥å‚ï¼šæ— 
+  å‡ºå‚ï¼šå–å‡ºçš„socketå¥æŸ„
 */
 int yCTcp::GetHandle () const
 {
     return m_nSock;
 }
 
-/*´´½¨socket
-  Èë²Î£ºÎŞ
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*åˆ›å»ºsocket
+  å…¥å‚ï¼šæ— 
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::Open ()
 {
@@ -101,9 +101,9 @@ int yCTcp::Open ()
     return (m_nSock != -1);
 }
 
-/*¹Ø±Õsocket
-  Èë²Î£ºÎŞ
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*å…³é—­socket
+  å…¥å‚ï¼šæ— 
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::Close ()
 {
@@ -115,10 +115,10 @@ int yCTcp::Close ()
     return 1;
 }
 
-/*Á¬½Ó£¨Î´ÉèÖÃ³¬Ê±£©
-  Èë²Î£ºpHost - IPµØÖ·»òÖ÷»úÃû
-    nPort - ¶Ë¿Ú
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*è¿æ¥ï¼ˆæœªè®¾ç½®è¶…æ—¶ï¼‰
+  å…¥å‚ï¼špHost - IPåœ°å€æˆ–ä¸»æœºå
+    nPort - ç«¯å£
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::Connect (const char *pHost, int nPort) const
 {
@@ -142,18 +142,18 @@ int yCTcp::Connect (const char *pHost, int nPort) const
 }
 
 /*
-//×¨ÃÅ¸øConnectNoblockÊ¹ÓÃ
+//ä¸“é—¨ç»™ConnectNoblockä½¿ç”¨
 static void conn_alarm (int signo)
 {
     return;
 }
 */
 
-/*Á¬½Ó£¨ÉèÖÃ³¬Ê±£©
-  Èë²Î£ºpHost - IPµØÖ·»òÖ÷»úÃû
-    nPort - ¶Ë¿Ú
-    nSec - ³¬Ê±Öµ£¨µ¥Î»£ºÃë£©
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*è¿æ¥ï¼ˆè®¾ç½®è¶…æ—¶ï¼‰
+  å…¥å‚ï¼špHost - IPåœ°å€æˆ–ä¸»æœºå
+    nPort - ç«¯å£
+    nSec - è¶…æ—¶å€¼ï¼ˆå•ä½ï¼šç§’ï¼‰
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 /*
 int yCTcp::ConnectNoblock (const char *pHost, int nPort, int nSec) const
@@ -196,11 +196,11 @@ int yCTcp::ConnectNoblock (const char *pHost, int nPort, int nSec) const
 }
 */
 
-/*Á¬½Ó£¨ÉèÖÃ³¬Ê±£©
-  Èë²Î£ºpHost - IPµØÖ·»òÖ÷»úÃû
-    nPort - ¶Ë¿Ú
-    nSec - ³¬Ê±Öµ£¨µ¥Î»£ºÃë£©
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*è¿æ¥ï¼ˆè®¾ç½®è¶…æ—¶ï¼‰
+  å…¥å‚ï¼špHost - IPåœ°å€æˆ–ä¸»æœºå
+    nPort - ç«¯å£
+    nSec - è¶…æ—¶å€¼ï¼ˆå•ä½ï¼šç§’ï¼‰
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::ConnectNoblock (const char *pHost, int nPort, int nSec) const
 {
@@ -258,10 +258,10 @@ Ok:
     return 1;
 }
 
-/*°ó¶¨
-  Èë²Î£ºpIP - IPµØÖ·
-    nPort - ¶Ë¿Ú
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*ç»‘å®š
+  å…¥å‚ï¼špIP - IPåœ°å€
+    nPort - ç«¯å£
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::Bind (const char *pIP, int nPort) const
 {
@@ -298,9 +298,9 @@ int yCTcp::Bind (const char *pIP, int nPort) const
     return (bind (m_nSock, (struct sockaddr *)&addr, sizeof (addr)) == 0);
 }
 
-/*¼àÌı
-  Èë²Î£ºnNum - ¼àÌıÊıÄ¿
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*ç›‘å¬
+  å…¥å‚ï¼šnNum - ç›‘å¬æ•°ç›®
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::Listen (int nNum) const
 {
@@ -309,9 +309,9 @@ int yCTcp::Listen (int nNum) const
     return (listen (m_nSock, nNum) == 0);
 }
 
-/*½ÓÊÜÁ¬½Ó
-  Èë²Î£ºÎŞ
-  ³ö²Î£ºÆäËû: Á¬½ÓÌ×½Ó×Ö¾ä±ú ; -1: Ê§°Ü
+/*æ¥å—è¿æ¥
+  å…¥å‚ï¼šæ— 
+  å‡ºå‚ï¼šå…¶ä»–: è¿æ¥å¥—æ¥å­—å¥æŸ„ ; -1: å¤±è´¥
 */
 int yCTcp::Accept () const
 {
@@ -320,11 +320,11 @@ int yCTcp::Accept () const
     return (accept (m_nSock, (struct sockaddr *)NULL, NULL));
 }
 
-/*·¢ËÍÖ¸¶¨ÊıÄ¿Êı¾İ
-  Èë²Î£ºpBuf - ·¢ËÍ»º´æ
-    nCount - Ğè·¢ËÍ×Ö½ÚÊı
-    nMicsec - socket³¬Ê±Öµ£¬µ¥Î»£ºÎ¢Ãî£¬È±Ê¡£º500000Î¢Ãî
-  ³ö²Î£ºÊµ¼Ê·¢ËÍ×Ö½ÚÊı £¬Èç¹û·¢ËÍÊ§°Ü£¬·µ»Ø¸ºÊı
+/*å‘é€æŒ‡å®šæ•°ç›®æ•°æ®
+  å…¥å‚ï¼špBuf - å‘é€ç¼“å­˜
+    nCount - éœ€å‘é€å­—èŠ‚æ•°
+    nMicsec - socketè¶…æ—¶å€¼ï¼Œå•ä½ï¼šå¾®å¦™ï¼Œç¼ºçœï¼š500000å¾®å¦™
+  å‡ºå‚ï¼šå®é™…å‘é€å­—èŠ‚æ•° ï¼Œå¦‚æœå‘é€å¤±è´¥ï¼Œè¿”å›è´Ÿæ•°
 */
 int yCTcp::Sendn (const void *pBuf, int nCount, int nMicsec) const
 {
@@ -381,11 +381,11 @@ int yCTcp::Sendn (const void *pBuf, int nCount, int nMicsec) const
     return nCount;
 }
 
-/*·¢ËÍÊı¾İ
-  Èë²Î£ºpBuf - ·¢ËÍ»º´æ
-    nCount - Ğè·¢ËÍ×Ö½ÚÊı
-    nMicsec - socket³¬Ê±Öµ£¬µ¥Î»£ºÎ¢Ãî£¬È±Ê¡£º500000Î¢Ãî
-  ³ö²Î£ºÊµ¼Ê·¢ËÍ×Ö½ÚÊı £¬Èç¹û·¢ËÍÊ§°Ü£¬·µ»Ø¸ºÊı
+/*å‘é€æ•°æ®
+  å…¥å‚ï¼špBuf - å‘é€ç¼“å­˜
+    nCount - éœ€å‘é€å­—èŠ‚æ•°
+    nMicsec - socketè¶…æ—¶å€¼ï¼Œå•ä½ï¼šå¾®å¦™ï¼Œç¼ºçœï¼š500000å¾®å¦™
+  å‡ºå‚ï¼šå®é™…å‘é€å­—èŠ‚æ•° ï¼Œå¦‚æœå‘é€å¤±è´¥ï¼Œè¿”å›è´Ÿæ•°
 */
 int yCTcp::Send (const void *pBuf, int nCount, int nMicsec) const
 {
@@ -425,11 +425,11 @@ int yCTcp::Send (const void *pBuf, int nCount, int nMicsec) const
     return wn;
 }
 
-/*½ÓÊÕÖ¸¶¨ÊıÄ¿Êı¾İ
-  Èë²Î£ºpBuf - ½ÓÊÕ»º´æ
-    nCount - Ğè½ÓÊÕ×Ö½ÚÊı
-    nMicsec - socket³¬Ê±Öµ£¬µ¥Î»£ºÎ¢Ãî£¬È±Ê¡£º500000Î¢Ãî
-  ³ö²Î£ºÊµ¼Ê½ÓÊÕ×Ö½ÚÊı £¬Èç¹û½ÓÊÕÊ§°Ü£¬·µ»Ø¸ºÊı£¬Èç¹û¶Ô·½¹Ø±Õ£¬·µ»Ø0
+/*æ¥æ”¶æŒ‡å®šæ•°ç›®æ•°æ®
+  å…¥å‚ï¼špBuf - æ¥æ”¶ç¼“å­˜
+    nCount - éœ€æ¥æ”¶å­—èŠ‚æ•°
+    nMicsec - socketè¶…æ—¶å€¼ï¼Œå•ä½ï¼šå¾®å¦™ï¼Œç¼ºçœï¼š500000å¾®å¦™
+  å‡ºå‚ï¼šå®é™…æ¥æ”¶å­—èŠ‚æ•° ï¼Œå¦‚æœæ¥æ”¶å¤±è´¥ï¼Œè¿”å›è´Ÿæ•°ï¼Œå¦‚æœå¯¹æ–¹å…³é—­ï¼Œè¿”å›0
 */
 int yCTcp::Recvn (void *pBuf, int nCount, int nMicsec) const
 {
@@ -486,11 +486,11 @@ int yCTcp::Recvn (void *pBuf, int nCount, int nMicsec) const
     return nCount;
 }
 
-/*½ÓÊÕÊı¾İ
-  Èë²Î£ºpBuf - ½ÓÊÕ»º´æ
-    nCount - Ğè½ÓÊÕ×Ö½ÚÊı
-    nMicsec - socket³¬Ê±Öµ£¬µ¥Î»£ºÎ¢Ãî£¬È±Ê¡£º500000Î¢Ãî
-  ³ö²Î£ºÊµ¼Ê½ÓÊÕ×Ö½ÚÊı £¬Èç¹û½ÓÊÕÊ§°Ü£¬·µ»Ø¸ºÊı£¬Èç¹û¶Ô·½¹Ø±Õ£¬·µ»Ø0
+/*æ¥æ”¶æ•°æ®
+  å…¥å‚ï¼špBuf - æ¥æ”¶ç¼“å­˜
+    nCount - éœ€æ¥æ”¶å­—èŠ‚æ•°
+    nMicsec - socketè¶…æ—¶å€¼ï¼Œå•ä½ï¼šå¾®å¦™ï¼Œç¼ºçœï¼š500000å¾®å¦™
+  å‡ºå‚ï¼šå®é™…æ¥æ”¶å­—èŠ‚æ•° ï¼Œå¦‚æœæ¥æ”¶å¤±è´¥ï¼Œè¿”å›è´Ÿæ•°ï¼Œå¦‚æœå¯¹æ–¹å…³é—­ï¼Œè¿”å›0
 */
 int yCTcp::Recv (void *pBuf, int nCount, int nMicsec) const
 {
@@ -528,11 +528,11 @@ int yCTcp::Recv (void *pBuf, int nCount, int nMicsec) const
     return rn;
 }
 
-/*½ÓÊÕÒ»ĞĞÊı¾İ(ÒÔ"\r\n"½áÎ²)
-  Èë²Î£ºpBuf - ½ÓÊÕ»º´æ
-    nMaxCount - Ò»ĞĞµÄ×î´ó³¤¶È(°üÀ¨"\r\n")
-    nMicsec - socket³¬Ê±Öµ£¬µ¥Î»£ºÎ¢Ãî£¬È±Ê¡£º500000Î¢Ãî
-  ³ö²Î£ºÊµ¼Ê½ÓÊÕ×Ö½ÚÊı £¬Èç¹û½ÓÊÕÊ§°Ü£¬·µ»Ø¸ºÊı£¬Èç¹û¶Ô·½¹Ø±Õ£¬·µ»Ø0
+/*æ¥æ”¶ä¸€è¡Œæ•°æ®(ä»¥"\r\n"ç»“å°¾)
+  å…¥å‚ï¼špBuf - æ¥æ”¶ç¼“å­˜
+    nMaxCount - ä¸€è¡Œçš„æœ€å¤§é•¿åº¦(åŒ…æ‹¬"\r\n")
+    nMicsec - socketè¶…æ—¶å€¼ï¼Œå•ä½ï¼šå¾®å¦™ï¼Œç¼ºçœï¼š500000å¾®å¦™
+  å‡ºå‚ï¼šå®é™…æ¥æ”¶å­—èŠ‚æ•° ï¼Œå¦‚æœæ¥æ”¶å¤±è´¥ï¼Œè¿”å›è´Ÿæ•°ï¼Œå¦‚æœå¯¹æ–¹å…³é—­ï¼Œè¿”å›0
 */
 int yCTcp::RecvLine_rn (void *pBuf, int nMaxCount, int nMicsec) const
 {
@@ -553,11 +553,11 @@ int yCTcp::RecvLine_rn (void *pBuf, int nMaxCount, int nMicsec) const
     return rn;
 }
 
-/*½ÓÊÕÒ»ĞĞÊı¾İ(ÒÔ"\n"½áÎ²)
-  Èë²Î£ºpBuf - ½ÓÊÕ»º´æ
-    nMaxCount - Ò»ĞĞµÄ×î´ó³¤¶È(°üÀ¨"\n")
-    nMicsec - socket³¬Ê±Öµ£¬µ¥Î»£ºÎ¢Ãî£¬È±Ê¡£º500000Î¢Ãî
-  ³ö²Î£ºÊµ¼Ê½ÓÊÕ×Ö½ÚÊı £¬Èç¹û½ÓÊÕÊ§°Ü£¬·µ»Ø¸ºÊı£¬Èç¹û¶Ô·½¹Ø±Õ£¬·µ»Ø0
+/*æ¥æ”¶ä¸€è¡Œæ•°æ®(ä»¥"\n"ç»“å°¾)
+  å…¥å‚ï¼špBuf - æ¥æ”¶ç¼“å­˜
+    nMaxCount - ä¸€è¡Œçš„æœ€å¤§é•¿åº¦(åŒ…æ‹¬"\n")
+    nMicsec - socketè¶…æ—¶å€¼ï¼Œå•ä½ï¼šå¾®å¦™ï¼Œç¼ºçœï¼š500000å¾®å¦™
+  å‡ºå‚ï¼šå®é™…æ¥æ”¶å­—èŠ‚æ•° ï¼Œå¦‚æœæ¥æ”¶å¤±è´¥ï¼Œè¿”å›è´Ÿæ•°ï¼Œå¦‚æœå¯¹æ–¹å…³é—­ï¼Œè¿”å›0
 */
 int yCTcp::RecvLine_n (void *pBuf, int nMaxCount, int nMicsec) const
 {
@@ -578,9 +578,9 @@ int yCTcp::RecvLine_n (void *pBuf, int nMaxCount, int nMicsec) const
     return rn;
 }
 
-/*µÃµ½±¾»ú»úÆ÷Ãû
-  Èë²Î£ºpName - ´æ·Å±¾»ú»úÆ÷Ãû
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*å¾—åˆ°æœ¬æœºæœºå™¨å
+  å…¥å‚ï¼špName - å­˜æ”¾æœ¬æœºæœºå™¨å
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::GetHostName (char *pName) const
 {
@@ -589,9 +589,9 @@ int yCTcp::GetHostName (char *pName) const
     return (gethostname (pName, 100) == 0);
 }
 
-/*µÃµ½¶Ô·½»úÆ÷Ãû
-  Èë²Î£ºpName - ´æ·Å¶Ô·½»úÆ÷Ãû
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*å¾—åˆ°å¯¹æ–¹æœºå™¨å
+  å…¥å‚ï¼špName - å­˜æ”¾å¯¹æ–¹æœºå™¨å
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::GetPeerName (char *pName) const
 {
@@ -612,9 +612,9 @@ int yCTcp::GetPeerName (char *pName) const
     return 0;
 }
 
-/*µÃµ½±¾»úµØÖ·
-  Èë²Î£ºÎŞ
-  ³ö²Î£ºµØÖ·ÁĞ±í£¬Èç¹û³ö´í£¬·µ»ØNULL
+/*å¾—åˆ°æœ¬æœºåœ°å€
+  å…¥å‚ï¼šæ— 
+  å‡ºå‚ï¼šåœ°å€åˆ—è¡¨ï¼Œå¦‚æœå‡ºé”™ï¼Œè¿”å›NULL
 */
 char **yCTcp::GetHostAddr () const
 {
@@ -650,9 +650,9 @@ char **yCTcp::GetHostAddr () const
     return NULL;
 }
 
-/*µÃµ½¶Ô·½µØÖ·
-  Èë²Î£ºpAddr - ´æ·Å¶Ô·½µØÖ·
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*å¾—åˆ°å¯¹æ–¹åœ°å€
+  å…¥å‚ï¼špAddr - å­˜æ”¾å¯¹æ–¹åœ°å€
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::GetPeerAddr (char *pAddr) const
 {
@@ -666,9 +666,9 @@ int yCTcp::GetPeerAddr (char *pAddr) const
     return (inet_ntop (AF_INET, &addr.sin_addr, pAddr, 100) != NULL);
 }
 
-/*ÉèÖÃsocketÎª·Ç×èÈû
-  Èë²Î£ºÎŞ
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*è®¾ç½®socketä¸ºéé˜»å¡
+  å…¥å‚ï¼šæ— 
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::SetNoblock ()
 {
@@ -686,9 +686,9 @@ int yCTcp::SetNoblock ()
     return 1;
 }
 
-/*ÉèÖÃsocketÎª×èÈû
-  Èë²Î£ºÎŞ
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*è®¾ç½®socketä¸ºé˜»å¡
+  å…¥å‚ï¼šæ— 
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::SetBlock ()
 {
@@ -706,9 +706,9 @@ int yCTcp::SetBlock ()
     return 1;
 }
 
-/*ÉèÖÃµØÖ·¿ÉÖØÓÃ
-  Èë²Î£ºÎŞ
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*è®¾ç½®åœ°å€å¯é‡ç”¨
+  å…¥å‚ï¼šæ— 
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::SetReuseAddr ()
 {
@@ -723,9 +723,9 @@ int yCTcp::SetReuseAddr ()
     return 1;
 }
 
-/*ÉèÖÃ·¢ËÍ³¬Ê±Öµ
-  Èë²Î£º·¢ËÍ³¬Ê±Öµ£¨µ¥Î»£ºÎ¢Ãë£©
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*è®¾ç½®å‘é€è¶…æ—¶å€¼
+  å…¥å‚ï¼šå‘é€è¶…æ—¶å€¼ï¼ˆå•ä½ï¼šå¾®ç§’ï¼‰
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::SetSendTimeout (int nTimeout)
 {
@@ -743,9 +743,9 @@ int yCTcp::SetSendTimeout (int nTimeout)
     return 1;
 }
 
-/*ÉèÖÃ½ÓÊÕ³¬Ê±Öµ
-  Èë²Î£º½ÓÊÕ³¬Ê±Öµ£¨µ¥Î»£ºÃë£©
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*è®¾ç½®æ¥æ”¶è¶…æ—¶å€¼
+  å…¥å‚ï¼šæ¥æ”¶è¶…æ—¶å€¼ï¼ˆå•ä½ï¼šç§’ï¼‰
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::SetRecvTimeout (int nTimeout)
 {
@@ -763,9 +763,9 @@ int yCTcp::SetRecvTimeout (int nTimeout)
     return 1;
 }
 
-/*ÉèÖÃ·¢ËÍ»º³åÇøµÄ´óĞ¡
-  Èë²Î£º·¢ËÍ»º³åÇøÖµ£¨µ¥Î»£º×Ö½Ú£©
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*è®¾ç½®å‘é€ç¼“å†²åŒºçš„å¤§å°
+  å…¥å‚ï¼šå‘é€ç¼“å†²åŒºå€¼ï¼ˆå•ä½ï¼šå­—èŠ‚ï¼‰
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::SetSendBuf (int nSendBuf)
 {
@@ -780,9 +780,9 @@ int yCTcp::SetSendBuf (int nSendBuf)
     return 1;
 }
 
-/*ÉèÖÃ½ÓÊÕ»º³åÇøµÄ´óĞ¡
-  Èë²Î£º½ÓÊÕ»º³åÇøÖµ£¨µ¥Î»£º×Ö½Ú£©
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*è®¾ç½®æ¥æ”¶ç¼“å†²åŒºçš„å¤§å°
+  å…¥å‚ï¼šæ¥æ”¶ç¼“å†²åŒºå€¼ï¼ˆå•ä½ï¼šå­—èŠ‚ï¼‰
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::SetRecvBuf (int nRcvBuf)
 {
@@ -797,9 +797,9 @@ int yCTcp::SetRecvBuf (int nRcvBuf)
     return 1;
 }
 
-/*ÉèÖÃ´æ»î¼ì²â
-  Èë²Î£ºÎŞ
-  ³ö²Î£º1: ³É¹¦ ; 0: Ê§°Ü
+/*è®¾ç½®å­˜æ´»æ£€æµ‹
+  å…¥å‚ï¼šæ— 
+  å‡ºå‚ï¼š1: æˆåŠŸ ; 0: å¤±è´¥
 */
 int yCTcp::SetKeepalive ()
 {

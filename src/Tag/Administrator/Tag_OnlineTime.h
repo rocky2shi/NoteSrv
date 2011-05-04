@@ -9,7 +9,7 @@ namespace TAG_ONLINETIME_SPACE
 
 
 
-// ÏÔÊ¾ÏµÍ³ÔÚÏßÊ±³¤µÈ
+// æ˜¾ç¤ºç³»ç»Ÿåœ¨çº¿æ—¶é•¿ç­‰
 class Tag_OnlineTime : public Tag
 {
 protected:

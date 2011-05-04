@@ -9,26 +9,26 @@ namespace SESSION_SPACE
 
 
 
-// ÈÏÖ¤¡¢»á»°
+// è®¤è¯ã€ä¼šè¯
 class Session
 {
-    // »º´æSessionĞÅÏ¢
+    // ç¼“å­˜Sessionä¿¡æ¯
     class Cache
     {
     public:
         Cache();
         ~Cache();
 
-        // È¡id¶ÔÓ¦µÄSessionĞÅÏ¢
+        // å–idå¯¹åº”çš„Sessionä¿¡æ¯
         Session *Get(const string &id);
 
-        // È¡¼ÇÂ¼ĞÂSessionĞÅÏ¢
+        // å–è®°å½•æ–°Sessionä¿¡æ¯
         void Set(const string &id, Request * request);
 
-        // ´Ó»º´æÖĞÈ¥³ıSessionĞÅÏ¢
+        // ä»ç¼“å­˜ä¸­å»é™¤Sessionä¿¡æ¯
         void Del(const string &id);
 
-        // ÇåÀíÎŞĞ§£¨¹ıÆÚ£©Session£»£¨¶¨Ê±µ÷ÓÃ£©
+        // æ¸…ç†æ— æ•ˆï¼ˆè¿‡æœŸï¼‰Sessionï¼›ï¼ˆå®šæ—¶è°ƒç”¨ï¼‰
         void Clear();
 
     private:
@@ -40,60 +40,60 @@ class Session
 public:
     ~Session();
 
-    // Àà³õÊ¼»¯£¨³ÌĞòÆô¶¯Ê±µÄ³õÊ¼»¯£©
+    // ç±»åˆå§‹åŒ–ï¼ˆç¨‹åºå¯åŠ¨æ—¶çš„åˆå§‹åŒ–ï¼‰
     static int init();
 
-    // ÓÉsession idÈ¡session¶ÔÏó
+    // ç”±session idå–sessionå¯¹è±¡
     static Session *Get(const Request *request);
     static Session *Get(const string &id);
 
-    // ÉèÖÃsession»º´æ
+    // è®¾ç½®sessionç¼“å­˜
     static void Set(const string &id, Request * request);
 
-    // ÒÑµÇÂ¼£¨ÈÏÖ¤£©·µ»Øtrue
+    // å·²ç™»å½•ï¼ˆè®¤è¯ï¼‰è¿”å›true
     bool CheckLogin(Request * request);
 
-    // ¼ì²é»á»°ÓĞĞ§ĞÔ£¬ÓĞĞ§·µ»Øtrue
+    // æ£€æŸ¥ä¼šè¯æœ‰æ•ˆæ€§ï¼Œæœ‰æ•ˆè¿”å›true
     bool isValid() const;
 
-    // È¡ÓÃ»§Ãû
+    // å–ç”¨æˆ·å
     const string GetUser() const;
 
-    // È¡µÇÂ¼ip
+    // å–ç™»å½•ip
     const string GetIp() const;
 
-    // È¡×î½ü»îÔ¾Ê±¼ä
+    // å–æœ€è¿‘æ´»è·ƒæ—¶é—´
     long GetActiveTime() const;
 
-    // È¡µÇÂ¼Ê±¼ä
+    // å–ç™»å½•æ—¶é—´
     long GetLoginTime() const;
 
-    // Ê¹µ±Ç°»á»°Ê§Ğ§£¨±ÈÈçÓ¦ÓÃÓÚÍË³öµÇÂ¼Ê±£©
+    // ä½¿å½“å‰ä¼šè¯å¤±æ•ˆï¼ˆæ¯”å¦‚åº”ç”¨äºé€€å‡ºç™»å½•æ—¶ï¼‰
     void SetInvalid();
 
 
 private:
     Session(Request * request);
 
-    // »º´æµ¥ÀıÉèÖÃ
+    // ç¼“å­˜å•ä¾‹è®¾ç½®
     inline static Cache *instance(Cache *cache=NULL)
     {
         static Cache *obj = (Cache *)(Environment::instance()->ClassInit("Session::Cache", cache));
         return obj;
     }
 
-    // ¶¨Ê±ÇåÀí
+    // å®šæ—¶æ¸…ç†
     static void Clear(void *);
 
 
 private:
-    static const int KEEPALIVE_MAX = 1800; // 7200Ãë£¨2Ğ¡Ê±£©[XXX]
-    Request * m_request;    // ¿Í»§¶ËÇëÇóĞÅÏ¢£¨Íâ²¿ÒÑ¾­½âÎö£©
-    bool m_valid;           // SessionÊÇ·ñÓĞĞ§
+    static const int KEEPALIVE_MAX = 1800; // 7200ç§’ï¼ˆ2å°æ—¶ï¼‰[XXX]
+    Request * m_request;    // å®¢æˆ·ç«¯è¯·æ±‚ä¿¡æ¯ï¼ˆå¤–éƒ¨å·²ç»è§£æï¼‰
+    bool m_valid;           // Sessionæ˜¯å¦æœ‰æ•ˆ
     string m_username;
-    string m_LoginIp;       // µÇÂ¼Ê±µÄip
-    long m_LoginTime;       // µÇÂ¼Ê±¼ä£¨Ê±¼äµã£¬ÒÔÃë¼Æ£©
-    long m_ActiveTime;      // ×î½ü»îÔ¾Ê±¼ä£¨Ê±¼äµã£¬ÒÔÃë¼Æ£©
+    string m_LoginIp;       // ç™»å½•æ—¶çš„ip
+    long m_LoginTime;       // ç™»å½•æ—¶é—´ï¼ˆæ—¶é—´ç‚¹ï¼Œä»¥ç§’è®¡ï¼‰
+    long m_ActiveTime;      // æœ€è¿‘æ´»è·ƒæ—¶é—´ï¼ˆæ—¶é—´ç‚¹ï¼Œä»¥ç§’è®¡ï¼‰
 };
 
 

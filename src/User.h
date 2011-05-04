@@ -10,24 +10,24 @@ namespace USER_SPACE
 
 
 
-// Õë¶Ôµ¥¸öÓÃ»§
+// é’ˆå¯¹å•ä¸ªç”¨æˆ·
 class User
 {
-    // »º´æÓÃ»§ĞÅÏ¢
+    // ç¼“å­˜ç”¨æˆ·ä¿¡æ¯
     class Cache
     {
     public:
         Cache();
         ~Cache();
 
-        // È¡ÓÃ»§Ãû¶ÔÓ¦µÄÓÃ»§ĞÅÏ¢
+        // å–ç”¨æˆ·åå¯¹åº”çš„ç”¨æˆ·ä¿¡æ¯
         User *Get(const string &username);
 
-        // ´Ó»º´æÖĞÈ¥³ıÓÃ»§ĞÅÏ¢
+        // ä»ç¼“å­˜ä¸­å»é™¤ç”¨æˆ·ä¿¡æ¯
         void Del(const string &username);
 
     private:
-        // ¼ÓÔØÓÃ»§ĞÅÏ¢£¨´ÓÎÄ¼ş£©
+        // åŠ è½½ç”¨æˆ·ä¿¡æ¯ï¼ˆä»æ–‡ä»¶ï¼‰
         User *Load(const string &username);
 
     private:
@@ -39,81 +39,81 @@ class User
 public:
     ~User();
 
-    // Àà³õÊ¼»¯£¨³ÌĞòÆô¶¯Ê±µÄ³õÊ¼»¯£©
+    // ç±»åˆå§‹åŒ–ï¼ˆç¨‹åºå¯åŠ¨æ—¶çš„åˆå§‹åŒ–ï¼‰
     static int init();
 
-    // È¡ÓÃ»§Ãû¶ÔÓ¦µÄÓÃ»§¶ÔÏó
+    // å–ç”¨æˆ·åå¯¹åº”çš„ç”¨æˆ·å¯¹è±¡
     static User *Get(const string &username);
 
-    // ´´½¨ÓÃ»§£¨³É¹¦£º·µ»ØÖ¸ÏòÓÃ»§¶ÔÏóÖ¸Õë£¬Ê§°Ü·µ»ØNULL£©
+    // åˆ›å»ºç”¨æˆ·ï¼ˆæˆåŠŸï¼šè¿”å›æŒ‡å‘ç”¨æˆ·å¯¹è±¡æŒ‡é’ˆï¼Œå¤±è´¥è¿”å›NULLï¼‰
     static User *Create(const string &username);
 
-    // µ±Ç°ÓÃ»§Ä¿Â¼
+    // å½“å‰ç”¨æˆ·ç›®å½•
     const string UserDir() const;
 
-    // È¡ÓÃ»§Êı¾İÂ·¾¶
+    // å–ç”¨æˆ·æ•°æ®è·¯å¾„
     const string DataDir() const;
 
-    // È¡¸½¼şÊı¾İÂ·¾¶
+    // å–é™„ä»¶æ•°æ®è·¯å¾„
     const string AttachDir() const;
 
-    // È¡»º´æÄ¿Â¼
+    // å–ç¼“å­˜ç›®å½•
     const string CacheDir() const;
 
-    // È¡ÓÃ»§ÁÙÊ±Ä¿Â¼
+    // å–ç”¨æˆ·ä¸´æ—¶ç›®å½•
     const string TmpDir() const;
 
-    // È¡´æ·Å²Ëµ¥Ïà¹ØĞÅÏ¢µÄÄ¿Â¼
+    // å–å­˜æ”¾èœå•ç›¸å…³ä¿¡æ¯çš„ç›®å½•
     const string MenuDir() const;
 
-    // ÊÇÓĞĞ§µÄÓÃ»§·µ»Øtrue;
+    // æ˜¯æœ‰æ•ˆçš„ç”¨æˆ·è¿”å›true;
     bool isValid() const;
 
-    // È¡ÓÃ»§ĞÅÏ¢£¨ÓÉ×Ö¶ÎÖ¸¶¨£©
+    // å–ç”¨æˆ·ä¿¡æ¯ï¼ˆç”±å­—æ®µæŒ‡å®šï¼‰
     const string GetInfo(const string &section, const string &field) const;
-    // È¡ÓÃ»§ĞÅÏ¢£¨sectionÄ¬ÈÏÎª"userinfo"£©
+    // å–ç”¨æˆ·ä¿¡æ¯ï¼ˆsectioné»˜è®¤ä¸º"userinfo"ï¼‰
     const string GetInfo(const string &field) const;
 
 
-    // ÉèÖÃÓÃ»§ĞÅÏ¢£¨ÓÉ×Ö¶ÎÖ¸¶¨£©
+    // è®¾ç½®ç”¨æˆ·ä¿¡æ¯ï¼ˆç”±å­—æ®µæŒ‡å®šï¼‰
     int SetInfo(const string &field, const string &value);
     int SetInfo(const string &section, const string &field, const string &value);
 
-    // ±£´æ
+    // ä¿å­˜
     int Save();
 
-    // ĞèÒªÍ¬²½»º´æ
+    // éœ€è¦åŒæ­¥ç¼“å­˜
     void Syn();
 
-    // ·µ»ØËø£¨×¢Òâ£¬ÊÇÒıÓÃ£©£¨Ó¦ÅäºÏUNIQUE_LOCKºêµÈÀ´Ê¹ÓÃ£©
+    // è¿”å›é”ï¼ˆæ³¨æ„ï¼Œæ˜¯å¼•ç”¨ï¼‰ï¼ˆåº”é…åˆUNIQUE_LOCKå®ç­‰æ¥ä½¿ç”¨ï¼‰
     Lock &GetLock();
 
 private:
-    // Ò»°ãĞÔÊ¹ÓÃµÄ¹¹Ôìº¯Êı
+    // ä¸€èˆ¬æ€§ä½¿ç”¨çš„æ„é€ å‡½æ•°
     User(const string &username);
-    // Ö»ÔÚ×¢²áĞÂÓÃ»§Ê±ÓÃµÄ¹¹Ôìº¯Êı
+    // åªåœ¨æ³¨å†Œæ–°ç”¨æˆ·æ—¶ç”¨çš„æ„é€ å‡½æ•°
     User(const string &username, int);
 
-    // »º´æµ¥ÀıÉèÖÃ
+    // ç¼“å­˜å•ä¾‹è®¾ç½®
     inline static Cache *instance(Cache *cache=NULL)
     {
         static Cache *obj = (Cache *)(Environment::instance()->ClassInit("User::Cache", cache));
         return obj;
     }
 
-    // ³õÊ¼»¯ÓÃ»§¿Õ¼ä£¨×¢²áÊ±ÓÃ£©
+    // åˆå§‹åŒ–ç”¨æˆ·ç©ºé—´ï¼ˆæ³¨å†Œæ—¶ç”¨ï¼‰
     int Init();
 
-    // ÓÃ»§Ö÷ÅäÖÃÎÄ¼ş£¨¶à´¦Ê¹ÓÃ£¬ËùÒÔ°ü·âµ½Ò»º¯ÊıÖĞ£©
+    // ç”¨æˆ·ä¸»é…ç½®æ–‡ä»¶ï¼ˆå¤šå¤„ä½¿ç”¨ï¼Œæ‰€ä»¥åŒ…å°åˆ°ä¸€å‡½æ•°ä¸­ï¼‰
     const string GetCfgFile() const;
 
 
 
 private:
-    const string m_username;    // ÓÃ»§Ãû
-    Ini m_mycfg;     // ÓÃ»§Ö÷ÅäÖÃÎÄ¼ş
-    bool m_valid;    // ÓÃ»§ÓĞĞ§£¨±ÈÈçÎ´³¬Ê±µÈ£©
-    Lock m_lock;     // µ±ÓĞĞŞ¸ÄÓÃ»§ĞÅÏ¢£¬ÈçµÇÂ¼Ê±µÈĞè¼ÓËø
+    const string m_username;    // ç”¨æˆ·å
+    Ini m_mycfg;     // ç”¨æˆ·ä¸»é…ç½®æ–‡ä»¶
+    bool m_valid;    // ç”¨æˆ·æœ‰æ•ˆï¼ˆæ¯”å¦‚æœªè¶…æ—¶ç­‰ï¼‰
+    Lock m_lock;     // å½“æœ‰ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯ï¼Œå¦‚ç™»å½•æ—¶ç­‰éœ€åŠ é”
 };
 
 

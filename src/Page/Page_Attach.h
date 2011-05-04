@@ -8,14 +8,14 @@ namespace PAGE_ATTACH_SPACE
 
 
 
-// 附件列表
+// 闄勪欢鍒楄〃
 class Page_Attach : public Page
 {
 protected:
     virtual int Deal();
     virtual int OutBody();
 
-    // 上传附件
+    // 涓婁紶闄勪欢
     int Upload();
 
 public:

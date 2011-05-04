@@ -12,32 +12,32 @@ namespace PAGE_DOWNLOAD_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "download";
 
 
 
 Page_Download::Page_Download()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Download::~Page_Download()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Download::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Download::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Download;
 }
 
@@ -48,13 +48,13 @@ Page *Page_Download::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
-// Êä³öhttpĞ­ÒéÍ·²¿
+// è¾“å‡ºhttpåè®®å¤´éƒ¨
 int Page_Download::OutHead()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     Connect * const connect = m_request->GetConnect();
     string filename = m_request->GetField("file");
@@ -62,7 +62,7 @@ int Page_Download::OutHead()
 
 
     /*
-     * ´ò¿ªÓÃ»§ÎÄ¼ş£¬Èç£º
+     * æ‰“å¼€ç”¨æˆ·æ–‡ä»¶ï¼Œå¦‚ï¼š
      *  http://192.168.1.100:17890/download?file=logo.gif
      */
     const string &username = m_request->GetCurrentUser();
@@ -76,16 +76,16 @@ int Page_Download::OutHead()
     {
         Page::OutHead();
 
-        const string str = HtmlAlert("Ã»ÓĞÎÄ¼ş: " + filename + "£¬¿ÉÄÜÎÄ¼şÒÑ±»É¾³ı¡£");
+        const string str = HtmlAlert("æ²¡æœ‰æ–‡ä»¶: " + filename + "ï¼Œå¯èƒ½æ–‡ä»¶å·²è¢«åˆ é™¤ã€‚");
         LOG_ERROR("Can't open file: [%s]", fullpath.c_str());
-        // ·¢ËÍµ½ä¯ÀÀÆ÷
+        // å‘é€åˆ°æµè§ˆå™¨
         connect->Send(str);
         return ERR;
     }
 
     const string &size = IntToString(m_file.Size());
 
-    // ÎÄ¼şÏÂÔØÍ·²¿¸ñÊ½
+    // æ–‡ä»¶ä¸‹è½½å¤´éƒ¨æ ¼å¼
     const string html = ""
                         "HTTP/1.1 200 OK\n"
                         "Accept-Ranges: bytes\n"
@@ -95,14 +95,14 @@ int Page_Download::OutHead()
                         "Content-Type: application/ms-excel\n"
                         "\n";
 
-    // ·¢ËÍ
+    // å‘é€
     return connect->Send(html) == html.length() ? OK : ERR;
 }
 
-// Êä³öÊı¾İÌå
+// è¾“å‡ºæ•°æ®ä½“
 int Page_Download::OutBody()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
@@ -118,7 +118,7 @@ int Page_Download::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Download, THIS_MODULE)
 
 }// end of PAGE_DOWNLOAD_SPACE

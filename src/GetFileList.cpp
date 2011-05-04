@@ -12,20 +12,20 @@ namespace GETFILELIST_SPACE
 
 GetFileList::GetFileList(const string &dir, int deep/*=0*/)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     ScanDir(dir, deep);
 }
 
 GetFileList::~GetFileList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
-// É¨ÃèÄ¿Â¼
+// æ‰«æç›®å½•
 void GetFileList::ScanDir(const string &dir, int deep)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     DIR *pDir;
     struct dirent *pDirent;
@@ -33,7 +33,7 @@ void GetFileList::ScanDir(const string &dir, int deep)
     pDir = opendir(dir.c_str());
     if( NULL == pDir )
     {
-        LOG_ERROR("²»ÄÜ´ò¿ªÄ¿Â¼[%s] ", dir.c_str());
+        LOG_ERROR("ä¸èƒ½æ‰“å¼€ç›®å½•[%s] ", dir.c_str());
         return;
     }
 
@@ -45,23 +45,23 @@ void GetFileList::ScanDir(const string &dir, int deep)
             continue;
         }
 
-        // È¡Ä¿Â¼ĞÅÏ¢
+        // å–ç›®å½•ä¿¡æ¯
         struct stat stDir;
         const string file = dir + pDirent->d_name;
         if( stat(file.c_str(), &stDir) == -1)
         {
-            LOG_DEBUG("È¡ÎÄ¼ş£¨Ä¿Â¼£©ĞÅÏ¢³ö´í£º[%s]", pDirent->d_name);
+            LOG_DEBUG("å–æ–‡ä»¶ï¼ˆç›®å½•ï¼‰ä¿¡æ¯å‡ºé”™ï¼š[%s]", pDirent->d_name);
             continue;
         }
 
         if( S_ISDIR(stDir.st_mode) )
         {
-            // Ä¿Â¼
+            // ç›®å½•
             m_SubDir[ file ] = NULL;
         }
         else
         {
-            // ÎÄ¼ş
+            // æ–‡ä»¶
             m_FileList.push_back(file);
         }
     }// end of while( (pDirent ...
@@ -71,7 +71,7 @@ void GetFileList::ScanDir(const string &dir, int deep)
 }
 
 
-// °´asciiÅÅĞòÎÄ¼şÃû
+// æŒ‰asciiæ’åºæ–‡ä»¶å
 void GetFileList::SortFilename()
 {
     class Comparer
@@ -83,8 +83,8 @@ void GetFileList::SortFilename()
         }
     };
 
-    //sort(m_FileList.begin(), m_FileList.end()); // ÉıĞòÅÅÁĞ
-    sort(m_FileList.begin(), m_FileList.end(), Comparer::doit); // ½µĞòÅÅÁĞ
+    //sort(m_FileList.begin(), m_FileList.end()); // å‡åºæ’åˆ—
+    sort(m_FileList.begin(), m_FileList.end(), Comparer::doit); // é™åºæ’åˆ—
 }
 
 

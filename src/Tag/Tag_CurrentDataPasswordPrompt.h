@@ -7,7 +7,7 @@ namespace TAG_CURRENTDATAPASSWORDPROMPT_SPACE
 
 
 
-// 当前数据密码提示
+// 褰撳墠鏁版嵁瀵嗙爜鎻愮ず
 class Tag_CurrentDataPasswordPrompt : public Tag
 {
 protected:

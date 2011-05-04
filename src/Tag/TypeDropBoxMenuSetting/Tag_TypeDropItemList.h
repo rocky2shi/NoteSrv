@@ -8,7 +8,7 @@ namespace TAG_TYPEDROPITEMLIST_SPACE
 
 
 
-// 类型选择下拉框菜单项列表
+// 绫诲瀷閫夋嫨涓嬫媺妗嗚彍鍗曢」鍒楄〃
 class Tag_TypeDropItemList : public Tag
 {
 protected:

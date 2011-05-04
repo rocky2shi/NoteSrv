@@ -9,7 +9,7 @@ namespace SUBMIT_REGISTERUSER_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "RegisterUser";
 
 
@@ -18,18 +18,18 @@ static const string THIS_MODULE = "RegisterUser";
 
 Submit_RegisterUser::Submit_RegisterUser()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_RegisterUser::Submit_RegisterUser(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_RegisterUser::~Submit_RegisterUser()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -37,15 +37,15 @@ Submit_RegisterUser::~Submit_RegisterUser()
 
 int Submit_RegisterUser::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_RegisterUser::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_RegisterUser;
 }
 
@@ -53,7 +53,7 @@ Submit *Submit_RegisterUser::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -69,19 +69,19 @@ int Submit_RegisterUser::Deal(Page *page)
     try
     {
         /*
-         * ¼òµ¥ÑéÖ¤ÊäÈëÊÇ·ñºÏ·¨
-         *   ¼ì²é ¡°\ / : * ? " < > | '¡±
+         * ç®€å•éªŒè¯è¾“å…¥æ˜¯å¦åˆæ³•
+         *   æ£€æŸ¥ â€œ\ / : * ? " < > | 'â€
          */
         if( username.find_first_of("\\/:*?\"<>|'") != -1 )
         {
             LOG_ERROR("Username error: [%s]", username.c_str());
-            msg = "ÓÃ»§Ãûº¬ÓĞ·Ç·¨×Ö·û£¡";
+            msg = "ç”¨æˆ·åå«æœ‰éæ³•å­—ç¬¦ï¼";
             throw 1;
         }
         if("" == username)
         {
             LOG_ERROR("Username can't empty.");
-            msg = "ÓÃ»§Ãû²»ÄÜÎª¿Õ£¡";
+            msg = "ç”¨æˆ·åä¸èƒ½ä¸ºç©ºï¼";
             throw 2;
         }
 
@@ -90,37 +90,37 @@ int Submit_RegisterUser::Deal(Page *page)
         if("" != password && password != password1)
         {
             LOG_ERROR("Password no match on twice input.");
-            msg = "Á½´ÎÊäÈëµÄÃÜÂë²»Ò»Ñù£¡";
+            msg = "ä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ä¸€æ ·ï¼";
             throw 4;
         }
 
-        // ÊÇ·ñÎªÒÑ´æÔÚµÄÓÃ»§
+        // æ˜¯å¦ä¸ºå·²å­˜åœ¨çš„ç”¨æˆ·
         if( User::Get(username)->isValid() )
         {
             LOG_ERROR("Username exist: [%s]", username.c_str());
-            msg = "ÓÃ»§[" + username + "]ÒÑ±»×¢²á£¡";
+            msg = "ç”¨æˆ·[" + username + "]å·²è¢«æ³¨å†Œï¼";
             throw 3;
         }
 
         /*
-         * ³õÊ¼»¯£¬´´½¨ÓÃ»§±ØĞèÄ¿Â¼µÈ£»
+         * åˆå§‹åŒ–ï¼Œåˆ›å»ºç”¨æˆ·å¿…éœ€ç›®å½•ç­‰ï¼›
          */
         User *user = User::Create(username);
         if(NULL == user)
         {
             LOG_ERROR("Create user error: [%s]", username.c_str());
-            msg = "ÄÚ²¿´íÎó[´úÂë:SR5]";
+            msg = "å†…éƒ¨é”™è¯¯[ä»£ç :SR5]";
             throw 5;
         }
 
-        // µ±ĞèÒªĞŞ¸ÄÓÃ»§ĞÅÏ¢Ê±£¬Ğè¼ÓËø£»
+        // å½“éœ€è¦ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯æ—¶ï¼Œéœ€åŠ é”ï¼›
         UNIQUE_LOCK( user->GetLock() );
 
         /*
-         * ÉèÖÃÓÃ»§ĞÅÏ¢£¬ËµÃ÷£º
+         * è®¾ç½®ç”¨æˆ·ä¿¡æ¯ï¼Œè¯´æ˜ï¼š
          *
-         *  1. ÃÜÂë¼ÓÃÜ´æ·Å£¬²»¿ÉÄæ£¨¼´¶ªÊ§ºó²»¿ÉÕÒ»Ø£©
-         *  2. ´ğ°¸Ò²±»¼ÓÃÜ´æ·Å£¬ÒÔ
+         *  1. å¯†ç åŠ å¯†å­˜æ”¾ï¼Œä¸å¯é€†ï¼ˆå³ä¸¢å¤±åä¸å¯æ‰¾å›ï¼‰
+         *  2. ç­”æ¡ˆä¹Ÿè¢«åŠ å¯†å­˜æ”¾ï¼Œä»¥
          */
         const string &question = request->GetField("question");
         const string &answer = request->GetField("answer");
@@ -137,11 +137,11 @@ int Submit_RegisterUser::Deal(Page *page)
         if( user->Save() < 0 )
         {
             LOG_ERROR("Save user cfg error: [%s]", username.c_str());
-            msg = "ÄÚ²¿´íÎó[´úÂë:SR6]";
+            msg = "å†…éƒ¨é”™è¯¯[ä»£ç :SR6]";
             throw 6;
         }
 
-        msg = "×¢²á³É¹¦";
+        msg = "æ³¨å†ŒæˆåŠŸ";
     }
     catch(int)
     {

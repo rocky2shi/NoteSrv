@@ -12,32 +12,32 @@ namespace PAGE_ERROR_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "error";
 
 
 
 Page_Error::Page_Error()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Error::~Page_Error()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Error::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Error::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Error;
 }
 
@@ -48,13 +48,13 @@ Page *Page_Error::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 int Page_Error::Deal()
 {
     assert(NULL != m_request);
 
-    // ³ö´íÊ±Ö±½Ó×ªµÇÂ¼Ò³
+    // å‡ºé”™æ—¶ç›´æ¥è½¬ç™»å½•é¡µ
     ChangeTo("login");
     return OK;
 }
@@ -64,7 +64,7 @@ int Page_Error::Deal()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Error, THIS_MODULE)
 
 }// end of PAGE_ERROR_SPACE

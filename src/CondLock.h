@@ -10,22 +10,22 @@ namespace CONDLOCK_SPACE
 
 
 
-// Ìõ¼şËø
+// æ¡ä»¶é”
 class CondLock
 {
 public:
     //
     int Init();
 
-    // Ëø£¨µÈ´ı£©
+    // é”ï¼ˆç­‰å¾…ï¼‰
     int Wait();
 
-    // ½âËø£¨»½ĞÑµÈ´ı£¬¹ã²¥ĞÎÊ½£©
+    // è§£é”ï¼ˆå”¤é†’ç­‰å¾…ï¼Œå¹¿æ’­å½¢å¼ï¼‰
     int Wake();
 
 
 private:
-    pthread_cond_t m_cond;      // ÕâÀïÔİÖ»Ö§³ÖlinuxºÍÊµÏÖ£¬µÈ¸Ä¡£[XXX]
+    pthread_cond_t m_cond;      // è¿™é‡Œæš‚åªæ”¯æŒlinuxå’Œå®ç°ï¼Œç­‰æ”¹ã€‚[XXX]
     pthread_mutex_t m_mutex;
 };
 

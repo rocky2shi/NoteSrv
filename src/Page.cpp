@@ -19,12 +19,12 @@ Page::Page() : m_request(NULL),
                m_pack(NULL),
                m_PageCfg(NULL)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 Page::~Page()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     if( m_bParent )
     {
@@ -56,45 +56,45 @@ Page::~Page()
 
 
 /*
- * ¹¦ÄÜ£º×¢²á×ÓÀà¶ÔÏóµ½¹¤³§
- * ±àĞ´£ºRocky 2009-09-07 17:09:46
- * ·µ»Ø£ºÕıÈ··µ»Ø>=0Öµ£¬³ö´í·µ<0Öµ£»
- * ×¢Òâ£º´Ëº¯ÊıÔÚ½øÈëmain()º¯ÊıÖ®Ç°¾ÍÓÉ¹¹Ôìº¯Êıµ÷ÓÃÁË
+ * åŠŸèƒ½ï¼šæ³¨å†Œå­ç±»å¯¹è±¡åˆ°å·¥å‚
+ * ç¼–å†™ï¼šRocky 2009-09-07 17:09:46
+ * è¿”å›ï¼šæ­£ç¡®è¿”å›>=0å€¼ï¼Œå‡ºé”™è¿”<0å€¼ï¼›
+ * æ³¨æ„ï¼šæ­¤å‡½æ•°åœ¨è¿›å…¥main()å‡½æ•°ä¹‹å‰å°±ç”±æ„é€ å‡½æ•°è°ƒç”¨äº†
  */
 int Page::Register(const string &page, Page *sub)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
-    assert(NULL == m_Factory[ page ]);   // ÕâÊ±µÄÎ»ÖÃÓ¦Îª¿Õ
-    m_Factory[ page ] = sub;  // ¼ÓÈë¶ÓÁĞ
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
+    assert(NULL == m_Factory[ page ]);   // è¿™æ—¶çš„ä½ç½®åº”ä¸ºç©º
+    m_Factory[ page ] = sub;  // åŠ å…¥é˜Ÿåˆ—
     sub->m_id = page;
-    sub->m_bParent = true;    // ËùÓĞĞÂ×¢²áµÄ¶ÔÏó¶¼×öÎª¸¸¶ÔÏó
+    sub->m_bParent = true;    // æ‰€æœ‰æ–°æ³¨å†Œçš„å¯¹è±¡éƒ½åšä¸ºçˆ¶å¯¹è±¡
     LOG_DEBUG("Register CGI deal [%s:%p] OK.", page.c_str(), sub);
     return OK;
 }
 
 
 /*
- * ¹¦ÄÜ£º×¢Ïú
- * ±àĞ´£ºRocky 2009-09-07 17:09:46
- * ·µ»Ø£ºÕıÈ··µ»Ø>=0Öµ£¬³ö´í·µ<0Öµ£»
- * ×¢Òâ£º´Ëº¯ÊıÔÚ½øÈëmain()º¯ÊıÖ®Ç°¾ÍÓÉ¹¹Ôìº¯Êıµ÷ÓÃÁË
+ * åŠŸèƒ½ï¼šæ³¨é”€
+ * ç¼–å†™ï¼šRocky 2009-09-07 17:09:46
+ * è¿”å›ï¼šæ­£ç¡®è¿”å›>=0å€¼ï¼Œå‡ºé”™è¿”<0å€¼ï¼›
+ * æ³¨æ„ï¼šæ­¤å‡½æ•°åœ¨è¿›å…¥main()å‡½æ•°ä¹‹å‰å°±ç”±æ„é€ å‡½æ•°è°ƒç”¨äº†
  */
 int Page::UnRegister(const string &page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
     m_Factory.erase(page);
-    LOG_INFO("×¢ÏúÒ³Ãæ[%s]´¦Àí¶ÔÏó", page.c_str());
+    LOG_INFO("æ³¨é”€é¡µé¢[%s]å¤„ç†å¯¹è±¡", page.c_str());
     return OK;
 }
 
 /*
- * ¹¦ÄÜ£º¾²Ì¬³õÊ¼»¯ÉèÖÃ
- * ±àĞ´£ºRocky 2009-09-23 14:14:55
- * ·µ»Ø£ºÕıÈ··µ»Ø>=0Öµ£¬³ö´í·µ<0Öµ£»
+ * åŠŸèƒ½ï¼šé™æ€åˆå§‹åŒ–è®¾ç½®
+ * ç¼–å†™ï¼šRocky 2009-09-23 14:14:55
+ * è¿”å›ï¼šæ­£ç¡®è¿”å›>=0å€¼ï¼Œå‡ºé”™è¿”<0å€¼ï¼›
  */
 int Page::init()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
 
     int ret;
@@ -109,44 +109,44 @@ int Page::init()
     }
 
 
-    // ¶¯Ì¬¿âÎÄ¼şÄ¿Â¼
+    // åŠ¨æ€åº“æ–‡ä»¶ç›®å½•
     const string &path = GlobalConfig::instance()->CgiDir();
 
-    // È¡³öÄ¿Â¼ÏÂËùÓĞ¶¯Ì¬¿â
+    // å–å‡ºç›®å½•ä¸‹æ‰€æœ‰åŠ¨æ€åº“
     GetFileList dll( path );
 
     GetFileList::file_iterator file(dll);
 
-    // ×¢²á´¦ÀíÒ³Ãæµ½¶ÓÁĞ
+    // æ³¨å†Œå¤„ç†é¡µé¢åˆ°é˜Ÿåˆ—
     while( file.next() )
     {
         DllLoad::Ptr dll;
 
-        // ´ò¿ª¶¯Ì¬¿â
+        // æ‰“å¼€åŠ¨æ€åº“
         if( dll->Open(file.name()) < 0 )
         {
-            LOG_ERROR("¼ÓÔØ¶¯Ì¬¿â³ö´í£º[%s]", file.name());
+            LOG_ERROR("åŠ è½½åŠ¨æ€åº“å‡ºé”™ï¼š[%s]", file.name());
             continue;
         }
 
         typedef void (*FuncPtr)(void *);
 
-        // È¡Ö´ĞĞ¶ÔÏó
+        // å–æ‰§è¡Œå¯¹è±¡
         const string sym = "DllEnter";
         FuncPtr pSym = (FuncPtr)dll->GetSymbol(sym);
         if(NULL == pSym)
         {
-            LOG_ERROR("È¡Ö´ĞĞ¶ÔÏó³ö´í£º[%s]", sym.c_str());
+            LOG_ERROR("å–æ‰§è¡Œå¯¹è±¡å‡ºé”™ï¼š[%s]", sym.c_str());
             continue;
         }
 
-        // Ö´ĞĞ£¨´«Èëµ±Ç°½ø³Ì»·¾³£¬¼´Ö÷Ä£¿éµÄĞÅÏ¢£©
+        // æ‰§è¡Œï¼ˆä¼ å…¥å½“å‰è¿›ç¨‹ç¯å¢ƒï¼Œå³ä¸»æ¨¡å—çš„ä¿¡æ¯ï¼‰
         (*pSym)( Environment::instance() );
 
         LOG_INFO("Loaded: [%s]", file.name());
     }
 
-    // ³õÊ¼»¯
+    // åˆå§‹åŒ–
     Factory::iterator it;
 
     for(it = Page::instance()->m_Factory.begin(); Page::instance()->m_Factory.end()!= it; it++)
@@ -168,17 +168,17 @@ int Page::init()
 }
 
 /*
- * ¹¦ÄÜ£º¸ú¾İ´«ÈëµÄid´Ó¹¤³§ÖĞ²úÉúÒ»¸ö´¦Àí¶ÔÏó£¨µ÷ÓÃ¾ßÌåµÄ×ÓÀà¶ÔÏó´´½¨º¯ÊıÀ´ÊµÏÖ£©
- * ±àĞ´£ºRocky 2009-09-23 14:17:54
- * ·µ»Ø£ºÕıÈ··µ»Ø>=0Öµ£¬³ö´í·µ<0Öµ£»
+ * åŠŸèƒ½ï¼šè·Ÿæ®ä¼ å…¥çš„idä»å·¥å‚ä¸­äº§ç”Ÿä¸€ä¸ªå¤„ç†å¯¹è±¡ï¼ˆè°ƒç”¨å…·ä½“çš„å­ç±»å¯¹è±¡åˆ›å»ºå‡½æ•°æ¥å®ç°ï¼‰
+ * ç¼–å†™ï¼šRocky 2009-09-23 14:17:54
+ * è¿”å›ï¼šæ­£ç¡®è¿”å›>=0å€¼ï¼Œå‡ºé”™è¿”<0å€¼ï¼›
  */
 Page *Page::New(const string &page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     Page *parent = instance();
 
-    /* È¡id¶ÔÓ¦µÄ¶ÔÏó£¬È»ÔÙÊ¹ÓÃ´Ë¶ÔÏóµÄDoNew()À´´´½¨ÕâÖÖÀàµÄ¶ÔÏó
+    /* å–idå¯¹åº”çš„å¯¹è±¡ï¼Œç„¶å†ä½¿ç”¨æ­¤å¯¹è±¡çš„DoNew()æ¥åˆ›å»ºè¿™ç§ç±»çš„å¯¹è±¡
      */
     Factory::iterator it = parent->m_Factory.find( page );
     if(parent->m_Factory.end() == it)
@@ -187,15 +187,15 @@ Page *Page::New(const string &page)
         return NULL;
     }
     Page * const obj = it->second;
-    // ´´½¨×ÓÀà¶ÔÏó
+    // åˆ›å»ºå­ç±»å¯¹è±¡
     Page *sub = obj->DoNew();
     if(NULL == sub)
     {
-        LOG_ERROR("·ÖÅäÒ³Ãæ´¦Àí¶ÔÏóÄÚ´æ³ö´í");
+        LOG_ERROR("åˆ†é…é¡µé¢å¤„ç†å¯¹è±¡å†…å­˜å‡ºé”™");
         return NULL;
     }
     obj->m_VisitCounter->Inc();
-    sub->m_TagList = obj->m_TagList;  // Ö¸ÏòÏàÍ¬µÄ±ê¼ÇÁĞ±í£¨²»ÊÇ¸´ÖÆ£©
+    sub->m_TagList = obj->m_TagList;  // æŒ‡å‘ç›¸åŒçš„æ ‡è®°åˆ—è¡¨ï¼ˆä¸æ˜¯å¤åˆ¶ï¼‰
     sub->m_VisitCounter = obj->m_VisitCounter;
     sub->m_id = obj->m_id;
     return sub;
@@ -203,17 +203,17 @@ Page *Page::New(const string &page)
 
 
 /*
- * ¹¦ÄÜ£º¸÷×ÓÀà¸ºÔğÊµÏÖ×ÔÒÑ³õÊ¼»¯²Ù×÷£¨×ÓÀàÓ¦ÖØÊµÏÖ´Ë½Ó¿Ú£©
- * ±àĞ´£ºRocky 2010-04-09 15:15:58
- * ·µ»Ø£ºÕıÈ··µ»Ø>=0Öµ£¬³ö´í·µ<0Öµ£»
+ * åŠŸèƒ½ï¼šå„å­ç±»è´Ÿè´£å®ç°è‡ªå·²åˆå§‹åŒ–æ“ä½œï¼ˆå­ç±»åº”é‡å®ç°æ­¤æ¥å£ï¼‰
+ * ç¼–å†™ï¼šRocky 2010-04-09 15:15:58
+ * è¿”å›ï¼šæ­£ç¡®è¿”å›>=0å€¼ï¼Œå‡ºé”™è¿”<0å€¼ï¼›
  */
 int Page::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     int ret;
 
-    // ½âÎöÇëÇó
+    // è§£æè¯·æ±‚
     ret = Parse();
     if(ret < 0)
     {
@@ -221,14 +221,14 @@ int Page::DoInit()
         return ERR;
     }
 
-    // È¡Ò³Ãæ¼ÆÊıÆ÷´æ·ÅÎÄ¼ş
+    // å–é¡µé¢è®¡æ•°å™¨å­˜æ”¾æ–‡ä»¶
     const string &cfg = GlobalConfig::instance()->CounterDir() + "page.txt";
 
-    // ÏÈ¶Á³öÔ­Êı¾İ
+    // å…ˆè¯»å‡ºåŸæ•°æ®
     Ini counter( cfg );
     unsigned int count = atol( counter.Get("page", m_id).c_str() );
 
-    // ÉèÖÃÒ³Ãæ¼ÆÊıÆ÷
+    // è®¾ç½®é¡µé¢è®¡æ•°å™¨
     m_VisitCounter = new Counter(m_id, "page", count);
 
     if(NULL == m_VisitCounter)
@@ -241,14 +241,14 @@ int Page::DoInit()
 }
 
 /*
- * ¹¦ÄÜ£º¸÷×ÓÀà¸ºÔğÊµÏÖ×ÔÒÑµÄ¶ÔÏó´´½¨Æ÷£¨×ÓÀàÓ¦ÖØÊµÏÖ´Ë½Ó¿Ú£©
- * ±àĞ´£ºRocky 2010-04-09 15:16:12
- * ·µ»Ø£ºÕıÈ··µ»Ø>=0Öµ£¬³ö´í·µ<0Öµ£»
+ * åŠŸèƒ½ï¼šå„å­ç±»è´Ÿè´£å®ç°è‡ªå·²çš„å¯¹è±¡åˆ›å»ºå™¨ï¼ˆå­ç±»åº”é‡å®ç°æ­¤æ¥å£ï¼‰
+ * ç¼–å†™ï¼šRocky 2010-04-09 15:16:12
+ * è¿”å›ï¼šæ­£ç¡®è¿”å›>=0å€¼ï¼Œå‡ºé”™è¿”<0å€¼ï¼›
  */
 Page *Page::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
-    LOG_ERROR("¹¦ÄÜÎ´ÊµÏÖ");
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
+    LOG_ERROR("åŠŸèƒ½æœªå®ç°");
     return NULL;
 }
 
@@ -258,32 +258,32 @@ Page *Page::DoNew()
 
 
 /*
- * ========================== ÒÔÏÂÎªÒµÎñ´¦Àí´úÂë ==========================
+ * ========================== ä»¥ä¸‹ä¸ºä¸šåŠ¡å¤„ç†ä»£ç  ==========================
  */
 
 
 
-// ÉèÖÃÁ¬½Ó
+// è®¾ç½®è¿æ¥
 void Page::SetRequest(Request *request)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
     m_request = request;
 }
 
-// È¡³öÒ³Ãæµ±Ç°ËùÓÃµÄÇëÇó£¨Á¬½Ó£©
+// å–å‡ºé¡µé¢å½“å‰æ‰€ç”¨çš„è¯·æ±‚ï¼ˆè¿æ¥ï¼‰
 Request *Page::GetRequest()
 {
     return m_request;
 }
 
-// ½âÎöÒ³ÃæÄ£°å
+// è§£æé¡µé¢æ¨¡æ¿
 int Page::Parse()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     FileObj file;
 
-    // ÎÄ¼şÃû¿Õ£¬Ôò²»½âÎö£»
+    // æ–‡ä»¶åç©ºï¼Œåˆ™ä¸è§£æï¼›
     if("" == m_html)
     {
         LOG_DEBUG("no html file. [%s]", m_id.c_str());
@@ -303,14 +303,14 @@ int Page::Parse()
 
     if(NULL == buf)
     {
-        LOG_ERROR("·ÖÅäÄÚ´æ³ö´í");
+        LOG_ERROR("åˆ†é…å†…å­˜å‡ºé”™");
         return ERR;
     }
 
     ret = file.Read(buf, nFileSize);
     if(nFileSize != ret)
     {
-        LOG_ERROR("¶ÁÈ¡ÎÄ¼ş²»ÍêÕû£¬[%d/%d]", ret, nFileSize);
+        LOG_ERROR("è¯»å–æ–‡ä»¶ä¸å®Œæ•´ï¼Œ[%d/%d]", ret, nFileSize);
         return ERR;
     }
     buf[ret] = '\0';
@@ -319,7 +319,7 @@ int Page::Parse()
     m_TagList = new vector< Tag * >;
     if(NULL == m_TagList)
     {
-        LOG_ERROR("·ÖÅä±ê¼ÇÈİÆ÷ÄÚ´æ³ö´í");
+        LOG_ERROR("åˆ†é…æ ‡è®°å®¹å™¨å†…å­˜å‡ºé”™");
         return ERR;
     }
 
@@ -333,40 +333,40 @@ int Page::Parse()
     {
         char *left;
         char *right;
-        char *txt = pBuf;   // Õı³£ÎÄ±¾²¿·Ö
-        char *tag = NULL;     // ±ê¼Ç²¿·Ö
+        char *txt = pBuf;   // æ­£å¸¸æ–‡æœ¬éƒ¨åˆ†
+        char *tag = NULL;     // æ ‡è®°éƒ¨åˆ†
 
-        // ²éÕÒ±ê¼ÇÈç£º"<!--$.......$-->"
+        // æŸ¥æ‰¾æ ‡è®°å¦‚ï¼š"<!--$.......$-->"
         if( (left = strstr(pBuf, TAG_LEFT)) != NULL
             && (right = strstr(left, TAG_RIGHT)) != NULL
           )
         {
-            *left = '\0';   // È¥µô×ó±ßÀ¨ºÅ
-            *right = '\0';  // È¥µôÓÒ±ßÀ¨ºÅ
-            tag = left + (sizeof(TAG_LEFT) - 1);    // Ìø¹ı×ó±ßÀ¨ºÅ£¨Ö¸Ïò±ê¼Ç²¿·Ö£©
-            pBuf = right + (sizeof(TAG_RIGHT) - 1);    // Ìø¹ıÓÒ±ßÀ¨ºÅºó£¬Ö¸ÏòÏÂ¶ÎÎÄ±¾£»
+            *left = '\0';   // å»æ‰å·¦è¾¹æ‹¬å·
+            *right = '\0';  // å»æ‰å³è¾¹æ‹¬å·
+            tag = left + (sizeof(TAG_LEFT) - 1);    // è·³è¿‡å·¦è¾¹æ‹¬å·ï¼ˆæŒ‡å‘æ ‡è®°éƒ¨åˆ†ï¼‰
+            pBuf = right + (sizeof(TAG_RIGHT) - 1);    // è·³è¿‡å³è¾¹æ‹¬å·åï¼ŒæŒ‡å‘ä¸‹æ®µæ–‡æœ¬ï¼›
         }
         else
         {
-            pBuf = NULL;    // ×¼±¸½áÊø²Ù×÷
+            pBuf = NULL;    // å‡†å¤‡ç»“æŸæ“ä½œ
         }
 
         /*
-         * Ã¿¸ö¶ÎÎÄ¼ş£¨¼°±ê¼Ç£©£¬¶ÔÓ¦Ò»¸ö´¦Àí¶ÔÏó£»
+         * æ¯ä¸ªæ®µæ–‡ä»¶ï¼ˆåŠæ ‡è®°ï¼‰ï¼Œå¯¹åº”ä¸€ä¸ªå¤„ç†å¯¹è±¡ï¼›
          */
 
-        // Õı³£ÎÄ±¾
+        // æ­£å¸¸æ–‡æœ¬
         {
             Tag *objTxt;
             if( '\0' != *txt
-                && (objTxt = Tag::New("", "TXT")) != NULL // "TXT"¶ÔÓ¦ÎÄ¼ş´¦Àí¶ÔÏó
+                && (objTxt = Tag::New("", "TXT")) != NULL // "TXT"å¯¹åº”æ–‡ä»¶å¤„ç†å¯¹è±¡
               )
             {
-                // ÉèÖÃ±ê¼Ç£¬¼°ÀàĞÍÎªÎÄ±¾£»
+                // è®¾ç½®æ ‡è®°ï¼ŒåŠç±»å‹ä¸ºæ–‡æœ¬ï¼›
                 objTxt->Set(txt, Tag::TXT);
-                // ²åÈëÁĞ¶Ó
+                // æ’å…¥åˆ—é˜Ÿ
                 list.push_back(objTxt);
-                //LOG_DEBUG("²åÈë±ê¼Ç¶ÔÏó£º[%d][%s]", Tag::TXT, txt);
+                //LOG_DEBUG("æ’å…¥æ ‡è®°å¯¹è±¡ï¼š[%d][%s]", Tag::TXT, txt);
             }
             else
             {
@@ -374,18 +374,18 @@ int Page::Parse()
             }
         }
 
-        // ´¦Àí±ê¼Ç
+        // å¤„ç†æ ‡è®°
         if(NULL != tag && '\0' != tag)
         {
             /*
-             * ±ê¼Ç¸ñÊ½Èç£º
-             *      <!--$±ê¼Ç¼ÇºÅ$ÀàĞÍ$-->'
+             * æ ‡è®°æ ¼å¼å¦‚ï¼š
+             *      <!--$æ ‡è®°è®°å·$ç±»å‹$-->'
              *
-             *      µ±ÀàĞÍ¿ÕÊ±£¬±íÊ¾¸Ã±ê¼ÇÖ»´ÓÊôÓÚµ±Ç°Ò³Ãæ£¬·ñÔò¿ÉÄÜ
-             *      ÊÇÈ«¾ÖÓĞĞ§µÄ±ê¼Ç£»[2010-05-01]
+             *      å½“ç±»å‹ç©ºæ—¶ï¼Œè¡¨ç¤ºè¯¥æ ‡è®°åªä»å±äºå½“å‰é¡µé¢ï¼Œå¦åˆ™å¯èƒ½
+             *      æ˜¯å…¨å±€æœ‰æ•ˆçš„æ ‡è®°ï¼›[2010-05-01]
              */
 
-            // ·Ö¸î³öÃüÁîºÍÀàĞÍ×Ö¶Î
+            // åˆ†å‰²å‡ºå‘½ä»¤å’Œç±»å‹å­—æ®µ
             char *tmp;
             const char *cmd = tag;
             const char *type = NULL;
@@ -393,24 +393,24 @@ int Page::Parse()
             tmp = strchr(tag, '$');
             if(NULL != tmp)
             {
-                *tmp = '\0';        // Çåµô¡®$¡¯
-                type = tmp + 1;     // Ö¸ÏòÀàĞÍ
+                *tmp = '\0';        // æ¸…æ‰â€˜$â€™
+                type = tmp + 1;     // æŒ‡å‘ç±»å‹
             }
 
             if(NULL == type || '\0' == *type)
             {
-                // Ã»ÓĞÀàĞÍ×Ö¶ÎÔòÖ¸Ïòµ±Ç°Ò³Ãæid
+                // æ²¡æœ‰ç±»å‹å­—æ®µåˆ™æŒ‡å‘å½“å‰é¡µé¢id
                 type = m_id.c_str();
             }
 
             Tag *objTag = Tag::New(type, cmd);
             if( objTag != NULL )
             {
-                // ÉèÖÃ±ê¼Ç£¬¼°ÀàĞÍÎª±ê¼Ç£»
+                // è®¾ç½®æ ‡è®°ï¼ŒåŠç±»å‹ä¸ºæ ‡è®°ï¼›
                 objTag->Set(cmd, Tag::TAG);
-                // ²åÈëÁĞ¶Ó
+                // æ’å…¥åˆ—é˜Ÿ
                 list.push_back(objTag);
-                //LOG_DEBUG("²åÈë±ê¼Ç¶ÔÏó£º[%d][%s]", Tag::TAG, cmd);
+                //LOG_DEBUG("æ’å…¥æ ‡è®°å¯¹è±¡ï¼š[%d][%s]", Tag::TAG, cmd);
             }
             else
             {
@@ -424,28 +424,28 @@ int Page::Parse()
     return OK;
 }// end of int Page::Parse()...
 
-// ´¦ÀíÒ³ÇóÇëÇó
+// å¤„ç†é¡µæ±‚è¯·æ±‚
 int Page::Deal()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     Connect * const connect = m_request->GetConnect();
 
-    // Êä³öhttpĞ­ÒéÍ·²¿
+    // è¾“å‡ºhttpåè®®å¤´éƒ¨
     if( OutHead() < 0 )
     {
         LOG_ERROR("Send http head error");
         return ERR;
     }
 
-    // Êä³öÊı¾İÌå
+    // è¾“å‡ºæ•°æ®ä½“
     return OutBody();
 }
 
-// Êä³öhttpĞ­ÒéÍ·²¿
+// è¾“å‡ºhttpåè®®å¤´éƒ¨
 int Page::OutHead()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
     const string head = ""
                   "HTTP/1.1 200 OK\n"
                   "Date: " + GmgTime() + "\n"
@@ -453,19 +453,19 @@ int Page::OutHead()
                   "Keep-Alive: timeout=15, max=100\n"
                   "Content-Type: text/html; charset=GB2312\n"
                   "\n";
-    // ·¢ËÍ
+    // å‘é€
     m_request->GetConnect()->Send(head);
     return OK;
 }
 
-// Êä³öÊı¾İÌå
+// è¾“å‡ºæ•°æ®ä½“
 int Page::OutBody()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     if(NULL == m_TagList)
     {
-        LOG_DEBUG("±ê¼Ç´¦Àí¶ÔÏó¶ÓÁĞ¿Õ");
+        LOG_DEBUG("æ ‡è®°å¤„ç†å¯¹è±¡é˜Ÿåˆ—ç©º");
         return OK;
     }
 
@@ -477,15 +477,15 @@ int Page::OutBody()
 
     LOG_DEBUG("list.size=[%d]", list.size());
 
-    // °´Ë³ĞòÊä³öÒ³ÃæÄ£¿éÖĞ¸÷±ê¼Ç
+    // æŒ‰é¡ºåºè¾“å‡ºé¡µé¢æ¨¡å—ä¸­å„æ ‡è®°
     for(it = list.begin(); list.end() != it; it++)
     {
         Tag * const tag = (*it);
-        // È¡±ê¼Ç¶ÔÏó´¦ÀíÄÚÈİ£¨Ã¿¸ö±ê¼Ç¶¼´ÓÊôÓÚÒ³Ãæ£¬Ëù³ö´«Èë´¦ÀíÕıµÄ´¦ÀíµÄÒ³ÃæÖ¸Õë£»£©
+        // å–æ ‡è®°å¯¹è±¡å¤„ç†å†…å®¹ï¼ˆæ¯ä¸ªæ ‡è®°éƒ½ä»å±äºé¡µé¢ï¼Œæ‰€å‡ºä¼ å…¥å¤„ç†æ­£çš„å¤„ç†çš„é¡µé¢æŒ‡é’ˆï¼›ï¼‰
         const string &txt = tag->Get( this );
         if("" != txt)
         {
-            // ·¢ËÍµ½ä¯ÀÀÆ÷
+            // å‘é€åˆ°æµè§ˆå™¨
             ret = connect->Send(txt.c_str(), txt.length());
             if(ret < txt.length())
             {
@@ -499,8 +499,8 @@ int Page::OutBody()
 }
 
 /*
- * ¹¦ÄÜ£ºÒ³ÃæÌø×ª
- * ±àĞ´£ºRocky 2010-05-08
+ * åŠŸèƒ½ï¼šé¡µé¢è·³è½¬
+ * ç¼–å†™ï¼šRocky 2010-05-08
  */
 void Page::ChangeTo(const string &url)
 {
@@ -516,7 +516,7 @@ void Page::ChangeTo(const string &url)
 }
 
 
-// ÉèÖÃ¡¢»ñÈ¡tag¼ä´¦Àí½á¹û´«µİ
+// è®¾ç½®ã€è·å–tagé—´å¤„ç†ç»“æœä¼ é€’
 const string Page::GetResult(const string &key)
 {
     return GetMapValue(m_result, key);
@@ -527,29 +527,29 @@ void Page::SetResult(const string &key, const string &value)
     m_result[ key ] = value;
 }
 
-// È¡µ±Ç°¿Í»§¶Ë´«À´µÄKEYÖµ
+// å–å½“å‰å®¢æˆ·ç«¯ä¼ æ¥çš„KEYå€¼
 const string Page::GetCurrentKey()
 {
     if("" == m_key)
     {
-        // Èô¿Í»§¶ËÓĞ´«key×Ö¶Î£¬Ê¹ÓÃ¸ÃÖµ£º
+        // è‹¥å®¢æˆ·ç«¯æœ‰ä¼ keyå­—æ®µï¼Œä½¿ç”¨è¯¥å€¼ï¼š
         m_key = m_request->GetField("key");
         if("" == m_key)
         {
-            // ·ñÔò´´½¨Ò»ĞÂµÄKEY
+            // å¦åˆ™åˆ›å»ºä¸€æ–°çš„KEY
             m_key = NowTime("%Y%m%d%H%M%S");
         }
     }
     return m_key;
 }
 
-/* È¡µ±Ç°KEY¶ÔÓ¦µÄÊı¾İ£¨°ü£©
- *   ×¢Òâ£¬µ±Êı¾İÓĞĞŞ¸ÄÊ±£¬¿ÉÄÜĞèÊÇ¸üĞÂ°üµÄÄÚÈİ£¬ËùÒÔ
- *   ²»·µ»ØconstÀàĞÍ£»
+/* å–å½“å‰KEYå¯¹åº”çš„æ•°æ®ï¼ˆåŒ…ï¼‰
+ *   æ³¨æ„ï¼Œå½“æ•°æ®æœ‰ä¿®æ”¹æ—¶ï¼Œå¯èƒ½éœ€æ˜¯æ›´æ–°åŒ…çš„å†…å®¹ï¼Œæ‰€ä»¥
+ *   ä¸è¿”å›constç±»å‹ï¼›
  */
 Conf *Page::GetCurrentPack()
 {
-    // ¿Õ£¬ÔòÏÈ¼ÓÔØÆäÖµ£»
+    // ç©ºï¼Œåˆ™å…ˆåŠ è½½å…¶å€¼ï¼›
     if(NULL == m_pack)
     {
         const string &key = GetCurrentKey();
@@ -559,7 +559,7 @@ Conf *Page::GetCurrentPack()
         if(NULL != pack)
         {
             Ini ini;
-            // Ìî³äÒ»¸ö¿ÕConf£¬ÒÔ±ã²åÈëkey¶ÔÓ¦µÄËùÓĞÖµ£»
+            // å¡«å……ä¸€ä¸ªç©ºConfï¼Œä»¥ä¾¿æ’å…¥keyå¯¹åº”çš„æ‰€æœ‰å€¼ï¼›
             ini.Set(key, *pack);
             data.Get( ini );
             pack->Set( *(ini.Get(key)) );
@@ -569,25 +569,25 @@ Conf *Page::GetCurrentPack()
     }
     if(NULL == m_pack)
     {
-        // ·µ»ØÒ»¿ÕÖµ£¬±ÜÃâÍâ²¿×ö¹ı¶àµÄNULL¼ì²â£»
+        // è¿”å›ä¸€ç©ºå€¼ï¼Œé¿å…å¤–éƒ¨åšè¿‡å¤šçš„NULLæ£€æµ‹ï¼›
         static Conf pack;
         return &pack;
     }
     return m_pack;
 }
 
-// Í³Ò»´¦Àí±£´æ£¨³ö±ãÓÚÍ¬²½´¦Àí»º´æ¸üĞÂ£©
+// ç»Ÿä¸€å¤„ç†ä¿å­˜ï¼ˆå‡ºä¾¿äºåŒæ­¥å¤„ç†ç¼“å­˜æ›´æ–°ï¼‰
 int Page::Save(const Ini &pack)
 {
     const string &username = m_request->GetCurrentUser();
     UserData save( username );
 
-    // ±£´æ
+    // ä¿å­˜
     if(save.Set( pack ) < 0)
     {
         return ERR;
     }
-    // ¸üĞÂ»º´æ
+    // æ›´æ–°ç¼“å­˜
     const string &key = GetCurrentKey();
     Conf *syn = GetCurrentPack();
     syn->Set( *(pack.Get(key)) );
@@ -595,19 +595,19 @@ int Page::Save(const Ini &pack)
     return OK;
 }
 
-// È¡µ±Ç°Ò³ÃæÉèÖÃ
+// å–å½“å‰é¡µé¢è®¾ç½®
 PageCfg *Page::GetCurrentPageCfg()
 {
-    // ¿Õ£¬ÔòÏÈ¼ÓÔØÆäÖµ£»
+    // ç©ºï¼Œåˆ™å…ˆåŠ è½½å…¶å€¼ï¼›
     if(NULL == m_PageCfg)
     {
         const string &username = m_request->GetCurrentUser();
-        const string &cfg = m_request->GetPageName() + ".txt"; // ÅäÖÃÎÄ¼şÃû£º¡°Ò³ÃæÃû¡±£«¡°.txt¡±
+        const string &cfg = m_request->GetPageName() + ".txt"; // é…ç½®æ–‡ä»¶åï¼šâ€œé¡µé¢åâ€ï¼‹â€œ.txtâ€
         m_PageCfg = new PageCfg(username, cfg);
     }
     if(NULL == m_PageCfg)
     {
-        // ·µ»ØÒ»¿ÕÖµ£¬±ÜÃâÍâ²¿×ö¹ı¶àµÄNULL¼ì²â£»
+        // è¿”å›ä¸€ç©ºå€¼ï¼Œé¿å…å¤–éƒ¨åšè¿‡å¤šçš„NULLæ£€æµ‹ï¼›
         static PageCfg cfg("", "");
         return &cfg;
     }

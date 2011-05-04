@@ -4,33 +4,33 @@ namespace PAGE_TYPEDROPBOXMENUSETTING_SPACE
 {
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "TypeDropBoxMenuSetting";
 
 
 
 Page_TypeDropBoxMenuSetting::Page_TypeDropBoxMenuSetting()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_TypeDropBoxMenuSetting::~Page_TypeDropBoxMenuSetting()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_TypeDropBoxMenuSetting::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     m_html = GlobalConfig::instance()->TemplateDir() + "TypeDropBoxMenuSetting.html";
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_TypeDropBoxMenuSetting::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_TypeDropBoxMenuSetting;
 }
 
@@ -41,14 +41,14 @@ Page *Page_TypeDropBoxMenuSetting::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 // Rocky 2010-05-24 20:42:42
 int Page_TypeDropBoxMenuSetting::OutBody()
 {
     /*
-     * ĞŞ¸ÄÀàĞÍÏÂÀ­²Ëµ¥ÏîÌá½»ÊÂ¼ş
+     * ä¿®æ”¹ç±»å‹ä¸‹æ‹‰èœå•é¡¹æäº¤äº‹ä»¶
      */
     const string &submit_modify = m_request->GetField("submit_modify");
     if("" != submit_modify)
@@ -58,7 +58,7 @@ int Page_TypeDropBoxMenuSetting::OutBody()
     }
 
     /*
-     * ĞÂÔöÀàĞÍÏÂÀ­²Ëµ¥ÏîÌá½»ÊÂ¼ş
+     * æ–°å¢ç±»å‹ä¸‹æ‹‰èœå•é¡¹æäº¤äº‹ä»¶
      */
     const string &submit_new = m_request->GetField("submit_new");
     if("" != submit_new)
@@ -76,7 +76,7 @@ int Page_TypeDropBoxMenuSetting::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_TypeDropBoxMenuSetting, THIS_MODULE)
 
 }// end of PAGE_TYPEDROPBOXMENUSETTING_SPACE

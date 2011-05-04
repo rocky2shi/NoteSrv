@@ -23,7 +23,7 @@ FileObj::~FileObj()
     Close();
 }
 
-// ´ò¿ªÎÄ¼ş
+// æ‰“å¼€æ–‡ä»¶
 bool FileObj::Open(const string &file, const string &mode/*=R*/)
 {
     if("" == file)
@@ -39,7 +39,7 @@ bool FileObj::Open(const string &file, const string &mode/*=R*/)
     return true;
 }
 
-// ¹Ø±ÕÎÄ¼ş
+// å…³é—­æ–‡ä»¶
 int FileObj::Close()
 {
     if(NULL != m_file)
@@ -49,44 +49,44 @@ int FileObj::Close()
     }
 }
 
-// ¶ÁÖ¸¶¨×Ö½Ú
+// è¯»æŒ‡å®šå­—èŠ‚
 int FileObj::Read(void *buf, const int len) const
 {
     if( NULL == m_file )
     {
-        return 0;   // -1¸ÄÎª0    [2010-05-11 10:48:58]
+        return 0;   // -1æ”¹ä¸º0    [2010-05-11 10:48:58]
     }
 
     return fread(buf, 1, len, m_file);
 }
 
-// Ğ´ÈëÖ¸¶¨³¤¶È×Ö½Ú
+// å†™å…¥æŒ‡å®šé•¿åº¦å­—èŠ‚
 int FileObj::Write(const void *buf, const int len) const
 {
     if( NULL == m_file )
     {
-        return 0;   // -1¸ÄÎª0    [2010-05-11 10:48:58]
+        return 0;   // -1æ”¹ä¸º0    [2010-05-11 10:48:58]
     }
 
     return fwrite(buf, 1, len, m_file);
 }
 
-// ÎÄ¼ş³¤¶È
+// æ–‡ä»¶é•¿åº¦
 int FileObj::Size() const
 {
     if(NULL == m_file)
     {
-        return 0;   // -1¸ÄÎª0    [2010-05-11 10:48:58]
+        return 0;   // -1æ”¹ä¸º0    [2010-05-11 10:48:58]
     }
     return GetSizeOfFile( m_fullname );
 }
 
-// ¶ÁÈ¡È¡Ò»ĞĞ£¨ÏŞ¶¨×î³¤Öµ£©£¨·µ»ØÒÑ¶ÁÈ¡µÄ×Ö½ÚÊı£¬³ö´í·µ»Ø0£©
+// è¯»å–å–ä¸€è¡Œï¼ˆé™å®šæœ€é•¿å€¼ï¼‰ï¼ˆè¿”å›å·²è¯»å–çš„å­—èŠ‚æ•°ï¼Œå‡ºé”™è¿”å›0ï¼‰
 int FileObj::GetLine(char * const buf, const int max) const
 {
     if(NULL == m_file)
     {
-        return 0;   // -1¸ÄÎª0    [2010-05-11 10:48:58]
+        return 0;   // -1æ”¹ä¸º0    [2010-05-11 10:48:58]
     }
 
     char *str = buf;
@@ -99,20 +99,20 @@ int FileObj::GetLine(char * const buf, const int max) const
         str++;
         if( '\n' == c || max == count )
         {
-            break; // ÊÇ»Ø³µ·û£¬»òÒÑ¶ÁÈ¡×ã¹»×Ö½Ú£¬ÍË³ö£»
+            break; // æ˜¯å›è½¦ç¬¦ï¼Œæˆ–å·²è¯»å–è¶³å¤Ÿå­—èŠ‚ï¼Œé€€å‡ºï¼›
         }
     }
     *str = '\0';
     return count;
 }
 
-// ·µ»Øµ±Ç°ÎÄ¼şÈ«Â·¾¶Ãû
+// è¿”å›å½“å‰æ–‡ä»¶å…¨è·¯å¾„å
 const string FileObj::Fullname() const
 {
     return m_fullname;
 }
 
-// ÉèÖÃÎÄ¼şÆ«ÒÆ£¨³É¹¦·µ»ØOK£¬³ö´í·µ»ØERR£©
+// è®¾ç½®æ–‡ä»¶åç§»ï¼ˆæˆåŠŸè¿”å›OKï¼Œå‡ºé”™è¿”å›ERRï¼‰
 int FileObj::SetSeek(SEEK whence/*=SET*/, int offset/*=0*/)
 {
     if(NULL == m_file)

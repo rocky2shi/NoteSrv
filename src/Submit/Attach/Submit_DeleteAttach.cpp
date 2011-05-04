@@ -8,7 +8,7 @@ namespace SUBMIT_DELETEATTACH_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "DeleteAttach";
 
 
@@ -17,18 +17,18 @@ static const string THIS_MODULE = "DeleteAttach";
 
 Submit_DeleteAttach::Submit_DeleteAttach()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_DeleteAttach::Submit_DeleteAttach(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_DeleteAttach::~Submit_DeleteAttach()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -36,15 +36,15 @@ Submit_DeleteAttach::~Submit_DeleteAttach()
 
 int Submit_DeleteAttach::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_DeleteAttach::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_DeleteAttach;
 }
 
@@ -52,7 +52,7 @@ Submit *Submit_DeleteAttach::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -76,11 +76,11 @@ int Submit_DeleteAttach::Deal(Page *page)
     }
 
     /*
-     * ¸üĞÂ¸½¼şÊı×Ö¶Î
+     * æ›´æ–°é™„ä»¶æ•°å­—æ®µ
      */
     Ini data;
     vector<string> attachs;
-    UserData(username).GetAttachList(key, attachs);     // ¸½¼şÁĞ±í
+    UserData(username).GetAttachList(key, attachs);     // é™„ä»¶åˆ—è¡¨
 
     data.Set(key, "modify", NowTime("%Y%m%d%H%M%S"));
     data.Set(key, "attach_num", IntToString(attachs.size()));

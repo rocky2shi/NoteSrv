@@ -9,7 +9,7 @@ namespace TAG_FONTDROPBOXMENU_SPACE
 
 
 
-// ×ÖÌåÏÂÀ­¿ò²Ëµ¥
+// å­—ä½“ä¸‹æ‹‰æ¡†èœå•
 class Tag_FontDropBoxMenu : public Tag
 {
 protected:

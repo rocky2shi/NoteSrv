@@ -8,7 +8,7 @@ namespace RINGQUEUEOFINT_SPACE
 
 
 
-// »·ĞÎ¶ÓÁĞ£¬Ã¿ÔªËØÎªÒ»ÕûÊı£¨³¤¶È£©
+// ç¯å½¢é˜Ÿåˆ—ï¼Œæ¯å…ƒç´ ä¸ºä¸€æ•´æ•°ï¼ˆé•¿åº¦ï¼‰
 class RingQueueOfInt
 {
 public:
@@ -18,19 +18,19 @@ public:
     //
     int Init();
 
-    // ×¡¶ÓÁĞÖĞ´æÈëÒ»¸öÔªËØ£¨²»ÄÜ´æÈë£¬·µ»ØĞ¡ÓÚ0Öµ£©
+    // ä½é˜Ÿåˆ—ä¸­å­˜å…¥ä¸€ä¸ªå…ƒç´ ï¼ˆä¸èƒ½å­˜å…¥ï¼Œè¿”å›å°äº0å€¼ï¼‰
     int Push(void *element);
 
-    // È¡Ò»¸öÔªËØ
+    // å–ä¸€ä¸ªå…ƒç´ 
     int Pop(void *&element);
 
-    // µ±Ç°¶ÓÁĞÔªËØ¸öÊı
+    // å½“å‰é˜Ÿåˆ—å…ƒç´ ä¸ªæ•°
     int Size();
 
-    // ¶ÓÁĞÂú·µ»Øtrue
+    // é˜Ÿåˆ—æ»¡è¿”å›true
     bool isFull();
 
-    // ¶ÓÁĞ¿Õ·µ»Øtrue
+    // é˜Ÿåˆ—ç©ºè¿”å›true
     bool isEmpty();
 
 
@@ -38,9 +38,9 @@ private:
     static const int DEFAULT_COUNT_MAX = 500;
     const int m_max;
 
-    void ** const m_buf;    // Êı¾İ´æ·Å´¦
-    int m_read;             // ¶ÁÎ»ÖÃ
-    int m_write;            // Ğ´Î»ÖÃ
+    void ** const m_buf;    // æ•°æ®å­˜æ”¾å¤„
+    int m_read;             // è¯»ä½ç½®
+    int m_write;            // å†™ä½ç½®
 };
 
 

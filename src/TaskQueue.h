@@ -9,29 +9,29 @@ namespace TASKQUEUE_SPACE
 
 
 
-// оъЁлЁь╢╕юМхннЯ╤сап
+// Г╨©Г╗▀Ф╠═Е╓└Г░├Д╩╩Е┼║И≤÷Е┬≈
 class TaskQueue
 {
 public:
-    // max: вН╢СхннЯйЩ
+    // max: Ф°─Е╓╖Д╩╩Е┼║Ф∙╟
     TaskQueue(int max);
 
     //
     int Init();
 
-    // ╥ехКр╩╦ЖхннЯ
+    // Ф■╬Е┘╔Д╦─Д╦╙Д╩╩Е┼║
     int push(void *task);
 
-    // х║ЁЖр╩╦ЖхннЯ
+    // Е▐√Е┤╨Д╦─Д╦╙Д╩╩Е┼║
     void *pop();
 
-    // ╣╠г╟╤сапхннЯйЩ
+    // Е╫⌠Е┴█И≤÷Е┬≈Д╩╩Е┼║Ф∙╟
     int size();
 
 private:
-    RingQueueOfInt m_queue; // ╩╥пн╢Ф╢╒╤сап
-    Lock m_PushLock;        // п╢╤сапкЬ
-    Lock m_PopLock;         // ╤а╤сапкЬё╗в╒рБё╛уБюО╣д╤а║╒п╢кЬйгнч╧ьа╙╣дё╘
+    RingQueueOfInt m_queue; // Г▌╞Е╫╒Е╜≤Е┌╗И≤÷Е┬≈
+    Lock m_PushLock;        // Е├≥И≤÷Е┬≈И■│
+    Lock m_PopLock;         // Х╞╩И≤÷Е┬≈И■│О╪┬ФЁ╗Ф└▐О╪▄Х©≥И┤▄Г └Х╞╩Ц─│Е├≥И■│Ф≤╞Ф≈═Е┘ЁХ│■Г └О╪┴
 };
 
 

@@ -8,7 +8,7 @@ namespace TAG_TEXTCOLORDROPBOXMENU_SPACE
 
 
 
-// ÕıÎÄ×ÖÌåÑÕÉ«ÏÂÀ­¿ò²Ëµ¥
+// æ­£æ–‡å­—ä½“é¢œè‰²ä¸‹æ‹‰æ¡†èœå•
 class Tag_TextColorDropBoxMenu : public Tag
 {
 protected:

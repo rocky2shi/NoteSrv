@@ -12,16 +12,16 @@ namespace MODULE_CGI_SPACE
 
 
 
-// Ïß³Ì³Ø»Øµ÷º¯Êý
+// çº¿ç¨‹æ± å›žè°ƒå‡½æ•°
 static void *CgiDealBackCall(void *param)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     Connect *pConnect = (Connect *)param;
 
     Request request( pConnect );
 
-    // È¡Ò³Ãæ´¦Àí¶ÔÏó£¨¸ù¾ÝÒ³ÃæÃû£¬µ÷¶ÔÓ¦´¦Àí¶ÔÏó£©
+    // å–é¡µé¢å¤„ç†å¯¹è±¡ï¼ˆæ ¹æ®é¡µé¢åï¼Œè°ƒå¯¹åº”å¤„ç†å¯¹è±¡ï¼‰
     const string &name = request.GetPageName();
 
     LOG_DEBUG("page=[%s]", name.c_str());
@@ -29,53 +29,53 @@ static void *CgiDealBackCall(void *param)
     Page *page = NULL;
 
     /*
-     * ¸ù¾ÝÀàÐÍ£¨Çé¿ö£©£¬µ÷ÓÃ²»Í¬´¦ÀíÄ£¿é£»
+     * æ ¹æ®ç±»åž‹ï¼ˆæƒ…å†µï¼‰ï¼Œè°ƒç”¨ä¸åŒå¤„ç†æ¨¡å—ï¼›
      */
     if( request.isText() )
     {
-        // µ÷ÎÄ±¾´¦ÀíÀà
+        // è°ƒæ–‡æœ¬å¤„ç†ç±»
         page = Page::New("text");
     }
     else if( request.isImage() )
     {
-        // µ÷Í¼Æ¬´¦ÀíÀà
+        // è°ƒå›¾ç‰‡å¤„ç†ç±»
         page = Page::New("image");
     }
     else
     {
         /*
-         * ¶ÔÓÚcgi´¦ÀíµÈ£¬ÐèÒªÓÃ»§µÇÂ¼²ÅÄÜ²Ù×÷£»
+         * å¯¹äºŽcgiå¤„ç†ç­‰ï¼Œéœ€è¦ç”¨æˆ·ç™»å½•æ‰èƒ½æ“ä½œï¼›
          */
         if( ! request.ok() )
         {
-            // µ÷³ö´í´¦ÀíÒ³
+            // è°ƒå‡ºé”™å¤„ç†é¡µ
             page = Page::New("error");
         }
         else if("" == name)
         {
-            // Ò³Ãæ¿ÕÊ±£¬½øÈëµÇÂ¼Ò³£»£¨×¢£ºµ±ÓÃ»§ÒÑµÇÂ¼Ê±£¬½«ÔÙÓÉµÇÂ¼Ò³Ìøµ½Ô¤ÀÀÒ³£©
+            // é¡µé¢ç©ºæ—¶ï¼Œè¿›å…¥ç™»å½•é¡µï¼›ï¼ˆæ³¨ï¼šå½“ç”¨æˆ·å·²ç™»å½•æ—¶ï¼Œå°†å†ç”±ç™»å½•é¡µè·³åˆ°é¢„è§ˆé¡µï¼‰
             page = Page::New("login");
         }
         else
         {
-            // ½øÈëÇóÇëµÄÒ³Ãæ
+            // è¿›å…¥æ±‚è¯·çš„é¡µé¢
             page = Page::New( name );
         }
     }
 
     if(NULL != page)
     {
-        // ÉèÖÃÁ¬½ÓÇëÇó
+        // è®¾ç½®è¿žæŽ¥è¯·æ±‚
         page->SetRequest( &request );
 
-        // Ö´ÐÐ´¦Àí
+        // æ‰§è¡Œå¤„ç†
         page->Deal();
 
-        // ´¦ÀíÍê£¬ÊÍ·ÅÄÚ´æ£»
+        // å¤„ç†å®Œï¼Œé‡Šæ”¾å†…å­˜ï¼›
         delete page;
     }
 
-    // ´¦ÀíÍê³É£¬¹Ø±ÕÁ¬½Ó£»
+    // å¤„ç†å®Œæˆï¼Œå…³é—­è¿žæŽ¥ï¼›
     pConnect->Close();
 
     return NULL;
@@ -93,7 +93,7 @@ static void *CgiDealBackCall(void *param)
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜Žæ¨¡å—
 static const string THIS_MODULE = "CgiDeal";
 
 
@@ -101,24 +101,24 @@ static const string THIS_MODULE = "CgiDeal";
 
 Module_Cgi::Module_Cgi() : m_ThreadPool( NULL )
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
-// ×¢²áÓÃµÄ¹¹Ôìº¯Êý
+// æ³¨å†Œç”¨çš„æž„é€ å‡½æ•°
 Module_Cgi::Module_Cgi(const string &id): Module(id), m_ThreadPool( NULL )
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Module_Cgi::~Module_Cgi()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Module_Cgi::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     int ret;
 
@@ -147,20 +147,20 @@ int Module_Cgi::DoInit()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
-// Ñ­»·µ÷ÓÃ´¦Àíº¯Êý
+// å¾ªçŽ¯è°ƒç”¨å¤„ç†å‡½æ•°
 int Module_Cgi::Run()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    // ´¦ÀíÃ¿¸ö²ÊÖÖ
+    // å¤„ç†æ¯ä¸ªå½©ç§
     while( !SignalDeal::exit() )
     {
-        // µ÷ÓÃ´¦Àíº¯Êý£¬Ã¿´Îµ÷ÓÃ¶¼É¨ÃèÒ»´ÎÁ¬½Ó¶ÓÁÐ£¨Ö±µ½¶ÓÁÐ¿Õ²Å·µ»Ø£©
+        // è°ƒç”¨å¤„ç†å‡½æ•°ï¼Œæ¯æ¬¡è°ƒç”¨éƒ½æ‰«æä¸€æ¬¡è¿žæŽ¥é˜Ÿåˆ—ï¼ˆç›´åˆ°é˜Ÿåˆ—ç©ºæ‰è¿”å›žï¼‰
         Deal();
 
     }// end of while( ...
@@ -169,15 +169,15 @@ int Module_Cgi::Run()
 }
 
 
-// Æô¶¯web·þÎñ
+// å¯åŠ¨webæœåŠ¡
 int Module_Cgi::Deal()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     Connect *pConnect;
     int ret;
 
-    // È¡³ö¸÷¸öÁ¬½Ó¶ÔÏó£¬·Åµ½Ïß³Ì³ØÖÐ¡££¨ÎÞÊý¾Ý£¬ÔòµÈ´ý£©
+    // å–å‡ºå„ä¸ªè¿žæŽ¥å¯¹è±¡ï¼Œæ”¾åˆ°çº¿ç¨‹æ± ä¸­ã€‚ï¼ˆæ— æ•°æ®ï¼Œåˆ™ç­‰å¾…ï¼‰
     while( (pConnect = ConnectQueue::instance()->pop()) != NULL )
     {
         LOG_DEBUG("get pConnect=[%p]", pConnect);
@@ -205,7 +205,7 @@ int Module_Cgi::Deal()
 
 
 
-// ×¢²á
+// æ³¨å†Œ
 static Module_Cgi tmp(THIS_MODULE);
 
 

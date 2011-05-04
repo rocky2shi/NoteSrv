@@ -9,7 +9,7 @@ namespace TAG_COUNTERLIST_SPACE
 
 
 
-// ¼ÆÊı¾İÁĞ±í
+// è®¡æ•°æ®åˆ—è¡¨
 class Tag_CounterList : public Tag
 {
 protected:

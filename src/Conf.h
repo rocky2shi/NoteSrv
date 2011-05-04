@@ -10,7 +10,7 @@ namespace CONF_SPACE
 
 /*
  * [Rocky 2010-04-29 18:30:39]
- * ´¦Àí¸ñÊ½ÎÄ¼þ£¬Èç£º
+ * å¤„ç†æ ¼å¼æ–‡ä»¶ï¼Œå¦‚ï¼š
  *
  *   user=rocky
  *   id=8816
@@ -19,7 +19,7 @@ namespace CONF_SPACE
 class Conf
 {
 public:
-    // µü´úÆ÷£¬ÁÐ³öËùÓÐµÄÊý¾Ý¶Ô
+    // è¿­ä»£å™¨ï¼Œåˆ—å‡ºæ‰€æœ‰çš„æ•°æ®å¯¹
     class iterator
     {
     public:
@@ -28,7 +28,7 @@ public:
             it = m_conf->m_list.begin();
         }
 
-        // Ö¸ÏòÏÂÒ»¸öÔªËØ
+        // æŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
         bool next()
         {
             if( first )
@@ -42,13 +42,13 @@ public:
             return m_conf->m_list.end() != it;
         }
 
-        // È¡name
+        // å–name
         const char *GetName()
         {
             return it->first.c_str();
         }
 
-        // È¡value
+        // å–value
         const char *GetValue()
         {
             return it->second.c_str();
@@ -88,7 +88,7 @@ public:
         m_list[ key ] = value;
     }
 
-    // ·ÅÈëÖµ£¨¾ÉÖµ½«±»¸²¸Ç£©
+    // æ”¾å…¥å€¼ï¼ˆæ—§å€¼å°†è¢«è¦†ç›–ï¼‰
     void Set(const Conf &pack);
 
     inline void Del(const string &key)
@@ -103,7 +103,7 @@ public:
 
 
 private:
-    map<string, string> m_list; // ´æ·Å[key/value]¶Ô
+    map<string, string> m_list; // å­˜æ”¾[key/value]å¯¹
 };
 
 

@@ -8,7 +8,7 @@ namespace SUBMIT_MODIFYTYPEDROPBOXMENU_SPACE
 
 
 
-// ĞŞ¸ÄÀàĞÍÏÂÀ­²Ëµ¥Ïî
+// ä¿®æ”¹ç±»å‹ä¸‹æ‹‰èœå•é¡¹
 class Submit_ModifyTypeDropBoxMenu : public Submit
 {
 protected:

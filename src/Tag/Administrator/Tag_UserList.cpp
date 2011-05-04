@@ -5,7 +5,7 @@
 namespace TAG_USERLIST_SPACE
 {
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "UserList";
 
 
@@ -14,17 +14,17 @@ static const string THIS_MODULE = "UserList";
 
 Tag_UserList::Tag_UserList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_UserList::Tag_UserList(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_UserList::~Tag_UserList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -32,15 +32,15 @@ Tag_UserList::~Tag_UserList()
 
 int Tag_UserList::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_UserList::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_UserList;
 }
 
@@ -51,20 +51,20 @@ Tag *Tag_UserList::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±êÌâ [2010-05]
+// å–æ ‡é¢˜ [2010-05]
 string Tag_UserList::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    // È¡ÓÃ»§´æ·ÅÄ¿Â¼
+    // å–ç”¨æˆ·å­˜æ”¾ç›®å½•
     const string &users = GlobalConfig::instance()->UserRootDir();
-    // ±éÀú
+    // éå†
     GetFileList dir( users );
     GetFileList::dir_iterator it(dir);
     string html = "";
@@ -76,15 +76,15 @@ string Tag_UserList::Get(Page *page)
 
         /*
          *   <tr>
-         *   <td>ÓÃ»§Ãû</td>
-         *   <td>×¢²áÊ±¼ä</td>
-         *   <td>×îºóµÇÂ¼Ê±¼ä</td>
-         *   <td>µÇÂ¼´ÎÊı</td>
-         *   <td>²Ù×÷</td>
+         *   <td>ç”¨æˆ·å</td>
+         *   <td>æ³¨å†Œæ—¶é—´</td>
+         *   <td>æœ€åç™»å½•æ—¶é—´</td>
+         *   <td>ç™»å½•æ¬¡æ•°</td>
+         *   <td>æ“ä½œ</td>
          *   </tr>
          *
-         *  ×¢Òâ£¬ÓĞĞ©ĞÅÏ¢¿ÉÄÜÎ»ÓÚ²»Í¬¶ÎÖĞ£ºÈçregtimeÎ»ÓÚ[login]£¬¶ø
-         *  lasttimeÎ»ÓÚ[userinfo]ÖĞ£»
+         *  æ³¨æ„ï¼Œæœ‰äº›ä¿¡æ¯å¯èƒ½ä½äºä¸åŒæ®µä¸­ï¼šå¦‚regtimeä½äº[login]ï¼Œè€Œ
+         *  lasttimeä½äº[userinfo]ä¸­ï¼›
          */
         const string &regtime = TimeTo( KeyToSecond(user->GetInfo("regtime")) );
         const string &lasttime = TimeTo( KeyToSecond(user->GetInfo("login", "lasttime")) );
@@ -95,7 +95,7 @@ string Tag_UserList::Get(Page *page)
                 "  <td>" + regtime + "</td>\n"
                 "  <td>" + lasttime + "</td>\n"
                 "  <td>" + counter + "</td>\n"
-                "  <td><input type=button value='É¾³ı' onclick='DeleteUser(\"" + username + "\", this)'></td>\n"
+                "  <td><input type=button value='åˆ é™¤' onclick='DeleteUser(\"" + username + "\", this)'></td>\n"
                 "</tr>\n"
                 "";
     }

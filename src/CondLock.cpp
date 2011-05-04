@@ -9,12 +9,12 @@ namespace CONDLOCK_SPACE
 
 int CondLock::Init()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     if( pthread_cond_init(&m_cond, NULL) != 0
         || pthread_mutex_init(&m_mutex, NULL) != 0 )
     {
-        // LOG_ERROR("Init()³ö´í [%s]", strerror((int)error) );
+        // LOG_ERROR("Init()å‡ºé”™ [%s]", strerror((int)error) );
         return ERR;
     }
 
@@ -23,20 +23,20 @@ int CondLock::Init()
 
 int CondLock::Wait()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     pthread_mutex_lock(&m_mutex);
 
     /*
-     * µÈ´ıÌõ¼ş£¨³¬Ê±ĞÎÊ½£©
-     * ×¢Òâ£º²é¿´°ïÖú[man pthread_cond_timedwait]£¬ÓĞËµÃ÷£¬pthread_cond_timedwait()·µ
-     *       ²»Ò»¶¨ÊÇÊÕµ½ĞÅºÅ£¬Ëü¿ÉÄÜÊÇ¼ÙµÄ£¬ËùÒÔÒªÔÙ´Î¼ì²éÌõ¼ş£¬µ«¶ÔÓÚÎÒÃÇµÄÏµÍ³À´Ëµ
-     *       ·µ»ØºóÈç²»Êı¾İ£¬Ò²²»Ó°ÏìÕı³£ÔËĞĞ¡£ÏÂÍ¬¡£   [XXX]
+     * ç­‰å¾…æ¡ä»¶ï¼ˆè¶…æ—¶å½¢å¼ï¼‰
+     * æ³¨æ„ï¼šæŸ¥çœ‹å¸®åŠ©[man pthread_cond_timedwait]ï¼Œæœ‰è¯´æ˜ï¼Œpthread_cond_timedwait()è¿”
+     *       ä¸ä¸€å®šæ˜¯æ”¶åˆ°ä¿¡å·ï¼Œå®ƒå¯èƒ½æ˜¯å‡çš„ï¼Œæ‰€ä»¥è¦å†æ¬¡æ£€æŸ¥æ¡ä»¶ï¼Œä½†å¯¹äºæˆ‘ä»¬çš„ç³»ç»Ÿæ¥è¯´
+     *       è¿”å›åå¦‚ä¸æ•°æ®ï¼Œä¹Ÿä¸å½±å“æ­£å¸¸è¿è¡Œã€‚ä¸‹åŒã€‚   [XXX]
      */
     struct timespec t;
-    t.tv_sec = time(NULL) + 5; // ×¢ÒâÕâÀï³¬Ê±Ê¹ÓÃµÄÊÇÊ±¼äµã£¨²»ÊÇÊ±¼ä¶Î£©£¬¸ãËÀÁË¡£[XXX] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    t.tv_sec = time(NULL) + 5; // æ³¨æ„è¿™é‡Œè¶…æ—¶ä½¿ç”¨çš„æ˜¯æ—¶é—´ç‚¹ï¼ˆä¸æ˜¯æ—¶é—´æ®µï¼‰ï¼Œææ­»äº†ã€‚[XXX] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     t.tv_nsec = 0;
-    pthread_cond_timedwait(&m_cond, &m_mutex, &t); // ³¬Ê±ĞÎÊ½
+    pthread_cond_timedwait(&m_cond, &m_mutex, &t); // è¶…æ—¶å½¢å¼
     // pthread_cond_wait(&m_cond, &m_mutex);
 
     pthread_mutex_unlock(&m_mutex);
@@ -46,10 +46,10 @@ int CondLock::Wait()
 
 int CondLock::Wake()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
-    int ret = pthread_cond_broadcast(&m_cond);  // ¹ã²¥ĞÎÊ½
-    // LOG_DEBUG("·¢ËÍÍ¨Öªº¯pthread_cond_signal()·µ»Ø: %d", ret);
+    int ret = pthread_cond_broadcast(&m_cond);  // å¹¿æ’­å½¢å¼
+    // LOG_DEBUG("å‘é€é€šçŸ¥å‡½pthread_cond_signal()è¿”å›: %d", ret);
 
     return OK;
 }

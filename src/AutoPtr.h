@@ -7,22 +7,22 @@ namespace AUTOPTR_SPACE
 using namespace std;
 
 /*
- * ÖÇÄÜÖ¸ÕëÀà£¬Ö÷ÒªÓÃÓÚÅäÖÃ¹¤³§´¦ÀíÖÐÊ¹ÓÃ£¬Èç£º
+ * æ™ºèƒ½æŒ‡é’ˆç±»ï¼Œä¸»è¦ç”¨äºŽé…ç½®å·¥åŽ‚å¤„ç†ä¸­ä½¿ç”¨ï¼Œå¦‚ï¼š
  *
  *      class Foo
  *      {
  *      public:
  *          ...
  *          ...
- *          // ¶¨ÒåÖÇÄÜÖ¸ÕëÀàÐÍ
+ *          // å®šä¹‰æ™ºèƒ½æŒ‡é’ˆç±»åž‹
  *          typedef AutoPtr< Foo > auto_ptr;
  *
- *          // ½Ó¿Ú
+ *          // æŽ¥å£
  *          void Get();
  *      };
  *
  *      Foo::auto_ptr foo;
- *      foo->Get(); // ÎÞÐè²âÊÔfooÊÇ·ñÎªNULL;
+ *      foo->Get(); // æ— éœ€æµ‹è¯•fooæ˜¯å¦ä¸ºNULL;
  */
 template<typename Type>
 class AutoPtr
@@ -41,12 +41,12 @@ public:
     {
         delete obj;
     }
-    // ÖØÔØ()²Ù×÷·û£¬·µ»ØÄ£¿é¶ÔÏóµØÖ·£»
+    // é‡è½½()æ“ä½œç¬¦ï¼Œè¿”å›žæ¨¡å—å¯¹è±¡åœ°å€ï¼›
     Type * operator->()
     {
         if(NULL == obj)
         {
-            // Ê¹ÓÃ¸ÃÀà£¬ÒÔ±ÜÃâÃ¿´Îµ÷ÓÃÊ±×öÖ¸Õë²âÊÔ£»
+            // ä½¿ç”¨è¯¥ç±»ï¼Œä»¥é¿å…æ¯æ¬¡è°ƒç”¨æ—¶åšæŒ‡é’ˆæµ‹è¯•ï¼›
             class Empty : public Type
             {
             public:

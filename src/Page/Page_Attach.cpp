@@ -10,33 +10,33 @@ namespace PAGE_ATTACH_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "attach";
 
 
 
 Page_Attach::Page_Attach()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Attach::~Page_Attach()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Attach::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     m_html = GlobalConfig::instance()->TemplateDir() + "Attach.html";
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Attach::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Attach;
 }
 
@@ -47,10 +47,10 @@ Page *Page_Attach::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
-// ÉÏ´«¸½¼ş
+// ä¸Šä¼ é™„ä»¶
 int Page_Attach::Upload()
 {
     FileObj *attach = m_request->GetFileObj("attach");
@@ -63,7 +63,7 @@ int Page_Attach::Upload()
     const string &dest = user->AttachDir()
                        + key
                        + "."
-                       + FilenameEncode(basename); /* ¶ÔÎÄ¼şÃû±àÂë£¨ºº×ÖÎÊÌâ£©
+                       + FilenameEncode(basename); /* å¯¹æ–‡ä»¶åç¼–ç ï¼ˆæ±‰å­—é—®é¢˜ï¼‰
                                                     * [Rocky 2010-06-06 00:54:01]
                                                     */
 
@@ -72,7 +72,7 @@ int Page_Attach::Upload()
     if( isExistFile(dest) )
     {
         LOG_ERROR("File exist: [%s]", basename.c_str());
-        const string err = "ÎÄ¼şÒÑ´æÔÚ£º[" + basename + "]";
+        const string err = "æ–‡ä»¶å·²å­˜åœ¨ï¼š[" + basename + "]";
         SetResult("UploadError", err);
         return ERR;
     }
@@ -80,17 +80,17 @@ int Page_Attach::Upload()
     if( ! MoveFile(src, dest) )
     {
         LOG_ERROR("Move file error: src=[%s], dest=[%s]", src.c_str(), dest.c_str());
-        const string err = "ÎÄ¼şÉÏ´«³ö´í£º[" + basename + "]";
+        const string err = "æ–‡ä»¶ä¸Šä¼ å‡ºé”™ï¼š[" + basename + "]";
         SetResult("UploadError", err);
         return ERR;
     }
 
-    // ¸üĞÂ¼ÇÂ¼ĞÅÏ¢
-    const string &modify = NowTime("%Y%m%d%H%M%S");     // ĞŞ¸ÄÊ±¼äÎªµ±Ç°Ê±¼ä
+    // æ›´æ–°è®°å½•ä¿¡æ¯
+    const string &modify = NowTime("%Y%m%d%H%M%S");     // ä¿®æ”¹æ—¶é—´ä¸ºå½“å‰æ—¶é—´
     vector<string> attachs;
     Ini data;
 
-    UserData(username).GetAttachList(key, attachs);     // ¸½¼şÁĞ±í£¨ÓÃÓÚÈ¡¸öÊı£©
+    UserData(username).GetAttachList(key, attachs);     // é™„ä»¶åˆ—è¡¨ï¼ˆç”¨äºå–ä¸ªæ•°ï¼‰
 
     data.Set(key, "modify", modify);
     data.Set(key, "attach_num", IntToString(attachs.size()));
@@ -100,10 +100,10 @@ int Page_Attach::Upload()
     return Save( data );
 }
 
-// Êä³öÊı¾İ
+// è¾“å‡ºæ•°æ®
 int Page_Attach::Deal()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
@@ -112,16 +112,16 @@ int Page_Attach::Deal()
     if("" != upfile)
     {
         /*
-         * ´¦ÀíÉÏ´«
-         *  ×¢Òâ£¬µ±ĞÂ½¨ÌõÄ¿£¬¶øÎ´ÌîĞ´ÄÚÈİ£¨Î´±£´æ£©£¬ÕâÊ±ÏÈÉÏ´«ÎÄ¼şÒ²ÊÇ¿ÉÒÔµÄ£¬
-         *  µ«ÔÚ±£´æÄÚÈİÇ°Ë¢ĞÂÒ³Ãæ£¬ÔòÉÏ´«µÄÎÄ¼ş½«¶ªÊ§£¨±äÎªÀ¬»ø£©£¬ÏµÍ³Ó¦ÊÊÊ±
-         *  ÇåÀíÕâ²¿·ÖÎÄ¼ş¡£´ıĞ´¡£  [Rocky 2010-05-11 16:56:39] [XXX]
+         * å¤„ç†ä¸Šä¼ 
+         *  æ³¨æ„ï¼Œå½“æ–°å»ºæ¡ç›®ï¼Œè€Œæœªå¡«å†™å†…å®¹ï¼ˆæœªä¿å­˜ï¼‰ï¼Œè¿™æ—¶å…ˆä¸Šä¼ æ–‡ä»¶ä¹Ÿæ˜¯å¯ä»¥çš„ï¼Œ
+         *  ä½†åœ¨ä¿å­˜å†…å®¹å‰åˆ·æ–°é¡µé¢ï¼Œåˆ™ä¸Šä¼ çš„æ–‡ä»¶å°†ä¸¢å¤±ï¼ˆå˜ä¸ºåƒåœ¾ï¼‰ï¼Œç³»ç»Ÿåº”é€‚æ—¶
+         *  æ¸…ç†è¿™éƒ¨åˆ†æ–‡ä»¶ã€‚å¾…å†™ã€‚  [Rocky 2010-05-11 16:56:39] [XXX]
          */
         Upload();
     }
 
     /*
-     * ´¦ÀíÉ¾³ı¸½¼şÌá½»ÊÂ¼ş
+     * å¤„ç†åˆ é™¤é™„ä»¶æäº¤äº‹ä»¶
      */
     const string &delete_attach = m_request->GetField("delete_attach");
     if("" != delete_attach)
@@ -129,7 +129,7 @@ int Page_Attach::Deal()
         Submit::Ptr submit( Submit::New("attach", "DeleteAttach") );
         if(submit->Deal(this) < 0)
         {
-            m_request->GetConnect()->Send("É¾³ı¸½¼ş³ö´í");
+            m_request->GetConnect()->Send("åˆ é™¤é™„ä»¶å‡ºé”™");
         }
         else
         {
@@ -141,7 +141,7 @@ int Page_Attach::Deal()
     return Page::Deal();
 }
 
-// Êä³öÊı¾İÌå
+// è¾“å‡ºæ•°æ®ä½“
 int Page_Attach::OutBody()
 {
     const string &err = GetResult("UploadError");
@@ -159,7 +159,7 @@ int Page_Attach::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Attach, THIS_MODULE)
 
 }// end of PAGE_ATTACH_SPACE

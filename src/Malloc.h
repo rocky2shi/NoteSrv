@@ -8,7 +8,7 @@ namespace MALLOC_SPACE
 
 
 
-// ÄÚ´æ°´Ğè·ÖÅä [2010-05-17]
+// å†…å­˜æŒ‰éœ€åˆ†é… [2010-05-17]
 class Malloc
 {
 public:
@@ -29,7 +29,7 @@ public:
     }
     ~Malloc()
     {
-        // ÈôÊÇ¶¯Ì¬·ÖÅäµÄ£¬ĞèÊÍ·Å£»
+        // è‹¥æ˜¯åŠ¨æ€åˆ†é…çš„ï¼Œéœ€é‡Šæ”¾ï¼›
         if( m_dynamic )
         {
             Debug("delete...");
@@ -37,13 +37,13 @@ public:
         }
     }
 
-    // È¡ÄÚ´æÇø
+    // å–å†…å­˜åŒº
     char *Get() const
     {
         return m_buf;
     }
 
-    // ·µ»ØÄÚ´æ³¤¶È
+    // è¿”å›å†…å­˜é•¿åº¦
     unsigned int Size() const
     {
         return m_len;
@@ -53,7 +53,7 @@ public:
 private:
     char *m_buf;
     int m_len;
-    bool m_dynamic; // m_bufÖ¸ÏòÊÇ¶¯Ì¬·ÖÅäµÄÔòÎªtrue;
+    bool m_dynamic; // m_bufæŒ‡å‘æ˜¯åŠ¨æ€åˆ†é…çš„åˆ™ä¸ºtrue;
 };
 
 

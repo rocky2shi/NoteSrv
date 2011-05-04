@@ -8,7 +8,7 @@ namespace SUBMIT_LOGOUT_SPACE
 
 
 
-// 处理注销事件
+// 澶勭悊娉ㄩ攢浜嬩欢
 class Submit_Logout : public Submit
 {
 protected:

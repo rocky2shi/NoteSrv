@@ -8,7 +8,7 @@ namespace SUBMIT_TEXTSTYLESETTING_SPACE
 
 
 
-// ±êÃ÷Ä£¿é£¨¶ÔÓ¦ÓÚÒ³ÃæÖĞµÄÌá½»×Ö¶Î£©
+// æ ‡æ˜æ¨¡å—ï¼ˆå¯¹åº”äºé¡µé¢ä¸­çš„æäº¤å­—æ®µï¼‰
 static const string THIS_MODULE = "TextStyleSetting";
 
 
@@ -17,18 +17,18 @@ static const string THIS_MODULE = "TextStyleSetting";
 
 Submit_TextStyleSetting::Submit_TextStyleSetting()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_TextStyleSetting::Submit_TextStyleSetting(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_TextStyleSetting::~Submit_TextStyleSetting()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -36,15 +36,15 @@ Submit_TextStyleSetting::~Submit_TextStyleSetting()
 
 int Submit_TextStyleSetting::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_TextStyleSetting::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_TextStyleSetting;
 }
 
@@ -52,17 +52,17 @@ Submit *Submit_TextStyleSetting::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
-// ÈÏÖ¤Í¨¹ı£¬·µ»ØµÄ["decryption"]Îª¿Õ´®£¬²»Í¨¹ıÔò·µ»Ø³ö´íĞÅÏ¢£»
+// è®¤è¯é€šè¿‡ï¼Œè¿”å›çš„["decryption"]ä¸ºç©ºä¸²ï¼Œä¸é€šè¿‡åˆ™è¿”å›å‡ºé”™ä¿¡æ¯ï¼›
 int Submit_TextStyleSetting::Deal(Page *page)
 {
     const string &key = page->GetCurrentKey();
 
-    // È¡³ö¿Í»§¶Ë´«À´µÄÖµ
+    // å–å‡ºå®¢æˆ·ç«¯ä¼ æ¥çš„å€¼
     const string &font_weight = page->GetRequest()->GetField("font_weight");
     const string &font_style = page->GetRequest()->GetField("font_style");
     const string &font_text_decoration = page->GetRequest()->GetField("font_text_decoration");
@@ -71,7 +71,7 @@ int Submit_TextStyleSetting::Deal(Page *page)
     const string &font_family = page->GetRequest()->GetField("font_family");
     const string &font_bgcolor = page->GetRequest()->GetField("font_bgcolor");
 
-    // Ğ´Èë°ü
+    // å†™å…¥åŒ…
     Ini item;
     item.Set(key, "modify", NowTime("%Y%m%d%H%M%S"));
     item.Set(key, "font_weight", font_weight);
@@ -81,10 +81,10 @@ int Submit_TextStyleSetting::Deal(Page *page)
     item.Set(key, "font_color", font_color);
     item.Set(key, "font_family", font_family);
     item.Set(key, "font_bgcolor", font_bgcolor);
-    // Ôö¼Ó¼ÆÊı [XXX]
+    // å¢åŠ è®¡æ•° [XXX]
     // ...
 
-    // ±£´æ
+    // ä¿å­˜
     return page->Save( item );
 }
 

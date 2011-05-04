@@ -9,51 +9,51 @@ namespace GLOBALCONFIG_SPACE
 
 
 
-// È«¾ÖÅäÖÃ¹ÜÀí
+// å…¨å±€é…ç½®ç®¡ç†
 class GlobalConfig
 {
 public:
-    // Àà³õÊ¼»¯
+    // ç±»åˆå§‹åŒ–
     static int init(int argc, char *argv[]);
 
-    // ÉèÖÃ»ò»ñÈ¡µ¥Àı
+    // è®¾ç½®æˆ–è·å–å•ä¾‹
     inline static GlobalConfig *instance(GlobalConfig *config=NULL)
     {
         static GlobalConfig *obj = (GlobalConfig *)(Environment::instance()->ClassInit("GlobalConfig", config));
         return obj;
     }
 
-    // ÏµÍ³¸ùÄ¿Â¼
+    // ç³»ç»Ÿæ ¹ç›®å½•
     const string Root() const;
 
-    // È«¾ÖÊı¾İÄ¿Â¼
+    // å…¨å±€æ•°æ®ç›®å½•
     const string SystemDataDir() const;
 
-    // ÓÃ»§Ä¿Â¼´æ·ÅµØ
+    // ç”¨æˆ·ç›®å½•å­˜æ”¾åœ°
     const string UserRootDir() const;
 
-    // Ò³Ãæ´¦Àí¶¯Ì¬¿â£¨Ä£¿é£©Ä¿Â¼
+    // é¡µé¢å¤„ç†åŠ¨æ€åº“ï¼ˆæ¨¡å—ï¼‰ç›®å½•
     const string CgiDir() const;
 
-    // ÎÄ±¾Ò³ÃæÄ¿Â¼£¨´æ·Åhtml¡¢js¡¢txt¡¢cssµÈÄÜÖ±½ÓÔÚÒ³ÃæÉÏÏÔÊ¾µÄÎÄ¼ş£©
+    // æ–‡æœ¬é¡µé¢ç›®å½•ï¼ˆå­˜æ”¾htmlã€jsã€txtã€cssç­‰èƒ½ç›´æ¥åœ¨é¡µé¢ä¸Šæ˜¾ç¤ºçš„æ–‡ä»¶ï¼‰
     const string HtmlDir() const;
 
-    // Ä£°åÎÄ¼şÄ¿Â¼
+    // æ¨¡æ¿æ–‡ä»¶ç›®å½•
     const string TemplateDir() const;
 
-    // ÏµÍ³ÈÕÖ¾Ä¿Â¼
+    // ç³»ç»Ÿæ—¥å¿—ç›®å½•
     const string SystemLogDir() const;
 
-    // ÏµÍ³ÁÙÊ±Ä¿Â¼
+    // ç³»ç»Ÿä¸´æ—¶ç›®å½•
     const string SystemTmpDir() const;
 
-    // ´æ·Å¹¤¾ß¡¢Íâ²¿´¦Àí³ÌĞòµÈµÄÄ¿Â¼
+    // å­˜æ”¾å·¥å…·ã€å¤–éƒ¨å¤„ç†ç¨‹åºç­‰çš„ç›®å½•
     const string ToolDir() const;
 
-    // È«¾Ö¼ÆÊıÆ÷Ä¿Â¼
+    // å…¨å±€è®¡æ•°å™¨ç›®å½•
     const string CounterDir() const;
 
-    // »ñÈ¡ÃüÁîĞĞ²ÎÊıµÈÅäÖÃÑ¡Ïî£¨»ñÈ¡field×Ö¶Î¶ÔÓ¦µÄ²ÎÊı£¬²»´æÔÚÔò·µ»ØÄ¬ÈÏµÄdefÖµ£©
+    // è·å–å‘½ä»¤è¡Œå‚æ•°ç­‰é…ç½®é€‰é¡¹ï¼ˆè·å–fieldå­—æ®µå¯¹åº”çš„å‚æ•°ï¼Œä¸å­˜åœ¨åˆ™è¿”å›é»˜è®¤çš„defå€¼ï¼‰
     const string GetOption(const string &field, const string def="") const;
 
 private:
@@ -61,7 +61,7 @@ private:
 
 
 private:
-    map<string, string> m_option;   // ÅäÖÃÑ¡Ïî
+    map<string, string> m_option;   // é…ç½®é€‰é¡¹
 };
 
 

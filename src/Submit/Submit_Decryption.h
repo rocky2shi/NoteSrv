@@ -9,7 +9,7 @@ namespace SUBMIT_DECRYPTION_SPACE
 
 
 
-// 验证“查看加密数据输入窗口”提交的数据
+// 楠岃瘉鈥滄煡鐪嬪姞瀵嗘暟鎹緭鍏ョ獥鍙ｂ�濇彁浜ょ殑鏁版嵁
 class Submit_Decryption : public Submit
 {
 protected:

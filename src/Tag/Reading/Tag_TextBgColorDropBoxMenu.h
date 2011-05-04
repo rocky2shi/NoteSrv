@@ -10,7 +10,7 @@ namespace TAG_TEXTBGCOLORDROPBOXMENU_SPACE
 
 
 
-// 正文背景颜色下接选框菜单
+// 姝ｆ枃鑳屾櫙棰滆壊涓嬫帴閫夋鑿滃崟
 class Tag_TextBgColorDropBoxMenu : public Tag
 {
 protected:

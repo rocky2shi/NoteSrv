@@ -14,7 +14,7 @@ class Tag_TextTextarea : public Tag_Text
 protected:
     virtual string Get(Page *page);
 
-    // ×ª»»º¯Êı
+    // è½¬æ¢å‡½æ•°
     virtual const string ThisTextToWeb(const string &txt) const;
 
 

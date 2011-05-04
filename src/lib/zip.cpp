@@ -157,7 +157,7 @@ static void zerr(int ret)
     }
 }
 
-// 文件压缩
+// 鏂囦欢鍘嬬缉
 int ZipCompress(const string &src, const string &dest)
 {
     FILE* pfIn = fopen(src.c_str(), "r");
@@ -173,7 +173,7 @@ int ZipCompress(const string &src, const string &dest)
     return ret == Z_OK ? 0 : -1;
 }
 
-// 文件解压
+// 鏂囦欢瑙ｅ帇
 int ZipDecompress(const string &src, const string &dest)
 {
     FILE* pfIn = fopen(src.c_str(), "r");

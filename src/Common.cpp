@@ -1,7 +1,7 @@
 // Rocky 2010-04-09 15:17:23
 #include "MultiStringMatch.h"
 #include "Common.h"
-#include <dirent.h>     // ¿çÏµÍ³ÎÊÌâ [XXX]
+#include <dirent.h>     // è·¨ç³»ç»Ÿé—®é¢˜ [XXX]
 #include <fstream>
 
 
@@ -14,7 +14,7 @@
 
 
 
-// °ü½á¹¹×ªÎª×Ö·û´®
+// åŒ…ç»“æ„è½¬ä¸ºå­—ç¬¦ä¸²
 const string map2string(const map<string, string> &pack)
 {
     ostringstream msg;
@@ -28,7 +28,7 @@ const string map2string(const map<string, string> &pack)
     return msg.str();
 }
 
-// ´®×ªÎªÈ«Ğ¡×Ö
+// ä¸²è½¬ä¸ºå…¨å°å­—
 void toLower(char *str)
 {
     while( NULL != str && '\0' != *str)
@@ -48,7 +48,7 @@ void toLower(string &str)
     }
 }
 
-// ´®×ªÎªÈ«´ó×Ö
+// ä¸²è½¬ä¸ºå…¨å¤§å­—
 void toUpper(char *str)
 {
     while( NULL != str && '\0' != *str)
@@ -59,7 +59,7 @@ void toUpper(char *str)
     }
 }
 
-// ÕûÊı×ªÎª´®
+// æ•´æ•°è½¬ä¸ºä¸²
 const string IntToString(int num)
 {
     char buf[16] = "";
@@ -68,8 +68,8 @@ const string IntToString(int num)
 }
 
 /*
- * ¹¦ÄÜ£º×Ö·ûµÄASCII£¨0¡«255£©×ªÎª´®±íÊ¾µÄÊ®Áù½øÖÆÊı
- * ±àĞ´£ºRocky 2010-05-12 10:51:22
+ * åŠŸèƒ½ï¼šå­—ç¬¦çš„ASCIIï¼ˆ0ï½255ï¼‰è½¬ä¸ºä¸²è¡¨ç¤ºçš„åå…­è¿›åˆ¶æ•°
+ * ç¼–å†™ï¼šRocky 2010-05-12 10:51:22
  */
 const char *AsciiToString(int num, char buf[3])
 {
@@ -81,8 +81,8 @@ const char *AsciiToString(int num, char buf[3])
     return buf;
 }
 
-// Í¨¹ıÎÄ¼şÃûÈ¡ÎÄ¼ş×Ö½ÚÊı
-// ³É¹¦·µ»ØÎÄ¼ş×Ö½ÚÊı£¬Ê§°Ü·µ0¡£
+// é€šè¿‡æ–‡ä»¶åå–æ–‡ä»¶å­—èŠ‚æ•°
+// æˆåŠŸè¿”å›æ–‡ä»¶å­—èŠ‚æ•°ï¼Œå¤±è´¥è¿”0ã€‚
 int GetSizeOfFile(const string &fullname)
 {
     struct stat stFile;
@@ -95,29 +95,29 @@ int GetSizeOfFile(const string &fullname)
 
 
 /*
- * ¹¦ÄÜ£º×Ö·û£¨Á½×Ö·û£©×ªÕûÊı
- * ±àĞ´£ºRocky 2010-04-20
+ * åŠŸèƒ½ï¼šå­—ç¬¦ï¼ˆä¸¤å­—ç¬¦ï¼‰è½¬æ•´æ•°
+ * ç¼–å†™ï¼šRocky 2010-04-20
  */
 int toInt(char c1, char c2)
 {
-    int n1 = 0; // Ê®Î»
-    int n2 = 0; // ¸öÎ»
+    int n1 = 0; // åä½
+    int n2 = 0; // ä¸ªä½
 
-    // ¼ÆËãÊ®Î»Êı
+    // è®¡ç®—åä½æ•°
     if('A' <= c1 && c1 <= 'F')
     {
-        n1 = (c1 - 'A' + 10) << 4; // ³ËÉÏ16
+        n1 = (c1 - 'A' + 10) << 4; // ä¹˜ä¸Š16
     }
     else if('a' <= c1 && c1 <= 'f')
     {
         n1 = (c1 - 'a' + 10) << 4;
     }
-    else // Êı×Ö
+    else // æ•°å­—
     {
         n1 = (c1 - '0') << 4;
     }
 
-    // ¼ÆËã¸öÎ»Êı
+    // è®¡ç®—ä¸ªä½æ•°
     if('A' <= c2 && c2 <= 'F')
     {
         n2 = (c2 - 'A' + 10);
@@ -126,7 +126,7 @@ int toInt(char c1, char c2)
     {
         n2 = (c2 - 'a' + 10);
     }
-    else // Êı×Ö
+    else // æ•°å­—
     {
         n2 = (c2 - '0');
     }
@@ -137,9 +137,9 @@ int toInt(char c1, char c2)
 
 
 /*
- * ¹¦ÄÜ£º½âÂëurl£¨%xx => ×Ö·û£©
- * ±àĞ´£ºRocky 2010-04-20
- * ×¢Òâ£ºstr±ØĞëÊÇ¿ÉĞ´ÄÚ´æ£¬×ª»»²Ù×÷ÔÚÔ­´®ÖĞ½øĞĞ£»
+ * åŠŸèƒ½ï¼šè§£ç urlï¼ˆ%xx => å­—ç¬¦ï¼‰
+ * ç¼–å†™ï¼šRocky 2010-04-20
+ * æ³¨æ„ï¼šstrå¿…é¡»æ˜¯å¯å†™å†…å­˜ï¼Œè½¬æ¢æ“ä½œåœ¨åŸä¸²ä¸­è¿›è¡Œï¼›
  */
 char *UrlDecode(char * const str)
 {
@@ -150,24 +150,24 @@ char *UrlDecode(char * const str)
 
     while('\0' != *pOld && '\0' != *(pOld + 1) && '\0' != *(pOld + 2))
     {
-        if('%' == *pOld) // ÊÇ%XXĞÎÊ½£¬Ğè½âÂë£»
+        if('%' == *pOld) // æ˜¯%XXå½¢å¼ï¼Œéœ€è§£ç ï¼›
         {
             *pNew = toInt(*(pOld + 1), *(pOld + 2));
-            pOld += 3; // Ç°½øÈıÎ»
+            pOld += 3; // å‰è¿›ä¸‰ä½
         }
         else if('+' == *pOld)
         {
-            *pNew = ' ';    // +×ªÎª¿Õ¸ñ
+            *pNew = ' ';    // +è½¬ä¸ºç©ºæ ¼
             pOld++;
         }
         else
         {
-            *pNew = *pOld; // ²»Ğè½âÂë
-            pOld++; // Ç°½øÒ»Î»
+            *pNew = *pOld; // ä¸éœ€è§£ç 
+            pOld++; // å‰è¿›ä¸€ä½
         }
-        pNew++; // Ç°½øÒ»Î»
+        pNew++; // å‰è¿›ä¸€ä½
     }
-    // Î´×ª»»²¿·Ö
+    // æœªè½¬æ¢éƒ¨åˆ†
     while('\0' != *pOld)
     {
         *pNew = ('+' == *pOld) ? ' ' : *pOld; // Rocky 2010-05-19 18:54:45
@@ -183,12 +183,12 @@ const string UrlDecode(const string &str)
     static const int LEN_MAX = 512;
 
     /*
-     * ÕâÀï·ÖÁ½ÖÖ´¦ÀíÇé¿ö£ºµ±×Ö·û´®ºÜ³¤Ê±£¬ĞèÊÇ¶¯Ì¬·ÖÅä
-     * ÄÚ´æ£¬Òò´ËÓĞÓĞ¶à´Îcopy²Ù×÷¡£[XXX]
+     * è¿™é‡Œåˆ†ä¸¤ç§å¤„ç†æƒ…å†µï¼šå½“å­—ç¬¦ä¸²å¾ˆé•¿æ—¶ï¼ŒåŠ¨æ€åˆ†é…
+     * å†…å­˜ï¼Œå› æ­¤æœ‰æœ‰å¤šæ¬¡copyæ“ä½œã€‚[XXX]
      */
     if(str.length() >= LEN_MAX)
     {
-        char *p = new char[ str.length() + 10 ];
+        char *p = new char[ str.length() + 10 ]; // å…¶å®ä¸éœ€è¦å¤šåŠ 10
         if(NULL == p)
         {
             return "";
@@ -206,11 +206,11 @@ const string UrlDecode(const string &str)
 }
 
 /*
- * ¹¦ÄÜ£º°ÑÖĞÎÄµÈ×Ö·û×ª»¯Îª°Ù·ÖºÅĞÎÊ½µÄ±àÂë
- * ±àĞ´£ºRocky 2010-05-08
- * ²ÎÊı£ºfrom--´ı×ª»»´®
- *       to--´æ·Å×ª»»ºóµÄ´®
- *       max--to´®µÄ×î´ó³¤¶È
+ * åŠŸèƒ½ï¼šæŠŠä¸­æ–‡ç­‰å­—ç¬¦è½¬åŒ–ä¸ºç™¾åˆ†å·å½¢å¼çš„ç¼–ç 
+ * ç¼–å†™ï¼šRocky 2010-05-08
+ * å‚æ•°ï¼šfrom--å¾…è½¬æ¢ä¸²
+ *       to--å­˜æ”¾è½¬æ¢åçš„ä¸²
+ *       max--toä¸²çš„æœ€å¤§é•¿åº¦
  */
 char *UrlCode(const char *from, char *to, int max)
 {
@@ -241,7 +241,7 @@ char *UrlCode(const char *from, char *to, int max)
     static char *xx = Init::doit();
 
     int i;
-    max -= 10; // ÒòÔÚÒÔÏÂ²Ù×÷ÖĞ£¬toÔÚÒ»´ÎÑ­»·ÖĞ²»Ö¹ºóÒÆ1Î»£»[Rocky 2010-05-17 15:41:30]
+    max -= 10; // å› åœ¨ä»¥ä¸‹æ“ä½œä¸­ï¼Œtoåœ¨ä¸€æ¬¡å¾ªç¯ä¸­ä¸æ­¢åç§»1ä½ï¼›[Rocky 2010-05-17 15:41:30]
     for(i = 0; (i < max) && ('\0' != *from); i++, from++)
     {
         const unsigned char &c = *from;
@@ -268,8 +268,9 @@ const string UrlCode(const string &str)
     static const int LEN_MAX = 4 * 1024;
 
     /*
-     * ÕâÀï·ÖÁ½ÖÖ´¦ÀíÇé¿ö£ºµ±×Ö·û´®ºÜ³¤Ê±£¬ĞèÊÇ¶¯Ì¬·ÖÅä
-     * ÄÚ´æ£¬Òò´ËÓĞÓĞ¶à´Îcopy²Ù×÷¡£[XXX]
+     * è¿™é‡Œåˆ†ä¸¤ç§å¤„ç†æƒ…å†µï¼šå½“å­—ç¬¦ä¸²å¾ˆé•¿æ—¶ï¼ŒåŠ¨æ€åˆ†é…
+     * å†…å­˜ï¼Œå› æ­¤æœ‰æœ‰å¤šæ¬¡copyæ“ä½œã€‚[XXX]
+     * ï¼ˆæ³¨ï¼šè¿™é‡Œçš„â€œ*2â€åŠâ€œ+10â€åªæ˜¯ä¸€ä¸ªçŒœæµ‹å€¼ï¼›ï¼‰
      */
     if( (str.length() * 2) >= LEN_MAX )
     {
@@ -291,8 +292,8 @@ const string UrlCode(const string &str)
 }
 
 /*
- * ¹¦ÄÜ£º·µ»ØÖ¸ÏòÈ«Â·¾¶ÖĞ»ù±¾Ãû²¿·ÖµÄÖ¸Õë
- * ±àĞ´£ºRocky 2008-4-7 12:02
+ * åŠŸèƒ½ï¼šè¿”å›æŒ‡å‘å…¨è·¯å¾„ä¸­åŸºæœ¬åéƒ¨åˆ†çš„æŒ‡é’ˆ
+ * ç¼–å†™ï¼šRocky 2008-4-7 12:02
  */
 const char *GetBaseName(const char *pFullPath)
 {
@@ -310,12 +311,12 @@ const char *GetBaseName(const char *pFullPath)
 }
 
 /*
- * ¹¦ÄÜ£ºÈ¡ÎÄ¼şÀàĞÍ£¨ºó×ºÃû£©´®
- * ±àĞ´£ºRocky 2010-04-27 16:41:39
+ * åŠŸèƒ½ï¼šå–æ–‡ä»¶ç±»å‹ï¼ˆåç¼€åï¼‰ä¸²
+ * ç¼–å†™ï¼šRocky 2010-04-27 16:41:39
  */
 const char *GetFileType(const char *filename)
 {
-    // ´ÓºóÍùÇ°ÕÒ¡®.¡¯
+    // ä»åå¾€å‰æ‰¾â€˜.â€™
     filename = rindex(filename, '.');
     if(NULL == filename)
     {
@@ -325,18 +326,18 @@ const char *GetFileType(const char *filename)
 }
 
 /*
- * ¹¦ÄÜ£º·¢ËÍÎÄ¼şµ½Á¬½Ó
- * ±àĞ´£ºRocky 2010-0427
- * ·µ»Ø£ºÒÑ·¢ËÍµÄ×Ö½ÚÊı
+ * åŠŸèƒ½ï¼šå‘é€æ–‡ä»¶åˆ°è¿æ¥
+ * ç¼–å†™ï¼šRocky 2010-0427
+ * è¿”å›ï¼šå·²å‘é€çš„å­—èŠ‚æ•°
  */
 int SendFile(FileObj &file, Connect *connect)
 {
     int ret;
     char buf[256];
     unsigned int count = 0;
-    const string &ip = connect->GetPeerAddr(); // È¡³ö¿Í»§¶ËÁ¬½Óip
+    const string &ip = connect->GetPeerAddr(); // å–å‡ºå®¢æˆ·ç«¯è¿æ¥ip
 
-    // Ê¹Ö®´ÓÎÄ¼şÍ·¿ªÊ¼¶ÁÈ¡
+    // ä½¿ä¹‹ä»æ–‡ä»¶å¤´å¼€å§‹è¯»å–
     file.SetSeek(FileObj::SET, 0);
 
     while( (ret = file.Read(buf, sizeof(buf))) > 0 )
@@ -357,13 +358,13 @@ int SendFile(FileObj &file, Connect *connect)
 }
 
 /*
- * ¹¦ÄÜ£ºÈ¡Ö¸¶¨·¶Î§Ëæ»úÕûÊı
- * ±àĞ´£ºRocky 2010-04-28
- * ·µ»Ø£ºmin <= ret <= max
+ * åŠŸèƒ½ï¼šå–æŒ‡å®šèŒƒå›´éšæœºæ•´æ•°
+ * ç¼–å†™ï¼šRocky 2010-04-28
+ * è¿”å›ï¼šmin <= ret <= max
  */
 int GetRandomInt(int min, int max)
 {
-    // ³õÊ¼»¯
+    // åˆå§‹åŒ–
     static struct Init{
         Init()
         {
@@ -380,8 +381,8 @@ int GetRandomInt(int min, int max)
 }
 
 /*
- * ¹¦ÄÜ£ºÈ¡Ëæ»ú×Ö·û´®£¨×ÖÄ¸Êı×Ö×é³É£©£¬´®³¤¶ÈÔçlenÖ¸¶¨£»
- * ±àĞ´£ºRocky 2010-05-07 10:01:24
+ * åŠŸèƒ½ï¼šå–éšæœºå­—ç¬¦ä¸²ï¼ˆå­—æ¯æ•°å­—ç»„æˆï¼‰ï¼Œä¸²é•¿åº¦ç”±lenæŒ‡å®šï¼›
+ * ç¼–å†™ï¼šRocky 2010-05-07 10:01:24
  */
 const string GetRandomString(int len/*=32*/)
 {
@@ -399,8 +400,8 @@ const string GetRandomString(int len/*=32*/)
 }
 
 /*
- * ¹¦ÄÜ£ºÓÉkey£¨Èç20060423000003£©È¡¶ÔÓ¦ÎÄ¼şÃû
- * ±àĞ´£ºRocky 2010-05-04 11:44:32
+ * åŠŸèƒ½ï¼šç”±keyï¼ˆå¦‚20060423000003ï¼‰å–å¯¹åº”æ–‡ä»¶å
+ * ç¼–å†™ï¼šRocky 2010-05-04 11:44:32
  */
 const string KeyToFile(const string &key)
 {
@@ -432,8 +433,8 @@ const string KeyToFile(const string &key)
 }
 
 /*
- * ¹¦ÄÜ£ºÓÉkey£¨Èç20060423000003£©×ª»»ÎªÃëÊı
- * ±àĞ´£ºRocky 2010-05-05 16:13:39
+ * åŠŸèƒ½ï¼šç”±keyï¼ˆå¦‚20060423000003ï¼‰è½¬æ¢ä¸ºç§’æ•°
+ * ç¼–å†™ï¼šRocky 2010-05-05 16:13:39
  */
 time_t KeyToSecond(const string &key)
 {
@@ -447,22 +448,22 @@ time_t KeyToSecond(const string &key)
 }
 
 /*
- * ¹¦ÄÜ£º°ÑºóÌ¨´æ´¢µÄÊı¾İ£¬×ª³ÉÒ³Ãæ¿ÉÏÔÊ¾¸ñÊ½¡£
- * ±àĞ´£ºRocky 2010-05-04 11:44:15
+ * åŠŸèƒ½ï¼šæŠŠåå°å­˜å‚¨çš„æ•°æ®ï¼Œè½¬æˆé¡µé¢å¯æ˜¾ç¤ºæ ¼å¼ã€‚
+ * ç¼–å†™ï¼šRocky 2010-05-04 11:44:15
  *
  * $web = TextToWeb($txt)
  */
 const string TextToWeb(const string &txt)
 {
     /*
-     *  ×÷×ª»»£º
+     *  ä½œè½¬æ¢ï¼š
      *
-     *  ¡®<¡¯=>¡®&lt;¡¯
-     *  ¡®>¡¯=>¡®&gt;¡¯
-     *  ¡®&¡¯=>¡®&amp;¡¯
-     *  ¡®\x1¡¯=>¡®\n¡¯
-     *  ¡®\x2¡¯=>¡®<¡¯
-     *  ¡®\x3¡¯=>¡®>¡¯
+     *  â€˜<â€™=>â€˜&lt;â€™
+     *  â€˜>â€™=>â€˜&gt;â€™
+     *  â€˜&â€™=>â€˜&amp;â€™
+     *  â€˜\x1â€™=>â€˜\nâ€™
+     *  â€˜\x2â€™=>â€˜<â€™
+     *  â€˜\x3â€™=>â€˜>â€™
      */
 
 
@@ -473,7 +474,7 @@ const string TextToWeb(const string &txt)
         switch( *p )
         {
         /****************************
-         * ÎªÊ¹Ò³ÃæÕı³£ÏÔÊ¾£¬Ó¦µ±×ªÒå£º¡®<¡¯¡®>¡¯¡®&¡¯µÈÒ³ÃæÌØÊâ×Ö·û
+         * ä¸ºä½¿é¡µé¢æ­£å¸¸æ˜¾ç¤ºï¼Œåº”å½“è½¬ä¹‰ï¼šâ€˜<â€™â€˜>â€™â€˜&â€™ç­‰é¡µé¢ç‰¹æ®Šå­—ç¬¦
          */
         case '<':
             s += "&lt;";
@@ -485,7 +486,7 @@ const string TextToWeb(const string &txt)
             s += "&amp;";
             break;
         /****************************
-         * ºóÌ¨´æ´¢Ê±×öÁËÌØ¶¨×ª»»£¬ËùÒÔÕâÀï×ª»ØÀ´£»
+         * åå°å­˜å‚¨æ—¶åšäº†ç‰¹å®šè½¬æ¢ï¼Œæ‰€ä»¥è¿™é‡Œè½¬å›æ¥ï¼›
          */
         case 1:
             s += "\n";
@@ -497,7 +498,7 @@ const string TextToWeb(const string &txt)
             s += ">";
             break;
         /****************************
-         * ²»Ğè×ª»»µÄ²¿·Ö
+         * ä¸éœ€è½¬æ¢çš„éƒ¨åˆ†
          */
         default:
             s += *p;
@@ -510,24 +511,24 @@ const string TextToWeb(const string &txt)
 }
 
 /*
- * ¹¦ÄÜ£º°ÑºóÌ¨´æ´¢µÄÊı¾İ£¬×ª³ÉÒ³Ãæ¿ÉÏÔÊ¾¸ñÊ½£¨ÓÃÓÚ±à¼­£¬Èç¡°<textarea>¡±±êÇ©ÖĞ£©¡£
- * ±àĞ´£ºRocky 2010-06-11 17:09:30
+ * åŠŸèƒ½ï¼šæŠŠåå°å­˜å‚¨çš„æ•°æ®ï¼Œè½¬æˆé¡µé¢å¯æ˜¾ç¤ºæ ¼å¼ï¼ˆç”¨äºç¼–è¾‘ï¼Œå¦‚â€œ<textarea>â€æ ‡ç­¾ä¸­ï¼‰ã€‚
+ * ç¼–å†™ï¼šRocky 2010-06-11 17:09:30
  *
  * $web = TextToWebEdit($txt)
  */
 const string TextToWebEdit(const string &txt)
 {
     /*
-     *  ×÷×ª»»£º
+     *  ä½œè½¬æ¢ï¼š
      *
-     *  ¡®\x1¡¯=>¡®\x1¡¯
+     *  â€˜\x1â€™=>â€˜\x1â€™
      */
 
 
     /*
-     * Ìæ»»´¦Àí»Ø³µ»»ĞĞ·û£¨ÆäËü×Ö·û²»±ä£©¡£
-     * ×¢Òâ£¬ÕâÀïµÄ¼¼ÇÉ£¬ÒòÎª¶ÔÕâÀïµÄ×Ö·ûÌæ»»Ö»ºÍÄÚÈİ±¾Éí
-     * Ïà¹Ø£¬ËùÒÔÉèÖÃÎª¾²Ì¬µÄ£¬±ÜÃâ¶à´ÎÖØ¸´µÄ³õÊ¼»¯£»
+     * æ›¿æ¢å¤„ç†å›è½¦æ¢è¡Œç¬¦ï¼ˆå…¶å®ƒå­—ç¬¦ä¸å˜ï¼‰ã€‚
+     * æ³¨æ„ï¼Œè¿™é‡Œçš„æŠ€å·§ï¼Œå› ä¸ºå¯¹è¿™é‡Œçš„å­—ç¬¦æ›¿æ¢åªå’Œå†…å®¹æœ¬èº«
+     * ç›¸å…³ï¼Œæ‰€ä»¥è®¾ç½®ä¸ºé™æ€çš„ï¼Œé¿å…å¤šæ¬¡é‡å¤çš„åˆå§‹åŒ–ï¼›
      */
     struct ToWeb
     {
@@ -550,28 +551,28 @@ const string TextToWebEdit(const string &txt)
 }
 
 /*
- * ¹¦ÄÜ£º°ÑºóÌ¨´æ´¢µÄÊı¾İ£¬×ª³ÉÒ³Ãæ¿ÉÏÔÊ¾¸ñÊ½£¨ÓÃÓÚÏÔÊ¾£©¡£
- * ±àĞ´£ºRocky 2010-06-11 17:23:55
+ * åŠŸèƒ½ï¼šæŠŠåå°å­˜å‚¨çš„æ•°æ®ï¼Œè½¬æˆé¡µé¢å¯æ˜¾ç¤ºæ ¼å¼ï¼ˆç”¨äºæ˜¾ç¤ºï¼‰ã€‚
+ * ç¼–å†™ï¼šRocky 2010-06-11 17:23:55
  *
  * $web = TextToWebHtml($txt)
  */
 const string TextToWebHtml(const string &txt)
 {
     /*
-     *  ×÷×ª»»£º
+     *  ä½œè½¬æ¢ï¼š
      *
-     *  ¡®<¡¯=>¡®&lt;¡¯
-     *  ¡®>¡¯=>¡®&gt;¡¯
-     *  ¡®&¡¯=>¡®&amp;¡¯
-     *  ¡®\x1¡¯=>¡®\n¡¯
-     *  ¡®\x2¡¯=>¡®<¡¯
-     *  ¡®\x3¡¯=>¡®>¡¯
+     *  â€˜<â€™=>â€˜&lt;â€™
+     *  â€˜>â€™=>â€˜&gt;â€™
+     *  â€˜&â€™=>â€˜&amp;â€™
+     *  â€˜\x1â€™=>â€˜\nâ€™
+     *  â€˜\x2â€™=>â€˜<â€™
+     *  â€˜\x3â€™=>â€˜>â€™
      */
 
     /*
-     * Ìæ»»´¦Àí»Ø³µ»»ĞĞ·û£¨ÆäËü×Ö·û²»±ä£©¡£
-     * ×¢Òâ£¬ÕâÀïµÄ¼¼ÇÉ£¬ÒòÎª¶ÔÕâÀïµÄ×Ö·ûÌæ»»Ö»ºÍÄÚÈİ±¾Éí
-     * Ïà¹Ø£¬ËùÒÔÉèÖÃÎª¾²Ì¬µÄ£¬±ÜÃâ¶à´ÎÖØ¸´µÄ³õÊ¼»¯£»
+     * æ›¿æ¢å¤„ç†å›è½¦æ¢è¡Œç¬¦ï¼ˆå…¶å®ƒå­—ç¬¦ä¸å˜ï¼‰ã€‚
+     * æ³¨æ„ï¼Œè¿™é‡Œçš„æŠ€å·§ï¼Œå› ä¸ºå¯¹è¿™é‡Œçš„å­—ç¬¦æ›¿æ¢åªå’Œå†…å®¹æœ¬èº«
+     * ç›¸å…³ï¼Œæ‰€ä»¥è®¾ç½®ä¸ºé™æ€çš„ï¼Œé¿å…å¤šæ¬¡é‡å¤çš„åˆå§‹åŒ–ï¼›
      */
     struct ToWeb
     {
@@ -604,33 +605,33 @@ const string TextToWebHtml(const string &txt)
 }
 
 /*
- * ¹¦ÄÜ£º°ÑÒ³ÃæµÄÔ´´úÂë×ö×ª»»ÄÜ´æ´¢µÄ·½Ê½£¨Ö÷Òª½â¾ö¡º´æ´¢/ÏÔÊ¾¡»¼äµÄ»¥»»ÎÊÌâ£©
- * ±àĞ´£ºRocky 2009-12-04 16:48:17
+ * åŠŸèƒ½ï¼šæŠŠé¡µé¢çš„æºä»£ç åšè½¬æ¢èƒ½å­˜å‚¨çš„æ–¹å¼ï¼ˆä¸»è¦è§£å†³ã€å­˜å‚¨/æ˜¾ç¤ºã€é—´çš„äº’æ¢é—®é¢˜ï¼‰
+ * ç¼–å†™ï¼šRocky 2009-12-04 16:48:17
  *
  * $txt = WebToText($html)
  */
 const string WebToText(const string &html)
 {
     /*
-     *  ×÷×ª»»£º
+     *  ä½œè½¬æ¢ï¼š
      *
-     *  ¡®&lt;¡¯=>¡®<¡¯
-     *  ¡®&gt;¡¯=>¡®>¡¯
-     *  ¡®&amp¡¯=>¡®&¡¯
-     *  ¡®\n¡¯  =>¡®\1¡¯
-     *  ¡®\r¡¯  =>¡®¡¯
-     *  ¡®<"    =>¡®\x2¡¯
-     *  ¡®>"    =>¡®\x3¡¯
+     *  â€˜&lt;â€™=>â€˜<â€™
+     *  â€˜&gt;â€™=>â€˜>â€™
+     *  â€˜&ampâ€™=>â€˜&â€™
+     *  â€˜\nâ€™  =>â€˜\1â€™
+     *  â€˜\râ€™  =>â€˜â€™
+     *  â€˜<"    =>â€˜\x2â€™
+     *  â€˜>"    =>â€˜\x3â€™
      */
 
     int i;
     int c;
-    int state = 0; // ³õÌ¬
+    int state = 0; // åˆæ€
     string str;
 
     for(i=0; '\0' != (c = html[i]); i++)
     {
-        // ´¦Àí¡®\r¡¯¡®\n¡¯
+        // å¤„ç†â€˜\râ€™â€˜\nâ€™
         switch( c )
         {
         case '\n':
@@ -647,10 +648,10 @@ const string WebToText(const string &html)
         }
 
 
-        // ¶Ô¡®&lt;¡¯¡®&gt;¡¯¡®&amp¡¯£¬Ê¹ÓÃ×´Ì¬»ú´¦Àí£»
+        // å¯¹â€˜&lt;â€™â€˜&gt;â€™â€˜&ampâ€™ï¼Œä½¿ç”¨çŠ¶æ€æœºå¤„ç†ï¼›
         switch( state )
         {
-        case 0:     // ÆğÊ¼Ì¬
+        case 0:     // èµ·å§‹æ€
             if('&' == c)
             {
                 state = 1;
@@ -780,25 +781,25 @@ const string WebToText(const string &html)
 }
 
 /*
- * ¹¦ÄÜ£º°ÑÒ³ÃæµÄ±à¼­¿òÄÚÈİ×ö×ª»»ÄÜ´æ´¢µÄ·½Ê½£¨Ö÷Òª½â¾ö¡º´æ´¢/ÏÔÊ¾¡»¼äµÄ»¥»»ÎÊÌâ£©
- * ±àĞ´£ºRocky 2010-06-11 17:37:24
+ * åŠŸèƒ½ï¼šæŠŠé¡µé¢çš„ç¼–è¾‘æ¡†å†…å®¹åšè½¬æ¢èƒ½å­˜å‚¨çš„æ–¹å¼ï¼ˆä¸»è¦è§£å†³ã€å­˜å‚¨/æ˜¾ç¤ºã€é—´çš„äº’æ¢é—®é¢˜ï¼‰
+ * ç¼–å†™ï¼šRocky 2010-06-11 17:37:24
  *
  * $txt = WebEditToText($html)
  */
 const string WebEditToText(const string &html)
 {
     /*
-     *  ×÷×ª»»£¬Ö»´¦Àí»Ø³µ»»ĞĞ·û£º
+     *  ä½œè½¬æ¢ï¼Œåªå¤„ç†å›è½¦æ¢è¡Œç¬¦ï¼š
      *
-     *  ¡®\n¡¯  =>¡®\x1¡¯
-     *  ¡®\r¡¯  =>¡®¡¯
+     *  â€˜\nâ€™  =>â€˜\x1â€™
+     *  â€˜\râ€™  =>â€˜â€™
      */
 
 
     /*
-     * Ìæ»»´¦Àí»Ø³µ»»ĞĞ·û£¨ÆäËü×Ö·û²»±ä£©¡£
-     * ×¢Òâ£¬ÕâÀïµÄ¼¼ÇÉ£¬ÒòÎª¶ÔÕâÀïµÄ×Ö·ûÌæ»»Ö»ºÍÄÚÈİ±¾Éí
-     * Ïà¹Ø£¬ËùÒÔÉèÖÃÎª¾²Ì¬µÄ£¬±ÜÃâ¶à´ÎÖØ¸´µÄ³õÊ¼»¯£»
+     * æ›¿æ¢å¤„ç†å›è½¦æ¢è¡Œç¬¦ï¼ˆå…¶å®ƒå­—ç¬¦ä¸å˜ï¼‰ã€‚
+     * æ³¨æ„ï¼Œè¿™é‡Œçš„æŠ€å·§ï¼Œå› ä¸ºå¯¹è¿™é‡Œçš„å­—ç¬¦æ›¿æ¢åªå’Œå†…å®¹æœ¬èº«
+     * ç›¸å…³ï¼Œæ‰€ä»¥è®¾ç½®ä¸ºé™æ€çš„ï¼Œé¿å…å¤šæ¬¡é‡å¤çš„åˆå§‹åŒ–ï¼›
      */
     struct ToText
     {
@@ -823,30 +824,30 @@ const string WebEditToText(const string &html)
 }
 
 /*
- * ¹¦ÄÜ£º°ÑÒ³ÃæµÄÔ´´úÂë×ö×ª»»ÄÜ´æ´¢µÄ·½Ê½£¨Ö÷Òª½â¾ö¡º´æ´¢/ÏÔÊ¾¡»¼äµÄ»¥»»ÎÊÌâ£©
- * ±àĞ´£ºRocky 2010-06-11 17:44:35
+ * åŠŸèƒ½ï¼šæŠŠé¡µé¢çš„æºä»£ç åšè½¬æ¢èƒ½å­˜å‚¨çš„æ–¹å¼ï¼ˆä¸»è¦è§£å†³ã€å­˜å‚¨/æ˜¾ç¤ºã€é—´çš„äº’æ¢é—®é¢˜ï¼‰
+ * ç¼–å†™ï¼šRocky 2010-06-11 17:44:35
  *
  * $txt = WebHtmlToText($html)
  */
 const string WebHtmlToText(const string &html)
 {
     /*
-     *  ×÷×ª»»£º
+     *  ä½œè½¬æ¢ï¼š
      *
-     *  ¡®&lt;¡¯=>¡®<¡¯
-     *  ¡®&gt;¡¯=>¡®>¡¯
-     *  ¡®&amp¡¯=>¡®&¡¯
-     *  ¡®\n¡¯  =>¡®\1¡¯
-     *  ¡®\r¡¯  =>¡®¡¯
-     *  ¡®<"    =>¡®\x2¡¯
-     *  ¡®>"    =>¡®\x3¡¯
+     *  â€˜&lt;â€™=>â€˜<â€™
+     *  â€˜&gt;â€™=>â€˜>â€™
+     *  â€˜&ampâ€™=>â€˜&â€™
+     *  â€˜\nâ€™  =>â€˜\1â€™
+     *  â€˜\râ€™  =>â€˜â€™
+     *  â€˜<"    =>â€˜\x2â€™
+     *  â€˜>"    =>â€˜\x3â€™
      */
 
 
     /*
-     * Ìæ»»´¦Àí»Ø³µ»»ĞĞ·û£¨ÆäËü×Ö·û²»±ä£©¡£
-     * ×¢Òâ£¬ÕâÀïµÄ¼¼ÇÉ£¬ÒòÎª¶ÔÕâÀïµÄ×Ö·ûÌæ»»Ö»ºÍÄÚÈİ±¾Éí
-     * Ïà¹Ø£¬ËùÒÔÉèÖÃÎª¾²Ì¬µÄ£¬±ÜÃâ¶à´ÎÖØ¸´µÄ³õÊ¼»¯£»
+     * æ›¿æ¢å¤„ç†å›è½¦æ¢è¡Œç¬¦ï¼ˆå…¶å®ƒå­—ç¬¦ä¸å˜ï¼‰ã€‚
+     * æ³¨æ„ï¼Œè¿™é‡Œçš„æŠ€å·§ï¼Œå› ä¸ºå¯¹è¿™é‡Œçš„å­—ç¬¦æ›¿æ¢åªå’Œå†…å®¹æœ¬èº«
+     * ç›¸å…³ï¼Œæ‰€ä»¥è®¾ç½®ä¸ºé™æ€çš„ï¼Œé¿å…å¤šæ¬¡é‡å¤çš„åˆå§‹åŒ–ï¼›
      */
     struct ToText
     {
@@ -887,21 +888,21 @@ const string WebHtmlToText(const string &html)
 }
 
 /*
- *  ¹¦ÄÜ£º×ª»»ÃëÊı£¨»òµ±Ç°ÏµÍ³Ê±¼ä[µ±nSecÎª0Ê±]£©ÎªÖ¸¶¨ĞÎÊ½
- *  ²ÎÊı£º
- *           pTimeBuf : ´æ·ÅÊ±¼ä´®µÄÄÚ´æÇø
- *           mode     : 0=>ĞÎÈç£º1204434269
- *                      1=>ĞÎÈç£º080302
- *                      2=>ĞÎÈç£º08_03_02
- *                      3=>ĞÎÈç£º08.03.02
- *                      4=>ĞÎÈç£º20080302
- *                      5=>ĞÎÈç£º2008_03_02
- *                      6=>ĞÎÈç£º2008.03.02
- *                      7=>ĞÎÈç£º2009-02-07 18:56:07
- *           nSec     : ĞèÒª×ª»»µÄÃëÊı£¨Ä¬ÈÏ0£©
- *  ±àĞ´£ºRocky, rocky2shi@126.com, 2008-3-2 12:15:36
- *  °æ±¾£º1.1
- *  ·µ»Ø£ºµ±Ç°Ê±¼äµÄÃëÊı
+ *  åŠŸèƒ½ï¼šè½¬æ¢ç§’æ•°ï¼ˆæˆ–å½“å‰ç³»ç»Ÿæ—¶é—´[å½“nSecä¸º0æ—¶]ï¼‰ä¸ºæŒ‡å®šå½¢å¼
+ *  å‚æ•°ï¼š
+ *           pTimeBuf : å­˜æ”¾æ—¶é—´ä¸²çš„å†…å­˜åŒº
+ *           mode     : 0=>å½¢å¦‚ï¼š1204434269
+ *                      1=>å½¢å¦‚ï¼š080302
+ *                      2=>å½¢å¦‚ï¼š08_03_02
+ *                      3=>å½¢å¦‚ï¼š08.03.02
+ *                      4=>å½¢å¦‚ï¼š20080302
+ *                      5=>å½¢å¦‚ï¼š2008_03_02
+ *                      6=>å½¢å¦‚ï¼š2008.03.02
+ *                      7=>å½¢å¦‚ï¼š2009-02-07 18:56:07
+ *           nSec     : éœ€è¦è½¬æ¢çš„ç§’æ•°ï¼ˆé»˜è®¤0ï¼‰
+ *  ç¼–å†™ï¼šRocky, rocky2shi@126.com, 2008-3-2 12:15:36
+ *  ç‰ˆæœ¬ï¼š1.1
+ *  è¿”å›ï¼šå½“å‰æ—¶é—´çš„ç§’æ•°
  */
 time_t TimeTo(char *pTimeBuf, int mode/*=7*/, int nSec/*=0*/)
 {
@@ -912,37 +913,37 @@ time_t TimeTo(char *pTimeBuf, int mode/*=7*/, int nSec/*=0*/)
     {
         case 0:
         {
-            sprintf(pTimeBuf, "%u", (int)t); // È¡ÃëÊıµÄÊ±¼äÖµ
+            sprintf(pTimeBuf, "%u", (int)t); // å–ç§’æ•°çš„æ—¶é—´å€¼
         }break;
         //------
         case 1:
         {
-            strftime(pTimeBuf, 32, "%y%m%d", localtime(&t) );  // Èç£º080302
+            strftime(pTimeBuf, 32, "%y%m%d", localtime(&t) );  // å¦‚ï¼š080302
         }break;
         case 2:
         {
-            strftime(pTimeBuf, 32, "%y_%m_%d", localtime(&t) );// Èç:08_03_02
+            strftime(pTimeBuf, 32, "%y_%m_%d", localtime(&t) );// å¦‚:08_03_02
         }break;
         case 3:
         {
-            strftime(pTimeBuf, 32, "%y.%m.%d", localtime(&t) );// Èç:08.03.02
+            strftime(pTimeBuf, 32, "%y.%m.%d", localtime(&t) );// å¦‚:08.03.02
         }break;
         //------
         case 4:
         {
-            strftime(pTimeBuf, 32, "%Y%m%d", localtime(&t) );  // Èç:20080302
+            strftime(pTimeBuf, 32, "%Y%m%d", localtime(&t) );  // å¦‚:20080302
         }break;
         case 5:
         {
-            strftime(pTimeBuf, 32, "%Y_%m_%d", localtime(&t) );// Èç:2008_03_02
+            strftime(pTimeBuf, 32, "%Y_%m_%d", localtime(&t) );// å¦‚:2008_03_02
         }break;
         case 6:
         {
-            strftime(pTimeBuf, 32, "%Y.%m.%d", localtime(&t) );// Èç:2008.03.02
+            strftime(pTimeBuf, 32, "%Y.%m.%d", localtime(&t) );// å¦‚:2008.03.02
         }break;
         case 7:
         {
-            strftime(pTimeBuf, 32, "%Y-%m-%d %H:%M:%S", localtime(&t) );// Èç:2009-02-07 18:56:07
+            strftime(pTimeBuf, 32, "%Y-%m-%d %H:%M:%S", localtime(&t) );// å¦‚:2009-02-07 18:56:07
         }break;
         //------
         default:
@@ -974,19 +975,19 @@ const string TimeTo(long sec, const string &format/*="%Y-%m-%d %H:%M:%S"*/)
 }
 
 /*
- * È¡format¸ñÊ½Ö¸¶¨µÄµ±Ç°Ê±¼ä´®
+ * å–formatæ ¼å¼æŒ‡å®šçš„å½“å‰æ—¶é—´ä¸²
  *
- *      ¸ñÊ½¶¨ÒåÈç£º
- *          %Y: Äê£¨ËÄÎ»£©
- *          %m: ÔÂ
- *          %d: ÈÕ
- *          %H: Ê±
- *          %M: ·Ö
- *          %S: Ãë
+ *      æ ¼å¼å®šä¹‰å¦‚ï¼š
+ *          %Y: å¹´ï¼ˆå››ä½ï¼‰
+ *          %m: æœˆ
+ *          %d: æ—¥
+ *          %H: æ—¶
+ *          %M: åˆ†
+ *          %S: ç§’
  *
- *      ÒÔÉÏÈ¡ÖµĞÎÊ½Èç£º
+ *      ä»¥ä¸Šå–å€¼å½¢å¼å¦‚ï¼š
  *          "%Y-%m-%d %H:%M:%S" => 2009-02-07 18:56:07
- *  ÆäËüĞÎÊ½Ê±¼ä´®£¬²Î¿¼strftime()º¯Êı
+ *  å…¶å®ƒå½¢å¼æ—¶é—´ä¸²ï¼Œå‚è€ƒstrftime()å‡½æ•°
  */
 const string NowTime(const string &format/*="%Y-%m-%d %H:%M:%S"*/)
 {
@@ -994,8 +995,8 @@ const string NowTime(const string &format/*="%Y-%m-%d %H:%M:%S"*/)
 }
 
 /*
- * ¹¦ÄÜ£ºÈ¡µ±Ç°µÄ£¨»ò×ª»»ÃëÊıÎª£©GMTÊ±¼ä
- * ±àĞ´£ºRocky 2010-05-24 11:27:18
+ * åŠŸèƒ½ï¼šå–å½“å‰çš„ï¼ˆæˆ–è½¬æ¢ç§’æ•°ä¸ºï¼‰GMTæ—¶é—´
+ * ç¼–å†™ï¼šRocky 2010-05-24 11:27:18
  */
 const string GmgTime(long sec/*=0*/)
 {
@@ -1007,14 +1008,14 @@ const string GmgTime(long sec/*=0*/)
 }
 
 /*
- * ¹¦ÄÜ£º×Ö·ûÌæ»»£¨ÔÚÔ­Êı¾İÉÏÖ±½ÓĞŞ¸Ä£©£»
- * ±àĞ´£ºRocky 2009-1-20 17:11:23
- * ²ÎÊı£º
- *          buf[in][out] --- ĞèÌæ»»µÄ»º³åÇøÊı¾İ
- *          len[in] --- Êı¾İ³¤¶È£»
- *          cOld[in] --- ¾É×Ö·û
- *          cNew[in] --- ĞÂ×Ö·û
- * ·µ»Ø£º±»Ìæ»»µÄ×Ö·û¸öÊı
+ * åŠŸèƒ½ï¼šå­—ç¬¦æ›¿æ¢ï¼ˆåœ¨åŸæ•°æ®ä¸Šç›´æ¥ä¿®æ”¹ï¼‰ï¼›
+ * ç¼–å†™ï¼šRocky 2009-1-20 17:11:23
+ * å‚æ•°ï¼š
+ *          buf[in][out] --- éœ€æ›¿æ¢çš„ç¼“å†²åŒºæ•°æ®
+ *          len[in] --- æ•°æ®é•¿åº¦ï¼›
+ *          cOld[in] --- æ—§å­—ç¬¦
+ *          cNew[in] --- æ–°å­—ç¬¦
+ * è¿”å›ï¼šè¢«æ›¿æ¢çš„å­—ç¬¦ä¸ªæ•°
  */
 int CharReplace(void *buf, int len, char cOld, char cNew)
 {
@@ -1053,8 +1054,8 @@ int CharReplace(string &src, char cOld, char cNew)
 }
 
 /*
- * ¹¦ÄÜ£º¸ñÊ½»¯×Ö½ÚÊıÎªÒ×¶ÁĞÎÊ½
- * ±àĞ´£ºRocky 2008-10-12 02:35:33
+ * åŠŸèƒ½ï¼šæ ¼å¼åŒ–å­—èŠ‚æ•°ä¸ºæ˜“è¯»å½¢å¼
+ * ç¼–å†™ï¼šRocky 2008-10-12 02:35:33
  */
 const string ByteSizeFormat(int size)
 {
@@ -1076,13 +1077,13 @@ const string ByteSizeFormat(int size)
 }
 
 /*
- * ¹¦ÄÜ£º·Ö½â×Ö·û´®Îª[key/value]¶Ô£¬´æÈëpackÖĞ£»
- * ±àĞ´£ºRocky 2010-05-07 10:52:08
- * ²ÎÊı£ºstr--Ö÷´®
- *       pack--´æ·Å[key/value]¶Ô
- *       first--µÚÒ»²ã·Ö¸ô·û
- *       second--µÚ¶ş²ã·Ö¸ô·û
- * ×¢Òâ£ºstr±ØĞëÊÇ¿ÉĞ´µÄÄÚ´æ£¨·Ç³£Á¿£©
+ * åŠŸèƒ½ï¼šåˆ†è§£å­—ç¬¦ä¸²ä¸º[key/value]å¯¹ï¼Œå­˜å…¥packä¸­ï¼›
+ * ç¼–å†™ï¼šRocky 2010-05-07 10:52:08
+ * å‚æ•°ï¼šstr--ä¸»ä¸²
+ *       pack--å­˜æ”¾[key/value]å¯¹
+ *       first--ç¬¬ä¸€å±‚åˆ†éš”ç¬¦
+ *       second--ç¬¬äºŒå±‚åˆ†éš”ç¬¦
+ * æ³¨æ„ï¼šstrå¿…é¡»æ˜¯å¯å†™çš„å†…å­˜ï¼ˆéå¸¸é‡ï¼‰
  */
 void ParseStr(char *str, map<string, string> &pack, char first, char second)
 {
@@ -1092,7 +1093,7 @@ void ParseStr(char *str, map<string, string> &pack, char first, char second)
     char *value;
 
     /*
-     * ´¦Àí¼¸ÖÖÇé¿öµÈ£º
+     * å¤„ç†å‡ ç§æƒ…å†µç­‰ï¼š
      *
      * 1 => [window.screen.width=1024&window.screen.height=&username=abcdefghijklmnopqrstuvwxyz&login=GET\0]
      * 2 => [user\0]
@@ -1104,26 +1105,26 @@ void ParseStr(char *str, map<string, string> &pack, char first, char second)
         name = NULL;
         value = NULL;
         begin = str;
-        str = strchr(str, first); // ÈçfirstÎª';'
+        str = strchr(str, first); // å¦‚firstä¸º';'
         if(NULL != str)
         {
-            // Çåµô¡®;¡¯
+            // æ¸…æ‰â€˜;â€™
             *str = '\0';
-            // ÒÆµ½ÏÂÒ»¶Î£¬ÎªÏÂ´Î½âÎö×ö×¼±¸£»Èô¡®;¡¯ºóÊÇ¿Õ¸ñ£¬ÔòÒªÌø¹ıÁ½×Ö·û£»
+            // ç§»åˆ°ä¸‹ä¸€æ®µï¼Œä¸ºä¸‹æ¬¡è§£æåšå‡†å¤‡ï¼›è‹¥â€˜;â€™åæ˜¯ç©ºæ ¼ï¼Œåˆ™è¦è·³è¿‡ä¸¤å­—ç¬¦ï¼›
             str++;
-            IGNORE_BLANK(str); // ºöÂÔÇ°µ¼Ç°¸ñ
+            IGNORE_BLANK(str); // å¿½ç•¥å‰å¯¼å‰æ ¼
         }
-        end = strchr(begin, second);    // ÈçsecondÎª'='
+        end = strchr(begin, second);    // å¦‚secondä¸º'='
         if(NULL != end)
         {
-            *end = '\0';    // Çåµô¡®£½¡¯
+            *end = '\0';    // æ¸…æ‰â€˜ï¼â€™
             end++;
             value = end;
         }
         name = begin;
         if('\0' != *name)
         {
-            // ½âÂëºó´æÈë£¨×¢ÒâUrlDecode()²Ù×÷µÄÄÚ´æ±ØĞëÊÇ¿ÉĞ´µÄ£©
+            // è§£ç åå­˜å…¥ï¼ˆæ³¨æ„UrlDecode()æ“ä½œçš„å†…å­˜å¿…é¡»æ˜¯å¯å†™çš„ï¼‰
             pack[name] = (value && *value) ? UrlDecode(value) : "";
             //Debug("[%s]=[%s]", name, value);
         }
@@ -1131,8 +1132,8 @@ void ParseStr(char *str, map<string, string> &pack, char first, char second)
 }// end of void ParseStr(char *str...
 
 /*
- * ¹¦ÄÜ£ºÈ¡map<string, string>ÖĞµÄÖµ£¬Èç²»´æÔÚ¼ü£¬Ôò·µ»ØÄ¬ÈÏÖµ£»
- * ±àĞ´£ºRocky 2010-05-07 11:19:08
+ * åŠŸèƒ½ï¼šå–map<string, string>ä¸­çš„å€¼ï¼Œå¦‚ä¸å­˜åœ¨é”®ï¼Œåˆ™è¿”å›é»˜è®¤å€¼ï¼›
+ * ç¼–å†™ï¼šRocky 2010-05-07 11:19:08
  */
 const string GetMapValue(const map<string, string> &pack, const string &key, const string def/*=""*/)
 {
@@ -1145,9 +1146,9 @@ const string GetMapValue(const map<string, string> &pack, const string &key, con
 }
 
 /*
- * ¹¦ÄÜ£º¼ÓÃÜÃ÷ÎÄµÄÃÜÂë£¬¶Ôcrypt_r()º¯Êı½øĞĞ°ü×°£»
- * ±àĞ´£ºRocky 2010-05-07 16:44:26
- * ·µ»Ø£º¼ÓÃÜºóµÄÂëÎÄ´®
+ * åŠŸèƒ½ï¼šåŠ å¯†æ˜æ–‡çš„å¯†ç ï¼Œå¯¹crypt_r()å‡½æ•°è¿›è¡ŒåŒ…è£…ï¼›
+ * ç¼–å†™ï¼šRocky 2010-05-07 16:44:26
+ * è¿”å›ï¼šåŠ å¯†åçš„ç æ–‡ä¸²
  */
 const string Crypt(const string &key, const string salt)
 {
@@ -1159,7 +1160,7 @@ const string Crypt(const string &key, const string salt)
 
 
 
-// ÊÇ·ñÎªÍ¼Æ¬£ºjpg, jpeg, png, gif, ...
+// æ˜¯å¦ä¸ºå›¾ç‰‡ï¼šjpg, jpeg, png, gif, ...
 bool isImage(const string &type)
 {
     static const string suffix[] = {
@@ -1189,7 +1190,7 @@ bool isImage(const string &type)
     return false;
 }
 
-// ÊÇ·ñÎªÎÄ±¾ÎÄ¼ş£ºtxt, js, css, html, htm, ...
+// æ˜¯å¦ä¸ºæ–‡æœ¬æ–‡ä»¶ï¼štxt, js, css, html, htm, ...
 bool isText(const string &type)
 {
     static const string suffix[] = {
@@ -1218,12 +1219,12 @@ bool isText(const string &type)
 }
 
 /*
- * ¹¦ÄÜ£ºÉ¾³ıµ¥¸öÎÄ¼ş
- * ±àĞ´£ºRocky 2010-05-10 20:32:44
+ * åŠŸèƒ½ï¼šåˆ é™¤å•ä¸ªæ–‡ä»¶
+ * ç¼–å†™ï¼šRocky 2010-05-10 20:32:44
  */
 int DeleteFile(const char *fullname)
 {
-    if("" == fullname || "/" == fullname)
+    if(NULL == fullname || '\0' == *fullname || '/' == *fullname)
     {
         return ERR;
     }
@@ -1235,8 +1236,8 @@ int DeleteFile(const string &fullname)
 }
 
 // Rocky, 2008-4-5 3:22:47
-// É¾³ıpDirPathËùÖ¸ÎÄ¼ş»òÄ¿Â¼£¨°üÀ¨ËùÓĞ×ÓÄ¿Â¼£©
-// ·µ»Ø£ºĞ¡ÓÚ0³ö´í¡£
+// åˆ é™¤pDirPathæ‰€æŒ‡æ–‡ä»¶æˆ–ç›®å½•ï¼ˆåŒ…æ‹¬æ‰€æœ‰å­ç›®å½•ï¼‰
+// è¿”å›ï¼šå°äº0å‡ºé”™ã€‚
 int DeleteDir(const char *pDirPath)
 {
     char szFullName[512];
@@ -1250,7 +1251,7 @@ int DeleteDir(const char *pDirPath)
     pDir = opendir(pDirPath);
     if( NULL != pDir )
     {
-        // ±éÀúÊı¾İÄ¿Â¼£¬Ïàµ±ÓÚË«ÖØÑ­»·À´±éÀú£¨µÚ¶şÖØ·ÅÔÚº¯Fun()ÖĞ£©
+        // éå†æ•°æ®ç›®å½•ï¼Œç›¸å½“äºåŒé‡å¾ªç¯æ¥éå†ï¼ˆç¬¬äºŒé‡æ”¾åœ¨å‡½Fun()ä¸­ï¼‰
         while( (pDirent = readdir(pDir)) != NULL )
         {
             if( strcmp(".", pDirent->d_name) == 0 ||
@@ -1258,9 +1259,9 @@ int DeleteDir(const char *pDirPath)
             {
                 continue;
             }
-            // ×é×°ÎªÈ«Â·¾¶
+            // ç»„è£…ä¸ºå…¨è·¯å¾„
             sprintf(szFullName, "%s/%s", pDirPath, pDirent->d_name);
-            // È¡ÎÄ¼ş/Ä¿Â¼ĞÅÏ¢
+            // å–æ–‡ä»¶/ç›®å½•ä¿¡æ¯
             struct stat stDir;
             if( lstat(szFullName, &stDir) == -1)
             {
@@ -1268,25 +1269,25 @@ int DeleteDir(const char *pDirPath)
             }
             if( S_ISDIR(stDir.st_mode) )
             {
-                // ½øÈëÄ¿Â¼£¨µİ¹é´¦Àí£©
+                // è¿›å…¥ç›®å½•ï¼ˆé€’å½’å¤„ç†ï¼‰
                 DeleteDir(szFullName);
             }
             else
             {
-                // É¾ÎÄ¼ş
+                // åˆ æ–‡ä»¶
                 // printf(" %s\n", szFullName);
                 unlink(szFullName);
             }
         }// end of while( (pDirent ...
         closedir(pDir);
     }
-    // É¾Ä¿Â¼/ÎÄ¼ş£¬
+    // åˆ ç›®å½•/æ–‡ä»¶ï¼Œ
     return remove(pDirPath) == 0 ? OK : ERR;
 }
 
 /*
- * ¹¦ÄÜ£ºÒÆ¶¯µ¥¸öÎÄ¼ş£¨Ä¿µÄÎÄ¼şÈô´æÔÚ½«±»¸²¸Ç£©
- * ±àĞ´£ºRocky 2010-05-11 11:11:53
+ * åŠŸèƒ½ï¼šç§»åŠ¨å•ä¸ªæ–‡ä»¶ï¼ˆç›®çš„æ–‡ä»¶è‹¥å­˜åœ¨å°†è¢«è¦†ç›–ï¼‰
+ * ç¼–å†™ï¼šRocky 2010-05-11 11:11:53
  */
 bool MoveFile(const string &src, const string &dest)
 {
@@ -1298,8 +1299,8 @@ bool MoveFile(const string &src, const string &dest)
 }
 
 /*
- * ¹¦ÄÜ£ºÎÄ¼ş¡¢Ä¿Â¼ÒÑ´æÔÚ£¬Ôò·µ»Øtrue
- * ±àĞ´£ºRocky 2010-05-11 11:11:59
+ * åŠŸèƒ½ï¼šæ–‡ä»¶ã€ç›®å½•å·²å­˜åœ¨ï¼Œåˆ™è¿”å›true
+ * ç¼–å†™ï¼šRocky 2010-05-11 11:11:59
  */
 bool isExistFile(const string &fullname)
 {
@@ -1312,8 +1313,8 @@ bool isExistFile(const string &fullname)
 }
 
 /*
- * ¹¦ÄÜ£ºÊÇÒ»°ãÎÄ¼ş·µ»Øtrue
- * ±àĞ´£ºRocky 2010-05-11 11:11:56
+ * åŠŸèƒ½ï¼šæ˜¯ä¸€èˆ¬æ–‡ä»¶è¿”å›true
+ * ç¼–å†™ï¼šRocky 2010-05-11 11:11:56
  */
 bool isFile(const string &fullname)
 {
@@ -1326,15 +1327,15 @@ bool isFile(const string &fullname)
 }
 
 /*
- * ¹¦ÄÜ£ºÊÇÄ¿Â¼·µ»Øtrue
- * ±àĞ´£ºRocky 2010-05-11 11:11:59
+ * åŠŸèƒ½ï¼šæ˜¯ç›®å½•è¿”å›true
+ * ç¼–å†™ï¼šRocky 2010-05-11 11:11:59
  */
 bool isDir(const string &fullname)
 {
     /*
-     * ×¢£º
-     *      stat() £ºÈç¹ûfullnameÊÇÒ»¸öÁ´½Ó£¬º¯Êı²Ù×÷µÄÊÇfullnameÖ¸ÏòµÄÄÇ¸ö¶ÔÏó£»
-     *      lstat()£ºÓëstat()µÄÎ¨Ò»²»Í¬ÊÇ£¬ÈôfullnameÊÇÁ´½Ó£¬lstat()²Ù×÷µÄÊÇÁ´½Ó±¾Éí£»
+     * æ³¨ï¼š
+     *      stat() ï¼šå¦‚æœfullnameæ˜¯ä¸€ä¸ªé“¾æ¥ï¼Œå‡½æ•°æ“ä½œçš„æ˜¯fullnameæŒ‡å‘çš„é‚£ä¸ªå¯¹è±¡ï¼›
+     *      lstat()ï¼šä¸stat()çš„å”¯ä¸€ä¸åŒæ˜¯ï¼Œè‹¥fullnameæ˜¯é“¾æ¥ï¼Œlstat()æ“ä½œçš„æ˜¯é“¾æ¥æœ¬èº«ï¼›
      */
     struct stat stDir;
     if( stat(fullname.c_str(), &stDir) == -1)
@@ -1346,9 +1347,9 @@ bool isDir(const string &fullname)
 
 
 /*
- * ¹¦ÄÜ£ºÒÔspÎª·Ö¸ô·û£¬·Ö¸îstrÎª¶à¶Î£¬·Åµ½resultsÖĞ£»
- * ±àĞ´£ºRocky 2010-05-13
- * ÀıÈç£º
+ * åŠŸèƒ½ï¼šä»¥spä¸ºåˆ†éš”ç¬¦ï¼Œåˆ†å‰²strä¸ºå¤šæ®µï¼Œæ”¾åˆ°resultsä¸­ï¼›
+ * ç¼–å†™ï¼šRocky 2010-05-13
+ * ä¾‹å¦‚ï¼š
  *        [rocky@rocky-desktop today]$ a.out "12,34,,56"
  *        split.cpp:54 : [12]
  *        split.cpp:54 : [34]
@@ -1371,8 +1372,8 @@ void Split(const string &str, const string sp, vector<string> &results)
 }
 
 /*
- * ¹¦ÄÜ£º¹şÏ£º¯Êı
- * ±àĞ´£ºÍøÂçÕûÀí¶øÀ´ [Rocky 2010-05-14 11:44:23]
+ * åŠŸèƒ½ï¼šå“ˆå¸Œå‡½æ•°
+ * ç¼–å†™ï¼šç½‘ç»œæ•´ç†è€Œæ¥ [Rocky 2010-05-14 11:44:23]
  */
 unsigned int SDBMHash(const char *str)
 {
@@ -1386,8 +1387,8 @@ unsigned int SDBMHash(const char *str)
 }
 
 /*
- * ¹¦ÄÜ£ººÏ²¢vectorÎª´®£¬ÔªËØ¼äÒÔspÎª¼ä¸ô·û£»
- * ±àĞ´£ºRocky 2010-05-14 12:14:04
+ * åŠŸèƒ½ï¼šåˆå¹¶vectorä¸ºä¸²ï¼Œå…ƒç´ é—´ä»¥spä¸ºé—´éš”ç¬¦ï¼›
+ * ç¼–å†™ï¼šRocky 2010-05-14 12:14:04
  */
 const string Join(const vector<string> &v, const string sp/*=","*/)
 {
@@ -1406,8 +1407,8 @@ const string Join(const vector<string> &v, const string sp/*=","*/)
 }
 
 /*
- * ¹¦ÄÜ£º¿Õ×Ö·û´®Ôò×ªÎªÄ¬ÈÏµÄÖµ£¨·ñÔò·µ»ØÔ­Öµ£©
- * ±àĞ´£ºRocky 2010-05-14 14:37:56
+ * åŠŸèƒ½ï¼šç©ºå­—ç¬¦ä¸²åˆ™è½¬ä¸ºé»˜è®¤çš„å€¼ï¼ˆå¦åˆ™è¿”å›åŸå€¼ï¼‰
+ * ç¼–å†™ï¼šRocky 2010-05-14 14:37:56
  */
 const string EmptyStringToDefault(const string &str, const string def/*=""*/)
 {
@@ -1419,8 +1420,8 @@ const string EmptyStringToDefault(const string &str, const string def/*=""*/)
 }
 
 /*
- * ¹¦ÄÜ£ºÊ¹³ö×Ö·û´®±íÊ¾µÄÊı¾İÔö¼ÓÒ»
- * ±àĞ´£ºRocky 2010-05-15 15:30
+ * åŠŸèƒ½ï¼šä½¿ç”±å­—ç¬¦ä¸²è¡¨ç¤ºçš„æ•°å€¼å¢åŠ ä¸€
+ * ç¼–å†™ï¼šRocky 2010-05-15 15:30
  */
 const string Inc(const string &num)
 {
@@ -1428,10 +1429,10 @@ const string Inc(const string &num)
 }
 
 /*
- * ¹¦ÄÜ£ºÉ¾³ıhtml±ê¼Ç
- * ±àĞ´£ºRocky 2010-05-17 17:12:06
- * °æ±¾£ºv0.1
- * ËµÃ÷£ºÎ´ÄÜ´¦ÀíÇ¶Ì×
+ * åŠŸèƒ½ï¼šåˆ é™¤htmlæ ‡è®°
+ * ç¼–å†™ï¼šRocky 2010-05-17 17:12:06
+ * ç‰ˆæœ¬ï¼šv0.1
+ * è¯´æ˜ï¼šæœªèƒ½å¤„ç†åµŒå¥—
  */
 const string DeleteHtmlLable(const string &html)
 {
@@ -1447,7 +1448,7 @@ const string DeleteHtmlLable(const string &html)
             i++;
             for(; i<html.length(); i++)
             {
-                // Óöµ½ÁËÒ»¶Ô <...>
+                // é‡åˆ°äº†ä¸€å¯¹ <...>
                 if('>' == html[i])
                 {
                     result += html.substr(begin, left - begin);
@@ -1463,9 +1464,9 @@ const string DeleteHtmlLable(const string &html)
 }
 
 /*
- * ¹¦ÄÜ£ºÈ¡ÎÄ¼ş×îºóĞŞ¸ÄÊ±¼ä
- * ±àĞ´£ºRocky 2010-05-19 11:05:06
- * ·µ»Ø£º·µ»ØÕûÊıµÄÊ±¼äÊıÖµ£¬³ö´í·µ0£»
+ * åŠŸèƒ½ï¼šå–æ–‡ä»¶æœ€åä¿®æ”¹æ—¶é—´
+ * ç¼–å†™ï¼šRocky 2010-05-19 11:05:06
+ * è¿”å›ï¼šè¿”å›æ•´æ•°çš„æ—¶é—´æ•°å€¼ï¼Œå‡ºé”™è¿”0ï¼›
  */
 time_t GetFileModifyTime(const string &filename)
 {
@@ -1478,9 +1479,9 @@ time_t GetFileModifyTime(const string &filename)
 }
 
 /*
- * ¹¦ÄÜ£ºĞŞ¸ÄÎÄ¼şµÄ´æÈ¡Ê±¼äºÍ¸ü¸ÄÊ±¼ä
- * ±àĞ´£ºRocky 2010-05-19 15:14:07
- * ·µ»Ø£ºÊ§°Ü·µ»ØĞ¡ÓÚ0Öµ
+ * åŠŸèƒ½ï¼šä¿®æ”¹æ–‡ä»¶çš„å­˜å–æ—¶é—´å’Œæ›´æ”¹æ—¶é—´
+ * ç¼–å†™ï¼šRocky 2010-05-19 15:14:07
+ * è¿”å›ï¼šå¤±è´¥è¿”å›å°äº0å€¼
  */
 int SettFileModifyTime(const string &filename, long second)
 {
@@ -1491,9 +1492,9 @@ int SettFileModifyTime(const string &filename, long second)
 }
 
 /*
- * ¹¦ÄÜ£º´´½¨Ä¿Â¼
- * ±àĞ´£ºRocky 2010-05-24
- * ·µ»Ø£ºÊ§°Ü·µ»ØĞ¡ÓÚ0Öµ
+ * åŠŸèƒ½ï¼šåˆ›å»ºç›®å½•
+ * ç¼–å†™ï¼šRocky 2010-05-24
+ * è¿”å›ï¼šå¤±è´¥è¿”å›å°äº0å€¼
  */
 int CreateDir(const string &dir)
 {
@@ -1506,8 +1507,8 @@ int CreateDir(const string &dir)
 }
 
 /*
- * ¹¦ÄÜ£ºÈ¡¡°ÉèÖÃ¸¸Ò³ÃæÖĞinput¿Ø¼şÖµ¡±html´úÂë
- * ±àĞ´£ºRocky 2010-05-24 15:42:02
+ * åŠŸèƒ½ï¼šå–â€œè®¾ç½®çˆ¶é¡µé¢ä¸­inputæ§ä»¶å€¼â€htmlä»£ç 
+ * ç¼–å†™ï¼šRocky 2010-05-24 15:42:02
  */
 const string HtmlSetParentInputValue(const string &element, const string &value)
 {
@@ -1523,8 +1524,8 @@ const string HtmlSetParentInputValue(const string &element, const string &value)
 }
 
 /*
- * ¹¦ÄÜ£ºÈ¡¡°ÉèÖÃ¸¸Ò³ÃæÖĞ¿Ø¼şµÄinnerHTMLÖµ¡±html´úÂë
- * ±àĞ´£ºRocky 2010-05-24 17:25:51
+ * åŠŸèƒ½ï¼šå–â€œè®¾ç½®çˆ¶é¡µé¢ä¸­æ§ä»¶çš„innerHTMLå€¼â€htmlä»£ç 
+ * ç¼–å†™ï¼šRocky 2010-05-24 17:25:51
  */
 const string HtmlSetParentInnerhtmlValue(const string &element, const string &value)
 {
@@ -1540,8 +1541,8 @@ const string HtmlSetParentInnerhtmlValue(const string &element, const string &va
 }
 
 /*
- * ¹¦ÄÜ£ºÈ¡Alert()º¯ÊıµÄhtml´úÂë
- * ±àĞ´£ºRocky 2010-05-24 15:42:02
+ * åŠŸèƒ½ï¼šå–Alert()å‡½æ•°çš„htmlä»£ç 
+ * ç¼–å†™ï¼šRocky 2010-05-24 15:42:02
  */
 const string HtmlAlert(const string &value)
 {
@@ -1549,8 +1550,8 @@ const string HtmlAlert(const string &value)
 }
 
 /*
- * ¹¦ÄÜ£ºÈ¡ĞÂµÄKEY´®
- * ±àĞ´£ºRocky 2010-05-25 18:39:57
+ * åŠŸèƒ½ï¼šå–æ–°çš„KEYä¸²
+ * ç¼–å†™ï¼šRocky 2010-05-25 18:39:57
  */
 const string NewKeyStr()
 {
@@ -1558,13 +1559,13 @@ const string NewKeyStr()
 }
 
 /*
- * ¹¦ÄÜ£º°Ñ×Ö·û´®Ğ´ÈëÁÙÊ±ÎÄ¼ş
- * ±àĞ´£ºRocky 2010-05-25 21:14
- * ·µ»Ø£º³É¹¦·µ»ØÎÄ¼şÃû£¬³ö´í·µ»Ø¿Õ´®£»
+ * åŠŸèƒ½ï¼šæŠŠå­—ç¬¦ä¸²å†™å…¥ä¸´æ—¶æ–‡ä»¶
+ * ç¼–å†™ï¼šRocky 2010-05-25 21:14
+ * è¿”å›ï¼šæˆåŠŸè¿”å›æ–‡ä»¶åï¼Œå‡ºé”™è¿”å›ç©ºä¸²ï¼›
  */
 const string StringToTempFile(const string &str)
 {
-    // È¡Ò»ÁÙÊ±ÎÄ¼şÃû£¨Ëæ»ú´®£©
+    // å–ä¸€ä¸´æ—¶æ–‡ä»¶åï¼ˆéšæœºä¸²ï¼‰
     const string &tmp = GlobalConfig::instance()->SystemTmpDir()
                       + GetRandomString();
     FileObj file;
@@ -1582,13 +1583,13 @@ const string StringToTempFile(const string &str)
         return "";
     }
 
-    // ³É¹¦·µ»ØÎÄ¼ş
+    // æˆåŠŸè¿”å›æ–‡ä»¶
     return tmp;
 }
 
 /*
- * ¹¦ÄÜ£º·µ»ØÎÄ¼şÄÚÈİ´®
- * ±àĞ´£ºRocky 2010-05-25 21:59
+ * åŠŸèƒ½ï¼šè¿”å›æ–‡ä»¶å†…å®¹ä¸²
+ * ç¼–å†™ï¼šRocky 2010-05-25 21:59
  */
 const string FileToStr(const string &filename)
 {
@@ -1607,28 +1608,28 @@ const string FileToStr(const string &filename)
 }
 
 /*
- * ¹¦ÄÜ£º¸Ä±äµ±Ç°µÄ¹¤×÷Ä¿Â¼
- * ±àĞ´£ºRocky 2010-05-28 10:46:01
+ * åŠŸèƒ½ï¼šæ”¹å˜å½“å‰çš„å·¥ä½œç›®å½•
+ * ç¼–å†™ï¼šRocky 2010-05-28 10:46:01
  */
 int ChangeDir(const string &path)
 {
-    // chdir()Ö´ĞĞ³É¹¦Ôò·µ»Ø0
+    // chdir()æ‰§è¡ŒæˆåŠŸåˆ™è¿”å›0
     return chdir(path.c_str()) == 0 ? OK : ERR;
 }
 
 /*
- * ¹¦ÄÜ£ºÈ¡µ±Ç°CPUÊ¹ÓÃÂÊ
- * ±àĞ´£ºRocky 2009-02-11 16:21:56
- * ·µ»Ø£º³É¹¦·µ»Øµ±Ç°CPUÊ¹ÓÃÂÊ£¬-1³ö´í£»
- * ËµÃ÷£º
- *          1. Èçµ±Ç°Ê±¼ä´Á±È[cat /dev/shm/.cpustates]µÄµÚ¶ş¸ö×Ö¶ÎĞ¡ÓÚ30£¬ÔòÈ¡
- *             µÚÒ»¸ö×Ö¶ÎÖµÎªCPU¿ÕÏĞÂÊ£¬·ñÔò
- *          2. È¡[/apps/bzw/bin/setup/sysinfo]ÖĞµÄcpuÎª×Ö¶ÎÖµÎª¿ÕÏĞÂÊ¡££¨Áí£º×¢
- *             Òâ¸ÃÃüÁîµÄÄÚ´æ×Ö¶Î²»×¼±¸£©
+ * åŠŸèƒ½ï¼šå–å½“å‰CPUä½¿ç”¨ç‡
+ * ç¼–å†™ï¼šRocky 2009-02-11 16:21:56
+ * è¿”å›ï¼šæˆåŠŸè¿”å›å½“å‰CPUä½¿ç”¨ç‡ï¼Œ-1å‡ºé”™ï¼›
+ * è¯´æ˜ï¼š
+ *          1. å¦‚å½“å‰æ—¶é—´æˆ³æ¯”[cat /dev/shm/.cpustates]çš„ç¬¬äºŒä¸ªå­—æ®µå°äº30ï¼Œåˆ™å–
+ *             ç¬¬ä¸€ä¸ªå­—æ®µå€¼ä¸ºCPUç©ºé—²ç‡ï¼Œå¦åˆ™
+ *          2. å–[/apps/bzw/bin/setup/sysinfo]ä¸­çš„cpuä¸ºå­—æ®µå€¼ä¸ºç©ºé—²ç‡ã€‚ï¼ˆå¦ï¼šæ³¨
+ *             æ„è¯¥å‘½ä»¤çš„å†…å­˜å­—æ®µä¸å‡†å¤‡ï¼‰
  */
 int GetCpuUsed()
 {
-    // cpuĞÅÏ¢½á¹¹
+    // cpuä¿¡æ¯ç»“æ„
     struct Info
     {
         unsigned long nUserTime;
@@ -1636,18 +1637,18 @@ int GetCpuUsed()
         unsigned long nSysTime;
         unsigned long nIdleTime;
         unsigned long nTimeTotal;
-        unsigned long uptime;       // ½á¹¹ÌåÊı¾İµÄ¸üĞÂÊ±¼ä
+        unsigned long uptime;       // ç»“æ„ä½“æ•°æ®çš„æ›´æ–°æ—¶é—´
         Info()
         {
             memset(this, 0, sizeof(*this));
         }
     };
 
-    // È¡µ±Ç°cpuĞÅÏ¢
+    // å–å½“å‰cpuä¿¡æ¯
     class Get
     {
     public:
-        // È¡µ±Ç°cpuÁ¿
+        // å–å½“å‰cpué‡
         static const void CpuInfo(Info &info)
         {
             string sLine = "";
@@ -1655,11 +1656,11 @@ int GetCpuUsed()
 
             if(!FileStream)
             {
-                Debug("´ò¿ª¶ÁÈ¡CPUÅäÖÃÎÄ¼şÊ§°Ü");
+                Debug("æ‰“å¼€è¯»å–CPUé…ç½®æ–‡ä»¶å¤±è´¥");
                 return;
             }
 
-            //»ñÈ¡ÎÄ¼şµÚÒ»ĞĞ»ñÈ¡ÏìÓ¦cpuÖµ
+            //è·å–æ–‡ä»¶ç¬¬ä¸€è¡Œè·å–å“åº”cpuå€¼
             getline(FileStream, sLine);
             sscanf(sLine.c_str(), "cpu %lu %lu %lu %lu",
                                     &info.nUserTime,
@@ -1667,7 +1668,7 @@ int GetCpuUsed()
                                     &info.nSysTime,
                                     &info.nIdleTime
                   );
-            // ¼ÇÂ¼Êı¾İ¸üĞÂÊ±¼ä
+            // è®°å½•æ•°æ®æ›´æ–°æ—¶é—´
             info.uptime = time(NULL);
 
             info.nTimeTotal = info.nIdleTime
@@ -1676,25 +1677,25 @@ int GetCpuUsed()
                             + info.nUserTime;
         }
 
-        // È¡ÉÏ´ÎcpuÁ¿£¨ÓÃÓÚºÍµ±Ç°cpu±È½Ï£¬ÇóÊ¹ÓÃÂÊµÈ£©
+        // å–ä¸Šæ¬¡cpué‡ï¼ˆç”¨äºå’Œå½“å‰cpuæ¯”è¾ƒï¼Œæ±‚ä½¿ç”¨ç‡ç­‰ï¼‰
         static const Info &PrevInfo()
         {
             static Info info[4];
             static unsigned int cur = 0;
 
-            // ¸üĞÂ¼ä¸ô£¨ºÃµÄ×ö·¨ÊÇÊ¹ÓÃ¶¨Ê±Æ÷À´¸üĞÂ£¬ÒÔÃâ¶àÏß³ÌÎÊÌâ [XXX]£©
+            // æ›´æ–°é—´éš”ï¼ˆå¥½çš„åšæ³•æ˜¯ä½¿ç”¨å®šæ—¶å™¨æ¥æ›´æ–°ï¼Œä»¥å…å¤šçº¿ç¨‹é—®é¢˜ [XXX]ï¼‰
             if(time(NULL) - info[cur].uptime < 3)
             {
                 return info[cur];
             }
 
             /*
-             * ÂÖ×ªÀ´¸üĞÂinfoÖĞµÄÔªËØ£¬curÖ¸Ïòµ±Ç°Ê¹ÓÃµÄÔªËØ£»
-             *   ×¢£º(n + x) & 0x3²Ù×÷ÏŞ¶¨ÆäÖµÖ»È¡0,1,2,3£¬¼´infoÔª
-             *       ËØÏÂ±ê£»
+             * è½®è½¬æ¥æ›´æ–°infoä¸­çš„å…ƒç´ ï¼ŒcuræŒ‡å‘å½“å‰ä½¿ç”¨çš„å…ƒç´ ï¼›
+             *   æ³¨ï¼š(n + x) & 0x3æ“ä½œé™å®šå…¶å€¼åªå–0,1,2,3ï¼Œå³infoå…ƒ
+             *       ç´ ä¸‹æ ‡ï¼›
              */
 
-            int last = (cur + 3) & 0x3; // Ö¸Ïò×îÔ¶µÄÒ»¸öÔªËØ
+            int last = (cur + 3) & 0x3; // æŒ‡å‘æœ€è¿œçš„ä¸€ä¸ªå…ƒç´ 
             CpuInfo( info[last] );
             cur = (cur + 1) & 0x3;
             return info[cur];
@@ -1719,8 +1720,8 @@ int GetCpuUsed()
 }
 
 /*
- * ¹¦ÄÜ£º°ÑÎÄ¼şÃû±àÂë£¨´¦Àí²»Í¬ÏµÍ³ºº×ÖÎÊÌâ£©
- * ±àĞ´£ºRocky 2010-06-05 22:36:06
+ * åŠŸèƒ½ï¼šæŠŠæ–‡ä»¶åç¼–ç ï¼ˆå¤„ç†ä¸åŒç³»ç»Ÿæ±‰å­—é—®é¢˜ï¼‰
+ * ç¼–å†™ï¼šRocky 2010-06-05 22:36:06
  */
 const string FilenameEncode(const string &filename)
 {
@@ -1737,12 +1738,12 @@ const string FilenameEncode(const string &filename)
 }
 
 /*
- * ¹¦ÄÜ£º½âÂë£¨»¹Ô­ÎÄ¼şÃû£©£¨¶ÔÓ¦ÓÚFilenameEncode()£©
- * ±àĞ´£ºRocky 2010-06-05 22:50:32
+ * åŠŸèƒ½ï¼šè§£ç ï¼ˆè¿˜åŸæ–‡ä»¶åï¼‰ï¼ˆå¯¹åº”äºFilenameEncode()ï¼‰
+ * ç¼–å†™ï¼šRocky 2010-06-05 22:50:32
  */
 const string FilenameDecode(const string &filename)
 {
-    // ·Ç±àÂëÊı¾İ£¨»òÓĞÎó£©
+    // éç¼–ç æ•°æ®ï¼ˆæˆ–æœ‰è¯¯ï¼‰
     if(filename.length() % 2 != 0)
     {
         return filename;
@@ -1753,21 +1754,21 @@ const string FilenameDecode(const string &filename)
 
     while('\0' != *p)
     {
-        // ascii»¹Ô­Îª×Ö·û
+        // asciiè¿˜åŸä¸ºå­—ç¬¦
         int n1 = (unsigned char)(*p);
         int n2 = (unsigned char)(*(p + 1));
 
         /*
-         * ÒòÎª±àÂëÊÇÓÃÊ®Áù½øÖÆÊıµÄ£¬²»ÔÚÊı×Ö¡¢´óĞ´×ÖÄ¸ÔòÈÏÎª²»ÊÇ
-         * ±àÂëµÄÎÄ¼şÃû£¬´ËÅĞ¶Ï¿ÉÄÜ²»Ì«×¼È·£¬Ò²¿ÉÄÜ´æÔÚÒÔºóÊı¾İµÄ
-         * ¼æÈİĞÔÎÊÌâ [XXX] [Rocky 2010-06-07 11:56:55]
+         * å› ä¸ºç¼–ç æ˜¯ç”¨åå…­è¿›åˆ¶æ•°çš„ï¼Œä¸åœ¨æ•°å­—ã€å¤§å†™å­—æ¯åˆ™è®¤ä¸ºä¸æ˜¯
+         * ç¼–ç çš„æ–‡ä»¶åï¼Œæ­¤åˆ¤æ–­å¯èƒ½ä¸å¤ªå‡†ç¡®ï¼Œä¹Ÿå¯èƒ½å­˜åœ¨ä»¥åæ•°æ®çš„
+         * å…¼å®¹æ€§é—®é¢˜ [XXX] [Rocky 2010-06-07 11:56:55]
          */
         if( ! ( ('A' <= n1 && n1 <= 'F' || '0' <= n1 && n1 <= '9')
                 || ('A' <= n2 && n2 <= 'F' || '0' <= n2 && n2 <= '9')
               )
           )
         {
-            // ·ñÔòËµÃ÷²»ÊÇ±àÂëµÄ´®£¬·µ»ØÔ­ÎÄ¼şÃû£»
+            // å¦åˆ™è¯´æ˜ä¸æ˜¯ç¼–ç çš„ä¸²ï¼Œè¿”å›åŸæ–‡ä»¶åï¼›
             return filename;
         }
 

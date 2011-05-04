@@ -10,33 +10,33 @@ namespace PAGE_EDIT_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "edit";
 
 
 
 Page_Edit::Page_Edit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Edit::~Page_Edit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Edit::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     m_html = GlobalConfig::instance()->TemplateDir() + "Edit.html";
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Edit::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Edit;
 }
 
@@ -47,17 +47,17 @@ Page *Page_Edit::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 int Page_Edit::OutBody()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
     /*
-     * ÊÇ·ñÎª½âÃÜÌá½»ÊÂ¼ş
+     * æ˜¯å¦ä¸ºè§£å¯†æäº¤äº‹ä»¶
      */
     const string &decryption = m_request->GetField("decryption");
     if("" != decryption)
@@ -67,18 +67,18 @@ int Page_Edit::OutBody()
     }
 
     /*
-     * ÊÇ·ñÎªÉèÖÃÃÜÂëÌá½»ÊÂ¼ş
+     * æ˜¯å¦ä¸ºè®¾ç½®å¯†ç æäº¤äº‹ä»¶
      */
     const string &set_password = m_request->GetField("set_password");
     if("" != set_password)
     {
-        // µ÷ÉèÖÃÃÜÂë´úÂë
+        // è°ƒè®¾ç½®å¯†ç ä»£ç 
         Submit::Ptr submit( Submit::New("edit", "SetPassword") );
         submit->Deal(this);
     }
 
     /*
-     * ÄÚÈİ±£´æÌá½»ÊÂ¼ş
+     * å†…å®¹ä¿å­˜æäº¤äº‹ä»¶
      */
     const string &save = m_request->GetField("save_text");
     if("" != save)
@@ -88,7 +88,7 @@ int Page_Edit::OutBody()
         return OK;
     }
 
-    // ÏÔÊ¾µ±Ç°Ò³
+    // æ˜¾ç¤ºå½“å‰é¡µ
     return Page::OutBody();
 }
 
@@ -102,7 +102,7 @@ int Page_Edit::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Edit, THIS_MODULE)
 
 }// end of PAGE_EDIT_SPACE

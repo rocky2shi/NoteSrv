@@ -8,7 +8,7 @@ namespace PAGE_REGISTER_SPACE
 
 
 
-// ע��ҳ
+// 注册页
 class Page_Register : public Page
 {
 protected:

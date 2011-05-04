@@ -7,11 +7,11 @@ namespace CONNECT_SPACE
 
 
 
-// ÍøÂçÁ¬½Ó»ùÀà
+// ç½‘ç»œè¿æ¥åŸºç±»
 class Connect
 {
 public:
-    // ¶¨ÒåÖÇÄÜÖ¸ÕëÀàĞÍ
+    // å®šä¹‰æ™ºèƒ½æŒ‡é’ˆç±»å‹
     typedef AutoPtr<Connect> auto_ptr;
 
 public:
@@ -20,22 +20,22 @@ public:
 
 
 
-    // ×öÎª¿Í»§¶Ë£¨Á¬½Óµ½ ip:port£©
+    // åšä¸ºå®¢æˆ·ç«¯ï¼ˆè¿æ¥åˆ° ip:portï¼‰
     virtual int InitAsClient(const string &ip, int port);
 
-    // ×öÎª·şÎñ¶Ë£¨ÔÚportÉÏÕìÌı£©
+    // åšä¸ºæœåŠ¡ç«¯ï¼ˆåœ¨portä¸Šä¾¦å¬ï¼‰
     virtual int InitAsServer(int port);
 
-    // ´ÓÁ¬½ÓÉÏ¶ÁÊı¾İ£¬·µ»ØÊµ¼ÊÈ¡µÃµÄ×Ö½ÚÊı£»
+    // ä»è¿æ¥ä¸Šè¯»æ•°æ®ï¼Œè¿”å›å®é™…å–å¾—çš„å­—èŠ‚æ•°ï¼›
     virtual int Recv(char *buf, unsigned int len);
 
-    // Ğ´Êı¾İÈëÁ¬½ÓÖĞ£¬·µ»ØÊµ¼ÊĞ´ÈëµÄ×Ö½ÚÊı£»
+    // å†™æ•°æ®å…¥è¿æ¥ä¸­ï¼Œè¿”å›å®é™…å†™å…¥çš„å­—èŠ‚æ•°ï¼›
     virtual int Send(const char *buf, unsigned int len);
-    // ·¢ËÍ×Ö·û´®
+    // å‘é€å­—ç¬¦ä¸²
     int Send(const char *str);
     int Send(const string &str);
 
-    // È¡Ò»ĞĞ£¬·µ»ØÊµ¼ÊÈ¡µÃµÄ×Ö½ÚÊı£»
+    // å–ä¸€è¡Œï¼Œè¿”å›å®é™…å–å¾—çš„å­—èŠ‚æ•°ï¼›
     virtual int GetLine(char *buf, unsigned int max);
 
 
@@ -47,12 +47,12 @@ public:
     // virtual int Accept(Connect &connect);
     virtual Connect *Accept();
     virtual int ConnectTo();
-    virtual const string GetPeerAddr() const; // È¡¶Ô¶Ëip
+    virtual const string GetPeerAddr() const; // å–å¯¹ç«¯ip
 
 
 
 
-    // ¸ú¾İ´«ÈëµÄid´Ó¹¤³§ÖĞ²úÉúÒ»¸ö´¦Àí¶ÔÏó
+    // è·Ÿæ®ä¼ å…¥çš„idä»å·¥å‚ä¸­äº§ç”Ÿä¸€ä¸ªå¤„ç†å¯¹è±¡
     static Connect *New(const string &id="TCP");
 
 protected:

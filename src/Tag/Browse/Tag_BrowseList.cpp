@@ -12,7 +12,7 @@ namespace TAG_BROWSELIST_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "BrowseList";
 
 
@@ -21,17 +21,17 @@ static const string THIS_MODULE = "BrowseList";
 
 Tag_BrowseList::Tag_BrowseList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_BrowseList::Tag_BrowseList(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_BrowseList::~Tag_BrowseList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -39,15 +39,15 @@ Tag_BrowseList::~Tag_BrowseList()
 
 int Tag_BrowseList::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_BrowseList::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_BrowseList;
 }
 
@@ -58,9 +58,9 @@ Tag *Tag_BrowseList::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
-// ·µ»Ø´óÓÚ0µÄÖµ£¬±í¸ÃÊı¾İÒª¹ıÂËµô£»
+// è¿”å›å¤§äº0çš„å€¼ï¼Œè¡¨è¯¥æ•°æ®è¦è¿‡æ»¤æ‰ï¼›
 int Tag_BrowseList::Filter(const string &key, const Conf *pack, Page *page, map<string, MultiStringMatch*> &matchs)
 {
     const string &filter = "filter";
@@ -75,7 +75,7 @@ int Tag_BrowseList::Filter(const string &key, const Conf *pack, Page *page, map<
     const string &result_win    = cfg->Get(filter, "result_win");
 
     /*
-     * ¹ıÂËÊ±¼ä
+     * è¿‡æ»¤æ—¶é—´
      */
     if("1" == timebeginchk && key < qtbegin)
     {
@@ -89,7 +89,7 @@ int Tag_BrowseList::Filter(const string &key, const Conf *pack, Page *page, map<
     }
 
     /*
-     * ÒÑ±»É¾³ıµÄÊı¾İ
+     * å·²è¢«åˆ é™¤çš„æ•°æ®
      */
     if("delete" == pack->Get("status"))
     {
@@ -98,26 +98,26 @@ int Tag_BrowseList::Filter(const string &key, const Conf *pack, Page *page, map<
     }
 
     /*
-     * ¹Ø¼ü×Ö¹ıÂË£¨¹Ø¼ü×Ö²»ÄÜÎª¿Õ£©
+     * å…³é”®å­—è¿‡æ»¤ï¼ˆå…³é”®å­—ä¸èƒ½ä¸ºç©ºï¼‰
      */
-    // a. Ñ¡ÖĞµÄÊÇ±êÌâ£¬²âÊÔÊÇ·ñº¬ÓĞ¹Ø¼ü×Ö
+    // a. é€‰ä¸­çš„æ˜¯æ ‡é¢˜ï¼Œæµ‹è¯•æ˜¯å¦å«æœ‰å…³é”®å­—
     if("title" == query_scope)
     {
         const string &title = pack->Get("title");
-        // ÕÒ²»µ½¹Ø¼ü×ÖÊ±£¬¸ÃÊı¾İ»á±»¹ıÂË£»
+        // æ‰¾ä¸åˆ°å…³é”®å­—æ—¶ï¼Œè¯¥æ•°æ®ä¼šè¢«è¿‡æ»¤ï¼›
         if(title.find(query_keyword) == string::npos)
         {
             LOG_DEBUG("Filter [%s] ...", key.c_str());
             return 3;
         }
     }
-    // b. Ñ¡ÖĞµÄÊÇÄÚÈİ£¬²âÊÔÊÇ·ñº¬ÓĞ¹Ø¼ü×Ö
+    // b. é€‰ä¸­çš„æ˜¯å†…å®¹ï¼Œæµ‹è¯•æ˜¯å¦å«æœ‰å…³é”®å­—
     if("content" == query_scope)
     {
-        // È¡¶ÔÓ¦Æ¥Åä»ú
+        // å–å¯¹åº”åŒ¹é…æœº
         MultiStringMatch *match = matchs["query_keyword"];
         const string &text = pack->Get("text");
-        // ²é¿´textÖĞÊÇ·ñ´æµÄËùÒªµÄ¹Ø¼ü×Ö£¬²»´æµÄ·µ»Øfalse£¬±íÊ¾Òª¹ıÂË´ËÊı¾İ£»
+        // æŸ¥çœ‹textä¸­æ˜¯å¦å­˜çš„æ‰€è¦çš„å…³é”®å­—ï¼Œä¸å­˜çš„è¿”å›falseï¼Œè¡¨ç¤ºè¦è¿‡æ»¤æ­¤æ•°æ®ï¼›
         if( NULL != match && !match->MatchOneKey( text ) )
         {
             LOG_DEBUG("Filter [%s] ...", key.c_str());
@@ -126,16 +126,16 @@ int Tag_BrowseList::Filter(const string &key, const Conf *pack, Page *page, map<
     }
 
     /*
-     * ¹éÀà¹ıÂË£¨ĞëÂú×ãËùÓĞÒÑÑ¡Ìõ¼ş£¬¼´ÓëµÄ¹ØÏµ£©   [XXX]
+     * å½’ç±»è¿‡æ»¤ï¼ˆé¡»æ»¡è¶³æ‰€æœ‰å·²é€‰æ¡ä»¶ï¼Œå³ä¸çš„å…³ç³»ï¼‰   [XXX]
      */
     if("" != query_type)
     {
-        // È¡¶ÔÓ¦Æ¥Åä»ú
+        // å–å¯¹åº”åŒ¹é…æœº
         MultiStringMatch *match = matchs["query_type"];
         if(NULL != match)
         {
             const string &msg_type = pack->Get("msg_type");
-            // ²»ÊÇËùÓĞ¹Ø¼ü×ÖÊ±¶¼±»ÃüÖĞÊ±£¬MatchAllKey()·µ»Øfalse£¬±íÊ¾Òª¹ıÂË´ËÊı¾İ£»
+            // ä¸æ˜¯æ‰€æœ‰å…³é”®å­—æ—¶éƒ½è¢«å‘½ä¸­æ—¶ï¼ŒMatchAllKey()è¿”å›falseï¼Œè¡¨ç¤ºè¦è¿‡æ»¤æ­¤æ•°æ®ï¼›
             if( !match->MatchAllKey( msg_type ) )
             {
                 LOG_DEBUG("Filter [%s] ...", key.c_str());
@@ -145,15 +145,15 @@ int Tag_BrowseList::Filter(const string &key, const Conf *pack, Page *page, map<
     }
 
 
-    // ÎŞĞè¹ıÂË£¬Ôò·µ»ØĞ¡ÓÚ0Öµ£»
+    // æ— éœ€è¿‡æ»¤ï¼Œåˆ™è¿”å›å°äº0å€¼ï¼›
     return -1;
 }
 
 
-// ä¯ÀÀÊı¾İ£¨±íÁĞ£©
+// æµè§ˆæ•°æ®ï¼ˆè¡¨åˆ—ï¼‰
 string Tag_BrowseList::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
 
     string html;
@@ -169,10 +169,10 @@ string Tag_BrowseList::Get(Page *page)
     }
 
     /*
-     * ´´½¨¹ıÂËÆ¥Åä»ú
+     * åˆ›å»ºè¿‡æ»¤åŒ¹é…æœº
      */
     map<string, MultiStringMatch *> matchs;
-    // ÀàĞÍ£¨¹éÀà£©¹ıÂË»ú
+    // ç±»å‹ï¼ˆå½’ç±»ï¼‰è¿‡æ»¤æœº
     const string &query_type = cfg->Get("filter", "query_type");
     if("" != query_type)
     {
@@ -182,7 +182,7 @@ string Tag_BrowseList::Get(Page *page)
         matchs["query_type"] = new MultiStringMatch( query_type_set );
     }
     LOG_DEBUG("query_type=[%s]", query_type.c_str());
-    // ÕıÎÄÄÚÈİ¹ıÂË»ú
+    // æ­£æ–‡å†…å®¹è¿‡æ»¤æœº
     const string &query_keyword = cfg->Get("filter", "query_keyword");
     if("" != query_keyword)
     {
@@ -192,7 +192,7 @@ string Tag_BrowseList::Get(Page *page)
     }
     LOG_DEBUG("query_keyword=[%s]", query_keyword.c_str());
 
-    // ×Ô¶¯ÊÍ·Å¹ıÂËÆ¥Åä»úÄÚ´æ
+    // è‡ªåŠ¨é‡Šæ”¾è¿‡æ»¤åŒ¹é…æœºå†…å­˜
     struct AutoMatchsFree
     {
         AutoMatchsFree(map<string, MultiStringMatch *> &matchs): m_matchs(matchs)
@@ -209,10 +209,10 @@ string Tag_BrowseList::Get(Page *page)
         }
     private:
         map<string, MultiStringMatch *> &m_matchs;
-    } AutoMatchsFree( matchs ); // ×Ô¶¯ÊÍ·ÅÖ´ĞĞ¶ÔÏó
+    } AutoMatchsFree( matchs ); // è‡ªåŠ¨é‡Šæ”¾æ‰§è¡Œå¯¹è±¡
 
 
-    // È¡µ±Ç°¿Í»§¶ËÓÃ»§ËùÓÃµÄÆÁÄ»¿í¶È£¬×ª»»ÎªÃ¿ĞĞÓ¦ÏÔÊ¾µÄ×Ö½ÚÊı£»
+    // å–å½“å‰å®¢æˆ·ç«¯ç”¨æˆ·æ‰€ç”¨çš„å±å¹•å®½åº¦ï¼Œè½¬æ¢ä¸ºæ¯è¡Œåº”æ˜¾ç¤ºçš„å­—èŠ‚æ•°ï¼›
     const string &width = page->GetRequest()->GetCookie("window.screen.width");
     const string &byte = EmptyStringToDefault(cfg->Get("screen.width.to.byte", width), "90");
     const int LINE_LENl = atoi(byte.c_str());
@@ -223,9 +223,9 @@ string Tag_BrowseList::Get(Page *page)
     Connect * const connect = page->GetRequest()->GetConnect();
 
     /*
-     * Ìæ»»htmlÌØÊâ×Ö·û¡£×¢Òâ£¬ÕâÀïµÄ¼¼ÇÉ£¬ÒòÎª¶ÔÕâÀïµÄ×Ö
-     * ·ûÌæ»»Ö»ºÍÄÚÈİ±¾ÉíÏà¹Ø£¬ËùÒÔÉèÖÃÈÕ¾²Ì¬µÄ£¬±ÜÃâ¶à´Î
-     * ÖØ¸´µÄ³õÊ¼»¯£»
+     * æ›¿æ¢htmlç‰¹æ®Šå­—ç¬¦ã€‚æ³¨æ„ï¼Œè¿™é‡Œçš„æŠ€å·§ï¼Œå› ä¸ºå¯¹è¿™é‡Œçš„å­—
+     * ç¬¦æ›¿æ¢åªå’Œå†…å®¹æœ¬èº«ç›¸å…³ï¼Œæ‰€ä»¥è®¾ç½®ä¸ºé™æ€çš„ï¼Œé¿å…å¤šæ¬¡
+     * é‡å¤çš„åˆå§‹åŒ–ï¼›
      */
     struct InitDelHtmlMatch
     {
@@ -248,28 +248,28 @@ string Tag_BrowseList::Get(Page *page)
 
     UserData::iterator it( datapath );
 
-    // ÁĞ³öËùÓĞÊı¾İ
+    // åˆ—å‡ºæ‰€æœ‰æ•°æ®
     for(i=0; it.next(); i++ )
     {
         int ret;
         string key;
         Conf *pack = NULL;
 
-        // È¡³öµ±Ç°ËùÖ¸µÄkeyºÍPack
+        // å–å‡ºå½“å‰æ‰€æŒ‡çš„keyå’ŒPack
         ret = it.Get(key, pack);
         if(ret < 0)
         {
             continue;
         }
 
-        // ¹ıÂË´¦Àí£¨¾ö¶¨µ±Ç°Êı¾İÊÇ·ñĞèÒªÏÔÊ¾µ½¿Í»§¶Ë£©
+        // è¿‡æ»¤å¤„ç†ï¼ˆå†³å®šå½“å‰æ•°æ®æ˜¯å¦éœ€è¦æ˜¾ç¤ºåˆ°å®¢æˆ·ç«¯ï¼‰
         ret = Filter(key, pack, page, matchs);
         if(ret > 0)
         {
             /*
-             * ×¢Òâ£¬ÕâÀï·µ»ØÖµÎª1Ê±£¬±íÊ¾½Ó×ÅÀ´µÄÊı¾İÊ±¼ä
-             * ¶¼±ÈÉè¶¨µÄÔç£¬Ö±½ÓÍË³ö£¬²»ĞèÊÇ¶ÁÈ¡ÍùºóµÄÎÄ
-             * ¼ş¡£ÒòÎªÈ¡³öµÄÎÄ¼şÊÇ½ÓÈÕÆÚË³ĞòÅÅĞòµÄ¡£
+             * æ³¨æ„ï¼Œè¿™é‡Œè¿”å›å€¼ä¸º1æ—¶ï¼Œè¡¨ç¤ºå½“å‰è¿™æ¡æ•°æ®ä»¥åçš„æ•°
+             * æ®æ—¶é—´éƒ½æ¯”è®¾å®šçš„æ—©ï¼Œç›´æ¥é€€å‡ºï¼Œä¸éœ€æ˜¯è¯»å–å¾€åçš„æ–‡
+             * ä»¶ã€‚å› ä¸ºå–å‡ºçš„æ–‡ä»¶æ˜¯æ¥æ—¥æœŸé¡ºåºæ’åºçš„ã€‚
              */
             if(1 == ret)
             {
@@ -280,13 +280,13 @@ string Tag_BrowseList::Get(Page *page)
 
         char buf[1024] = "";
         string text;
-        const string &txt = pack->Get("text");    // ¿ÉÓÅ»¯ÎªÈ¡ÏŞ¶¨³¤¶È´® [XXX]
+        const string &txt = pack->Get("text");    // å¯ä¼˜åŒ–ä¸ºå–é™å®šé•¿åº¦ä¸² [XXX]
         const string &title = TextToWeb( pack->Get("title") );
         string modify = pack->Get("modify");
         string sTextLen;
 
 
-        // ±êÌâ²»ÄÜÎª¿Õ
+        // æ ‡é¢˜ä¸èƒ½ä¸ºç©º
         if("" == title)
         {
             continue;
@@ -294,16 +294,16 @@ string Tag_BrowseList::Get(Page *page)
 
         if( pack->Get("password") != "" )
         {
-            text = "<i>[ÄÚÈİÒÑ¼ÓÃÜ]</i>";
+            text = "<i>[å†…å®¹å·²åŠ å¯†]</i>";
         }
         else if("" == txt)
         {
-            // ¾ÉÊı¾İ
-            if("ÈÕ¼Ç" == title)
+            // æ—§æ•°æ®
+            if("æ—¥è®°" == title)
             {
                 continue;
             }
-            text = "<i>[¿Õ]</i>";
+            text = "<i>[ç©º]</i>";
         }
         else
         {
@@ -311,7 +311,7 @@ string Tag_BrowseList::Get(Page *page)
             int len = txt.length() + title.length();
             if(len > LINE_LENl)
             {
-                // ½Ø¶Ìµ½Ö¸¶¨³¤¶È
+                // æˆªçŸ­åˆ°æŒ‡å®šé•¿åº¦
                 len = LINE_LENl - title.length();
                 text = txt.substr(0, len) + "...";
             }
@@ -319,20 +319,20 @@ string Tag_BrowseList::Get(Page *page)
             {
                 text = txt;
             }
-            // ×ªÎªÍøÒ³¿ÉÏÔÊ¾¸ñÊ½
+            // è½¬ä¸ºç½‘é¡µå¯æ˜¾ç¤ºæ ¼å¼
             text = TextToWeb(text);
-            // ´¦ÀítextÖĞµÄ£º'<' '>' '\n'
+            // å¤„ç†textä¸­çš„ï¼š'<' '>' '\n'
             text = DelHtml.Replace(text);
         }
 
-        // ×ª»»ÎªÒ×¶Á¸ñÊ½
+        // è½¬æ¢ä¸ºæ˜“è¯»æ ¼å¼
         modify = TimeTo( KeyToSecond(modify) );
 
         snprintf(buf, sizeof(buf)-1,
                 "    <li id='%s'>\n"
                 "    <a name='%s' />\n"
-                "    <a href='reading?key=%s&index=%d' class=time title='µã»÷ÔÄ¶Á[%s] ×îºóĞŞ¸Ä[%s]'>%s</a>\n"
-                "    <span class=title>[<a href='javascript:EditMsg(%d);' title='ĞŞ¸Ä'>%s</a>]</span>\n"
+                "    <a href='reading?key=%s&index=%d' class=time title='ç‚¹å‡»é˜…è¯»[%s] æœ€åä¿®æ”¹[%s]'>%s</a>\n"
+                "    <span class=title>[<a href='javascript:EditMsg(%d);' title='ä¿®æ”¹'>%s</a>]</span>\n"
                 "    <span class=text>%s</span></li> \n"
                 "\n",
                         key.c_str(),

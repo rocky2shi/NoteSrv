@@ -10,32 +10,32 @@ ChineseCoding::ChineseCoding(const string &from, const string &to)
                  : m_from(from),
                    m_to(to)
 {
-    //ÉêÇëÒ»¸ö×ª»»ÃèÊö·û
-    m_cd = iconv_open(m_to.c_str(), m_from.c_str()); // ×¢Òâ£¬ÕâÀïµÄ²ÎÊıÊÇtoÔÚÇ°!
+    //ç”³è¯·ä¸€ä¸ªè½¬æ¢æè¿°ç¬¦
+    m_cd = iconv_open(m_to.c_str(), m_from.c_str()); // æ³¨æ„ï¼Œè¿™é‡Œçš„å‚æ•°æ˜¯toåœ¨å‰!
 }
 
 ChineseCoding::~ChineseCoding()
 {
     if(m_cd != 0)
     {
-        // ¹Ø±Õ
+        // å…³é—­
         iconv_close(m_cd);
     }
 }
 
 
-// °Ñstr´Ófrom±àÂë×ªÎªto±àÂë£¨fromºÍto¿ÉÎªÍ¬Ò»×Ö·û´®£©
+// æŠŠsträ»fromç¼–ç è½¬ä¸ºtoç¼–ç ï¼ˆfromå’Œtoå¯ä¸ºåŒä¸€å­—ç¬¦ä¸²ï¼‰
 int ChineseCoding::Converter(const string &from, string &to)
 {
     if(m_cd == 0)
     {
         LOG_ERROR("iconv_open fail");
-        // ³ö´íÊ±£¬Ô­Öµ²»±ä£»
+        // å‡ºé”™æ—¶ï¼ŒåŸå€¼ä¸å˜ï¼›
         return ERR;
     }
 
-    const int nToLen = from.length() * 2; // Á½²¿³¤¶ÈÓ¦¸ÃÄÜ´æ·Å»»½á¹û²»
-    char fixbuf[512*1024] = "";    // ´æ·Å×ª»»ºóµÄ½á¹û
+    const int nToLen = from.length() * 2; // ä¸¤éƒ¨é•¿åº¦åº”è¯¥èƒ½å­˜æ”¾æ¢ç»“æœä¸
+    char fixbuf[512*1024] = "";    // å­˜æ”¾è½¬æ¢åçš„ç»“æœ
     Malloc buf(fixbuf, sizeof(fixbuf), nToLen + 1);
     char *pBuf = buf.Get();
 
@@ -53,7 +53,7 @@ int ChineseCoding::Converter(const string &from, string &to)
     size_t tolen = nToLen;
     size_t fromlen = from.length();
 
-    // ×ª»»
+    // è½¬æ¢
     if(iconv(m_cd, ppfrom, &fromlen, ppto, &tolen) == (size_t)(-1))
     {
         LOG_DEBUG("from=[%s] to=[%s]", m_from.c_str(), m_to.c_str());

@@ -6,7 +6,7 @@ namespace SUBMIT_DELETEUSER_SPACE
 {
 
 
-// ±êÃ÷Ä£¿é£¨¶ÔÓ¦ÓÚÒ³ÃæÖĞµÄÌá½»×Ö¶Î£©
+// æ ‡æ˜æ¨¡å—ï¼ˆå¯¹åº”äºé¡µé¢ä¸­çš„æäº¤å­—æ®µï¼‰
 static const string THIS_MODULE = "DeleteUser";
 
 
@@ -15,18 +15,18 @@ static const string THIS_MODULE = "DeleteUser";
 
 Submit_DeleteUser::Submit_DeleteUser()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_DeleteUser::Submit_DeleteUser(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_DeleteUser::~Submit_DeleteUser()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -34,15 +34,15 @@ Submit_DeleteUser::~Submit_DeleteUser()
 
 int Submit_DeleteUser::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_DeleteUser::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_DeleteUser;
 }
 
@@ -50,7 +50,7 @@ Submit *Submit_DeleteUser::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -64,30 +64,30 @@ int Submit_DeleteUser::Deal(Page *page)
     if( ! user->isValid() )
     {
         LOG_ERROR("Anvalid user: [%s]", username.c_str());
-        page->SetResult("msg", "ÓÃ»§²»´æÔÚ");
+        page->SetResult("msg", "ç”¨æˆ·ä¸å­˜åœ¨");
         return ERR;
     }
 
     if("administrator" == username)
     {
         LOG_ERROR("Can't delete administrator user");
-        page->SetResult("msg", "Î´Öª´íÎó[´úÂë:SD02]");
+        page->SetResult("msg", "æœªçŸ¥é”™è¯¯[ä»£ç :SD02]");
         return ERR;
     }
 
-    // Ëø¶¨
+    // é”å®š
     UNIQUE_LOCK( user->GetLock() );
 
-    // ´òÉÏÉ¾³ı±ê¼Ç£¨ÉÔºó½«ÓÉ¶¨Ê±Æ÷Ö´ĞĞÖ±ÕıµÄÇåÀí²Ù×÷£¬¼ûOther.cppÖĞ£©
+    // æ‰“ä¸Šåˆ é™¤æ ‡è®°ï¼ˆç¨åå°†ç”±å®šæ—¶å™¨æ‰§è¡Œç›´æ­£çš„æ¸…ç†æ“ä½œï¼Œè§Other.cppä¸­ï¼‰
     user->SetInfo("status", "delete");
     user->SetInfo("modify", NowTime("%Y%m%d%H%M%S"));
 
-    // ±£´æ
+    // ä¿å­˜
     ret = user->Save();
     if(ret < 0)
     {
         LOG_ERROR("Save user delete mark error: [%s]", username.c_str());
-        page->SetResult("msg", "Î´Öª´íÎó[´úÂë:SD01]");
+        page->SetResult("msg", "æœªçŸ¥é”™è¯¯[ä»£ç :SD01]");
         return ERR;
     }
     LOG_INFO("User had been maked delete mark: [%s]", username.c_str());

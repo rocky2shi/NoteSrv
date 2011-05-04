@@ -8,7 +8,7 @@ namespace DATAPACK_SPACE
 
 
 
-// µ÷ÓÃÍâ²¿perl´úÂë£¬ºÏ²¢ÊéÇ©£¨Ê¹ÓÃÖĞ¼äÎÄ¼ş£©   [Rocky 2010-05-26 15:47:33]
+// è°ƒç”¨å¤–éƒ¨perlä»£ç ï¼Œåˆå¹¶ä¹¦ç­¾ï¼ˆä½¿ç”¨ä¸­é—´æ–‡ä»¶ï¼‰   [Rocky 2010-05-26 15:47:33]
 static const string MergeBookmark(const string &bookmark1, const string &bookmark2)
 {
     struct AutoDelete
@@ -39,7 +39,7 @@ static const string MergeBookmark(const string &bookmark1, const string &bookmar
     Debug("[%s]", tmpfile2.c_str());
     Debug("[%s]", tmpfile3.c_str());
 
-    // µ÷Íâ²¿ÃüÁî´¦Àí´ËÎÄ¼ş
+    // è°ƒå¤–éƒ¨å‘½ä»¤å¤„ç†æ­¤æ–‡ä»¶
     const string cmd = GlobalConfig::instance()->ToolDir() + "MergeBookmark.pl "
                        "'" + tmpfile1 + "' "
                        "'" + tmpfile2 + "' "
@@ -49,7 +49,7 @@ static const string MergeBookmark(const string &bookmark1, const string &bookmar
     if(0 != ret)
     {
         LOG_ERROR("Command error: [%s]", cmd.c_str());
-        // ³ö´íÔò±£ÁôÔ­Öµ£¨bookmark2Ó¦Îª±¾µØÊéÇ©Êı¾İ£¨·ÇÉÏ´«µÄÊı¾İ£©£©
+        // å‡ºé”™åˆ™ä¿ç•™åŸå€¼ï¼ˆbookmark2åº”ä¸ºæœ¬åœ°ä¹¦ç­¾æ•°æ®ï¼ˆéä¸Šä¼ çš„æ•°æ®ï¼‰ï¼‰
         return bookmark2;
     }
 
@@ -71,7 +71,7 @@ DataPack::DataPack(const string &username)
               m_username(username),
               m_opr(OPR_UNKNOWN)
 {
-    // ÊôĞÔ±êÖ¾ÖÃ¿Õ
+    // å±æ€§æ ‡å¿—ç½®ç©º
     memset(m_attribs, 0, sizeof(m_attribs));
 }
 
@@ -80,7 +80,7 @@ DataPack::~DataPack()
     Clear();
 }
 
-// ÇåÀí
+// æ¸…ç†
 void DataPack::Clear()
 {
     LOG_DEBUG("Delete file: [%s]", m_ini.Fullname().c_str());
@@ -88,10 +88,10 @@ void DataPack::Clear()
 }
 
 
-// ÉèÖÃ´ò°üĞÅÏ¢£¨³É¹¦·µ»ØOK£©
+// è®¾ç½®æ‰“åŒ…ä¿¡æ¯ï¼ˆæˆåŠŸè¿”å›OKï¼‰
 int DataPack::MakePack()
 {
-    // Ö»ÄÜÉèÖÃÒ»´Î²Ù×÷ÀàĞÍ
+    // åªèƒ½è®¾ç½®ä¸€æ¬¡æ“ä½œç±»å‹
     if(OPR_UNKNOWN != m_opr)
     {
         LOG_ERROR("error: operator had beeg setted, current m_opr=[%d]", m_opr);
@@ -100,31 +100,31 @@ int DataPack::MakePack()
 
     User *user = User::Get(m_username);
 
-    // ¹¹ÔìÒ»ÁÙÊ±ÎÄ¼şÃû
+    // æ„é€ ä¸€ä¸´æ—¶æ–‡ä»¶å
     const string &file = user->TmpDir() + GetRandomString();
     m_pack.Open(file + ".pack", FileObj::W);
     m_ini.Open(file + ".data", FileObj::W);
 
-    // Ğ´ÈëÍ·²¿´ò°ü´úÂëµÄ°æ±¾ĞÅÏ¢
+    // å†™å…¥å¤´éƒ¨æ‰“åŒ…ä»£ç çš„ç‰ˆæœ¬ä¿¡æ¯
     Version v;
     m_pack.Write(&v, sizeof(v));
 
-    // ±êÃ÷²Ù×÷ÀàĞÍ
+    // æ ‡æ˜æ“ä½œç±»å‹
     m_opr = OPR_MAKEPACK;
 
     return OK;
 }
 
-// ÉèÖÃ´ò°üÊôĞÔ
+// è®¾ç½®æ‰“åŒ…å±æ€§
 void DataPack::SetAttrib(Attrib type, bool valid/*=true*/)
 {
     m_attribs[type] = valid;
 }
 
-// ¼ÓÈëĞèÒª´ò°üµÄÓÃ»§Êı¾İ£¨¼°¸½¼ş£©
+// åŠ å…¥éœ€è¦æ‰“åŒ…çš„ç”¨æˆ·æ•°æ®ï¼ˆåŠé™„ä»¶ï¼‰
 int DataPack::Add(const Ini &pack)
 {
-    // ·Ç´ò°ü²Ù×÷£¬Ôò³ö´í¡£
+    // éæ‰“åŒ…æ“ä½œï¼Œåˆ™å‡ºé”™ã€‚
     if(OPR_MAKEPACK != m_opr)
     {
         LOG_ERROR("operator error, m_opr=[%d]", m_opr);
@@ -133,11 +133,11 @@ int DataPack::Add(const Ini &pack)
 
     Ini::iterator itIni( &pack );
 
-    // Ğ´ÓÃ»§Ê±Êı¾İµ½ÁÙÊ±ÎÄ¼ş£¬Í¬°Ñ¸½¼ş´ò°ü£»
+    // å†™ç”¨æˆ·æ—¶æ•°æ®åˆ°ä¸´æ—¶æ–‡ä»¶ï¼ŒåŒæŠŠé™„ä»¶æ‰“åŒ…ï¼›
     while( itIni.next() )
     {
         /*
-         * Ğ´ÈëÊı¾İ
+         * å†™å…¥æ•°æ®
          */
         Conf *conf = itIni.GetValue();
         const string key = string("\n[") + itIni.GetKey() + string("]") + "\n";
@@ -155,19 +155,19 @@ int DataPack::Add(const Ini &pack)
         }
 
 
-        // ÊÇ·ñÔÊĞí´ò°ü¸½¼ş£¨ÉèÖÃ´Ë±êÖ¾ËµÃ÷²»Ğè´ò°ü¸½¼ş£©
+        // æ˜¯å¦å…è®¸æ‰“åŒ…é™„ä»¶ï¼ˆè®¾ç½®æ­¤æ ‡å¿—è¯´æ˜ä¸éœ€æ‰“åŒ…é™„ä»¶ï¼‰
         if( m_attribs[A_EXCLUDE_ATTACH] )
         {
             continue;
         }
 
         /*
-         * È¡keyÊı¾İµÄ¸½¼şÁĞ±í£¬²¢´ò°ü£»
+         * å–keyæ•°æ®çš„é™„ä»¶åˆ—è¡¨ï¼Œå¹¶æ‰“åŒ…ï¼›
          */
         vector<string> attachs;
         vector<string>::iterator it;
 
-        // È¡¸½¼şÁĞ±í
+        // å–é™„ä»¶åˆ—è¡¨
         m_UserData.GetAttachList(itIni.GetKey(), attachs);
         LOG_DEBUG("[%d]", attachs.size());
 
@@ -175,7 +175,7 @@ int DataPack::Add(const Ini &pack)
         {
             const string &fullname = *it;
             LOG_DEBUG("Pack file: [%s]", fullname.c_str());
-            // ´ò°ü
+            // æ‰“åŒ…
             int ret = FilePack(fullname, FT_ATTACH);
             if(ret < 0)
             {
@@ -186,16 +186,16 @@ int DataPack::Add(const Ini &pack)
     }
 
     /*
-     * ×¢£º¶Ôm_iniµÄ´ò°üÓÉOtherPack()À´×ö£»
+     * æ³¨ï¼šå¯¹m_iniçš„æ‰“åŒ…ç”±OtherPack()æ¥åšï¼›
      */
 
     return OK;
 }
 
-// ´ò°üËùÓĞÓÃ»§Êı¾İ
+// æ‰“åŒ…æ‰€æœ‰ç”¨æˆ·æ•°æ®
 int DataPack::AddAll()
 {
-    // ·Ç´ò°ü²Ù×÷£¬Ôò³ö´í¡£
+    // éæ‰“åŒ…æ“ä½œï¼Œåˆ™å‡ºé”™ã€‚
     if(OPR_MAKEPACK != m_opr)
     {
         LOG_ERROR("operator error, m_opr=[%d]", m_opr);
@@ -205,15 +205,15 @@ int DataPack::AddAll()
     User *user = User::Get(m_username);
 
     /*
-     * ±éÀú¸½¼şÄ¿Â¼£¬È¡³öËùÓĞ¸½¼şÀ´´ò°ü£»
+     * éå†é™„ä»¶ç›®å½•ï¼Œå–å‡ºæ‰€æœ‰é™„ä»¶æ¥æ‰“åŒ…ï¼›
      */
-    // ÊÇ·ñÔÊĞí´ò°ü¸½¼ş£¨²»ÉèÖÃ´Ë±êÖ¾ËµÃ÷Ğè´ò°ü¸½¼ş£©
+    // æ˜¯å¦å…è®¸æ‰“åŒ…é™„ä»¶ï¼ˆä¸è®¾ç½®æ­¤æ ‡å¿—è¯´æ˜éœ€æ‰“åŒ…é™„ä»¶ï¼‰
     if( ! m_attribs[A_EXCLUDE_ATTACH] )
     {
         GetFileList attachs( user->AttachDir() );
         GetFileList::file_iterator itAttach( attachs );
 
-        // É¨ÃèÃ¿¸ö¸½¼şÃû£¬È¡³öÇ°×ºÊÇkeyµÄÎÄ¼ş
+        // æ‰«ææ¯ä¸ªé™„ä»¶åï¼Œå–å‡ºå‰ç¼€æ˜¯keyçš„æ–‡ä»¶
         while( itAttach.next() )
         {
             const char *filename = itAttach.name();
@@ -227,13 +227,13 @@ int DataPack::AddAll()
     }
 
     /*
-     * ÔÙ´ò°üËùÓĞÊı¾İÎÄ¼ş
+     * å†æ‰“åŒ…æ‰€æœ‰æ•°æ®æ–‡ä»¶
      */
     {
         GetFileList datas( user->DataDir() );
         GetFileList::file_iterator itData( datas );
 
-        // É¨ÃèÃ¿¸ö¸½¼şÃû£¬È¡³öÇ°×ºÊÇkeyµÄÎÄ¼ş
+        // æ‰«ææ¯ä¸ªé™„ä»¶åï¼Œå–å‡ºå‰ç¼€æ˜¯keyçš„æ–‡ä»¶
         while( itData.next() )
         {
             const char *filename = itData.name();
@@ -249,21 +249,21 @@ int DataPack::AddAll()
     return OK;
 }
 
-// ´ò°üÆäËüÏî£º²Ëµ¥¡¢¸÷Ò³ÃæÅäÖÃµÈ£»
+// æ‰“åŒ…å…¶å®ƒé¡¹ï¼šèœå•ã€å„é¡µé¢é…ç½®ç­‰ï¼›
 int DataPack::OtherPack()
 {
     User *user = User::Get(m_username);
 
     /*
-     * µ±ÊÇµ÷ÓÃAdd()À´´ò°üµÄ£¬Ôòm_ini²»Îª¿Õ£¬ÈôÊÇµ÷AddAll()£¬
-     * Ôòm_iniÎª¿Õ£»
+     * å½“æ˜¯è°ƒç”¨Add()æ¥æ‰“åŒ…çš„ï¼Œåˆ™m_iniä¸ä¸ºç©ºï¼Œè‹¥æ˜¯è°ƒAddAll()ï¼Œ
+     * åˆ™m_iniä¸ºç©ºï¼›
      */
     if( m_ini.Size() > 0 )
     {
         /*
-         * ´ò°üÊı¾İÎÄ¼ş
+         * æ‰“åŒ…æ•°æ®æ–‡ä»¶
          */
-        m_ini.Close(); // Ê¹»º³åÇøÊı¾İĞ´Èë£¬·ñÔò¿ÉÄÜ´ò°ü²»ÍêÕû£»
+        m_ini.Close(); // ä½¿ç¼“å†²åŒºæ•°æ®å†™å…¥ï¼Œå¦åˆ™å¯èƒ½æ‰“åŒ…ä¸å®Œæ•´ï¼›
         int ret = FilePack(m_ini.Fullname(), FT_DATA);
         if(ret < 0)
         {
@@ -274,13 +274,13 @@ int DataPack::OtherPack()
 
 
     /*
-     * ´ò°ü¸÷ÏÂÀ­²Ëµ¥Êı¾İ£¨Î»ÓÚÓÃ»§Ä¿Â¼µÄmenu×ÓÄ¿Â¼ÖĞµÄÎÄ¼ş£©
+     * æ‰“åŒ…å„ä¸‹æ‹‰èœå•æ•°æ®ï¼ˆä½äºç”¨æˆ·ç›®å½•çš„menuå­ç›®å½•ä¸­çš„æ–‡ä»¶ï¼‰
      */
     {
         GetFileList menus( user->MenuDir() );
         GetFileList::file_iterator it( menus );
 
-        // É¨ÃèÃ¿¸ö¸½¼şÃû£¬È¡³öÇ°×ºÊÇkeyµÄÎÄ¼ş
+        // æ‰«ææ¯ä¸ªé™„ä»¶åï¼Œå–å‡ºå‰ç¼€æ˜¯keyçš„æ–‡ä»¶
         while( it.next() )
         {
             const char *filename = it.name();
@@ -294,13 +294,13 @@ int DataPack::OtherPack()
     }
 
     /*
-     * ´ò°ü¸÷Ò³ÃæÊı¾İ£¨Î»ÓÚÓÃ»§Ä¿Â¼³ö¡®.txt¡¯Îªºó×ºµÄÎÄ¼ş£©
+     * æ‰“åŒ…å„é¡µé¢æ•°æ®ï¼ˆä½äºç”¨æˆ·ç›®å½•å‡ºâ€˜.txtâ€™ä¸ºåç¼€çš„æ–‡ä»¶ï¼‰
      */
     {
         GetFileList cfgs( user->UserDir() );
         GetFileList::file_iterator it( cfgs );
 
-        // É¨ÃèÃ¿¸ö¸½¼şÃû£¬È¡³öÇ°×ºÊÇkeyµÄÎÄ¼ş
+        // æ‰«ææ¯ä¸ªé™„ä»¶åï¼Œå–å‡ºå‰ç¼€æ˜¯keyçš„æ–‡ä»¶
         while( it.next() )
         {
             const char *filename = it.name();
@@ -320,16 +320,16 @@ int DataPack::OtherPack()
     return OK;
 }
 
-// ´ò°üÒ»¸öÎÄ¼ş£¨°ÑfilenameÎÄ¼ş¼ÓÈë°üÖĞ£©£¨³É¹¦·µ»ØOK£¬³ö´í·µ»ØERR£©
+// æ‰“åŒ…ä¸€ä¸ªæ–‡ä»¶ï¼ˆæŠŠfilenameæ–‡ä»¶åŠ å…¥åŒ…ä¸­ï¼‰ï¼ˆæˆåŠŸè¿”å›OKï¼Œå‡ºé”™è¿”å›ERRï¼‰
 int DataPack::FilePack(const string &filename, FileType type)
 {
     FileObj file;
     Head head;
     char buf[512];
     int ret;
-    string filename2 = filename;    // filename2Ö¸Ïòfilename£¬»òÕßÑ¹ËõºóµÄÎÄ¼ş£»
+    string filename2 = filename;    // filename2æŒ‡å‘filenameï¼Œæˆ–è€…å‹ç¼©åçš„æ–‡ä»¶ï¼›
 
-    // ÈçÊÇÊı¾İÎÄ¼ş£¬ÔòÏÈÑ¹Ëõ£»
+    // å¦‚æ˜¯æ•°æ®æ–‡ä»¶ï¼Œåˆ™å…ˆå‹ç¼©ï¼›
     if(FT_DATA == type)
     {
         User *user = User::Get(m_username);
@@ -355,7 +355,7 @@ int DataPack::FilePack(const string &filename, FileType type)
         return ERR;
     }
 
-    // Ìî³äÍ·²¿ĞÅÏ¢
+    // å¡«å……å¤´éƒ¨ä¿¡æ¯
     strncpy(head.basename, GetBaseName(filename2.c_str()), sizeof(head.basename) - 1);
     head.filesize = file.Size();
     head.mtime = GetFileModifyTime(filename2);
@@ -367,10 +367,10 @@ int DataPack::FilePack(const string &filename, FileType type)
     LOG_DEBUG("head.mtime=[%u]", head.mtime);
     LOG_DEBUG("head.magic=[0x%X]", head.magic);
 
-    // ÏÈĞ´ÈëÎÄ¼şÍ·
+    // å…ˆå†™å…¥æ–‡ä»¶å¤´
     m_pack.Write(&head, sizeof(head));
 
-    // ÔÙĞ´ÎÄ¼şÌå
+    // å†å†™æ–‡ä»¶ä½“
     while( (ret = file.Read(buf, sizeof(buf))) > 0 )
     {
         int n = m_pack.Write(buf, ret);
@@ -381,8 +381,8 @@ int DataPack::FilePack(const string &filename, FileType type)
         }
     }
 
-    /* Çå³ıÁÙÊ±µÄÑ¹ËõÎÄ¼ş£¨¼ûÉÏÃæµÄ¶ÔÓ¦µÄif()£©
-     * µ±filename²»µÈÓÚfilenam2£¬ËµÃ÷filename2ÊÇÑ¹ËõµÄÁÙÊ±ÎÄ¼ş£¬É¾³ıÖ®£»
+    /* æ¸…é™¤ä¸´æ—¶çš„å‹ç¼©æ–‡ä»¶ï¼ˆè§ä¸Šé¢çš„å¯¹åº”çš„if()ï¼‰
+     * å½“filenameä¸ç­‰äºfilenam2ï¼Œè¯´æ˜filename2æ˜¯å‹ç¼©çš„ä¸´æ—¶æ–‡ä»¶ï¼Œåˆ é™¤ä¹‹ï¼›
      */
     if( filename != filename2 )
     {
@@ -393,34 +393,34 @@ int DataPack::FilePack(const string &filename, FileType type)
     return OK;
 }
 
-// ½áÊø´ò°ü£¬²¢·µ»Ø°üÎÄ¼şÃû£»
+// ç»“æŸæ‰“åŒ…ï¼Œå¹¶è¿”å›åŒ…æ–‡ä»¶åï¼›
 const string DataPack::PackFinish()
 {
-    // ÒÑ´¦ÀíÍê³É
+    // å·²å¤„ç†å®Œæˆ
     if(OPR_FINISH == m_opr)
     {
         LOG_ERROR("operator error, m_opr=[%d]", m_opr);
         return m_pack.Fullname();;
     }
 
-    // ÔÙÖ´ĞĞÊÕ±ØĞèµÄÊı¾İ´ò°ü
+    // å†æ‰§è¡Œæ”¶å¿…éœ€çš„æ•°æ®æ‰“åŒ…
     if( OtherPack() < 0 )
     {
         LOG_ERROR("OtherPack() error");
         return "";
     }
 
-    // ²Ù×÷Íê³É£¬ÉèÖÃ½áÊø±ê¼Ç£¬²¢¹Ø±ÕÎÄ¼ş£¨Ê¹»º³åÇøĞ´ÈëÎÄ¼şÖĞ£©£»
+    // æ“ä½œå®Œæˆï¼Œè®¾ç½®ç»“æŸæ ‡è®°ï¼Œå¹¶å…³é—­æ–‡ä»¶ï¼ˆä½¿ç¼“å†²åŒºå†™å…¥æ–‡ä»¶ä¸­ï¼‰ï¼›
     m_opr = OPR_FINISH;
     m_pack.Close();
     return m_pack.Fullname();
 }
 
 
-// ÉèÖÃ½â°üĞÅÏ¢£¨pack: ´ı½âµÄ°üÎÄ¼şÃû£©
+// è®¾ç½®è§£åŒ…ä¿¡æ¯ï¼ˆpack: å¾…è§£çš„åŒ…æ–‡ä»¶åï¼‰
 int DataPack::UnPack(const string &pack)
 {
-    // Ö»ÄÜÉèÖÃÒ»´Î²Ù×÷ÀàĞÍ
+    // åªèƒ½è®¾ç½®ä¸€æ¬¡æ“ä½œç±»å‹
     if(OPR_UNKNOWN != m_opr)
     {
         LOG_ERROR("error: operator had beeg setted, current m_opr=[%d]", m_opr);
@@ -435,7 +435,7 @@ int DataPack::UnPack(const string &pack)
         return ERR;
     }
 
-    // È¡³ö°æ±¾ºÅ
+    // å–å‡ºç‰ˆæœ¬å·
     Version v;
 
     ret = m_pack.Read(&v, sizeof(v));
@@ -446,18 +446,18 @@ int DataPack::UnPack(const string &pack)
     }
     LOG_DEBUG("key=[%s]", v.key);
 
-    // ²âÊÔ°æ±¾£¨²»Í¬µÄ¸÷¿ÉÄÜĞèÒªÓÃ¶ÔÓ¦µÄ½â°ü´úÂë°æ±¾£©
+    // æµ‹è¯•ç‰ˆæœ¬ï¼ˆå¯èƒ½éœ€è¦ç”¨å¯¹åº”çš„è§£åŒ…ä»£ç ç‰ˆæœ¬ï¼‰
     if(! v.isValid())
     {
-        LOG_ERROR("Version not matching, version on pack is [%s] ", v.key);
+        LOG_ERROR("Version not match, version of pack is [%s] ", v.key);
         return ERR;
     }
 
-    // ±êÃ÷²Ù×÷ÀàĞÍ
+    // æ ‡æ˜æ“ä½œç±»å‹
     m_opr = OPR_MAKEPACK;
 
     /*
-     * ¿ªÊ¼Ö´ĞĞ½â°ü¶¯×÷¡£¡£¡£
+     * å¼€å§‹æ‰§è¡Œè§£åŒ…åŠ¨ä½œã€‚ã€‚ã€‚
      */
     while( FileUnPack() == OK )
     {
@@ -466,21 +466,21 @@ int DataPack::UnPack(const string &pack)
     return OK;
 }
 
-// ÎÄ¼ş½â°ü
+// æ–‡ä»¶è§£åŒ…
 int DataPack::FileUnPack()
 {
     int ret;
     Head head;
     struct {
-        int data;   // ³É¹¦´¦ÀíµÄÊı¾İÊı
-        int attach; // ³É¹¦´¦ÀíµÄ¸½¼şÊı
+        int data;   // æˆåŠŸå¤„ç†çš„æ•°æ®æ•°
+        int attach; // æˆåŠŸå¤„ç†çš„é™„ä»¶æ•°
     } success;
 
-    // ÏÈÈ¡³öÔ­Êı¾İ£¨ÀÛ¼Ó£©
+    // å…ˆå–å‡ºåŸæ•°æ®ï¼ˆç´¯åŠ ï¼‰
     success.data = atoi( m_result.Get("success.data").c_str() );
     success.attach = atoi( m_result.Get("success.attach").c_str() );
 
-    // ¶Á³öµ±Ç°´¦Êı¾İµÄÍ·²¿ĞÅÏ¢
+    // è¯»å‡ºå½“å‰å¤„æ•°æ®çš„å¤´éƒ¨ä¿¡æ¯
     ret = m_pack.Read(&head, sizeof(head));
     if(ret != sizeof(head))
     {
@@ -502,15 +502,15 @@ int DataPack::FileUnPack()
     User *user = User::Get(m_username);
     string fileFromPack = "";
 
-    // ¸ù¾İ²»Í¬µÄÎÄ¼şÀàĞÍ£¬½âÑ¹µ½²»Í¬µØµã
+    // æ ¹æ®ä¸åŒçš„æ–‡ä»¶ç±»å‹ï¼Œè§£å‹åˆ°ä¸åŒåœ°ç‚¹
     switch(head.type)
     {
-    case FT_ATTACH:     // ¸½¼şÔòÖ±½Ó½âµ½¸½¼şÄ¿Â¼
+    case FT_ATTACH:     // é™„ä»¶åˆ™ç›´æ¥è§£åˆ°é™„ä»¶ç›®å½•
         fileFromPack = user->AttachDir() + head.basename;
         break;
-    case FT_PAGE_CFG:   // Ò³Ãæ£¨ÅäÖÃ£©Êı¾İ
-    case FT_MENU_CFG:   // ²Ëµ¥Êı¾İ
-    case FT_DATA:       // Êı¾İÎÄ¼şÔò½âµ½ÁÙÊ±Ä¿Â¼
+    case FT_PAGE_CFG:   // é¡µé¢ï¼ˆé…ç½®ï¼‰æ•°æ®
+    case FT_MENU_CFG:   // èœå•æ•°æ®
+    case FT_DATA:       // æ•°æ®æ–‡ä»¶åˆ™è§£åˆ°ä¸´æ—¶ç›®å½•
         fileFromPack = user->TmpDir() + GetRandomString() + string(".") + head.basename;
         break;
     default:
@@ -518,23 +518,23 @@ int DataPack::FileUnPack()
         return ERR;
     }
 
-    // ÈôÎÄ¼şÒÑ´æÔÚ£¬ÇÒ×îºóĞŞ¸ÄÊ±¼ä²»ÍíÓÚµ±Ç°°üÖĞÎÄ¼şÊ±¼ä£¬·µ»Ø£»
+    // è‹¥æ–‡ä»¶å·²å­˜åœ¨ï¼Œä¸”æœ€åä¿®æ”¹æ—¶é—´ä¸æ™šäºå½“å‰åŒ…ä¸­æ–‡ä»¶æ—¶é—´ï¼Œè¿”å›ï¼›
     int tLocalFileTime = GetFileModifyTime(fileFromPack);
     if(tLocalFileTime > 0 && tLocalFileTime >= head.mtime)
     {
         LOG_DEBUG("Local file is new than file on pack, file=[%s]", fileFromPack.c_str());
-        // Ìø¹ıµ±Ç°ÎÄ¼şÎ»ÖÃ
+        // è·³è¿‡å½“å‰æ–‡ä»¶ä½ç½®
         m_pack.SetSeek(FileObj::CUR, head.filesize);
         return OK;
     }
 
     /*
-     * ½â°ü£º
+     * è§£åŒ…ï¼š
      */
     FileObj file;
     char buf[512];
     int len = head.filesize;
-    int need = min(sizeof(buf), head.filesize); // Ò»´Îµ÷Read()ĞèÒª¶ÁÈ¡µÄ×Ö½ÚÊı
+    int need = min(sizeof(buf), head.filesize); // ä¸€æ¬¡è°ƒRead()éœ€è¦è¯»å–çš„å­—èŠ‚æ•°
 
     if( ! file.Open(fileFromPack, FileObj::W) )
     {
@@ -554,23 +554,23 @@ int DataPack::FileUnPack()
         need = min(sizeof(buf), len);
     }
 
-    // ¹Ø±ÕÎÄ¼ş£¬È·±£»º³åÊı¾İĞ´Èë£»
+    // å…³é—­æ–‡ä»¶ï¼Œç¡®ä¿ç¼“å†²æ•°æ®å†™å…¥ï¼›
     file.Close();
 
 
     /*
-     * ÈôÊÇÓÃ»§Êı¾İÎÄ¼ş£¬»¹ĞèÊÍ·ÅÎÄ¼şÄÚµÄÊı¾İµ½ÏàÓ¦µÄÓÃ»§Êı¾İÎÄ¼şÖĞ£»
+     * è‹¥æ˜¯ç”¨æˆ·æ•°æ®æ–‡ä»¶ï¼Œè¿˜éœ€é‡Šæ”¾æ–‡ä»¶å†…çš„æ•°æ®åˆ°ç›¸åº”çš„ç”¨æˆ·æ•°æ®æ–‡ä»¶ä¸­ï¼›
      */
     switch( head.type )
     {
     case FT_ATTACH:
-        // »¹Ô­ÎÄ¼şÊ±¼ä
+        // è¿˜åŸæ–‡ä»¶æ—¶é—´
         SettFileModifyTime(fileFromPack, head.mtime);
-        // Ôö¼Ó¸½¼ş¼ÆÊı
+        // å¢åŠ é™„ä»¶è®¡æ•°
         success.attach++;
         break;
     case FT_DATA:{
-        // ÏÈ½âÑ¹£¨Òò¸ÃÀàĞÍÎÄ¼şÊÇ±»Ñ¹ËõµÄ£¬¼û´ò°üº¯ÊıÖĞ£©
+        // å…ˆè§£å‹ï¼ˆå› è¯¥ç±»å‹æ–‡ä»¶æ˜¯è¢«å‹ç¼©çš„ï¼Œè§æ‰“åŒ…å‡½æ•°ä¸­ï¼‰
         const string file = fileFromPack + "." + GetRandomString();
         ret = ZipDecompress(fileFromPack, file);
         if(ret < 0)
@@ -579,76 +579,76 @@ int DataPack::FileUnPack()
                             fileFromPack.c_str(), file.c_str());
             return ERR;
         }
-        // È¡³öÊı¾İ
+        // å–å‡ºæ•°æ®
         Ini data(file);
-        m_UserData.Set(data);   // ÊÍ·ÅÊı¾İ
-        // Ôö¼ÓÊı¾İ²Ù×÷¼ÆÊı
+        m_UserData.Set(data);   // é‡Šæ”¾æ•°æ®
+        // å¢åŠ æ•°æ®æ“ä½œè®¡æ•°
         success.data += atoi( m_UserData.GetResult("success").c_str() );
         LOG_DEBUG("Delete file: [%s] [%s]", fileFromPack.c_str(), file.c_str());
-        DeleteFile(fileFromPack);   // Êı¾İÒÑ´¦ÀíÍê±Ï£¬É¾³ıÎÄ¼ş£»
+        DeleteFile(fileFromPack);   // æ•°æ®å·²å¤„ç†å®Œæ¯•ï¼Œåˆ é™¤æ–‡ä»¶ï¼›
         DeleteFile(file);
         }break;
     case FT_MENU_CFG:{
         /*
-         * ºÍÏÂ¶Î´úÂëÖØ¸´¡££ÛXXX£İ
+         * å’Œä¸‹æ®µä»£ç é‡å¤ã€‚ï¼»XXXï¼½
          */
         Ini merge;
-        // ºÏ²¢packDataµ½oldData;
-        // ÏÈ¶Á³öÉÏ´«µÄÊı¾İ
+        // åˆå¹¶packDataåˆ°oldData;
+        // å…ˆè¯»å‡ºä¸Šä¼ çš„æ•°æ®
         if(merge.Read( fileFromPack ) == OK)
         {
             const string &old = user->MenuDir() + head.basename;
-            // ÔÙ¶Á³öÔ­Êı¾İ
+            // å†è¯»å‡ºåŸæ•°æ®
             merge.Read(old);
-            // Ğ´Èë
+            // å†™å…¥
             merge.Write( old );
             LOG_DEBUG("old=[%s]", old.c_str());
         }
         LOG_DEBUG("Delete file: [%s]", fileFromPack.c_str());
-        DeleteFile(fileFromPack);   // Êı¾İÒÑ´¦ÀíÍê±Ï£¬É¾³ıÎÄ¼ş£»
+        DeleteFile(fileFromPack);   // æ•°æ®å·²å¤„ç†å®Œæ¯•ï¼Œåˆ é™¤æ–‡ä»¶ï¼›
         }break;
     case FT_PAGE_CFG:{
         /*
-         * ºÍÉÏ¶Î´úÂëÖØ¸´¡££ÛXXX£İ
+         * å’Œä¸Šæ®µä»£ç é‡å¤ã€‚ï¼»XXXï¼½
          */
         Ini merge;
-        // ºÏ²¢packDataµ½oldData;
-        // ÏÈ¶Á³öÉÏ´«µÄÊı¾İ
+        // åˆå¹¶packDataåˆ°oldData;
+        // å…ˆè¯»å‡ºä¸Šä¼ çš„æ•°æ®
         if(merge.Read( fileFromPack ) == OK)
         {
             /*
-             * ÈçÊÇbrowseÒ³£¬ĞèÒªºÏ²¢ÊéÇ©£¨[data]==>bookmark×Ö¶Î£©£¬´ËÊéÇ©Ö¸ÔÚ
-             * browseÒ³µÄ×ó²à´¦µÄÊéÇ©£»
+             * å¦‚æ˜¯browseé¡µï¼Œéœ€è¦åˆå¹¶ä¹¦ç­¾ï¼ˆ[data]==>bookmarkå­—æ®µï¼‰ï¼Œæ­¤ä¹¦ç­¾æŒ‡åœ¨
+             * browseé¡µçš„å·¦ä¾§å¤„çš„ä¹¦ç­¾ï¼›
              */
             const string &bookmark1 = merge.Get("data", "bookmark");
-            // ÔÙ¶Á³öÔ­Êı¾İ
+            // å†è¯»å‡ºåŸæ•°æ®
             const string &old = user->UserDir() + head.basename;
             merge.Read(old);
-            // ÔÙÈ¡Ô­ÊéÇ©
+            // å†å–åŸä¹¦ç­¾
             const string &bookmark2 = merge.Get("data", "bookmark");
-            // ºÏ²¢ÊéÇ©£¨Èô²»ÊÇbrowseÒ³£¬»òÉÏ´«µÄ°üÖĞÃ»ÓĞbookmarkĞÅÏ¢£¬Ôò²»ĞèºÏ²¢£©
+            // åˆå¹¶ä¹¦ç­¾ï¼ˆè‹¥ä¸æ˜¯browseé¡µï¼Œæˆ–ä¸Šä¼ çš„åŒ…ä¸­æ²¡æœ‰bookmarkä¿¡æ¯ï¼Œåˆ™ä¸éœ€åˆå¹¶ï¼‰
             if("" != bookmark1)
             {
-                /* °ÑÉÏ´«µÄÊéÇ©Êı¾İºÏ²¢µ½±¾µØµÄÊéÇ©Êı¾İÖĞ£¨¸ù¾İ×îĞÂÊ±¼äÖµ£©
-                 * ºÏ²¢³ö´í£¬Ôò±£ÁôÔ­ÊéÇ©Êı¾İ¡£
-                 *   bookmark1: ÉÏ´«ÊéÇ©
-                 *   bookmark2: Ô­ÊéÇ©
+                /* æŠŠä¸Šä¼ çš„ä¹¦ç­¾æ•°æ®åˆå¹¶åˆ°æœ¬åœ°çš„ä¹¦ç­¾æ•°æ®ä¸­ï¼ˆæ ¹æ®æœ€æ–°æ—¶é—´å€¼ï¼‰
+                 * åˆå¹¶å‡ºé”™ï¼Œåˆ™ä¿ç•™åŸä¹¦ç­¾æ•°æ®ã€‚
+                 *   bookmark1: ä¸Šä¼ ä¹¦ç­¾
+                 *   bookmark2: åŸä¹¦ç­¾
                  */
                 merge.Set("data", "bookmark", MergeBookmark(bookmark1, bookmark2));
             }
-            // Ğ´Èë
+            // å†™å…¥
             merge.Write( old );
             LOG_DEBUG("old=[%s]", old.c_str());
         }
         LOG_DEBUG("Delete file: [%s]", fileFromPack.c_str());
-        DeleteFile(fileFromPack);   // Êı¾İÒÑ´¦ÀíÍê±Ï£¬É¾³ıÎÄ¼ş£»
+        DeleteFile(fileFromPack);   // æ•°æ®å·²å¤„ç†å®Œæ¯•ï¼Œåˆ é™¤æ–‡ä»¶ï¼›
         }break;
     default:
         LOG_ERROR("Type error: [%d]", head.type);
         break;
     }
 
-    // ×ö¼ÇÂ¼
+    // åšè®°å½•
     m_result.Set("success.data", IntToString(success.data));
     m_result.Set("success.attach", IntToString(success.attach));
 
@@ -657,7 +657,7 @@ int DataPack::FileUnPack()
     return OK;
 }
 
-// È¡²Ù×÷½á¹û
+// å–æ“ä½œç»“æœ
 const string DataPack::GetResult(const string &field) const
 {
     return m_result.Get(field);

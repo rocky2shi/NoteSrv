@@ -10,20 +10,20 @@ namespace CHINESECODING_SPACE
 
 
 
-// ÖĞÎÄ±àÂë×ª»»´¦Àí
+// ä¸­æ–‡ç¼–ç è½¬æ¢å¤„ç†
 class ChineseCoding
 {
 public:
     ChineseCoding(const string &from, const string &to);
     ~ChineseCoding();
 
-    // °Ñstr´Ófrom±àÂë×ªÎªto±àÂë£¨³É¹¦·µ»ØOK£©
+    // æŠŠsträ»fromç¼–ç è½¬ä¸ºtoç¼–ç ï¼ˆæˆåŠŸè¿”å›OKï¼‰
     int Converter(const string &from, string &to);
 
 private:
-    const string m_from;    // Ô´±àÂë
-    const string m_to;      // Ä¿±ê±àÂë
-    iconv_t m_cd;           // ×ª»»ÃèÊö·û
+    const string m_from;    // æºç¼–ç 
+    const string m_to;      // ç›®æ ‡ç¼–ç 
+    iconv_t m_cd;           // è½¬æ¢æè¿°ç¬¦
 };
 
 

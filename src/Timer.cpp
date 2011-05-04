@@ -13,24 +13,24 @@ namespace TIMER_SPACE
 
 Timer::Timer(): m_exit(false)
 {
-    // Æô¶¯Ö´ÐÐÏß³Ì
+    // å¯åŠ¨æ‰§è¡Œçº¿ç¨‹
     boost::thread t( boost::bind(&Run, this) );
-    // ÉèÖÃÎª·ÖÀë×´Ì¬
+    // è®¾ç½®ä¸ºåˆ†ç¦»çŠ¶æ€
     t.detach();
 }
 
 Timer::~Timer()
 {
-    // Ê¹¶¨Ê±Ïß³ÌÍË³ö
+    // ä½¿å®šæ—¶çº¿ç¨‹é€€å‡º
     m_exit = true;
 }
 
-// Àà³õÊ¼»¯£¨µÄ³ÌÐòÆô¶¯Ê±Ö´ÐÐÒ»´Î£©
+// ç±»åˆå§‹åŒ–ï¼ˆçš„ç¨‹åºå¯åŠ¨æ—¶æ‰§è¡Œä¸€æ¬¡ï¼‰
 int Timer::init()
 {
     static Timer timer;
 
-    // ×¢²áµ½È«¾Ö»·¾³¼ÇÂ¼
+    // æ³¨å†Œåˆ°å…¨å±€çŽ¯å¢ƒè®°å½•
     Timer *obj = instance( &timer );
     if(NULL == obj)
     {
@@ -50,9 +50,9 @@ int Timer::Insert(const Task &task)
 }
 
 /*
- * É¾³ýÈÎÎñ¡£×¢£ºÓÉÓÚ¿ÉÄÜÔÚÈÎÎñÖ´ÐÐº¯ÊýÄÚ²¿µ÷×¢Ïú£¨É¾³ý£©²Ù×÷£¬Òò´ËÕâÀï²¢
- * ²»Ö´ÐÐÕæÕýÉ¾³ý£¬Ö»ÖÃÎªÎÞÐ§±ê¼Ç£¬¶øÉÔºóµ÷ClearInvalid()²ÅÕæÕý´Ó¶ÓÁÐÖÐÉ¾
- * ³ýÈÎÎñ£»
+ * åˆ é™¤ä»»åŠ¡ã€‚æ³¨ï¼šç”±äºŽå¯èƒ½åœ¨ä»»åŠ¡æ‰§è¡Œå‡½æ•°å†…éƒ¨è°ƒæ³¨é”€ï¼ˆåˆ é™¤ï¼‰æ“ä½œï¼Œå› æ­¤è¿™é‡Œå¹¶
+ * ä¸æ‰§è¡ŒçœŸæ­£åˆ é™¤ï¼Œåªç½®ä¸ºæ— æ•ˆæ ‡è®°ï¼Œè€Œç¨åŽè°ƒClearInvalid()æ‰çœŸæ­£ä»Žé˜Ÿåˆ—ä¸­åˆ 
+ * é™¤ä»»åŠ¡ï¼›
  */
 int Timer::Delete(const ExeFunc exector)
 {
@@ -68,12 +68,12 @@ int Timer::Delete(const ExeFunc exector)
         return ERR;
     }
     // m_queue.erase(it);
-    it->invalid = true; // ±ê¼ÇÎªÎÞÐ§
+    it->invalid = true; // æ ‡è®°ä¸ºæ— æ•ˆ
     LOG_DEBUG("Delete task: [%p]", task.exector);
     return OK;
 }
 
-// Çå³ýÎÞÐ§ÈÎÎñ
+// æ¸…é™¤æ— æ•ˆä»»åŠ¡
 int Timer::ClearInvalid()
 {
     UNIQUE_LOCK(m_lock);
@@ -85,7 +85,7 @@ int Timer::ClearInvalid()
         if(task.invalid)
         {
             LOG_DEBUG("Clear invalid task: [%p] [%s]", task.exector, task.remark.c_str());
-            // ¶ÔlistµÄÉ¾³ý²Ù×÷£¬Ð¡ÐÄ£»
+            // å¯¹listçš„åˆ é™¤æ“ä½œï¼Œå°å¿ƒï¼›
             it = m_queue.erase(it);
         }
         else
@@ -96,7 +96,7 @@ int Timer::ClearInvalid()
     return OK;
 }
 
-// ÈÎÎñÖ÷Ñ­»·
+// ä»»åŠ¡ä¸»å¾ªçŽ¯
 void Timer::Run(Timer *timer)
 {
     assert(NULL != timer);
@@ -104,33 +104,33 @@ void Timer::Run(Timer *timer)
 
     while( ! timer->m_exit )
     {
-        {// Ö´ÐÐÃ¿¸öµÇ¼ÇÈÎÎñ£¨´óÀ¨ºÅÓÃÓÚ×Ô¶¯¼Ó¡¢½âËø£©
+        {// æ‰§è¡Œæ¯ä¸ªç™»è®°ä»»åŠ¡ï¼ˆå¤§æ‹¬å·ç”¨äºŽè‡ªåŠ¨åŠ ã€è§£é”ï¼‰
             SHARE_LOCK(timer->m_lock);
             list<Task>::iterator it;
             for(it = timer->m_queue.begin(); (!timer->m_exit && timer->m_queue.end() != it); it++)
             {
                 Task &task = *it;
 
-                // Ìø¹ýÎÞÐ§Ïî
+                // è·³è¿‡æ— æ•ˆé¡¹
                 if(task.invalid)
                 {
                     continue;
                 }
 
                 LOG_DEBUG("Execute task: [%p] [%s]", task.exector, task.remark.c_str());
-                // Ö´ÐÐÈÎÎñ
+                // æ‰§è¡Œä»»åŠ¡
                 (*task.exector)(task.param);
             }
         }
 
-        sleep(10); // <<<<<<<<<<<<<<<<<<<<<<<<<<<<< Ó¦¿ÉÅäÖÃ
+        sleep(10); // <<<<<<<<<<<<<<<<<<<<<<<<<<<<< åº”å¯é…ç½®
 
-        // ÇåÀíÎÞÐ§Ïî
+        // æ¸…ç†æ— æ•ˆé¡¹
         timer->ClearInvalid();
     }
 }
 
-// ×¢²áÐèÒª¶¨Ê±Ö´ÐÐµÄÈÎÎñ
+// æ³¨å†Œéœ€è¦å®šæ—¶æ‰§è¡Œçš„ä»»åŠ¡
 int Timer::Register(const ExeFunc exector, void *param, const string &remark)
 {
     Task task;
@@ -140,7 +140,7 @@ int Timer::Register(const ExeFunc exector, void *param, const string &remark)
     return instance()->Insert(task);
 }
 
-// ×¢Ïú¶¨Ê±ÈÎÎñ
+// æ³¨é”€å®šæ—¶ä»»åŠ¡
 int Timer::UnRegister(const ExeFunc exector)
 {
     return instance()->Delete(exector);

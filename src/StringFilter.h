@@ -5,7 +5,7 @@
 
 /*
  *
- *  ÀûÓÃÕýÔò±í´ïÊ½£¬¹ýÂË£¨×ª»»£©×Ö·û´®£»
+ *  åˆ©ç”¨æ­£åˆ™è¡¨è¾¾å¼ï¼Œè¿‡æ»¤ï¼ˆè½¬æ¢ï¼‰å­—ç¬¦ä¸²ï¼›
  *
  */
 
@@ -18,41 +18,41 @@
 class StringFilter
 {
     struct Node {
-        regex_t regex;          // Ö¸Ïò±àÒëºóµÄÕýÔòÊ½
-        char *pTarget;          // ´æ·Å½«×ª»»³ÉµÄÄ¿±ê±í´ïÐÎÊ½
+        regex_t regex;          // æŒ‡å‘ç¼–è¯‘åŽçš„æ­£åˆ™å¼
+        char *pTarget;          // å­˜æ”¾å°†è½¬æ¢æˆçš„ç›®æ ‡è¡¨è¾¾å½¢å¼
     };
     enum {
-        MAX_REGEX_COUNT=100,                // ×î¶à±í´ïÊ½Êý
-        CFLAGS = REG_EXTENDED|REG_NEWLINE   // Ê¹ÓÃµÄ±í´ïÊ½±êÖ¾
+        MAX_REGEX_COUNT=100,                // æœ€å¤šè¡¨è¾¾å¼æ•°
+        CFLAGS = REG_EXTENDED|REG_NEWLINE   // ä½¿ç”¨çš„è¡¨è¾¾å¼æ ‡å¿—
     };
 public:
     StringFilter();
     StringFilter(const char *pFile);
     ~StringFilter();
 
-    // ´ò¿ª¹ýÂË±í´ïÊ½µÄÅäÖÃÎÄ¼þ£¬²¢³õÊ¼»¯±í´ïÊ½£»
-    // ·µ»Ø£º³É¹¦·µ0£¬³ö´í·µ·Ç0£»
+    // æ‰“å¼€è¿‡æ»¤è¡¨è¾¾å¼çš„é…ç½®æ–‡ä»¶ï¼Œå¹¶åˆå§‹åŒ–è¡¨è¾¾å¼ï¼›
+    // è¿”å›žï¼šæˆåŠŸè¿”0ï¼Œå‡ºé”™è¿”éž0ï¼›
     int OpenConfig(const char *pFile);
 
-    // ±àÒë±í´ïÊ½£¬´æÈëÊý×é£¨×·¼Ó£©£¬ÓÃÓÚÆ¥Åä¡£
-    // pRegex : ÕýÔòÊ½´®
-    // ·µ»Ø£º³É¹¦·µ0£¬³ö´í·µ·Ç0£»
+    // ç¼–è¯‘è¡¨è¾¾å¼ï¼Œå­˜å…¥æ•°ç»„ï¼ˆè¿½åŠ ï¼‰ï¼Œç”¨äºŽåŒ¹é…ã€‚
+    // pRegex : æ­£åˆ™å¼ä¸²
+    // è¿”å›žï¼šæˆåŠŸè¿”0ï¼Œå‡ºé”™è¿”éž0ï¼›
     int Regcomp(const char *pRegex, const char *pTarget);
 
-    // ¸ù¾ÝÉè¶¨µÄÖµ£¬×ª»»pSrc´®£¬½á¹û·Åµ½pDestÖÐ£»
-    // ·µ»Ø£º³É¹¦·µ»Ø´óÓÚ0µÄÖµ£¬Ê§°Ü·µ-1£»
+    // æ ¹æ®è®¾å®šçš„å€¼ï¼Œè½¬æ¢pSrcä¸²ï¼Œç»“æžœæ”¾åˆ°pDestä¸­ï¼›
+    // è¿”å›žï¼šæˆåŠŸè¿”å›žå¤§äºŽ0çš„å€¼ï¼Œå¤±è´¥è¿”-1ï¼›
     int ChangTo(const char *pSrc, char *pDest);
 
-    // pSrcÖÐ´æÔÚ·ûºÏÅäÖÃÖÐÖ¸¶¨µÄ´®
-    // ·µ»Ø£º³É¹¦·µ»Ø´óÓÚ0µÄÖµ£¬Ê§°Ü·µ-1£»
+    // pSrcä¸­å­˜åœ¨ç¬¦åˆé…ç½®ä¸­æŒ‡å®šçš„ä¸²
+    // è¿”å›žï¼šæˆåŠŸè¿”å›žå¤§äºŽ0çš„å€¼ï¼Œå¤±è´¥è¿”-1ï¼›
     int IsExist(const char *pSrc);
 
 private:
     void Clear();
 
 private:
-    Node m_Node[MAX_REGEX_COUNT];   // ÕýÔòÊ½Êý×é
-    int m_nCount;       // µ±Ç°m_NodeÖÐÔªËØ¼ÆÆ÷
+    Node m_Node[MAX_REGEX_COUNT];   // æ­£åˆ™å¼æ•°ç»„
+    int m_nCount;       // å½“å‰m_Nodeä¸­å…ƒç´ è®¡å™¨
 };
 
 

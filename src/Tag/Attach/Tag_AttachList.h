@@ -9,7 +9,7 @@ namespace TAG_ATTACHLIST_SPACE
 
 
 
-// Í¼Æ¬¸½¼þÁÐ±í
+// å›¾ç‰‡é™„ä»¶åˆ—è¡¨
 class Tag_AttachList : public Tag
 {
 protected:

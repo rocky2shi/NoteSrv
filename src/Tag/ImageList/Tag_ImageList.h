@@ -9,7 +9,7 @@ namespace TAG_IMAGELIST_SPACE
 
 
 
-// ͼƬ��ʾ�б�
+// 图片显示列表
 class Tag_ImageList : public Tag
 {
 protected:

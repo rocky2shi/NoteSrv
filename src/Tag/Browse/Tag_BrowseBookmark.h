@@ -9,7 +9,7 @@ namespace TAG_BROWSEBOOKMARK_SPACE
 
 
 
-// browseÒ³ÃæµÄÊéÇ©Êı¾İ
+// browseé¡µé¢çš„ä¹¦ç­¾æ•°æ®
 class Tag_BrowseBookmark : public Tag
 {
 protected:

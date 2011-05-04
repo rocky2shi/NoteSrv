@@ -8,7 +8,7 @@ namespace TAG_BOOKMARKDATA_SPACE
 
 
 
-// ÊéÇ©Êı¾İ
+// ä¹¦ç­¾æ•°æ®
 class Tag_BookmarkData : public Tag
 {
 protected:

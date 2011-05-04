@@ -7,32 +7,32 @@ namespace PAGE_SYSTEMINFO_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "SystemInfo";
 
 
 
 Page_SystemInfo::Page_SystemInfo()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_SystemInfo::~Page_SystemInfo()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_SystemInfo::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_SystemInfo::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_SystemInfo;
 }
 
@@ -43,20 +43,20 @@ Page *Page_SystemInfo::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
-// Êä³öÊı¾İÌå
+// è¾“å‡ºæ•°æ®ä½“
 int Page_SystemInfo::Deal()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
     Connect * const connect = m_request->GetConnect();
     const string &field = m_request->GetField("field");
 
-    // ·µ»ØcpuÊ¹ÓÃÂÊ
+    // è¿”å›cpuä½¿ç”¨ç‡
     if("CpuUsed" == field)
     {
         const string html = IntToString( GetCpuUsed() );
@@ -78,7 +78,7 @@ int Page_SystemInfo::Deal()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_SystemInfo, THIS_MODULE)
 
 }// end of PAGE_SYSTEMINFO_SPACE

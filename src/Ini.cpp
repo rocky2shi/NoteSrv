@@ -22,7 +22,7 @@ Ini::~Ini()
 }
 
 
-// �Ƿ�Ϊ��[...]�������򷵻��������ڵ����ݣ����򷵻�NULL
+// 是否为‘[...]’，是则返回中括号内的内容，否则返回NULL
 char *Ini::Section(char *buf, int len)
 {
     char *pBuf = buf;
@@ -30,28 +30,28 @@ char *Ini::Section(char *buf, int len)
     char *end;
     char *section = NULL;
 
-    // ����ע�͡�����
+    // 跳过注释、空行
     if( '#' == *pBuf || IS_CR( *pBuf ) )
     {
         return NULL;
     }
 
     end = pBuf;
-    JUMP_TO_LINE_END(end);  // ������β
+    JUMP_TO_LINE_END(end);  // 跳到行尾
 
-    // ����ʽ
+    // 检查格式
     if('[' != *pBuf || ']' != *(end - 1))
     {
         return NULL;
     }
 
-    *(end - 1) = '\0'; // �����]��
-    section = pBuf + 1; // ������[��
+    *(end - 1) = '\0'; // 清掉‘]’
+    section = pBuf + 1; // 跳过‘[’
 
     return section;
 }
 
-// ��ȡ��ʽ�ļ�
+// 读取格式文件
 int Ini::Read(const string &filename)
 {
     FileObj ini;
@@ -74,16 +74,16 @@ int Ini::Read(const string &filename)
 
 
     /*
-     * ��ȡsection�����¶�Ӧ������
+     * 读取section及其下对应的内容
      */
     while( (ret = ini.GetLine(buf, sizeof(buf) - 1)) > 0 )
     {
         pBuf = buf;
 
-        // ɾ���س����з�
+        // 删除回车换行符
         CUT_CR(pBuf, ret);
 
-        // ����ע�͡�����
+        // 跳过注释、空行
         if( '#' == *pBuf || IS_CR( *pBuf ) )
         {
             continue;
@@ -91,18 +91,18 @@ int Ini::Read(const string &filename)
 
 
         /*
-         * ��λ����һ����[...]����
+         * 定位到第一个‘[...]’处
          */
         begin = Section(buf, ret);
         if(NULL != begin)
         {
-            // �����µ�Section��
+            // 遇到新的Section了
             section = begin;
-            // �Ȳ鿴����ԭ����
+            // 先查看集合原数据
             conf = m_ConfList[ section ];
             if(NULL == conf)
             {
-                // �����½��
+                // 插入新结点
                 conf = new Conf;
                 if(NULL == conf)
                 {
@@ -121,7 +121,7 @@ int Ini::Read(const string &filename)
 
 
         /*
-         * ȡ������
+         * 取属性名
          */
         end = strchr(pBuf, '=');
         if(NULL == end)
@@ -129,25 +129,25 @@ int Ini::Read(const string &filename)
             //LOG_DEBUG("ini format error: [%s]", buf);
             continue;
         }
-        *end = '\0'; // ��ȥ��=��
+        *end = '\0'; // 削去‘=’
         string attribute = pBuf;
 
         /*
-         * ȡ����ֵ
+         * 取属性值
          */
         string value = end + 1;
         //LOG_DEBUG("%s=%s", attribute, value);
 
-        // ��ȡһ�л�����ȫȡ�����ݣ�������ȡ��
+        // 如取一行还不完全取完数据，接着再取；
         while( (sizeof(buf) - 1) == ret
                && ( (ret = ini.GetLine(buf, sizeof(buf) - 1)) > 0 ) )
         {
-            // ɾ���س����з������鿴�Ƿ�ȡ����һ������
+            // 删除回车换行符，并查看是否取到了一完整行
             CUT_CR(buf, ret);
             value += buf;
         }
 
-        // ����
+        // 插入
         conf->Set(attribute, value);
     }
 
@@ -156,7 +156,7 @@ int Ini::Read(const string &filename)
     return OK;
 }
 
-// ����д���ļ�
+// 数据写入文件
 int Ini::Write(string filename/*=""*/)
 {
     if("" == filename)
@@ -191,7 +191,7 @@ int Ini::Write(string filename/*=""*/)
     return OK;
 }
 
-// �������
+// 清除数据
 void Ini::Clear()
 {
     Ini::iterator it(this);
@@ -207,7 +207,7 @@ void Ini::Clear()
 
 
 
-// ��ʾ��������
+// 显示所有数据
 void Ini::Dump() const
 {
     Ini::iterator itIni(this);
@@ -251,29 +251,29 @@ int Ini::Set(const string &section, const string &attribute, const string &value
     Conf *conf = m_ConfList[ section ];
     if( NULL == conf )
     {
-        // �½�һ���
+        // 新建一结点
         conf = new Conf;
         if(NULL == conf)
         {
             LOG_ERROR("new Conf error");
             return ERR;
         }
-        // �����б�
+        // 插入列表
         m_ConfList[ section ] = conf;
     }
-    // ����ֵ
+    // 设置值
     conf->Set(attribute, value);
     return OK;
 }
 
-// pack���ܱ�copyһ�ݺ�ŵ�Set�У�������ָ�룻
+// pack可能被copy一份后放到Set中，它不是指针；
 int Ini::Set(const string &key, const Conf &pack)
 {
-    // �Ȳ鿴��ǰ�б����Ƿ��Ѵ���key��Ӧ��ֵ���޴���������½�㣻
+    // 先查看当前列表中是否已存在key对应的值，无存在则插入新结点；
     Conf *conf = m_ConfList[ key ];
     if( NULL == conf )
     {
-        // �����б�
+        // 插入列表
         conf = new Conf(pack);
         if(NULL == conf)
         {
@@ -282,7 +282,7 @@ int Ini::Set(const string &key, const Conf &pack)
         m_ConfList[ key ] = conf;
     }
 
-    // �Ѵ��ڣ��������ֵ����ֵ�������ǣ�
+    // 已存在，则放入新值（旧值将被覆盖）
     conf->Set(pack);
     return OK;
 }
@@ -296,9 +296,9 @@ void Ini::Del(const string &key)
 
 void Ini::Del(const string &section, const string &attribute)
 {
-    /* �Ȳ鿴�Ƿ���section��Ӧ�����ݣ������ٵ���Del()��ִ�У�
-     *   ע�⣬����ֱ����m_ConfList[ section ]->Del(...)����Ϊ
-     *   ���䲻����ʱ���ۣݲ���������Ԫ�أ�
+    /* 先查看是否存的section对应的数据，有则再调用Del()来执行；
+     *   注意，不能直接用m_ConfList[ section ]->Del(...)，因为
+     *   当其不存在时，［］操作会新增元素；
      */
     const Conf *conf = Get(section);
     if( NULL != conf )

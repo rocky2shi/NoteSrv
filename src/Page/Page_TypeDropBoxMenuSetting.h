@@ -10,7 +10,7 @@ namespace PAGE_TYPEDROPBOXMENUSETTING_SPACE
 
 
 
-// ÀàĞÍÑ¡ÔñÏÂÀ­²Ëµ¥ÉèÖÃÒ³
+// ç±»å‹é€‰æ‹©ä¸‹æ‹‰èœå•è®¾ç½®é¡µ
 class Page_TypeDropBoxMenuSetting : public Page
 {
 protected:

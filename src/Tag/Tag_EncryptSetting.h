@@ -11,7 +11,7 @@ namespace TAG_ENCRYPTSETTING_SPACE
 
 
 
-// ¼ÓÃÜÉèÖÃ´°¿Ú
+// åŠ å¯†è®¾ç½®çª—å£
 class Tag_EncryptSetting : public Tag
 {
 protected:

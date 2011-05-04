@@ -15,60 +15,60 @@ const int SOCK_ERROR                        = -100;
 const int SOCK_TIMEOUT                      = -101;
 
 
-//TcpÀà
+//Tcpç±»
 class yCTcp
 {
 
-//¹¹Ôìº¯Êı
+//æ„é€ å‡½æ•°
 public:
     yCTcp ();
     yCTcp (int nSock);
     virtual ~yCTcp ();
 
-//ÖØÔØ²Ù×÷·û
+//é‡è½½æ“ä½œç¬¦
 public:
-    int operator = (int);//¸³Öµ
-    int operator != (int) const;//²»µÈÓÚ²Ù×÷·û
-    int operator == (int) const;//µÈÓÚ²Ù×÷·û
+    int operator = (int);//èµ‹å€¼
+    int operator != (int) const;//ä¸ç­‰äºæ“ä½œç¬¦
+    int operator == (int) const;//ç­‰äºæ“ä½œç¬¦
 
-//¹«ÓĞ³ÉÔ±º¯Êı
+//å…¬æœ‰æˆå‘˜å‡½æ•°
 public:
-    int GetHandle () const;//È¡³öm_nSock
-    int Open ();//´´½¨socket
-    int Close ();//¹Ø±Õsocket
-    int Connect (const char *, int) const;//Á¬½Ó£¨Î´ÉèÖÃ³¬Ê±£©
-    int ConnectNoblock (const char *, int, int) const;//Á¬½Ó£¨ÉèÖÃ³¬Ê±£©
-    int Bind (const char *, int) const;//°ó¶¨
-    int Listen (int nNum) const;//¼àÌı
-    int Accept () const;//½ÓÊÜÁ¬½Ó
+    int GetHandle () const;//å–å‡ºm_nSock
+    int Open ();//åˆ›å»ºsocket
+    int Close ();//å…³é—­socket
+    int Connect (const char *, int) const;//è¿æ¥ï¼ˆæœªè®¾ç½®è¶…æ—¶ï¼‰
+    int ConnectNoblock (const char *, int, int) const;//è¿æ¥ï¼ˆè®¾ç½®è¶…æ—¶ï¼‰
+    int Bind (const char *, int) const;//ç»‘å®š
+    int Listen (int nNum) const;//ç›‘å¬
+    int Accept () const;//æ¥å—è¿æ¥
 
-    int Sendn (const void *, int, int = TCP_TIMEOUT) const;//·¢ËÍn¸ö×Ö½ÚÊı¾İ
-    int Send (const void *, int, int = TCP_TIMEOUT) const;//·¢ËÍÊı¾İ
-    int Recvn (void *, int, int = TCP_TIMEOUT) const;//½ÓÊÕn¸ö×Ö½ÚÊı¾İ
-    int Recv (void *, int, int = TCP_TIMEOUT) const;//½ÓÊÕÊı¾İ
-    int RecvLine_rn (void *, int, int = TCP_TIMEOUT) const;//½ÓÊÕÒ»ĞĞÊı¾İ(ÒÔ"\r\n"½áÎ²)
-    int RecvLine_n (void *, int, int = TCP_TIMEOUT) const;//½ÓÊÕÒ»ĞĞÊı¾İ(ÒÔ"\n"½áÎ²)
+    int Sendn (const void *, int, int = TCP_TIMEOUT) const;//å‘é€nä¸ªå­—èŠ‚æ•°æ®
+    int Send (const void *, int, int = TCP_TIMEOUT) const;//å‘é€æ•°æ®
+    int Recvn (void *, int, int = TCP_TIMEOUT) const;//æ¥æ”¶nä¸ªå­—èŠ‚æ•°æ®
+    int Recv (void *, int, int = TCP_TIMEOUT) const;//æ¥æ”¶æ•°æ®
+    int RecvLine_rn (void *, int, int = TCP_TIMEOUT) const;//æ¥æ”¶ä¸€è¡Œæ•°æ®(ä»¥"\r\n"ç»“å°¾)
+    int RecvLine_n (void *, int, int = TCP_TIMEOUT) const;//æ¥æ”¶ä¸€è¡Œæ•°æ®(ä»¥"\n"ç»“å°¾)
 
-    int GetHostName (char *) const;//µÃµ½±¾»ú»úÆ÷Ãû
-    int GetPeerName (char *) const;//µÃµ½¶Ô·½»úÆ÷Ãû
-    char **GetHostAddr () const;//µÃµ½±¾»úµØÖ·
-    int GetPeerAddr (char *) const;//µÃµ½¶Ô·½µØÖ·
+    int GetHostName (char *) const;//å¾—åˆ°æœ¬æœºæœºå™¨å
+    int GetPeerName (char *) const;//å¾—åˆ°å¯¹æ–¹æœºå™¨å
+    char **GetHostAddr () const;//å¾—åˆ°æœ¬æœºåœ°å€
+    int GetPeerAddr (char *) const;//å¾—åˆ°å¯¹æ–¹åœ°å€
 
-    int SetNoblock ();//ÉèÖÃsocketÎª·Ç×èÈû
-    int SetBlock ();//ÉèÖÃsocketÎª×èÈû
-    int SetReuseAddr ();//ÉèÖÃµØÖ·¿ÉÖØÓÃ
-    int SetSendTimeout (int);//ÉèÖÃ·¢ËÍ³¬Ê±Öµ
-    int SetRecvTimeout (int);//ÉèÖÃ½ÓÊÕ³¬Ê±Öµ
-    int SetSendBuf (int);//ÉèÖÃ·¢ËÍ»º³åÇøµÄ´óĞ¡
-    int SetRecvBuf (int);//ÉèÖÃ½ÓÊÕ»º³åÇøµÄ´óĞ¡
-    int SetKeepalive ();//ÉèÖÃ´æ»î¼ì²â
+    int SetNoblock ();//è®¾ç½®socketä¸ºéé˜»å¡
+    int SetBlock ();//è®¾ç½®socketä¸ºé˜»å¡
+    int SetReuseAddr ();//è®¾ç½®åœ°å€å¯é‡ç”¨
+    int SetSendTimeout (int);//è®¾ç½®å‘é€è¶…æ—¶å€¼
+    int SetRecvTimeout (int);//è®¾ç½®æ¥æ”¶è¶…æ—¶å€¼
+    int SetSendBuf (int);//è®¾ç½®å‘é€ç¼“å†²åŒºçš„å¤§å°
+    int SetRecvBuf (int);//è®¾ç½®æ¥æ”¶ç¼“å†²åŒºçš„å¤§å°
+    int SetKeepalive ();//è®¾ç½®å­˜æ´»æ£€æµ‹
 
 //public:
     static const int SOCK_ERROR;
     static const int SOCK_TIMEOUT;
     static const long TCP_TIMEOUT;
 
-//Ë½ÓĞ³ÉÔ±±äÁ¿
+//ç§æœ‰æˆå‘˜å˜é‡
 private:
     int m_nSock;
 };

@@ -10,7 +10,7 @@ namespace SUBMIT_BROWSEINSERTBOOKMARK_SPACE
 
 
 
-// 处理browse页面插入书签提交事件
+// 澶勭悊browse椤甸潰鎻掑叆涔︾鎻愪氦浜嬩欢
 class Submit_BrowseInsertBookmark : public Submit
 {
 protected:

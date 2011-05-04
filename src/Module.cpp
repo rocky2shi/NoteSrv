@@ -15,14 +15,14 @@ Module::Factory Module::m_Factory;
 
 Module::Module()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Module::Module(const string &id): m_module(id)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    // ÔÚÎ´½øÈëÖ÷º¯ÊýÇ°ÒÑµ÷ÓÃ£¬ÕâÊ±µÄm_TmpFactory[ index ]Ó¦ÎªNULL
+    // åœ¨æœªè¿›å…¥ä¸»å‡½æ•°å‰å·²è°ƒç”¨ï¼Œè¿™æ—¶çš„m_TmpFactory[ index ]åº”ä¸ºNULL
     assert(NULL == m_Factory[ id ]);
 
     Register(id, this);
@@ -30,29 +30,29 @@ Module::Module(const string &id): m_module(id)
 
 Module::~Module()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
 /*
- * ¹¦ÄÜ£º×¢²á×ÓÀà¶ÔÏóµ½¹¤³§
- * ±àÐ´£ºRocky 2009-09-07 17:09:46
- * ·µ»Ø£ºÕýÈ··µ»Ø>=0Öµ£¬³ö´í·µ<0Öµ£»
- * ×¢Òâ£º´Ëº¯ÊýÔÚ½øÈëmain()º¯ÊýÖ®Ç°¾ÍÓÉ¹¹Ôìº¯Êýµ÷ÓÃÁË£¨ÒòÐ©²»ÄÜÊ¹ÓÃMB_LOGGER_xxx()£©
+ * åŠŸèƒ½ï¼šæ³¨å†Œå­ç±»å¯¹è±¡åˆ°å·¥åŽ‚
+ * ç¼–å†™ï¼šRocky 2009-09-07 17:09:46
+ * è¿”å›žï¼šæ­£ç¡®è¿”å›ž>=0å€¼ï¼Œå‡ºé”™è¿”<0å€¼ï¼›
+ * æ³¨æ„ï¼šæ­¤å‡½æ•°åœ¨è¿›å…¥main()å‡½æ•°ä¹‹å‰å°±ç”±æž„é€ å‡½æ•°è°ƒç”¨äº†ï¼ˆå› äº›ä¸èƒ½ä½¿ç”¨MB_LOGGER_xxx()ï¼‰
  */
 int Module::Register(const string &id, Module *sub)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     assert("" != id && NULL == m_Factory[ id ]);
-    m_Factory[ id ] = sub;  // ¼ÓÈë¶ÓÁÐ
+    m_Factory[ id ] = sub;  // åŠ å…¥é˜Ÿåˆ—
     return OK;
 }
 
 /*
- * ¹¦ÄÜ£º¹Ø±ÕÄ£¿é
- * ±àÐ´£ºRocky 2010-03-16 14:52:25
- * ·µ»Ø£ºÕýÈ··µ»Ø>=0Öµ£¬³ö´í·µ<0Öµ£»
- * ×¢Òâ£º´Ëº¯ÊýÔÚ½øÈëmain()º¯ÊýÖ®Ç°¾ÍÓÉ¹¹Ôìº¯Êýµ÷ÓÃÁË
+ * åŠŸèƒ½ï¼šå…³é—­æ¨¡å—
+ * ç¼–å†™ï¼šRocky 2010-03-16 14:52:25
+ * è¿”å›žï¼šæ­£ç¡®è¿”å›ž>=0å€¼ï¼Œå‡ºé”™è¿”<0å€¼ï¼›
+ * æ³¨æ„ï¼šæ­¤å‡½æ•°åœ¨è¿›å…¥main()å‡½æ•°ä¹‹å‰å°±ç”±æž„é€ å‡½æ•°è°ƒç”¨äº†
  */
 int Module::UnRegister(const string &id)
 {
@@ -60,19 +60,19 @@ int Module::UnRegister(const string &id)
     {
         return ERR;
     }
-    m_Factory.erase(id); // É¾³ý
+    m_Factory.erase(id); // åˆ é™¤
     return OK;
 }
 
 
 /*
- * ¹¦ÄÜ£º¾²Ì¬³õÊ¼»¯ÉèÖÃ
- * ±àÐ´£ºRocky 2009-09-23 14:14:55
- * ·µ»Ø£ºÕýÈ··µ»Ø>=0Öµ£¬³ö´í·µ<0Öµ£»
+ * åŠŸèƒ½ï¼šé™æ€åˆå§‹åŒ–è®¾ç½®
+ * ç¼–å†™ï¼šRocky 2009-09-23 14:14:55
+ * è¿”å›žï¼šæ­£ç¡®è¿”å›ž>=0å€¼ï¼Œå‡ºé”™è¿”<0å€¼ï¼›
  */
 int Module::init()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
 
     Factory::iterator it;
@@ -82,32 +82,32 @@ int Module::init()
         const string &id = it->first;
         Module * const &db = it->second;
 
-        // µ÷ÓÃ×ÓÀà³õÊ¼»¯º¯Êý
+        // è°ƒç”¨å­ç±»åˆå§‹åŒ–å‡½æ•°
         if( db->DoInit() < 0 )
         {
-            LOG_ERROR("³õÊ¼»¯ModuleµÄ×ÓÀà[%s]³ö´í", id.c_str() );
+            LOG_ERROR("åˆå§‹åŒ–Moduleçš„å­ç±»[%s]å‡ºé”™", id.c_str() );
             return ERR;
         }
-        LOG_DEBUG("³õÊ¼»¯ModuleµÄ×ÓÀà[%s]½áÊø", id.c_str());
+        LOG_DEBUG("åˆå§‹åŒ–Moduleçš„å­ç±»[%s]ç»“æŸ", id.c_str());
     }
 
     return OK;
 }
 
 /*
- * ¹¦ÄÜ£º¸÷²ÊÖÖµÄ³õÊ¼»¯²Ù×÷¶¼ÀàËÆ£¬ËùÒÔ³éµ½»ùÀà£¨µ«±ØÐëÔÚ×ÓÀàÖÐÏÔÊ½µ÷ÓÃ£©
- * ±àÐ´£ºRocky 2009-09-15 18:30:21
- * ·µ»Ø£ºÕýÈ··µ»Ø>=0Öµ£¬³ö´í·µ<0Öµ£»
+ * åŠŸèƒ½ï¼šå„å½©ç§çš„åˆå§‹åŒ–æ“ä½œéƒ½ç±»ä¼¼ï¼Œæ‰€ä»¥æŠ½åˆ°åŸºç±»ï¼ˆä½†å¿…é¡»åœ¨å­ç±»ä¸­æ˜¾å¼è°ƒç”¨ï¼‰
+ * ç¼–å†™ï¼šRocky 2009-09-15 18:30:21
+ * è¿”å›žï¼šæ­£ç¡®è¿”å›ž>=0å€¼ï¼Œå‡ºé”™è¿”<0å€¼ï¼›
  */
 int Module::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-//    // ¸÷Ä£¿éÍ³Ò»Ê¹ÓÃµÄ´úÂë
+//    // å„æ¨¡å—ç»Ÿä¸€ä½¿ç”¨çš„ä»£ç 
 //    const string close = GetCfgValue(m_module, "close", "");
 //    if("1" == close)
 //    {
-//        LOG_ERROR("Ä£¿é[%s]ÅäÖÃÎª¹Ø±Õ", m_module.c_str() );
+//        LOG_ERROR("æ¨¡å—[%s]é…ç½®ä¸ºå…³é—­", m_module.c_str() );
 //        UnRegister(m_module);
 //        return OK;
 //    }
@@ -135,46 +135,46 @@ int Module::DoInit()
 
 
 
-/******************** ×ÓÀàÖØÔØÒÔÏÂ²Ù×÷À´Ö´ÐÐ¾ßÌåÒµÎñ ********************/
+/******************** å­ç±»é‡è½½ä»¥ä¸‹æ“ä½œæ¥æ‰§è¡Œå…·ä½“ä¸šåŠ¡ ********************/
 /*
- *  Run(): Ö÷Ñ­»·£¬µ÷ÓÃDeal()
+ *  Run(): ä¸»å¾ªçŽ¯ï¼Œè°ƒç”¨Deal()
  */
 
-// È¡Ä£¿éÃû
+// å–æ¨¡å—å
 const string Module::GetName() const
 {
     return m_module;
 }
 
 
-// Ñ­»·µ÷ÓÃ´¦Àíº¯Êý
+// å¾ªçŽ¯è°ƒç”¨å¤„ç†å‡½æ•°
 int Module::Run()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    // ÏÈ²é¿´µ±Ç°¹¦ÄÜÉèÖÃ£¬Èç²»Éè£¬ÔÙ²é¿´¹²ÓÃµÄÉèÖÃ£¬ÔÙ²»£¬ÔòÊ¹ÓÃÄ¬ÈÏÖµ£¨10Ãë£©
+    // å…ˆæŸ¥çœ‹å½“å‰åŠŸèƒ½è®¾ç½®ï¼Œå¦‚ä¸è®¾ï¼Œå†æŸ¥çœ‹å…±ç”¨çš„è®¾ç½®ï¼Œå†ä¸ï¼Œåˆ™ä½¿ç”¨é»˜è®¤å€¼ï¼ˆ10ç§’ï¼‰
     const int second = 3; // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<MyBox::S2I( GetCfgValue("Other", "main_loop_interval", "10") );
 
     LOG_INFO("main_loop_interval=[%d]", second);
 
-    // ´¦ÀíÃ¿¸ö²ÊÖÖ
+    // å¤„ç†æ¯ä¸ªå½©ç§
     while( !SignalDeal::exit() )
     {
-        // µ÷ÓÃ´¦Àíº¯Êý
+        // è°ƒç”¨å¤„ç†å‡½æ•°
         Deal();
 
-        // ´¦ÀíÍê³É£¬ÔÝÍ£secondÃë¡£
+        // å¤„ç†å®Œæˆï¼Œæš‚åœsecondç§’ã€‚
         sleep(second);
     }// end of while( ...
 
     return OK;
 }
 
-// ´¦Àíº¯Êý
+// å¤„ç†å‡½æ•°
 int Module::Deal()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
-    LOG_ERROR("ÔÝ²»Ö§³Ö´ËÄ£¿é[%s]", m_module.c_str() );
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
+    LOG_ERROR("æš‚ä¸æ”¯æŒæ­¤æ¨¡å—[%s]", m_module.c_str() );
     return ERR;
 }
 

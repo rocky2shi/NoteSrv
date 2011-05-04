@@ -9,7 +9,7 @@ namespace TAG_TYPEDROPITEMLIST_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "TypeDropItemList";
 
 
@@ -18,17 +18,17 @@ static const string THIS_MODULE = "TypeDropItemList";
 
 Tag_TypeDropItemList::Tag_TypeDropItemList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_TypeDropItemList::Tag_TypeDropItemList(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_TypeDropItemList::~Tag_TypeDropItemList()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -36,15 +36,15 @@ Tag_TypeDropItemList::~Tag_TypeDropItemList()
 
 int Tag_TypeDropItemList::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_TypeDropItemList::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_TypeDropItemList;
 }
 
@@ -55,7 +55,7 @@ Tag *Tag_TypeDropItemList::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -63,7 +63,7 @@ Tag *Tag_TypeDropItemList::DoNew()
 // Rocky 2010-05-24 19:36:59
 string Tag_TypeDropItemList::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     const string &username = page->GetRequest()->GetCurrentUser();
     Menu *menu = Menu::Get(username, "TypeDropBox.cfg");    // [XXX:56425820]
@@ -74,8 +74,8 @@ string Tag_TypeDropItemList::Get(Page *page)
     int index = 0;
     int i;
 
-    /* ÁĞ³öÀàĞÍÏÂ½Ó²Ëµ¥Ïî
-     *£¨×¢£ºÁĞ³öµÄ²Ëµ¥ÏîÄ¿Ç°ÊÇ°´index×Ö¶ÎÅÅĞòµÄ£¬¼ûMenuÀàÖĞ£©
+    /* åˆ—å‡ºç±»å‹ä¸‹æ¥èœå•é¡¹
+     *ï¼ˆæ³¨ï¼šåˆ—å‡ºçš„èœå•é¡¹ç›®å‰æ˜¯æŒ‰indexå­—æ®µæ’åºçš„ï¼Œè§Menuç±»ä¸­ï¼‰
      */
     while( it.next() )
     {
@@ -96,9 +96,9 @@ string Tag_TypeDropItemList::Get(Page *page)
                 "  <li> \n"
                 "    <input name='" + key_index + "' type='hidden' value='" + key + "'> \n"
                 "    <input name='" + title_key + "' class='width NOTEMPTY' value='" + title + "'> \n"
-                "    <input name='" + status_key + "' type='radio' title='Õı³£' value='enable'" + enable + ">Õı³£ \n"
-                "    <input name='" + status_key + "' type='radio' title='ÔİÍ£' value='disable'" + disable + ">ÔİÍ£ \n"
-                "    <input name='" + status_key + "' type='radio' title='É¾³ı' value='delete'>É¾³ı&nbsp; \n"
+                "    <input name='" + status_key + "' type='radio' title='æ­£å¸¸' value='enable'" + enable + ">æ­£å¸¸ \n"
+                "    <input name='" + status_key + "' type='radio' title='æš‚åœ' value='disable'" + disable + ">æš‚åœ \n"
+                "    <input name='" + status_key + "' type='radio' title='åˆ é™¤' value='delete'>åˆ é™¤&nbsp; \n"
                 "  </li> \n";
 
         index++;

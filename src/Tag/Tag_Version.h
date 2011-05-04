@@ -9,7 +9,7 @@ namespace TAG_VERSION_SPACE
 
 
 
-// ÏÔÊ¾°æ±¾ºÅ
+// æ˜¾ç¤ºç‰ˆæœ¬å·
 class Tag_Version : public Tag
 {
 protected:

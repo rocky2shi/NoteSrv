@@ -9,7 +9,7 @@ namespace PAGE_SYSTEMINFO_SPACE
 
 
 
-// 取系统信息：cpu使用率等
+// 鍙栫郴缁熶俊鎭細cpu浣跨敤鐜囩瓑
 class Page_SystemInfo : public Page
 {
 protected:

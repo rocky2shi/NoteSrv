@@ -9,7 +9,7 @@ namespace SUBMIT_DELETEDATA_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "DeleteData";
 
 
@@ -18,18 +18,18 @@ static const string THIS_MODULE = "DeleteData";
 
 Submit_DeleteData::Submit_DeleteData()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_DeleteData::Submit_DeleteData(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_DeleteData::~Submit_DeleteData()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -37,15 +37,15 @@ Submit_DeleteData::~Submit_DeleteData()
 
 int Submit_DeleteData::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_DeleteData::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_DeleteData;
 }
 
@@ -53,17 +53,17 @@ Submit *Submit_DeleteData::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
-// É¾³ıÒ»ÌõÊı¾İ
+// åˆ é™¤ä¸€æ¡æ•°æ®
 int Submit_DeleteData::Deal(Page *page)
 {
     const string &key = page->GetCurrentKey();
     Conf *pack = page->GetCurrentPack();
 
-    // ÉèÎªÉ¾³ı£¬²¢µ÷ÓÃ´¦Àíº¯Êı£º
+    // è®¾ä¸ºåˆ é™¤ï¼Œå¹¶è°ƒç”¨å¤„ç†å‡½æ•°ï¼š
     pack->Set("status", "delete");
     pack->Set("text", "");
     pack->Set("modify", NowTime("%Y%m%d%H%M%S"));
@@ -75,7 +75,7 @@ int Submit_DeleteData::Deal(Page *page)
     UserData del( username );
 
     /*
-     * ±£´æ£¨É¾³ıÊı¾İ£©
+     * ä¿å­˜ï¼ˆåˆ é™¤æ•°æ®ï¼‰
      */
     if(del.Set(data, true) < 0)
     {
@@ -84,11 +84,11 @@ int Submit_DeleteData::Deal(Page *page)
     }
 
     /*
-     * É¾³ı¸½¼ş
+     * åˆ é™¤é™„ä»¶
      */
     vector<string> attachs;
     vector<string>::iterator it;
-    del.GetAttachList(key, attachs);   // È¡¸½¼şÁĞ±í
+    del.GetAttachList(key, attachs);   // å–é™„ä»¶åˆ—è¡¨
     for(it = attachs.begin(); attachs.end() != it; it++)
     {
         LOG_INFO("Delete attach: [%s]", it->c_str());

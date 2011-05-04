@@ -7,7 +7,7 @@ namespace TAG_BROWSELIST_SPACE
 
 
 
-// 数据预览列表
+// 鏁版嵁棰勮鍒楄〃
 class Tag_BrowseList : public Tag
 {
 protected:

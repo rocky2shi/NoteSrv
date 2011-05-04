@@ -20,34 +20,34 @@ Session::Cache::~Cache()
     }
 }
 
-// È¡Session¶ÔÓ¦µÄÓÃ»§ĞÅÏ¢
+// å–Sessionå¯¹åº”çš„ç”¨æˆ·ä¿¡æ¯
 Session *Session::Cache::Get(const string &id)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
-    // ´æÔÚ¶àÏß³Ì²Ù×÷£¬Ğè¼ÓËø£»
+    // å­˜åœ¨å¤šçº¿ç¨‹æ“ä½œï¼Œéœ€åŠ é”ï¼›
     SHARE_LOCK(m_lock);
 
     map<string, Session*>::iterator it = m_SessionList.find( id );
     if(m_SessionList.end() != it)
     {
-        // ·µ»Ø´æÔÚµÄ¼ÇÂ¼
+        // è¿”å›å­˜åœ¨çš„è®°å½•
         return it->second;
     }
 
     LOG_DEBUG("Can't find session cache, id=[%s]", id.c_str());
 
-    // ÎŞ´æÔÚ£¬·µ»ØÎŞÊı¾İ¶ÔÏó£¨ÒÔ±ÜÃâÍâ²¿×öNULLÖ¸Ê²¼ì²â£©
+    // æ— å­˜åœ¨ï¼Œè¿”å›æ— æ•°æ®å¯¹è±¡ï¼ˆä»¥é¿å…å¤–éƒ¨åšNULLæŒ‡é’ˆæ£€æµ‹ï¼‰
     static Session empty(NULL);
     return &empty;
 }
 
-// È¡¼ÇÂ¼ĞÂSessionĞÅÏ¢
+// å–è®°å½•æ–°Sessionä¿¡æ¯
 void Session::Cache::Set(const string &id, Request * request)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
-    // ´æÔÚ¶àÏß³Ì²Ù×÷£¬Ğè¼ÓËø£»
+    // å­˜åœ¨å¤šçº¿ç¨‹æ“ä½œï¼Œéœ€åŠ é”ï¼›
     UNIQUE_LOCK(m_lock);
 
     Session *session = new Session(request);
@@ -56,13 +56,13 @@ void Session::Cache::Set(const string &id, Request * request)
         LOG_ERROR("new Session() error, id=[%s]", id.c_str());
         return;
     }
-    delete m_SessionList[ id ]; // Èô´æÔÚ¾ÉÊı¾İ£¬ÏÈÊÍ·Å£¬±ÜÃâÄÚ´æĞ¹Â©£»
+    delete m_SessionList[ id ]; // è‹¥å­˜åœ¨æ—§æ•°æ®ï¼Œå…ˆé‡Šæ”¾ï¼Œé¿å…å†…å­˜æ³„æ¼ï¼›
     m_SessionList[ id ] = session;
     LOG_DEBUG("Set session cache, id=[%s]", id.c_str());
 }
 
 
-// ÇåÀíÎŞĞ§£¨¹ıÆÚ£©Session£»£¨¶¨Ê±µ÷ÓÃ£©
+// æ¸…ç†æ— æ•ˆï¼ˆè¿‡æœŸï¼‰Sessionï¼›ï¼ˆå®šæ—¶è°ƒç”¨ï¼‰
 void Session::Cache::Clear()
 {
     UNIQUE_LOCK(m_lock);
@@ -91,7 +91,7 @@ Session::Session(Request * request)
               m_LoginTime( 0 ),
               m_ActiveTime( 0 )
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     if(NULL == request)
     {
@@ -99,17 +99,17 @@ Session::Session(Request * request)
     }
 
     m_LoginTime = time(NULL);
-    m_ActiveTime = m_LoginTime; // ¿ªÊ¼Ê±£¬µÇÂ¼Ê±¼äÎª×î½ü»îÔ¾Ê±¼ä£»
+    m_ActiveTime = m_LoginTime; // å¼€å§‹æ—¶ï¼Œç™»å½•æ—¶é—´ä¸ºæœ€è¿‘æ´»è·ƒæ—¶é—´ï¼›
     m_username = request->GetField("username");
-    m_LoginIp = request->GetConnect()->GetPeerAddr(); // È¡³ö¿Í»§¶ËÁ¬½Óip
-    m_valid = true; // ¼ÇÎªÓĞĞ§£¨×¢ÒâÆäºÍ³õÊ¼»¯ÁĞ±íÖĞÉèÖÃÎªfalseµÄÇø±ğ(request == NULL)£©
+    m_LoginIp = request->GetConnect()->GetPeerAddr(); // å–å‡ºå®¢æˆ·ç«¯è¿æ¥ip
+    m_valid = true; // è®°ä¸ºæœ‰æ•ˆï¼ˆæ³¨æ„å…¶å’Œåˆå§‹åŒ–åˆ—è¡¨ä¸­è®¾ç½®ä¸ºfalseçš„åŒºåˆ«(request == NULL)ï¼‰
 }
 
 Session::~Session()
 {
 }
 
-// Àà³õÊ¼»¯
+// ç±»åˆå§‹åŒ–
 int Session::init()
 {
     int ret;
@@ -122,14 +122,14 @@ int Session::init()
         return ERR;
     }
 
-    // ×¢²á¶¨Ê±ÇåÀí¹ıÆÚSessionÈÎÎñ
+    // æ³¨å†Œå®šæ—¶æ¸…ç†è¿‡æœŸSessionä»»åŠ¡
     Timer::Register(Clear, NULL, "Clear invalid session.");
 
     return OK;
 }
 
 
-// ÓÉsession idÈ¡session¶ÔÏó
+// ç”±session idå–sessionå¯¹è±¡
 Session *Session::Get(const Request *request)
 {
     const string &id = request->GetCookie("id");
@@ -140,107 +140,107 @@ Session *Session::Get(const string &id)
     return instance()->Get(id);
 }
 
-// ÉèÖÃsession»º´æ
+// è®¾ç½®sessionç¼“å­˜
 void Session::Set(const string &id, Request * request)
 {
     instance()->Set(id, request);
 }
 
-// È¡ÓÃ»§Ãû
+// å–ç”¨æˆ·å
 const string Session::GetUser() const
 {
     return m_username;
 }
 
-// È¡µÇÂ¼ip
+// å–ç™»å½•ip
 const string Session::GetIp() const
 {
     return m_LoginIp;
 }
 
-// È¡×î½ü»îÔ¾Ê±¼ä
+// å–æœ€è¿‘æ´»è·ƒæ—¶é—´
 long Session::GetActiveTime() const
 {
     return m_ActiveTime;
 }
 
-// È¡µÇÂ¼Ê±¼ä
+// å–ç™»å½•æ—¶é—´
 long Session::GetLoginTime() const
 {
     return m_LoginTime;
 }
 
-// Ê¹µ±Ç°»á»°Ê§Ğ§£¨±ÈÈçÓ¦ÓÃÓÚÍË³öµÇÂ¼Ê±£©
+// ä½¿å½“å‰ä¼šè¯å¤±æ•ˆï¼ˆæ¯”å¦‚åº”ç”¨äºé€€å‡ºç™»å½•æ—¶ï¼‰
 void Session::SetInvalid()
 {
     m_valid = false;
 }
 
 
-// ¼ì²é»á»°ÓĞĞ§ĞÔ£¬ÓĞĞ§·µ»Øtrue
+// æ£€æŸ¥ä¼šè¯æœ‰æ•ˆæ€§ï¼Œæœ‰æ•ˆè¿”å›true
 bool Session::isValid() const
 {
-    // SessionÊÇ·ñÓĞĞ§
+    // Sessionæ˜¯å¦æœ‰æ•ˆ
     if( ! m_valid )
     {
         LOG_DEBUG("Session invalid.");
         return false;
     }
 
-    // ÊÇ·ñ¹ıÆÚ
+    // æ˜¯å¦è¿‡æœŸ
     if( time(NULL) - m_ActiveTime > KEEPALIVE_MAX )
     {
         LOG_DEBUG("Session timeout or user not login, username: [%s]", m_username.c_str());
         return false;
     }
 
-    // ÓÃ»§ÊÇ·ñÓĞĞ§
+    // ç”¨æˆ·æ˜¯å¦æœ‰æ•ˆ
     if( ! User::Get(m_username)->isValid() )
     {
         LOG_DEBUG("Session user invalid, username: [%s]", m_username.c_str());
         return false;
     }
 
-    // ËùÓĞ¼ì²éÍ¨¹ı£¬·µ»Øtrue£»
+    // æ‰€æœ‰æ£€æŸ¥é€šè¿‡ï¼Œè¿”å›trueï¼›
     return true;
 }
 
-// ÒÑµÇÂ¼£¨ÈÏÖ¤£©·µ»Øtrue
+// å·²ç™»å½•ï¼ˆè®¤è¯ï¼‰è¿”å›true
 bool Session::CheckLogin(Request * request)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 
     assert(NULL != request);
 
-    // ¼ì²é»á»°ÓĞĞ§ĞÔ
+    // æ£€æŸ¥ä¼šè¯æœ‰æ•ˆæ€§
     if( !isValid() )
     {
         LOG_INFO("Session is invalid, username=[%s]", m_username.c_str());
         return false;
     }
 
-    // »á»°ÓĞĞ§£¬ÔÙ¼ì²éÊÇ²»ÊÇÊôÓÚ´ËipµÇÂ¼µÄ£»
-    const string &ip = request->GetConnect()->GetPeerAddr(); // È¡³ö¿Í»§¶ËÁ¬½Óip
+    // ä¼šè¯æœ‰æ•ˆï¼Œå†æ£€æŸ¥æ˜¯ä¸æ˜¯å±äºæ­¤ipç™»å½•çš„ï¼›
+    const string &ip = request->GetConnect()->GetPeerAddr(); // å–å‡ºå®¢æˆ·ç«¯è¿æ¥ip
     if(ip != m_LoginIp)
     {
         LOG_INFO("This ip[%s] is not login, username: [%s]", ip.c_str(), m_username.c_str());
         return false;
     }
 
-    // ¸üĞÂ»îÔ¾Ê±¼ä
+    // æ›´æ–°æ´»è·ƒæ—¶é—´
     m_ActiveTime = time(NULL);
 
     LOG_DEBUG("User has logined, session is avlid.");
 
-    // ËùÓĞ¶¼ÕıÈ·£¬·µ»Øtrue£»
+    // æ‰€æœ‰éƒ½æ­£ç¡®ï¼Œè¿”å›trueï¼›
     return true;
 }
 
 
-// ¶¨Ê±ÇåÀí£¨ÓÉ¶¨Ê±Æ÷Ñ­»·µ÷£©
+// å®šæ—¶æ¸…ç†ï¼ˆç”±å®šæ—¶å™¨å¾ªç¯è°ƒï¼‰
 void Session::Clear(void *)
 {
-    // ÇåÀí»º´æÖĞµÄ»á»°¼ÇÂ¼
+    // æ¸…ç†ç¼“å­˜ä¸­çš„ä¼šè¯è®°å½•
     Session::instance()->Clear();
 }
 

@@ -8,7 +8,7 @@ namespace TAG_REGISTERITEMS_SPACE
 
 
 
-// ×¢²áÓÃ»§Ò³×ÓÏî
+// æ³¨å†Œç”¨æˆ·é¡µå­é¡¹
 class Tag_RegisterItems : public Tag
 {
 protected:

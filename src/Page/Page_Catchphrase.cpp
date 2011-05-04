@@ -7,7 +7,7 @@ namespace PAGE_CATCHPHRASE_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "catchphrase";
 
 
@@ -20,18 +20,18 @@ vector<string> Page_Catchphrase::m_sentence;
 
 Page_Catchphrase::Page_Catchphrase()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Catchphrase::~Page_Catchphrase()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Catchphrase::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     const string filename = GlobalConfig::instance()->SystemDataDir() + "catchphrase.txt";
 
     FileObj list(filename);
@@ -47,10 +47,10 @@ int Page_Catchphrase::DoInit()
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Catchphrase::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Catchphrase;
 }
 
@@ -61,18 +61,18 @@ Page *Page_Catchphrase::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 int Page_Catchphrase::OutBody()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     assert(NULL != m_request);
 
-    const int num = GetRandomInt(0, m_sentence.size() - 1); // È¡Ò»Ëæ»úÊı
+    const int num = GetRandomInt(0, m_sentence.size() - 1); // å–ä¸€éšæœºæ•°
     const string &sentence = m_sentence[ num ];
 
     m_request->GetConnect()->Send(sentence.c_str(), sentence.length());
@@ -90,7 +90,7 @@ int Page_Catchphrase::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Catchphrase, THIS_MODULE)
 
 }// end of PAGE_CATCHPHRASE_SPACE

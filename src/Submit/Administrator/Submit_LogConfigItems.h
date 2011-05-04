@@ -10,7 +10,7 @@ namespace SUBMIT_LOGCONFIGITEMS_SPACE
 
 
 
-// 设置日志配制
+// 璁剧疆鏃ュ織閰嶅埗
 class Submit_LogConfigItems : public Submit
 {
 protected:

@@ -7,19 +7,19 @@ namespace ENCRYPT_SPACE
 
 
 
-/* 功能：加解密
- * 编写：Rocky 2010-05-13 12:26:31
- * 版本：v0.1
+/* 鍔熻兘锛氬姞瑙ｅ瘑
+ * 缂栧啓锛歊ocky 2010-05-13 12:26:31
+ * 鐗堟湰锛歷0.1
  */
 class Encrypt
 {
 public:
     Encrypt(const string &password);
 
-    // 加密
+    // 鍔犲瘑
     const string encrypt(const string &data);
 
-    // 解密
+    // 瑙ｅ瘑
     const string decrypt(const string &data);
 
 private:

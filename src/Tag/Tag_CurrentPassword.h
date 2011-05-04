@@ -10,7 +10,7 @@ namespace TAG_CURRENTPASSWORD_SPACE
 
 
 
-// ��ǰ�����м������õ����루���ģ���ע�⣬�����û����룩
+// 当前数据中加密所用的密码（明文）（注意，不是用户密码）
 class Tag_CurrentPassword : public Tag
 {
 protected:

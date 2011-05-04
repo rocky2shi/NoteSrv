@@ -9,7 +9,7 @@ namespace TAG_ESC_SPACE
 
 
 
-// µ±Ç°Ò³ÃæÖĞEsc¼ü¶ÔÓ¦º¯Êı
+// å½“å‰é¡µé¢ä¸­Escé”®å¯¹åº”å‡½æ•°
 class Tag_Esc : public Tag
 {
 protected:

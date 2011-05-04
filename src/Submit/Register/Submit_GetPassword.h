@@ -10,7 +10,7 @@ namespace SUBMIT_GETPASSWORD_SPACE
 
 
 
-// ÕÒ»ØÓÃ»§ÃÜÂë
+// æ‰¾å›ç”¨æˆ·å¯†ç 
 class Submit_GetPassword : public Submit
 {
 protected:

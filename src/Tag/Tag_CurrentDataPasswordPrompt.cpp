@@ -8,7 +8,7 @@ namespace TAG_CURRENTDATAPASSWORDPROMPT_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜Žæ¨¡å—
 static const string THIS_MODULE = "CurrentDataPasswordPrompt";
 
 
@@ -17,17 +17,17 @@ static const string THIS_MODULE = "CurrentDataPasswordPrompt";
 
 Tag_CurrentDataPasswordPrompt::Tag_CurrentDataPasswordPrompt()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_CurrentDataPasswordPrompt::Tag_CurrentDataPasswordPrompt(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_CurrentDataPasswordPrompt::~Tag_CurrentDataPasswordPrompt()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -35,15 +35,15 @@ Tag_CurrentDataPasswordPrompt::~Tag_CurrentDataPasswordPrompt()
 
 int Tag_CurrentDataPasswordPrompt::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_CurrentDataPasswordPrompt::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_CurrentDataPasswordPrompt;
 }
 
@@ -54,18 +54,18 @@ Tag *Tag_CurrentDataPasswordPrompt::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±êÌâ [2010-05]
+// å–æ ‡é¢˜ [2010-05]
 string Tag_CurrentDataPasswordPrompt::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    const Conf *pack = page->GetCurrentPack();          // µ±Ç°key¶ÔÓ¦Êý¾Ý¼¯
+    const Conf *pack = page->GetCurrentPack();          // å½“å‰keyå¯¹åº”æ•°æ®é›†
     return pack->Get("prompt");
 }
 
@@ -85,7 +85,7 @@ string Tag_CurrentDataPasswordPrompt::Get(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_CurrentDataPasswordPrompt tmp(TAG_GLOBAL, THIS_MODULE);
 
 }// end of TAG_CURRENTDATAPASSWORDPROMPT_SPACE

@@ -9,11 +9,11 @@ namespace GETFILELIST_SPACE
 
 
 
-// È¡Ö¸¶¨Ä¿Â¼ÏÂµÄËùÓĞÎÄ¼ş¼°µİ¹é×ÓÄ¿Â¼
+// å–æŒ‡å®šç›®å½•ä¸‹çš„æ‰€æœ‰æ–‡ä»¶åŠé€’å½’å­ç›®å½•
 class GetFileList
 {
 public:
-    // ÎÄ¼şµü´úÆ÷£¬ÁĞ³öËùÓĞµ±Ç°Ä¿Â¼ÏÂµÄÎÄ¼ş£»
+    // æ–‡ä»¶è¿­ä»£å™¨ï¼Œåˆ—å‡ºæ‰€æœ‰å½“å‰ç›®å½•ä¸‹çš„æ–‡ä»¶ï¼›
     class file_iterator
     {
     public:
@@ -22,10 +22,10 @@ public:
             it = m_obj.m_FileList.begin();
         }
 
-        // Ö¸ÏòÏÂÒ»¸öÔªËØ
+        // æŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
         bool next()
         {
-            if(first)   // ÈçÊÇµÚÒ»´Îµ÷ÓÃnext()£¬Ôò²»×ö¼Ó¼Ó£»
+            if(first)   // å¦‚æ˜¯ç¬¬ä¸€æ¬¡è°ƒç”¨next()ï¼Œåˆ™ä¸åšåŠ åŠ ï¼›
             {
                 first = false;
             }
@@ -36,7 +36,7 @@ public:
             return m_obj.m_FileList.end() != it;
         }
 
-        // ·µ»ØÎÄ¼şÃû
+        // è¿”å›æ–‡ä»¶å
         const char *name() const
         {
             return (*it).c_str();
@@ -48,7 +48,7 @@ public:
         bool first;
     };
 
-    // Ä¿Â¼µü´úÆ÷£¬ÁĞ³öËùÓĞµ±Ç°Ä¿Â¼ÏÂµÄ×ÓÄ¿Â¼£¨¶ÔÏó£©£»
+    // ç›®å½•è¿­ä»£å™¨ï¼Œåˆ—å‡ºæ‰€æœ‰å½“å‰ç›®å½•ä¸‹çš„å­ç›®å½•ï¼ˆå¯¹è±¡ï¼‰ï¼›
     class dir_iterator
     {
     public:
@@ -57,10 +57,10 @@ public:
             it = m_obj.m_SubDir.begin();
         }
 
-        // Ö¸ÏòÏÂÒ»¸öÔªËØ
+        // æŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
         bool next()
         {
-            if(first)   // ÈçÊÇµÚÒ»´Îµ÷ÓÃnext()£¬Ôò²»×ö¼Ó¼Ó£»
+            if(first)   // å¦‚æ˜¯ç¬¬ä¸€æ¬¡è°ƒç”¨next()ï¼Œåˆ™ä¸åšåŠ åŠ ï¼›
             {
                 first = false;
             }
@@ -71,13 +71,13 @@ public:
             return m_obj.m_SubDir.end() != it;
         }
 
-        // È¡Ä¿Â¼Ãû
+        // å–ç›®å½•å
         const char *name() const
         {
             return (it->first).c_str();
         }
 
-        // È¡×ÓÄ¿Â¼¶ÔÏó
+        // å–å­ç›®å½•å¯¹è±¡
         const GetFileList *sub() const
         {
             return it->second;
@@ -91,21 +91,21 @@ public:
 
 
 public:
-    // deep=0±íÊ¾Ö»È¡Ò»²ãÄ¿Â¼£¬¼´µ±Ç°Ä¿Â¼£»
+    // deep=0è¡¨ç¤ºåªå–ä¸€å±‚ç›®å½•ï¼Œå³å½“å‰ç›®å½•ï¼›
     GetFileList(const string &dir, int deep=0);
     virtual ~GetFileList();
 
-    // °´asciiÅÅĞòÎÄ¼şÃû
+    // æŒ‰asciiæ’åºæ–‡ä»¶å
     void SortFilename();
 
 protected:
-    // É¨ÃèÄ¿Â¼
+    // æ‰«æç›®å½•
     virtual void ScanDir(const string &dir, int deep);
 
 
 protected:
-    vector<string> m_FileList;          // µ±Ç°Ä¿Â¼ÏÂÎÄ¼şÁĞ±í
-    map<string, GetFileList*> m_SubDir; //  ËùÓĞ×ÓÄ¿Â¼¶ÔÏó
+    vector<string> m_FileList;          // å½“å‰ç›®å½•ä¸‹æ–‡ä»¶åˆ—è¡¨
+    map<string, GetFileList*> m_SubDir; //  æ‰€æœ‰å­ç›®å½•å¯¹è±¡
 };
 
 

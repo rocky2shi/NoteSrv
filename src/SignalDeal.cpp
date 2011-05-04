@@ -12,17 +12,17 @@ int SignalDeal::m_signo = 0;
 
 
 /*
- * ¹¦ÄÜ£ºÈ«¾ÖÐÅºÅ³õÊ¼»¯£¨°²×°ÐÅºÅ´¦Àíº¯ÊýµÈ£©
- * ±àÐ´£ºRocky 2009-08-26 18:20:47
- * ·µ»Ø£ºÕýÈ··µ»Ø>=0Öµ£¬³ö´í·µ<0Öµ£»
+ * åŠŸèƒ½ï¼šå…¨å±€ä¿¡å·åˆå§‹åŒ–ï¼ˆå®‰è£…ä¿¡å·å¤„ç†å‡½æ•°ç­‰ï¼‰
+ * ç¼–å†™ï¼šRocky 2009-08-26 18:20:47
+ * è¿”å›žï¼šæ­£ç¡®è¿”å›ž>=0å€¼ï¼Œå‡ºé”™è¿”<0å€¼ï¼›
  */
 int SignalDeal::init()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     struct sigaction act;
 
-    // °²×°ÐÅºÅ´¦Àíº¯Êý
+    // å®‰è£…ä¿¡å·å¤„ç†å‡½æ•°
     sigemptyset(&act.sa_mask);
     act.sa_flags = SA_SIGINFO;
     act.sa_sigaction = deal;
@@ -34,7 +34,7 @@ int SignalDeal::init()
     }
 
 
-    // // ³ýÁËSIGTERM¡¢SIGINT¡¢SIG_EXIT£¬ºöÂÔÆäËüËùÓÐÐÅºÅ£»
+    // // é™¤äº†SIGTERMã€SIGINTã€SIG_EXITï¼Œå¿½ç•¥å…¶å®ƒæ‰€æœ‰ä¿¡å·ï¼›
     // int ret;
     // sigset_t mask;
     // sigfillset(&mask);
@@ -52,27 +52,27 @@ int SignalDeal::init()
 
 
 /*
- * ¹¦ÄÜ£º·µ»Ø½ø³ÌÊÇ·ñ½Óµ½ÍË³öÐÅºÅ
- * ±àÐ´£ºRocky 2009-08-26 18:20:47
- * ·µ»Ø£º½øÍËÕýÔÚÍË³ö·µ»Ø1£¬²»ÐèÍË³ö·µ»Ø0£»
+ * åŠŸèƒ½ï¼šè¿”å›žè¿›ç¨‹æ˜¯å¦æŽ¥åˆ°é€€å‡ºä¿¡å·
+ * ç¼–å†™ï¼šRocky 2009-08-26 18:20:47
+ * è¿”å›žï¼šè¿›é€€æ­£åœ¨é€€å‡ºè¿”å›ž1ï¼Œä¸éœ€é€€å‡ºè¿”å›ž0ï¼›
  */
 int SignalDeal::exit()
 {
-    // ½Óµ½killÃü·¢À´µÄÒÀÀµ£¬»ò×Ô¶¨ÒåµÄÍË³öÐÅºÅ£¨ÊµÊ±£©£»
+    // æŽ¥åˆ°killå‘½å‘æ¥çš„ä¾èµ–ï¼Œæˆ–è‡ªå®šä¹‰çš„é€€å‡ºä¿¡å·ï¼ˆå®žæ—¶ï¼‰ï¼›
     return ( SIGTERM == m_signo
             || SIGINT == m_signo
             || SIG_EXIT == m_signo ) ? 1 : 0;
 }
 
 /*
- * ¹¦ÄÜ£ºÐÅºÅ´¦Àíº¯Êý
- * ±àÐ´£ºRocky 2009-08-26 18:29:25
- * ·µ»Ø£º½øÍËÕýÔÚÍË³ö·µ»Ø>=0Öµ£¬²»ÐèÍË³ö·µ»Ø<0Öµ£»
+ * åŠŸèƒ½ï¼šä¿¡å·å¤„ç†å‡½æ•°
+ * ç¼–å†™ï¼šRocky 2009-08-26 18:29:25
+ * è¿”å›žï¼šè¿›é€€æ­£åœ¨é€€å‡ºè¿”å›ž>=0å€¼ï¼Œä¸éœ€é€€å‡ºè¿”å›ž<0å€¼ï¼›
  */
 void SignalDeal::deal(int signo, siginfo_t*, void*)
 {
     m_signo = signo;
 
-    // ×¢Òâ£¬ÔÚÐÅºÅ´¦ÀíÀïÊ¹ÓÃioÊÇ²»°²È«µÄ¡£
-    // Debug("ÊÕµ½ÐÅºÅ£º[%d]", signo);
+    // æ³¨æ„ï¼Œåœ¨ä¿¡å·å¤„ç†é‡Œä½¿ç”¨ioæ˜¯ä¸å®‰å…¨çš„ã€‚
+    // Debug("æ”¶åˆ°ä¿¡å·ï¼š[%d]", signo);
 }

@@ -8,7 +8,7 @@ namespace SUBMIT_TEXTSTYLESETTING_SPACE
 
 
 
-// 正文风格设置
+// 姝ｆ枃椋庢牸璁剧疆
 class Submit_TextStyleSetting : public Submit
 {
 protected:

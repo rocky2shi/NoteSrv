@@ -11,7 +11,7 @@ namespace SUBMIT_BROWSEFILTER_SPACE
 
 
 
-// ±êÃ÷Ä£¿é£¨¶ÔÓ¦ÓÚÒ³ÃæÖÐµÄÌá½»×Ö¶Î£©
+// æ ‡æ˜Žæ¨¡å—ï¼ˆå¯¹åº”äºŽé¡µé¢ä¸­çš„æäº¤å­—æ®µï¼‰
 static const string THIS_MODULE = "BrowseFilter";
 
 
@@ -20,18 +20,18 @@ static const string THIS_MODULE = "BrowseFilter";
 
 Submit_BrowseFilter::Submit_BrowseFilter()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_BrowseFilter::Submit_BrowseFilter(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_BrowseFilter::~Submit_BrowseFilter()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -39,15 +39,15 @@ Submit_BrowseFilter::~Submit_BrowseFilter()
 
 int Submit_BrowseFilter::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_BrowseFilter::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_BrowseFilter;
 }
 
@@ -55,19 +55,19 @@ Submit *Submit_BrowseFilter::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
-// ÈÏÖ¤Í¨¹ý£¬·µ»ØµÄ["decryption"]Îª¿Õ´®£¬²»Í¨¹ýÔò·µ»Ø³ö´íÐÅÏ¢£»
+// è®¤è¯é€šè¿‡ï¼Œè¿”å›žçš„["decryption"]ä¸ºç©ºä¸²ï¼Œä¸é€šè¿‡åˆ™è¿”å›žå‡ºé”™ä¿¡æ¯ï¼›
 int Submit_BrowseFilter::Deal(Page *page)
 {
     const string &filter = "filter";
     PageCfg * const cfg = page->GetCurrentPageCfg();
 
 
-    // È¡³ö¿Í»§¶Ë´«À´µÄÖµ
+    // å–å‡ºå®¢æˆ·ç«¯ä¼ æ¥çš„å€¼
     const string &timebeginchk       = page->GetRequest()->GetField("timebeginchk");
     const string &timeendchk         = page->GetRequest()->GetField("timeendchk");
     const string &query_keyword      = page->GetRequest()->GetField("query_keyword");
@@ -107,7 +107,7 @@ int Submit_BrowseFilter::Deal(Page *page)
     cfg->Set(filter, "query_type",    query_type);
     cfg->Set(filter, "result_win",    result_win);
 
-    // ÊÇ·ñÐèÒª±£´æ
+    // æ˜¯å¦éœ€è¦ä¿å­˜
     if("" != save_query_setting)
     {
         return cfg->Save();
@@ -128,7 +128,7 @@ int Submit_BrowseFilter::Deal(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Submit_BrowseFilter tmp("browse", THIS_MODULE);
 
 }// end of SUBMIT_BROWSEFILTER_SPACE

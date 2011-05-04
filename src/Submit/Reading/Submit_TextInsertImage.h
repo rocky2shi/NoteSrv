@@ -9,7 +9,7 @@ namespace SUBMIT_TEXTINSERTIMAGE_SPACE
 
 
 
-// 处理正文中插入图片、书签等提交事件
+// 澶勭悊姝ｆ枃涓彃鍏ュ浘鐗囥�佷功绛剧瓑鎻愪氦浜嬩欢
 class Submit_TextInsertImage : public Submit
 {
 protected:

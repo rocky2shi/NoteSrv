@@ -8,7 +8,7 @@ namespace INI_SPACE
 
 /*
  * [Rocky 2010-04-29 18:33:48]
- * ´¦Àí¸ñÊ½ÎÄ¼ş£¬Èç£º
+ * å¤„ç†æ ¼å¼æ–‡ä»¶ï¼Œå¦‚ï¼š
  *
  *   [worker]
  *   user=rocky
@@ -18,7 +18,7 @@ namespace INI_SPACE
 class Ini
 {
 public:
-    // µü´úÆ÷£¬ÁĞ³öËùÓĞµÄConf¶ÔÏó       // ÖØ¸´´úÂë [XXX:26741890]
+    // è¿­ä»£å™¨ï¼Œåˆ—å‡ºæ‰€æœ‰çš„Confå¯¹è±¡       // é‡å¤ä»£ç  [XXX:26741890]
     class iterator
     {
     public:
@@ -30,7 +30,7 @@ public:
             it = m_ini->m_ConfList.begin();
         }
 
-        // Ö¸ÏòÏÂÒ»¸öÔªËØ
+        // æŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
         bool next()
         {
             if( first )
@@ -44,19 +44,19 @@ public:
             return m_ini->m_ConfList.end() != it;
         }
 
-        // È¡key
+        // å–key
         const char *GetKey()
         {
             return it->first.c_str();
         }
 
-        // ÖØÔØ()²Ù×÷·û£¬·µ»ØÄ£¿é¶ÔÏóµØÖ·£»
+        // é‡è½½()æ“ä½œç¬¦ï¼Œè¿”å›æ¨¡å—å¯¹è±¡åœ°å€ï¼›
         Conf *GetValue()
         {
             return it->second;
         }
 
-        // ÖØÔØ¸³ÖµºÅ =
+        // é‡è½½èµ‹å€¼å· =
         iterator & operator=(Ini *ini)
         {
             m_ini = ini;
@@ -71,7 +71,7 @@ public:
         bool first;
     };
 
-    // ·´Ïòµü´úÆ÷£¬ÁĞ³öËùÓĞµÄConf¶ÔÏó   // ÖØ¸´´úÂë [XXX:26741890]
+    // åå‘è¿­ä»£å™¨ï¼Œåˆ—å‡ºæ‰€æœ‰çš„Confå¯¹è±¡   // é‡å¤ä»£ç  [XXX:26741890]
     class reverse_iterator
     {
     public:
@@ -83,7 +83,7 @@ public:
             it = m_ini->m_ConfList.rbegin();
         }
 
-        // Ö¸ÏòÏÂÒ»¸öÔªËØ
+        // æŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
         bool next()
         {
             if( first )
@@ -97,19 +97,19 @@ public:
             return m_ini->m_ConfList.rend() != it;
         }
 
-        // È¡key
+        // å–key
         const char *GetKey()
         {
             return it->first.c_str();
         }
 
-        // ÖØÔØ()²Ù×÷·û£¬·µ»ØÄ£¿é¶ÔÏóµØÖ·£»
+        // é‡è½½()æ“ä½œç¬¦ï¼Œè¿”å›æ¨¡å—å¯¹è±¡åœ°å€ï¼›
         Conf *GetValue()
         {
             return it->second;
         }
 
-        // ÖØÔØ¸³ÖµºÅ =
+        // é‡è½½èµ‹å€¼å· =
         reverse_iterator & operator=(Ini *ini)
         {
             m_ini = ini;
@@ -134,10 +134,10 @@ public:
     Ini(const string &filename="");
     ~Ini();
 
-    // ¶ÁÈ¡¸ñÊ½ÎÄ¼ş
+    // è¯»å–æ ¼å¼æ–‡ä»¶
     int Read(const string &filename);
 
-    // Êı¾İĞ´ÈëÎÄ¼ş
+    // æ•°æ®å†™å…¥æ–‡ä»¶
     int Write(string filename="");
 
     const Conf *Get(const string &key) const;
@@ -150,15 +150,15 @@ public:
 
     void Del(const string &section, const string &attribute);
 
-    // Çå³ıÊı¾İ
+    // æ¸…é™¤æ•°æ®
     void Clear();
 
-    // ÏÔÊ¾ËùÓĞÊı¾İ
+    // æ˜¾ç¤ºæ‰€æœ‰æ•°æ®
     void Dump() const;
 
 
 private:
-    // ÊÇ·ñÎª¡®[...]¡¯£¬ÊÇÔò·µ»ØÖĞÀ¨ºÅÄÚµÄÄÚÈİ£¬·ñÔò·µ»ØNULL
+    // æ˜¯å¦ä¸ºâ€˜[...]â€™ï¼Œæ˜¯åˆ™è¿”å›ä¸­æ‹¬å·å†…çš„å†…å®¹ï¼Œå¦åˆ™è¿”å›NULL
     char *Section(char *buf, int len);
 
 

@@ -10,7 +10,7 @@ namespace TAG_TYPEDROPBOXMENU_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "TypeDropBoxMenu";
 
 
@@ -19,17 +19,17 @@ static const string THIS_MODULE = "TypeDropBoxMenu";
 
 Tag_TypeDropBoxMenu::Tag_TypeDropBoxMenu()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_TypeDropBoxMenu::Tag_TypeDropBoxMenu(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_TypeDropBoxMenu::~Tag_TypeDropBoxMenu()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -37,15 +37,15 @@ Tag_TypeDropBoxMenu::~Tag_TypeDropBoxMenu()
 
 int Tag_TypeDropBoxMenu::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_TypeDropBoxMenu::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_TypeDropBoxMenu;
 }
 
@@ -56,7 +56,7 @@ Tag *Tag_TypeDropBoxMenu::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -64,11 +64,11 @@ Tag *Tag_TypeDropBoxMenu::DoNew()
 
 string Tag_TypeDropBoxMenu::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     const string &username = page->GetRequest()->GetCurrentUser();
     Menu *menu = Menu::Get(username, "TypeDropBox.cfg");    // [XXX:56425820]
-    const string &sSelectType = GetSelectedItems(page);     // µ±Ç°±»Ñ¡ÖĞµÄÏÂ½Ó²Ëµ¥
+    const string &sSelectType = GetSelectedItems(page);     // å½“å‰è¢«é€‰ä¸­çš„ä¸‹æ¥èœå•
 
     LOG_DEBUG("sSelectType=[%s]", sSelectType.c_str());
 
@@ -76,8 +76,8 @@ string Tag_TypeDropBoxMenu::Get(Page *page)
     string html = "";
     int i;
 
-    /* ÁĞ³öÀàĞÍÏÂ½Ó²Ëµ¥Ïî
-     *£¨×¢£ºÁĞ³öµÄ²Ëµ¥ÏîÄ¿Ç°ÊÇ°´index×Ö¶ÎÅÅĞòµÄ£¬¼ûMenuÀàÖĞ£©
+    /* åˆ—å‡ºç±»å‹ä¸‹æ¥èœå•é¡¹
+     *ï¼ˆæ³¨ï¼šåˆ—å‡ºçš„èœå•é¡¹ç›®å‰æ˜¯æŒ‰indexå­—æ®µæ’åºçš„ï¼Œè§Menuç±»ä¸­ï¼‰
      */
     for(i=1; it.next(); i++)
     {
@@ -94,34 +94,34 @@ string Tag_TypeDropBoxMenu::Get(Page *page)
                                : "";
 
         html += ""
-                "    <label for='chk_" + key + "' title='ÀÛ¼ÆÑ¡ÓÃÊı£º" + hotspot + "'>\n"
+                "    <label for='chk_" + key + "' title='ç´¯è®¡é€‰ç”¨æ•°ï¼š" + hotspot + "'>\n"
                 "        " + index + "<input type=checkbox id='chk_" + key + "' value='" + key + "' title='" + title + "' " + checked + ">" + title + "</label>\n";
     }
 
     if("" == html)
     {
-        html = "<label OnClick='OpenPage(\"set_type_select.cgi?type=message\")'>\n"
-               "  <input class='hidden'><span class='hand'>ÀàĞÍÎ´ÉèÖÃ£¬×ªµ½¹éÀàÉèÖÃ</span></label>\n"
+        html = "<label OnClick='OpenPage(\"/TypeDropBoxMenuSetting\")'>\n"
+               "  <span class='hand'>ç±»å‹æœªè®¾ç½®ï¼Œè½¬åˆ°å½’ç±»è®¾ç½®</span></label>\n"
                "";
     }
 
     return html;
 }
 
-/* È¡µ±Ç°²Ëµ¥ÖĞÑ¡ÖĞµÄÏî
- *   ¸ù¾İ²»Í¬Ò³Ãæ£¬È¡²»Í¬Öµ£»
+/* å–å½“å‰èœå•ä¸­é€‰ä¸­çš„é¡¹
+ *   æ ¹æ®ä¸åŒé¡µé¢ï¼Œå–ä¸åŒå€¼ï¼›
  */
 const string Tag_TypeDropBoxMenu::GetSelectedItems(Page *page) const
 {
-    const string &name = page->GetRequest()->GetPageName(); // µ±Ç°Ò³ÃæÃû
+    const string &name = page->GetRequest()->GetPageName(); // å½“å‰é¡µé¢å
 
-    // ÊÇbrowseÒ³Ãæ£¬È¡µÄÊÇµ±Ç°Ò³ÃæÅäÖÃ
+    // æ˜¯browseé¡µé¢ï¼Œå–çš„æ˜¯å½“å‰é¡µé¢é…ç½®
     if("browse" == name)
     {
         return page->GetCurrentPageCfg()->Get("filter", "query_type");
     }
 
-    // ÊÇreading¡¢editÒ³Ãæ£¬È¡µÄÊÇµ±Ç°KEY¶ÔÓ¦µÄÊı¾İÅäÖÃ
+    // æ˜¯readingã€edité¡µé¢ï¼Œå–çš„æ˜¯å½“å‰KEYå¯¹åº”çš„æ•°æ®é…ç½®
     if( "reading" == name
         || "edit" == name
       )
@@ -148,7 +148,7 @@ const string Tag_TypeDropBoxMenu::GetSelectedItems(Page *page) const
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_TypeDropBoxMenu tmp(TAG_GLOBAL, THIS_MODULE);
 
 }// end of TAG_TYPEDROPBOXMENU_SPACE

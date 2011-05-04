@@ -12,7 +12,7 @@ namespace MODULE_WEBSERVER_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜Žæ¨¡å—
 static const string THIS_MODULE = "WebServer";
 
 
@@ -20,25 +20,25 @@ static const string THIS_MODULE = "WebServer";
 
 Module_WebServer::Module_WebServer() : m_server(NULL)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
-// ×¢²áÓÃµÄ¹¹Ôìº¯Êý
+// æ³¨å†Œç”¨çš„æž„é€ å‡½æ•°
 Module_WebServer::Module_WebServer(const string &id): Module(id), m_server(NULL)
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Module_WebServer::~Module_WebServer()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     delete m_server;
 }
 
 
 int Module_WebServer::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     int ret;
     const int port = atoi( GlobalConfig::instance()->GetOption("::ServicePort", "80").c_str() );
@@ -70,14 +70,14 @@ int Module_WebServer::DoInit()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
-// Æô¶¯web·þÎñ
+// å¯åŠ¨webæœåŠ¡
 int Module_WebServer::Run()
 {
-    FUNCTION_TRACK(); // º¯Êý¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     int ret;
 
@@ -86,17 +86,17 @@ int Module_WebServer::Run()
         Connect *pConnect = m_server->Accept();
         if(NULL == pConnect)
         {
-            LOG_ERROR("Á¬½Ó³ö´í");
-            sleep(1); // ±ÜÃâÎÞÒâµÄËÀÑ­»·
+            LOG_ERROR("è¿žæŽ¥å‡ºé”™");
+            sleep(1); // é¿å…æ— æ„çš„æ­»å¾ªçŽ¯
             continue;
         }
         /*
-         * ×¢ÒâÒÔÏÂµÄµ÷ÓÃ¹ØÏµ£¬È¡ip²Ù×÷Ê±£¬connect±ØÐëÊÇÓÐÐ§µÄ£»
+         * æ³¨æ„ä»¥ä¸‹çš„è°ƒç”¨å…³ç³»ï¼Œå–ipæ“ä½œæ—¶ï¼Œconnectå¿…é¡»æ˜¯æœ‰æ•ˆçš„ï¼›
          */
         LOG_DEBUG("Connect[%p] comes from [%s], push to queue.",
                              pConnect, pConnect->GetPeerAddr().c_str());
 
-        // °ÑÁ¬½Ó´æÈë¶ÓÁÐ£¬ÓÉÖ´ÐÐÏß³Ì´¦Àí¡££¨Òì²½²Ù×÷£©
+        // æŠŠè¿žæŽ¥å­˜å…¥é˜Ÿåˆ—ï¼Œç”±æ‰§è¡Œçº¿ç¨‹å¤„ç†ã€‚ï¼ˆå¼‚æ­¥æ“ä½œï¼‰
         ConnectQueue::instance()->push(pConnect);
     }
 
@@ -115,7 +115,7 @@ int Module_WebServer::Run()
 
 
 
-// ×¢²á
+// æ³¨å†Œ
 static Module_WebServer tmp(THIS_MODULE);
 
 

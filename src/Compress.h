@@ -7,16 +7,16 @@ namespace COMPRESS_SPACE
 
 
 
-// Ñ¹Ëõ´¦Àí£¨Ê¹ÓÃzipµÈ¿â£©
+// å‹ç¼©å¤„ç†ï¼ˆä½¿ç”¨zipç­‰åº“ï¼‰
 class Compress
 {
 public:
     virtual ~Compress();
 
-    // Àà³õÊ¼»¯£¨³ÌĞòÆô¶¯Ê±µÄ³õÊ¼»¯£©
+    // ç±»åˆå§‹åŒ–ï¼ˆç¨‹åºå¯åŠ¨æ—¶çš„åˆå§‹åŒ–ï¼‰
     static int init();
 
-    // ÉèÖÃ»ò»ñÈ¡Compressµ¥Àı£¬¸ù¾İÅäÖÆÑ¡Ïî£¬Ö¸Ïò²»Í¬Ëã·¨£¨zip¡¢rarµÈ£©£»
+    // è®¾ç½®æˆ–è·å–Compresså•ä¾‹ï¼Œæ ¹æ®é…åˆ¶é€‰é¡¹ï¼ŒæŒ‡å‘ä¸åŒç®—æ³•ï¼ˆzipã€rarç­‰ï¼‰ï¼›
     inline static Compress *instance(Compress *executor=NULL)
     {
         static Compress *obj = (Compress *)(Environment::instance()->ClassInit("Compress", executor));
@@ -24,28 +24,28 @@ public:
     }
 
     /*
-     * ÄÚ´æ²Ù×÷
+     * å†…å­˜æ“ä½œ
      */
-    virtual int Do(const void *pSrc, int nSrcLen, void *pDest, int nDestLen);   // Ñ¹Ëõ
-    virtual int Undo(const void *pSrc, int nSrcLen, void *pDest, int nDestLen); // ½âÑ¹Ëõ
+    virtual int Do(const void *pSrc, int nSrcLen, void *pDest, int nDestLen);   // å‹ç¼©
+    virtual int Undo(const void *pSrc, int nSrcLen, void *pDest, int nDestLen); // è§£å‹ç¼©
 
     /*
-     * ÎÄ¼ş²Ù×÷
+     * æ–‡ä»¶æ“ä½œ
      */
-    virtual int Do(const FileObj &src, FileObj &dest);    // Ñ¹Ëõ
-    virtual int Undo(const FileObj &src, FileObj &dest);  // ½âÑ¹Ëõ
+    virtual int Do(const FileObj &src, FileObj &dest);    // å‹ç¼©
+    virtual int Undo(const FileObj &src, FileObj &dest);  // è§£å‹ç¼©
 
 //    /*
-//     * ÄÚ´æÊı¾İ <=> Ñ¹ËõÎÄ¼ş
+//     * å†…å­˜æ•°æ® <=> å‹ç¼©æ–‡ä»¶
 //     */
-//    virtual int Do(const void *pSrc, int nSrcLen, FileObj &dest);       // Ñ¹Ëõ
-//    virtual int Undo((const FileObj &src, void *pDest, int nDestLen);   // ½âÑ¹Ëõ
+//    virtual int Do(const void *pSrc, int nSrcLen, FileObj &dest);       // å‹ç¼©
+//    virtual int Undo((const FileObj &src, void *pDest, int nDestLen);   // è§£å‹ç¼©
 //
 //    /*
-//     * ÄÚ´æÊı¾İ <=> Ñ¹ËõÎÄ¼ş
+//     * å†…å­˜æ•°æ® <=> å‹ç¼©æ–‡ä»¶
 //     */
-//    virtual int Do(const Ini &src, FileObj &dest);          // Ñ¹Ëõ
-//    virtual int Undo(const FileObj &obj, const Ini &dest);  // ½âÑ¹Ëõ
+//    virtual int Do(const Ini &src, FileObj &dest);          // å‹ç¼©
+//    virtual int Undo(const FileObj &obj, const Ini &dest);  // è§£å‹ç¼©
 
 
 

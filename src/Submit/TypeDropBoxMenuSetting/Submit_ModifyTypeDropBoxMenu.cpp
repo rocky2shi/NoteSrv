@@ -8,7 +8,7 @@ namespace SUBMIT_MODIFYTYPEDROPBOXMENU_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "ModifyTypeDropBoxMenu";
 
 
@@ -17,18 +17,18 @@ static const string THIS_MODULE = "ModifyTypeDropBoxMenu";
 
 Submit_ModifyTypeDropBoxMenu::Submit_ModifyTypeDropBoxMenu()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_ModifyTypeDropBoxMenu::Submit_ModifyTypeDropBoxMenu(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_ModifyTypeDropBoxMenu::~Submit_ModifyTypeDropBoxMenu()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -36,15 +36,15 @@ Submit_ModifyTypeDropBoxMenu::~Submit_ModifyTypeDropBoxMenu()
 
 int Submit_ModifyTypeDropBoxMenu::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_ModifyTypeDropBoxMenu::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_ModifyTypeDropBoxMenu;
 }
 
@@ -52,7 +52,7 @@ Submit *Submit_ModifyTypeDropBoxMenu::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
@@ -66,7 +66,7 @@ int Submit_ModifyTypeDropBoxMenu::Deal(Page *page)
     int i;
 
     /*
-     * È¡³ö¿Í»§´«À´µÄÖµ
+     * å–å‡ºå®¢æˆ·ä¼ æ¥çš„å€¼
      */
     for(i=0; "" != (key = request->GetField("key_" + IntToString(i))); i++)
     {
@@ -86,7 +86,7 @@ int Submit_ModifyTypeDropBoxMenu::Deal(Page *page)
 
     LOG_DEBUG("i=[%d]", i);
 
-    // ±£´æ
+    // ä¿å­˜
     return menu->Save();
 }
 

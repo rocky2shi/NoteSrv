@@ -11,17 +11,17 @@ namespace USERDATA_SPACE
 
 
 
-// ¶ÁÈ¡pathÏÂËùÓĞÎÄ¼şÄÚµÄÊı¾İ
+// è¯»å–pathä¸‹æ‰€æœ‰æ–‡ä»¶å†…çš„æ•°æ®
 UserData::iterator::iterator(const string &path)
                         : m_FilsList(path),
                           m_itFile(m_FilsList),
                           m_first(true)
 {
-    m_FilsList.SortFilename(); // ÅÅĞòÎÄ¼şÃû
+    m_FilsList.SortFilename(); // æ’åºæ–‡ä»¶å
 }
 
 
-// Ö¸ÏòÏÂÒ»×éÊı¾İ
+// æŒ‡å‘ä¸‹ä¸€ç»„æ•°æ®
 bool UserData::iterator::next()
 {
     while(1)
@@ -32,42 +32,42 @@ bool UserData::iterator::next()
         }
         else
         {
-            // È¡Ò»¸ö¼ÇÂ¼
+            // å–ä¸€ä¸ªè®°å½•
             if( m_itCurrent.next() )
             {
-                return true; // È¡µ½¼ÇÂ¼£¬·µ»Ø£»
+                return true; // å–åˆ°è®°å½•ï¼Œè¿”å›ï¼›
             }
         }
 
-        // ÉÏ¸öÎÄ¼şÒÑ¶ÁÈ¡Íê³É£¬´ò¿ªÁíÒ»¸öÎÄ¼ş£»
+        // ä¸Šä¸ªæ–‡ä»¶å·²è¯»å–å®Œæˆï¼Œæ‰“å¼€å¦ä¸€ä¸ªæ–‡ä»¶ï¼›
         if( m_itFile.next() )
         {
-            m_Curent.Clear(); // Çåµô¾ÉÊı¾İ
+            m_Curent.Clear(); // æ¸…æ‰æ—§æ•°æ®
 
             int ret;
             const char *filename = m_itFile.name();
             ret = m_Curent.Read( filename );
             if(ret < 0)
             {
-                continue;   // ½Ó×Å³¢ÊÔÏÂÒ»ÎÄ¼ş
+                continue;   // æ¥ç€å°è¯•ä¸‹ä¸€æ–‡ä»¶
             }
             m_itCurrent = &m_Curent;
         }
         else
         {
-            break; // ËùÓĞÎÄ¼ş¶¼´¦ÀíÍê±Ï£¬ÍË³ö£»
+            break; // æ‰€æœ‰æ–‡ä»¶éƒ½å¤„ç†å®Œæ¯•ï¼Œé€€å‡ºï¼›
         }
     }
 
-    return false; // ÎŞÊı¾İ
+    return false; // æ— æ•°æ®
 }
 
-// È¡µ±Ç°[key/pack]¶Ô
+// å–å½“å‰[key/pack]å¯¹
 int UserData::iterator::Get(string &key, Conf *&pack)
 {
     key = m_itCurrent.GetKey();
     pack = m_itCurrent.GetValue();
-    return OK; // È¡µ½¼ÇÂ¼£¬·µ»Ø£»
+    return OK; // å–åˆ°è®°å½•ï¼Œè¿”å›ï¼›
 }
 
 
@@ -85,8 +85,8 @@ UserData::~UserData()
 
 
 /*
- * ¶ÁÈ¡¸ø¶¨¾ßÌåÎ»ÖÃÊı¾İ¡£×¢Òâ£¬Ã¿µ÷ÓÃÒ»´Î£¬¶¼ÊÇ´ò
- * ¿ªÒ»´ÎÎÄ¼ş£»[XXX]
+ * è¯»å–ç»™å®šå…·ä½“ä½ç½®æ•°æ®ã€‚æ³¨æ„ï¼Œæ¯è°ƒç”¨ä¸€æ¬¡ï¼Œéƒ½æ˜¯æ‰“
+ * å¼€ä¸€æ¬¡æ–‡ä»¶ï¼›[XXX]
  */
 const string UserData::Get(const string &key, const string &item)
 {
@@ -98,7 +98,7 @@ const string UserData::Get(const string &key, const string &item)
         return "";
     }
 
-    const string &filename = KeyToFile( key ); // È¡key¶ÔÓ¦µÄÎÄ¼şÃû
+    const string &filename = KeyToFile( key ); // å–keyå¯¹åº”çš„æ–‡ä»¶å
     const string &path = user->DataDir() + filename;
 
     Ini data( path );
@@ -106,13 +106,13 @@ const string UserData::Get(const string &key, const string &item)
     return data.Get(key, item);
 }
 
-/* £¨´ÓÎÄ¼şÖĞ£©È¡Êı¾İ£¬Ìî³äpackÖĞkey¶ÔÓ¦µÄÖµ£¬Èç£º
+/* ï¼ˆä»æ–‡ä»¶ä¸­ï¼‰å–æ•°æ®ï¼Œå¡«å……packä¸­keyå¯¹åº”çš„å€¼ï¼Œå¦‚ï¼š
  *
  *  Ini pack;
  *  pack.Set("20100515020544", "title", "");
  *  pack.Set("20100515020544", "text", "");
  *
- *  Get( pack ); // ÕâÊ±½«Ìî³ätitle¡¢text£»
+ *  Get( pack ); // è¿™æ—¶å°†å¡«å……titleã€textï¼›
  */
 int UserData::Get(Ini &pack)
 {
@@ -123,30 +123,30 @@ int UserData::Get(Ini &pack)
         return ERR;
     }
 
-    map<string, Ini*> key2ini; // Ã¿¸öÎÄ¼şÃû => ini¶ÔÏó
+    map<string, Ini*> key2ini; // æ¯ä¸ªæ–‡ä»¶å => iniå¯¹è±¡
     Ini::iterator itIni( &pack );
 
     /*
-     * È¡³öpackÖĞÃ¿¸öÊı¾İkey£¬È»ºó´Ó¶ÔÓ¦ÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ£¬ÔÙÌî
-     * ³äµ½¶ÔÓ¦µÄvalueÖĞ£»
+     * å–å‡ºpackä¸­æ¯ä¸ªæ•°æ®keyï¼Œç„¶åä»å¯¹åº”æ–‡ä»¶ä¸­è¯»å–æ•°æ®ï¼Œå†å¡«
+     * å……åˆ°å¯¹åº”çš„valueä¸­ï¼›
      */
     while( itIni.next() )
     {
-        // È¡³ö[key/Conf]Öµ¶Ô
+        // å–å‡º[key/Conf]å€¼å¯¹
         const string &key = itIni.GetKey();
         const Conf &conf = *(itIni.GetValue());
 
         /*
-         * 1. È¡key¶ÔÓ¦µÄÎÄ¼şÃû
-         * 2. ¿´ÎÄ¼şÊÇ·ñÒÑ±»´ò¿ª£¬»¹Î´´ò¿ªÔò´ò¿ªËü£¬²¢¼ÇÈëkey2iniÖĞ£»
-         * 3. ´ÓÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ£¬Ìî³äµ½packÖĞ£»
+         * 1. å–keyå¯¹åº”çš„æ–‡ä»¶å
+         * 2. çœ‹æ–‡ä»¶æ˜¯å¦å·²è¢«æ‰“å¼€ï¼Œè¿˜æœªæ‰“å¼€åˆ™æ‰“å¼€å®ƒï¼Œå¹¶è®°å…¥key2iniä¸­ï¼›
+         * 3. ä»æ–‡ä»¶ä¸­è¯»å–æ•°æ®ï¼Œå¡«å……åˆ°packä¸­ï¼›
          */
         const string &filename = KeyToFile( key );
         Ini *ini = key2ini[ filename ];
-        // ¶ÔÓ¦ÎÄ¼şÎ´¼ÓÔØÊ±£¬Ôò¼ÓÔØ(new Ini())£º
+        // å¯¹åº”æ–‡ä»¶æœªåŠ è½½æ—¶ï¼Œåˆ™åŠ è½½(new Ini())ï¼š
         if(NULL == ini)
         {
-            // È¡Â·¾¶
+            // å–è·¯å¾„
             const string &path = user->DataDir() + filename;
 
             ini = new Ini(path);
@@ -165,43 +165,43 @@ int UserData::Get(Ini &pack)
             continue;
         }
 
-        /* ÈôÍâ²¿²»Ìî³äkey¶ÔÓ¦µÄconf×Ö¶Î£¨¼´Îª¿Õ£©£¬Ôò±íÊ¾°ÑÎÄ¼şÖĞµÄËù
-         * ÓĞÖµÌî³äµ½packÖĞ£¬·Ç¿Õ£¬ÔòÖ»Ìî³äÖ¸¶¨µÄconf×Ö¶Î£»
+        /* è‹¥å¤–éƒ¨ä¸å¡«å……keyå¯¹åº”çš„confå­—æ®µï¼ˆå³ä¸ºç©ºï¼‰ï¼Œåˆ™è¡¨ç¤ºæŠŠæ–‡ä»¶ä¸­çš„æ‰€
+         * æœ‰å€¼å¡«å……åˆ°packä¸­ï¼Œéç©ºï¼Œåˆ™åªå¡«å……æŒ‡å®šçš„confå­—æ®µï¼›
          */
         if(0 == conf.Size())
         {
             /*
-             * Ìî³äkey¶ÔÓ¦µÄËùÓĞ×Ö¶Î
+             * å¡«å……keyå¯¹åº”çš„æ‰€æœ‰å­—æ®µ
              */
             pack.Set(key, *oldConf);
         }
         else
         {
             /*
-             * Ö»Ìî³äconf¶ÔÓ¦µÄÖ¸¶¨×Ö¶Î
+             * åªå¡«å……confå¯¹åº”çš„æŒ‡å®šå­—æ®µ
              */
 
-            // È¡³ökey¶ÔÓ¦µÄConfÖµ
+            // å–å‡ºkeyå¯¹åº”çš„Confå€¼
             Conf::iterator itConf( &conf );
             while( itConf.next() )
             {
-                /* ×¢ÒâÕâÀïµÄnameºÍvalue:
+                /* æ³¨æ„è¿™é‡Œçš„nameå’Œvalue:
                  *
-                 *  name -- ´ÓÍâ²¿µÄpackÖĞ´«Èë
-                 *  value -- ÔòÊÇ´ÓÎÄ¼şÖĞ¶ÁÈ¡µÄ£¬½«Ìî³ä
-                 *           µ½packÖĞname¶ÔÓ¦µÄÖµÖĞ
+                 *  name -- ä»å¤–éƒ¨çš„packä¸­ä¼ å…¥
+                 *  value -- åˆ™æ˜¯ä»æ–‡ä»¶ä¸­è¯»å–çš„ï¼Œå°†å¡«å……
+                 *           åˆ°packä¸­nameå¯¹åº”çš„å€¼ä¸­
                  */
                 const string &name = itConf.GetName();
                 const string &value = oldConf->Get(name);
 
-                // ÉèÖÃµ½packÖĞ£¨Ô­Öµ±»¸²¸Ç£©
+                // è®¾ç½®åˆ°packä¸­ï¼ˆåŸå€¼è¢«è¦†ç›–ï¼‰
                 pack.Set(key, name, value);
             }
         }
     }
 
     /*
-     * ÓÃÍêºó£¬ÊÍ·ÅÄÚ´æ£»
+     * ç”¨å®Œåï¼Œé‡Šæ”¾å†…å­˜ï¼›
      */
     map<string, Ini*>::iterator itSave;
     for(itSave = key2ini.begin(); key2ini.end() != itSave; itSave++)
@@ -213,7 +213,7 @@ int UserData::Get(Ini &pack)
 }
 
 
-// ±£´æÊı¾İ£¨µ¥Ìõ£©
+// ä¿å­˜æ•°æ®ï¼ˆå•æ¡ï¼‰
 int UserData::Set(const string &key, const string &item, const string &value)
 {
     User *user = User::Get( m_username );
@@ -224,23 +224,23 @@ int UserData::Set(const string &key, const string &item, const string &value)
         return ERR;
     }
 
-    const string &filename = KeyToFile( key ); // È¡key¶ÔÓ¦µÄÎÄ¼şÃû
+    const string &filename = KeyToFile( key ); // å–keyå¯¹åº”çš„æ–‡ä»¶å
     const string &path = user->DataDir() + filename;
 
-    // ¶ÁÈëÔ­Êı¾İ
+    // è¯»å…¥åŸæ•°æ®
     Ini data( path );
 
-    // Ğ´Èë
+    // å†™å…¥
     data.Set(key, item, value);
 
-    // ±£´æ
+    // ä¿å­˜
     return data.Write();
 }
 
 /*
- * °ÑpackÖĞµÄÖµ±£´æ£¨µ½ÎÄ¼ş£©
- * force: 1. ÎªtrueÊ±£¬Ç¿ÖÆĞ´ÈëËùÓĞÊı¾İ£»
- *        2. ÎªfalseÊ±£¬Ö»Ğ´ÈëĞÂµÄÊı¾İ£¨modify×Ö¶Î¾ö¶¨£©
+ * æŠŠpackä¸­çš„å€¼ä¿å­˜ï¼ˆåˆ°æ–‡ä»¶ï¼‰
+ * force: 1. ä¸ºtrueæ—¶ï¼Œå¼ºåˆ¶å†™å…¥æ‰€æœ‰æ•°æ®ï¼›
+ *        2. ä¸ºfalseæ—¶ï¼Œåªå†™å…¥æ–°çš„æ•°æ®ï¼ˆmodifyå­—æ®µå†³å®šï¼‰
  */
 int UserData::Set(const Ini &pack, bool force/*=false*/)
 {
@@ -251,31 +251,31 @@ int UserData::Set(const Ini &pack, bool force/*=false*/)
         return ERR;
     }
 
-    map<string, Ini*> key2ini; // Ã¿¸öÎÄ¼şÃû => ini¶ÔÏó
+    map<string, Ini*> key2ini; // æ¯ä¸ªæ–‡ä»¶å => iniå¯¹è±¡
     Ini::iterator itIni( &pack );
-    int success = 0; // ÉèÖÃÊı¾İÌõÊı³É¹¦¼ÆÊıÆ÷
-    int ignore = 0;  // ºöÂÔ¼ÆÊıÆ÷
+    int success = 0; // è®¾ç½®æ•°æ®æ¡æ•°æˆåŠŸè®¡æ•°å™¨
+    int ignore = 0;  // å¿½ç•¥è®¡æ•°å™¨
 
     /*
-     * °ÑpackÖĞµÄÊı¾İ±£´æµ½ÏàÓ¦µÄÎÄ¼ş
+     * æŠŠpackä¸­çš„æ•°æ®ä¿å­˜åˆ°ç›¸åº”çš„æ–‡ä»¶
      */
     while( itIni.next() )
     {
-        // È¡³ö[key/Conf]Öµ¶Ô
+        // å–å‡º[key/Conf]å€¼å¯¹
         const string &key = itIni.GetKey();
         const Conf &conf = *(itIni.GetValue());
 
         /*
-         * 1. È¡key¶ÔÓ¦µÄÎÄ¼şÃû
-         * 2. ¿´ÎÄ¼şÊÇ·ñÒÑ±»´ò¿ª£¬»¹Î´´ò¿ªÔò´ò¿ªËü£¬²¢¼ÇÈëkey2iniÖĞ£»
-         * 3. Ìî³äĞÂÊı¾İ
+         * 1. å–keyå¯¹åº”çš„æ–‡ä»¶å
+         * 2. çœ‹æ–‡ä»¶æ˜¯å¦å·²è¢«æ‰“å¼€ï¼Œè¿˜æœªæ‰“å¼€åˆ™æ‰“å¼€å®ƒï¼Œå¹¶è®°å…¥key2iniä¸­ï¼›
+         * 3. å¡«å……æ–°æ•°æ®
          */
         const string &filename = KeyToFile( key );
         Ini *ini = key2ini[ filename ];
-        // ¶ÔÓ¦ÎÄ¼şÎ´¼ÓÔØÊ±£¬Ôò¼ÓÔØ(new Ini())£º
+        // å¯¹åº”æ–‡ä»¶æœªåŠ è½½æ—¶ï¼Œåˆ™åŠ è½½(new Ini())ï¼š
         if(NULL == ini)
         {
-            // È¡Â·¾¶
+            // å–è·¯å¾„
             const string &path = user->DataDir() + filename;
 
             ini = new Ini(path);
@@ -287,20 +287,20 @@ int UserData::Set(const Ini &pack, bool force/*=false*/)
             key2ini[ filename ] = ini;
         }
 
-        /* ÊÇ·ñÖ»Ğ´Èë×îĞÂÊı¾İ£º
-         *   1. ²»ÉèÖÃÇ¿ÖÆ±êÖ¾£¨force==false£©£¬ÇÒ
+        /* æ˜¯å¦åªå†™å…¥æœ€æ–°æ•°æ®ï¼š
+         *   1. ä¸è®¾ç½®å¼ºåˆ¶æ ‡å¿—ï¼ˆforce==falseï¼‰ï¼Œä¸”
          * [2010-05-22]
          */
         if( !force )
         {
-            // ´ıĞ´ÈëµÄÊı¾İ²»±ÈÔ­ÓĞÊı¾İ¾ÉĞÂÊ±
+            // å¾…å†™å…¥çš„æ•°æ®ä¸æ¯”åŸæœ‰æ•°æ®æ—§æ–°æ—¶
             if( conf.Get("modify") <= ini->Get(key, "modify") )
             {
                 ignore++;
                 LOG_DEBUG("Igore old: [%s]", key.c_str());
                 continue;
             }
-            // ºöÂÔÒÑ±»É¾³ıµÄÊı¾İ£¨ÊÇ·ñÒª²âÊÔ£ºini->Get(key, "status") == "delete" [XXX]£©
+            // å¿½ç•¥å·²è¢«åˆ é™¤çš„æ•°æ®ï¼ˆæ˜¯å¦è¦æµ‹è¯•ï¼šini->Get(key, "status") == "delete" [XXX]ï¼‰
             if( conf.Get("status") == "delete" )
             {
                 ignore++;
@@ -309,39 +309,39 @@ int UserData::Set(const Ini &pack, bool force/*=false*/)
             }
         }
 
-        // Ìî³äĞÂÊı¾İ£¨Ô­Öµ±»¸²¸Ç£©;
+        // å¡«å……æ–°æ•°æ®ï¼ˆåŸå€¼è¢«è¦†ç›–ï¼‰;
         ini->Set(key, conf);
         success++;
     }
 
     /*
-     * ±£´æ
+     * ä¿å­˜
      */
     map<string, Ini*>::iterator itSave;
     for(itSave = key2ini.begin(); key2ini.end() != itSave; itSave++)
     {
         Ini *ini = itSave->second;
-        ini->Write();   // Ğ´Èë
-        delete ini;     // ÓÃÍêºó£¬ÊÍ·ÅÄÚ´æ£»
+        ini->Write();   // å†™å…¥
+        delete ini;     // ç”¨å®Œåï¼Œé‡Šæ”¾å†…å­˜ï¼›
     }
 
-    // ¼ÇÂ¼³É¹¦¡¢ºöÂÔÊı
+    // è®°å½•æˆåŠŸã€å¿½ç•¥æ•°
     m_result.Set("success", IntToString(success));
     m_result.Set("ignore", IntToString(ignore));
 
     return OK;
 }
 
-// È¡key¶ÔÓ¦Êı¾İµÄ¸½¼şÃûÁĞ±íµ½attachsÖĞ     [Rocky 2010-05-18 18:08:42]
+// å–keyå¯¹åº”æ•°æ®çš„é™„ä»¶ååˆ—è¡¨åˆ°attachsä¸­     [Rocky 2010-05-18 18:08:42]
 int UserData::GetAttachList(const string &key, vector<string> &attachs) const
 {
     User *user = User::Get(m_username);
-    // È¡¸½¼şÄ¿Â¼
+    // å–é™„ä»¶ç›®å½•
     const string &path = user->AttachDir();
     GetFileList list(path);
     GetFileList::file_iterator itAttach( list );
 
-    // É¨ÃèÃ¿¸ö¸½¼şÃû£¬È¡³öÇ°×ºÊÇkeyµÄÎÄ¼ş
+    // æ‰«ææ¯ä¸ªé™„ä»¶åï¼Œå–å‡ºå‰ç¼€æ˜¯keyçš„æ–‡ä»¶
     while( itAttach.next() )
     {
         const char *filename = GetBaseName( itAttach.name() );
@@ -353,7 +353,7 @@ int UserData::GetAttachList(const string &key, vector<string> &attachs) const
     return OK;
 }
 
-// È¡²Ù×÷½á¹û
+// å–æ“ä½œç»“æœ
 const string UserData::GetResult(const string &field) const
 {
     return m_result.Get(field);

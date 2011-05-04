@@ -6,33 +6,33 @@ namespace PAGE_REGISTER_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "register";
 
 
 
 Page_Register::Page_Register()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Page_Register::~Page_Register()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 
 int Page_Register::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     m_html = GlobalConfig::instance()->TemplateDir() + "Register.html";
     return Page::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Page *Page_Register::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Page_Register;
 }
 
@@ -43,16 +43,16 @@ Page *Page_Register::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
-// Êä³öÊı¾İÌå
+// è¾“å‡ºæ•°æ®ä½“
 int Page_Register::OutBody()
 {
     const string &tag = m_request->GetField("tag");
 
     /*
-     * ×¢²áÓÃ»§Ìá½»ÊÂ¼ş
+     * æ³¨å†Œç”¨æˆ·æäº¤äº‹ä»¶
      */
     if("register" == tag)
     {
@@ -62,7 +62,7 @@ int Page_Register::OutBody()
     }
 
     /*
-     * ĞŞ¸ÄÃÜÂëÌá½»ÊÂ¼ş
+     * ä¿®æ”¹å¯†ç æäº¤äº‹ä»¶
      */
     if("modify" == tag)
     {
@@ -72,7 +72,7 @@ int Page_Register::OutBody()
     }
 
     /*
-     * ÕÒ»ØÃÜÂëÌá½»ÊÂ¼ş
+     * æ‰¾å›å¯†ç æäº¤äº‹ä»¶
      */
     if("retrieve" == tag)
     {
@@ -91,7 +91,7 @@ int Page_Register::OutBody()
 
 
 
-// ¶¨Òå¶¯Ì¬¿âÈë¿Ú
+// å®šä¹‰åŠ¨æ€åº“å…¥å£
 DefinitinoDllEnter(Page_Register, THIS_MODULE)
 
 }// end of PAGE_REGISTER_SPACE

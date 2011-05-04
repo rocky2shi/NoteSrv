@@ -8,7 +8,7 @@ namespace TAG_TYPEDROPBOXMENUSELECEDITEMS_SPACE
 
 
 
-// µ±Ç°Êý¾ÝÑ¡ÖÐµÄÀàÐÍÑ¡ÔñÏÂÀ­¿ò²Ëµ¥¡°ÏîÁÐ±í¡±
+// å½“å‰æ•°æ®é€‰ä¸­çš„ç±»åž‹é€‰æ‹©ä¸‹æ‹‰æ¡†èœå•â€œé¡¹åˆ—è¡¨â€
 class Tag_TypeDropBoxMenuSelecedItems : public Tag
 {
 protected:

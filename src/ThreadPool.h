@@ -3,7 +3,7 @@
 #include "Common.h"
 #include "CondLock.h"
 #include "TaskQueue.h"
-#include <signal.h> // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ¿¼ÂË¶àÆ½Ì¨
+#include <signal.h> // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< è€ƒæ»¤å¤šå¹³å°
 namespace THREADPOOL_SPACE
 {
 
@@ -12,21 +12,21 @@ namespace THREADPOOL_SPACE
 
 
 
-// Ïß³Ì³Ø
+// çº¿ç¨‹æ± 
 class ThreadPool
 {
     static const int THREAD_COUNT_MAX = 50;
     static const int THREAD_COUNT_MIN = 5;
-    static const int TASK_COUNT_MAX = 2000; // ÈÎÎñ¶ÓÁĞÈİÁ¿£¨ÈÎÎñ¸öÊı£©[XXX]
+    static const int TASK_COUNT_MAX = 2000; // ä»»åŠ¡é˜Ÿåˆ—å®¹é‡ï¼ˆä»»åŠ¡ä¸ªæ•°ï¼‰[XXX]
     typedef void *(*Func)(void *);
-    // Ïß³Ì×´Ì¬½á¹¹
+    // çº¿ç¨‹çŠ¶æ€ç»“æ„
     struct Status {
-        // Ïß³Ì×´Ì¬Öµ
+        // çº¿ç¨‹çŠ¶æ€å€¼
         typedef enum
         {
-            OK,             // Õı³£×´Ì¬
-            FINISH,         // ĞèÒªÍË³ö
-            NONE            // ÎŞ¶¯×÷
+            OK,             // æ­£å¸¸çŠ¶æ€
+            FINISH,         // éœ€è¦é€€å‡º
+            NONE            // æ— åŠ¨ä½œ
         } STATUS;
 
         Status()
@@ -36,8 +36,8 @@ class ThreadPool
             status = OK;
         }
 
-        long tid;           // Ïß³ÌºÅ
-        long alive;         // ×îºó»îÔ¾Ê±¼ä
+        long tid;           // çº¿ç¨‹å·
+        long alive;         // æœ€åæ´»è·ƒæ—¶é—´
         STATUS status;
     };
 
@@ -63,25 +63,25 @@ class ThreadPool
             SHARE_LOCK(m_Lock);
             return m_Queue.size();
         }
-        // É¾³ıÒ»ÌõÏß³Ì×´Ì¬¼ÇÂ¼£¨µ±Ïß³Ì¼´½«ÍË³öÊ±»áµ÷ÓÃ£©
+        // åˆ é™¤ä¸€æ¡çº¿ç¨‹çŠ¶æ€è®°å½•ï¼ˆå½“çº¿ç¨‹å³å°†é€€å‡ºæ—¶ä¼šè°ƒç”¨ï¼‰
         void del(long tid)
         {
             UNIQUE_LOCK(m_Lock);
             m_Queue.erase(tid);
         }
-        // ÉèÖÃÈÎÒ»¸öÏß³ÌÎªÍê³ÉÌ¬£¨ÔÚ´¦ÀíÍê³Éµ±Ç°ÈÎÎñºó£¬Ëü×Ô¶¯ÍË³ö£©
+        // è®¾ç½®ä»»ä¸€ä¸ªçº¿ç¨‹ä¸ºå®Œæˆæ€ï¼ˆåœ¨å¤„ç†å®Œæˆå½“å‰ä»»åŠ¡åï¼Œå®ƒè‡ªåŠ¨é€€å‡ºï¼‰
         bool SetFinish()
         {
             SHARE_LOCK(m_Lock);
-            map<long, Status*>::iterator it = m_Queue.begin();  // Ñ¡Ôñ¶ÓÊ×µÄÏß³Ì£¨ËæÒâÑ¡Ôñ£©
+            map<long, Status*>::iterator it = m_Queue.begin();  // é€‰æ‹©é˜Ÿé¦–çš„çº¿ç¨‹ï¼ˆéšæ„é€‰æ‹©ï¼‰
             if( m_Queue.end() == it )
             {
-                return false;   // ÎŞÏß³Ì
+                return false;   // æ— çº¿ç¨‹
             }
             it->second->status = Status::FINISH;
             return true;
         }
-        // ÉèÖÃËùÓĞÏß³ÌÎªÍê³ÉÌ¬£¨ÔÚ´¦ÀíÍê³Éµ±Ç°ÈÎÎñºó£¬Ëü×Ô¶¯ÍË³ö£©
+        // è®¾ç½®æ‰€æœ‰çº¿ç¨‹ä¸ºå®Œæˆæ€ï¼ˆåœ¨å¤„ç†å®Œæˆå½“å‰ä»»åŠ¡åï¼Œå®ƒè‡ªåŠ¨é€€å‡ºï¼‰
         void SetFinishAll()
         {
             SHARE_LOCK(m_Lock);
@@ -92,10 +92,10 @@ class ThreadPool
             }
         }
 
-        // Çå³ıÎŞĞ§Ïß³Ì¼ÇÂ¼£¨·µ»ØÒÑÇå³ıÊı£©
+        // æ¸…é™¤æ— æ•ˆçº¿ç¨‹è®°å½•ï¼ˆè¿”å›å·²æ¸…é™¤æ•°ï¼‰
         int ClearInavlidStatus()
         {
-            SHARE_LOCK(m_Lock);
+            UNIQUE_LOCK(m_Lock);
             int n = 0;
             map<long, Status*>::iterator it;
             for(it = m_Queue.begin(); m_Queue.end() != it; it++)
@@ -111,13 +111,13 @@ class ThreadPool
         }
 
     private:
-        map<long, Status*> m_Queue;   // Ã¿¸öÔªËØ¶ÔÓ¦Ò»Ïß³Ì£¨tid => Status£©
+        map<long, Status*> m_Queue;   // æ¯ä¸ªå…ƒç´ å¯¹åº”ä¸€çº¿ç¨‹ï¼ˆtid => Statusï¼‰
         Lock m_Lock;
     };
 
 
 public:
-    // µü´úÆ÷£¬ÓÃÓÚÁĞ³öËùÓĞÒÑ·ÖÅäµÄ³Ø¶ÔÏó£¨Öµ£©£»
+    // è¿­ä»£å™¨ï¼Œç”¨äºåˆ—å‡ºæ‰€æœ‰å·²åˆ†é…çš„æ± å¯¹è±¡ï¼ˆå€¼ï¼‰ï¼›
     class iterator
     {
     public:
@@ -126,7 +126,7 @@ public:
             it = ThreadPool::instance()->m_list.begin();
         }
 
-        // Ö¸ÏòÏÂÒ»¸öÔªËØ
+        // æŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
         bool next()
         {
             if( first )
@@ -140,7 +140,7 @@ public:
             return it != ThreadPool::instance()->m_list.end();
         }
 
-        // ÖØÔØ²Ù×÷·û£¬·µ»Ø³Ø¶ÔÏóµØÖ·£»
+        // é‡è½½æ“ä½œç¬¦ï¼Œè¿”å›æ± å¯¹è±¡åœ°å€ï¼›
         ThreadPool * operator()()
         {
             return it->second;
@@ -153,7 +153,7 @@ public:
 
 
 private:
-    // Ïß³Ì¹ÜÀíÀà£¨¼ÇÂ¼Ã¿¸ö·ÖÅäµÄÏß³Ì³Ø¶ÔÏó£©
+    // çº¿ç¨‹ç®¡ç†ç±»ï¼ˆè®°å½•æ¯ä¸ªåˆ†é…çš„çº¿ç¨‹æ± å¯¹è±¡ï¼‰
     class Manage
     {
         friend class ThreadPool::iterator;
@@ -175,53 +175,53 @@ private:
             LOG_DEBUG("Manage>>> delete: [%u] [%p]", pool->m_id, pool);
         }
     private:
-        // Ïß³Ì³Ø±àºÅ
+        // çº¿ç¨‹æ± ç¼–å·
         unsigned int GetId()
         {
             return m_id++;
         }
-        Lock m_InsertLock;  // ´´½¨ĞÂÀàÊ±·ÀÖ¹³åÍ»
-        // list<ThreadPool*> m_list; // ¼ÇÂ¼Ã¿¸öĞÂ½¨£¨ÒÑ·ÖÅä£©µÄÏß³Ì³Ø¶ÔÏó
-        map<unsigned int, ThreadPool*> m_list; // ¼ÇÂ¼Ã¿¸öĞÂ½¨£¨ÒÑ·ÖÅä£©µÄÏß³Ì³Ø¶ÔÏó
+        Lock m_InsertLock;  // åˆ›å»ºæ–°ç±»æ—¶é˜²æ­¢å†²çª
+        // list<ThreadPool*> m_list; // è®°å½•æ¯ä¸ªæ–°å»ºï¼ˆå·²åˆ†é…ï¼‰çš„çº¿ç¨‹æ± å¯¹è±¡
+        map<unsigned int, ThreadPool*> m_list; // è®°å½•æ¯ä¸ªæ–°å»ºï¼ˆå·²åˆ†é…ï¼‰çš„çº¿ç¨‹æ± å¯¹è±¡
         unsigned int m_id;
     };
 
 
 
 public:
-    // func--Ïß³Ì³Ø»Øµ÷º¯Êı£¬min--Ïß³ÌÊıÏÂÏŞ£¬max--Ïß³ÌÊıÉÏÏŞ£»
+    // func--çº¿ç¨‹æ± å›è°ƒå‡½æ•°ï¼Œmin--çº¿ç¨‹æ•°ä¸‹é™ï¼Œmax--çº¿ç¨‹æ•°ä¸Šé™ï¼›
     ThreadPool(Func func, int min=THREAD_COUNT_MIN, int max=THREAD_COUNT_MAX);
     ~ThreadPool();
 
-    // Àà³õÊ¼»¯
+    // ç±»åˆå§‹åŒ–
     static int init();
 
-    // ¶ÔÏó³õÊ¼»¯
+    // å¯¹è±¡åˆå§‹åŒ–
     int Init();
 
-    // ¸øÏß³Ì³ØËÍÈÎÎñÊı¾İ
+    // ç»™çº¿ç¨‹æ± é€ä»»åŠ¡æ•°æ®
     int push(void *task);
 
-    // È¡µ±Ç°Ïß³Ì³ØÖĞÏß³ÌÊı
+    // å–å½“å‰çº¿ç¨‹æ± ä¸­çº¿ç¨‹æ•°
     int GetPoolSize();
 
-    // È¡µ±Ç°Ïß³Ì³ØÖĞÈÎÎñÊı
+    // å–å½“å‰çº¿ç¨‹æ± ä¸­ä»»åŠ¡æ•°
     int GetTaskCount();
 
-    // È¡Ïß³Ì³Ø±àºÅ
+    // å–çº¿ç¨‹æ± ç¼–å·
     unsigned int GetId();
 
-    // Çå³ıÎŞĞ§Ïß³Ì¼ÇÂ¼
+    // æ¸…é™¤æ— æ•ˆçº¿ç¨‹è®°å½•
     int ClearInavlidThread();
 
 private:
-    // ÈÎÎñÖ÷Ñ­»·£¨Ñ­»·µ÷ÓÃÍâ²¿´«ÈëµÄº¯Êı£©
+    // ä»»åŠ¡ä¸»å¾ªç¯ï¼ˆå¾ªç¯è°ƒç”¨å¤–éƒ¨ä¼ å…¥çš„å‡½æ•°ï¼‰
     static void Run(ThreadPool *pool);
 
-    // ¹ÜÀíÏß³Ì£¬¶¨Ê±É¨Ãè£¨ËùÓĞÏß³Ì³Ø£©Êı¾İ¶ÓÁĞ£¬¿´¿´ÊÇ·ñĞèÒªÆô¶¯ĞÂÏß³Ì£¬»òÊÍ·Å²¿·Ö¿ÕÏĞÏß³Ì£»
+    // ç®¡ç†çº¿ç¨‹ï¼Œå®šæ—¶æ‰«æï¼ˆæ‰€æœ‰çº¿ç¨‹æ± ï¼‰æ•°æ®é˜Ÿåˆ—ï¼Œçœ‹çœ‹æ˜¯å¦éœ€è¦å¯åŠ¨æ–°çº¿ç¨‹ï¼Œæˆ–é‡Šæ”¾éƒ¨åˆ†ç©ºé—²çº¿ç¨‹ï¼›
     static void WatchThread();
 
-    // µ¥Ä£Ê½ÖĞÓÃµÄÈ¡ÊµÀı½Ó¿Ú
+    // å•æ¨¡å¼ä¸­ç”¨çš„å–å®ä¾‹æ¥å£
     inline static Manage *instance(Manage *pool=NULL)
     {
         static Manage *obj = (Manage *)(Environment::instance()->ClassInit("ThreadPool::Manage", pool));
@@ -230,11 +230,11 @@ private:
 
 private:
     StatusQueue m_StatusQueue;
-    boost::thread_group m_ThreadQueue;  // Ê¹ÓÃboost¿âÀ´´æ·ÅÏß³Ì×é
+    boost::thread_group m_ThreadQueue;  // ä½¿ç”¨booståº“æ¥å­˜æ”¾çº¿ç¨‹ç»„
     TaskQueue m_TaskList;
-    Func m_execute; // Íâ²¿´«ÈëµÄÖ´ĞĞº¯Êı
+    Func m_execute; // å¤–éƒ¨ä¼ å…¥çš„æ‰§è¡Œå‡½æ•°
     CondLock m_lock;
-    bool m_bInit;   // ÊÇ·ñÒÑÖ´ĞĞ¹ı³õÊ¼»¯
+    bool m_bInit;   // æ˜¯å¦å·²æ‰§è¡Œè¿‡åˆå§‹åŒ–
     bool m_bStopCreateThread;
     unsigned int m_id;
 };

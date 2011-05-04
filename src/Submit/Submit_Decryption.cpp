@@ -6,7 +6,7 @@ namespace SUBMIT_DECRYPTION_SPACE
 {
 
 
-// ±êÃ÷Ä£¿é£¨¶ÔÓ¦ÓÚÒ³ÃæÖĞµÄÌá½»×Ö¶Î£©
+// æ ‡æ˜æ¨¡å—ï¼ˆå¯¹åº”äºé¡µé¢ä¸­çš„æäº¤å­—æ®µï¼‰
 static const string THIS_MODULE = "decryption";
 
 
@@ -15,18 +15,18 @@ static const string THIS_MODULE = "decryption";
 
 Submit_Decryption::Submit_Decryption()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_Decryption::Submit_Decryption(const string &page, const string &element)
                         : Submit(page, element)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Submit_Decryption::~Submit_Decryption()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -34,15 +34,15 @@ Submit_Decryption::~Submit_Decryption()
 
 int Submit_Decryption::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Submit::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Submit *Submit_Decryption::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Submit_Decryption;
 }
 
@@ -50,12 +50,12 @@ Submit *Submit_Decryption::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
-// ÈÏÖ¤Í¨¹ı£¬·µ»ØµÄ["decryption"]Îª¿Õ´®£¬²»Í¨¹ıÔò·µ»Ø³ö´íĞÅÏ¢£»
+// è®¤è¯é€šè¿‡ï¼Œè¿”å›çš„["decryption"]ä¸ºç©ºä¸²ï¼Œä¸é€šè¿‡åˆ™è¿”å›å‡ºé”™ä¿¡æ¯ï¼›
 int Submit_Decryption::Deal(Page *page)
 {
     const string &ERR_MSG = "auth_msg";
@@ -63,25 +63,25 @@ int Submit_Decryption::Deal(Page *page)
     const string &key = page->GetCurrentKey();
     const Conf *pack = page->GetCurrentPack();
 
-    // ÔÙ´ÎÈ·ÈÏÆäÌá½»À´Ô´
+    // å†æ¬¡ç¡®è®¤å…¶æäº¤æ¥æº
     const string &decryption = page->GetRequest()->GetField("decryption");
     if("" == decryption)
     {
         return ERR;
     }
 
-    // ±È¶ÔÃÜÂë
-    const string &passwd1 = page->GetRequest()->GetField("password");  // ¿Í»§¶Ë´«À´µÄÃÜÂë£¨Ã÷ÎÄ£©
-    const string &passwd2 = pack->Get("password");  // ¼ÓÃÜºóµÄÃÜÂë£¨ÃÜÎÄ£©
+    // æ¯”å¯¹å¯†ç 
+    const string &passwd1 = page->GetRequest()->GetField("password");  // å®¢æˆ·ç«¯ä¼ æ¥çš„å¯†ç ï¼ˆæ˜æ–‡ï¼‰
+    const string &passwd2 = pack->Get("password");  // åŠ å¯†åçš„å¯†ç ï¼ˆå¯†æ–‡ï¼‰
     if( ("" != passwd1 || "" != passwd2) && (passwd2 != Crypt(passwd1, CRYPT_VERSION)) )
     {
-        page->SetResult(ERR_MSG, "ÃÜÂë´í");
+        page->SetResult(ERR_MSG, "å¯†ç é”™");
         LOG_ERROR("Password error");
         return ERR;
     }
 
     page->SetResult(ERR_MSG, "OK");
-    page->SetResult("decryption", "YES"); // ÈÏÖ¤Í¨¹ı£¬Ôò±ê¼ÇÎª½âÃÜ£»
+    page->SetResult("decryption", "YES"); // è®¤è¯é€šè¿‡ï¼Œåˆ™æ ‡è®°ä¸ºè§£å¯†ï¼›
     LOG_DEBUG("User %s authenticate ok", username.c_str());
 
     return OK;
@@ -99,7 +99,7 @@ int Submit_Decryption::Deal(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Submit_Decryption tmp(SUBMIT_GLOBAL, THIS_MODULE);
 
 }// end of SUBMIT_DECRYPTION_SPACE

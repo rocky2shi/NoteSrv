@@ -8,16 +8,16 @@ namespace TIMER_SPACE
 
 
 
-// ¶¨Ê±Æ÷
+// å®šæ—¶å™¨
 class Timer
 {
     typedef void (*ExeFunc)(void *);
     struct Task
     {
-        ExeFunc exector;    // ÈÎÎñÖ´ÐÐÆ÷
-        void *param;        // Ö´ÐÐÆ÷µ÷Ê±µÄÈë²Î
-        string remark;      // ±¸×¢
-        bool invalid;       // ÊÇ·ñÓÐÐ§£¨ÎÞÐ§µÄ½«±»Çå³ý£©
+        ExeFunc exector;    // ä»»åŠ¡æ‰§è¡Œå™¨
+        void *param;        // æ‰§è¡Œå™¨è°ƒæ—¶çš„å…¥å‚
+        string remark;      // å¤‡æ³¨
+        bool invalid;       // æ˜¯å¦æœ‰æ•ˆï¼ˆæ— æ•ˆçš„å°†è¢«æ¸…é™¤ï¼‰
 
         Task(): exector(NULL),
                 param(NULL),
@@ -30,7 +30,7 @@ class Timer
                                 invalid(task.invalid)
         {
         }
-        // °´exector²éÕÒ
+        // æŒ‰exectoræŸ¥æ‰¾
         bool operator==(const Task& rhs) const
         {
             return (exector == rhs.exector);
@@ -41,24 +41,24 @@ class Timer
 public:
     ~Timer();
 
-    // Àà³õÊ¼»¯£¨³ÌÐòÆô¶¯Ê±Ö´ÐÐÒ»´Î£©
+    // ç±»åˆå§‹åŒ–ï¼ˆç¨‹åºå¯åŠ¨æ—¶æ‰§è¡Œä¸€æ¬¡ï¼‰
     static int init();
 
     /*
-     * ×¢²áÐèÒª¶¨Ê±Ö´ÐÐµÄÈÎÎñ
-     *  exector : ÈÎÎñ´¦Àí½Ó¿Ú
-     *  param   : ¶¨Ê±Æ÷µ÷ÓÃexectorÊ±´«ÈëËüµÄ²ÎÊý
-     *  remark  : ÈÎÎñËµÃ÷
+     * æ³¨å†Œéœ€è¦å®šæ—¶æ‰§è¡Œçš„ä»»åŠ¡
+     *  exector : ä»»åŠ¡å¤„ç†æŽ¥å£
+     *  param   : å®šæ—¶å™¨è°ƒç”¨exectoræ—¶ä¼ å…¥å®ƒçš„å‚æ•°
+     *  remark  : ä»»åŠ¡è¯´æ˜Ž
      */
     static int Register(const ExeFunc exector, void *param, const string &remark);
 
-    // ×¢Ïú¶¨Ê±ÈÎÎñ
+    // æ³¨é”€å®šæ—¶ä»»åŠ¡
     static int UnRegister(const ExeFunc exector);
 
 private:
     Timer();
 
-    // µ¥Ä£Ê½ÖÐÓÃµÄÈ¡ÊµÀý½Ó¿Ú
+    // å•æ¨¡å¼ä¸­ç”¨çš„å–å®žä¾‹æŽ¥å£
     inline static Timer *instance(Timer *exector=NULL)
     {
         static Timer *obj = (Timer *)(Environment::instance()->ClassInit("::Timer", exector));
@@ -71,8 +71,8 @@ private:
     static void Run(Timer *timer);
 
 private:
-    list<Task> m_queue;     // ¶¨Ê±ÈÎÎñ¶ÓÁÐ
-    bool m_exit;            // ¿ØÖÆ¶¨Ê±Ïß³ÌÍË³ö
+    list<Task> m_queue;     // å®šæ—¶ä»»åŠ¡é˜Ÿåˆ—
+    bool m_exit;            // æŽ§åˆ¶å®šæ—¶çº¿ç¨‹é€€å‡º
     Lock m_lock;
 };
 

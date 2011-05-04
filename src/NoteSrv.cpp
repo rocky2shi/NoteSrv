@@ -27,7 +27,7 @@ static void ModuleThread(Module *module)
 
     LOG_INFO("Start service: [%s]", module->GetName().c_str());
 
-    // Ö´ĞĞÒµÎñÑ­»·
+    // æ‰§è¡Œä¸šåŠ¡å¾ªç¯
     module->Run();
 
     LOG_INFO("Service quit: [%s]", module->GetName().c_str());
@@ -37,7 +37,7 @@ static void ModuleThread(Module *module)
 
 int main(int argc, char *argv[])
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
 
     if( (2 == argc) && ((strncmp(argv[1], "-h", 2) == 0) || (strncmp(argv[1], "--help", 6) == 0)) )
@@ -51,137 +51,137 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    {/****************************** ³õÊ¼»¯ ¿ªÊ¼ ******************************/
+    {/****************************** åˆå§‹åŒ– å¼€å§‹ ******************************/
 
     int ret;
 
 
 
-    // ³õÊ¼»¯È«¾ÖÅäÖÃÀà
+    // åˆå§‹åŒ–å…¨å±€é…ç½®ç±»
     ret = GlobalConfig::init(argc, argv);
     if(ret < 0)
     {
-        printf("³õÊ¼»¯È«¾ÖÅäÖÃÀà³ö´í [%d] \n", ret);
+        printf("åˆå§‹åŒ–å…¨å±€é…ç½®ç±»å‡ºé”™ [%d] \n", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯ÏµÍ³ÉèÖÃ
+    // åˆå§‹åŒ–ç³»ç»Ÿè®¾ç½®
     ret = SystemInit();
     if(ret < 0)
     {
-        printf("³õÊ¼»¯ÏµÍ³ÉèÖÃ³ö´í [%d] \n", ret);
+        printf("åˆå§‹åŒ–ç³»ç»Ÿè®¾ç½®å‡ºé”™ [%d] \n", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯ÈÕÖ¾´¦ÀíÀà
+    // åˆå§‹åŒ–æ—¥å¿—å¤„ç†ç±»
     ret = Log::init();
     if(ret < 0)
     {
-        printf("³õÊ¼»¯ÈÕÖ¾´¦ÀíÀà³ö´í [%d] \n", ret);
+        printf("åˆå§‹åŒ–æ—¥å¿—å¤„ç†ç±»å‡ºé”™ [%d] \n", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯È«¾ÖÀàÉèÖÃ
+    // åˆå§‹åŒ–å…¨å±€ç±»è®¾ç½®
     ret = ClassInit::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯È«¾ÖÀàÉèÖÃ³ö´í [%d] \n", ret);
+        LOG_ERROR("åˆå§‹åŒ–å…¨å±€ç±»è®¾ç½®å‡ºé”™ [%d] \n", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯¼ÆÊıÆ÷Àà
+    // åˆå§‹åŒ–è®¡æ•°å™¨ç±»
     ret = Counter::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯³õÊ¼»¯¼ÆÊıÆ÷Àà³ö´í [%d]", ret);
+        LOG_ERROR("åˆå§‹åŒ–åˆå§‹åŒ–è®¡æ•°å™¨ç±»å‡ºé”™ [%d]", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯¶¨Ê±Æ÷´¦ÀíÀà
+    // åˆå§‹åŒ–å®šæ—¶å™¨å¤„ç†ç±»
     ret = Timer::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯¶¨Ê±Æ÷´¦ÀíÀà³ö´í [%d] ", ret);
+        LOG_ERROR("åˆå§‹åŒ–å®šæ—¶å™¨å¤„ç†ç±»å‡ºé”™ [%d] ", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯Ïß³Ì³ØÀà
+    // åˆå§‹åŒ–çº¿ç¨‹æ± ç±»
     ret = ThreadPool::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯Ïß³Ì³ØÀà³ö´í [%d] ", ret);
+        LOG_ERROR("åˆå§‹åŒ–çº¿ç¨‹æ± ç±»å‡ºé”™ [%d] ", ret);
         return ret;
     }
 
-    // // ³õÊ¼»¯ÏµÍ³ĞÅºÅÀà
+    // // åˆå§‹åŒ–ç³»ç»Ÿä¿¡å·ç±»
     // ret = SignalDeal::init();
     // if(ret < 0)
     // {
-    //     LOG_ERROR("³õÊ¼»¯ÏµÍ³ĞÅºÅÀà³ö´í [%d] ", ret);
+    //     LOG_ERROR("åˆå§‹åŒ–ç³»ç»Ÿä¿¡å·ç±»å‡ºé”™ [%d] ", ret);
     //     return ret;
     // }
 
-    // ³õÊ¼»¯Ä£¿éµ÷ÓÃÀà
+    // åˆå§‹åŒ–æ¨¡å—è°ƒç”¨ç±»
     ret = Module::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯Ä£¿éµ÷ÓÃÀà³ö´í [%d] ", ret);
+        LOG_ERROR("åˆå§‹åŒ–æ¨¡å—è°ƒç”¨ç±»å‡ºé”™ [%d] ", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯Ò³Ãæ´¦ÀíÀà
+    // åˆå§‹åŒ–é¡µé¢å¤„ç†ç±»
     ret = Page::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯Ò³Ãæ´¦ÀíÀà³ö´í [%d] ", ret);
+        LOG_ERROR("åˆå§‹åŒ–é¡µé¢å¤„ç†ç±»å‡ºé”™ [%d] ", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯»á»°Àà
+    // åˆå§‹åŒ–ä¼šè¯ç±»
     ret = Session::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯»á»°Àà³ö´í [%d] ", ret);
+        LOG_ERROR("åˆå§‹åŒ–ä¼šè¯ç±»å‡ºé”™ [%d] ", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯ÓÃ»§ĞÅÏ¢Àà
+    // åˆå§‹åŒ–ç”¨æˆ·ä¿¡æ¯ç±»
     ret = User::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯ÓÃ»§ĞÅÏ¢Àà³ö´í [%d] ", ret);
+        LOG_ERROR("åˆå§‹åŒ–ç”¨æˆ·ä¿¡æ¯ç±»å‡ºé”™ [%d] ", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯²Ëµ¥´¦ÀíÀà
+    // åˆå§‹åŒ–èœå•å¤„ç†ç±»
     ret = Menu::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯²Ëµ¥´¦ÀíÀà³ö´í [%d] ", ret);
+        LOG_ERROR("åˆå§‹åŒ–èœå•å¤„ç†ç±»å‡ºé”™ [%d] ", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯Ñ¹Ëõ´¦ÀíÀà
+    // åˆå§‹åŒ–å‹ç¼©å¤„ç†ç±»
     ret = Compress::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯Ñ¹Ëõ´¦ÀíÀà³ö´í [%d] ", ret);
+        LOG_ERROR("åˆå§‹åŒ–å‹ç¼©å¤„ç†ç±»å‡ºé”™ [%d] ", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯Ìá½»ÊÂ¼ş´¦ÀíÀà
+    // åˆå§‹åŒ–æäº¤äº‹ä»¶å¤„ç†ç±»
     ret = Submit::init();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯Ìá½»ÊÂ¼ş´¦ÀíÀà³ö´í [%d] ", ret);
+        LOG_ERROR("åˆå§‹åŒ–æäº¤äº‹ä»¶å¤„ç†ç±»å‡ºé”™ [%d] ", ret);
         return ret;
     }
 
-    // ³õÊ¼»¯ÆäËü´¦Àí²Ù×÷
+    // åˆå§‹åŒ–å…¶å®ƒå¤„ç†æ“ä½œ
     ret = OtherInit();
     if(ret < 0)
     {
-        LOG_ERROR("³õÊ¼»¯ÆäËü´¦Àí²Ù×÷³ö´í [%d] ", ret);
+        LOG_ERROR("åˆå§‹åŒ–å…¶å®ƒå¤„ç†æ“ä½œå‡ºé”™ [%d] ", ret);
         return ret;
     }
 
@@ -190,20 +190,20 @@ int main(int argc, char *argv[])
 
 
 
-    }/****************************** ³õÊ¼»¯ ½áÊø ******************************/
+    }/****************************** åˆå§‹åŒ– ç»“æŸ ******************************/
 
 
 
 
-    Module::iterator module;    // µø´úÆ÷moduleÄÚ²¿Ö¸ÏòÁËModuleÀïµÄ³ÉÔ±¡£
+    Module::iterator module;    // è·Œä»£å™¨moduleå†…éƒ¨æŒ‡å‘äº†Moduleé‡Œçš„æˆå‘˜ã€‚
     boost::thread_group grp;
 
-    // ¶ÁÈ¡ËùÓĞ´ò¿ªµÄÄ£¿é£¬Ã¿¸öÄ£¿é¶ÔÓ¦Ò»¸ö´¦ÀíÏß³Ì£»
+    // è¯»å–æ‰€æœ‰æ‰“å¼€çš„æ¨¡å—ï¼Œæ¯ä¸ªæ¨¡å—å¯¹åº”ä¸€ä¸ªå¤„ç†çº¿ç¨‹ï¼›
     while( module.next() )
     {
         /*
-         * module()ÊÇµ÷ÓÃÖØÔØÁËµÄ()ÔËËã·û£¬È¡µÃÄ£¿éÖ¸Õë£¬×÷Îª²ÎÊı´«¸øÏß³Ìº¯
-         * ÊıModuleThread()£¬ÔÚÏß³Ìº¯ÊıÀïÔÙÖ´ĞĞ´¦ÀíÑ­»·£»
+         * module()æ˜¯è°ƒç”¨é‡è½½äº†çš„()è¿ç®—ç¬¦ï¼Œå–å¾—æ¨¡å—æŒ‡é’ˆï¼Œä½œä¸ºå‚æ•°ä¼ ç»™çº¿ç¨‹å‡½
+         * æ•°ModuleThread()ï¼Œåœ¨çº¿ç¨‹å‡½æ•°é‡Œå†æ‰§è¡Œå¤„ç†å¾ªç¯ï¼›
          */
         grp.create_thread( boost::bind( &ModuleThread, module() ) );
     }
@@ -211,7 +211,7 @@ int main(int argc, char *argv[])
     grp.join_all();
 
 
-    LOG_INFO("Ö÷Ïß³ÌÍË³ö¡£¡£¡£");
+    LOG_INFO("ä¸»çº¿ç¨‹é€€å‡ºã€‚ã€‚ã€‚");
     pthread_exit(NULL);
     // return 0;
 }

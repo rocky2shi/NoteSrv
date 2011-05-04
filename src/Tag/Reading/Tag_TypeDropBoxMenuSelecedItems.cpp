@@ -8,7 +8,7 @@ namespace TAG_TYPEDROPBOXMENUSELECEDITEMS_SPACE
 
 
 
-// ±êÃ÷Ä£¿é
+// æ ‡æ˜æ¨¡å—
 static const string THIS_MODULE = "TypeDropBoxMenuSelecedItems";
 
 
@@ -17,17 +17,17 @@ static const string THIS_MODULE = "TypeDropBoxMenuSelecedItems";
 
 Tag_TypeDropBoxMenuSelecedItems::Tag_TypeDropBoxMenuSelecedItems()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_TypeDropBoxMenuSelecedItems::Tag_TypeDropBoxMenuSelecedItems(const string &page, const string &tag) : Tag(page, tag)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 }
 
 Tag_TypeDropBoxMenuSelecedItems::~Tag_TypeDropBoxMenuSelecedItems()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Ù
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿè¸ª
 }
 
 
@@ -35,15 +35,15 @@ Tag_TypeDropBoxMenuSelecedItems::~Tag_TypeDropBoxMenuSelecedItems()
 
 int Tag_TypeDropBoxMenuSelecedItems::DoInit()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
     return Tag::DoInit();
 }
 
-// ×ÓÀà¶ÔÏó´´½¨Æ÷
+// å­ç±»å¯¹è±¡åˆ›å»ºå™¨
 Tag *Tag_TypeDropBoxMenuSelecedItems::DoNew()
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
     return new Tag_TypeDropBoxMenuSelecedItems;
 }
 
@@ -54,18 +54,18 @@ Tag *Tag_TypeDropBoxMenuSelecedItems::DoNew()
 
 
 
-/******************************** ÒµÎñ´úÂë ********************************/
+/******************************** ä¸šåŠ¡ä»£ç  ********************************/
 
 
 
 
 
-// È¡±êÌâ [2010-05]
+// å–æ ‡é¢˜ [2010-05]
 string Tag_TypeDropBoxMenuSelecedItems::Get(Page *page)
 {
-    FUNCTION_TRACK(); // º¯Êı¹ì¼£¸ú×Û
+    FUNCTION_TRACK(); // å‡½æ•°è½¨è¿¹è·Ÿç»¼
 
-    const Conf *pack = page->GetCurrentPack();          // µ±Ç°key¶ÔÓ¦Êı¾İ¼¯
+    const Conf *pack = page->GetCurrentPack();          // å½“å‰keyå¯¹åº”æ•°æ®é›†
     const string &username = page->GetRequest()->GetCurrentUser();
     Menu *menu = Menu::Get(username, "TypeDropBox.cfg");    // [XXX:56425820]
     vector<string> menulist;
@@ -77,17 +77,17 @@ string Tag_TypeDropBoxMenuSelecedItems::Get(Page *page)
         return "";
     }
 
-    // °Ñ²Ëµ¥´®·Ö¸îÎªµ¥¶ÀµÄ: 20081013103040,20081008220609,20081008220619
+    // æŠŠèœå•ä¸²åˆ†å‰²ä¸ºå•ç‹¬çš„: 20081013103040,20081008220609,20081008220619
     Split(pack->Get("msg_type"), ",", menulist);
 
-    // Ã¿¸ökey»»³É²Ëµ¥ÏîÃû£¬ÔÙÁ¬½ÓÆğÀ´£»
+    // æ¯ä¸ªkeyæ¢æˆèœå•é¡¹åï¼Œå†è¿æ¥èµ·æ¥ï¼›
     vector<string>::iterator it;
     for(it = menulist.begin(); menulist.end() != it; it++)
     {
         (*it) = menu->GetItem(*it, "title");
     }
 
-    // ÔÙºÏ²¢¸÷ÏîÎª´®ºó·µ»Ø
+    // å†åˆå¹¶å„é¡¹ä¸ºä¸²åè¿”å›
     return Join(menulist);
 }
 
@@ -107,7 +107,7 @@ string Tag_TypeDropBoxMenuSelecedItems::Get(Page *page)
 
 
 
-// ÉèÖÃÎªÈ«¾Ö±ê¼Ç£»
+// è®¾ç½®ä¸ºå…¨å±€æ ‡è®°ï¼›
 static Tag_TypeDropBoxMenuSelecedItems tmp("reading", THIS_MODULE);
 
 }// end of TAG_TYPEDROPBOXMENUSELECEDITEMS_SPACE

@@ -3,22 +3,22 @@
 #include "Environment.h"
 #include "Common.h"
 #include "Lock.h"
-#include <stdarg.h>     //°üº¬va_list
-#include <stdio.h>      //°üº¬vsprintf()
+#include <stdarg.h>     //åŒ…å«va_list
+#include <stdio.h>      //åŒ…å«vsprintf()
 namespace LOG_SPACE
 {
 
 
 #if 1
 
-// ÈÕÖ¾´¦ÀíÀà£¨Òò´¦Àívc++ÉÏ¿É±ä²ÎÊıºêÎÊÌâ£©
+// æ—¥å¿—å¤„ç†ç±»ï¼ˆå› å¤„ç†vc++ä¸Šå¯å˜å‚æ•°å®é—®é¢˜ï¼‰
 class Log
 {
 public:
     typedef enum{
-        DEBUG,      // µ÷ÊÔĞÅÏ¢
-        INFO,       // Ò»°ãĞÔÌáÊ¾ĞÅÏ¢
-        ERROR,      // ³ö´íĞÅÏ¢
+        DEBUG,      // è°ƒè¯•ä¿¡æ¯
+        INFO,       // ä¸€èˆ¬æ€§æç¤ºä¿¡æ¯
+        ERROR,      // å‡ºé”™ä¿¡æ¯
         LEVEL_MAX
     } Level;
 
@@ -26,23 +26,23 @@ public:
     Log(const char *file, int line);
     virtual ~Log();
 
-    // Àà³õÊ¼»¯£¨³ÌĞòÆô¶¯Ê±µÄ³õÊ¼»¯£©
+    // ç±»åˆå§‹åŒ–ï¼ˆç¨‹åºå¯åŠ¨æ—¶çš„åˆå§‹åŒ–ï¼‰
     static int init();
 
-    // ÉèÖÃ»ò»ñÈ¡Logµ¥Àı
+    // è®¾ç½®æˆ–è·å–Logå•ä¾‹
     inline static Log *instance(Log *logger=NULL)
     {
         static Log *obj = (Log *)(Environment::instance()->ClassInit("Log", logger));
         return obj;
     }
 
-    // ÉèÖÃÈÕÖ¾¼¶±ğ
+    // è®¾ç½®æ—¥å¿—çº§åˆ«
     void SetLevel(Level level, bool open=true);
 
-    // »ñÈ¡ÈÕÖ¾¼¶±ğ
+    // è·å–æ—¥å¿—çº§åˆ«
     bool GetLevel(Level level);
 
-    // È¡ÈÕÖ¾¼¶±ğ¶ÔÓ¦×Ö·û´®
+    // å–æ—¥å¿—çº§åˆ«å¯¹åº”å­—ç¬¦ä¸²
     const char *LevelToStr(Level level)
     {
         static const char *str[] = {
@@ -54,27 +54,27 @@ public:
         return str[level];
     }
 
-    // µ÷ÊÔĞÅÏ¢
+    // è°ƒè¯•ä¿¡æ¯
     void DebugLog(const char * format, ...);
 
-    // Ò»°ãĞÔÌáÊ¾ĞÅÏ¢
+    // ä¸€èˆ¬æ€§æç¤ºä¿¡æ¯
     void InfoLog(const char * format, ...);
 
-    // ³ö´íĞÅÏ¢
+    // å‡ºé”™ä¿¡æ¯
     void ErrorLog(const char * format, ...);
 
 
 protected:
     Log();
 
-    // µ¥¸ö¶ÔÏó³õÊ¼»¯
+    // å•ä¸ªå¯¹è±¡åˆå§‹åŒ–
     virtual int Init();
 
-    // Êä³öÈÕÖ¾
+    // è¾“å‡ºæ—¥å¿—
     virtual void Out(Level level, const Log *logger, const char *format, va_list ap);
 
 
-public: // ÎªÁËÊ¹×ÓÀà¡°º¯Êı¡±ÖĞÄÜÊ¹ÓÃ£¬
+public: // ä¸ºäº†ä½¿å­ç±»â€œå‡½æ•°â€ä¸­èƒ½ä½¿ç”¨ï¼Œ
     const char *m_file;
     const int m_line;
     char *m_level;
