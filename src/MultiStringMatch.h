@@ -30,8 +30,8 @@ class MultiStringMatch
     };
 
 public:
-    // 用于查找，strings子串集
-    MultiStringMatch(vector<string> &strings);
+    // 用于查找，strings子串集，bIgnoreCase是否忽略大小写；
+    MultiStringMatch(vector<string> &strings, bool bIgnoreCase=false);
 
     // 用于替换，把from中的子串换成对应的to中的串；
     MultiStringMatch(vector<string> &from, vector<string> &to);
@@ -75,6 +75,7 @@ private:
     vector<string> m_from;                  // 源子串集
     vector<string> m_to;                    // 目的子串集
     map<int, string> m_NotMatchTable;       // 当不匹配时，当前状态应转为的串；
+    bool m_bIgnoreCase;                     // true:忽略大小写
 };
 
 
@@ -101,6 +102,7 @@ history:
  2010-05-21: v0.1
  2010-05-21: v0.2，增加MatchOneKey()、MatchAllKey()接口；
  2010-05-21: v0.3，修改MultiStringMatch::MatchKey()中的int ch改为unsigned char ch；
+ 2011-05-05: v0.4，修改构造转换表的函数，加入忽略大小写查找（替换的没改）；
 
 
 ***/

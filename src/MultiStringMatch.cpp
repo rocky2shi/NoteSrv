@@ -1,5 +1,6 @@
 // Rocky 2010-05-21 10:01:26
 #include <string.h>
+#include <stdio.h>
 #include "MultiStringMatch.h"
 namespace MULTISTRINGMATCH_SPACE
 {
@@ -15,8 +16,9 @@ namespace MULTISTRINGMATCH_SPACE
 
 
 // 用于查找，strings子串集
-MultiStringMatch::MultiStringMatch(vector<string> &strings)
-                    : m_from( strings )
+MultiStringMatch::MultiStringMatch(vector<string> &strings, bool bIgnoreCase/*=true*/)
+                    : m_from( strings ),
+                      m_bIgnoreCase( bIgnoreCase )
 {
     Init();
 }
@@ -24,13 +26,15 @@ MultiStringMatch::MultiStringMatch(vector<string> &strings)
 // 用于替换，把from中的子串换成对应的to中的串；
 MultiStringMatch::MultiStringMatch(vector<string> &from, vector<string> &to)
                     : m_from(from),
-                      m_to(to)
+                      m_to(to),
+                      m_bIgnoreCase(false)
 {
     Init();
 }
 
 // 用于替换，把key对应集合转为value对应集合；
 MultiStringMatch::MultiStringMatch(map<string, string> &key2value)
+    : m_bIgnoreCase(false)
 {
     map<string, string>::iterator it;
     for(it = key2value.begin(); key2value.end() != it; it++)
@@ -95,41 +99,56 @@ void MultiStringMatch::MarkStateTable()
              *
              *    2) 已在记录中，则转换当前状态，继续扫描；
              */
-
-
             if(0 == m_StateTable[ current ][ ch ])
             {
+                int next = -1; // 下一状态值
+
+                /* 取新的状态：
+                 *  1. 当前字符是子串的最后一个字符时，新状置为一特殊
+                 *     值，即状态的最大值+索引，此索引指明匹配的序号；
+                 *  2. 否则，置新态状为一顺序递增值；
+                 */
                 if('\0' == str[n + 1])
                 {
                     // 匹配成功，标记一特殊值；
-                    int id = STATE_MAX + index;
-                    m_StateTable[ current ][ ch ] = id;
-
-                    // 记录当前状态的来源
-                    Back &source = m_BackTable[ id ];
-                    source.state = current;
-                    source.ch = ch;
-
-                    current = INIT;
+                    next = STATE_MAX + index;
                     index++;
                 }
                 else
                 {
                     // 出现新的状态
                     nNewState++;
-                    m_StateTable[ current ][ ch ] = nNewState;
-
-                    // 记录当前状态的来源
-                    Back &source = m_BackTable[ nNewState ];
-                    source.state = current;
-                    source.ch = ch;
-
-                    // 指向新的状态
-                    current = nNewState;
+                    next = nNewState;
                 }
 
-                // 记录出现的字符
-                m_CharTable[ch]++;
+                // 即current状态遇到ch字符时，应转到next状态；
+                m_StateTable[ current ][ ch ] = next;
+
+                // 用于不区分大小写操作时
+                if( m_bIgnoreCase && isupper(ch) )
+                {
+                    int c = tolower(ch);
+                    m_StateTable[ current ][ c ] = next;
+                    m_CharTable[c] = 1; // 标记出现的字符
+                }
+
+                // 记录当前状态的来源
+                Back &source = m_BackTable[next];
+                source.state = current;
+                source.ch = ch;
+
+                // 标记出现的字符
+                m_CharTable[ch] = 1;
+
+                // 指向新的状态
+                if(next >= STATE_MAX)
+                {
+                    current = INIT; // 完成处理当前子串，状态重新开始；
+                }
+                else
+                {
+                    current = next;
+                }
             }
             else
             {
