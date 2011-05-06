@@ -1,4 +1,4 @@
-<title>ÔÄ¶Á£¨<!--$Title$GLOBAL$-->£©</title>
+<title>é˜…è¯»ï¼ˆ<!--$Title$GLOBAL$-->ï¼‰</title>
 <input type=hidden id='user' value='<!--$CurrentUser$GLOBAL$-->'>
 <input type=hidden id='user_ip' value='<!--$ClientIp$GLOBAL$-->'>
 <input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
@@ -50,7 +50,7 @@ function S()
     $("font_weight")[0].focus();
 }
 
-// µ¼³ö
+// å¯¼å‡º
 function Export()
 {
     $('backup_export')[0].click();
@@ -73,7 +73,7 @@ function FontSizeUp(yes)
     content.style.fontSize = obj[0].value + 'pt';
 }
 
-// ´ÖÌå
+// ç²—ä½“
 function FontWeight()
 {
     $("content").style.fontWeight = ($("font_weight")[0].checked) ? 'bold' : 'normal';
@@ -81,25 +81,25 @@ function FontWeight()
     $("content").style.textDecoration = ($("font_text_decoration")[0].checked) ? 'underline' : 'none';
 }
 
-// ×ª»»µ±Ç°Êı¾İÎªĞÂ¸ñÊ½ [Rocky 2010-05-25 18:02:52]
+// è½¬æ¢å½“å‰æ•°æ®ä¸ºæ–°æ ¼å¼ [Rocky 2010-05-25 18:02:52]
 function DataConversion()
 {
     var url = "reading";
 
-    /* ×é×°Post²ÎÊı
+    /* ç»„è£…Postå‚æ•°
      */
     var post = "";
     post += "&key=<!--$Key$GLOBAL$-->";
     post += "&DataConversion=1";
     
-    // ·¢ËÍÇëÇóµ½·şÎñ¶Ë
+    // å‘é€è¯·æ±‚åˆ°æœåŠ¡ç«¯
     SubmitToServer(url, post, Response); 
-    // ´¦Àí»ØÓ¦
+    // å¤„ç†å›åº”
     function Response(str)
     {
         if("OK" == str)
         {
-            alert("×ª»»³É¹¦£¬ÇëË¢ĞÂÒ³Ãæ");
+            alert("è½¬æ¢æˆåŠŸï¼Œè¯·åˆ·æ–°é¡µé¢");
         }
         else
         {
@@ -108,17 +108,17 @@ function DataConversion()
     }
 }
 
-//ÖØÔØ´Ëº¯Êı£¬ÉèÖÃ²Ëµ¥
+//é‡è½½æ­¤å‡½æ•°ï¼Œè®¾ç½®èœå•
 function LoadSetting()
 {
     var span = GetObj('menu_html');
     var str='';
-    str += '<a href="javascript:E();">±à¼­¡¡E</a>';
-    str += '<a href="javascript:S();">×ÖÌå¡¡S</a>';
-    str += '<a href="javascript:Export();" title="µ¼³öµ±Ç°Êı¾İ">µ¼³ö¡¡V</a>';
-    str += '<a href="javascript:DataConversion();" title="×ª»»µ±Ç°Êı¾İÎªĞÂ¸ñÊ½">Êı¾İ×ª»»</a>';
-    str += '<a href="javascript:AltEnter();">·µ»Ø¡¡Alt+Enter</a>';
-    str += '<a href="javascript:Help();">°ïÖú</a>';
+    str += '<a href="javascript:E();">ç¼–è¾‘ã€€E</a>';
+    str += '<a href="javascript:S();">å­—ä½“ã€€S</a>';
+    str += '<a href="javascript:Export();" title="å¯¼å‡ºå½“å‰æ•°æ®">å¯¼å‡ºã€€V</a>';
+    str += '<a href="javascript:DataConversion();" title="è½¬æ¢å½“å‰æ•°æ®ä¸ºæ–°æ ¼å¼">æ•°æ®è½¬æ¢</a>';
+    str += '<a href="javascript:AltEnter();">è¿”å›ã€€Alt+Enter</a>';
+    str += '<a href="javascript:Help();">å¸®åŠ©</a>';
     span.innerHTML = str;;
 }
 
@@ -141,14 +141,14 @@ function SetBgColor(color)
     $('content').style.backgroundColor = color;
 }
 
-// ¶¨Ê±Ö´ĞĞº¯Êı
+// å®šæ—¶æ‰§è¡Œå‡½æ•°
 function PageLoopRun()
 {
-    // ÉÁ¶¯µ±Ç°ÊéÇ©¼ü
+    // é—ªåŠ¨å½“å‰ä¹¦ç­¾é”®
     Bookmark.Flash();
 }
 
-// É¨ÃèÕıÎÄÖĞµÄ<span>±ê¼Ç£¬ÎªÊéÇ©ÉèÖÃ¶¯×÷£»
+// æ‰«ææ­£æ–‡ä¸­çš„<span>æ ‡è®°ï¼Œä¸ºä¹¦ç­¾è®¾ç½®åŠ¨ä½œï¼›
 function SetMark()
 {
     var pre = GetObj("content");
@@ -158,7 +158,7 @@ function SetMark()
     for(i=0; i<spans.length; i++)
     {
         // [Rocky 2009-11-29 23:15:12]
-        spans[i].onclick = function(event) // µ¥»÷Ê±ÏÔÊ¾ÊéÇ©
+        spans[i].onclick = function(event) // å•å‡»æ—¶æ˜¾ç¤ºä¹¦ç­¾
         {
             event = event || window.event;
             if(event.ctrlKey)
@@ -172,24 +172,24 @@ function SetMark()
         // {
         //     // 2009-08-21 14:05:02
         //     event = event || window.event;
-        //     // ÏÔÊ¾ÊéÇ©±ê¼Ç
+        //     // æ˜¾ç¤ºä¹¦ç­¾æ ‡è®°
         //     if(event.ctrlKey)
         //     {
         //         this.oldCssText = this.style.cssText;
         //         this.style.background = "#939393";
         //     }
-        //     find.value = this.id;   // ·Åµ½input£¬ÒÔ±ãÊéÇ©²Ù×÷Ê±ÌáÈ¡£»
+        //     find.value = this.id;   // æ”¾åˆ°inputï¼Œä»¥ä¾¿ä¹¦ç­¾æ“ä½œæ—¶æå–ï¼›
         //     window.status = this.id;
         // }
         // spans[i].onmouseout = function()
         // {
-        //     // »¹Ô­
+        //     // è¿˜åŸ
         //     this.style.cssText = ""; //this.oldCssText; // [Rocky 2009-11-30 23:44:52]
         // }
     }
 }
 
-// ÉèÖÃÊéÇ©
+// è®¾ç½®ä¹¦ç­¾
 function SetBookMark()
 {
     var id = "mark_v3_" + GetKeyStr();
@@ -199,7 +199,7 @@ function SetBookMark()
         if(document.selection) // ie
         {
             var sel = document.selection.createRange();
-            sel.pasteHTML("<span id='" + id + "'>" + sel.htmlText + "</span>");    // ¼ÓÉÏÒ»¸ö°ü×°
+            sel.pasteHTML("<span id='" + id + "'>" + sel.htmlText + "</span>");    // åŠ ä¸Šä¸€ä¸ªåŒ…è£…
             sel.collapse(true);
         }
         else
@@ -217,35 +217,35 @@ function SetBookMark()
 
         var url = "reading";
 
-        /* ×é×°·¢ËÍÈİ
-         *      bug: ÔÚfirfoxÖĞ£¬Ã¿´ÎÌá½»»á×Ô¶¯ÔÚpost´®ºó¼ÓÒ»»Ø³µ·û [Rocky 2009-11-29 22:58:26]
+        /* ç»„è£…å‘é€å®¹
+         *      bug: åœ¨firfoxä¸­ï¼Œæ¯æ¬¡æäº¤ä¼šè‡ªåŠ¨åœ¨postä¸²ååŠ ä¸€å›è½¦ç¬¦ [Rocky 2009-11-29 22:58:26]
          */
         var post = "";
         post += "&key=<!--$Key$GLOBAL$-->";
-        post += "&operate=InsertObj";   // Ö¸¶¨²Ù×÷
-        post += "&type=bookmark";       // Ö¸¶¨ÀàĞÍ
+        post += "&operate=InsertObj";   // æŒ‡å®šæ“ä½œ
+        post += "&type=bookmark";       // æŒ‡å®šç±»å‹
         post += "&password=<!--$CurrentPassword$GLOBAL$-->";
 
-        // È¡ÊéÇ©Êı¾İ
+        // å–ä¹¦ç­¾æ•°æ®
         post += "&bookmark_data=" + encodeURIComponent( GetObj('bookmark_data').value );
 
         /*
-         *      ÒÔÏÂ²éÕÒÕıÎÄÖĞ²åÈëµÄÊéÇ©ÆğÊ¼±ê¼Ç <span id=...>µÈ£¬È»ºó½øĞĞÔöÁ¿
-         *      ²Ù×÷
+         *      ä»¥ä¸‹æŸ¥æ‰¾æ­£æ–‡ä¸­æ’å…¥çš„ä¹¦ç­¾èµ·å§‹æ ‡è®° <span id=...>ç­‰ï¼Œç„¶åè¿›è¡Œå¢é‡
+         *      æ“ä½œ
          */
 
 
-        // ÕıÎÄÄÚÈİ
+        // æ­£æ–‡å†…å®¹
         var text = GetObj('content').innerHTML.replace(/\r|^\n*|\n*$/g, "");
-        // ÕıÔòÊ½·ÖÈı¶Î£º<span ...> + Ñ¡ÖĞ²¿·Ö + </span>
+        // æ­£åˆ™å¼åˆ†ä¸‰æ®µï¼š<span ...> + é€‰ä¸­éƒ¨åˆ† + </span>
         var attach_mark_rex =  "((?:.|\n){0,60})";
         var mark_rex = attach_mark_rex + "(<span [^>]*" + id + "[^>]*>)" + "([^<]*)" + "(</span>)" + attach_mark_rex;
         var re = new RegExp(mark_rex, "ig");
 
-        // Ö´ĞĞÕıÔòÊ½
+        // æ‰§è¡Œæ­£åˆ™å¼
         if(re.exec(text) == null)
         {
-            alert("²éÕÒÕıÎÄÖĞ²åÈëµÄÊéÇ©±ê¼Ç³ö´í");
+            alert("æŸ¥æ‰¾æ­£æ–‡ä¸­æ’å…¥çš„ä¹¦ç­¾æ ‡è®°å‡ºé”™");
             return;
         }
 
@@ -262,51 +262,51 @@ function SetBookMark()
         //
         function Try1()
         {
-            // ×é×°Êı¾İ
-            post += "&find=" + encodeURIComponent(data.C);   // Ô­×Ö¶Î
-            post += "&replace=" + encodeURIComponent(data.B + data.C + data.D);   // Ìæ»»×Ö¶Î
-            Msg("Õı±£´æµ½·şÎñ¶Ë£®£®£®");
-            // ·¢ËÍÇëÇóµ½·şÎñ¶Ë
-            SubmitToServer(url, post, Try2);    // »ØÓ¦×ªµ½Try2()
+            // ç»„è£…æ•°æ®
+            post += "&find=" + encodeURIComponent(data.C);   // åŸå­—æ®µ
+            post += "&replace=" + encodeURIComponent(data.B + data.C + data.D);   // æ›¿æ¢å­—æ®µ
+            Msg("æ­£ä¿å­˜åˆ°æœåŠ¡ç«¯ï¼ï¼ï¼");
+            // å‘é€è¯·æ±‚åˆ°æœåŠ¡ç«¯
+            SubmitToServer(url, post, Try2);    // å›åº”è½¬åˆ°Try2()
         }
 
         function Try2(response)
         {
             if( OK(response) )
             {
-                // ÌáÊ¾
+                // æç¤º
                 End(response);
                 return;
             }
-            Msg("³ö´í£¬ÔÙ´Î³¢ÊÔ1£®£®£®");
-            // ÔÙ´Î×é×°Êı¾İ
-            post += "&find=" + encodeURIComponent(data.A + data.C + data.E);    // À©´ó×Ö¶ÎÀ´È·¶¨Î¨Ò»ĞÔ
-            post += "&replace=" + encodeURIComponent(data.A + data.B + data.C + data.D + data.E);  // Ìæ»»×Ö¶Î
+            Msg("å‡ºé”™ï¼Œå†æ¬¡å°è¯•1ï¼ï¼ï¼");
+            // å†æ¬¡ç»„è£…æ•°æ®
+            post += "&find=" + encodeURIComponent(data.A + data.C + data.E);    // æ‰©å¤§å­—æ®µæ¥ç¡®å®šå”¯ä¸€æ€§
+            post += "&replace=" + encodeURIComponent(data.A + data.B + data.C + data.D + data.E);  // æ›¿æ¢å­—æ®µ
 
-            // ·¢ËÍÇëÇóµ½·şÎñ¶Ë
-            SubmitToServer(url, post, Try3);    // »ØÓ¦×ªµ½Try3()
+            // å‘é€è¯·æ±‚åˆ°æœåŠ¡ç«¯
+            SubmitToServer(url, post, Try3);    // å›åº”è½¬åˆ°Try3()
         }
 
         function Try3(response)
         {
             if( OK(response) )
             {
-                // ÌáÊ¾
+                // æç¤º
                 End(response);
                 return;
             }
-            Msg("³ö´í£¬ÔÙ´Î³¢ÊÔ2£®£®£®");
-            // ¾­¹ıÁ½´Î³¢ÊÔ¾ù³ö´í£¬È«ÎÄ·¢ËÍ£»
+            Msg("å‡ºé”™ï¼Œå†æ¬¡å°è¯•2ï¼ï¼ï¼");
+            // ç»è¿‡ä¸¤æ¬¡å°è¯•å‡å‡ºé”™ï¼Œå…¨æ–‡å‘é€ï¼›
             post += "&text=" + encodeURIComponent(text);
-            // ·¢ËÍÇëÇóµ½·şÎñ¶Ë
+            // å‘é€è¯·æ±‚åˆ°æœåŠ¡ç«¯
             SubmitToServer(url, post, End);
         }
 
-        // ½áÊø´¦Àí
+        // ç»“æŸå¤„ç†
         function End(response)
         {
-            // Êä³öÌáÊ¾
-            OK(response) ? Msg("ÒÑÌá½»") : Msg("<font color=red>Ìá½»³ö´í</font>");
+            // è¾“å‡ºæç¤º
+            OK(response) ? Msg("å·²æäº¤") : Msg("<font color=red>æäº¤å‡ºé”™</font>");
         }
 
         function OK(str)
@@ -324,7 +324,7 @@ function SetBookMark()
 // Rocky 2009-11-30 19:09:24
 function Alt1()
 {
-    Picture.SetSelect(); // ÔÚieÖĞ£¬µ±¶Ô»°¿ò³öÏÖºó£¬±»Ñ¡ÖĞ²¿·Ö¿ÉÄÜ»áÏûÊ§£¨µ±ÓĞÊó±êµã»÷ÆäËü´¦Ê±£©£¬ËùÒÔÒªÏÈ±£´æ±»Ñ¡ÇøÓò£»
+    Picture.SetSelect(); // åœ¨ieä¸­ï¼Œå½“å¯¹è¯æ¡†å‡ºç°åï¼Œè¢«é€‰ä¸­éƒ¨åˆ†å¯èƒ½ä¼šæ¶ˆå¤±ï¼ˆå½“æœ‰é¼ æ ‡ç‚¹å‡»å…¶å®ƒå¤„æ—¶ï¼‰ï¼Œæ‰€ä»¥è¦å…ˆä¿å­˜è¢«é€‰åŒºåŸŸï¼›
     ShortKey.Lock();
     OverLayer.Open();
     ShowToCenter.Open('div_image');
@@ -333,7 +333,7 @@ function Alt1()
 // Rocky 2009-12-14 15:22:16
 function Alt2()
 {
-    // ÏÔÊ¾Ğ¡°å
+    // æ˜¾ç¤ºå°æ¿
     SmallBoard();
 }
 
@@ -344,9 +344,9 @@ function Picture()
     var sel_obj = null;
 
     /*
-     *  ¶ÔÍâ½Ó¿Ú
+     *  å¯¹å¤–æ¥å£
      */
-    // ÉèÖÃÑ¡ÖĞµÄ¶ÔÏó
+    // è®¾ç½®é€‰ä¸­çš„å¯¹è±¡
     Picture.SetSelect = function()
     {
         if(document.selection)    // ie
@@ -358,29 +358,29 @@ function Picture()
             sel_obj = window.getSelection().getRangeAt(0);
         }
     }
-    // ²åÈë
+    // æ’å…¥
     Picture.Insert = function()
     {
         if(null == sel_obj)
         {
-            alert("Î´Ñ¡²åÈëµã");
+            alert("æœªé€‰æ’å…¥ç‚¹");
             return;
         }
 
         /*
-         * ¼ÓÒ»id£¬ÓÃÓÚ²éÕÒ£¨Çø·Ö£©¿Ø¼ş
+         * åŠ ä¸€idï¼Œç”¨äºæŸ¥æ‰¾ï¼ˆåŒºåˆ†ï¼‰æ§ä»¶
          *
-         *   ×¢£¬ÔÚieÖĞ£¬µ±idµÈÖµÊÇÁ¬ĞøµÄ×Ö·ûÊ±£¬Ê¹ÓÃinnerHTMLÈ¡µÃµ½µÄÄÚÈİ²»
-         *       °üº¬Ë«ÒıºÅ£¬¶øÔÚfirefox»òchromeÖĞÊÇÓĞµÄ£¬Èç£º
+         *   æ³¨ï¼Œåœ¨ieä¸­ï¼Œå½“idç­‰å€¼æ˜¯è¿ç»­çš„å­—ç¬¦æ—¶ï¼Œä½¿ç”¨innerHTMLå–å¾—åˆ°çš„å†…å®¹ä¸
+         *       åŒ…å«åŒå¼•å·ï¼Œè€Œåœ¨firefoxæˆ–chromeä¸­æ˜¯æœ‰çš„ï¼Œå¦‚ï¼š
          *
-         *      Ò³ÃæÔ´Âë£º<img id="img_v3_20091204211557">
-         *      Ê¹ÓÃinnerHTMLÈ¡ÄÚÈİµÃ£º
-         *          ie£º<IMG id=img_v3_20091204211557>
-         *          firefox£º<img id="img_v3_20091204211557">
-         *          chrome£º<img id="img_v3_20091204211557">
+         *      é¡µé¢æºç ï¼š<img id="img_v3_20091204211557">
+         *      ä½¿ç”¨innerHTMLå–å†…å®¹å¾—ï¼š
+         *          ieï¼š<IMG id=img_v3_20091204211557>
+         *          firefoxï¼š<img id="img_v3_20091204211557">
+         *          chromeï¼š<img id="img_v3_20091204211557">
          *
-         *   Õâ½«Ê¹ºóÌ¨±£´æÊ±¼ÆËã²åÈëµã³ö´í£¬ËùÒÔÖ»ºÃÔÚÕâ¸öidºóÔÙ¼ÓÒ»¿Õ¸ñ£¬Ê¹
-         *   µÃieÖĞÒ²»áÔÚidÖĞ¼ÓÒ»Ë«ÒıºÅ¡£
+         *   è¿™å°†ä½¿åå°ä¿å­˜æ—¶è®¡ç®—æ’å…¥ç‚¹å‡ºé”™ï¼Œæ‰€ä»¥åªå¥½åœ¨è¿™ä¸ªidåå†åŠ ä¸€ç©ºæ ¼ï¼Œä½¿
+         *   å¾—ieä¸­ä¹Ÿä¼šåœ¨idä¸­åŠ ä¸€åŒå¼•å·ã€‚
          */
         img_id = "img_v3_" + GetKeyStr();
         ModifyWebSource();
@@ -413,25 +413,25 @@ function Picture()
     {
         var url = "reading";
 
-        /* ×é×°·¢ËÍÈİ
-         *      bug: ÔÚfirfoxÖĞ£¬Ã¿´ÎÌá½»»á×Ô¶¯ÔÚpost´®ºó¼ÓÒ»»Ø³µ·û [Rocky 2009-11-29 22:58:26]
+        /* ç»„è£…å‘é€å®¹
+         *      bug: åœ¨firfoxä¸­ï¼Œæ¯æ¬¡æäº¤ä¼šè‡ªåŠ¨åœ¨postä¸²ååŠ ä¸€å›è½¦ç¬¦ [Rocky 2009-11-29 22:58:26]
          */
         var post = "";
         post += "&key=<!--$Key$GLOBAL$-->";
         post += "&operate=InsertObj";
         post += "&password=<!--$CurrentPassword$GLOBAL$-->";
 
-        // ÕıÎÄÄÚÈİ£¨É¾È¥¿ªÍ·½áÎ²µÄµÄ»Ø³µ·û£¬¼°ËùÓĞµÄ\r·û£©
+        // æ­£æ–‡å†…å®¹ï¼ˆåˆ å»å¼€å¤´ç»“å°¾çš„çš„å›è½¦ç¬¦ï¼ŒåŠæ‰€æœ‰çš„\rç¬¦ï¼‰
         var text = GetObj('content').innerHTML.replace(/\r|^\n*|\n*$/g, "");
-        // ÕıÔòÊ½·ÖÈı¶Î£º<span ...> + Ñ¡ÖĞ²¿·Ö + </span>
+        // æ­£åˆ™å¼åˆ†ä¸‰æ®µï¼š<span ...> + é€‰ä¸­éƒ¨åˆ† + </span>
         var attach_mark_rex =  "((?:.|\n){0,60})";
         var mark_rex = attach_mark_rex + "(<div><img [^>]*" + img_id + "[^>]*></div>)" + attach_mark_rex;
         var re = new RegExp(mark_rex, "ig");
 
-        // Ö´ĞĞÕıÔòÊ½
+        // æ‰§è¡Œæ­£åˆ™å¼
         if(re.exec(text) == null)
         {
-            alert("²éÕÒÕıÎÄÖĞ²åÈëµÄÊéÇ©±ê¼Ç³ö´í");
+            alert("æŸ¥æ‰¾æ­£æ–‡ä¸­æ’å…¥çš„ä¹¦ç­¾æ ‡è®°å‡ºé”™");
             return;
         }
 
@@ -446,34 +446,34 @@ function Picture()
         //
         function Try1()
         {
-            // ×é×°Êı¾İ
-            post += "&find=" + encodeURIComponent(data.A + data.C);   // Ô­×Ö¶Î
-            post += "&replace=" + encodeURIComponent(data.A + data.B + data.C);   // Ìæ»»×Ö¶Î
-            Msg("Õı±£´æµ½·şÎñ¶Ë£®£®£®");
-            // ·¢ËÍÇëÇóµ½·şÎñ¶Ë
-            SubmitToServer(url, post, Try2);    // »ØÓ¦×ªµ½Try2()
+            // ç»„è£…æ•°æ®
+            post += "&find=" + encodeURIComponent(data.A + data.C);   // åŸå­—æ®µ
+            post += "&replace=" + encodeURIComponent(data.A + data.B + data.C);   // æ›¿æ¢å­—æ®µ
+            Msg("æ­£ä¿å­˜åˆ°æœåŠ¡ç«¯ï¼ï¼ï¼");
+            // å‘é€è¯·æ±‚åˆ°æœåŠ¡ç«¯
+            SubmitToServer(url, post, Try2);    // å›åº”è½¬åˆ°Try2()
         }
 
         function Try2(response)
         {
             if( OK(response) )
             {
-                // ÌáÊ¾
+                // æç¤º
                 End(response);
                 return;
             }
-            Msg("³ö´í£¬ÔÙ´Î³¢ÊÔ£®£®£®");
-            // ¾­¹ıÁ½´Î³¢ÊÔ¾ù³ö´í£¬È«ÎÄ·¢ËÍ£»
+            Msg("å‡ºé”™ï¼Œå†æ¬¡å°è¯•ï¼ï¼ï¼");
+            // ç»è¿‡ä¸¤æ¬¡å°è¯•å‡å‡ºé”™ï¼Œå…¨æ–‡å‘é€ï¼›
             post += "&text=" + encodeURIComponent(text);
-            // ·¢ËÍÇëÇóµ½·şÎñ¶Ë
+            // å‘é€è¯·æ±‚åˆ°æœåŠ¡ç«¯
             SubmitToServer(url, post, End);
         }
 
-        // ½áÊø´¦Àí
+        // ç»“æŸå¤„ç†
         function End(response)
         {
-            // Êä³öÌáÊ¾
-            OK(response) ? Msg("ÒÑÌá½»") : Msg("<font color=red>Ìá½»³ö´í</font>");
+            // è¾“å‡ºæç¤º
+            OK(response) ? Msg("å·²æäº¤") : Msg("<font color=red>æäº¤å‡ºé”™</font>");
         }
 
         function OK(str)
@@ -483,7 +483,7 @@ function Picture()
     }
 }
 
-// ÏÔÊ¾ÌáÊ¾
+// æ˜¾ç¤ºæç¤º
 function Msg(content)
 {
     var win = Tips.GetWin();
@@ -491,23 +491,23 @@ function Msg(content)
     win.style.top =  document.body.scrollTop + document.body.clientHeight - 50 + 'px';
     win.style.width = '150px';
     win.style.height = '50px';
-    MoveLayer(Tips.GetWin());   // ÉèÖÃÒÆ¶¯
-    Tips.Open("<br>&nbsp;" + content + "<br>").Close(3000); // 3Ãëºó¹Ø±Õ
+    MoveLayer(Tips.GetWin());   // è®¾ç½®ç§»åŠ¨
+    Tips.Open("<br>&nbsp;" + content + "<br>").Close(3000); // 3ç§’åå…³é—­
 }
 
-// ÏÔÊ¾ÁÙÊ±Ğ¡´°¿Ú
+// æ˜¾ç¤ºä¸´æ—¶å°çª—å£
 function SmallBoard()
 {
     var win;
     var display;
     var control;
-    var close;  // ¹Ø±Õ°´Å¥
-    var menu;   // ²Ëµ¥
-    var move;   // ÒÆ¶¯¿ØÖÆ
+    var close;  // å…³é—­æŒ‰é’®
+    var menu;   // èœå•
+    var move;   // ç§»åŠ¨æ§åˆ¶
 
 
 
-    // ²Ëµ¥ [Rocky 2010-01-21 18:32:27]
+    // èœå• [Rocky 2010-01-21 18:32:27]
     function Menu()
     {
         var This = (window == this) ? Menu : this;
@@ -535,12 +535,12 @@ function SmallBoard()
         }
 
 
-        // ³õÊ¼»¯
+        // åˆå§‹åŒ–
         function Init()
         {
             item[0] = {
                 type:'checkbox',
-                title:'Êó±êÒÆ¶¯´°¿Ú',
+                title:'é¼ æ ‡ç§»åŠ¨çª—å£',
                 action: function(){
                             var obj = item[0].obj;
                             var chk = obj.getElementsByTagName("input")[0];
@@ -549,7 +549,7 @@ function SmallBoard()
             };
             item[1] = {
                 type:'checkbox',
-                title:'ËæÆÁÄ»¹ö¶¯',
+                title:'éšå±å¹•æ»šåŠ¨',
                 action: function(){
                             var obj = item[1].obj;
                             var chk = obj.getElementsByTagName("input")[0];
@@ -558,10 +558,10 @@ function SmallBoard()
             };
         }
 
-        // ´´½¨ÏÂ½ÓÁĞ±í£¨²Ëµ¥£©
+        // åˆ›å»ºä¸‹æ¥åˆ—è¡¨ï¼ˆèœå•ï¼‰
         function Create()
         {
-            // ÔÚÖ÷½çÃæÉÏ´´½¨ul£¬ÔÙÔÚulÖĞ¼ÓÈëliÀ´·Å²Ëµ¥ĞÅÏ¢£»
+            // åœ¨ä¸»ç•Œé¢ä¸Šåˆ›å»ºulï¼Œå†åœ¨ulä¸­åŠ å…¥liæ¥æ”¾èœå•ä¿¡æ¯ï¼›
             var body = document.getElementsByTagName('body')[0];
             var ul = document.createElement("ul");
 
@@ -602,7 +602,7 @@ function SmallBoard()
                     this.style.background = "";
                 }
                 item[i].obj = li;
-                // ²åÈë
+                // æ’å…¥
                 ul.appendChild(li);
             }
             body.appendChild(ul);
@@ -635,7 +635,7 @@ function SmallBoard()
 
     function Create()
     {
-        // ´´½¨ÏÔÊ¾µÄĞ¡°åÃæ
+        // åˆ›å»ºæ˜¾ç¤ºçš„å°æ¿é¢
         var body = document.getElementsByTagName('body')[0];
         win = document.createElement("pre");
         display = document.createElement("div");
@@ -646,7 +646,7 @@ function SmallBoard()
         win.style.cssText = "position:absolute; visibility:;"
                             + "padding:4px;"
                             + "background-color:#C3C3C3; color:#075F40; ";
-        Opacity(win, 92);   // ÉèÖÃÍ¸Ã÷¶È
+        Opacity(win, 92);   // è®¾ç½®é€æ˜åº¦
         win.style.top = document.body.scrollTop + 'px';
         control.appendChild(menu);
         control.appendChild(close);
@@ -655,10 +655,10 @@ function SmallBoard()
         body.appendChild(win);
     }
 
-    // ÉèÖÃÄÚÈİ£¨ÒÔÔÚÒ³ÃæÉÏÑ¡¶¨µÄÎÄ±¾ÎªÄÚÈİ£©
+    // è®¾ç½®å†…å®¹ï¼ˆä»¥åœ¨é¡µé¢ä¸Šé€‰å®šçš„æ–‡æœ¬ä¸ºå†…å®¹ï¼‰
     function SetText()
     {
-        var content = GetSelectHtml().replace(/\r/g, '').replace(/\n/g, '<br>').replace(/  /g, '¡¡');
+        var content = GetSelectHtml().replace(/\r/g, '').replace(/\n/g, '<br>').replace(/  /g, 'ã€€');
         display.innerHTML = content;
     }
 
@@ -676,9 +676,9 @@ function SmallBoard()
         }
         Opacity(control, 20);
 
-        // ¹Ø±Õ
-        close.innerHTML = "¡Á";
-        close.title = "¹Ø±Õ";
+        // å…³é—­
+        close.innerHTML = "Ã—";
+        close.title = "å…³é—­";
         close.style.cssText = "text-decoration:none;";
         close.onclick = function()
         {
@@ -693,11 +693,11 @@ function SmallBoard()
             this.style.color = "";
         }
 
-        // ÉèÖÃ
-        menu.body = new Menu;   // ²Ëµ¥Ö÷Ìå
-        menu.innerHTML = "£«";
+        // è®¾ç½®
+        menu.body = new Menu;   // èœå•ä¸»ä½“
+        menu.innerHTML = "ï¼‹";
         menu.style.cssText = close.style.cssText;
-        menu.title = "¸ü¶à²Ù×÷";
+        menu.title = "æ›´å¤šæ“ä½œ";
         menu.onmouseover =  close.onmouseover;
         menu.onmouseout =  close.onmouseout;
         menu.onclick = function()
@@ -708,14 +708,14 @@ function SmallBoard()
             }
             else
             {
-                // µ÷ÕûÎ»ÖÃ
+                // è°ƒæ•´ä½ç½®
                 var body = menu.body.GetHandler();
                 var posButton = GetPos(control);
                 var posBody = GetPos(body);
                 body.style.top = posButton.y + posButton.h + "px";
                 body.style.left = posButton.x - (posBody.w - posButton.w) + "px";
 
-                // ÏÔÊ¾
+                // æ˜¾ç¤º
                 menu.body.Open();
             }
         }
@@ -723,26 +723,26 @@ function SmallBoard()
 
     function Init()
     {
-        // ´´½¨´°¿Ú
+        // åˆ›å»ºçª—å£
         Create();
 
-        // Ìî³äÄÚÈİ
+        // å¡«å……å†…å®¹
         SetText();
 
-        // ¿ØÖÆ°´Å¥£¨¹Ø±ÕµÈ£©
+        // æ§åˆ¶æŒ‰é’®ï¼ˆå…³é—­ç­‰ï¼‰
         SetControl();
 
-        // ÉèÖÃ×î´ó¿í¶È
+        // è®¾ç½®æœ€å¤§å®½åº¦
         var maxWidth = 510;
         if( GetPos(win).w > maxWidth )
         {
             win.style.width = maxWidth + 'px';
         }
 
-        // ÉèÖÃÒÆ¶¯
+        // è®¾ç½®ç§»åŠ¨
         move = new MoveLayer(win);
 
-        // ÏÔÊ¾
+        // æ˜¾ç¤º
         Open();
     }
 
@@ -754,12 +754,12 @@ function Init()
 {
     DefaultInitProc();
     FormatPre();
-    ShowToCenter.MoveToCenter("div_setting"); // ¾ÓÖĞÏÔÊ¾
+    ShowToCenter.MoveToCenter("div_setting"); // å±…ä¸­æ˜¾ç¤º
     if($('div_pasd') != null)
     {
         OverLayer.Open();
         ShowToCenter.Open("div_pasd");
-        ShortKey.Lock();    // ±ÜÃâÔÚÊäÈëÃÜÂëÊ±´¥·¢¿ì½İ¼ü
+        ShortKey.Lock();    // é¿å…åœ¨è¾“å…¥å¯†ç æ—¶è§¦å‘å¿«æ·é”®
     }
     ShowToCenter.MoveToCenter("div_image");
     ShortKey.Register({key:KEY_ADD}, FontSizeUp, 1);
@@ -768,10 +768,10 @@ function Init()
     ShortKey.Register({key:KEY_S}, S);
     ShortKey.Register({key:KEY_V}, Export);
     ShortKey.Register({key:KEY_ESC}, Esc);
-    ShortKey.Register({key:KEY_F2}, SetBookMark);               // ÊéÇ©ÉèÖÃ
+    ShortKey.Register({key:KEY_F2}, SetBookMark);               // ä¹¦ç­¾è®¾ç½®
     ShortKey.Register({alt:true, key:KEY_ENTER}, AltEnter);
-    ShortKey.Register({alt:false, key:KEY_1}, Alt1);             // ²åÈëÍ¼Æ¬
-    ShortKey.Register({alt:false, key:KEY_2}, Alt2);             // ÁÙÊ±Ğ¡°å
+    ShortKey.Register({alt:false, key:KEY_1}, Alt1);             // æ’å…¥å›¾ç‰‡
+    ShortKey.Register({alt:false, key:KEY_2}, Alt2);             // ä¸´æ—¶å°æ¿
 
 
     Bookmark("bookmark_data", "coord");
@@ -781,7 +781,7 @@ function Init()
     TypeSelectMenu({id:"input_color_select"}, {id:"span_color_select", click:SetColor}, {id:"input_color_select"});
     TypeSelectMenu({id:"input_bgcolor_select"}, {id:"span_bgcolor_select", click:SetBgColor}, {id:"input_bgcolor_select"});
 
-    Picture();  // ³õÊ¼»¯ÔÚÕıÎÄÖĞ²åÈëÍ¼Æ¬µÄ²Ù×÷
+    Picture();  // åˆå§‹åŒ–åœ¨æ­£æ–‡ä¸­æ’å…¥å›¾ç‰‡çš„æ“ä½œ
 }
 
 </script>
@@ -791,13 +791,13 @@ function Init()
 
 
 <span class="title">
-<b title="±êÌâ">[<!--$Title$GLOBAL$-->]</b>  <i>¹éÀà[<u><!--$TypeDropBoxMenuSelecedItems$--></u>] ¸½¼ş[<!--$AttachList$GLOBAL$-->] </i>
+<b title="æ ‡é¢˜">[<!--$Title$GLOBAL$-->]</b>  <i>å½’ç±»[<u><!--$TypeDropBoxMenuSelecedItems$--></u>] é™„ä»¶[<!--$AttachList$GLOBAL$-->] </i>
 </span>
 
 
 
 
-<!-- ÕıÎÄÏÔÊ¾·ç¸ñ --> <!-- ÕıÎÄÄÚÈİ -->
+<!-- æ­£æ–‡æ˜¾ç¤ºé£æ ¼ --> <!-- æ­£æ–‡å†…å®¹ -->
 <pre id="content" style="<!--$TextStyle$-->"><!--$Text$GLOBAL$--></pre>
 
 
@@ -805,19 +805,19 @@ function Init()
 
 
 
-<!-- ²é¿´¼ÓÃÜÊı¾İÊäÈë´°¿Ú -->
+<!-- æŸ¥çœ‹åŠ å¯†æ•°æ®è¾“å…¥çª—å£ -->
 <!--$AuthenticationPrompt$GLOBAL$-->
 
 
 
 
 
-<!-- ±¸Ñ¡Í¼Æ¬µÈ£¨²åÈëÕıÎÄÖĞÏÔÊ¾£©-->
+<!-- å¤‡é€‰å›¾ç‰‡ç­‰ï¼ˆæ’å…¥æ­£æ–‡ä¸­æ˜¾ç¤ºï¼‰-->
 <div id="div_image" class="window" style="display:none;width:561px;">
 <table border="1" cellspacing=1 bgcolor="#FFFFFF"><tr><td>
 <table border="0" cellpadding=2 cellspacing=1>
 <td>
-<span class="tit">±¸Ñ¡Í¼Æ¬</span><hr>
+<span class="tit">å¤‡é€‰å›¾ç‰‡</span><hr>
 <span class="content">
     <iframe name="img_iframe" src="ImageList?key=<!--$Key$GLOBAL$-->"
             frameborder=0 scrolling=auto width="96%" height="236" allowTransparency="true">
@@ -827,8 +827,8 @@ function Init()
 </td></tr>
 <tr>
 <td align="right">
-    <input type=button class="button TABTO_upfile" value="È·¶¨" onClick="Picture.Insert(); Esc();" title="">
-    <input type=button class="button TABTO_upfile" value="È¡Ïû" onClick="Esc()" title="¿ì½İ¼ü£ºEsc">
+    <input type=button class="button TABTO_upfile" value="ç¡®å®š" onClick="Picture.Insert(); Esc();" title="">
+    <input type=button class="button TABTO_upfile" value="å–æ¶ˆ" onClick="Esc()" title="å¿«æ·é”®ï¼šEsc">
 </td>
 </tr>
 </table>
@@ -839,18 +839,18 @@ function Init()
 
 
 
-<!----------------------------------------- ÊéÇ© begin ----------------------------------------->
-<!-- ÊéÇ©Ìá½» -->
+<!----------------------------------------- ä¹¦ç­¾ begin ----------------------------------------->
+<!-- ä¹¦ç­¾æäº¤ -->
 <form method="POST" action="browse" target="tmp_iframe" style="display:none">
 <input name="key" value="<!--$Key$GLOBAL$-->">
 <textarea id="bookmark_data" name="bookmark_data"><!--$BookmarkData$--></textarea>
-<input name="bookmark_save" value="Ìá½»">
+<input name="bookmark_save" value="æäº¤">
 </form>
-<!----------------------------------------- ÊéÇ© end ------------------------------------------>
+<!----------------------------------------- ä¹¦ç­¾ end ------------------------------------------>
 
 
 
-<!-- ×ÖÌå¡¢ÑÕÉ«ÉèÖÃ -->
+<!-- å­—ä½“ã€é¢œè‰²è®¾ç½® -->
 <div id="div_setting" class="window" style="display:none;width:451px;">
 <form method="POST" target="tmp_iframe">
 <input type="hidden" name="key" value="<!--$Key$GLOBAL$-->">
@@ -858,26 +858,26 @@ function Init()
 <table border="0" cellpadding=2 cellspacing=1>
 <td>
 
-<span class="tit">×ÖÌåÉèÖÃ</span><hr>
+<span class="tit">å­—ä½“è®¾ç½®</span><hr>
 <span class="content">
 <br>
-·ç¸ñ£º<input type="checkbox" name="font_weight" value="bold" onClick="FontWeight()" <!--$chk_font_weight$-->>´ÖÌå
-      <input type="checkbox" name="font_style" value="oblique" onClick="FontWeight()" <!--$chk_font_style$-->>Ğ±Ìå
-      <input type="checkbox" name="font_text_decoration" value="underline" onClick="FontWeight()" <!--$chk_font_text_decoration$-->>ÏÂ»®Ïß
+é£æ ¼ï¼š<input type="checkbox" name="font_weight" value="bold" onClick="FontWeight()" <!--$chk_font_weight$-->>ç²—ä½“
+      <input type="checkbox" name="font_style" value="oblique" onClick="FontWeight()" <!--$chk_font_style$-->>æ–œä½“
+      <input type="checkbox" name="font_text_decoration" value="underline" onClick="FontWeight()" <!--$chk_font_text_decoration$-->>ä¸‹åˆ’çº¿
       <p>
-×ÖºÅ£º<input type=text class="input_font" name=font_size value="<!--$font_size$-->" title="(Ä¬ÈÏ12)" > <!--readonly-->
-<input type=button value=" + " onClick="FontSizeUp(1)" title="Ôö´ó×ÖÌå£¬¿ì½İ¼ü£º£«">
-<input type=button value=" - " onClick="FontSizeUp(0)" title="¼õĞ¡×ÖÌå£¬¿ì½İ¼ü£º£­"><p>
-ÑÕÉ«£º<input type="text" class="input_font" id="input_color_select" name="font_color" value="<!--$font_color$-->" autocomplete="off"><p>
-±³¾°£º<input type="text" class="input_font" id="input_bgcolor_select" name="font_bgcolor" value="<!--$font_bgcolor$-->" autocomplete="off"><p>
-×ÖÌå£º<input type="text" class="input_font hand" id="input_font_select" name="font_family" value="<!--$font_family$-->" autocomplete="off"><p>
+å­—å·ï¼š<input type=text class="input_font" name=font_size value="<!--$font_size$-->" title="(é»˜è®¤12)" > <!--readonly-->
+<input type=button value=" + " onClick="FontSizeUp(1)" title="å¢å¤§å­—ä½“ï¼Œå¿«æ·é”®ï¼šï¼‹">
+<input type=button value=" - " onClick="FontSizeUp(0)" title="å‡å°å­—ä½“ï¼Œå¿«æ·é”®ï¼šï¼"><p>
+é¢œè‰²ï¼š<input type="text" class="input_font" id="input_color_select" name="font_color" value="<!--$font_color$-->" autocomplete="off"><p>
+èƒŒæ™¯ï¼š<input type="text" class="input_font" id="input_bgcolor_select" name="font_bgcolor" value="<!--$font_bgcolor$-->" autocomplete="off"><p>
+å­—ä½“ï¼š<input type="text" class="input_font hand" id="input_font_select" name="font_family" value="<!--$font_family$-->" autocomplete="off"><p>
 
 <hr width=100%>
 </td></tr>
 <tr>
 <td align="right">
-    <input name="set_text_style" type="submit" class="button" value="È·¶¨" onClick="Esc()">
-    <input name="close" type="button" class="button TABTO_font_weight" value="¹Ø±Õ" onClick="Esc()" title="¿ì½İ¼ü£ºEsc">
+    <input name="set_text_style" type="submit" class="button" value="ç¡®å®š" onClick="Esc()">
+    <input name="close" type="button" class="button TABTO_font_weight" value="å…³é—­" onClick="Esc()" title="å¿«æ·é”®ï¼šEsc">
 </td>
 </tr>
 </table>
@@ -887,26 +887,26 @@ function Init()
 
 
 
-<!-- µ¼³öµ±Ç°Êı¾İ [2008-11-10] -->
+<!-- å¯¼å‡ºå½“å‰æ•°æ® [2008-11-10] -->
 <form method="POST" action="DataExport" target="tmp_iframe" style="display:none;">
 <input name="select_key" value="<!--$Key$GLOBAL$-->">
 <input name="backup_range" value="select">
 <input name="export_name" value="<!--$Key$GLOBAL$-->">
-<input type="submit" name="backup_export" value="Áí´æÎªÎÄ¼ş">
+<input type="submit" name="backup_export" value="å¦å­˜ä¸ºæ–‡ä»¶">
 </form>
 
 
 
 
 
-<!-- ×ÖÌåÏÂÀ­²Ëµ¥ -->
+<!-- å­—ä½“ä¸‹æ‹‰èœå• -->
 <span id="span_type_select" class="type_select_menu" style="position:absolute; visibility:hidden; top:0px;">
 <!--$FontDropBoxMenu$-->
 </span>
 
 
 
-<!-- ÑÕÉ«ÏÂÀ­²Ëµ¥ -- Ç°¾°É« -->
+<!-- é¢œè‰²ä¸‹æ‹‰èœå• -- å‰æ™¯è‰² -->
 <span id="span_color_select" class="type_select_menu" style="position:absolute; visibility:hidden; top:0px; width:153px;">
 <!--$TextColorDropBoxMenu$-->
 </span>
@@ -916,7 +916,7 @@ function Init()
 
 
 
-<!-- ÑÕÉ«ÏÂÀ­²Ëµ¥ -- ±³¾°É« -->
+<!-- é¢œè‰²ä¸‹æ‹‰èœå• -- èƒŒæ™¯è‰² -->
 <span id="span_bgcolor_select" class="type_select_menu" style="position:absolute; visibility:hidden; top:0px; width:153px;">
 <!--$TextBgColorDropBoxMenu$-->
 </span>

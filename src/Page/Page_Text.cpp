@@ -72,13 +72,13 @@ int Page_Text::Deal()
     }
 
     const string head = ""
-                  "HTTP/1.1 200 OK\n"
-                  "Date: " + GmgTime() + "\n"
-                  "Last-Modified: " + GmgTime( GetFileModifyTime(fullpath) ) + "\n"
-                  "Server: NoteSrv v0.6\n"
-                  "Keep-Alive: timeout=15, max=100\n"
-                  "Content-Type: text/html; charset=GB2312\n"
-                  "\n";
+                  "HTTP/1.1 200 OK\r\n"
+                  "Date: " + GmgTime() + "\r\n"
+                  "Last-Modified: " + GmgTime( GetFileModifyTime(fullpath) ) + "\r\n"
+                  "Server: NoteSrv v0.7\r\n"
+                  "Keep-Alive: timeout=15, max=100\r\n"
+                  "Content-Type: text/html; charset=utf-8\r\n"
+                  "\r\n";
 
     // 发送http头
     ret = connect->Send(head);

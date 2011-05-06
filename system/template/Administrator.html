@@ -1,4 +1,4 @@
-<title>¹ÜÀíÔ±</title>
+<title>ç®¡ç†å‘˜</title>
 <input type=hidden id='user' value='<!--$CurrentUser$GLOBAL$-->'>
 <input type=hidden id='user_ip' value='<!--$ClientIp$GLOBAL$-->'>
 <input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
@@ -12,10 +12,10 @@ fieldset{
 
 <script>
 
-// ·¢ËÍÉ¾³ıÃüÁî£¨url£©µ½·şÎñÆ÷
+// å‘é€åˆ é™¤å‘½ä»¤ï¼ˆurlï¼‰åˆ°æœåŠ¡å™¨
 function DeleteUser(user, button)
 {
-    var user2 = prompt("È·¶¨É¾³ı[" + user + "]£¿ÇëÔÙ´ÎÊäÈëÓÃ»§Ãû£º");
+    var user2 = prompt("ç¡®å®šåˆ é™¤[" + user + "]ï¼Ÿè¯·å†æ¬¡è¾“å…¥ç”¨æˆ·åï¼š");
     if( user2 != user )
     {
         return;
@@ -23,24 +23,24 @@ function DeleteUser(user, button)
 
     var url = "administrator";
 
-    /* ×é×°Post²ÎÊı
+    /* ç»„è£…Postå‚æ•°
      */
     var post = "";
     post += "&delete_user=" + user;
     
-    // ·¢ËÍÇëÇóµ½·şÎñ¶Ë
+    // å‘é€è¯·æ±‚åˆ°æœåŠ¡ç«¯
     SubmitToServer(url, post, Response); 
-    // ´¦Àí»ØÓ¦
+    // å¤„ç†å›åº”
     function Response(str)
     {
         if("OK" == str)
         {
-            // ²»Ë¢ĞÂÒ³Ãæ£¬Ö»¼ÓÒ»É¾³ıÏßÀ´±íÊ¾£»
+            // ä¸åˆ·æ–°é¡µé¢ï¼ŒåªåŠ ä¸€åˆ é™¤çº¿æ¥è¡¨ç¤ºï¼›
             var obj = $('ID_USER_' + user);
             obj.innerHTML = obj.innerHTML.strike();
-            // ÉèÖÃÌáÊ¾
+            // è®¾ç½®æç¤º
             button.disabled = true;
-            button.title = "ÒÑÉ¾³ı";
+            button.title = "å·²åˆ é™¤";
         }
         else
         {
@@ -49,7 +49,7 @@ function DeleteUser(user, button)
     }
 }
 
-// ÏµÍ³ÔÚÏßÊ±¼ä
+// ç³»ç»Ÿåœ¨çº¿æ—¶é—´
 function SysOnlineTime()
 {
     var sec = <!--$OnlineTime$-->; 
@@ -65,44 +65,44 @@ function SysOnlineTime()
         var str = "";
 
         h = h % 24;
-        str = h + "Ğ¡Ê±" + m + "·Ö" + s + "Ãë";
+        str = h + "å°æ—¶" + m + "åˆ†" + s + "ç§’";
 
         if(d > 0)
         {
-            str = d + "Ìì" + str;
+            str = d + "å¤©" + str;
         }
 
         $("online_time").innerHTML = str; 
     }
 }
 
-// È¡cpuÊ¹ÓÃÂÊ
+// å–cpuä½¿ç”¨ç‡
 // http://notesrv:17891/SystemInfo?field=CpuUsed
 function GetCpuUsed()
 {
     var url = "SystemInfo";
 
-    /* ×é×°Post²ÎÊı
+    /* ç»„è£…Postå‚æ•°
      */
     var post = "";
     post += "&field=CpuUsed";
     
-    // ·¢ËÍÇëÇóµ½·şÎñ¶Ë
+    // å‘é€è¯·æ±‚åˆ°æœåŠ¡ç«¯
     SubmitToServer(url, post, Response); 
-    // ´¦Àí»ØÓ¦
+    // å¤„ç†å›åº”
     function Response(str)
     {
         $("cpu_used").innerHTML = str + "%"; 
     }
 }
 
-// Ò³ÃæÑ­»·
+// é¡µé¢å¾ªç¯
 function PageLoopRun()
 {
-    // µİÔöÃëÊı
+    // é€’å¢ç§’æ•°
     SysOnlineTime.Step();
     
-    // cpuÊ¹ÓÃÂÊ
+    // cpuä½¿ç”¨ç‡
     GetCpuUsed();
 }
 
@@ -119,53 +119,53 @@ function Init()
 
 
 
-<!-- ÏµÍ³ÔÚÏßÊ±¼ä -->
+<!-- ç³»ç»Ÿåœ¨çº¿æ—¶é—´ -->
 <fieldset align="left">
-<legend>ÏµÍ³ĞÅÏ¢</legend>
+<legend>ç³»ç»Ÿä¿¡æ¯</legend>
 <table>
     <tr>
-        <td align="right">°æ±¾£º</td>
+        <td align="right">ç‰ˆæœ¬ï¼š</td>
         <td><!--$Version$GLOBAL$--></td>
     </tr>
     <tr>
-        <td align="right">CPUÊ¹ÓÃ£º</td>
-        <td><span id=cpu_used>¼ÓÔØÖĞ...</span></td>
+        <td align="right">CPUä½¿ç”¨ï¼š</td>
+        <td><span id=cpu_used>åŠ è½½ä¸­...</span></td>
     </tr>
     <tr>
-        <td align="right">Æô¶¯Ê±¼ä£º</td>
+        <td align="right">å¯åŠ¨æ—¶é—´ï¼š</td>
         <td><!--$BootTime$--></td>
     </tr>
     <tr>
-        <td align="right">ÔÚÏßÊ±³¤£º</td>
-        <td><span id=online_time>¼ÓÔØÖĞ...</span></td>
+        <td align="right">åœ¨çº¿æ—¶é•¿ï¼š</td>
+        <td><span id=online_time>åŠ è½½ä¸­...</span></td>
     </tr>
 </table>
 </fieldset>
 
 <br>
 
-<!-- ÈÕÖ¾ÅäÖÃ -->
+<!-- æ—¥å¿—é…ç½® -->
 <fieldset align="left">
-<legend>ÈÕÖ¾ÅäÖÃ</legend>
+<legend>æ—¥å¿—é…ç½®</legend>
 <form method="POST" target="tmp_iframe">
 <pre>
-µ÷ÊÔÈÕÖ¾£º<input type=radio name=level_debug value="open" <!--$debug_open$-->>¿ª <input type=radio name=level_debug value="close" <!--$debug_close$-->>¹Ø
-Ò»°ãÈÕÖ¾£º<input type=radio name=level_info value="open" <!--$info_open$-->>¿ª <input type=radio name=level_info value="close" <!--$info_close$-->>¹Ø
-´íÎóÈÕÖ¾£º<input type=radio name=level_error value="open" <!--$error_open$-->>¿ª <input type=radio name=level_error value="close" <!--$error_close$-->>¹Ø
+è°ƒè¯•æ—¥å¿—ï¼š<input type=radio name=level_debug value="open" <!--$debug_open$-->>å¼€ <input type=radio name=level_debug value="close" <!--$debug_close$-->>å…³
+ä¸€èˆ¬æ—¥å¿—ï¼š<input type=radio name=level_info value="open" <!--$info_open$-->>å¼€ <input type=radio name=level_info value="close" <!--$info_close$-->>å…³
+é”™è¯¯æ—¥å¿—ï¼š<input type=radio name=level_error value="open" <!--$error_open$-->>å¼€ <input type=radio name=level_error value="close" <!--$error_close$-->>å…³
 
-<input type=submit name=log_save value="¸ü¸Ä">
+<input type=submit name=log_save value="æ›´æ”¹">
 </pre>
 </form>
 </fieldset>
 
 <br>
 
-<!-- ¼ÆÊıÆ÷ÁĞ±í -->
-<fieldset><legend>Ò³Ãæ·ÃÎÊ¼ÆÊı</legend>
+<!-- è®¡æ•°å™¨åˆ—è¡¨ -->
+<fieldset><legend>é¡µé¢è®¿é—®è®¡æ•°</legend>
 <table border='1'>
 <tr>
-<td>Ò³ÃæÃû</td>
-<td>¼ÆÊıÖµ</td>
+<td>é¡µé¢å</td>
+<td>è®¡æ•°å€¼</td>
 </tr>
 <!--$CounterList$-->
 </table>
@@ -173,15 +173,15 @@ function Init()
 
 <br>
 
-<!-- ÓÃ»§ÁĞ±í -->
-<fieldset><legend>ÓÃ»§ÁĞ±í</legend>
+<!-- ç”¨æˆ·åˆ—è¡¨ -->
+<fieldset><legend>ç”¨æˆ·åˆ—è¡¨</legend>
 <table border='1'>
 <tr>
-<td>ÓÃ»§Ãû</td>
-<td>×¢²áÊ±¼ä</td>
-<td>×îºóµÇÂ¼Ê±¼ä</td>
-<td>µÇÂ¼´ÎÊı</td>
-<td>²Ù×÷</td>
+<td>ç”¨æˆ·å</td>
+<td>æ³¨å†Œæ—¶é—´</td>
+<td>æœ€åç™»å½•æ—¶é—´</td>
+<td>ç™»å½•æ¬¡æ•°</td>
+<td>æ“ä½œ</td>
 </tr>
 <!--$UserList$-->
 </table>

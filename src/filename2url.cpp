@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
                     // 去掉前缀
                     string old2 = old.substr(15);
                     // 先尝转为gb18330编码，转换出错则保留原值；
-                    ChineseCoding("utf-8", "gb18030").Converter(old2, old2);
+                    //ChineseCoding("utf-8", "gb18030").Converter(old2, old2); <<<<<<<<<<<<<<<<<<<
                     now = key + string(".") + FilenameEncode(old2);
                     printf("[%s] => [%s]\n", old.c_str(), now.c_str());
                     rename(old.c_str(), now.c_str());

@@ -1,13 +1,13 @@
 /************************************************************
 *                                                           *
-*   ¹¦ÄÜ   : ¼ÆËãÆ÷                                         *
-*   ×÷Õß   : shizw                                          *
+*   åŠŸèƒ½   : è®¡ç®—å™¨                                         *
+*   ä½œè€…   : shizw                                          *
 *   E-mail : mypyramid@126.com                              *
-*   ÈÕÆÚ   : 2007-2-15                                      *
-*   ÈÕÆÚ   :                                      			*
-*   ĞŞ¸Ä   :                                      			*
-*   °æ±¾   : 0.1                                            *
-*	Ö÷³ÌĞòÀ´×Ôwww.126.comÓÊÏäµÄ¸öÈËÖúÀí                     *
+*   æ—¥æœŸ   : 2007-2-15                                      *
+*   æ—¥æœŸ   :                                      			*
+*   ä¿®æ”¹   :                                      			*
+*   ç‰ˆæœ¬   : 0.1                                            *
+*	ä¸»ç¨‹åºæ¥è‡ªwww.126.comé‚®ç®±çš„ä¸ªäººåŠ©ç†                     *
 *                                                           *
 ************************************************************/
 
@@ -41,8 +41,8 @@ function Calculator()
 		html += ' 	width="258" height="230" frameborder="0" scrolling="no">';
 		html += ' </iframe>';
 		html += ' </td></tr><tr><td align="right">';
-		html += ' <hr><span class="comment">ËµÃ÷£º±¾³ÌĞòÀ´×Ôwww.126.com</span>';
-		html += ' <input type=button value="¹Ø±Õ" onClick="Calculator.Close()">';
+		html += ' <hr><span class="comment">è¯´æ˜ï¼šæœ¬ç¨‹åºæ¥è‡ªwww.126.com</span>';
+		html += ' <input type=button value="å…³é—­" onClick="Calculator.Close()">';
 		html += ' </td></tr></table>';
 		html += ' </div>';
 		//Print(html);
@@ -53,13 +53,13 @@ function Calculator()
 		THIS.objWin = GetObj('calendar_div');
 		if(null == THIS.objWin)
 		{
-			alert("¼ÆËãÆ÷³ö´í");
+			alert("è®¡ç®—å™¨å‡ºé”™");
 			return;
 		}
 		THIS.objFrame = GetObj('calculator_iframe');
 		if(null == THIS.objFrame)
 		{
-			alert("È¡¼ÆËãÆ÷ÔØÈ«³ö´í");
+			alert("å–è®¡ç®—å™¨è½½å…¨å‡ºé”™");
 			return;
 		}
 	}
@@ -67,5 +67,5 @@ function Calculator()
 	Init();
 }
 
-// Ä¸Ìå
+// æ¯ä½“
 document.write('<span id="MonthCalculator"></span>');

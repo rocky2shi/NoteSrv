@@ -100,8 +100,9 @@ string Tag_TypeDropBoxMenu::Get(Page *page)
 
     if("" == html)
     {
+        // 注意，下面的<input class='hidden'>用于焦点设置
         html = "<label OnClick='OpenPage(\"/TypeDropBoxMenuSetting\")'>\n"
-               "  <span class='hand'>类型未设置，转到归类设置</span></label>\n"
+               "  <input class='hidden'><span class='hand'>类型未设置，转到归类设置</span></label>\n"
                "";
     }
 

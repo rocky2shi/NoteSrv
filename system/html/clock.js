@@ -1,22 +1,22 @@
 /**********************************************************************
 *                                                                     *
-*   ¹¦ÄÜ : ÔÚÒ³ÃæÉÏÏÔÊ¾Ê±¼ä£¨·şÎñÆ÷Ê±¼ä£©                             *
-*   ±àĞ´ : Rocky 2009-06-23                                           *
+*   åŠŸèƒ½ : åœ¨é¡µé¢ä¸Šæ˜¾ç¤ºæ—¶é—´ï¼ˆæœåŠ¡å™¨æ—¶é—´ï¼‰                             *
+*   ç¼–å†™ : Rocky 2009-06-23                                           *
 *   mail : mypyramid@126.com                                          *
-*   ĞŞ¸Ä¡¢Ê¹ÓÃ·½·¨¼û±¾ÎÄ¼şµ×ËµÃ÷                                      *
+*   ä¿®æ”¹ã€ä½¿ç”¨æ–¹æ³•è§æœ¬æ–‡ä»¶åº•è¯´æ˜                                      *
 *                                                                     *
 **********************************************************************/
 
 
 /*
- *  ¹¦ÄÜ£º·µ»Ø·şÎñÆ÷µÄµ±Ç°Ê±¼ä
- *  ±àĞ´£ºRocky 2008-10-30 19:03:02
+ *  åŠŸèƒ½ï¼šè¿”å›æœåŠ¡å™¨çš„å½“å‰æ—¶é—´
+ *  ç¼–å†™ï¼šRocky 2008-10-30 19:03:02
  */
 function ServerDate()
 {
     if(typeof ServerDate.time == 'undefined')
     {
-        // ¾²Ì¬³ÉÔ±£¬Í³Ò»Î¬»¤£»²»²ânull£¬ÒÔÊ¹Ö®ÓÃ·¨´íÊ±ÓĞÌáĞÑ¡£
+        // é™æ€æˆå‘˜ï¼Œç»Ÿä¸€ç»´æŠ¤ï¼›ä¸æµ‹nullï¼Œä»¥ä½¿ä¹‹ç”¨æ³•é”™æ—¶æœ‰æé†’ã€‚
         ServerDate.time = document.getElementById('server_time');
         ServerDate.Step = function ()
         {
@@ -33,9 +33,9 @@ var obj_clock;
 
 
 /*****************************************************************************
-                                      Å©ÀúÈÕÆÚ¼ÆËã
+                                      å†œå†æ—¥æœŸè®¡ç®—
 *****************************************************************************/
-// ºÇºÇ£¬ÍøÉÏÕÒÀ´ÔÙÕûÀí¹ıµÄ
+// å‘µå‘µï¼Œç½‘ä¸Šæ‰¾æ¥å†æ•´ç†è¿‡çš„
 function chain_calendar()
 {
     var lunarInfo=new Array(
@@ -63,33 +63,33 @@ function chain_calendar()
 
 
 
-    //====================================== ·µ»ØÅ©Àú yÄêµÄ×ÜÌìÊı
+    //====================================== è¿”å›å†œå† yå¹´çš„æ€»å¤©æ•°
     function lYearDays(y) {
      var i, sum = 348;
      for(i=0x8000; i>0x8; i>>=1) sum += (lunarInfo[y-1900] & i)? 1: 0;
      return(sum+leapDays(y));
     }
 
-    //====================================== ·µ»ØÅ©Àú yÄêÈòÔÂµÄÌìÊı
+    //====================================== è¿”å›å†œå† yå¹´é—°æœˆçš„å¤©æ•°
     function leapDays(y) {
      if(leapMonth(y)) return( (lunarInfo[y-1899]&0xf)==0xf? 30: 29);
      else return(0);
     }
 
-    //====================================== ·µ»ØÅ©Àú yÄêÈòÄÄ¸öÔÂ 1-12 , Ã»Èò·µ»Ø 0
+    //====================================== è¿”å›å†œå† yå¹´é—°å“ªä¸ªæœˆ 1-12 , æ²¡é—°è¿”å› 0
     function leapMonth(y) {
      var lm = lunarInfo[y-1900] & 0xf;
      return(lm==0xf?0:lm);
     }
 
-    //====================================== ·µ»ØÅ©Àú yÄêmÔÂµÄ×ÜÌìÊı
+    //====================================== è¿”å›å†œå† yå¹´mæœˆçš„æ€»å¤©æ•°
     function monthDays(y,m) {
      return( (lunarInfo[y-1900] & (0x10000>>m))? 30: 29 );
     }
 
 
-    //====================================== Ëã³öÅ©Àú, ´«ÈëÈÕÆÚ¿Ø¼ş, ·µ»ØÅ©ÀúÈÕÆÚ¿Ø¼ş
-    //                                       ¸Ã¿Ø¼şÊôĞÔÓĞ .year .month .day .isLeap
+    //====================================== ç®—å‡ºå†œå†, ä¼ å…¥æ—¥æœŸæ§ä»¶, è¿”å›å†œå†æ—¥æœŸæ§ä»¶
+    //                                       è¯¥æ§ä»¶å±æ€§æœ‰ .year .month .day .isLeap
     function Lunar(objDate) {
 
        var i, leap=0, temp=0;
@@ -101,17 +101,17 @@ function chain_calendar()
 
        this.year = i;
 
-       leap = leapMonth(i); //ÈòÄÄ¸öÔÂ
+       leap = leapMonth(i); //é—°å“ªä¸ªæœˆ
        this.isLeap = false;
 
        for(i=1; i<13 && offset>0; i++) {
-          //ÈòÔÂ
+          //é—°æœˆ
           if(leap>0 && i==(leap+1) && this.isLeap==false)
              { --i; this.isLeap = true; temp = leapDays(this.year); }
           else
              { temp = monthDays(this.year, i); }
 
-          //½â³ıÈòÔÂ
+          //è§£é™¤é—°æœˆ
           if(this.isLeap==true && i==(leap+1)) this.isLeap = false;
 
           offset -= temp;
@@ -130,14 +130,14 @@ function chain_calendar()
     }
 
 
-    var chYear = new Array('¶ş¡ğ¡ğÁù', '¶ş¡ğ¡ğÆß', '¶ş¡ğ¡ğ°Ë', '¶ş¡ğ¡ğ¾Å', '¶ş¡ğÒ»¡ğ');
-    var chMonth = new Array('Ò»', '¶ş', 'Èı', 'ËÄ', 'Îå', 'Áù', 'Æß', '°Ë', '¾Å', 'Ê®', 'Ê®Ò»', 'Ê®¶ş');
-    var chDate = new Array('³õÒ»', '³õ¶ş', '³õÈı', '³õËÄ', '³õÎå', '³õÁù', '³õÆß', '³õ°Ë', '³õ¾Å', '³õÊ®',
-            'Ê®Ò»', 'Ê®¶ş', 'Ê®Èı', 'Ê®ËÄ', 'Ê®Îå', 'Ê®Áù', 'Ê®Æß', 'Ê®°Ë', 'Ê®¾Å', '¶şÊ®',
-            'Ø¥Ò»', 'Ø¥¶ş', 'Ø¥Èı', 'Ø¥ËÄ', 'Ø¥Îå', 'Ø¥Áù', 'Ø¥Æß', 'Ø¥°Ë', 'Ø¥¾Å', 'ÈıÊ®');
+    var chYear = new Array('äºŒâ—‹â—‹å…­', 'äºŒâ—‹â—‹ä¸ƒ', 'äºŒâ—‹â—‹å…«', 'äºŒâ—‹â—‹ä¹', 'äºŒâ—‹ä¸€â—‹');
+    var chMonth = new Array('ä¸€', 'äºŒ', 'ä¸‰', 'å››', 'äº”', 'å…­', 'ä¸ƒ', 'å…«', 'ä¹', 'å', 'åä¸€', 'åäºŒ');
+    var chDate = new Array('åˆä¸€', 'åˆäºŒ', 'åˆä¸‰', 'åˆå››', 'åˆäº”', 'åˆå…­', 'åˆä¸ƒ', 'åˆå…«', 'åˆä¹', 'åˆå',
+            'åä¸€', 'åäºŒ', 'åä¸‰', 'åå››', 'åäº”', 'åå…­', 'åä¸ƒ', 'åå…«', 'åä¹', 'äºŒå',
+            'å»¿ä¸€', 'å»¿äºŒ', 'å»¿ä¸‰', 'å»¿å››', 'å»¿äº”', 'å»¿å…­', 'å»¿ä¸ƒ', 'å»¿å…«', 'å»¿ä¹', 'ä¸‰å');
     var date = ServerDate();
     var lDate = new Lunar(date);
-    return chYear[lDate.year-2006] + "Äê" + chMonth[lDate.month-1] + "ÔÂ" + chDate[lDate.day-1] + "ÈÕ";
+    return chYear[lDate.year-2006] + "å¹´" + chMonth[lDate.month-1] + "æœˆ" + chDate[lDate.day-1] + "æ—¥";
 }
 
 
@@ -145,27 +145,27 @@ function chain_calendar()
 
 function SetClock(id)
 {
-    var obj_clock = document.getElementById(id); // ÈÕ¼äÏÔÊ¾¿Ø¼şÖ÷Ìå
-    var tip = new Tips; // ÈÕÆÚÏÔÊ¾Ğ¡´°¿Ú
+    var obj_clock = document.getElementById(id); // æ—¥é—´æ˜¾ç¤ºæ§ä»¶ä¸»ä½“
+    var tip = new Tips; // æ—¥æœŸæ˜¾ç¤ºå°çª—å£
 
 
     function GetDate()
     {
         var now=ServerDate();
         var day = new Array();
-           day[0] = "ĞÇÆÚÈÕ";
-           day[1] = "ĞÇÆÚÒ»";
-           day[2] = "ĞÇÆÚ¶ş";
-           day[3] = "ĞÇÆÚÈı";
-           day[4] = "ĞÇÆÚËÄ";
-           day[5] = "ĞÇÆÚÎå";
-           day[6] = "ĞÇÆÚÁù";
+           day[0] = "æ˜ŸæœŸæ—¥";
+           day[1] = "æ˜ŸæœŸä¸€";
+           day[2] = "æ˜ŸæœŸäºŒ";
+           day[3] = "æ˜ŸæœŸä¸‰";
+           day[4] = "æ˜ŸæœŸå››";
+           day[5] = "æ˜ŸæœŸäº”";
+           day[6] = "æ˜ŸæœŸå…­";
         var year=now.getFullYear()
         var month=now.getMonth()+1
         var today=now.getDate()
         var sec=now.getTime()
         var week=day[now.getDay()]
-        var nowTime=year+'Äê'+month+'ÔÂ'+today+'ÈÕ '+week
+        var nowTime=year+'å¹´'+month+'æœˆ'+today+'æ—¥ '+week
         return nowTime;
     }
 
@@ -187,18 +187,18 @@ function SetClock(id)
     {
         ServerDate.Step();
         obj_clock.innerHTML = GetTime();
-        // LoopRun()¹©Íâ²¿Ê¹ÓÃµÄ»Øµ÷¼ÆÊ±Æ÷£»
+        // LoopRun()ä¾›å¤–éƒ¨ä½¿ç”¨çš„å›è°ƒè®¡æ—¶å™¨ï¼›
         try{LoopRun();}catch(e){g_error=e;}
     }
 
-    // ÉèÖÃÈÕÆÚÏÔÊ¾
+    // è®¾ç½®æ—¥æœŸæ˜¾ç¤º
     function SetDateDisplay()
     {
         obj_clock.onmouseover = function()
         {
             var win = tip.GetWin();
             var pos = GetPos(obj_clock);
-            var s = GetDate() + ' (Å©Àú£º' + chain_calendar() + ')';
+            var s = GetDate() + ' (å†œå†ï¼š' + chain_calendar() + ')';
             win.style.right = "3px";
             win.style.top =  pos.y + pos.h - 3 + "px";
             tip.Open(s);
@@ -217,13 +217,13 @@ function SetClock(id)
         return;
     }
 
-    // ³õÊ¼»¯
+    // åˆå§‹åŒ–
     ServerDate();
 
-    // Æô¶¯Ê±ÖÓ
+    // å¯åŠ¨æ—¶é’Ÿ
     SetInterval(DisplayClock, 1000);
 
-    // ÉèÖÃÈÕÆÚÏÔÊ¾
+    // è®¾ç½®æ—¥æœŸæ˜¾ç¤º
     SetDateDisplay();
 }
 
@@ -237,6 +237,6 @@ function SetClock(id)
 /**********************************************************************
 History:
 
- 2009-06-23: 0.1°æ
- 2010-01-13: 0.2°æ£¬ĞŞ¸ÄÊó±êÒÆµ½Ê±¼äÉÏÊ±µÄÏÔÊ¾£»
+ 2009-06-23: 0.1ç‰ˆ
+ 2010-01-13: 0.2ç‰ˆï¼Œä¿®æ”¹é¼ æ ‡ç§»åˆ°æ—¶é—´ä¸Šæ—¶çš„æ˜¾ç¤ºï¼›
 **********************************************************************/

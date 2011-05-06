@@ -1,7 +1,7 @@
 /************************************************************
 *                                                           *
-*   ×÷Õß: rocky                                             *
-*   ¹¦ÄÜ: ´´½¨Ê÷ĞÎ   		                                *
+*   ä½œè€…: rocky                                             *
+*   åŠŸèƒ½: åˆ›å»ºæ ‘å½¢   		                                *
 *                                                           *
 ************************************************************/
 
@@ -43,12 +43,12 @@ function Swap()
 		return;
 	if(thisObj.leaf.className == 'tree_leaf_open')
 	{
-		thisObj.root.innerHTML = '£«';
+		thisObj.root.innerHTML = 'ï¼‹';
 		thisObj.leaf.className = 'tree_leaf_close';
 	}
 	else
 	{
-		thisObj.root.innerHTML = '£­';
+		thisObj.root.innerHTML = 'ï¼';
 		thisObj.leaf.className = 'tree_leaf_open';
 	}
 }
@@ -57,7 +57,7 @@ function Create(bOpen)
 	if(this.isError)
 		return false;
 	this.root.tree = this;
-	this.root.innerHTML = bOpen?'£­':'£«';
+	this.root.innerHTML = bOpen?'ï¼':'ï¼‹';
 	this.root.className = 'tree_branch';
 	this.root.onclick	= this.swap;
 	this.leaf.className = bOpen?'tree_leaf_open':'tree_leaf_close';
@@ -65,16 +65,16 @@ function Create(bOpen)
 
 
 /*************************************************
-*ÓÃ·¨Ê¾Àı£º                                      *
+*ç”¨æ³•ç¤ºä¾‹ï¼š                                      *
 *                                                *
-* <span id=trees></span>µÚÒ»²ã                   *
+* <span id=trees></span>ç¬¬ä¸€å±‚                   *
 * <span id=treesS>                               *
-* 	µÚ¶ş²ã1<br>                                  *
-* 	µÚ¶ş²ã2<br>                                  *
-* 	<span id=tree2></span>µÚ¶ş²ã3<br>            *
+* 	ç¬¬äºŒå±‚1<br>                                  *
+* 	ç¬¬äºŒå±‚2<br>                                  *
+* 	<span id=tree2></span>ç¬¬äºŒå±‚3<br>            *
 * 	<span id=tree2S>                             *
-* 		µÚÈı²ã1<br>                              *
-* 		µÚÈı²ã2<br>                              *
+* 		ç¬¬ä¸‰å±‚1<br>                              *
+* 		ç¬¬ä¸‰å±‚2<br>                              *
 * 	</span>                                      *
 * </span>                                        *
 *                                                *

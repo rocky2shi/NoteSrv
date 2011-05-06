@@ -1,9 +1,9 @@
 /**********************************************************************
 *                                                                     *
-*   ¹¦ÄÜ : µÇÂ¼´°¿ÚÏÔÊ¾µÈ´¦Àí                                         *
-*   ±àĞ´ : Rocky 2010-05-29 17:09:37                                  *
+*   åŠŸèƒ½ : ç™»å½•çª—å£æ˜¾ç¤ºç­‰å¤„ç†                                         *
+*   ç¼–å†™ : Rocky 2010-05-29 17:09:37                                  *
 *   mail : mypyramid@126.com                                          *
-*   ĞŞ¸Ä¡¢Ê¹ÓÃ·½·¨¼û±¾ÎÄ¼şµ×ËµÃ÷                                      *
+*   ä¿®æ”¹ã€ä½¿ç”¨æ–¹æ³•è§æœ¬æ–‡ä»¶åº•è¯´æ˜                                      *
 *                                                                     *
 **********************************************************************/
 
@@ -17,34 +17,34 @@ function LoginWin()
     var This = (window == this) ? LoginWin : this;
     var win;
     var timer;
-    var interval = 10000; // Ã¿10Ãë×öÒ»´Î¼ì²â [XXX]
+    var interval = 10000; // æ¯10ç§’åšä¸€æ¬¡æ£€æµ‹ [XXX]
     var err_msg_id = "LOGIN_WIN375359086234"; 
     var bOpen = false;
 
 
-    /****************** Íâ²¿½Ó¿Ú ******************/
+    /****************** å¤–éƒ¨æ¥å£ ******************/
 
-    // ´ò¿ª
+    // æ‰“å¼€
     This.Open = function()
     {
-        // ÒÑ´ò¿ª£¬ÔòÖ±½Ó·µ»Ø£»
+        // å·²æ‰“å¼€ï¼Œåˆ™ç›´æ¥è¿”å›ï¼›
         if(bOpen)
         {
             return;
         }
         ShortKey.LockAll();
         OverLayer.Open();
-        ShowToCenter.MoveToCenter( win.id ); // ¾ÓÖĞ
+        ShowToCenter.MoveToCenter( win.id ); // å±…ä¸­
         OpenWin(win);
         SetFocus();
-        //ClearInterval(timer);   // ¹Ø±Õ¶¨Ê±Æ÷£¨¼û[XXX:34438285]´¦ËµÃ÷£©
+        //ClearInterval(timer);   // å…³é—­å®šæ—¶å™¨ï¼ˆè§[XXX:34438285]å¤„è¯´æ˜ï¼‰
         bOpen = true;
     }
 
-    // ¹Ø±Õ
+    // å…³é—­
     This.Close = function()
     {
-        // ÒÑ¹Ø±Õ£¬ÔòÖ±½Ó·µ»Ø£»
+        // å·²å…³é—­ï¼Œåˆ™ç›´æ¥è¿”å›ï¼›
         if(! bOpen)
         {
             return;
@@ -52,50 +52,50 @@ function LoginWin()
         ShortKey.Unlock();
         OverLayer.Close();
         CloseWin(win);
-        //timer = SetInterval(Ping, interval); // ÖØÆô¶¨Ê±Æ÷£¨¼û[XXX:34438285]´¦ËµÃ÷£©
+        //timer = SetInterval(Ping, interval); // é‡å¯å®šæ—¶å™¨ï¼ˆè§[XXX:34438285]å¤„è¯´æ˜ï¼‰
         bOpen = false;
     }
 
-    // ·¢ËÍµÇÂ¼ÇëÇó£¨Êµ¼ÊÉÏ±¾½Ó¿ÚÖ»ÔÚÄÚ²¿Ê¹ÓÃ£©
+    // å‘é€ç™»å½•è¯·æ±‚ï¼ˆå®é™…ä¸Šæœ¬æ¥å£åªåœ¨å†…éƒ¨ä½¿ç”¨ï¼‰
     This.Submit = function(forms)
     {
         var url = "login";
 
-        /* ×é×°Post²ÎÊı
+        /* ç»„è£…Postå‚æ•°
          */
         var post = "";
         post += "username=" + encodeURIComponent( $('user').value );
         post += "&password=" + encodeURIComponent( forms["password"].value );
         post += "&login=1";
 
-        // ·¢ËÍÇëÇóµ½·şÎñ¶Ë
+        // å‘é€è¯·æ±‚åˆ°æœåŠ¡ç«¯
         SubmitToServer(url, post, Response); 
-        // ´¦Àí»ØÓ¦
+        // å¤„ç†å›åº”
         function Response(str)
         {
             if("OK" == str || "" == str)
             {
-                /* ÑéÖ¤Í¨¹ı£¬¹Ø±ÕµÇÂ¼´°¿Ú£»
-                 * µ±ÓÃ»§´ò¿ªÁË¶à¸ö´°¿Ú£¬Ö»ÒªÔÚÒ»¸ö´°¿ÚÖĞÊäÈëÑéÖ¤ÂëÕıÈ·£¬ÔòÆäËü
-                 * ´°¿ÚµÄÑéÖ¤ÂëÊäÈë´°¿ÚÔòÒª×Ô¶¯¹Ø±Õ£»[XXX:34438285]
+                /* éªŒè¯é€šè¿‡ï¼Œå…³é—­ç™»å½•çª—å£ï¼›
+                 * å½“ç”¨æˆ·æ‰“å¼€äº†å¤šä¸ªçª—å£ï¼Œåªè¦åœ¨ä¸€ä¸ªçª—å£ä¸­è¾“å…¥éªŒè¯ç æ­£ç¡®ï¼Œåˆ™å…¶å®ƒ
+                 * çª—å£çš„éªŒè¯ç è¾“å…¥çª—å£åˆ™è¦è‡ªåŠ¨å…³é—­ï¼›[XXX:34438285]
                  */
                 This.Close();
             }
             else
             {
-                // ´íÎóÌáÊ¾
+                // é”™è¯¯æç¤º
                 $(err_msg_id).innerHTML = str;
             }
         }
     }
 
 
-    /****************** ÄÚ²¿´¦Àíº¯Êı ******************/
+    /****************** å†…éƒ¨å¤„ç†å‡½æ•° ******************/
     function Init()
     {
         if( !Create() )
         {
-            alert("´´½¨´°¿Ú³ö´í");
+            alert("åˆ›å»ºçª—å£å‡ºé”™");
             return false;
         }
         return true;
@@ -112,16 +112,16 @@ function LoginWin()
         }
 
         var pasd_id = "LOGIN_WIN29348204823572834";
-        tDiv.id = "LOGIN_WIN48583945394294"; // Ê¹ÓÃÒ»Ëæ»úid£¬ÒòÎªÓĞĞ©²Ù×÷ĞèÒªÓÃµ½id£»
+        tDiv.id = "LOGIN_WIN48583945394294"; // ä½¿ç”¨ä¸€éšæœºidï¼Œå› ä¸ºæœ‰äº›æ“ä½œéœ€è¦ç”¨åˆ°idï¼›
         tDiv.innerHTML = ""
             + "<div>"
-            + "<fieldset style='width:291px;'><legend>ÖØĞÂµÇÂ¼</legend>"
+            + "<fieldset style='width:291px;'><legend>é‡æ–°ç™»å½•</legend>"
             + "<center>"
             + "<form>"
             + "<br>"
-            + "ÃÜÂë£º<input name=password id=" + pasd_id + " type=password style='width:154px;'"
+            + "å¯†ç ï¼š<input name=password id=" + pasd_id + " type=password style='width:154px;'"
             + "         onkeydown=\"$('" + err_msg_id + "').innerHTML='';\">"
-            + "      <input type=submit class='TABTO_" + pasd_id + "' value='È·¶¨' onclick='LoginWin.Submit(this.form); return false;'>"
+            + "      <input type=submit class='TABTO_" + pasd_id + "' value='ç¡®å®š' onclick='LoginWin.Submit(this.form); return false;'>"
             + "</form>"
             + "</center>"
             + "</fieldset>"
@@ -139,14 +139,14 @@ function LoginWin()
         return true;
     }
 
-    // ÉèÖÃ½¹µãµ½ÊäÈë¿ò
+    // è®¾ç½®ç„¦ç‚¹åˆ°è¾“å…¥æ¡†
     function SetFocus()
     {
-        // ÃÜÂëÊäÈë¿ò
+        // å¯†ç è¾“å…¥æ¡†
         $(win.id).getElementsByTagName('input')[0].focus();
     }
 
-    // ¼ì²âµ±Ç°µÇÂ¼ÊÇ·ñÄËÓĞĞ§  [Rocky 2010-05-29 18:27:54]
+    // æ£€æµ‹å½“å‰ç™»å½•æ˜¯å¦ä¹ƒæœ‰æ•ˆ  [Rocky 2010-05-29 18:27:54]
     function Ping()
     {
         var url = "ping";
@@ -157,13 +157,13 @@ function LoginWin()
             return;
         }
         
-        /* ×é×°Post²ÎÊı
+        /* ç»„è£…Postå‚æ•°
          */
         var post = "username=" + user.value;
 
-        // ·¢ËÍÇëÇóµ½·şÎñ¶Ë
+        // å‘é€è¯·æ±‚åˆ°æœåŠ¡ç«¯
         SubmitToServer(url, post, Response); 
-        // ´¦Àí»ØÓ¦
+        // å¤„ç†å›åº”
         function Response(str)
         {
             if("OK" == str)
@@ -172,26 +172,26 @@ function LoginWin()
             }
             else
             {
-                // ÏÔÊ¾ÌáÊ¾
+                // æ˜¾ç¤ºæç¤º
                 $(err_msg_id).innerHTML = str;
-                // ´ò¿ªÖØĞÂµÇÂ¼´°¿Ú 
+                // æ‰“å¼€é‡æ–°ç™»å½•çª—å£ 
                 This.Open();
             }
         }
     }
 
-    // Ö´ĞĞ³õÊ¼»¯
+    // æ‰§è¡Œåˆå§‹åŒ–
     if( ! Init() )
     {
         return false;
     }
 
-    // ·ÇµÇÂ¼Ò³£¬ÔòÆô¶¯µÇÂ¼ÓĞĞ§¼ì²â£»
+    // éç™»å½•é¡µï¼Œåˆ™å¯åŠ¨ç™»å½•æœ‰æ•ˆæ£€æµ‹ï¼›
     if( location.href.indexOf('/login') == -1
         && location.href.indexOf('/register') == -1
       )
     {
-        // Æô¶¯¶¨Ê±Æ÷
+        // å¯åŠ¨å®šæ—¶å™¨
         timer = SetInterval(Ping, interval);   
     }
 
@@ -206,13 +206,13 @@ function LoginWin()
 
 
 /**********************************************************************
-Ê¹ÓÃ·½·¨£º
+ä½¿ç”¨æ–¹æ³•ï¼š
 
 html:
 
 
 History:
 
- 2010-05-29: 0.1°æ
+ 2010-05-29: 0.1ç‰ˆ
 
 **********************************************************************/

@@ -1,52 +1,52 @@
 /**********************************************************************
 *                                                                     *
-*   ¹¦ÄÜ : ÏÔÊ¾¡¢Òş²ØÖ¸¶¨¿Ø¼ş£¬²¢ÒÆ¶¯µ½´°¿ÚÖĞ¼ä£»                     *
-*   ±àĞ´ : Rocky                                                      *
+*   åŠŸèƒ½ : æ˜¾ç¤ºã€éšè—æŒ‡å®šæ§ä»¶ï¼Œå¹¶ç§»åŠ¨åˆ°çª—å£ä¸­é—´ï¼›                     *
+*   ç¼–å†™ : Rocky                                                      *
 *   mail : mypyramid@126.com                                          *
-*   ÈÕÆÚ : 2008-09-10                                                 *
-*   °æ±¾ : 1.0                                                        *
-*   ĞŞ¸Ä¡¢Ê¹ÓÃ·½·¨¼û±¾ÎÄ¼şµ×ËµÃ÷                                      *
+*   æ—¥æœŸ : 2008-09-10                                                 *
+*   ç‰ˆæœ¬ : 1.0                                                        *
+*   ä¿®æ”¹ã€ä½¿ç”¨æ–¹æ³•è§æœ¬æ–‡ä»¶åº•è¯´æ˜                                      *
 *                                                                     *
 **********************************************************************/
 
 
 function ShowToCenter()
 {
-    // ¶ÔÍâ½Ó¿Ú
+    // å¯¹å¤–æ¥å£
     ShowToCenter.MoveToCenter = MoveToCenter;
     ShowToCenter.Open = Open;
     ShowToCenter.Close = Close;
 
     /*
-     *  ÕıÔÚ²Ù×÷µÄ¿Ø¼ş¶ÓÁĞ£¬Ã¿µ±Open()Ê±£¬¾Í¼ÇÏÂ¸Ã¿Ø¼şµ½´ËÊı×é£»
+     *  æ­£åœ¨æ“ä½œçš„æ§ä»¶é˜Ÿåˆ—ï¼Œæ¯å½“Open()æ—¶ï¼Œå°±è®°ä¸‹è¯¥æ§ä»¶åˆ°æ­¤æ•°ç»„ï¼›
      */
     var aryId = [];
     var isIE = (navigator.userAgent.toLowerCase().indexOf("msie") != -1);
 
     /*
-     *  ÏÔÊ¾¿Ø¼ş
+     *  æ˜¾ç¤ºæ§ä»¶
      */
     function Open(id)
     {
         var obj = GetObj(id);
 
-        // ÒÆµ½ÖĞ¼ä
+        // ç§»åˆ°ä¸­é—´
         MoveToCenter(id);
 
-        // ÏÔÊ¾
+        // æ˜¾ç¤º
         obj.style.display = 'block';
 
         /*
-         *  ¼ÇÈë¶ÓÁĞ£»
-         *  ×¢Òâ£¬ÕâÀïÎ´²âÊÔ¶ÓÁĞÖĞ¸ÃÔªËØÊÇ·ñÒÑ´æÔÚ£¬µ±¶ÔÍ¬Ò»¿Ø¼ş¶à´ÎÁ¬Ğøµ÷
-         *  ÓÃOpen()Ê±¿ÉÄÜ³öÏÖÕâÖÖÇé¿ö¡£Ò»°ãÊ¹ÓÃÊ±£¬Ó¦È·±£²»»á¶à´ÎÁ¬Ğøµ÷ÓÃ
-         *  Open()£¬¼´µ÷ÓÃÒ»´ÎOpen()ºóÓ¦½Ó×ÅÊÇµ÷ÓÃClose()£»
+         *  è®°å…¥é˜Ÿåˆ—ï¼›
+         *  æ³¨æ„ï¼Œè¿™é‡Œæœªæµ‹è¯•é˜Ÿåˆ—ä¸­è¯¥å…ƒç´ æ˜¯å¦å·²å­˜åœ¨ï¼Œå½“å¯¹åŒä¸€æ§ä»¶å¤šæ¬¡è¿ç»­è°ƒ
+         *  ç”¨Open()æ—¶å¯èƒ½å‡ºç°è¿™ç§æƒ…å†µã€‚ä¸€èˆ¬ä½¿ç”¨æ—¶ï¼Œåº”ç¡®ä¿ä¸ä¼šå¤šæ¬¡è¿ç»­è°ƒç”¨
+         *  Open()ï¼Œå³è°ƒç”¨ä¸€æ¬¡Open()ååº”æ¥ç€æ˜¯è°ƒç”¨Close()ï¼›
          */
          aryId.push(id);
     }
 
     /*
-     *  Òş²Ø£¨¹Ø±Õ£©¿Ø¼ş
+     *  éšè—ï¼ˆå…³é—­ï¼‰æ§ä»¶
      */
     function Close()
     {
@@ -60,21 +60,21 @@ function ShowToCenter()
     }
 
     /*
-     *  ÓÉidÈ¡¿Ø¼ş
+     *  ç”±idå–æ§ä»¶
      */
     function GetObj(id)
     {
         var obj = document.getElementById(id);
         if(null == obj)
         {
-            alert("ShowToCenter.js: È¡¿Ø¼ş³ö´í£¬id=" + id);
+            alert("ShowToCenter.js: å–æ§ä»¶å‡ºé”™ï¼Œid=" + id);
             return null;
         }
         return obj;
     }
 
     /*
-     *  ¿Ø¼ş¾ÓÖĞÉèÖÃ
+     *  æ§ä»¶å±…ä¸­è®¾ç½®
      */
     function MoveToCenter(id)
     {
@@ -84,18 +84,18 @@ function ShowToCenter()
 
         /*
          *  Step 1:
-         *      Ê¹¿Ø¼şÏÔÊ¾£¬µ«ÉèÖÃÎªÍ¸Ã÷¡£ÒòÎªÈ¡¸ß¡¢¿íÖ»ÄÜ¶Ôstyle.displeyÎª
-         *      ""£¨¿Õ£©µÄ¿Ø¼şÓĞĞ§¡£×¢Òâ£¬ÔÚ²»Í¬ä¯ÀÀÆ÷ÖĞ¶ÔÊôĞÔµÄ²»Í¬ÉèÖÃ¡£
+         *      ä½¿æ§ä»¶æ˜¾ç¤ºï¼Œä½†è®¾ç½®ä¸ºé€æ˜ã€‚å› ä¸ºå–é«˜ã€å®½åªèƒ½å¯¹style.displeyä¸º
+         *      ""ï¼ˆç©ºï¼‰çš„æ§ä»¶æœ‰æ•ˆã€‚æ³¨æ„ï¼Œåœ¨ä¸åŒæµè§ˆå™¨ä¸­å¯¹å±æ€§çš„ä¸åŒè®¾ç½®ã€‚
          */
         if(isIE)
         {
-            // IEÖĞ
+            // IEä¸­
             opacity = obj.style.filter;
             obj.style.filter = "Alpha(Opacity=0)";
         }
         else
         {
-            // FFÖĞ
+            // FFä¸­
             opacity = obj.style.MozOpacity;
             obj.style.MozOpacity = 0;
         }
@@ -104,39 +104,39 @@ function ShowToCenter()
 
         /*
          *  Step 2:
-         *      ¾ÓÖĞ¡££¨×¢Òâ£¬±ØĞëÉèÖÃpositionÖµ²ÅÓĞĞ§¡££©
+         *      å±…ä¸­ã€‚ï¼ˆæ³¨æ„ï¼Œå¿…é¡»è®¾ç½®positionå€¼æ‰æœ‰æ•ˆã€‚ï¼‰
          */
         obj.style.position = "absolute";
-        // ´°¿Ú¸ß¡¢¿í£¨²»°üÀ¨¹ö¶¯Çø£©
+        // çª—å£é«˜ã€å®½ï¼ˆä¸åŒ…æ‹¬æ»šåŠ¨åŒºï¼‰
         var nWinWidth = document.body.clientWidth;
         var nWinHeight = document.body.clientHeight;
 
-        // ×¢Òâ£¬Èç¹û¿Ø¼şÊÇÒş²ØµÄ£¬Ôòobj.offsetWidth¡¢offsetHeightÎª0£»
+        // æ³¨æ„ï¼Œå¦‚æœæ§ä»¶æ˜¯éšè—çš„ï¼Œåˆ™obj.offsetWidthã€offsetHeightä¸º0ï¼›
         var nObjWidth = obj.offsetWidth;
         var nObjHeight = obj.offsetHeight;
 
-        // È¡¿Ø¼ş×óÉÏ½ÇÎ»ÖÃ£¬×¢Òâ¹ö¶¯µÄÆ«ÒÆ£»
+        // å–æ§ä»¶å·¦ä¸Šè§’ä½ç½®ï¼Œæ³¨æ„æ»šåŠ¨çš„åç§»ï¼›
         var nLeft = (nWinWidth - nObjWidth) / 2 + document.body.scrollLeft;
         var nTop = (nWinHeight - nObjHeight) / 2 + document.body.scrollTop;
 
-        // ¾ÓÖĞ
+        // å±…ä¸­
         obj.style.left = nLeft + 'px';
         obj.style.top = nTop + 'px';
 
         /*
          *  Step 3:
-         *      »¹Ô­
+         *      è¿˜åŸ
          */
         if(isIE)
         {
-            // IEÖĞ
+            // IEä¸­
             obj.style.filter = opacity;
             obj.style.display = display;
         }
         else
         {
             obj.style.display = display;
-            // FFÖĞ
+            // FFä¸­
             obj.style.MozOpacity = opacity;
             // Chrome
             obj.style.opacity = opacity;
@@ -144,7 +144,7 @@ function ShowToCenter()
     }
 }
 
-// Ö±½Ó³õÊ¼»¯
+// ç›´æ¥åˆå§‹åŒ–
 ShowToCenter();
 
 
@@ -158,16 +158,16 @@ ShowToCenter();
 
 
 /**********************************************************************
-Ê¹ÓÃ·½·¨£º
+ä½¿ç”¨æ–¹æ³•ï¼š
 
-        Ö±½Óµ÷ÓÃ£º
+        ç›´æ¥è°ƒç”¨ï¼š
 
-        ShowToCenter.Open(id)   -- ÏÔÊ¾
-        ShowToCenter.Close()    -- ¹Ø±Õ
+        ShowToCenter.Open(id)   -- æ˜¾ç¤º
+        ShowToCenter.Close()    -- å…³é—­
 
 
 History:
 
- 2008-09-25 : 1.1°æ
- 2008-09-10 : 1.0°æ
+ 2008-09-25 : 1.1ç‰ˆ
+ 2008-09-10 : 1.0ç‰ˆ
 **********************************************************************/

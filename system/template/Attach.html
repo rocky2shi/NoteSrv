@@ -13,38 +13,38 @@ a:hover{text-decoration:none; color:#FAEE0E;background-color:#212001;}
 </style>
 <script>
 
-// ·¢ËÍÉ¾³ıÃüÁî£¨url£©µ½·şÎñÆ÷
+// å‘é€åˆ é™¤å‘½ä»¤ï¼ˆurlï¼‰åˆ°æœåŠ¡å™¨
 function Delete(obj, key, urlfilename, filename)
 {
     if( "" == obj.title )
     {
-        alert("ÎÄ¼ş[" + filename + "]ÒÑ¾­±»É¾³ı");
+        alert("æ–‡ä»¶[" + filename + "]å·²ç»è¢«åˆ é™¤");
         return;
     }
     
-    if( ! confirm("È·¶¨É¾³ı[" + filename + "]?") )
+    if( ! confirm("ç¡®å®šåˆ é™¤[" + filename + "]?") )
     {
         return;
     }
 
     var url = "attach";
 
-    /* ×é×°Post²ÎÊı
+    /* ç»„è£…Postå‚æ•°
      */
     var post = "";
     post += "&key=" + key;
     post += "&file=" + urlfilename;
     post += "&delete_attach=1";
     
-    // ·¢ËÍÇëÇóµ½·şÎñ¶Ë
+    // å‘é€è¯·æ±‚åˆ°æœåŠ¡ç«¯
     SubmitToServer(url, post, Response); 
-    // ´¦Àí»ØÓ¦
+    // å¤„ç†å›åº”
     function Response(str)
     {
         if("OK" == str)
         {
             obj.title = "";
-            // ²»Ë¢ĞÂÒ³Ãæ£¬Ö»¼ÓÒ»É¾³ıÏßÀ´±íÊ¾£»
+            // ä¸åˆ·æ–°é¡µé¢ï¼ŒåªåŠ ä¸€åˆ é™¤çº¿æ¥è¡¨ç¤ºï¼›
             obj.parentNode.innerHTML = obj.parentNode.innerHTML.strike();
         }
         else
@@ -63,7 +63,7 @@ function Init()
 <body>
 
 
-<!-- ÁĞ³öÄÚÈİ -->
+<!-- åˆ—å‡ºå†…å®¹ -->
 <ol>
 <!----------------------------- list begin ------------------------------------->
 <!--$AttachList$GLOBAL$-->
@@ -78,18 +78,18 @@ function Init()
 
 
 
-<!--ÔÚ¸¸Ò³ÃæÏÔÊ¾¸½¼şÊı-->
+<!--åœ¨çˆ¶é¡µé¢æ˜¾ç¤ºé™„ä»¶æ•°-->
 <script>
 var obj = parent.document.getElementById('attach_count');
 if(null != obj)
 {
     if('SPAN' == obj.nodeName)
     {
-        obj.innerHTML = '¸½¼şÊı[<!--$AttachCount$-->]';
+        obj.innerHTML = 'é™„ä»¶æ•°[<!--$AttachCount$-->]';
     }
     else
     {
-        obj.value = '¸½¼şÊı[<!--$AttachCount$-->]';
+        obj.value = 'é™„ä»¶æ•°[<!--$AttachCount$-->]';
     }
 }
 </script>

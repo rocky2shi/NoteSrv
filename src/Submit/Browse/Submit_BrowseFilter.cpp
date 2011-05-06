@@ -70,8 +70,12 @@ int Submit_BrowseFilter::Deal(Page *page)
     // 取出客户端传来的值
     const string &timebeginchk       = page->GetRequest()->GetField("timebeginchk");
     const string &timeendchk         = page->GetRequest()->GetField("timeendchk");
+    const string &time_type          = page->GetRequest()->GetField("time_type");
     const string &query_keyword      = page->GetRequest()->GetField("query_keyword");
     const string &query_scope        = page->GetRequest()->GetField("query_scope");
+    const string &query_case_ignore  = (page->GetRequest()->GetField("query_case_ignore") == "0"
+                                        ? "0" :"1");
+    const string &query_relation     = page->GetRequest()->GetField("query_relation");
     const string &query_type         = page->GetRequest()->GetField("query_type");
     const string &result_win         = page->GetRequest()->GetField("result_win");
     const string &save_query_setting = page->GetRequest()->GetField("save_query_setting");
@@ -100,12 +104,15 @@ int Submit_BrowseFilter::Deal(Page *page)
         cfg->Set(filter, "qtend", qtend);
     }
 
-    cfg->Set(filter, "timebeginchk",  timebeginchk);
-    cfg->Set(filter, "timeendchk",    timeendchk);
-    cfg->Set(filter, "query_keyword", query_keyword);
-    cfg->Set(filter, "query_scope",   query_scope);
-    cfg->Set(filter, "query_type",    query_type);
-    cfg->Set(filter, "result_win",    result_win);
+    cfg->Set(filter, "timebeginchk",      timebeginchk);
+    cfg->Set(filter, "timeendchk",        timeendchk);
+    cfg->Set(filter, "time_type",         time_type);
+    cfg->Set(filter, "query_keyword",     query_keyword);
+    cfg->Set(filter, "query_scope",       query_scope);
+    cfg->Set(filter, "query_case_ignore", query_case_ignore);
+    cfg->Set(filter, "query_relation",    query_relation);
+    cfg->Set(filter, "query_type",        query_type);
+    cfg->Set(filter, "result_win",        result_win);
 
     // 是否需要保存
     if("" != save_query_setting)

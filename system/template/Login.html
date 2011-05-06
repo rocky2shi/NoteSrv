@@ -1,4 +1,4 @@
-<title>��¼</title>
+<title>登录</title>
 <input type=hidden id='user' value='<!--$CurrentUser$GLOBAL$-->'>
 <input type=hidden id='user_ip' value='<!--$ClientIp$GLOBAL$-->'>
 <input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
@@ -38,21 +38,21 @@ function Login(forms)
 {
     var url = "login";
 
-    /* ��װPost����
+    /* 组装Post参数
      */
     var post = "";
     post += "&username=" + encodeURIComponent(forms["username"].value);
     post += "&password=" + encodeURIComponent(forms["password"].value);
     post += "&login=1";
     
-    // �������󵽷����
+    // 发送请求到服务端
     SubmitToServer(url, post, Response); 
-    // ������Ӧ
+    // 处理回应
     function Response(str)
     {
         if("OK" == str)
         {
-            // ��¼�ɹ���ת����
+            // 登录成功，转跳：
             var page;
             if("administrator" == forms["username"].value)
             {
@@ -65,7 +65,7 @@ function Login(forms)
         }
         else
         {
-            // ���ô�����ʾ
+            // 设置错误提示
             $("auth_msg").innerHTML = str;
         }
     }
@@ -84,67 +84,67 @@ function Init()
 </script>
 
 
-<!-- ��¼�Ի��� -->
+<!-- 登录对话框 -->
 <table border="0" width="100%" height="73%"><tr><td align="center" valign="middle">
-<!-----------------------------------���� begin----------------------------------->
+<!-----------------------------------居中 begin----------------------------------->
 
 <table id="table_login" border="0" bgcolor="#FFFFFF" align="center" valign="middle">
 <form method="post" action="login">
     <tr align="center" valign="bottom" height="36px">
-        <td colspan="2">�û�����<input name='username' id='username' class='USERNAME FOCUS' value='rocky'></td> <!-- <!--$CurrentUser$GLOBAL$--> -->
+        <td colspan="2">用户名：<input name='username' id='username' class='USERNAME FOCUS' value='rocky'></td> <!-- <!--$CurrentUser$GLOBAL$--> -->
     </tr>
     <tr align="center" height="32px">
-        <td colspan="2">�ܡ��룺<input name='password' id='password' type='password' value='123456' onkeydown='$("auth_msg").innerHTML=""'></td>
+        <td colspan="2">密　码：<input name='password' id='password' type='password' value='123456' onkeydown='$("auth_msg").innerHTML=""'></td>
     </tr>
     <tr align="center">
-        <td align=center><span id="auth_msg" class="font12 red">&nbsp;<!--�����ش�����Ϣ--></span></td>
+        <td align=center><span id="auth_msg" class="font12 red">&nbsp;<!--存放相关错误信息--></span></td>
         <td align=right>
-            <input type=Submit class="button" value="��¼" onclick="Login(this.form); return false;">
-            <input type=button class="button TABTO_username" value="����" OnClick="About()">
+            <input type=Submit class="button" value="登录" onclick="Login(this.form); return false;">
+            <input type=button class="button TABTO_username" value="关于" OnClick="About()">
         </td>
     </tr>
 </form>
 </table>
 
-<!-----------------------------------���� end-------------------------------------->
+<!-----------------------------------居中 end-------------------------------------->
 </td></tr></table>
 
 
 
 
-<!----------------------------------------- ���� begin------------------------------------------>
+<!----------------------------------------- 关于 begin------------------------------------------>
 <div id="div_about" class="window" style="display:none;position:absolute;width:530px; top:0px; z-index:50;">
 <table border="1" cellspacing="1" bgcolor="#FFFFFF">
 <tr>
 <td>
 <table border="0" cellpadding="2" cellspacing="1">
 <td>
-<span class="tit">����</span><hr>
+<span class="tit">关于</span><hr>
 <span class="content">
-<h2><b><font face="����_GB2312" size="+2">���±�����Ϣ���ּǣ�</font></b></h2>
+<h2><b><font face="楷体_GB2312" size="+2">记事本，信息随手记！</font></b></h2>
 <pre style="margin-left:28px;">
-�汾��<!--$Version$GLOBAL$-->
-��д��Rocky
-QQ����15586350
-Mail��mypyramid@126.com
+版本：<!--$Version$GLOBAL$-->
+编写：Rocky
+QQ　：15586350
+Mail：mypyramid@126.com
 <i>
-    һ���Լ�¼���ݡ�ѧϰС����ΪĿ�ĵ�С��������̨CGI��C++ʵ�֣�
-Ӧ���˶�����ģʽ��Ŀ�궼��Ϊ��ʵ��һ�������ܡ�����չ�ķֲ�ʽ
-���ּ���ϵͳ����ӵ�ж�����web��������CGI�ͷ��������壩��
-    ��ʵ�ֵĹ��ܣ����¡����ݵ��뵼������ǩ��ȫ����������ݼ���
-�������ݼ��ܵȡ��򵥵ı������̲���ǿ��Ĺ��ܣ���ȥ�Ұɣ��������ء�
-    ��ע���˳���֮ǰ�ĺ�̨CGI��Perlʵ�֣�
+    一个以记录数据、学习小技巧为目的的小东东。后台CGI以C++实现，
+应用了多个设计模式，目标都是为了实现一个高性能、易扩展的分布式
+随手记事系统，并拥有独立的web服务器（CGI和服务器合体）。
+    已实现的功能：记事、数据导入导出、书签、全文搜索、快捷键操
+作、数据加密等。简单的表面下蕴藏着强大的功能，你去找吧，好玩着呢。
+    （注：此程序之前的后台CGI由Perl实现）
 </i>
 </pre>
 <div style="text-align:right; margin-bottom:5px;">
-<input type="button" value="ע���û�" OnClick=OpenPage("register?tag_page=register")>
-<input type="button" value="�һ�����" OnClick=OpenPage("register?tag_page=retrieve")>
-<input type="button" value="�޸�����" OnClick=OpenPage("register?tag_page=modify")>
+<input type="button" value="注册用户" OnClick=OpenPage("register?tag_page=register")>
+<input type="button" value="找回密码" OnClick=OpenPage("register?tag_page=retrieve")>
+<input type="button" value="修改密码" OnClick=OpenPage("register?tag_page=modify")>
 </div>
 
 <!--
 history:
-  2009-12-23 : [v3.7]�ӽ��Բ�����ʾ�������رգ�
+  2009-12-23 : [v3.7]加渐显部分提示窗口隐关闭；
 -->
 
 </span>
@@ -153,7 +153,7 @@ history:
 </tr>
 <tr>
 <td align="right">
-    <input type="button" class="button" value="�ر�" onClick="Esc()" title="��ݼ���Esc">
+    <input type="button" class="button" value="关闭" onClick="Esc()" title="快捷键：Esc">
 </td>
 </tr>
 </table>
@@ -161,7 +161,7 @@ history:
 </tr>
 </table>
 </div><!-- end of <div id="div_about"> -->
-<!----------------------------------------- ���� end-------------------------------------------->
+<!----------------------------------------- 关于 end-------------------------------------------->
 
 
 
@@ -171,5 +171,5 @@ history:
 
 
 
-<!--<script language=javascript>document.write("������ʱ��: " + document.lastModified)</script>-->
+<!--<script language=javascript>document.write("最后更新时间: " + document.lastModified)</script>-->
 

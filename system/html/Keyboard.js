@@ -2,13 +2,13 @@
 
 
 /*
- *  ¶¨Òå°´¼üÃû×Ö´®
+ *  å®šä¹‰æŒ‰é”®åå­—ä¸²
  *
- *      °´¼üÃû       ´úÂë         ¶¨Òå
+ *      æŒ‰é”®å       ä»£ç          å®šä¹‰
  *     -------------------------------------------------
- *      0¡«9         48¡«57       KEY_0¡«KEY_9
- *      A¡«Z         65¡«90       KEY_A¡«KEY_Z
- *      F1¡«F12      112¡«123     KEY_F1¡«KEY_F12
+ *      0ï½9         48ï½57       KEY_0ï½KEY_9
+ *      Aï½Z         65ï½90       KEY_Aï½KEY_Z
+ *      F1ï½F12      112ï½123     KEY_F1ï½KEY_F12
  *      ~            192          KEY_
  *      +            107(187)     KEY_ADD
  *      -            109(189)     KEY_SUB
@@ -18,16 +18,16 @@
  *      {            219          KEY_
  *      }            221          KEY_
  *      |            220          KEY_
- *      ×ó¼ıÍ·       37           KEY_LEFT
- *      ÓÒ¼ıÍ·       39           KEY_RIGHT
- *      ÉÏ¼ıÍ·       38           KEY_UP
- *      ÏÂ¼ıÍ·       40           KEY_DOWN
- *      »Ø³µ         13           KEY_ENTER
- *      ÍË¸ñ         8            KEY_BACKSPACE
- *      ¿Õ¸ñ         32           KEY_SPACE
+ *      å·¦ç®­å¤´       37           KEY_LEFT
+ *      å³ç®­å¤´       39           KEY_RIGHT
+ *      ä¸Šç®­å¤´       38           KEY_UP
+ *      ä¸‹ç®­å¤´       40           KEY_DOWN
+ *      å›è½¦         13           KEY_ENTER
+ *      é€€æ ¼         8            KEY_BACKSPACE
+ *      ç©ºæ ¼         32           KEY_SPACE
  *      Esc          27           KEY_ESC
  *      Tab          9            KEY_TAB
- *      ´óĞ¡Ğ´       20           KEY_CAPSLOCK
+ *      å¤§å°å†™       20           KEY_CAPSLOCK
  *      Delete       46           KEY_DELETE
  *      PageUp       33           KEY_PAGEUP
  *      PageDown     34           KEY_PAGEDOWN
@@ -40,7 +40,7 @@
  */
 
 
-// °´¼ü´úÂë¡¢¶ÔÓ¦´®£»
+// æŒ‰é”®ä»£ç ã€å¯¹åº”ä¸²ï¼›
 var KeyStr = [
         [48, "0"], [49, "1"], [50, "2"], [51, "3"], [52, "4"], [53, "5"], [54, "6"], [55, "7"], [56, "8"], [57, "9"],
         [65, "A"], [66, "B"], [67, "C"], [68, "D"], [69, "E"], [70, "F"], [71, "G"], [72, "H"], [73, "I"], [74, "J"], [75, "K"], [76, "L"], [77, "M"], [78, "N"], [79, "O"], [80, "P"], [81, "Q"], [82, "R"], [83, "S"], [84, "T"], [85, "U"], [86, "V"], [87, "W"], [88, "X"], [89, "Y"], [90, "Z"],
@@ -64,10 +64,10 @@ var KeyStr = [
         [109,"SUB"]
     ];
 
-// ´æ·ÅËùÓĞ¶¨ÒåµÄ°´¼ü¶ÔÓ¦µÄÃüÃû£¨×Ö´®£©
+// å­˜æ”¾æ‰€æœ‰å®šä¹‰çš„æŒ‰é”®å¯¹åº”çš„å‘½åï¼ˆå­—ä¸²ï¼‰
 var KEY = [];
 
-// ¶¯Ì¬¹¹¹¹ÔìÁ½×é±äÁ¿£ºÈç KEY_A = 48; KEY[48] = 'KEY_A';
+// åŠ¨æ€æ„æ„é€ ä¸¤ç»„å˜é‡ï¼šå¦‚ KEY_A = 48; KEY[48] = 'KEY_A';
 var keys = '';
 var p='';
 for(var i=0; (p = KeyStr[i]); i++)
@@ -85,16 +85,16 @@ function ShortKey()
     var THIS = ShortKey;
     var mapFun = {};
     var mapArgs = {};
-    var bLocked = false;    // true:±íÊ¾¿ì½İ¼üÒÑ±»ËøĞÅ£¨Esc³ıÍâ£©£¬false±íÊ¾Ã»Ëø£»
-    var bLockAll= false;    // Ëø¶¨ËùÓĞ¼ü£¬°üÀ¨Esc¼ü [2010-05-29]
+    var bLocked = false;    // true:è¡¨ç¤ºå¿«æ·é”®å·²è¢«é”ä¿¡ï¼ˆEscé™¤å¤–ï¼‰ï¼Œfalseè¡¨ç¤ºæ²¡é”ï¼›
+    var bLockAll= false;    // é”å®šæ‰€æœ‰é”®ï¼ŒåŒ…æ‹¬Escé”® [2010-05-29]
 
-    // ³õÊ¼»¯
+    // åˆå§‹åŒ–
     Init();
 
     /*
-     *  ¹¦ÄÜ£º¶ÔÍâ½Ó¿Ú£¬×¢²á°´Å¥²Ù×÷£»
-     *  ²ÎÊı£º$1--º¯ÊıÃû£¨±ØĞë£©
-     *        $2~n--º¯Êı$1µÄ²ÎÊı£¨¿ÉÑ¡£©
+     *  åŠŸèƒ½ï¼šå¯¹å¤–æ¥å£ï¼Œæ³¨å†ŒæŒ‰é’®æ“ä½œï¼›
+     *  å‚æ•°ï¼š$1--å‡½æ•°åï¼ˆå¿…é¡»ï¼‰
+     *        $2~n--å‡½æ•°$1çš„å‚æ•°ï¼ˆå¯é€‰ï¼‰
      */
     THIS.Register = function()
     {
@@ -103,11 +103,11 @@ function ShortKey()
 
         if(mapFun[keys])
         {
-            alert('°´¼üÒÑ±»Õ¼ÓÃ: ' + keys);
+            alert('æŒ‰é”®å·²è¢«å ç”¨: ' + keys);
             return;
         }
 
-        // È¡³öº¯ÊıÃû¡¢²ÎÊı
+        // å–å‡ºå‡½æ•°åã€å‚æ•°
         var fun = arguments[1];
         var args = [].slice.call(arguments, 2);
 
@@ -117,7 +117,7 @@ function ShortKey()
     }
 
     /*
-     *  ¿ì½İ¼üÊÇ·ñ±»Ëø¶¨
+     *  å¿«æ·é”®æ˜¯å¦è¢«é”å®š
      */
     THIS.IsLock = function()
     {
@@ -125,13 +125,13 @@ function ShortKey()
     }
 
     /*
-     *  Ëø¶¨¿ì½İ¼ü
+     *  é”å®šå¿«æ·é”®
      */
     THIS.Lock = function()
     {
         bLocked = true;
     }
-    // Ò²Ëø¶¨Esc¼ü
+    // ä¹Ÿé”å®šEscé”®
     THIS.LockAll = function()
     {
         bLocked = true;
@@ -139,7 +139,7 @@ function ShortKey()
     }
 
     /*
-     *  ½âËø¿ì½İ¼ü
+     *  è§£é”å¿«æ·é”®
      */
     THIS.Unlock = function()
     {
@@ -148,43 +148,43 @@ function ShortKey()
     }
 
     /*
-     *  »ñÈ¡°´¼ü¶ÔÓ¦µÄ×éºÏ´®
+     *  è·å–æŒ‰é”®å¯¹åº”çš„ç»„åˆä¸²
      */
     function MakeKeyStr(ctrl, alt, shift, code)
     {
         var keys = '';
 
-        // CTRL + ALT + SHIFT + °´¼ü
+        // CTRL + ALT + SHIFT + æŒ‰é”®
         if(ctrl && alt && shift)
         {
             keys = 'CTRL_' + 'ALT_' + 'SHIFT_';
         }
-        // CTRL + ALT + °´¼ü
+        // CTRL + ALT + æŒ‰é”®
         else if(ctrl && alt)
         {
             keys = 'CTRL_' + 'ALT_';
         }
-        // CTRL + SHIFT + °´¼ü
+        // CTRL + SHIFT + æŒ‰é”®
         else if(ctrl && shift)
         {
             keys = 'CTRL_' + 'SHIFT_';
         }
-        // ALT + SHIFT + °´¼ü
+        // ALT + SHIFT + æŒ‰é”®
         else if(alt && shift)
         {
             keys = 'ALT_' + 'SHIFT_';
         }
-        // CTRL + °´¼ü
+        // CTRL + æŒ‰é”®
         else if(ctrl)
         {
             keys = 'CTRL_';
         }
-        // ALT + °´¼ü
+        // ALT + æŒ‰é”®
         else if(alt)
         {
             keys = 'ALT_';
         }
-        // SHIFT + °´¼ü
+        // SHIFT + æŒ‰é”®
         else if(shift)
         {
             keys = 'SHIFT_';
@@ -195,12 +195,12 @@ function ShortKey()
         {
             return null;
         }
-        keys = "KEY_" + keys + KEY[code];  // ÔÙ¼ÓÉÏÇ°×º
+        keys = "KEY_" + keys + KEY[code];  // å†åŠ ä¸Šå‰ç¼€
         return keys;
     }
 
     /*
-     *  Ö´ĞĞ°´¼üµÄ¶¯×÷
+     *  æ‰§è¡ŒæŒ‰é”®çš„åŠ¨ä½œ
      */
     function OnKeyDown(event)
     {
@@ -208,7 +208,7 @@ function ShortKey()
 
         var keyCode = event.keyCode;
 
-        // Í³Ò»¼üÅÌ´úÂë
+        // ç»Ÿä¸€é”®ç›˜ä»£ç 
         if(Version.ie() || Version.chrome()) // [Rocky 2010-05-26 16:43:39]
         {
             switch(keyCode)
@@ -231,10 +231,10 @@ function ShortKey()
             }
         }
 
-        // ½ûÖ¹¿ì½İ¼ü
+        // ç¦æ­¢å¿«æ·é”®
         if( bLockAll || (27 != keyCode && bLocked) )
         {
-            window.status = '°´¼ü±»Ëø¶¨';
+            window.status = 'æŒ‰é”®è¢«é”å®š';
             return;
         }
 
@@ -259,18 +259,18 @@ function ShortKey()
     }
 
     /*
-     *  ÉèÖÃÏµÍ³È«¾Ö°´¼ü·´Ó¦
+     *  è®¾ç½®ç³»ç»Ÿå…¨å±€æŒ‰é”®ååº”
      */
     function Init()
     {
         if( Version.ie() )
         {
-            //Ö§³Ö IE
+            //æ”¯æŒ IE
             document.attachEvent("onkeydown", OnKeyDown);
         }
         else
         {
-            //Ö§³Ö FF
+            //æ”¯æŒ FF
             document.addEventListener("keydown", OnKeyDown, false);
         }
     }
@@ -285,7 +285,7 @@ function ShortKey()
 
 
 /*
- *  Ê¹ÓÃÊ¾Àı
+ *  ä½¿ç”¨ç¤ºä¾‹
  *
  *  function AltN()
  *  {

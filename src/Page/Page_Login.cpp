@@ -174,13 +174,13 @@ int Page_Login::Deal()
             }
 
             // 构造Cookie和跳转头
-            const string html = "HTTP/1.1 200 OK\n"
-                                "Date: " + GmgTime() + "\n"
-                                "Server: NoteSrv v0.6\n"
-                                "Set-Cookie: id=" + id + "; path=/;\n"
-                                "Keep-Alive: timeout=15, max=100\n"
-                                "Content-Type: text/html; charset=GB2312\n"
-                                "\n"
+            const string html = "HTTP/1.1 200 OK\r\n"
+                                "Date: " + GmgTime() + "\r\n"
+                                "Server: NoteSrv v0.7\r\n"
+                                "Set-Cookie: id=" + id + "; path=/;\r\n"
+                                "Keep-Alive: timeout=15, max=100\r\n"
+                                "Content-Type: text/html; charset=utf-8\r\n"
+                                "\r\n"
                                 "OK";
 
             // 认证通过，记到缓存；
@@ -196,7 +196,7 @@ int Page_Login::Deal()
         /*
          * 发送出错提示信息
          */
-        ChineseCoding("gb18030", "utf-8").Converter(msg, msg);
+        // ChineseCoding("gb18030", "utf-8").Converter(msg, msg); // delete -- Rocky 2011-05-06 17:05:48
         m_request->GetConnect()->Send( msg );
         return OK;
     }

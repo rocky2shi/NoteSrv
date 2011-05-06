@@ -1,7 +1,7 @@
 /************************************************************
 *                                                           *
-*   ×÷Õß: rocky                                             *
-*   ¹¦ÄÜ: ·ç¸ñÉèÖÃ   		                                *
+*   ä½œè€…: rocky                                             *
+*   åŠŸèƒ½: é£æ ¼è®¾ç½®   		                                *
 *                                                           *
 ************************************************************/
 
@@ -25,12 +25,12 @@ label {
     cursor: pointer;
 }
 
-/* É¾³ıÏß */
+/* åˆ é™¤çº¿ */
 strike{
 	color:#FA8072;
 }
 
-/* message.cgiÁĞ±í¡¢browse.cgi±êÌâ´¦¸½¼şµÈÓÃµ½ */
+/* message.cgiåˆ—è¡¨ã€browse.cgiæ ‡é¢˜å¤„é™„ä»¶ç­‰ç”¨åˆ° */
 a:link{text-decoration:none; color:#000000}
 a:visited{text-decoration:none; color:#000000}
 a:active{text-decoration:none; color:#F2E231}
@@ -74,7 +74,7 @@ a:hover{text-decoration:underline; color:#F2E231}
 	background-color: #D8DAFE;
 }
 
-/* ÎÄ±¾¾ÓÖĞ */
+/* æ–‡æœ¬å±…ä¸­ */
 .input_text_center{
     text-align:center;
 }
@@ -142,10 +142,10 @@ a:hover.time{
 }
 
 #title_item{
-	color:#FA8072; font-size:38px; font-family:"»ªÎÄĞÂÎº"; position:absolute; top:28px; left:190px; z-Index:12; white-space: nowrap;
+	color:#FA8072; font-size:38px; font-family:"åæ–‡æ–°é­"; position:absolute; top:28px; left:190px; z-Index:12; white-space: nowrap;
 }
 #title_item2{
-	color:#ADD8E6; font-size:38px; font-family:"»ªÎÄĞÂÎº"; position:absolute; top:30px; left:192px; z-Index:11; white-space: nowrap;
+	color:#ADD8E6; font-size:38px; font-family:"åæ–‡æ–°é­"; position:absolute; top:30px; left:192px; z-Index:11; white-space: nowrap;
 }
 
 #login_user{
@@ -153,7 +153,7 @@ a:hover.time{
 	color:blue;
 }
 
-/* ÃÉ¸Ç²ã */
+/* è’™ç›–å±‚ */
 #overlayer {
     background-color:#454545;
     opacity: 0.60;
@@ -165,41 +165,41 @@ a:hover.time{
 	background-color:#FEA3B7;
 }
 
-.NOTEMPTY{      /*ÊÇ·ñÄÜ¿Õ*/
+.NOTEMPTY{      /*æ˜¯å¦èƒ½ç©º*/
 }
 
-.ONLYLETTER{    /*Ö»ÄÜ°üº¬×ÖÄ¸*/
+.ONLYLETTER{    /*åªèƒ½åŒ…å«å­—æ¯*/
 }
 
-.ONLYDIGIT{     /*Ö»ÄÜ°üº¬Êı×Ö*/
+.ONLYDIGIT{     /*åªèƒ½åŒ…å«æ•°å­—*/
 }
 
-.FLOAT{         /* ÊµÊı£¨¼´Ö»ÄÜÊÇÊı×ÖºÍµã£©*/
+.FLOAT{         /* å®æ•°ï¼ˆå³åªèƒ½æ˜¯æ•°å­—å’Œç‚¹ï¼‰*/
 }
 
-.FILENAME{      /*Ö»ÄÜÊÇ°üº¬ºÏ·¨ÎÄ¼şÃû×Ö·û*/
+.FILENAME{      /*åªèƒ½æ˜¯åŒ…å«åˆæ³•æ–‡ä»¶åå­—ç¬¦*/
 }
 
 .EMAIL{         /*E-mail*/
 }
 
-.USERNAME{      /*ÓÃ»§Ãû*/
+.USERNAME{      /*ç”¨æˆ·å*/
 }
 
-.FOCUS{         /*È¡µÃ½¹µã*/
+.FOCUS{         /*å–å¾—ç„¦ç‚¹*/
 }
 
-.DISCOLOR{      /*Êó±ê»®¹ıÊ±±äÉ«*/
+.DISCOLOR{      /*é¼ æ ‡åˆ’è¿‡æ—¶å˜è‰²*/
 }
 
-.TABTO_id{      /* µ±¿Ø¼şÊ§È¥½¹µãÊ±£¬°Ñ½¹µãÒÆµ½id¿Ø¼ş */
+.TABTO_id{      /* å½“æ§ä»¶å¤±å»ç„¦ç‚¹æ—¶ï¼ŒæŠŠç„¦ç‚¹ç§»åˆ°idæ§ä»¶ */
 }
 /************************************************************/
 
 
 
 /************************************************************/
-/*²Ëµ¥Ñ¡ÏîÉèÖÃ*/
+/*èœå•é€‰é¡¹è®¾ç½®*/
 #operator{
 	width: 38px;
 	height: 18px;
@@ -207,8 +207,8 @@ a:hover.time{
 }
 #menu{
 	font-size:14px;
-	background: #dfdfdf;   			/*¶¨Òå±³¾°ÑÕÉ«*/
-	border:#fff 2px solid;  		/*¶¨Òå±ß¿òÎª2px°×É«ÏßÌõ*/
+	background: #dfdfdf;   			/*å®šä¹‰èƒŒæ™¯é¢œè‰²*/
+	border:#fff 2px solid;  		/*å®šä¹‰è¾¹æ¡†ä¸º2pxç™½è‰²çº¿æ¡*/
 	position:absolute;
 	z-Index:20;
 	width:70px;
@@ -226,7 +226,7 @@ a:hover.time{
 }
 
 /************************************************************/
-/*ÉÏÏÂ¹ö¶¯°´Å¥*/
+/*ä¸Šä¸‹æ»šåŠ¨æŒ‰é’®*/
 #scroll_up_down{
 	position:absolute;
 	z-index:10;
@@ -253,7 +253,7 @@ a:hover.time{
 	color:#FA8072;
 }
 /************************************************************/
-/*ÉèÖÃ´°¿Ú*/
+/*è®¾ç½®çª—å£*/
 .window{
     z-index:50;
     position:absolute;
@@ -281,10 +281,10 @@ a:hover.time{
 }
 
 /************************************************************/
-/* ¹éÀàÑ¡Ôñ²Ëµ¥ */
+/* å½’ç±»é€‰æ‹©èœå• */
 .type_select_menu{
-	background: #dfdfdf;   			/*¶¨Òå±³¾°ÑÕÉ«*/
-	border:#5D5D5D 2px solid;  		/*¶¨Òå±ß¿òÎª2px°×É«ÏßÌõ*/
+	background: #dfdfdf;   			/*å®šä¹‰èƒŒæ™¯é¢œè‰²*/
+	border:#5D5D5D 2px solid;  		/*å®šä¹‰è¾¹æ¡†ä¸º2pxç™½è‰²çº¿æ¡*/
 	z-Index:51;
 }
 .type_select_menu label{
@@ -300,7 +300,7 @@ a:hover.time{
 }
 
 /************************************************************/
-/* ±êÇ©Ò³ */
+/* æ ‡ç­¾é¡µ */
 .tagBoxHead ul { height:25px; margin:0 0 0 1em; padding:0}
 .tagBoxHead li { float:left; height:24px; list-style:none; margin-right:2px}
 .tagBoxHead li a { float:left; height:24px; line-height:24px; padding:0 1em; background:#eee; text-decoration:none; color:#8F98A7; border:1px solid #999; border-bottom:none}

@@ -12,7 +12,7 @@ input, label{
 
 
 <script>
-// ¶¯Ì¬µØ°ÑÍ¼Ïñ¼ÓÔØµ½<img>ÉÏ
+// åŠ¨æ€åœ°æŠŠå›¾åƒåŠ è½½åˆ°<img>ä¸Š
 function PreviewImg(url, name)
 {
     var img = document.getElementById("img_preview");
@@ -20,12 +20,12 @@ function PreviewImg(url, name)
     img.name = name;
 }
 
-// È¡Í¼ÏñĞÅÏ¢£¨src£¬ÃûµÈ£©
+// å–å›¾åƒä¿¡æ¯ï¼ˆsrcï¼Œåç­‰ï¼‰
 function GetImgInfo()
 {
     var img = document.getElementById("img_preview");
     var info = {};
-    info.src = img.src.replace(/^http:\/\/[^\/]*/, '');  // È¥µôä¯ÀÀÆ÷×Ô¶¯¼ÓÉÏµÄÓòÃûµÈÇ°×º
+    info.src = img.src.replace(/^http:\/\/[^\/]*/, '');  // å»æ‰æµè§ˆå™¨è‡ªåŠ¨åŠ ä¸Šçš„åŸŸåç­‰å‰ç¼€
     info.name = img.name;
     return info;
 }
@@ -36,7 +36,7 @@ function Esc()
     {
         return;
     }
-    // µ÷¸¸´°¿ÚµÄº¯Êı
+    // è°ƒçˆ¶çª—å£çš„å‡½æ•°
     parent.Esc();
 }
 
@@ -52,7 +52,7 @@ function Init()
 
 <body>
 
-<!-- ÁĞ³öÍ¼Æ¬ÁĞ±í -->
+<!-- åˆ—å‡ºå›¾ç‰‡åˆ—è¡¨ -->
 <table width=100% border=0 cellpadding=0 cellspacing=0>
   <tr>
     <td align=left valign=top>
@@ -63,7 +63,7 @@ function Init()
         </ol>
     </td>
     <td align=right>
-        <img id="img_preview" src="" width="200px" border="1" style="display:<!--$ImgDisplay$-->;" title="Ô¤ÀÀĞ¡´°¿Ú" alt="Ô¤ÀÀĞ¡´°¿Ú">
+        <img id="img_preview" src="" width="200px" border="1" style="display:<!--$ImgDisplay$-->;" title="é¢„è§ˆå°çª—å£" alt="é¢„è§ˆå°çª—å£">
     </td>
   </tr>
 </table>

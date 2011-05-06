@@ -85,6 +85,16 @@ string Tag_BrowseFilterItems::Get(Page *page)
     {
         return cfg->Get(filter, "qtend");
     }
+    else if("chk_time_type_create" == m_id)
+    {
+        const string &value = cfg->Get(filter, "time_type");
+        return "create" == value ? "checked" : "";
+    }
+    else if("chk_time_type_modify" == m_id)
+    {
+        const string &value = cfg->Get(filter, "time_type");
+        return "modify" == value ? "checked" : "";
+    }
 
     /*
      * 关键字过滤项
@@ -103,10 +113,20 @@ string Tag_BrowseFilterItems::Get(Page *page)
         const string &query_scope = cfg->Get(filter, "query_scope");
         return "content" == query_scope ? "checked" : "";
     }
-    else if("chk_all" == m_id)
+    else if("chk_case_ignore" == m_id) // 当0时，为区分大小写（注意，页面的命名有点易乱）
     {
-        const string &query_scope = cfg->Get(filter, "query_scope");
-        return "all" == query_scope ? "checked" : "";
+        const string &value = cfg->Get(filter, "query_case_ignore");
+        return "0" == value ? "checked" : "";
+    }
+    else if("chk_relation_and" == m_id)
+    {
+        const string &value = cfg->Get(filter, "query_relation");
+        return "and" == value ? "checked" : "";
+    }
+    else if("chk_relation_or" == m_id)
+    {
+        const string &value = cfg->Get(filter, "query_relation");
+        return "or" == value ? "checked" : "";
     }
 
     /*
@@ -162,9 +182,13 @@ static Tag_BrowseFilterItems tmp4("browse", "qtend");
 static Tag_BrowseFilterItems tmp5("browse", "query_keyword");
 static Tag_BrowseFilterItems tmp6("browse", "chk_title");
 static Tag_BrowseFilterItems tmp7("browse", "chk_content");
-static Tag_BrowseFilterItems tmp8("browse", "chk_all");
 static Tag_BrowseFilterItems tmp9("browse", "chk_blank");
 static Tag_BrowseFilterItems tmp10("browse", "chk_self");
 static Tag_BrowseFilterItems tmp11("browse", "result_win");
+static Tag_BrowseFilterItems tmp12("browse", "chk_case_ignore");
+static Tag_BrowseFilterItems tmp13("browse", "chk_relation_and");
+static Tag_BrowseFilterItems tmp14("browse", "chk_relation_or");
+static Tag_BrowseFilterItems tmp15("browse", "chk_time_type_create");
+static Tag_BrowseFilterItems tmp16("browse", "chk_time_type_modify");
 
 }// end of TAG_BROWSEFILTERITEMS_SPACE

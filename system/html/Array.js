@@ -1,19 +1,19 @@
 /************************************************************
 *                                                           *
-*   ¹¦ÄÜ   : ÈÕÆÚÉèÖÃ¿Ø¼ş                                   *
-*   ×÷Õß   : shizw                                          *
+*   åŠŸèƒ½   : æ—¥æœŸè®¾ç½®æ§ä»¶                                   *
+*   ä½œè€…   : shizw                                          *
 *   E-mail : mypyramid@126.com                              *
-*   ÈÕÆÚ   : 2007-1-30                                      *
-*   ĞŞ¸Ä   : 2007-2-6                                       *
-*   °æ±¾   : 1.0                                            *
-*	Ê¹ÓÃ·½·¨¼û±¾ÎÄ¼şµ×ËµÃ÷                                  *
+*   æ—¥æœŸ   : 2007-1-30                                      *
+*   ä¿®æ”¹   : 2007-2-6                                       *
+*   ç‰ˆæœ¬   : 1.0                                            *
+*	ä½¿ç”¨æ–¹æ³•è§æœ¬æ–‡ä»¶åº•è¯´æ˜                                  *
 *                                                           *
 ************************************************************/
 
 
 
 /******************************************************************************/
-// Èç¹ûÍâ²¿ÒÑ¶¨ÒåÁËÕâ¼¸¸öº¯Êı£¬ÔòÊ¹ÓÃÍâ²¿¶¨ÒåµÄ
+// å¦‚æœå¤–éƒ¨å·²å®šä¹‰äº†è¿™å‡ ä¸ªå‡½æ•°ï¼Œåˆ™ä½¿ç”¨å¤–éƒ¨å®šä¹‰çš„
 if(typeof GetObj != 'function')
 {
 	GetObj = function(obj)
@@ -26,7 +26,7 @@ if(typeof GetObj != 'function')
 			return tmp;
 	}
 }
-//È¡µÃ¿Ø¼şµÄ¾ø¶ÔÎ»ÖÃ(x, y), objIDÎª¶ÔÏóID;
+//å–å¾—æ§ä»¶çš„ç»å¯¹ä½ç½®(x, y), objIDä¸ºå¯¹è±¡ID;
 if(typeof GetPosition != 'function')
 {
 	GetPosition = function(objID)
@@ -51,18 +51,18 @@ if(typeof GetPosition != 'function')
 		return pos;
 	}
 }
-// È¡µ±ÔÂÌìÊı£¬¼°µ±ÔÂ1ÈÕÊÇĞÇÆÚ¼¸
+// å–å½“æœˆå¤©æ•°ï¼ŒåŠå½“æœˆ1æ—¥æ˜¯æ˜ŸæœŸå‡ 
 if(typeof calendar != 'function')
 {
 	calendar = function(y,m)
 	{
 	    var solarMonth=new Array(31,28,31,30,31,30,31,31,30,31,30,31);
-	    var sDObj = new Date(y,m,1,0,0,0,0);    //µ±ÔÂÒ»ÈÕÈÕÆÚ
+	    var sDObj = new Date(y,m,1,0,0,0,0);    //å½“æœˆä¸€æ—¥æ—¥æœŸ
 	
-	    this.length    = solarDays(y, m);    //¹«Àúµ±ÔÂÌìÊı
-	    this.firstWeek = sDObj.getDay();    //¹«Àúµ±ÔÂ1ÈÕĞÇÆÚ¼¸
+	    this.length    = solarDays(y, m);    //å…¬å†å½“æœˆå¤©æ•°
+	    this.firstWeek = sDObj.getDay();    //å…¬å†å½“æœˆ1æ—¥æ˜ŸæœŸå‡ 
 	
-	    // ·µ»Ø¹«Àú yÄêÄ³m+1ÔÂµÄÌìÊı
+	    // è¿”å›å…¬å† yå¹´æŸm+1æœˆçš„å¤©æ•°
 	    function solarDays(y,m)
 	    {
 	        if(m==1)
@@ -82,14 +82,14 @@ if(typeof calendar != 'function')
 
 
 
-/* Àà´úÂë */
+/* ç±»ä»£ç  */
 function MonthCalendar(idSpan)
 {
     var THIS = MonthCalendar;
-    // ÈÕÆÚ¿Ø¼şÑÕÉ«
+    // æ—¥æœŸæ§ä»¶é¢œè‰²
     THIS.colorDateOver = '#F3EF98';
     THIS.colorDateSel = '#F3EF98';
-    // µ±Ç°¼ÇÂ¼µÄÈÕÆÚ
+    // å½“å‰è®°å½•çš„æ—¥æœŸ
     THIS.thisYear = '';
     THIS.thisMonth = '';
     THIS.thisDate = '';
@@ -97,7 +97,7 @@ function MonthCalendar(idSpan)
     THIS.objOwner = '';
     THIS.idSpan = idSpan?idSpan:'MonthCalendar';
     THIS.error = '';
-    // ÈÕÆÚ¿Ø¼şÉÏµÄÏÔÊ¾¿Ø¼ş¾ä±ú
+    // æ—¥æœŸæ§ä»¶ä¸Šçš„æ˜¾ç¤ºæ§ä»¶å¥æŸ„
     THIS.objCalendarDiv = '';
     THIS.objCalendarYearmon = '';
     THIS.objCalendarDay = '';
@@ -105,18 +105,18 @@ function MonthCalendar(idSpan)
     THIS.objPrevMonth = '';
     THIS.objNextMonth = '';
     
-    // ÈÕÆÚ¿Ø¼şµÄ´óĞ¡
+    // æ—¥æœŸæ§ä»¶çš„å¤§å°
     THIS.posCalendarWidth = '';
     THIS.posCalendarHeight = '';
 
-    // ¶ÔÍâ½Ó¿Ú
+    // å¯¹å¤–æ¥å£
     THIS.Set = Set;
     THIS.PrevMonth = PrevMonth;
     THIS.NextMonth = NextMonth;
 
-    /* Íâ²¿µ÷ÓÃ½Ó¿Úº¯Êı */
+    /* å¤–éƒ¨è°ƒç”¨æ¥å£å‡½æ•° */
     /***********************************************************************/
-    // ÏÈ´Ó¿Ø¼şÉÏÈ¡Öµ²¢ÏÔÊ¾
+    // å…ˆä»æ§ä»¶ä¸Šå–å€¼å¹¶æ˜¾ç¤º
     function Set(obj)
     {
         THIS.objOwner = obj;
@@ -131,22 +131,22 @@ function MonthCalendar(idSpan)
         }
         else
         {
-            // ½ñÌìÈÕÆÚ
+            // ä»Šå¤©æ—¥æœŸ
             var date = new Date();
             THIS.thisYear = date.getFullYear();
             THIS.thisMonth = date.getMonth() + 1;
             THIS.thisDate = date.getDate();
         }
-        // Ìî³äÖµºóÏÔÊ¾
+        // å¡«å……å€¼åæ˜¾ç¤º
         FillData();
         Show();
     }
     
-    /* ÄÚ²¿º¯Êı */
+    /* å†…éƒ¨å‡½æ•° */
     /***********************************************************************/
     function Create()
     {
-        // Ê¹ÓÃthis.idÊÇÎª·ÀÖ¹³öÏÖÏàÍ¬ID£¨¶à´Î´´½¨´Ë¿Ø¼ş¾Í»áÓĞ´ËÇé¿ö£©
+        // ä½¿ç”¨this.idæ˜¯ä¸ºé˜²æ­¢å‡ºç°ç›¸åŒIDï¼ˆå¤šæ¬¡åˆ›å»ºæ­¤æ§ä»¶å°±ä¼šæœ‰æ­¤æƒ…å†µï¼‰
         if(null == this.id)
         {
             this.id = 0;
@@ -165,8 +165,8 @@ function MonthCalendar(idSpan)
             var html = '';
             html += '<div id="' + idCalendarDiv + '" style="position:absolute;';
             html += '   left:-1000px;top:-10000px;border:1px solid;background-color:#FA8072;"';
-            html += '	 title="ÉÏ¡¢ÏÂ¼ıÍ·¼üÑ¡Äê£¬×ó¡¢ÓÒ¼ıÍ·Ñ¡ÔÂ¡£">';
-            // ÔÚÈÕÆÚµÄdivÏÂµæÉÏÒ»¸öiframe£¬ÒòÎªÔÚIEÖĞ£¬div²»ÄÜ¸Ç×¡select¡£
+            html += '	 title="ä¸Šã€ä¸‹ç®­å¤´é”®é€‰å¹´ï¼Œå·¦ã€å³ç®­å¤´é€‰æœˆã€‚">';
+            // åœ¨æ—¥æœŸçš„divä¸‹å«ä¸Šä¸€ä¸ªiframeï¼Œå› ä¸ºåœ¨IEä¸­ï¼Œdivä¸èƒ½ç›–ä½selectã€‚
             html += '<iframe id="' + idCalendarBGOver + '" frameborder="0" ';
             html += '   style="position:absolute;top:0px;width:0px;height:0px;top:0px;left:0px;z-index:6;"></iframe>';
             html += '<div style="position:absolute;z-index:7;background-color:#FA8072;"">';
@@ -185,13 +185,13 @@ function MonthCalendar(idSpan)
             html += '</table>';
             html += '<table id="' + idCalendarDay + '" width="210" border="0">';
             html += '  <tr>';
-            html += '    <td>ÈÕ</td>';
-            html += '    <td>Ò»</td>';
-            html += '    <td>¶ş</td>';
-            html += '    <td>Èı</td>';
-            html += '    <td>ËÄ</td>';
-            html += '    <td>Îå</td>';
-            html += '    <td>Áù</td>';
+            html += '    <td>æ—¥</td>';
+            html += '    <td>ä¸€</td>';
+            html += '    <td>äºŒ</td>';
+            html += '    <td>ä¸‰</td>';
+            html += '    <td>å››</td>';
+            html += '    <td>äº”</td>';
+            html += '    <td>å…­</td>';
             html += '  </tr>';
             for(var i=0 ; i<6 ; i++)
             {
@@ -203,23 +203,23 @@ function MonthCalendar(idSpan)
                 html += '</tr>';
             }
             html += '</table>';
-            html += '½ñÌìÊÇ£º<span id="' + idCalendarToday + '"></span>';
-            // Õâ¸öspanÓÃÓÚÈ¡µÃdivµÄÓÒÏÂ½Ç×ø±ê£¨ÓÃÓÚ¼ä½ÓÈ¡div³¤¿í£©
+            html += 'ä»Šå¤©æ˜¯ï¼š<span id="' + idCalendarToday + '"></span>';
+            // è¿™ä¸ªspanç”¨äºå–å¾—divçš„å³ä¸‹è§’åæ ‡ï¼ˆç”¨äºé—´æ¥å–divé•¿å®½ï¼‰
             html += '<span id="' + idCalendarPosRB + '" style="position:absolute;right:0px;width:0px;height:0px;"><span>';
             html += '</div></div>';
             GetObj(THIS.idSpan).innerHTML = html;
 
-            // È¡ÈÕÆÚ¿Ø¼ş³¤¿í£¨ÓÒÏÂ½Ç×ø±ê¼õÈ¥×óÉÏ½Ç×ø±ê£©
+            // å–æ—¥æœŸæ§ä»¶é•¿å®½ï¼ˆå³ä¸‹è§’åæ ‡å‡å»å·¦ä¸Šè§’åæ ‡ï¼‰
             var posRB = GetPosition(idCalendarPosRB);
             var posLT = GetPosition(idCalendarDiv);
             THIS.posCalendarWidth = posRB.x - posLT.x;
             THIS.posCalendarHeight = posRB.y - posLT.y + 15;
-            // ĞŞ¸Äiframe³¤¿íºÍÈÕÆÚ¿Ø¼şÒ»Ñù
+            // ä¿®æ”¹iframeé•¿å®½å’Œæ—¥æœŸæ§ä»¶ä¸€æ ·
             var over = GetObj(idCalendarBGOver);
             over.style.width = THIS.posCalendarWidth;
             over.style.height = THIS.posCalendarHeight;
             
-            // È¡¾ä±ú
+            // å–å¥æŸ„
             THIS.objCalendarDiv = GetObj(idCalendarDiv);
             THIS.objPrevMonth = GetObj(idCalendarPrev);
             THIS.objCalendarYearmon = GetObj(idCalendarYearmon);
@@ -227,7 +227,7 @@ function MonthCalendar(idSpan)
             THIS.objCalendarDay = GetObj(idCalendarDay).getElementsByTagName('span');
             THIS.objCalendarToday = GetObj(idCalendarToday);
 
-            // °´Å¥ ÏòÇ°
+            // æŒ‰é’® å‘å‰
 			THIS.objPrevMonth.onclick = function()
 			{
 				PrevMonth();
@@ -244,7 +244,7 @@ function MonthCalendar(idSpan)
 			{
 				THIS.objCalendarYearmon.onkeyup(evt);
 			}
-			// °´Å¥ Ïòºó
+			// æŒ‰é’® å‘å
 			THIS.objNextMonth.onclick = function()
 			{
 				NextMonth();
@@ -261,7 +261,7 @@ function MonthCalendar(idSpan)
 			{
 				THIS.objCalendarYearmon.onkeyup(evt);
 			}
-			// Äê¡¢ÔÂ
+			// å¹´ã€æœˆ
 			THIS.objCalendarYearmon.onfocus = function()
 			{
 				CloseLater(false);
@@ -275,32 +275,32 @@ function MonthCalendar(idSpan)
 				var keyCode = GetKeyCode(evt);
 				switch(keyCode)
 				{
-				case 27: // Esc¼ü
+				case 27: // Escé”®
 					Hide();
-				case 37: // ×ó¼ıÍ·
+				case 37: // å·¦ç®­å¤´
 					PrevMonth();
 					break;
-				case 39: // ×ó¼ıÍ·
+				case 39: // å·¦ç®­å¤´
 					NextMonth();
 					break;
-				case 38: // ÉÏ¼ıÍ·
+				case 38: // ä¸Šç®­å¤´
 					PrevYear();
 					break;
-				case 40: // ÏÂ¼ıÍ·
+				case 40: // ä¸‹ç®­å¤´
 					NextYear();
 					break;
 				}
 			}
-			// ÈÕ
+			// æ—¥
             for(var i=0 ; i<THIS.objCalendarDay.length ; i++)
             {
-	            // ÖØÔØº¯Êı
+	            // é‡è½½å‡½æ•°
 	            THIS.objCalendarDay[i].onclick = function()
 	            {
 		            THIS.objOwner.value = THIS.thisYear + '-' + THIS.thisMonth + '-' + this.innerHTML;
                     Hide();
 	            }
-	            // Êó±êÒÆ¶¯
+	            // é¼ æ ‡ç§»åŠ¨
 	            THIS.objCalendarDay[i].onmouseover = function()
 	            {
                     this.oldBackground = this.style.background;
@@ -308,7 +308,7 @@ function MonthCalendar(idSpan)
                     this.style.background = THIS.colorDateOver;
                     this.style.cursor = "pointer";		            
 	            }
-	            // Êó±êÒÆ³ö
+	            // é¼ æ ‡ç§»å‡º
 	            THIS.objCalendarDay[i].onmouseout = function()
 	            {
                     this.style.background = this.oldBackground;
@@ -316,7 +316,7 @@ function MonthCalendar(idSpan)
 	            }		
             }
             
-            // ÉèÖÃ½ñÌìÈÕÆÚµÄÊó±ê·´Ó¦
+            // è®¾ç½®ä»Šå¤©æ—¥æœŸçš„é¼ æ ‡ååº”
             THIS.objCalendarToday.onclick = function()
             {
                 THIS.objOwner.value = THIS.objCalendarToday.innerHTML;
@@ -338,11 +338,11 @@ function MonthCalendar(idSpan)
         }
         catch(e)
         {
-            THIS.error = '´´½¨ÈÕÆÚ¿Ø¼şÊ±³ö´í: ' + e.message;
+            THIS.error = 'åˆ›å»ºæ—¥æœŸæ§ä»¶æ—¶å‡ºé”™: ' + e.message;
         }
     }// end of Create()...
     
-    // close==true: ÑÓÊ±¹Ø±Õ£¬ close==false: Çå³ıÑÓÊ±¹Ø±Õ
+    // close==true: å»¶æ—¶å…³é—­ï¼Œ close==false: æ¸…é™¤å»¶æ—¶å…³é—­
     function CloseLater(close)
     {
 		if(close)
@@ -358,25 +358,25 @@ function MonthCalendar(idSpan)
     }
     function Show()
     {
-        // ÒÆµ½ĞèÒªÏÔÊ¾µÄÎ»ÖÃ
+        // ç§»åˆ°éœ€è¦æ˜¾ç¤ºçš„ä½ç½®
         var pos = GetPosition(THIS.objOwner.id);
         THIS.objCalendarDiv.style.left = pos.x;
         THIS.objCalendarDiv.style.top = pos.y + 22;
-        // ÏÔÊ¾
+        // æ˜¾ç¤º
         THIS.objCalendarDiv.style.display = '';
-        // ÒÆ¶¯½¹µã£¬ÕâÑùÒÔ±ãÔÚÊ§È¥½¹µãÊ±¹Ø±Õ±¾¿Ø¼ş¡£
+        // ç§»åŠ¨ç„¦ç‚¹ï¼Œè¿™æ ·ä»¥ä¾¿åœ¨å¤±å»ç„¦ç‚¹æ—¶å…³é—­æœ¬æ§ä»¶ã€‚
         THIS.objPrevMonth.focus();
     }
     function Hide()
     {
         THIS.objCalendarDiv.style.display = 'none';
     }
-    // È¡°´¼ü´úÂë£¬×¢Òâ£¬ÔÚ²»Í¬Æ½Ì¨ÓĞ²»Í¬¡£
+    // å–æŒ‰é”®ä»£ç ï¼Œæ³¨æ„ï¼Œåœ¨ä¸åŒå¹³å°æœ‰ä¸åŒã€‚
     function GetKeyCode(evt)
     {
 	    return (typeof event=='undefined' ? evt.keyCode : event.keyCode);
     }
-    // ³¬Ê±´¦Àíº¯Êı£¨ÖØÔØ³¬Ê±º¯ÊısetTimeout£©	£­£­February 06, 2007 
+    // è¶…æ—¶å¤„ç†å‡½æ•°ï¼ˆé‡è½½è¶…æ—¶å‡½æ•°setTimeoutï¼‰	ï¼ï¼February 06, 2007 
     SetTimeout = function(fRef, mDelay) 
 	{
 		var _st = window.setTimeout;
@@ -418,21 +418,21 @@ function MonthCalendar(idSpan)
         }
         FillData();
     }
-    // °ÑÄê¡¢ÔÂ¡¢ÈÕÊı¾İÏÔÊ¾ÔÚ¿Ø¼şÉÏ
+    // æŠŠå¹´ã€æœˆã€æ—¥æ•°æ®æ˜¾ç¤ºåœ¨æ§ä»¶ä¸Š
     function FillData()
     {
         try
         {
-            // ÏÔÊ¾Äê¡¢ÔÂ
-            THIS.objCalendarYearmon.innerHTML = THIS.thisYear + 'Äê' + THIS.thisMonth + 'ÔÂ';
-            // ÏÔÊ¾ÈÕ
-            /// ÏÈÇå¿Õ
+            // æ˜¾ç¤ºå¹´ã€æœˆ
+            THIS.objCalendarYearmon.innerHTML = THIS.thisYear + 'å¹´' + THIS.thisMonth + 'æœˆ';
+            // æ˜¾ç¤ºæ—¥
+            /// å…ˆæ¸…ç©º
             for(var i=0 ; i<THIS.objCalendarDay.length ; i++)
             {
 	            THIS.objCalendarDay[i].style.background = '';
 	            THIS.objCalendarDay[i].style.display = 'none';
             }
-            /// ÔÙÏÔÊ¾
+            /// å†æ˜¾ç¤º
             var cal = new calendar(THIS.thisYear, THIS.thisMonth-1);
             var nDayOfMonth = cal.length;
             var week = cal.firstWeek;
@@ -442,7 +442,7 @@ function MonthCalendar(idSpan)
                 var objCalendarDay = THIS.objCalendarDay[week++];
                 objCalendarDay.innerHTML = date;
                 objCalendarDay.style.display = '';
-                // ±ê¼ÇÑ¡¶¨µÄÈÕÆÚ
+                // æ ‡è®°é€‰å®šçš„æ—¥æœŸ
                 if(THIS.thisDate == date)
                 {
                     //objCalendarDay.style.background = THIS.colorDateSel;
@@ -451,13 +451,13 @@ function MonthCalendar(idSpan)
                     objCalendarDay.style.border = '1px solid #000000';
                 }
             }
-            /// ½ñÌìÈÕÆÚ
+            /// ä»Šå¤©æ—¥æœŸ
             var date = new Date();
             THIS.objCalendarToday.innerHTML = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
         }
         catch(e)
         {
-            THIS.error = 'ÏÔÊ¾µ÷ÓÃ³ö´í: ' + e;
+            THIS.error = 'æ˜¾ç¤ºè°ƒç”¨å‡ºé”™: ' + e;
             alert(THIS.error);
         }
     }// end of FillData()...
@@ -473,29 +473,29 @@ function MonthCalendar(idSpan)
     Init();
 }
 
-// Ä¸Ìå
+// æ¯ä½“
 document.write('<span id="MonthCalendar"></span>');
 
 
 
 /**********************************************************************
 
-Ê¹ÓÃ·½·¨£º
-£±£®ÔÚÒ³ÃæÀï°üº¬±¾ÎÄ¼ş£¬Èç£º
+ä½¿ç”¨æ–¹æ³•ï¼š
+ï¼‘ï¼åœ¨é¡µé¢é‡ŒåŒ…å«æœ¬æ–‡ä»¶ï¼Œå¦‚ï¼š
 		<script src="calendar.js"></script>
 		
-£²£®ÔÚÒ³ÃæÀïµÄ³õÈç»¯º¯ÊıÖĞµ÷ÓÃMonthCalendar()£¬½øĞĞÈÕÆÚ¿Ø¼ş³õÊ¼»¯£¬µ±
-	³õ»¯Ã»´ø²ÎÊıÊ±£¬ËüÊ¹ÓÃµÄÊÇÄ¬ÈÏµÄID£ºMonthCalendar£¬¼ûÉÏ¶¨ÒåµÄÄ¸Ìå¡£
-	µ±ĞèÒª¶à¸öÈÕÆÚ¿Ø¼şÊ±£¬¿É¶¨Òå¶à¸öÄ¸Ìå£¬È»ºó´ø²Î³õ»¯µ÷ÓÃ£º
-		MonthCalendar('Ä¸ÌåID')
-	×¢£º¶àÄ¸Ìå»¹Î´²âÊÔ¹ı¡£
+ï¼’ï¼åœ¨é¡µé¢é‡Œçš„åˆå¦‚åŒ–å‡½æ•°ä¸­è°ƒç”¨MonthCalendar()ï¼Œè¿›è¡Œæ—¥æœŸæ§ä»¶åˆå§‹åŒ–ï¼Œå½“
+	åˆåŒ–æ²¡å¸¦å‚æ•°æ—¶ï¼Œå®ƒä½¿ç”¨çš„æ˜¯é»˜è®¤çš„IDï¼šMonthCalendarï¼Œè§ä¸Šå®šä¹‰çš„æ¯ä½“ã€‚
+	å½“éœ€è¦å¤šä¸ªæ—¥æœŸæ§ä»¶æ—¶ï¼Œå¯å®šä¹‰å¤šä¸ªæ¯ä½“ï¼Œç„¶åå¸¦å‚åˆåŒ–è°ƒç”¨ï¼š
+		MonthCalendar('æ¯ä½“ID')
+	æ³¨ï¼šå¤šæ¯ä½“è¿˜æœªæµ‹è¯•è¿‡ã€‚
 
-£³£®ÔÚĞèÒªÈÕÆÚµØµØ·½ÉèÖÃÒ»¿Ø¼ş£¬µ÷ÓÃÕâ¸öÈÕÆÚ¿Ø¼ş£¬À´È¡ÈÕÆÚ£¬ÈçÏÂ£º
+ï¼“ï¼åœ¨éœ€è¦æ—¥æœŸåœ°åœ°æ–¹è®¾ç½®ä¸€æ§ä»¶ï¼Œè°ƒç”¨è¿™ä¸ªæ—¥æœŸæ§ä»¶ï¼Œæ¥å–æ—¥æœŸï¼Œå¦‚ä¸‹ï¼š
 		<input id="calendar" onClick="MonthCalendar.Set(this)">
-	ÕâÑù£¬ÔÚµã»÷Õâ¸öinputÊ±£¬¾Í»áÏÔÊ¾ÈÕÆÚ¿Ø£¬Ñ¡ÔñÈÕÆÚºó£¬×Ô¶¯°ÑÈÕÆÚ
-	Ìîµ½Õâ¸ö¿Ø¼şÖĞ¡£
+	è¿™æ ·ï¼Œåœ¨ç‚¹å‡»è¿™ä¸ªinputæ—¶ï¼Œå°±ä¼šæ˜¾ç¤ºæ—¥æœŸæ§ï¼Œé€‰æ‹©æ—¥æœŸåï¼Œè‡ªåŠ¨æŠŠæ—¥æœŸ
+	å¡«åˆ°è¿™ä¸ªæ§ä»¶ä¸­ã€‚
 
-¼¼ÇÉ£º
-¡¡¿ÉºÏÓÃÉÏ¡¢ÏÂ¡¢×ó¡¢ÓÒ¼ıÍ·À´Ñ¡ÔñÇ°ºóÄê¡¢ÔÂ£¬Esc¼üÍË³ö¡£
+æŠ€å·§ï¼š
+ã€€å¯åˆç”¨ä¸Šã€ä¸‹ã€å·¦ã€å³ç®­å¤´æ¥é€‰æ‹©å‰åå¹´ã€æœˆï¼ŒEscé”®é€€å‡ºã€‚
 
 **********************************************************************/

@@ -1,4 +1,4 @@
-<title>×¢²á</title>
+<title>æ³¨å†Œ</title>
 <input type=hidden id='user' value='<!--$CurrentUser$GLOBAL$-->'>
 <input type=hidden id='user_ip' value='<!--$ClientIp$GLOBAL$-->'>
 <input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
@@ -22,12 +22,12 @@
 }
 </style>
 <script>
-//ÖØÔØ´Ëº¯Êý£¬ÉèÖÃ²Ëµ¥
+//é‡è½½æ­¤å‡½æ•°ï¼Œè®¾ç½®èœå•
 function LoadSetting()
 {
     var span = GetObj('menu_html');
     var str='';
-    str += '<a href="javascript:OpenPage(\'login\')">µÇÂ¼</a>';
+    str += '<a href="javascript:OpenPage(\'login\')">ç™»å½•</a>';
     span.innerHTML = str;;
 }
 
@@ -35,10 +35,10 @@ function Setting()
 {
 }
 
-// SetTagBoxµÄ»Øµ÷º¯Êý
+// SetTagBoxçš„å›žè°ƒå‡½æ•°
 function TagDo(o, p)
 {
-    // ¶¯Ì¬ÉèÖÃÌá½»°´¼üÖ¸Ïò
+    // åŠ¨æ€è®¾ç½®æäº¤æŒ‰é”®æŒ‡å‘
     $('submit_tagx').onclick = function()
     {
         $(o.body).getElementsByTagName('form')[0]['tag'].click();
@@ -60,78 +60,78 @@ function Init()
 
 
 <table border="0" width="100%" height="73%"><tr><td align="center" valign="middle">
-<!-----------------------------------¾ÓÖÐ begin----------------------------------->
+<!-----------------------------------å±…ä¸­ begin----------------------------------->
 
 <div style="width:700px;">
     <div class="tagBoxHead">
         <ul>
-            <li><a href="#" id="tag_head1">ÓÃ»§×¢²á</a></li>
-            <li><a href="#" id="tag_head2">ÕÒ»ØÃÜÂë</a></li>
-            <li><a href="#" id="tag_head3">ÐÞ¸ÄÃÜÂë</a></li>
+            <li><a href="#" id="tag_head1">ç”¨æˆ·æ³¨å†Œ</a></li>
+            <li><a href="#" id="tag_head2">æ‰¾å›žå¯†ç </a></li>
+            <li><a href="#" id="tag_head3">ä¿®æ”¹å¯†ç </a></li>
         </ul>
     </div>
     <div class="tagBoxBody" style="height:436px">
         <table border="0" width="100%"><tr><td align="center" valign="top">
-        <!-----------------------------------¾ÓÖÐ begin----------------------------------->
+        <!-----------------------------------å±…ä¸­ begin----------------------------------->
 
-        <div id="tag_body1">    <!-- ÓÃ»§×¢²á -->
+        <div id="tag_body1">    <!-- ç”¨æˆ·æ³¨å†Œ -->
             <form method="post" action="register" target="tmp_iframe">
             <input type="submit" class="hidden" name="tag" value="register">
             <table border="0" width="100%">
               <tr>
-                <td align="right" width="129">ÓÃ»§Ãû<span class="xing">*</span>£º</td>
+                <td align="right" width="129">ç”¨æˆ·å<span class="xing">*</span>ï¼š</td>
                 <td><input name="username" class="NOTEMPTY USERNAME input_text" size="30" maxlength="26" value=""></td>
               </tr>
               <tr>
-                <td align="right">ÃÜ¡¡Âë £º</td>
+                <td align="right">å¯†ã€€ç  ï¼š</td>
                 <td><input type="password" name="password" class="input_text" size="30" maxlength="18" value=""></td>
               </tr>
               <tr>
-                <td align="right">È·ÈÏÃÜÂë £º</td>
+                <td align="right">ç¡®è®¤å¯†ç  ï¼š</td>
                 <td><input type="password" name="password1" size="30" class="input_text" maxlength="18" value=""></td>
               </tr>
               <tr>
-                <td align="right">ÎÊ¡¡Ìâ £º</td>
+                <td align="right">é—®ã€€é¢˜ ï¼š</td>
                 <td><input name="question" class="input_text" size="30" maxlength="50" value=""></td>
               </tr>
               <tr>
-                <td align="right">´ð¡¡°¸ £º</td>
+                <td align="right">ç­”ã€€æ¡ˆ ï¼š</td>
                 <td><input name="answer" class="input_text" size="30" maxlength="50" value=""></td>
               </tr>
               <tr>
-                <td valign="top" align="right">±¸¡¡×¢ £º</td>
+                <td valign="top" align="right">å¤‡ã€€æ³¨ ï¼š</td>
                 <td valign="top"><textarea class="input_textarea" name="comment"></textarea></td>
               </tr>
             </table>
             </form>
         </div>
 
-        <div id="tag_body2">    <!-- ÕÒ»ØÃÜÂë -->
-            <!-- ÕÒ»ØÃÜÂë Step2£ºÕÒ»ØÃÜÂë -->
+        <div id="tag_body2">    <!-- æ‰¾å›žå¯†ç  -->
+            <!-- æ‰¾å›žå¯†ç  Step2ï¼šæ‰¾å›žå¯†ç  -->
             <table border="0" width="100%" style="display:<!--$stet2_display$-->;">
             <form method="post" action="register" target="tmp_iframe">
             <input type="submit" class="hidden" name="tag" value="retrieve">
               <tr>
-                <td align="right" width="129">ÓÃ»§Ãû<span class="xing">*</span>£º</td>
+                <td align="right" width="129">ç”¨æˆ·å<span class="xing">*</span>ï¼š</td>
                 <td>
                     <input name="username" class="input_text readonly" size="30" maxlength="26" value="<!--$username$-->" readonly autocomplete="off">
                 </td>
               </tr>
               <tr>
-                <td align="right">ÎÊ¡¡Ìâ £º</td>
+                <td align="right">é—®ã€€é¢˜ ï¼š</td>
                 <td>
                     <input size="30" maxlength="50" class="input_text readonly" name="question" value="<!--$question$-->" readonly autocomplete="off">
                 </td>
               </tr>
               <tr>
-                <td align="right">´ð¡¡°¸ £º</td>
+                <td align="right">ç­”ã€€æ¡ˆ ï¼š</td>
                 <td><input name="answer" size="30" maxlength="50" value=""></td>
               </tr>
               <tr>
-                <td align="right" valign="top">È¡»ØµÄÃÜÂë £º</td>
+                <td align="right" valign="top">å–å›žçš„å¯†ç  ï¼š</td>
                 <td valign="top">
                     <input id="get_password" size="30" class="red" value="" readonly autocomplete="off">
-            ¡¡  </td>
+            ã€€  </td>
               </tr>
             </form>
             <form method="post" action="register">
@@ -139,7 +139,7 @@ function Init()
             <input type="hidden" name="username" value="<!--$username$-->">
               <tr>
                 <td>&nbsp;</td>
-                <td><input type="submit" name="prev_step" value="ÉÏÒ»²½"></td>
+                <td><input type="submit" name="prev_step" value="ä¸Šä¸€æ­¥"></td>
               </tr>
             </form>
               <tr>
@@ -147,45 +147,45 @@ function Init()
                 <td>
                     <br><br><br><br><br>
                     <span class="comment" style="border:1px solid #ADD8E6; display:table; width:299px; padding:8px;line-height:17px;">
-                        ×¢Òâ£ºÔ­ÃÜÂëÎÞ·¨ÕÒ»Ø£¬È¡»ØµÄÊÇÏµÍ³ÖØÐÂÉèÖÃµÄÃÜÂë£¬ÇëÔÚÈ¡µÃºó£¬µ½¡ºÐÞ¸ÄÃÜÂë¡»±êÇ©Ò³ÖØÐÂÉèÖÃÎªÄúËùÐèÒªµÄÐÂÃÜÂë¡£
+                        æ³¨æ„ï¼šåŽŸå¯†ç æ— æ³•æ‰¾å›žï¼Œå–å›žçš„æ˜¯ç³»ç»Ÿé‡æ–°è®¾ç½®çš„å¯†ç ï¼Œè¯·åœ¨å–å¾—åŽï¼Œåˆ°ã€Žä¿®æ”¹å¯†ç ã€æ ‡ç­¾é¡µé‡æ–°è®¾ç½®ä¸ºæ‚¨æ‰€éœ€è¦çš„æ–°å¯†ç ã€‚
                     </span>
                 </td>
               </tr>
             </table>
 
-            <!-- ÕÒ»ØÃÜÂë Step1£ºÊäÈëÓÃ»§Ãû -->
+            <!-- æ‰¾å›žå¯†ç  Step1ï¼šè¾“å…¥ç”¨æˆ·å -->
             <form method="post" action="register">
             <table border="0" width="100%" style="display:<!--$stet1_display$-->;">
               <tr>
-                <td align="right" width="129">ÓÃ»§Ãû<span class="xing">*</span>£º</td>
+                <td align="right" width="129">ç”¨æˆ·å<span class="xing">*</span>ï¼š</td>
                 <td><input name="username" class="NOTEMPTY USERNAME input_text" size="30" maxlength="26" value="<!--$username$-->"></td>
               </tr>
               <tr>
                 <td align="right">&nbsp;</td>
-                <td><input type="submit" name="next_step" value="ÏÂÒ»²½"></td>
+                <td><input type="submit" name="next_step" value="ä¸‹ä¸€æ­¥"></td>
               </tr>
             </table>
             </form>
         </div>
 
-        <div id="tag_body3">    <!-- ÐÞ¸ÄÃÜÂë -->
+        <div id="tag_body3">    <!-- ä¿®æ”¹å¯†ç  -->
             <form method="post" action="register" target="tmp_iframe">
             <input type="submit" class="hidden" name="tag" value="modify">
             <table border="0" width="100%">
               <tr>
-                <td align="right" width="129">ÓÃ»§Ãû<span class="xing">*</span>£º</td>
+                <td align="right" width="129">ç”¨æˆ·å<span class="xing">*</span>ï¼š</td>
                 <td><input name="username" class="NOTEMPTY USERNAME input_text" size="30" maxlength="26" value="<!--$username$-->"></td>
               </tr>
               <tr>
-                <td align="right">Ô­ÃÜÂë £º</td>
+                <td align="right">åŽŸå¯†ç  ï¼š</td>
                 <td><input type="password" name="old_password" class="input_text" size="30" maxlength="18" value=""></td>
               </tr>
               <tr>
-                <td align="right">ÐÂÃÜÂë £º</td>
+                <td align="right">æ–°å¯†ç  ï¼š</td>
                 <td><input type="password" name="new_password1" class="input_text" size="30" maxlength="18" value=""></td>
               </tr>
               <tr>
-                <td align="right">È·ÈÏÃÜÂë £º</td>
+                <td align="right">ç¡®è®¤å¯†ç  ï¼š</td>
                 <td><input type="password" name="new_password2" size="30" class="input_text" maxlength="18" value=""></td>
               </tr>
             </table>
@@ -193,18 +193,18 @@ function Init()
         </div>
 
 
-        <!-----------------------------------¾ÓÖÐ end-------------------------------------->
+        <!-----------------------------------å±…ä¸­ end-------------------------------------->
         </td></tr></table>
     </div>
     <table width="100%">
         <tr>
-            <td>¡¡<span class="comment">(×¢£º±ê<span class="xing">*</span>µÄÎª±ØÌîÏî¡£)</span></td>
+            <td>ã€€<span class="comment">(æ³¨ï¼šæ ‡<span class="xing">*</span>çš„ä¸ºå¿…å¡«é¡¹ã€‚)</span></td>
             <td align="right">
-                <input id="submit_tagx" type="button" class="button" value="Ìá½»">
-                <input type="button" value="·µ»Ø" OnClick="OpenPage('browse')" title="·µ»ØµÇÂ¼Ò³">
+                <input id="submit_tagx" type="button" class="button" value="æäº¤">
+                <input type="button" value="è¿”å›ž" OnClick="OpenPage('browse')" title="è¿”å›žç™»å½•é¡µ">
             </td>
         </tr>
     </table>
 </div>
-<!-----------------------------------¾ÓÖÐ end-------------------------------------->
+<!-----------------------------------å±…ä¸­ end-------------------------------------->
 </td></tr></table>

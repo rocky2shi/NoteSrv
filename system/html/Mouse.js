@@ -1,33 +1,33 @@
 /**********************************************************************
 *                                                                     *
-*   ¹¦ÄÜ : Êó±ê¿ØÖÆ                                                   *
-*   ±àĞ´ : Rocky                                                      *
+*   åŠŸèƒ½ : é¼ æ ‡æ§åˆ¶                                                   *
+*   ç¼–å†™ : Rocky                                                      *
 *   mail : mypyramid@126.com                                          *
-*   ÈÕÆÚ : 2008-10-03                                                 *
-*   °æ±¾ : 1.0                                                        *
-*   ĞŞ¸Ä¡¢Ê¹ÓÃ·½·¨¼û±¾ÎÄ¼şµ×ËµÃ÷                                      *
+*   æ—¥æœŸ : 2008-10-03                                                 *
+*   ç‰ˆæœ¬ : 1.0                                                        *
+*   ä¿®æ”¹ã€ä½¿ç”¨æ–¹æ³•è§æœ¬æ–‡ä»¶åº•è¯´æ˜                                      *
 *                                                                     *
 **********************************************************************/
 
 
 
 
-// È«¾Öµ¥»÷ÊÂ¼ş
+// å…¨å±€å•å‡»äº‹ä»¶
 function SetMouseClick()
 {
-    // µ±ĞèÒªÊ±ÔÚ¸÷Ò³ÖØÔØOnClickÀ´Ö´ĞĞµ¥»÷
+    // å½“éœ€è¦æ—¶åœ¨å„é¡µé‡è½½OnClickæ¥æ‰§è¡Œå•å‡»
     if(typeof OnClick == "undefined")
     {
         OnClick = function(){};
     }
     if (window.attachEvent)
     {
-        //Ö§³Ö IE
+        //æ”¯æŒ IE
         document.attachEvent("onclick", OnClick);
     }
     else
     {
-        //Ö§³Ö FF
+        //æ”¯æŒ FF
         document.addEventListener("click", OnClick, false);
     }
 }
@@ -35,9 +35,9 @@ function SetMouseClick()
 
 
 
-// Êó±ê¿ØÖÆ
+// é¼ æ ‡æ§åˆ¶
 function SetMouseEvent()
 {
-    // µ¥»÷
+    // å•å‡»
     SetMouseClick();
 }

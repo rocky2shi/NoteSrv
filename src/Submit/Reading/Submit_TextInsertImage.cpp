@@ -94,17 +94,18 @@ int Submit_TextInsertImage::Deal(Page *page)
     string replace = page->GetRequest()->GetField("replace");  // 替换后的串
 
     // 编码转换：utf8 => gbk
-    ChineseCoding code("utf-8", "gb18030");
+    // ChineseCoding code("utf-8", "gb18030"); delete -- Rocky 2011-05-06 17:06:52 <<<<<<<<<<<<<<<<
     int ret;
 
-    if( code.Converter(text, text) < 0
-        || code.Converter(find, find) < 0
-        || code.Converter(replace, replace) < 0
-      )
-    {
-        LOG_ERROR("Converter error");
-        return ERR;
-    }
+    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    // if( code.Converter(text, text) < 0
+    //     || code.Converter(find, find) < 0
+    //     || code.Converter(replace, replace) < 0
+    //   )
+    // {
+    //     LOG_ERROR("Converter error");
+    //     return ERR;
+    // }
 
     // text空，说明客户端发来的是部分串，即等修改部分，则执行增量保存；
     if("" == text)
@@ -175,11 +176,12 @@ int Submit_TextInsertImage::Deal(Page *page)
     if("bookmark" == type)
     {
         string bookmark = page->GetRequest()->GetField("bookmark_data");
-        if(code.Converter(bookmark, bookmark) < 0)
-        {
-            LOG_ERROR("Converter error");
-            return ERR;
-        }
+        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        // if(code.Converter(bookmark, bookmark) < 0)
+        // {
+        //     LOG_ERROR("Converter error");
+        //     return ERR;
+        // }
         data.Set(key, "bookmark", bookmark);    // 书签数据
     }
 

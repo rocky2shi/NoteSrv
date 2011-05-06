@@ -1,20 +1,20 @@
 /**********************************************************************
 *                                                                     *
-*   π¶ƒ‹ : ◊∞ Œlogo±Í÷æ                                               *
-*   ±‡–¥ : Rocky 2009-11-25 17:29:01                                  *
+*   ÂäüËÉΩ : Ë£ÖÈ•∞logoÊ†áÂøó                                               *
+*   ÁºñÂÜô : Rocky 2009-11-25 17:29:01                                  *
 *   mail : mypyramid@126.com                                          *
-*   –ﬁ∏ƒ°¢ π”√∑Ω∑®º˚±æŒƒº˛µ◊Àµ√˜                                      *
+*   ‰øÆÊîπ„ÄÅ‰ΩøÁî®ÊñπÊ≥ïËßÅÊú¨Êñá‰ª∂Â∫ïËØ¥Êòé                                      *
 *                                                                     *
 **********************************************************************/
 
 
-// id: logoøÿº˛µƒID
+// id: logoÊéß‰ª∂ÁöÑID
 function Logo(id)
 {
     var pos = GetPosition(id);
     var scan = null;
-    var thick = 3;  // …®√Ëœﬂ∫Ò∂»£®œÒÀÿ£©
-    var dir = 1;    // ≥∆∂Ø∑ΩœÚ: 1--◊ÛµΩ”“, -1--”“µΩ◊Û
+    var thick = 3;  // Êâ´ÊèèÁ∫øÂéöÂ∫¶ÔºàÂÉèÁ¥†Ôºâ
+    var dir = 1;    // Áß∞Âä®ÊñπÂêë: 1--Â∑¶Âà∞Âè≥, -1--Âè≥Âà∞Â∑¶
     
     // Rocky 2009-12-02 12:51:01
     if(null == pos)
@@ -22,15 +22,15 @@ function Logo(id)
         return;
     }
     
-    // …Ë÷√≥ı º◊¥Ã¨
+    // ËÆæÁΩÆÂàùÂßãÁä∂ÊÄÅ
     function Init()
     {   
-        // ¥¥Ω®…®√Ëœﬂ
+        // ÂàõÂª∫Êâ´ÊèèÁ∫ø
         var body = document.getElementsByTagName("body")[0];
         scan = document.createElement("div");
-        // º”»Î
+        // Âä†ÂÖ•
         body.appendChild(scan);
-        // …Ë÷√≥ı º÷µ
+        // ËÆæÁΩÆÂàùÂßãÂÄº
         scan.style.cssText = 'position:absolute;display:none;background-color:#808080;z-index:11;'
         scan.style.left = pos.x + 'px';
         scan.style.top = pos.y + 'px';
@@ -39,11 +39,11 @@ function Logo(id)
         scan.style.display = '';
     }
     
-    // “∆∂Ø…®√Ëœﬂ£®Õ˘∑µ“∆∂Ø£©
+    // ÁßªÂä®Êâ´ÊèèÁ∫øÔºàÂæÄËøîÁßªÂä®Ôºâ
     function Move()
     {
         var left = parseInt(scan.style.left);
-        if(left >= pos.x + pos.w)// ◊™∑ΩœÚ
+        if(left >= pos.x + pos.w)// ËΩ¨ÊñπÂêë
         {
             dir = -1;
         }

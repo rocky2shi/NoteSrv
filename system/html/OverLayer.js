@@ -1,28 +1,28 @@
 /**********************************************************************
 *                                                                     *
-*   ¹¦ÄÜ : ÃÉ¸Ç²ãÉèÖÃ                                                 *
-*   ±àĞ´ : Rocky                                                      *
+*   åŠŸèƒ½ : è’™ç›–å±‚è®¾ç½®                                                 *
+*   ç¼–å†™ : Rocky                                                      *
 *   mail : mypyramid@126.com                                          *
-*   ÈÕÆÚ : 2008-9-3                                                   *
-*   °æ±¾ : 1.0                                                        *
-*   ĞŞ¸Ä¡¢Ê¹ÓÃ·½·¨¼û±¾ÎÄ¼şµ×ËµÃ÷                                      *
+*   æ—¥æœŸ : 2008-9-3                                                   *
+*   ç‰ˆæœ¬ : 1.0                                                        *
+*   ä¿®æ”¹ã€ä½¿ç”¨æ–¹æ³•è§æœ¬æ–‡ä»¶åº•è¯´æ˜                                      *
 *                                                                     *
 **********************************************************************/
 
 
 /*
- *  ²ÎÊıËµÃ÷£º
- *      zIndex--ÉèÖÃ²ã´ÎĞòµÄ³õÊ¼Öµ£¬Ä¬ÈÏÎª40£»
- *      bgColor--ÉèÖÃ²ã±³¾°É«£¬Ä¬ÈÏÎª#313131;
- *      opacity--ÉèÖÃ³õÊ¼Í¸Ã÷¶È£¬Ä¬ÈÏÎª50£¨¼´50%£©£»
+ *  å‚æ•°è¯´æ˜ï¼š
+ *      zIndex--è®¾ç½®å±‚æ¬¡åºçš„åˆå§‹å€¼ï¼Œé»˜è®¤ä¸º40ï¼›
+ *      bgColor--è®¾ç½®å±‚èƒŒæ™¯è‰²ï¼Œé»˜è®¤ä¸º#313131;
+ *      opacity--è®¾ç½®åˆå§‹é€æ˜åº¦ï¼Œé»˜è®¤ä¸º50ï¼ˆå³50%ï¼‰ï¼›
  */
 function OverLayer(zIndex, opacity, bgColor)
 {
-    // ¶ÔÍâ½Ó¿Ú
+    // å¯¹å¤–æ¥å£
     OverLayer.Open = Open;
     OverLayer.Close = Close;
 
-    // ÄÚ²¿ÊôĞÔ
+    // å†…éƒ¨å±æ€§
     var tDiv = null;
     var tIindexZ = zIndex ? zIndex : 40;
     var tOpacity = opacity ? opacity : 30;
@@ -32,8 +32,8 @@ function OverLayer(zIndex, opacity, bgColor)
 
 
     /*
-     *  ¹¦ÄÜ£ºÏÔÊ¾ÃÉ¸Ç²ã
-     *  ²ÎÊı£ºnIndex--²ã´ÎĞòÖµ£¬ÓÃÓÚµ±ĞèÒª¶¯Ì¬µ÷ÕûÊ±£¬Ò»°ãÇé¿öÏÂÎª¿Õ£»
+     *  åŠŸèƒ½ï¼šæ˜¾ç¤ºè’™ç›–å±‚
+     *  å‚æ•°ï¼šnIndex--å±‚æ¬¡åºå€¼ï¼Œç”¨äºå½“éœ€è¦åŠ¨æ€è°ƒæ•´æ—¶ï¼Œä¸€èˆ¬æƒ…å†µä¸‹ä¸ºç©ºï¼›
      */
     function Open(nIndex)
     {
@@ -46,11 +46,11 @@ function OverLayer(zIndex, opacity, bgColor)
     };
 
     /*
-     * µ÷Õû±³¾° [Rocky 2009-08-10 22:26:32]
+     * è°ƒæ•´èƒŒæ™¯ [Rocky 2009-08-10 22:26:32]
      */
     function AdjustBgRect()
     {
-        // ¶ÔÓÚ´°¿ÚµÄ±ä»¯£¬»¹²»Ì«Çå³şÓÃÄÇ¸ö±äÁ¿ÊÇÄÜÍ¨ÓÃµÄ£¨ÔÚIEºÍFFµÈÀïÃæ£©
+        // å¯¹äºçª—å£çš„å˜åŒ–ï¼Œè¿˜ä¸å¤ªæ¸…æ¥šç”¨é‚£ä¸ªå˜é‡æ˜¯èƒ½é€šç”¨çš„ï¼ˆåœ¨IEå’ŒFFç­‰é‡Œé¢ï¼‰
         var nWidth = document.body.clientWidth > document.body.scrollWidth ? document.body.clientWidth : document.body.scrollWidth;
         var nHeight = document.body.clientHeight > document.body.scrollHeight ? document.body.clientHeight : document.body.scrollHeight;
 
@@ -60,7 +60,7 @@ function OverLayer(zIndex, opacity, bgColor)
 
 
     /*
-     *  ¹¦ÄÜ£º¹Ø±Õ£¨Òş²Ø£©ÃÉ¸Ç²ã
+     *  åŠŸèƒ½ï¼šå…³é—­ï¼ˆéšè—ï¼‰è’™ç›–å±‚
      *
      */
     function Close()
@@ -72,11 +72,11 @@ function OverLayer(zIndex, opacity, bgColor)
     {
         if( !Create() )
         {
-            alert("ÉèÖÃÃÉ¸Ç²ã³ö´í");
+            alert("è®¾ç½®è’™ç›–å±‚å‡ºé”™");
             return false;
         }
 
-        // ¸Ä±ä´°¿Ú´óĞ¡Ê±
+        // æ”¹å˜çª—å£å¤§å°æ—¶
         InsertFun(window, "resize", AdjustBgRect);
 
         return true;
@@ -103,30 +103,30 @@ function OverLayer(zIndex, opacity, bgColor)
 
         if(isIE)
         {
-            // IEÖĞ
+            // IEä¸­
             tDiv.style.filter = "Alpha(Opacity=" + tOpacity + ")";
         }
         else
         {
-            // FFÖĞ
+            // FFä¸­
             tDiv.style.MozOpacity = tOpacity/100;
-            // chromeÖĞ [Rocky 2009-11-30 18:57:53]
+            // chromeä¸­ [Rocky 2009-11-30 18:57:53]
             tDiv.style.opacity = tOpacity/100;
         }
 
-        // ×¢ÒâÕâÁ½¾äµÄË³Ğò
+        // æ³¨æ„è¿™ä¸¤å¥çš„é¡ºåº
         body[0].appendChild(tDiv);
 
         return true;
     }
 
-    // Ö´ĞĞ³õÊ¼»¯
+    // æ‰§è¡Œåˆå§‹åŒ–
     return Init();
 }
 
 
 
-// ³õÊ¼»¯¼ÓÔØÃÉ¸Ç²ã
+// åˆå§‹åŒ–åŠ è½½è’™ç›–å±‚
 OverLayer();
 
 
@@ -135,17 +135,17 @@ OverLayer();
 
 
 /**********************************************************************
-Ê¹ÓÃ·½·¨£º
+ä½¿ç”¨æ–¹æ³•ï¼š
 
-        ÔÚÒ³ÃæÀïµÄ³õÊ¼»¯º¯ÊıÖĞµ÷ÓÃOverLayer()£¬½øĞĞ³õÊ¼»¯£¬µ±
-    ³õ»¯Ã»´ø²ÎÊıÊ±£¬ËüÊ¹ÓÃµÄÊÇÄ¬ÈÏÖµ£¬¼ûÉÏÃæ¶¨Òå¡£µ÷ÓÃ£º
+        åœ¨é¡µé¢é‡Œçš„åˆå§‹åŒ–å‡½æ•°ä¸­è°ƒç”¨OverLayer()ï¼Œè¿›è¡Œåˆå§‹åŒ–ï¼Œå½“
+    åˆåŒ–æ²¡å¸¦å‚æ•°æ—¶ï¼Œå®ƒä½¿ç”¨çš„æ˜¯é»˜è®¤å€¼ï¼Œè§ä¸Šé¢å®šä¹‰ã€‚è°ƒç”¨ï¼š
 
-        OverLayer()       -- ³õÊ¼»¯
-        OverLayer.Open()  -- ÏÔÊ¾²ã
-        OverLayer.Close() -- ¹Ø±Õ²ã
+        OverLayer()       -- åˆå§‹åŒ–
+        OverLayer.Open()  -- æ˜¾ç¤ºå±‚
+        OverLayer.Close() -- å…³é—­å±‚
 
 
 History:
 
- 2008-09-03 : 0.9°æ
+ 2008-09-03 : 0.9ç‰ˆ
 **********************************************************************/

@@ -69,20 +69,33 @@ int Tag_BrowseList::Filter(const string &key, const Conf *pack, Page *page, map<
     const string &timeendchk    = cfg->Get(filter, "timeendchk");
     const string &qtbegin       = cfg->Get(filter, "qtbegin");
     const string &qtend         = cfg->Get(filter, "qtend");
+    const string &time_type     = cfg->Get(filter, "time_type");
     const string &query_keyword = cfg->Get(filter, "query_keyword");
     const string &query_scope   = cfg->Get(filter, "query_scope");
     const string &query_type    = cfg->Get(filter, "query_type");
+    const string &query_relation= cfg->Get(filter, "query_relation");
     const string &result_win    = cfg->Get(filter, "result_win");
 
     /*
      * 过滤时间
+     *  根据选项确定使用创建时间还是最后修改时间
      */
-    if("1" == timebeginchk && key < qtbegin)
+    string item = "";
+    if("create" == time_type)
+    {
+        item = key; // key 即创建时间
+    }
+    else if("modify" == time_type)
+    {
+        item = pack->Get("modify"); // 取修改时间
+    }
+
+    if("1" == timebeginchk && item < qtbegin)
     {
         LOG_DEBUG("Filter [%s] ...", key.c_str());
         return 1;
     }
-    if("1" == timeendchk && key > qtend)
+    if("1" == timeendchk && item > qtend)
     {
         LOG_DEBUG("Filter [%s] ...", key.c_str());
         return 2;
@@ -98,30 +111,29 @@ int Tag_BrowseList::Filter(const string &key, const Conf *pack, Page *page, map<
     }
 
     /*
-     * 关键字过滤（关键字不能为空）
+     * 关键字过滤
+     *   对于查找的是标题，还是正文，操作都是相同的，只是主串值不同
      */
-    // a. 选中的是标题，测试是否含有关键字
-    if("title" == query_scope)
     {
-        const string &title = pack->Get("title");
-        // 找不到关键字时，该数据会被过滤；
-        if(title.find(query_keyword) == string::npos)
-        {
-            LOG_DEBUG("Filter [%s] ...", key.c_str());
-            return 3;
-        }
-    }
-    // b. 选中的是内容，测试是否含有关键字
-    if("content" == query_scope)
-    {
+        const string main_str = ("title" == query_scope)
+                                ? pack->Get("title")    // 选中标题时
+                                : pack->Get("text");    // 选中内容时（或无选时）
         // 取对应匹配机
         MultiStringMatch *match = matchs["query_keyword"];
-        const string &text = pack->Get("text");
-        // 查看text中是否存的所要的关键字，不存的返回false，表示要过滤此数据；
-        if( NULL != match && !match->MatchOneKey( text ) )
+        // 查看主串中是否存的所要的关键字，不存在返回大于零值，表示要过滤此数据；
+        if( NULL != match )
         {
-            LOG_DEBUG("Filter [%s] ...", key.c_str());
-            return 4;
+            // 根据与或选项，调对应匹配函数。
+            if("and" == query_relation && !match->MatchAllKey(main_str))
+            {
+                LOG_DEBUG("Filter [%s] ...", key.c_str());
+                return 41;
+            }
+            if("or" == query_relation && !match->MatchOneKey(main_str))
+            {
+                LOG_DEBUG("Filter [%s] ...", key.c_str());
+                return 42;
+            }
         }
     }
 
@@ -186,9 +198,14 @@ string Tag_BrowseList::Get(Page *page)
     const string &query_keyword = cfg->Get("filter", "query_keyword");
     if("" != query_keyword)
     {
+        // 分解关键字，以空格为分隔符；
         vector<string> query_keyword_set;
-        query_keyword_set.push_back(query_keyword);
-        matchs["query_keyword"] = new MultiStringMatch( query_keyword_set );
+        Split(query_keyword, " ", query_keyword_set);
+        // 取出大小写设置（注意，这里当是1或是空是，为区分大小写）
+        bool case_ignore = ("0" != cfg->Get("filter", "query_case_ignore"))
+                           ? true : false;
+        // 创建匹配机
+        matchs["query_keyword"] = new MultiStringMatch( query_keyword_set, case_ignore );
     }
     LOG_DEBUG("query_keyword=[%s]", query_keyword.c_str());
 

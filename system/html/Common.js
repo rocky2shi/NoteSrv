@@ -1,15 +1,15 @@
 /**********************************************************************
 *                                                                     *
-*   ¹¦ÄÜ : ºÍ¾ßÌåÓ¦ÓÃÎŞ¹ØµÄ¹¦ÄÜÊµÏÖ£»                                 *
-*   ±àĞ´ : Rocky                                                      *
+*   åŠŸèƒ½ : å’Œå…·ä½“åº”ç”¨æ— å…³çš„åŠŸèƒ½å®ç°ï¼›                                 *
+*   ç¼–å†™ : Rocky                                                      *
 *   mail : mypyramid@126.com                                          *
-*   ÈÕÆÚ : 2008-10-10                                                 *
-*   °æ±¾ : 1.0                                                        *
+*   æ—¥æœŸ : 2008-10-10                                                 *
+*   ç‰ˆæœ¬ : 1.0                                                        *
 *                                                                     *
 **********************************************************************/
 
 
-//µ÷ÊÔ
+//è°ƒè¯•
 function DB(str)
 {
     if(null == this.i)
@@ -28,30 +28,30 @@ function DB2(obj)
 }
 
 /*
- *  ¹¦ÄÜ£ºÖØĞ´alert()£¬·½±ãµ÷ÊÔ
- *  ±àĞ´£ºRocky 2009-12-07
+ *  åŠŸèƒ½ï¼šé‡å†™alert()ï¼Œæ–¹ä¾¿è°ƒè¯•
+ *  ç¼–å†™ï¼šRocky 2009-12-07
  */
-function Alert(/* ¿É±ä²ÎÊı */)
+function Alert(/* å¯å˜å‚æ•° */)
 {
     Alert.i = (Alert.i || 0) + 1;
     alert('----------[' + Alert.i + ']----------\r\n' + '******[' + [].slice.call(arguments).join(']\r\n******[') + ']');
 }
 
 /*
- *  ¹¦ÄÜ£ºÔÚ±êÌâÀ¸ÏÔÊı¾İ£¬ÓÃÓÚµ÷ÊÔ£»
- *  ±àĞ´£ºRocky 2008-10-29
+ *  åŠŸèƒ½ï¼šåœ¨æ ‡é¢˜æ æ˜¾æ•°æ®ï¼Œç”¨äºè°ƒè¯•ï¼›
+ *  ç¼–å†™ï¼šRocky 2008-10-29
  */
-function Title(/* ¿É±ä²ÎÊı */)
+function Title(/* å¯å˜å‚æ•° */)
 {
     Title.i = (Title.i || 0) + 1;
     document.title = '[' + Title.i + ']' + '[' + [].slice.call(arguments) + ']';
 }
 
 /*
- *  ¹¦ÄÜ£ºÔÚ×´Ì¬À¸ÏÔÊı¾İ£¬ÓÃÓÚµ÷ÊÔ£»
- *  ±àĞ´£ºRocky 2008-10-29
+ *  åŠŸèƒ½ï¼šåœ¨çŠ¶æ€æ æ˜¾æ•°æ®ï¼Œç”¨äºè°ƒè¯•ï¼›
+ *  ç¼–å†™ï¼šRocky 2008-10-29
  */
-function Status(/* ¿É±ä²ÎÊı */)
+function Status(/* å¯å˜å‚æ•° */)
 {
     Title.i = (Title.i || 0) + 1;
     window.status = '[' + Title.i + ']' + '[' + [].slice.call(arguments) + ']';
@@ -63,7 +63,7 @@ function Print(str)
 }
 
 /*
- *  ¹¦ÄÜ£º¸ù¾İ¿Ø¼şid»òname·µ»Ø¿Ø¼ş¶ÔÏó£»
+ *  åŠŸèƒ½ï¼šæ ¹æ®æ§ä»¶idæˆ–nameè¿”å›æ§ä»¶å¯¹è±¡ï¼›
  */
 function $(obj, p)
 {
@@ -85,20 +85,20 @@ function GetObj(obj, p)
 }
 
 /*
- *  ¹¦ÄÜ£ºÏò¿Ø¼ş¶¯×÷ÖĞ²åÈë×Ô¶¨ÒåµÄ¶¯×÷£¨º¯Êı£©
- *  ÈÕÆÚ£º2008-10-27 02:01:05
- *  ÒÉÎÊ£ºÔÚIEÖĞ£¬(document == obj)ºÍ(obj == document)¡¡
- *        ¼°¡¡(window == obj)ºÍ(obj == window)µÄ±È½Ï½á¹û²»Í¬
+ *  åŠŸèƒ½ï¼šå‘æ§ä»¶åŠ¨ä½œä¸­æ’å…¥è‡ªå®šä¹‰çš„åŠ¨ä½œï¼ˆå‡½æ•°ï¼‰
+ *  æ—¥æœŸï¼š2008-10-27 02:01:05
+ *  ç–‘é—®ï¼šåœ¨IEä¸­ï¼Œ(document == obj)å’Œ(obj == document)ã€€
+ *        åŠã€€(window == obj)å’Œ(obj == window)çš„æ¯”è¾ƒç»“æœä¸åŒ
  */
 function InsertFun(obj, fun_str, fun_name)
 {
     if(typeof obj != 'object' || typeof fun_name != 'function')
     {
-        alert('Common.js: º¯Êı²ÎÊı³ö´í£¬µ÷ÓÃ¶¼£º' + InsertFun.caller);
+        alert('Common.js: å‡½æ•°å‚æ•°å‡ºé”™ï¼Œè°ƒç”¨éƒ½ï¼š' + InsertFun.caller);
         return false;
     }
 
-    // È¡³ö²ÎÊı
+    // å–å‡ºå‚æ•°
     var args = [].slice.call(arguments, 3);
 
     if(document == obj || obj != window)
@@ -116,7 +116,7 @@ function InsertFun(obj, fun_str, fun_name)
 }
 
 /*
- *  ¹¦ÄÜ£ºÈ¡µÃ¿Ø¼şµÄ¾ø¶ÔÎ»ÖÃ(x, y), objIDÎª¶ÔÏóID;
+ *  åŠŸèƒ½ï¼šå–å¾—æ§ä»¶çš„ç»å¯¹ä½ç½®(x, y), objIDä¸ºå¯¹è±¡ID;
  */
 function GetPosition(objID)
 {
@@ -155,19 +155,19 @@ function GetPos(obj)
 }
 
 /*
- *  ¹¦ÄÜ£ºÁĞ³ö¶ÔÏóËùÓĞµÄÊôĞÔ¡¢·½·¨£¬¼°¶ÔÓ¦µÄÖµ£»
+ *  åŠŸèƒ½ï¼šåˆ—å‡ºå¯¹è±¡æ‰€æœ‰çš„å±æ€§ã€æ–¹æ³•ï¼ŒåŠå¯¹åº”çš„å€¼ï¼›
  */
 function ListOjb(obj)
 {
-    // ÓÃÀ´±£´æËùÓĞµÄÊôĞÔÃû³ÆºÍÖµ
+    // ç”¨æ¥ä¿å­˜æ‰€æœ‰çš„å±æ€§åç§°å’Œå€¼
     var prop = "" ;
     var props = "";
     var ary = [];
 
-    // ¿ªÊ¼±éÀú
+    // å¼€å§‹éå†
     for(var p in obj )
     {
-        // ·½·¨
+        // æ–¹æ³•
         if(typeof(obj[p]) == "function")
         {
             prop = "<b>" + obj[p] + "</b>";
@@ -175,24 +175,24 @@ function ListOjb(obj)
         }
         else
         {
-            // p ÎªÊôĞÔÃû³Æ£¬obj[p]Îª¶ÔÓ¦ÊôĞÔµÄÖµ
+            // p ä¸ºå±æ€§åç§°ï¼Œobj[p]ä¸ºå¯¹åº”å±æ€§çš„å€¼
             prop = p + " = <font color=red>" + obj [p] + "</font>" ;
             ary.push(prop);
         }
     }
 
-    // ÅÅĞò
+    // æ’åº
     ary.sort();
 
-    // ×îºóÏÔÊ¾ËùÓĞµÄÊôĞÔ
+    // æœ€åæ˜¾ç¤ºæ‰€æœ‰çš„å±æ€§
     document.write(ary.join('<br>')) ;
 }
 
 /*
- *  ¹¦ÄÜ£ºÑÓÊ±Ö´ĞĞÖ¸¶¨º¯Êı£¨ÀàËÆÓÚwindow.setTimeout£©
- *  ÓÃ·¨£º
+ *  åŠŸèƒ½ï¼šå»¶æ—¶æ‰§è¡ŒæŒ‡å®šå‡½æ•°ï¼ˆç±»ä¼¼äºwindow.setTimeoutï¼‰
+ *  ç”¨æ³•ï¼š
  *          SetTimeout(function, 2000, arg1, arg2, ...);
- *          SetInterval()ÀàËÆ;
+ *          SetInterval()ç±»ä¼¼;
  */
 function SetTimeout(fRef, mDelay)
 {
@@ -230,26 +230,26 @@ function ClearInterval(iTimeoutID)
 }
 
 /*
- *  ¹¦ÄÜ£º×èÖ¹ÊÂ¼ş´«µİ
+ *  åŠŸèƒ½ï¼šé˜»æ­¢äº‹ä»¶ä¼ é€’
  */
 function EventStop(event)
 {
     event = event || window.event;
     if(event.preventDefault)
     {
-        event.preventDefault();    // ×èÖ¹ÊÂ¼ş´«µİ[Firefox]
+        event.preventDefault();    // é˜»æ­¢äº‹ä»¶ä¼ é€’[Firefox]
     }
-    event.returnValue = false;     // ×èÖ¹ÊÂ¼ş´«µİ[IE]
+    event.returnValue = false;     // é˜»æ­¢äº‹ä»¶ä¼ é€’[IE]
 }
 
 /*
- * ¹¦ÄÜ£ºÈ¡¶ÔÏóÍ¸Ã÷¶È£¨¶ÔÓ¦ÓÚSetOpacity()£©
- * ±àĞ´£ºRocky 2009-12-23 21:31:57
- * ²ÎÊı£ºobj--¶ÔÏó
+ * åŠŸèƒ½ï¼šå–å¯¹è±¡é€æ˜åº¦ï¼ˆå¯¹åº”äºSetOpacity()ï¼‰
+ * ç¼–å†™ï¼šRocky 2009-12-23 21:31:57
+ * å‚æ•°ï¼šobj--å¯¹è±¡
  */
 function GetOpacity(obj)
 {
-    var depth = 100;    // Ä¬ÈÏ·µ»ØÎŞÍ¸Ã÷
+    var depth = 100;    // é»˜è®¤è¿”å›æ— é€æ˜
     if(Version.ie())
     {
         var v = obj.style.filter.match(/Opacity=([\d.]+)/);
@@ -267,21 +267,21 @@ function GetOpacity(obj)
 }
 
 /*
- * ¹¦ÄÜ£ºÉèÖÃ¶ÔÏóÍ¸Ã÷¶È
- * ±àĞ´£ºRocky 2009-08-17 23:23:43
- * ²ÎÊı£ºobj--¶ÔÏó
- *       depth--Í¸Ã÷¶È£¬È¡Öµ[0, 100]£¬ÖµÔ½Ğ¡Ô½Í¸Ã÷£¬0Ê±È«Í¸Ã÷£®
+ * åŠŸèƒ½ï¼šè®¾ç½®å¯¹è±¡é€æ˜åº¦
+ * ç¼–å†™ï¼šRocky 2009-08-17 23:23:43
+ * å‚æ•°ï¼šobj--å¯¹è±¡
+ *       depth--é€æ˜åº¦ï¼Œå–å€¼[0, 100]ï¼Œå€¼è¶Šå°è¶Šé€æ˜ï¼Œ0æ—¶å…¨é€æ˜ï¼
  */
 function SetOpacity(obj, depth)
 {
     if(document.all)
     {
-        // IEÖĞ
+        // IEä¸­
         obj.style.filter = "Alpha(Opacity=" + depth + ")";
     }
     else
     {
-        // FFÖĞ
+        // FFä¸­
         obj.style.MozOpacity = depth/100;
         // Chrome
         obj.style.opacity = depth/100;
@@ -293,8 +293,8 @@ function Opacity(obj, depth)
 }
 
 /*
- *  ¹¦ÄÜ£ºÈ¡Ê±¼ä´®£¨ÎªKEY£©£¬×¢Òâ£¬Ã¿µ÷ÓÃÒ»´Î×°²úÉúÒ»¸öĞÂKEY
- *  ±àĞ´£ºRocky 2008-11-10
+ *  åŠŸèƒ½ï¼šå–æ—¶é—´ä¸²ï¼ˆä¸ºKEYï¼‰ï¼Œæ³¨æ„ï¼Œæ¯è°ƒç”¨ä¸€æ¬¡è£…äº§ç”Ÿä¸€ä¸ªæ–°KEY
+ *  ç¼–å†™ï¼šRocky 2008-11-10
  */
 function GetKeyStr()
 {
@@ -316,9 +316,9 @@ function GetKeyStr()
 }
 
 /*
- *  ¹¦ÄÜ£º»ñÈ¡Ò³ÃæÉÏÑ¡ÖĞµÄÎÄ±¾
- *  ±àĞ´£º2008-10-26 22:28:31
- *  ËµÃ÷£ºÓÉÍøÉÏÕûÀí¶øÀ´
+ *  åŠŸèƒ½ï¼šè·å–é¡µé¢ä¸Šé€‰ä¸­çš„æ–‡æœ¬
+ *  ç¼–å†™ï¼š2008-10-26 22:28:31
+ *  è¯´æ˜ï¼šç”±ç½‘ä¸Šæ•´ç†è€Œæ¥
  */
 function GetSelectText()
 {
@@ -337,31 +337,31 @@ function GetSelectText()
 }
 
 /*
- *  ¹¦ÄÜ£º»ñÈ¡Ò³ÃæÉÏÑ¡ÖĞµÄhtml´úÂë£¨ÎÄ±¾¼°±ê¼Ç£©
- *  ±àĞ´£ºRocky 2009-12-14 01:14:47
+ *  åŠŸèƒ½ï¼šè·å–é¡µé¢ä¸Šé€‰ä¸­çš„htmlä»£ç ï¼ˆæ–‡æœ¬åŠæ ‡è®°ï¼‰
+ *  ç¼–å†™ï¼šRocky 2009-12-14 01:14:47
  */
 function GetSelectHtml()
 {
-    // Firefox, ChromeµÈ£¨bug: Ñ¡¶¨²»ÄÜ¿ç±ê¼Ç [XXX]£©
+    // Firefox, Chromeç­‰ï¼ˆbug: é€‰å®šä¸èƒ½è·¨æ ‡è®° [XXX]ï¼‰
     if(window.getSelection)
     {
         var id = Math.random();
-        // ²åÈëÒ»±ê¼Ç
+        // æ’å…¥ä¸€æ ‡è®°
         var range = window.getSelection().getRangeAt(0);
         var span = document.createElement("span");
         span.id = id;
         range.surroundContents(span);
 
-        // È¡³öÑ¡ÖĞµÄhtmlÎÄ±¾
+        // å–å‡ºé€‰ä¸­çš„htmlæ–‡æœ¬
         var html = span.innerHTML;
 
-        // ÔÙÈ¥³ı¸Õ²åÈëµÄ±ê¼Ç
+        // å†å»é™¤åˆšæ’å…¥çš„æ ‡è®°
         var mark_rex = "(<span [^>]*" + id + "[^>]*>)" + "([^<]*)" + "(</span>)";
         var re = new RegExp(mark_rex, "ig");
         var str = span.parentNode.innerHTML.replace(re, "$2");
         span.parentNode.innerHTML = str;
 
-        // ·µ»ØhtmlÎÄ±¾
+        // è¿”å›htmlæ–‡æœ¬
         return html;
     }
     // IE
@@ -369,8 +369,8 @@ function GetSelectHtml()
 }
 
 /*
- * ¹¦ÄÜ£º×ª»»Ò³Ãæ±àÂë
- * ±àĞ´£º2009-08-19 00:38:45
+ * åŠŸèƒ½ï¼šè½¬æ¢é¡µé¢ç¼–ç 
+ * ç¼–å†™ï¼š2009-08-19 00:38:45
  */
 function Escape(str)
 {
@@ -384,10 +384,10 @@ function Escape(str)
 }
 
 /*
- * ¹¦ÄÜ£ºÊ±¼ä´®×ª»»
- *          1. 20060324120254 => 2006Äê03ÔÂ24ÈÕ12µã02·Ö54Ãë
+ * åŠŸèƒ½ï¼šæ—¶é—´ä¸²è½¬æ¢
+ *          1. 20060324120254 => 2006å¹´03æœˆ24æ—¥12ç‚¹02åˆ†54ç§’
  *          2. 20060324120254 => 2006.03.24 12:02:54:
- * µ÷ÓÃ£ºTimeTo("20060324120254", 1)
+ * è°ƒç”¨ï¼šTimeTo("20060324120254", 1)
  */
 function TimeTo(t, type)
 {
@@ -399,19 +399,19 @@ function TimeTo(t, type)
     switch(type)
     {
         case 1:
-            t = t.replace(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, "$1Äê$2ÔÂ$3ÈÕ$4µã$5·Ö$6Ãë");
+            t = t.replace(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, "$1å¹´$2æœˆ$3æ—¥$4ç‚¹$5åˆ†$6ç§’");
             break;
         case 2:
             t = t.replace(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, "$1.$2.$3 $4:$5:$6");
             break;
         default:
         {
-            // ·ÖÀë¸÷¶ÎÖµ
+            // åˆ†ç¦»å„æ®µå€¼
             var re = new RegExp("([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})", "g");
             t = re.exec(t);
             if(null != t)
             {
-                t.shift(); // È¥µôµÚÒ»¸ö
+                t.shift(); // å»æ‰ç¬¬ä¸€ä¸ª
             }
             break;
         }
@@ -420,8 +420,8 @@ function TimeTo(t, type)
 }
 
 /*
- * ¹¦ÄÜ£º´´½¨´¦Àí¶ÔÏó
- * ±àĞ´£ºRocky 2009-11-28
+ * åŠŸèƒ½ï¼šåˆ›å»ºå¤„ç†å¯¹è±¡
+ * ç¼–å†™ï¼šRocky 2009-11-28
  */
 function CreateXmlRequest()
 {
@@ -436,43 +436,43 @@ function CreateXmlRequest()
     }
     else
     {
-        alert("LoadCatchphrase::() ³ö´í");
+        alert("LoadCatchphrase::() å‡ºé”™");
         return null;
     }
     return xmlHttp;
 }
 
 /*
- * ¹¦ÄÜ£º·¢ËÍÇëÇóµ½server£¨¹Ì¶¨ÎªPOST·½Ê½£©
- * ±àĞ´£ºRocky 2009-12-02 17:23:39
- * ×¢Òâ£ºµ÷ÓÃº¯ÊıÇ°£¬Ó¦¿¼ÂËcontentÊÇ·ñĞèÒª encodeURIComponent()
+ * åŠŸèƒ½ï¼šå‘é€è¯·æ±‚åˆ°serverï¼ˆå›ºå®šä¸ºPOSTæ–¹å¼ï¼‰
+ * ç¼–å†™ï¼šRocky 2009-12-02 17:23:39
+ * æ³¨æ„ï¼šè°ƒç”¨å‡½æ•°å‰ï¼Œåº”è€ƒæ»¤contentæ˜¯å¦éœ€è¦ encodeURIComponent()
  */
 function SubmitToServer(url, content, callback)
 {
     var xmlHttp = CreateXmlRequest();
     var method = "post";
-    var asyn = true; // Ä¬ÈÏ£¨true£©ÎªÒì²½´¦Àí·µ»ØµÄÊı¾İ
+    var asyn = true; // é»˜è®¤ï¼ˆtrueï¼‰ä¸ºå¼‚æ­¥å¤„ç†è¿”å›çš„æ•°æ®
 
     if("" == url || null == xmlHttp)
     {
-        alert("SaveToServer()ÖĞ³ö´í");
+        alert("SaveToServer()ä¸­å‡ºé”™");
         return;
     }
 
-    // ·¢ËÍÇëÇó
+    // å‘é€è¯·æ±‚
     function Send()
     {
-        // Ê¹ÓÃÁËËæ»úÊı£¬Ê¹Ã¿´ÎÇëÇó¶¼Ë¢ĞÂ»º´æ£»
+        // ä½¿ç”¨äº†éšæœºæ•°ï¼Œä½¿æ¯æ¬¡è¯·æ±‚éƒ½åˆ·æ–°ç¼“å­˜ï¼›
         url += "?" + (Math.random() + "").substr(2) + "&";
 
-        // ·¢ËÍ
+        // å‘é€
         xmlHttp.onreadystatechange = Deal;
-        xmlHttp.open(method, url, asyn); // true ÎªÒì²½´¦Àí·µ»ØµÄÊı¾İ
+        xmlHttp.open(method, url, asyn); // true ä¸ºå¼‚æ­¥å¤„ç†è¿”å›çš„æ•°æ®
         xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xmlHttp.send(content);
     }
 
-    // ´¦Àí·µ»ØµÄÊı¾İ
+    // å¤„ç†è¿”å›çš„æ•°æ®
     function Deal()
     {
         if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -485,17 +485,17 @@ function SubmitToServer(url, content, callback)
         }
     }
 
-    // Ö´ĞĞ
+    // æ‰§è¡Œ
     Send();
 }
 
 /*
- * ¹¦ÄÜ£º×Ö·û´®×Ö½ÚÊı£¬Ò»¸öºº×ÖÎªÁ½×Ö½Ú£¨²»Í¬ÓÚString.lenght()£©
- * ±àĞ´£ºRocky 2009-12-03 14:05:28
+ * åŠŸèƒ½ï¼šå­—ç¬¦ä¸²å­—èŠ‚æ•°ï¼Œä¸€ä¸ªæ±‰å­—ä¸ºä¸¤å­—èŠ‚ï¼ˆä¸åŒäºString.lenght()ï¼‰
+ * ç¼–å†™ï¼šRocky 2009-12-03 14:05:28
  */
 function SizeofString(str)
 {
-    // ×¢Òâ£¬´ËĞ´·¨Ê¹ÓÃÁËÕıÔòÊ½£¬¿ÉÄÜ»áÓ°ÏìÈ«¾Ö£¬ÒıÆğ´íÂÒ¡£
+    // æ³¨æ„ï¼Œæ­¤å†™æ³•ä½¿ç”¨äº†æ­£åˆ™å¼ï¼Œå¯èƒ½ä¼šå½±å“å…¨å±€ï¼Œå¼•èµ·é”™ä¹±ã€‚
     // if(typeof str == "string")
     // {
     //     var zh = str.match(/[^x00-xff]/ig);
@@ -511,34 +511,34 @@ function SizeofString(str)
         }
         else
         {
-            sum = sum + 2;// ºº×ÖÎªÁ½×Ö½Ú
+            sum = sum + 2;// æ±‰å­—ä¸ºä¸¤å­—èŠ‚
         }
     }
     return  sum;
 }
 
 
-// ÓÃÊó±êÒÆ¶¯²ã
+// ç”¨é¼ æ ‡ç§»åŠ¨å±‚
 // [Rocky 2009-12-14 01:23:10]
-// id: ²ãµÄID»ò¶ÔÏó
+// id: å±‚çš„IDæˆ–å¯¹è±¡
 function MoveLayer(id)
 {
     var This = (window == this) ? MoveLayer : this;
     var bStartMove = false;
     var layer = ('object' == typeof id) ? id : GetObj(id);
-    var oPosOfMouse;        // Êó±êµãÏÂÊ±µÄÊó±ê×ø±ê
-    var oPosOfLayer;        // Êó±êµãÏÂÊ±µÄ²ã×ø±ê
+    var oPosOfMouse;        // é¼ æ ‡ç‚¹ä¸‹æ—¶çš„é¼ æ ‡åæ ‡
+    var oPosOfLayer;        // é¼ æ ‡ç‚¹ä¸‹æ—¶çš„å±‚åæ ‡
     var oSeekOfScroll = {};
-    var bAllowMove = true;  // ÔÊĞíÓÃÊó±êÒÆ¶¯
-    var bAllowScroll = true;// ÔÊĞíËæÆÁÄ»¹ö¶¯
+    var bAllowMove = true;  // å…è®¸ç”¨é¼ æ ‡ç§»åŠ¨
+    var bAllowScroll = true;// å…è®¸éšå±å¹•æ»šåŠ¨
 
-    // ÉèÖÃÊÇ·ñÔÊĞíÓÃÊó±êÒÆ¶¯
+    // è®¾ç½®æ˜¯å¦å…è®¸ç”¨é¼ æ ‡ç§»åŠ¨
     This.AllowMove = function(allow)
     {
         bAllowMove = allow;
     }
     
-    // ÉèÖÃÊÇ·ñÔÊĞíËæÆÁÄ»¹ö¶¯
+    // è®¾ç½®æ˜¯å¦å…è®¸éšå±å¹•æ»šåŠ¨
     This.AllowScroll = function(allow)
     {
         bAllowScroll = allow;
@@ -566,11 +566,11 @@ function MoveLayer(id)
         var seekx = mouse.x - oPosOfMouse.x;
         var seeky = mouse.y - oPosOfMouse.y;
         var left = oPosOfLayer.x + seekx;
-        var top = oPosOfLayer.y + seeky - 14;   // 14ÎªÔİ¶¨¹ö¶¯Ìõ¿í¶È£¨´ı¸Ä£©
+        var top = oPosOfLayer.y + seeky - 14;   // 14ä¸ºæš‚å®šæ»šåŠ¨æ¡å®½åº¦ï¼ˆå¾…æ”¹ï¼‰
         layer.style.left = left + 'px';
         layer.style.top = top + 'px';
 
-        // ¼ÇÏÂµ±Ç°ĞÂµÄÎÄµµ¹ö¶¯Æ«ÒÆ
+        // è®°ä¸‹å½“å‰æ–°çš„æ–‡æ¡£æ»šåŠ¨åç§»
         GetScrollSeek();
     }
 
@@ -591,7 +591,7 @@ function MoveLayer(id)
         }
     }
 
-    // µ÷ÕûÎ»ÖÃ
+    // è°ƒæ•´ä½ç½®
     function AdjustPos(event)
     {
         if( !bAllowScroll )
@@ -603,7 +603,7 @@ function MoveLayer(id)
         layer.style.top = document.body.scrollTop + oSeekOfScroll.y + 'px';
     }
 
-    // È¡µ±Ç°ÎÄµµ¹ö¶¯Æ«ÒÆ
+    // å–å½“å‰æ–‡æ¡£æ»šåŠ¨åç§»
     function GetScrollSeek()
     {
         var oInitPosOfScroll = GetScrollPos();
@@ -636,26 +636,26 @@ function MoveLayer(id)
             Move(event);
         }
 
-        // ÉèÖÃ¹ö¶¯´°¿ÚµÄ¶¯×÷
+        // è®¾ç½®æ»šåŠ¨çª—å£çš„åŠ¨ä½œ
         InsertFun(window, "scroll", AdjustPos);
 
-        // ¸Ä±ä´°¿Ú´óĞ¡Ê±
+        // æ”¹å˜çª—å£å¤§å°æ—¶
         InsertFun(window, "resize", AdjustPos);
 
-        // È¡³õÎÄµµ¹ö¶¯Æ«ÒÆ
+        // å–åˆæ–‡æ¡£æ»šåŠ¨åç§»
         GetScrollSeek();
     }
 
-    // Ö´ĞĞ³õÊ¼»¯
+    // æ‰§è¡Œåˆå§‹åŒ–
     Init();
 }
 
 
 /*
- * ¹¦ÄÜ£º¹Ø±Õ£¨Òş²Ø£©¶ÔÏó£¨´°¿Ú£©
- * ±àĞ´£ºRocky 2009-12-23 21:31:57
- * ²ÎÊı£ºobj--¶ÔÏó
- *       delay--ÑÓÊ±£¨ºÁÃë£©¹Ø±Õ
+ * åŠŸèƒ½ï¼šå…³é—­ï¼ˆéšè—ï¼‰å¯¹è±¡ï¼ˆçª—å£ï¼‰
+ * ç¼–å†™ï¼šRocky 2009-12-23 21:31:57
+ * å‚æ•°ï¼šobj--å¯¹è±¡
+ *       delay--å»¶æ—¶ï¼ˆæ¯«ç§’ï¼‰å…³é—­
  */
 function CloseWin(obj, delay)
 {
@@ -670,7 +670,7 @@ function CloseWin(obj, delay)
         if(depth <= 0)
         {
             Hide();
-            SetOpacity(obj, obj.oldOpacity); // ¸´Ô­
+            SetOpacity(obj, obj.oldOpacity); // å¤åŸ
             return;
         }
         obj.hCloseTimer = SetTimeout(DoClose, 30);
@@ -689,10 +689,10 @@ function CloseWin(obj, delay)
 }
 
 /*
- * ¹¦ÄÜ£º´ò¿ª£¨ÏÔÊ¾£©¶ÔÏó£¨´°¿Ú£©
- * ±àĞ´£ºRocky 2009-12-23 21:31:57
- * ²ÎÊı£ºobj--¶ÔÏó
- *       delay--ÑÓÊ±£¨ºÁÃë£©¹Ø±Õ
+ * åŠŸèƒ½ï¼šæ‰“å¼€ï¼ˆæ˜¾ç¤ºï¼‰å¯¹è±¡ï¼ˆçª—å£ï¼‰
+ * ç¼–å†™ï¼šRocky 2009-12-23 21:31:57
+ * å‚æ•°ï¼šobj--å¯¹è±¡
+ *       delay--å»¶æ—¶ï¼ˆæ¯«ç§’ï¼‰å…³é—­
  */
 function OpenWin(obj)
 {
@@ -708,8 +708,8 @@ function OpenWin(obj)
 }
 
 /*
- * ¹¦ÄÜ£ºä¯ÀÀÆ÷°æ±¾ÅĞ¶Ï
- * ±àĞ´£ºRocky 2009-12-23 21:49:42
+ * åŠŸèƒ½ï¼šæµè§ˆå™¨ç‰ˆæœ¬åˆ¤æ–­
+ * ç¼–å†™ï¼šRocky 2009-12-23 21:49:42
  */
 function Version()
 {
@@ -737,28 +737,28 @@ function Version()
 }
 
 /*
- * ¹¦ÄÜ£ºÉèÖÃÈ«¾ÖÊÂ¼ş
- * ±àĞ´£ºRocky 2010-01-21 17:44:20
- * ÀıÈç£º   
+ * åŠŸèƒ½ï¼šè®¾ç½®å…¨å±€äº‹ä»¶
+ * ç¼–å†™ï¼šRocky 2010-01-21 17:44:20
+ * ä¾‹å¦‚ï¼š   
  *       SetMouseEvent("click", menu.Close);
  */
 function SetMouseEvent(event, fun)
 {
     if (window.attachEvent)
     {
-        //Ö§³Ö IE
+        //æ”¯æŒ IE
         document.attachEvent("on" + event, fun);
     }
     else
     {
-        //Ö§³Ö FF
+        //æ”¯æŒ FF
         document.addEventListener(event, fun, false);
     }
 }
 
 function SetCookie(name, value, expire)
 {
-    expire = expire || 1000*24*3600*1000; // Ä¬ÈÏ1000Ìì¹ıÆÚ
+    expire = expire || 1000*24*3600*1000; // é»˜è®¤1000å¤©è¿‡æœŸ
     var exp  = new Date();
     exp.setTime(exp.getTime() + expire);
     document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();

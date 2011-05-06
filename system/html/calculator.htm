@@ -1,5 +1,5 @@
-<HTML><HEAD><TITLE>¼ÆËãÆ÷</TITLE>
-<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<HTML><HEAD><TITLE>è®¡ç®—å™¨</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
 <STYLE type=text/css>.b3 {
 	BORDER-RIGHT: #b2b2b2 1px solid; BACKGROUND-POSITION: center 50%; BORDER-TOP: #b2b2b2 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #b2b2b2 1px solid; WIDTH: 61px; COLOR: #ff6501; BORDER-BOTTOM: #b2b2b2 1px solid; HEIGHT: 23px; BACKGROUND-COLOR: #fbfbfb
 }
@@ -23,7 +23,7 @@ TD {
 	FONT-SIZE: 12px
 }
 .b1 {
-	BORDER-RIGHT: #b2b2b2 1px solid; BACKGROUND-POSITION: center 50%; BORDER-TOP: #b2b2b2 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #b2b2b2 1px solid; WIDTH: 43px; COLOR: #313596; BORDER-BOTTOM: #b2b2b2 1px solid; FONT-FAMILY: "ËÎÌå"; HEIGHT: 23px; BACKGROUND-COLOR: #fbfbfb
+	BORDER-RIGHT: #b2b2b2 1px solid; BACKGROUND-POSITION: center 50%; BORDER-TOP: #b2b2b2 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #b2b2b2 1px solid; WIDTH: 43px; COLOR: #313596; BORDER-BOTTOM: #b2b2b2 1px solid; FONT-FAMILY: "å®‹ä½“"; HEIGHT: 23px; BACKGROUND-COLOR: #fbfbfb
 }
 .b2 {
 	BORDER-RIGHT: #b2b2b2 1px solid; BACKGROUND-POSITION: center 50%; BORDER-TOP: #b2b2b2 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #b2b2b2 1px solid; WIDTH: 43px; COLOR: #fe3498; BORDER-BOTTOM: #b2b2b2 1px solid; HEIGHT: 23px; BACKGROUND-COLOR: #fbfbfb
@@ -54,7 +54,7 @@ var level="0"
 var layer=0
 
 
-//Êı×Ö¼ü
+//æ•°å­—é”®
 
 function inputkey(key)
 {
@@ -83,7 +83,7 @@ function changeSign()
         	document.calc.display.value = "-" + document.calc.display.value
 }
 
-//º¯Êı¼ü
+//å‡½æ•°é”®
 
 function inputfunction(fun,shiftfun)
 {
@@ -106,7 +106,7 @@ function inputtrig(trig,arctrig,hyp,archyp)
 }
 
 
-//ÔËËã·û
+//è¿ç®—ç¬¦
 
 function operation(join,newlevel)
 {
@@ -125,7 +125,7 @@ function operation(join,newlevel)
 	
 }
 
-//À¨ºÅ
+//æ‹¬å·
 
 function addbracket()
 {
@@ -161,7 +161,7 @@ function disbracket()
 		document.calc.bracket.value=""
 }
 
-//µÈºÅ
+//ç­‰å·
 
 function result()
 {
@@ -183,7 +183,7 @@ function result()
 }
 
 
-//ĞŞ¸Ä¼ü
+//ä¿®æ”¹é”®
 
 function backspace()
 {
@@ -208,7 +208,7 @@ function clearall()
 }
 
 
-//×ª»»¼ü
+//è½¬æ¢é”®
 
 function inputChangCarry(newcarry)
 {
@@ -278,7 +278,7 @@ function inputshift()
 		document.calc.sqr.value="x^.5"
 		document.calc.cube.value="x^.3"
 		
-		document.calc.floor.value="Ğ¡Êı"
+		document.calc.floor.value="å°æ•°"
 	}
 	else
 	{
@@ -302,11 +302,11 @@ function inputshift()
 		document.calc.sqr.value="x^2 "
 		document.calc.cube.value="x^3 "
 		
-		document.calc.floor.value="È¡Õû"
+		document.calc.floor.value="å–æ•´"
 	}
 
 }
-//´æ´¢Æ÷²¿·Ö
+//å­˜å‚¨å™¨éƒ¨åˆ†
 
 function clearmemory()
 {
@@ -352,7 +352,7 @@ function multimemory()
 		document.calc.memory.value=" M "
 }
 
-//Ê®½øÖÆ×ª»»
+//åè¿›åˆ¶è½¬æ¢
 
 function todec(num,oldcarry)
 {
@@ -383,7 +383,7 @@ function decto(num,newcarry)
 	return(newnum)
 }
 
-//±í´ïÊ½½âÎö
+//è¡¨è¾¾å¼è§£æ
 
 function parse(string)
 {
@@ -393,7 +393,7 @@ function parse(string)
 		return(string)
 }
 
-//ÊıÑ§ÔËËãºÍÎ»ÔËËã
+//æ•°å­¦è¿ç®—å’Œä½è¿ç®—
 
 function cypher(left,join,right)
 {
@@ -419,11 +419,11 @@ function cypher(left,join,right)
 		return(decto(left^right,carry))
 	if (join=="<")
 		return(decto(left<<right,carry))
-	alert("³ıÊı²»ÄÜÎªÁã")
+	alert("é™¤æ•°ä¸èƒ½ä¸ºé›¶")
 	return(left)
 }
 
-//º¯Êı¼ÆËã
+//å‡½æ•°è®¡ç®—
 
 function funcalc(fun,num)
 {
@@ -522,11 +522,11 @@ function funcalc(fun,num)
 
 		if (fun=="ahypsin" | fun=="hypcos" | fun=="hyptan")
 		{
-			alert("¶Ô²»Æğ,¹«Ê½»¹Ã»ÓĞ²éµ½!")
+			alert("å¯¹ä¸èµ·,å…¬å¼è¿˜æ²¡æœ‰æŸ¥åˆ°!")
 			return(num)
 		}
 		
-		alert("³¬³öº¯Êı¶¨Òå·¶Î§")
+		alert("è¶…å‡ºå‡½æ•°å®šä¹‰èŒƒå›´")
 		return(num)
 	}
 }
@@ -582,7 +582,7 @@ function radiansToDegress(radians)
 	return(radians*180/Math.PI)
 }
 
-//½çÃæ
+//ç•Œé¢
 
 //-->
 </SCRIPT>
@@ -605,10 +605,10 @@ function radiansToDegress(radians)
 <TBODY>
 <TR>
 <TD>
-<INPUT onclick=inputChangCarry(16) type=radio name=carry> Ê®Áù½øÖÆ <INPUT onclick=inputChangCarry(10) type=radio CHECKED name=carry> Ê®½øÖÆ <INPUT onclick=inputChangCarry(8) type=radio name=carry> °Ë½øÖÆ <INPUT onclick=inputChangCarry(2) type=radio name=carry> ¶ş½øÖÆ 
+<INPUT onclick=inputChangCarry(16) type=radio name=carry> åå…­è¿›åˆ¶ <INPUT onclick=inputChangCarry(10) type=radio CHECKED name=carry> åè¿›åˆ¶ <INPUT onclick=inputChangCarry(8) type=radio name=carry> å…«è¿›åˆ¶ <INPUT onclick=inputChangCarry(2) type=radio name=carry> äºŒè¿›åˆ¶ 
 </TD>
 <TD></TD>
-<TD><INPUT onclick="inputChangAngle('d')" type=radio CHECKED value=d name=angle> ½Ç¶ÈÖÆ <INPUT onclick="inputChangAngle('r')" type=radio value=r name=angle> »¡¶ÈÖÆ </TD></TR></TBODY></TABLE>
+<TD><INPUT onclick="inputChangAngle('d')" type=radio CHECKED value=d name=angle> è§’åº¦åˆ¶ <INPUT onclick="inputChangAngle('r')" type=radio value=r name=angle> å¼§åº¦åˆ¶ </TD></TR></TBODY></TABLE>
 <TABLE height=40 cellSpacing=1 cellPadding=0 width="100%" border=0>
 <TBODY>
 <TR>
@@ -618,11 +618,11 @@ function radiansToDegress(radians)
 <TR>
 <TD>
 <div style="display:none">
-<INPUT onclick=inputshift() type=checkbox name=shiftf> ÉÏµµ¹¦ÄÜ <INPUT onclick=inputshift() type=checkbox name=hypf> Ë«Çúº¯Êı 
+<INPUT onclick=inputshift() type=checkbox name=shiftf> ä¸Šæ¡£åŠŸèƒ½ <INPUT onclick=inputshift() type=checkbox name=hypf> åŒæ›²å‡½æ•° 
 <INPUT style="BACKGROUND-COLOR: lightgrey" readOnly size=3 name=bracket>  <INPUT style="BACKGROUND-COLOR: lightgrey" readOnly size=3 name=memory> 
 <INPUT style="BACKGROUND-COLOR: lightgrey" readOnly size=3 name=operator> 
 </div>
-<INPUT class=b3 onclick=backspace() type=button value=" ÍË¸ñ " name=button2>  <INPUT class=b3 onclick="document.calc.display.value = 0 " type=button value=" ÇåÆÁ " name=button2>  <INPUT class=b3 onclick=clearall() type=button value=" È«Çå" name=button2> </TD>
+<INPUT class=b3 onclick=backspace() type=button value=" é€€æ ¼ " name=button2>  <INPUT class=b3 onclick="document.calc.display.value = 0 " type=button value=" æ¸…å± " name=button2>  <INPUT class=b3 onclick=clearall() type=button value=" å…¨æ¸…" name=button2> </TD>
 </TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
 <TABLE cellSpacing=0 width="100%">
 <TBODY>
@@ -654,15 +654,15 @@ function radiansToDegress(radians)
   <!--shizw-->
   <TBODY>
   <TR>
-  <TD width=65><INPUT class=b3 onclick=putmemory() type=button value=" ´¢´æ "> </TD></TR>
+  <TD width=65><INPUT class=b3 onclick=putmemory() type=button value=" å‚¨å­˜ "> </TD></TR>
   <TR>
-  <TD><INPUT class=b3 onclick=getmemory() type=button value=" È¡´æ "> </TD></TR>
+  <TD><INPUT class=b3 onclick=getmemory() type=button value=" å–å­˜ "> </TD></TR>
   <TR>
-  <TD><INPUT class=b3 onclick=addmemory() type=button value=" ÀÛ´æ "> </TD></TR>
+  <TD><INPUT class=b3 onclick=addmemory() type=button value=" ç´¯å­˜ "> </TD></TR>
   <TR>
-  <TD><INPUT class=b3 onclick=multimemory() type=button value=" »ı´æ "> </TD></TR>
+  <TD><INPUT class=b3 onclick=multimemory() type=button value=" ç§¯å­˜ "> </TD></TR>
   <TR>
-  <TD><INPUT class=b3 onclick=clearmemory() type=button value=" Çå´æ "> </TD></TR></TBODY>
+  <TD><INPUT class=b3 onclick=clearmemory() type=button value=" æ¸…å­˜ "> </TD></TR></TBODY>
 </TABLE>
 <TABLE cellPadding=1>
   <TBODY>
@@ -671,38 +671,38 @@ function radiansToDegress(radians)
   <TD><INPUT class=xn onclick="inputkey('8')" type=button value=" 8 " name=k8> </TD>
   <TD><INPUT class=xn onclick="inputkey('9')" type=button value=" 9 " name=k9> </TD>
   <TD><INPUT class=xo onclick="operation('/',6)" type=button value=" / "> </TD>
-  <TD><INPUT class=or onclick="operation('%',6)" type=button value=È¡Óà> </TD>
-  <TD><INPUT class=or onclick="operation('&amp;',3)" type=button value=" Óë "> </TD></TR>
+  <TD><INPUT class=or onclick="operation('%',6)" type=button value=å–ä½™> </TD>
+  <TD><INPUT class=or onclick="operation('&amp;',3)" type=button value=" ä¸ "> </TD></TR>
   <TR align=middle>
   <TD><INPUT class=xn onclick="inputkey('4')" type=button value=" 4 " name=k4> </TD>
   <TD><INPUT class=xn onclick="inputkey('5')" type=button value=" 5 " name=k5> </TD>
   <TD><INPUT class=xn onclick="inputkey('6')" type=button value=" 6 " name=k6> </TD>
   <TD><INPUT class=xo onclick="operation('*',6)" type=button value=" * "> </TD>
-  <TD><INPUT class=or onclick="inputfunction('floor','deci')" type=button value=È¡Õû name=floor> </TD>
-  <TD><INPUT class=or onclick="operation('|',1)" type=button value=" »ò "> </TD></TR>
+  <TD><INPUT class=or onclick="inputfunction('floor','deci')" type=button value=å–æ•´ name=floor> </TD>
+  <TD><INPUT class=or onclick="operation('|',1)" type=button value=" æˆ– "> </TD></TR>
   <TR align=middle>
   <TD><INPUT class=xn onclick="inputkey('1')" type=button value=" 1 "> </TD>
   <TD><INPUT class=xn onclick="inputkey('2')" type=button value=" 2 " name=k2> </TD>
   <TD><INPUT class=xn onclick="inputkey('3')" type=button value=" 3 " name=k3> </TD>
   <TD><INPUT class=xo onclick="operation('-',5)" type=button value=" - "> </TD>
-  <TD><INPUT class=or onclick="operation('<',4)" type=button value=×óÒÆ> </TD>
-  <TD><INPUT class=or onclick="inputfunction('~','~')" type=button value=" ·Ç "> </TD></TR>
+  <TD><INPUT class=or onclick="operation('<',4)" type=button value=å·¦ç§»> </TD>
+  <TD><INPUT class=or onclick="inputfunction('~','~')" type=button value=" é "> </TD></TR>
   <TR align=middle>
   <TD><INPUT class=xn onclick="inputkey('0')" type=button value=" 0 "> </TD>
   <TD><INPUT class=xn onclick=changeSign() type=button value=+/-> </TD>
   <TD><INPUT class=xn onclick="inputkey('.')" type=button value=" . " name=kp> </TD>
   <TD><INPUT class=xo onclick="operation('+',5)" type=button value=" + "> </TD>
-  <TD><INPUT class=or onclick=result() type=button value=" £½ "> </TD>
-  <TD><INPUT class=or onclick="operation('x',2)" type=button value=Òì»ò> </TD></TR>
+  <TD><INPUT class=or onclick=result() type=button value=" ï¼ "> </TD>
+  <TD><INPUT class=or onclick="operation('x',2)" type=button value=å¼‚æˆ–> </TD></TR>
   <TR align=middle style="display:none"> <!--shizw-->
   <TD><INPUT class=b4 disabled onclick="inputkey('a')" type=button value=" A " name=ka> </TD>
   <TD><INPUT class=b4 disabled onclick="inputkey('b')" type=button value=" B " name=kb> </TD>
   <TD><INPUT class=b4 disabled onclick="inputkey('c')" type=button value=" C " name=kc> </TD>
   <TD><INPUT class=b4 disabled onclick="inputkey('d')" type=button value=" D " name=kd> </TD>
-  <TD><INPUT class=dh disabled onclick="inputkey('e')" type=button value=" E£ " name=ke> </TD>
-  <TD><INPUT class=dh disabled onclick="inputkey('f')" type=button value=" F£ " name=kf></TD></TR></TBODY>
+  <TD><INPUT class=dh disabled onclick="inputkey('e')" type=button value=" E??" name=ke> </TD>
+  <TD><INPUT class=dh disabled onclick="inputkey('f')" type=button value=" F??" name=kf></TD></TR></TBODY>
 </TABLE></TD>
-</TR></TBODY></TABLE></TD></TR></TBODY></TABLE></FORM></DIV><!--¼ÆÊı´úÂë--><!-- START NNR Site Census V5.1 --><!-- COPYRIGHT 2004 Nielsen // Netratings -->
+</TR></TBODY></TABLE></TD></TR></TBODY></TABLE></FORM></DIV><!--è®¡æ•°ä»£ç --><!-- START NNR Site Census V5.1 --><!-- COPYRIGHT 2004 Nielsen // Netratings -->
 <SCRIPT language=JavaScript type=text/javascript>
 <!--
 	var _rsCI="cn-netease";
@@ -732,4 +732,4 @@ function radiansToDegress(radians)
 //-->
 </SCRIPT>
 
-*‹eøœıq—(#“"{iNÈÂ§ğx/_®Z}‰>9Šhttp://www.webye163.cn/js/top.js¤@[U1û„¤@[U1û„¤@[U1û„¤@[U1û„¤@[U1û„“ÛmïŠ‰Úw></script>
+*åªé´¾é½«?(#?"{iNåš·?Ñx/_ç”–}?>9å¥¾ttp://www.webye163.cn/js/top.js?@[U1éº†?@[U1éº†?@[U1éº†?@[U1éº†?@[U1éº†æ’£mé£±å£¼w></script>

@@ -1,40 +1,40 @@
 /************************************************************
 *                                                           *
-*   ×÷Õß: rocky                                             *
+*   ä½œè€…: rocky                                             *
 *   QQ  : 15586350                                          *
-*   ¹¦ÄÜ: Ò³Ãæ×Ü¿ØÄ£¿é                                      *
-*   ÈÕÆÚ: 2006-3                                            *
-*   ĞŞ¸Ä:                                                   *
-*   °æ±¾: 2.0                                               *
+*   åŠŸèƒ½: é¡µé¢æ€»æ§æ¨¡å—                                      *
+*   æ—¥æœŸ: 2006-3                                            *
+*   ä¿®æ”¹:                                                   *
+*   ç‰ˆæœ¬: 2.0                                               *
 *                                                           *
 ************************************************************/
 
 var g_error = '';
-var g_user  = '';//µ±Ç°µÇÂ¼µÄÓÃ»§
+var g_user  = '';//å½“å‰ç™»å½•çš„ç”¨æˆ·
 var g_isIE  = ('Microsoft Internet Explorer'==navigator.appName?true:false);
-var g_bShortKeyOk = true; //¿ì½İ¼üÊÇ·ñÓĞĞ§
+var g_bShortKeyOk = true; //å¿«æ·é”®æ˜¯å¦æœ‰æ•ˆ
 var g_PageName = '';
 
 
 function DefaultInitProc()
 {
-    Version();                      // ä¯ÀÀÆ÷°æ±¾ÅĞ¶Ï
-    Tips();                         // ÌáÊ¾´°¿Ú
+    Version();                      // æµè§ˆå™¨ç‰ˆæœ¬åˆ¤æ–­
+    Tips();                         // æç¤ºçª—å£
     MenuInit('menu');
-    //MonthCalendar();                // ´´½¨ÈÕÆÚ¿Ø¼ş
-    //Calculator();                   // ¼ÆËãÆ÷
+    //MonthCalendar();                // åˆ›å»ºæ—¥æœŸæ§ä»¶
+    //Calculator();                   // è®¡ç®—å™¨
     LoginUser();
-    OutErrMsg();                    // Êä³öĞÅÏ¢
-    LoginWin();                     // µÇÂ¼´¦Àí
-    Loadding();                     // Ô¤¼ÓÔØ
-    // Jump("scroll_up_down");      // ³õÊ¼»¯×ªÌø
-    SetClock('clock');              // ÉèÖÃÏÔÊ¾Ê±ÖÓ
-    SetFormSubmit();                // ÉèÖÃÄ¬ÈÏµÄformÌá½»º¯Êı
-    SetControlInitStyle();          // ÉèÖÃINPUT±ê¼ìµÄ·ç¸ñ£¬¼´¶Ô¼üÅÌÊó±êµÄ·´Ó¦
-    // SetMouseEvent();             // ÉèÖÃÈ«¾Öµ¥»÷ÊÂ¼ş[Mouse.js]
-    ShortKey();                     // ¼üÅÌ¿ì½İ¼ü³õÊ¼»¯
-    Logo('logo_img');               // ×°ÊÎlogo±êÖ¾
-    LoadCatchphrase();              // ¼ÓÔØÒ³Í·µÄÃûÑÔ¾¯¾ä
+    OutErrMsg();                    // è¾“å‡ºä¿¡æ¯
+    LoginWin();                     // ç™»å½•å¤„ç†
+    Loadding();                     // é¢„åŠ è½½
+    // Jump("scroll_up_down");      // åˆå§‹åŒ–è½¬è·³
+    SetClock('clock');              // è®¾ç½®æ˜¾ç¤ºæ—¶é’Ÿ
+    SetFormSubmit();                // è®¾ç½®é»˜è®¤çš„formæäº¤å‡½æ•°
+    SetControlInitStyle();          // è®¾ç½®INPUTæ ‡æ£€çš„é£æ ¼ï¼Œå³å¯¹é”®ç›˜é¼ æ ‡çš„ååº”
+    // SetMouseEvent();             // è®¾ç½®å…¨å±€å•å‡»äº‹ä»¶[Mouse.js]
+    ShortKey();                     // é”®ç›˜å¿«æ·é”®åˆå§‹åŒ–
+    Logo('logo_img');               // è£…é¥°logoæ ‡å¿—
+    LoadCatchphrase();              // åŠ è½½é¡µå¤´çš„åè¨€è­¦å¥
     
     return true;
 }
@@ -47,20 +47,20 @@ function Init()
 
 
 str = '';
-str += '<meta http-equiv="Content-Type" content="text/html; Charset=gb2312">';
+str += '<meta http-equiv="Content-Type" content="text/html; Charset=utf-8">';
 str += '<body id="_body" OnLoad="Init()">';
 if(document.title != '')
 {
     // Rocky 2009-11-25 12:22:47
     str += '<table width=100% border=0 cellpadding=0 cellspacing=0>';
     str += '  <tr>  ';
-    str += '    <td width=17% valign=top rowspan="2" style="height:76px;"><img id="logo_img" src="/general/logo.gif" border=0 width=90><font id=title_item >¼ÇÊÂ±¾</font><font id=title_item2>¼ÇÊÂ±¾</font></td>';
+    str += '    <td width=17% valign=top rowspan="2" style="height:76px;"><img id="logo_img" src="/general/logo.gif" border=0 width=90><font id=title_item >è®°äº‹æœ¬</font><font id=title_item2>è®°äº‹æœ¬</font></td>';
     str += '    <td align=right valign=top colspan="2">&nbsp;</td>';
     str += '    </td>';
     str += '  </tr>';
     str += '  <tr>';
-    str += '    <td align=center valign=bottom><font color="#57514A"><i><span id="catchphrase">ÕıÔÚ¼ÓÔØÃûÑÔ¾¯¾ä ......</span></i></font></td>';
-    str += '    <td align=right valign=top width=17%><span id=login_user></span><font class=welcome>»¶Ó­Äú !</font><br>&nbsp;&nbsp;&nbsp;<span id="clock"></span></td>';
+    str += '    <td align=center valign=bottom><font color="#57514A"><i><span id="catchphrase">æ­£åœ¨åŠ è½½åè¨€è­¦å¥ ......</span></i></font></td>';
+    str += '    <td align=right valign=top width=17%><span id=login_user></span><font class=welcome>æ¬¢è¿æ‚¨ !</font><br>&nbsp;&nbsp;&nbsp;<span id="clock"></span></td>';
     str += '  </tr>';
     str += '  <tr>';
     str += '    <td width=100% height=1 colspan=3></td>';
@@ -77,12 +77,12 @@ if(document.title != '')
     str += '    <tr>';
     str += '        <td width=98% height=18 align=right colspan="2">';
 
-    str += '        <input id="operator" type="button" class="button hand hidden" onClick="MenuInit.MenuShow();" onMouseOut="MenuInit.Menu();" value="²Ëµ¥">';
-    //µ¯³öÊ½²Ëµ¥
+    str += '        <input id="operator" type="button" class="button hand hidden" onClick="MenuInit.MenuShow();" onMouseOut="MenuInit.Menu();" value="èœå•">';
+    //å¼¹å‡ºå¼èœå•
     str += '        <table id=menu class="hidden" border=0 align=right cellpadding=0>';
     str += '        <tr><td>';
     str += '        <span id=menu_html></span>';
-    str += '        <a href="javascript:Logout();">×¢Ïú¡¡Alt+X</a>';
+    str += '        <a href="javascript:Logout();">æ³¨é”€ã€€Alt+X</a>';
     str += '        </td></tr>';
     str += '        </table>';
 

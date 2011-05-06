@@ -1,4 +1,4 @@
-<title>±à¼­£¨<!--$Title$GLOBAL$-->£©</title>
+<title>ç¼–è¾‘ï¼ˆ<!--$Title$GLOBAL$-->ï¼‰</title>
 <input type=hidden id='user' value='<!--$CurrentUser$GLOBAL$-->'>
 <input type=hidden id='user_ip' value='<!--$ClientIp$GLOBAL$-->'>
 <input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
@@ -31,7 +31,7 @@ function CtrlEnter()
 
 function AltEnter()
 {
-    if(bModify && !IsSure("Î´±£´æ£¬È·¶¨ÍË³öÂğ£¿"))
+    if(bModify && !IsSure("æœªä¿å­˜ï¼Œç¡®å®šé€€å‡ºå—ï¼Ÿ"))
         return;
     var obj = GetObj('edit_form');
     obj['return'].click();
@@ -40,7 +40,7 @@ function AltEnter()
 function AltB(key)
 {
     ShortKey.Lock();
-    if(bModify && !IsSure("Î´±£´æ£¬È·¶¨ÍË³öÂğ£¿"))
+    if(bModify && !IsSure("æœªä¿å­˜ï¼Œç¡®å®šé€€å‡ºå—ï¼Ÿ"))
         return;
     OpenPage('reading?key=<!--$Key$GLOBAL$-->');
 }
@@ -57,7 +57,7 @@ function AltS()
 {
     ShortKey.Lock();
     OverLayer.Open();
-    ShowToCenter.Open("div_set_pasd"); // ¾ÓÖĞÏÔÊ¾
+    ShowToCenter.Open("div_set_pasd"); // å±…ä¸­æ˜¾ç¤º
     form_obj['opr'].value = 'set';
     form_obj['msg_pasd_new'].focus();
 }
@@ -75,15 +75,15 @@ function Esc()
 <!--$Esc$GLOBAL$-->
 }
 
-//ÖØÔØ´Ëº¯Êı£¬ÉèÖÃ²Ëµ¥
+//é‡è½½æ­¤å‡½æ•°ï¼Œè®¾ç½®èœå•
 function LoadSetting()
 {
     var span = GetObj('menu_html');
     var str='';
-    str += '<a href="javascript:Alt1()">¸½¼ş¡¡Alt+1</a>';
-    str += '<a href="javascript:AltS();">¼ÓÃÜ¡¡Alt+S</a>';
-    str += '<a href="TypeDropBoxMenuSetting">¹éÀàÉèÖÃ</a>';
-    str += '<a href="javascript:AltEnter();">·µ»Ø¡¡Alt+Enter</a>';
+    str += '<a href="javascript:Alt1()">é™„ä»¶ã€€Alt+1</a>';
+    str += '<a href="javascript:AltS();">åŠ å¯†ã€€Alt+S</a>';
+    str += '<a href="TypeDropBoxMenuSetting">å½’ç±»è®¾ç½®</a>';
+    str += '<a href="javascript:AltEnter();">è¿”å›ã€€Alt+Enter</a>';
     span.innerHTML = str;;
 }
 
@@ -92,7 +92,7 @@ function OnTextKeyUp(ts)
     if(ts.value.length != txt_len)
     {
         bModify = true;
-        mod_obj.innerHTML = '(Î´±£´æ)';
+        mod_obj.innerHTML = '(æœªä¿å­˜)';
     }
     else
     {
@@ -101,7 +101,7 @@ function OnTextKeyUp(ts)
     }
 }
 
-// »Ö¸´³õÊ¼×´Ì¬
+// æ¢å¤åˆå§‹çŠ¶æ€
 function ClearStatus()
 {
     txt_len = GetObj('text')[0].value.length;
@@ -124,7 +124,7 @@ function Init()
     }
 
     ShortKey.Register({key:KEY_ESC}, Esc);
-    ShortKey.Register({key:KEY_F2}, AltN);  // ÒòÎªĞÂÔö²Ù×÷½Ï¶à£¬¹ÊÔÙ¼ÓÒ»¸ö±È½Ï·½±ãµÄ¿ì½İ¼ü£»
+    ShortKey.Register({key:KEY_F2}, AltN);  // å› ä¸ºæ–°å¢æ“ä½œè¾ƒå¤šï¼Œæ•…å†åŠ ä¸€ä¸ªæ¯”è¾ƒæ–¹ä¾¿çš„å¿«æ·é”®ï¼›
     ShortKey.Register({alt:true, key:KEY_1}, Alt1);
     ShortKey.Register({alt:true, key:KEY_B}, AltB);
     ShortKey.Register({alt:true, key:KEY_N}, AltN);
@@ -150,7 +150,7 @@ function Init()
 
 
 
-<!-- ÕıÎÄÊı¾İ -->
+<!-- æ­£æ–‡æ•°æ® -->
 <form id="edit_form" action="edit" method="POST" target="tmp_iframe">
 <table border="0" width="100%" height="73%">
     <tr>
@@ -159,25 +159,25 @@ function Init()
 
 <table align=center valign=middle id="table_edit">
 <input type="hidden" name="key" value="<!--$Key$GLOBAL$-->">
-<input type="hidden" name="operate" value=""> <!--ÖµÈ¡"new"Ê±£¬ÔòÌá½»ºó×ªĞÂÒ³Ãæ£»-->
-<input type="hidden" name="password" value="<!--$CurrentPassword$GLOBAL$-->"> <!--µ±Æä²»Îª¿ÕÊ±£¬ËµÃ÷µ±Ç°Êı¾İÊÇ±»¼ÓÃÜµÄ£»-->
-<input type="hidden" name="msg_type" id="msg_type" size="100"> <!--ÏÂÀ­²Ëµ¥ÖĞÑ¡ÖĞµÄÀàĞÍÁĞ±í-->
+<input type="hidden" name="operate" value=""> <!--å€¼å–"new"æ—¶ï¼Œåˆ™æäº¤åè½¬æ–°é¡µé¢ï¼›-->
+<input type="hidden" name="password" value="<!--$CurrentPassword$GLOBAL$-->"> <!--å½“å…¶ä¸ä¸ºç©ºæ—¶ï¼Œè¯´æ˜å½“å‰æ•°æ®æ˜¯è¢«åŠ å¯†çš„ï¼›-->
+<input type="hidden" name="msg_type" id="msg_type" size="100"> <!--ä¸‹æ‹‰èœå•ä¸­é€‰ä¸­çš„ç±»å‹åˆ—è¡¨-->
     <tr>
-        <td nowrap>±êÌâ£º</td>
+        <td nowrap>æ ‡é¢˜ï¼š</td>
         <td>
-            <input name="title" class="NOTEMPTY FOCUS" size="51" value="<!--$Title$GLOBAL$-->" maxlength="60" autocomplete="off"> <!-- $status £­£­February 22, 2007 -->
+            <input name="title" class="NOTEMPTY FOCUS" size="51" value="<!--$Title$GLOBAL$-->" maxlength="60" autocomplete="off"> <!-- $status ï¼ï¼February 22, 2007 -->
 
-            <input id="input_type_select" size="15" value="¹éÀàÑ¡Ôñ" title="µ¥»÷´ò¿ª¹éÀàÑ¡Ôñ´°¿Ú£¬ÔÙ´Îµ¥»÷¹Ø±Õ" readonly autocomplete="off"
+            <input id="input_type_select" size="15" value="å½’ç±»é€‰æ‹©" title="å•å‡»æ‰“å¼€å½’ç±»é€‰æ‹©çª—å£ï¼Œå†æ¬¡å•å‡»å…³é—­" readonly autocomplete="off"
                     class="disabled input_text input_text_center hand">
 
-            <input id="attach_count" size="9" value="¸½¼ş£º0" OnClick="Alt1()" title="µ¥»÷´ò¿ª¸½¼ş´°¿Ú" readonly autocomplete="off"
+            <input id="attach_count" size="9" value="é™„ä»¶ï¼š0" OnClick="Alt1()" title="å•å‡»æ‰“å¼€é™„ä»¶çª—å£" readonly autocomplete="off"
                     class="disabled input_text input_text_center hand">
 
             <span id="error" class="font12 blue"></span>
         </td>
     </tr>
     <tr>
-        <td valign="top">ÄÚÈİ£º</td>
+        <td valign="top">å†…å®¹ï¼š</td>
         <td>
             <textarea name="text" wrap="VIRTUAL" onKeyUp="OnTextKeyUp(this)"
                         class="input_text "><!--$Text$--></textarea>
@@ -186,9 +186,9 @@ function Init()
     <tr>
         <td></td>
         <td align=right>
-            <span class="note margin">¿ì½İ¼ü£ºÌá½»[Ctrl+Enter]£¬Ìá½»²¢ĞÂÔö[Alt+N]£¬·µ»Ø[Alt+Enter]</span>
-            <input type="submit" name="save_text" class="button TABTO_title" value=" Ìá ½» ">
-            <input type="button" id="return" onClick="OpenPage('browse')" value=" ·µ »Ø ">
+            <span class="note margin">å¿«æ·é”®ï¼šæäº¤[Ctrl+Enter]ï¼Œæäº¤å¹¶æ–°å¢[Alt+N]ï¼Œè¿”å›[Alt+Enter]</span>
+            <input type="submit" name="save_text" class="button TABTO_title" value=" æ äº¤ ">
+            <input type="button" id="return" onClick="OpenPage('browse')" value=" è¿” å› ">
         </td>
     </tr>
 </table>
@@ -206,7 +206,7 @@ function Init()
 
 
 
-<!-- ¼ÓÃÜÉèÖÃ -->
+<!-- åŠ å¯†è®¾ç½® -->
 <div id="div_set_pasd" class="window" style="display:none; position:absolute; width:491px;">
 <form method="POST" id="form_set">
 <input type="hidden" name="key" value="<!--$Key$GLOBAL$-->">
@@ -214,21 +214,21 @@ function Init()
 <table border="0" cellpadding=2 cellspacing=1>
 <td>
 
-<span class="tit">¼ÓÃÜ±¾ÌõÏûÏ¢</span><hr>
+<span class="tit">åŠ å¯†æœ¬æ¡æ¶ˆæ¯</span><hr>
 <span class="content">
 <br>
-<input type=hidden name="msg_pasd_old" value="<!--$CurrentPassword$GLOBAL$-->">  <!-- Ô­ÃÜÂë -->
+<input type=hidden name="msg_pasd_old" value="<!--$CurrentPassword$GLOBAL$-->">  <!-- åŸå¯†ç  -->
 <table>
     <tr>
-        <td width="70">ÉèÖÃÃÜÂë£º</td>
+        <td width="70">è®¾ç½®å¯†ç ï¼š</td>
         <td><input type=password name=msg_pasd_new size=46 value="" autocomplete="off"></td>
     </tr>
     <tr>
-        <td width="70">È·ÈÏÃÜÂë£º</td>
+        <td width="70">ç¡®è®¤å¯†ç ï¼š</td>
         <td><input type=password name=msg_pasd_new size=46 value="" autocomplete="off"></td>
     </tr>
     <tr>
-        <td>ÃÜÂëÌáÊ¾£º</td>
+        <td>å¯†ç æç¤ºï¼š</td>
         <td><input type=text name=msg_pasd_prompt size=46 value="<!--$CurrentDataPasswordPrompt$GLOBAL$-->" autocomplete="off"></td>
     </tr>
 </table>
@@ -238,8 +238,8 @@ function Init()
 </td></tr>
 <tr>
 <td align="right">
-    <input name="set_password" type="submit" class="button" value="È·¶¨">
-    <input type="reset" class="button TABTO_msg_pasd_new" value="È¡Ïû" onClick="Esc()" title="¿ì½İ¼ü£ºEsc">
+    <input name="set_password" type="submit" class="button" value="ç¡®å®š">
+    <input type="reset" class="button TABTO_msg_pasd_new" value="å–æ¶ˆ" onClick="Esc()" title="å¿«æ·é”®ï¼šEsc">
 </td>
 </tr>
 </table>
@@ -252,26 +252,26 @@ function Init()
 
 
 
-<!-- ²é¿´¼ÓÃÜÊı¾İÊäÈë´°¿Ú -->
+<!-- æŸ¥çœ‹åŠ å¯†æ•°æ®è¾“å…¥çª—å£ -->
 <!--$AuthenticationPrompt$GLOBAL$-->
 
 
 
-<!--ÎÄ¼ş¸½¼ş-->
+<!--æ–‡ä»¶é™„ä»¶-->
 <div id="div_attach" class="window" style="display:none;width:491px;">
 <form action="attach" method="POST" ENCTYPE="multipart/form-data" target="iframe_attach">
 <input type="hidden" name="key" value="<!--$Key$GLOBAL$-->">
 <table border="1" cellspacing=1 bgcolor="#FFFFFF"><tr><td>
 <table border="0" cellpadding=2 cellspacing=1>
 <td>
-<span class="tit">¸½¼ş</span><hr>
+<span class="tit">é™„ä»¶</span><hr>
 <span class="content">
     <iframe name="iframe_attach"
             src="attach?key=<!--$Key$GLOBAL$-->"
             frameborder=0 scrolling=auto width="96%" height="96" allowTransparency="true">
     </iframe>
     <br>
-    ÉÏ´«£º<input type=file name="attach" size="38" class="NOTEMPTY"> <input type=submit name=upfile value="ÉÏ´«">
+    ä¸Šä¼ ï¼š<input type=file name="attach" size="38" class="NOTEMPTY"> <input type=submit name=upfile value="ä¸Šä¼ ">
     <br>
     <br>
 </span>
@@ -279,7 +279,7 @@ function Init()
 </td></tr>
 <tr>
 <td align="right">
-    <input type=button class="button TABTO_upfile" value="¹Ø±Õ" onClick="Esc()" title="¿ì½İ¼ü£ºEsc">
+    <input type=button class="button TABTO_upfile" value="å…³é—­" onClick="Esc()" title="å¿«æ·é”®ï¼šEsc">
 </td>
 </tr>
 </table>
@@ -288,7 +288,7 @@ function Init()
 </div>
 
 
-<!-- ÀàĞÍÑ¡Ôñ²Ëµ¥ -->
+<!-- ç±»å‹é€‰æ‹©èœå• -->
 <span id="span_type_select" class="type_select_menu" style="position:absolute; visibility:hidden; left:0px; top:0px;">
 <!--$TypeDropBoxMenu$GLOBAL$-->
 </span>

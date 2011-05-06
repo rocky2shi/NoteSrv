@@ -8,7 +8,7 @@
 <script>
 function SetCookie(name, value, expire)
 {
-    expire = expire || 1000*24*3600*1000; // Ä¬ÈÏ1000Ìì¹ıÆÚ
+    expire = expire || 1000*24*3600*1000; // é»˜è®¤1000å¤©è¿‡æœŸ
     var exp  = new Date();
     exp.setTime(exp.getTime() + expire);
     document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
@@ -22,13 +22,13 @@ function GetCookie(name)
 
 
 
-// ´ò¿ªµÇÂ¼´°Æ·
+// æ‰“å¼€ç™»å½•çª—å“
 function OpenLoginWin()
 {
 //    ShortKey.Lock();
 //    OverLayer.Open();
     
-    // ShowToCenter.Open("table_login"); // ´ò¿ª 
+    // ShowToCenter.Open("table_login"); // æ‰“å¼€ 
 
     LoginWin.Open();
 
@@ -39,7 +39,7 @@ function OpenLoginWin()
 function Init()
 {
     DefaultInitProc();
-//    ShowToCenter.MoveToCenter("table_login"); // ¾ÓÖĞ
+//    ShowToCenter.MoveToCenter("table_login"); // å±…ä¸­
 //    SetCookie("name", "Rocky");
 //    SetCookie("id", "es360");
 //    ShowToCenter.MoveToCenter('table_login');
@@ -70,9 +70,9 @@ function Init()
 <form method="get" action="http://192.168.0.230:17890/login.cgi?user=rocky" target=tmp_iframe> 
 <input type="hidden" name="window.screen.width"> 
 <input type="hidden" name="window.screen.height"> 
-<input name='username' id='username' class='USERNAME FOCUS' value='abcdefghijklmnopqrstuvwxyzÖĞ¹úÈË'>
+<input name='username' id='username' class='USERNAME FOCUS' value='abcdefghijklmnopqrstuvwxyzä¸­å›½äºº'>
 <input type=submit name=login class="button" value="GET"> 
-<input type=button class="button TABTO_username" value="¹ØÓÚ" OnClick="About()"> 
+<input type=button class="button TABTO_username" value="å…³äº" OnClick="About()"> 
 </form> 
 
 <br>
@@ -80,9 +80,9 @@ function Init()
 <form method="post" action="http://192.168.0.230:17890/login.cgi?user=rocky" target=tmp_iframe> 
 <input type="hidden" name="window.screen.width"> 
 <input type="hidden" name="window.screen.height"> 
-<input name='username' id='username' class='USERNAME FOCUS' value='0123456789ÖĞ¹úÈË'>
+<input name='username' id='username' class='USERNAME FOCUS' value='0123456789ä¸­å›½äºº'>
 <input type=submit name=login class="button" value="POST"> 
-<input type=button class="button TABTO_username" value="¹ØÓÚ" OnClick="About()"> 
+<input type=button class="button TABTO_username" value="å…³äº" OnClick="About()"> 
 </form> 
 
 <hr>
@@ -90,9 +90,9 @@ function Init()
 
 
 <form action="http://192.168.0.230:17890/Login.cgi?user=rocky" method="POST" ENCTYPE="multipart/form-data" target="iframe_attach"> 
-<input type="hidden" name="username" value="abcdefghijklmnopqrstuvwxyzÖĞ¹úÈË"> 
+<input type="hidden" name="username" value="abcdefghijklmnopqrstuvwxyzä¸­å›½äºº"> 
 <input type="hidden" name="key" value="20100419194646"> 
-ÉÏ´«£º<input type=file name="attach" size="38" class="NOTEMPTY"> <input type=submit name=upfile value="ÉÏ´«"> 
+ä¸Šä¼ ï¼š<input type=file name="attach" size="38" class="NOTEMPTY"> <input type=submit name=upfile value="ä¸Šä¼ "> 
 </form> 
 
 
@@ -100,13 +100,13 @@ function Init()
 <form method="get"> 
 <input name='username' id='username' class='USERNAME FOCUS' value=''>
 <input type=submit name=login class="button" value="GET"> 
-<input type=button class="button TABTO_username" value="¹ØÓÚ" OnClick="About()"> 
+<input type=button class="button TABTO_username" value="å…³äº" OnClick="About()"> 
 </form> 
 
 <hr>
 <input id=cookie> 
-<input type=button value="ÉèÖÃCookie" OnClick='SetCookie("id", $("cookie").value)'> 
-<input type=button value="»ñÈ¡Cookie" OnClick='alert( GetCookie("id") )'>
+<input type=button value="è®¾ç½®Cookie" OnClick='SetCookie("id", $("cookie").value)'> 
+<input type=button value="è·å–Cookie" OnClick='alert( GetCookie("id") )'>
 
 <br>
 <hr>

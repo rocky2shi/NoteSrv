@@ -1,4 +1,4 @@
-<title>Ô¤ÀÀ</title> 
+<title>é¢„è§ˆ</title> 
 <input type=hidden id='user' value='<!--$CurrentUser$GLOBAL$-->'> 
 <input type=hidden id='user_ip' value='<!--$ClientIp$GLOBAL$-->'>
 <input type='hidden' id='server_time' value='<!--$ServerTime$GLOBAL$-->'>
@@ -26,11 +26,11 @@ function LoadTime(name, ti)
         tiArray = ('1970', '01', '01', '00', '00', '00');
     }
  
-    LoadItem(name+'1', tiArray[1], 2000, 2050);Print(" Äê ");//Äê
-    LoadItem(name+'2', tiArray[2], 1, 12);Print(" ÔÂ ");//ÔÂ
-    LoadItem(name+'3', tiArray[3], 1, 31);Print(" ÈÕ ");//ÈÕ
-    LoadItem(name+'4', tiArray[4], 0, 23);Print(" Ê± ");//Ê±
-    LoadItem(name+'5', tiArray[5], 0, 59);Print(" ·Ö ");//·Ö
+    LoadItem(name+'1', tiArray[1], 2000, 2050);Print(" å¹´ ");//å¹´
+    LoadItem(name+'2', tiArray[2], 1, 12);Print(" æœˆ ");//æœˆ
+    LoadItem(name+'3', tiArray[3], 1, 31);Print(" æ—¥ ");//æ—¥
+    LoadItem(name+'4', tiArray[4], 0, 23);Print(" æ—¶ ");//æ—¶
+    LoadItem(name+'5', tiArray[5], 0, 59);Print(" åˆ† ");//åˆ†
 }
  
 function LoadItem(name, ti, begin, end)
@@ -45,7 +45,7 @@ function LoadItem(name, ti, begin, end)
     Print("</option></select>");
 }
  
-//ÉèÖÃÆğÊ¼Ê±¼ä×´Ì¬
+//è®¾ç½®èµ·å§‹æ—¶é—´çŠ¶æ€
 function SetStatusTimeBegin()
 {
     var obj = GetObj('timebeginchk');
@@ -53,7 +53,7 @@ function SetStatusTimeBegin()
         SetStatusRange('form_query', 'hidden_t1', 'hidden_t2', obj[0].checked);
 }
  
-//ÉèÖÃÖÕÖ¹Ê±¼ä×´Ì¬
+//è®¾ç½®ç»ˆæ­¢æ—¶é—´çŠ¶æ€
 function SetStatusTimeEnd()
 {
     var obj = GetObj('timeendchk');
@@ -97,7 +97,7 @@ function EditMsg(index)
         index = '0';
     users     = GetObj('user');
     if(null == users)
-        alert('³ö´í£¬Ô­ÒòÎ´Ã÷¡£');
+        alert('å‡ºé”™ï¼ŒåŸå› æœªæ˜ã€‚');
     OpenPage('edit?username=' + users.value + '&key=' + key + '&index=' + index);
 }
  
@@ -112,41 +112,41 @@ function Delete()
     var key = sel[0];
     if(null==key || ''==key)
     {
-        alert("ÇëÑ¡Ë«»÷Ñ¡ÖĞÒªÉ¾³ıµÄ¼ÇÂ¼£¡");
+        alert("è¯·é€‰åŒå‡»é€‰ä¸­è¦åˆ é™¤çš„è®°å½•ï¼");
         return;
     }
     else if(sel.length > 2)
     {
-        // alert("°´Del¼üÒ»´ÎÖ»ÄÜÉ¾³ıÒ»Ìõ¼ÇÂ¼£¬É¾¶àÌõÇë°´D¼ü½øĞĞ²Ù×÷£¡");
-        alert("ÔİÒ»Ö§³ÖÒ»´ÎÉ¾³ı¶àÌõ¼ÇÂ¼");
+        // alert("æŒ‰Delé”®ä¸€æ¬¡åªèƒ½åˆ é™¤ä¸€æ¡è®°å½•ï¼Œåˆ å¤šæ¡è¯·æŒ‰Dé”®è¿›è¡Œæ“ä½œï¼");
+        alert("æš‚ä¸€æ”¯æŒä¸€æ¬¡åˆ é™¤å¤šæ¡è®°å½•");
         return;
     }
-    if(confirm("È·¶¨ÒªÉ¾³ıÑ¡ÖĞµÄ¼ÇÂ¼Âğ?"))
+    if(confirm("ç¡®å®šè¦åˆ é™¤é€‰ä¸­çš„è®°å½•å—?"))
     {
         // OpenPage('browse?delete_data=1&key=' + key);
         DoDelete();
     }
 
 
-    // ·¢ËÍÉ¾³ıÇëÊ¾
+    // å‘é€åˆ é™¤è¯·ç¤º
     function DoDelete()
     {
         var url = "browse";
 
-        /* ×é×°Post²ÎÊı
+        /* ç»„è£…Postå‚æ•°
          */
         var post = "";
         post += "delete_data=1";
         post += "&key=" + key;
         
-        // ·¢ËÍÇëÇóµ½·şÎñ¶Ë
+        // å‘é€è¯·æ±‚åˆ°æœåŠ¡ç«¯
         SubmitToServer(url, post, Response); 
-        // ´¦Àí»ØÓ¦
+        // å¤„ç†å›åº”
         function Response(str)
         {
             if("OK" == str)
             {
-                // ²»Ë¢ĞÂÒ³Ãæ£¬Ö»¼ÓÒ»É¾³ıÏßÀ´±íÊ¾£»
+                // ä¸åˆ·æ–°é¡µé¢ï¼ŒåªåŠ ä¸€åˆ é™¤çº¿æ¥è¡¨ç¤ºï¼›
                 $(key).innerHTML = $(key).innerHTML.strike();
             }
             else
@@ -157,16 +157,16 @@ function Delete()
     }
 }
  
-//ÖØÔØ´Ëº¯Êı£¬ÉèÖÃ²Ëµ¥
+//é‡è½½æ­¤å‡½æ•°ï¼Œè®¾ç½®èœå•
 function LoadSetting()
 {
     var span = GetObj('menu_html');
     var str='';
-    str += '<a href="javascript:F();">²éÕÒ¡¡ ¡¡F</a>';
-    str += '<a href="javascript:D();">²Ù×÷¡¡ ¡¡D</a>';
-    str += '<a href="javascript:EditMsg();">ĞÂÔö¡¡Alt+N</a>';
-    str += '<a href="javascript:BackupWin();">µ¼Èëµ¼³ö¡¡V</a>';
-    str += '<a href="javascript:Help();">°ïÖú</a>';
+    str += '<a href="javascript:F();">æŸ¥æ‰¾ã€€ ã€€F</a>';
+    str += '<a href="javascript:D();">æ“ä½œã€€ ã€€D</a>';
+    str += '<a href="javascript:EditMsg();">æ–°å¢ã€€Alt+N</a>';
+    str += '<a href="javascript:BackupWin();">å¯¼å…¥å¯¼å‡ºã€€V</a>';
+    str += '<a href="javascript:Help();">å¸®åŠ©</a>';
     span.innerHTML = str;;
 }
  
@@ -182,7 +182,7 @@ function Choice(c)
 }
  
  
-//ÒÔÏÂÁ½º¯ÊıÔÚlibrary.jsµÄSetTagAttrib()µ÷ÓÃ
+//ä»¥ä¸‹ä¸¤å‡½æ•°åœ¨library.jsçš„SetTagAttrib()è°ƒç”¨
 function liDoSome1(th)
 {
     one_obj.value = th.id;
@@ -192,12 +192,12 @@ function liDoSome2(th)
     if(th.bChoice)
     {
         if(more_obj.value.indexOf(th.id) < 0)
-            more_obj.value += th.id + ' ';//Ôö
+            more_obj.value += th.id + ' ';//å¢
     }
     else
     {
         var re = new RegExp(th.id+' ', "g");
-        more_obj.value = more_obj.value.replace(re, '');//É¾
+        more_obj.value = more_obj.value.replace(re, '');//åˆ 
     }
 }
  
@@ -221,17 +221,17 @@ function BackupSelect()
 // Rocky 2009-11-24 11:34:21
 function SelectData()
 {
-    // ±È½Ïº¯Êı£¨´ÓĞ¡µ½´ó£©
+    // æ¯”è¾ƒå‡½æ•°ï¼ˆä»å°åˆ°å¤§ï¼‰
     function cmp(a, b)
     {
         return b - a;
     }
     
-    // È¡³öÑ¡ÖĞµÄ£¬²¢ÅÅĞò
+    // å–å‡ºé€‰ä¸­çš„ï¼Œå¹¶æ’åº
     var sel = more_obj.value.split(' ').sort(cmp);
     var li_ary = $("date_list").getElementsByTagName('li');
     var i;
-    // Ìø¹ıÇ°ÃæµÄ
+    // è·³è¿‡å‰é¢çš„
     for(i=0; (li = li_ary[i]); i++)
     {
         if(sel[0] == li.id)
@@ -240,14 +240,14 @@ function SelectData()
             break;
         }
     }
-    // ÉèÖÃÑ¡ÖĞ
+    // è®¾ç½®é€‰ä¸­
     for(; (li = li_ary[i]); i++)
     {
-        if(sel[1] == li.id) // ÒÑ´ïÑ¡ÖĞµÄ×îºóÒ»¸ö£¬½áÊøÑ¡ÖĞ²Ù×÷
+        if(sel[1] == li.id) // å·²è¾¾é€‰ä¸­çš„æœ€åä¸€ä¸ªï¼Œç»“æŸé€‰ä¸­æ“ä½œ
         {
             break;
         }
-        li.ondblclick(); // Ë«»÷¼´ÎªÑ¡ÖĞ
+        li.ondblclick(); // åŒå‡»å³ä¸ºé€‰ä¸­
     }
 }
  
@@ -277,7 +277,7 @@ function BackupSelectCheck()
     if( $('backup_date_key').value == ''
         && $('backup_range')[0].checked == false)
     {
-        alert("ÇëÏÈÑ¡ÖĞÒªµ¼³öµÄÊı¾İ£¬»òÑ¡¡°ËùÓĞÊı¾İ¡±Ñ¡Ïî¡£");
+        alert("è¯·å…ˆé€‰ä¸­è¦å¯¼å‡ºçš„æ•°æ®ï¼Œæˆ–é€‰â€œæ‰€æœ‰æ•°æ®â€é€‰é¡¹ã€‚");
         return false;
     }
     return true;
@@ -285,7 +285,7 @@ function BackupSelectCheck()
  
 function BackupWin()
 {
-    // ×¢Òâ£¬ÔÚIEÀï£¬ÕâÀïÈ¡²»µ½£¬nameºÍidÓĞ³åÍ»£¬´ı¸Ä¡£[2008-11-18 22:38:40]
+    // æ³¨æ„ï¼Œåœ¨IEé‡Œï¼Œè¿™é‡Œå–ä¸åˆ°ï¼Œnameå’Œidæœ‰å†²çªï¼Œå¾…æ”¹ã€‚[2008-11-18 22:38:40]
     $("backup_range")[0].checked = $("backup_range")[1].checked = false;
     ShortKey.Lock();
     OverLayer.Open();
@@ -300,7 +300,7 @@ function Help()
     ShowToCenter.Open("div_help");
 }
  
-// ÉèÖÃÊéÇ©
+// è®¾ç½®ä¹¦ç­¾
 function SetBookMark()
 {
     var key = one_obj.value;
@@ -312,17 +312,17 @@ function SetBookMark()
     Bookmark.Set(key, title);
 }
  
-// ²éÕÒÕıÎÄ±ê¼Ç¶ÔÓ¦µÄÊéÇ©
+// æŸ¥æ‰¾æ­£æ–‡æ ‡è®°å¯¹åº”çš„ä¹¦ç­¾
 function FindBookMark()
 {
     var key = GetObj("choice_one").value;
     Bookmark.Find(key);
 }
  
-// ¶¨Ê±Ö´ĞĞº¯Êı
+// å®šæ—¶æ‰§è¡Œå‡½æ•°
 function PageLoopRun()
 {
-    // ÉÁ¶¯µ±Ç°ÊéÇ©¼ü
+    // é—ªåŠ¨å½“å‰ä¹¦ç­¾é”®
     Bookmark.Flash();
 }
  
@@ -343,10 +343,10 @@ function Init()
     ShortKey.Register({key:KEY_ESC}, Esc);
     ShortKey.Register({key:KEY_DELETE}, Delete);
     ShortKey.Register({alt:true, key:KEY_N}, AltN);
-    ShortKey.Register({alt:true, key:KEY_1}, SelectData);     // Ñ¡°ÑÁ½Ìõ¼ÇÂ¼Ö®¼äµÄ¼ÇÂ¼
+    ShortKey.Register({alt:true, key:KEY_1}, SelectData);     // é€‰æŠŠä¸¤æ¡è®°å½•ä¹‹é—´çš„è®°å½•
  
-    ShortKey.Register({key:KEY_F2}, SetBookMark);               // ÊéÇ©ÉèÖÃ
-    ShortKey.Register({ctrl:true, key:KEY_F2}, FindBookMark);   // ·´²éÊéÇ©
+    ShortKey.Register({key:KEY_F2}, SetBookMark);               // ä¹¦ç­¾è®¾ç½®
+    ShortKey.Register({ctrl:true, key:KEY_F2}, FindBookMark);   // åæŸ¥ä¹¦ç­¾
  
     TypeSelectMenu({id:"input_type_select", show:'index'}, {id:"span_type_select"}, {id:"query_type"});
     Bookmark("bookmark_data");
@@ -356,14 +356,14 @@ function Init()
  
 </script>
 
-<!-- Êı¾İÁĞ±í -->
+<!-- æ•°æ®åˆ—è¡¨ -->
 <ol id='date_list' class='DISCOLOR'>
 <!--$BrowseList$-->
 </ol>
 
 
-<!-- ËÑË÷¶Ô»°¿ò -->
-<div id="div_query" class="window" style="display:none;width:589px;">
+<!-- æœç´¢å¯¹è¯æ¡† -->
+<div id="div_query" class="window" style="display:none;width:639px;">
 <form id="form_query" action="browse" method="POST" target="<!--$result_win$-->">
 <input type="hidden" name="query_type" id="query_type" size="100">
 <table border="1" cellspacing="1" bgcolor="#FFFFFF">
@@ -371,47 +371,76 @@ function Init()
 <td>
 <table border="0" cellpadding="2" cellspacing="1">
 <td>
-<span class="tit">²éÑ¯</span><hr>
+<span class="tit">æŸ¥è¯¢</span><hr>
 <span class="content">
 
 <table border="0" height="163">
     <tr>
-        <td nowrap valign="middle">Ê±¡¡¼ä£º</td>
-        <td>
-            ÆğÊ¼ <input type=hidden id=hidden_t1><script>LoadTime('qtbegin', '<!--$qtbegin$-->')</script><input type=hidden id=hidden_t2>
-            <input type=checkbox name=timebeginchk value=1 onClick='SetStatusTimeBegin()' <!--$timebeginchk$-->>ÆôÓÃ<p />
-            ÖÕÖ¹ <input type=hidden id=hidden_t3><script>LoadTime('qtend', '<!--$qtend$-->')</script><input type=hidden id=hidden_t4>
-            <input type=checkbox name=timeendchk value=1 onClick='SetStatusTimeEnd()' <!--$timeendchk$-->>ÆôÓÃ
+        <td nowrap valign="middle">æ—¶ã€€é—´ï¼š</td>
+        <td valign="middle">
+            èµ·å§‹ 
+            <input type=checkbox name=timebeginchk value=1 onClick='SetStatusTimeBegin()' <!--$timebeginchk$-->>
+            <input type=hidden id=hidden_t1><script>LoadTime('qtbegin', '<!--$qtbegin$-->')</script>
+            <input type=hidden id=hidden_t2>
+            <input type=radio id=time_type1 name=time_type value="create" <!--$chk_time_type_create$-->>
+                <label for="time_type1">åˆ›å»ºæ—¶é—´</label>
+                <br> 
+            <!----------------------------------------------------------------->
+            ç»ˆæ­¢ 
+            <input type=checkbox name=timeendchk value=1 onClick='SetStatusTimeEnd()' <!--$timeendchk$-->>
+            <input type=hidden id=hidden_t3><script>LoadTime('qtend', '<!--$qtend$-->')</script>
+            <input type=hidden id=hidden_t4>
+            <input type=radio id=time_type2 name=time_type value="modify" <!--$chk_time_type_modify$-->>
+                <label for="time_type2">ä¿®æ”¹æ—¶é—´</label>
         </td>
     </tr>
     <tr>
-        <td>¹Ø¼ü´Ê£º</td>
+        <td>å…³é”®è¯ï¼š</td>
         <td>
-            <input type="text" name="query_keyword" size="40" value='<!--$query_keyword$-->' title="Ö§³ÖPerlÕıÔò±í´ïÊ½">
-            <input type="radio" name="query_scope" value="title" <!--$chk_title$-->>±êÌâ
-            <input type="radio" name="query_scope" value="content" <!--$chk_content$-->>ÄÚÈİ
-            <!-- È¡Ïû [Rocky 2010-05-21 16:14:02]
-            <input type="radio" name="query_scope" value="all" <!--$chk_all$-->>Á½Õß 
-            -->
+          <table border="0">
+            <tr>
+              <td>
+                <input type="text" name="query_keyword" size="40" value='<!--$query_keyword$-->'>
+              </td>
+              <td width="80">
+                <input type="radio" id="query_scope1" name="query_scope" value="title" <!--$chk_title$-->>
+                    <label for="query_scope1">æ ‡é¢˜</label><br>
+                <input type="radio" id="query_scope2" name="query_scope" value="content" <!--$chk_content$-->>
+                    <label for="query_scope2">å†…å®¹</label>
+              </td>
+              <td>
+                <input type="checkbox" id="query_case_ignore" name="query_case_ignore" value="0" <!--$chk_case_ignore$-->>
+                    <label for="query_case_ignore">åŒºåˆ†å¤§å°å†™</label><br>
+                <input type="radio" id="query_relation1" name="query_relation" value="and" <!--$chk_relation_and$-->>
+                    <label for="query_relation1">åŒ…å«å…¨éƒ¨è¯</label><br>
+                <input type="radio" id="query_relation2" name="query_relation" value="or" <!--$chk_relation_or$-->>
+                    <label for="query_relation2">åŒ…å«ä¸€ä¸ªè¯</label><br>
+              </td>
+            </tr>
+          </table>
         </td>
     </tr>
     <tr>
-        <td>Àà¡¡ĞÍ£º</td>
+        <td>ç±»ã€€å‹ï¼š</td>
         <td>
-            <input id="input_type_select" type="button" value="ÇëÑ¡Ôñ"
-                    title="µ¥»÷´ò¿ª¹éÀàÑ¡Ôñ´°¿Ú£¬ÔÙ´Îµ¥»÷¹Ø±Õ">(×¢Òâ£ºÍ¬Ê±Âú×ãËùÓĞ¹³Ñ¡Ïî)
+            <input id="input_type_select" type="button" value="è¯·é€‰æ‹©"
+                    title="å•å‡»æ‰“å¼€å½’ç±»é€‰æ‹©çª—å£ï¼Œå†æ¬¡å•å‡»å…³é—­">(æ³¨æ„ï¼šåŒæ—¶æ»¡è¶³æ‰€æœ‰é’©é€‰é¡¹)
+            <br>
         </td>
     </tr>
     <tr>
-        <td>½á¡¡¹û£º</td>
+        <td>ç»“ã€€æœï¼š</td>
         <td><input id="result_win1" name="result_win" type="radio" value="_self" OnClick="this.form.target=this.value" <!--$chk_self$-->>
-                <label for="result_win1">ÔÚµ±Ç°´°¿ÚÖĞÏÔÊ¾</label>
+                <label for="result_win1">åœ¨å½“å‰çª—å£ä¸­æ˜¾ç¤º</label>
             <input id="result_win2" name="result_win" type="radio" value="_blank" OnClick="this.form.target=this.value" <!--$chk_blank$-->>
-                <label for="result_win2">ÔÚĞÂµÄ´°¿ÚÖĞÏÔÊ¾</label>
+                <label for="result_win2">åœ¨æ–°çš„çª—å£ä¸­æ˜¾ç¤º</label>
         </td>
     </tr>
     <tr>
-        <td colspan="2" align="right"> <input type="checkbox" name="save_query_setting" value="1">±£´æÒÔÉÏÉèÖÃ</td>
+        <td colspan="2" align="right"> 
+            <input type="checkbox" id="save_query_setting" name="save_query_setting" value="1">
+                <label for="save_query_setting">ä¿å­˜ä»¥ä¸Šè®¾ç½®</label>
+        </td>
     </tr>
 </table>
 
@@ -421,8 +450,8 @@ function Init()
 </tr>
 <tr>
 <td align="right">
-    <input name="save_query" type="submit" class="button" value="È·¶¨">
-    <input type="reset" class="button TABTO_timebeginchk" value="È¡Ïû" onClick="Esc()" title="¿ì½İ¼ü£ºEsc">
+    <input name="save_query" type="submit" class="button" value="ç¡®å®š">
+    <input type="reset" class="button TABTO_timebeginchk" value="å–æ¶ˆ" onClick="Esc()" title="å¿«æ·é”®ï¼šEsc">
 </td>
 </tr>
 </table>
@@ -440,31 +469,31 @@ function Init()
 
 
 
-<!----------------------------------------- ²Ù×÷ begin------------------------------------------>
+<!----------------------------------------- æ“ä½œ begin------------------------------------------>
 <div id="div_dosome" class="window" style="display:none;position:absolute;width:530px; top:0px; z-index:50;">
 <form method=post>
-<input type=hidden id="choice_one"> <!--ÁÙÊ±´æ·Åµ¥»÷µÄliÌõÄ¿£¬²»ĞëÌá½»£¬ËùÒÔÃ»ÓĞname×Ö¶Î-->
-<textarea id="choice_more" name="selects" style="display:none;"></textarea> <!--´æ·ÅÑ¡ÖĞµÄliÌõÄ¿-->
+<input type=hidden id="choice_one"> <!--ä¸´æ—¶å­˜æ”¾å•å‡»çš„liæ¡ç›®ï¼Œä¸é¡»æäº¤ï¼Œæ‰€ä»¥æ²¡æœ‰nameå­—æ®µ-->
+<textarea id="choice_more" name="selects" style="display:none;"></textarea> <!--å­˜æ”¾é€‰ä¸­çš„liæ¡ç›®-->
 <table border="1" cellspacing="1" bgcolor="#FFFFFF">
 <tr>
 <td>
 <table border="0" cellpadding="2" cellspacing="1">
 <td>
-<span class="tit">²Ù×÷</span><hr>
+<span class="tit">æ“ä½œ</span><hr>
 <span class="content">
-Ñ¡Ôñ£º<input type="radio" name="choice" onClick="Choice(0)">È«Ñ¡<input type="radio" name="choice" onClick="Choice(1)">·´Ñ¡
+é€‰æ‹©ï¼š<input type="radio" name="choice" onClick="Choice(0)">å…¨é€‰<input type="radio" name="choice" onClick="Choice(1)">åé€‰
 <p /><p />
-¶ÔËùÑ¡ÌõÄ¿½øĞĞ²Ù×÷£º<br>
-    ¡¡<input type=radio name=sel_do value="delete">²á³ı£¨ÌáÊ¾£º°´Del¼ü¿É¿ì½İÉ¾³ıÒ»Ìõ¼ÇÂ¼¡££©<br>
-    ¡¡<input type=radio name=sel_do value="copy">¸´ÖÆ¸øÓÃ»§£º<input type=text name=to_user>¡¡(ÓÃ»§Ãû)<br>
+å¯¹æ‰€é€‰æ¡ç›®è¿›è¡Œæ“ä½œï¼š<br>
+    ã€€<input type=radio name=sel_do value="delete">å†Œé™¤ï¼ˆæç¤ºï¼šæŒ‰Delé”®å¯å¿«æ·åˆ é™¤ä¸€æ¡è®°å½•ã€‚ï¼‰<br>
+    ã€€<input type=radio name=sel_do value="copy">å¤åˆ¶ç»™ç”¨æˆ·ï¼š<input type=text name=to_user>ã€€(ç”¨æˆ·å)<br>
 </span>
 <hr>
 </td>
 </tr>
 <tr>
 <td align="right">
-    <input type="submit" name="save_dosome" class=button value="È·¶¨">
-    <input type="button" class="button TABTO_choice" value="È¡Ïû" onClick="Esc()" title="¿ì½İ¼ü£ºEsc">
+    <input type="submit" name="save_dosome" class=button value="ç¡®å®š">
+    <input type="button" class="button TABTO_choice" value="å–æ¶ˆ" onClick="Esc()" title="å¿«æ·é”®ï¼šEsc">
 </td>
 </tr>
 </table>
@@ -473,7 +502,7 @@ function Init()
 </table>
 </form>
 </div><!-- end of <div id="div_dosome"> -->
-<!----------------------------------------- ²Ù×÷ end-------------------------------------------->
+<!----------------------------------------- æ“ä½œ end-------------------------------------------->
 
 
 
@@ -485,31 +514,31 @@ function Init()
 
 
 
-<!----------------------------------------- µ¼Èëµ¼³ö begin------------------------------------------>
+<!----------------------------------------- å¯¼å…¥å¯¼å‡º begin------------------------------------------>
 <div id="div_backup" class="window" style="display:none;position:absolute;width:560px; top:0px; z-index:50;">
 <form id="form_backup" method="POST" action="DataExport" target="tmp_iframe">
-<textarea id="backup_date_key" name="select_key" style="display:none;"></textarea> <!-- ´æ·ÅÑ¡ÖĞµÄliÌõÄ¿' -->
+<textarea id="backup_date_key" name="select_key" style="display:none;"></textarea> <!-- å­˜æ”¾é€‰ä¸­çš„liæ¡ç›®' -->
 <table border="1" cellspacing="1" bgcolor="#FFFFFF">
 <tr>
 <td>
 <table border="0" cellpadding="2" cellspacing="1">
 <td>
-<span class="tit">µ¼Èëµ¼³ö</span><hr>
+<span class="tit">å¯¼å…¥å¯¼å‡º</span><hr>
 <span class="content"><p />
-·¶Î§£º<input type="radio" id="backup_range1" name="backup_range" value="all" OnClick="BackupReverseButton(false)">
-            <label for="backup_range1">ËùÓĞÊı¾İ</label>
+èŒƒå›´ï¼š<input type="radio" id="backup_range1" name="backup_range" value="all" OnClick="BackupReverseButton(false)">
+            <label for="backup_range1">æ‰€æœ‰æ•°æ®</label>
       <input type="radio" id="backup_range2" name="backup_range" value="select" OnClick="BackupReverseButton(true)">
-            <label for="backup_range2">Ñ¡ÖĞÊı¾İ</label>
-      £¨<input type="button" id="backup_reverse" value="·´Ñ¡" OnClick="BackupSelect()" disabled>£© 
+            <label for="backup_range2">é€‰ä¸­æ•°æ®</label>
+      ï¼ˆ<input type="button" id="backup_reverse" value="åé€‰" OnClick="BackupSelect()" disabled>ï¼‰ 
       <input type="checkbox" id="include_attach" name="include_attach" value="yes" checked>
-            <label for="include_attach">°üº¬¸½¼ş</label> 
+            <label for="include_attach">åŒ…å«é™„ä»¶</label> 
       <p /><p />
-µ¼³ö£º<input type="submit" name="backup_export" value="Áí´æÎªÎÄ¼ş" OnClick="return BackupSelectCheck()">
+å¯¼å‡ºï¼š<input type="submit" name="backup_export" value="å¦å­˜ä¸ºæ–‡ä»¶" OnClick="return BackupSelectCheck()">
       <p />
 </form>
 
 <form method="POST" action="DataImport" ENCTYPE="multipart/form-data" target=tmp_iframe>
-µ¼Èë£º<input type=file name="pack" size=50> <input type=submit name="backup_import" value="ÉÏ´«"><p />
+å¯¼å…¥ï¼š<input type=file name="pack" size=50> <input type=submit name="backup_import" value="ä¸Šä¼ "><p />
 </form>
 </span>
 <hr>
@@ -517,7 +546,7 @@ function Init()
 </tr>
 <tr>
 <td align="right">
-    <input type="button" class="button TABTO_backup_range1" value="¹Ø±Õ" onClick="Esc()" title="¿ì½İ¼ü£ºEsc">
+    <input type="button" class="button TABTO_backup_range1" value="å…³é—­" onClick="Esc()" title="å¿«æ·é”®ï¼šEsc">
 </td>
 </tr>
 </table>
@@ -525,12 +554,12 @@ function Init()
 </tr>
 </table>
 </div><!-- end of <div id="div_backup"> -->
-<!----------------------------------------- µ¼Èëµ¼³ö end-------------------------------------------->
+<!----------------------------------------- å¯¼å…¥å¯¼å‡º end-------------------------------------------->
 
 
 
 
-<!-- ÀàĞÍÑ¡Ôñ²Ëµ¥ -->
+<!-- ç±»å‹é€‰æ‹©èœå• -->
 <span id="span_type_select" class="type_select_menu" style="position:absolute; visibility:hidden; left:0px; top:0px;">
 <!--$TypeDropBoxMenu$GLOBAL$-->
 </span>
@@ -539,66 +568,66 @@ function Init()
 
 
 
-<!----------------------------------------- ÊéÇ© begin ----------------------------------------->
-<!-- ÊéÇ©Ìá½» -->
+<!----------------------------------------- ä¹¦ç­¾ begin ----------------------------------------->
+<!-- ä¹¦ç­¾æäº¤ -->
 <form method="POST" action="browse" target="tmp_iframe" style="display:none">
 <input id="bookmark_data" name="bookmark_data" type="text" value="<!--$BrowseBookmark$-->" size="100">
-<input name="bookmark_save" value="Ìá½»">
+<input name="bookmark_save" value="æäº¤">
 </form>
-<!----------------------------------------- ÊéÇ© end ------------------------------------------>
+<!----------------------------------------- ä¹¦ç­¾ end ------------------------------------------>
 
 
 
 
 
-<!----------------------------------------- °ïÖú begin------------------------------------------>
+<!----------------------------------------- å¸®åŠ© begin------------------------------------------>
 <div id="div_help" class="window" style="display:none;position:absolute;width:530px; top:0px; z-index:50;">
-<input type=hidden id="choice_one">                             <!--ÁÙÊ±´æ·Åµ¥»÷µÄliÌõÄ¿£¬²»ĞëÌá½»£¬ËùÒÔÃ»ÓĞname×Ö¶Î-->
+<input type=hidden id="choice_one">                             <!--ä¸´æ—¶å­˜æ”¾å•å‡»çš„liæ¡ç›®ï¼Œä¸é¡»æäº¤ï¼Œæ‰€ä»¥æ²¡æœ‰nameå­—æ®µ-->
 <table border="1" cellspacing="1" bgcolor="#FFFFFF">
 <tr>
 <td>
 <table border="0" cellpadding="2" cellspacing="1">
 <td>
-<span class="tit">°ïÖú</span><hr> <!--------- ±êÌâ ---------------->
+<span class="tit">å¸®åŠ©</span><hr> <!--------- æ ‡é¢˜ ---------------->
 <span class="content">
-<!--------- ÄÚÈİ begin ---------------->
+<!--------- å†…å®¹ begin ---------------->
 <br>
-[ÊéÇ©]<br>
+[ä¹¦ç­¾]<br>
 
 <ol>
-    <li>ÉèÖÃÊéÇ©£ºÊó±êÒÆµ½ÒªÉèÊéÇ©µÄ¼ÇÂ¼ÉÏ£¨ÕâÊ±»á±ê°×£©£¬°´F2£»</li>
-    <li>Ctrl+F2£¬·´²é¶ÔÓ¦µÄÊéÇ©£»</li>
-    <li>ÉÏ¼ıÍ·</li>
+    <li>è®¾ç½®ä¹¦ç­¾ï¼šé¼ æ ‡ç§»åˆ°è¦è®¾ä¹¦ç­¾çš„è®°å½•ä¸Šï¼ˆè¿™æ—¶ä¼šæ ‡ç™½ï¼‰ï¼ŒæŒ‰F2ï¼›</li>
+    <li>Ctrl+F2ï¼ŒåæŸ¥å¯¹åº”çš„ä¹¦ç­¾ï¼›</li>
+    <li>ä¸Šç®­å¤´</li>
         <ul>
-            <li>µ¥»÷£ºÌøµ½Ç°Ò»¸öÊéÇ©´¦</li>
-            <li>Ctrl+µ¥»÷£ºµ±Ç°ÊéÇ©ÉÏÒÆÒ»¸öÎ»ÖÃ</li>
+            <li>å•å‡»ï¼šè·³åˆ°å‰ä¸€ä¸ªä¹¦ç­¾å¤„</li>
+            <li>Ctrl+å•å‡»ï¼šå½“å‰ä¹¦ç­¾ä¸Šç§»ä¸€ä¸ªä½ç½®</li>
         </ul>
-    <li>ÊéÇ©°´Å¥</li>
+    <li>ä¹¦ç­¾æŒ‰é’®</li>
         <ul>
-            <li>µ¥»÷£º×ªÌø</li>
-            <li>µ¥»÷+Ctrl£ºĞŞ¸ÄÊéÇ©±ê</li>
-            <li>ÓÒ»÷£ºÉ¾³ıÊéÇ©</li>
+            <li>å•å‡»ï¼šè½¬è·³</li>
+            <li>å•å‡»+Ctrlï¼šä¿®æ”¹ä¹¦ç­¾æ ‡</li>
+            <li>å³å‡»ï¼šåˆ é™¤ä¹¦ç­¾</li>
         </ul>
-    <li>ÏÂ¼ıÍ·</li>
+    <li>ä¸‹ç®­å¤´</li>
         <ul>
-            <li>µ¥»÷£ºÌøµ½ÏÂÒ»¸öÊéÇ©´¦</li>
-            <li>Ctrl+µ¥»÷£ºµ±Ç°ÊéÇ©ÏÂÒÆÒ»¸öÎ»ÖÃ</li>
+            <li>å•å‡»ï¼šè·³åˆ°ä¸‹ä¸€ä¸ªä¹¦ç­¾å¤„</li>
+            <li>Ctrl+å•å‡»ï¼šå½“å‰ä¹¦ç­¾ä¸‹ç§»ä¸€ä¸ªä½ç½®</li>
         </ul>
 </ol>
 
 <br>
-[Ñ¡Ôñ]<br>
+[é€‰æ‹©]<br>
 
 <ol>
-    <li> ÏÈÔÚ¼ÇÂ¼ÉÏË«»÷£¬Ñ¡ÖĞÁ½Ìõ£¬ÔÙ°´Alt+1¼ü£¬¿ÉÑ¡ÖĞÕâÁ½ÌõÖ®¼äµÄËùÓĞ¼ÇÂ¼£»
+    <li> å…ˆåœ¨è®°å½•ä¸ŠåŒå‡»ï¼Œé€‰ä¸­ä¸¤æ¡ï¼Œå†æŒ‰Alt+1é”®ï¼Œå¯é€‰ä¸­è¿™ä¸¤æ¡ä¹‹é—´çš„æ‰€æœ‰è®°å½•ï¼›
 </ol>
-<!--------- ÄÚÈİ end ------------------>
+<!--------- å†…å®¹ end ------------------>
 <hr>
 </td>
 </tr>
 <tr>
 <td align="right">
-    <input type="button" class="button" value="¹Ø±Õ" onClick="Esc()" title="¿ì½İ¼ü£ºEsc">
+    <input type="button" class="button" value="å…³é—­" onClick="Esc()" title="å¿«æ·é”®ï¼šEsc">
 </td>
 </tr>
 </table>
@@ -606,5 +635,5 @@ function Init()
 </tr>
 </table>
 </div><!-- end of <div id="div_help"> -->
-<!----------------------------------------- °ïÖú end-------------------------------------------->
+<!----------------------------------------- å¸®åŠ© end-------------------------------------------->
 

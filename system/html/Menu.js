@@ -2,9 +2,9 @@
 
 
 /*
- *  ¹¦ÄÜ£º¹éÀàÑ¡ÔñÉèÖÃ
- *  ±àĞ´£ºRocky 2008-10-29 00:36:34
- *  ËµÃ÷£º
+ *  åŠŸèƒ½ï¼šå½’ç±»é€‰æ‹©è®¾ç½®
+ *  ç¼–å†™ï¼šRocky 2008-10-29 00:36:34
+ *  è¯´æ˜ï¼š
  *          TypeSelectMenu( {id:"input_type_select", show:'value'|'title'|'index'},
  *                          {id:"span_type_select", click:menu_click},
  *                          {id:"query_type"} );
@@ -17,40 +17,40 @@ function TypeSelectMenu(head, menu, value)
     var THIS = this;
     var timeout = "";
 
-    // ÉèÖÃÄ¬ÈÏÖµ
+    // è®¾ç½®é»˜è®¤å€¼
     head.show = head.show || 'title';
     value.show = value.show || 'value';
 
-    // ¼ÇÂ¼µÚÒ»¸ö²Ëµ¥Ïî
+    // è®°å½•ç¬¬ä¸€ä¸ªèœå•é¡¹
     menu.obj.first_item = null;
-    // Ô­Öµ
+    // åŸå€¼
     head.obj.old_value = head.obj.value;
     value.obj.old_value = value.obj.value;
 
-    // ¶ÔÍâ½Ó¿Ú
+    // å¯¹å¤–æ¥å£
     //this.Open = Open;
     //this.Close = Close;
     //this.Show = Show;
 
 
-    // Ö´ĞĞ³õÊ¼»¯
+    // æ‰§è¡Œåˆå§‹åŒ–
     Init();
 
     /*
-     *  ¹¦ÄÜ£ºÏÔÊ¾¿Ø¼ş£»
-     *        ×¢Òâ£¬¿Ø¼ş±ØĞëÊÇ .style.visibility ÉèÖÃµÄ¡£
+     *  åŠŸèƒ½ï¼šæ˜¾ç¤ºæ§ä»¶ï¼›
+     *        æ³¨æ„ï¼Œæ§ä»¶å¿…é¡»æ˜¯ .style.visibility è®¾ç½®çš„ã€‚
      */
     function Open()
     {
-        // ÔÚÃ¿´Î´ò¿ª²Ëµ¥Ê±£¬¶¼ÒªÒÆµ½ÕıÈ·Î»ÖÃ£¨ÒòÎªÄ¿µÄÎ»ÖÃ¿ÉÄÜ»á±ä¶¯£©¡£
+        // åœ¨æ¯æ¬¡æ‰“å¼€èœå•æ—¶ï¼Œéƒ½è¦ç§»åˆ°æ­£ç¡®ä½ç½®ï¼ˆå› ä¸ºç›®çš„ä½ç½®å¯èƒ½ä¼šå˜åŠ¨ï¼‰ã€‚
         MoveTo();
-        // ÏÔÊ¾
+        // æ˜¾ç¤º
         menu.obj.style.visibility = "visible";
     }
 
     /*
-     *  ¹¦ÄÜ£ºÒş²Ø¿Ø¼ş£»
-     *        ×¢Òâ£¬¿Ø¼ş±ØĞëÊÇ .style.visibility ÉèÖÃµÄ¡£
+     *  åŠŸèƒ½ï¼šéšè—æ§ä»¶ï¼›
+     *        æ³¨æ„ï¼Œæ§ä»¶å¿…é¡»æ˜¯ .style.visibility è®¾ç½®çš„ã€‚
      */
     function Close()
     {
@@ -62,8 +62,8 @@ function TypeSelectMenu(head, menu, value)
     }
 
     /*
-     *  ¹¦ÄÜ£º¼ì²â²Ëµ¥ÊÇ·ñÒÑ´ò¿ª
-     *  ·µ»Ø£ºtrue-ÒÑ´ò¿ª£¬false-Î´´ò¿ª£»
+     *  åŠŸèƒ½ï¼šæ£€æµ‹èœå•æ˜¯å¦å·²æ‰“å¼€
+     *  è¿”å›ï¼štrue-å·²æ‰“å¼€ï¼Œfalse-æœªæ‰“å¼€ï¼›
      */
     function IsOpen()
     {
@@ -72,8 +72,8 @@ function TypeSelectMenu(head, menu, value)
 
 
     /*
-     *  ¹¦ÄÜ£ºÒ»´Îµ÷ÓÃÏÔÊ¾¡¢ÔÙ´Îµ÷ÓÃÒş²Ø¿Ø¼ş£»
-     *        ×¢Òâ£¬¿Ø¼ş±ØĞëÊÇ .style.visibility ÉèÖÃµÄ¡£
+     *  åŠŸèƒ½ï¼šä¸€æ¬¡è°ƒç”¨æ˜¾ç¤ºã€å†æ¬¡è°ƒç”¨éšè—æ§ä»¶ï¼›
+     *        æ³¨æ„ï¼Œæ§ä»¶å¿…é¡»æ˜¯ .style.visibility è®¾ç½®çš„ã€‚
      */
     function Show()
     {
@@ -81,7 +81,7 @@ function TypeSelectMenu(head, menu, value)
     }
 
     /*
-     *  ¹¦ÄÜ£º°Ñ¿Ø¼şÒÆµ½ÊÊµ±Î»ÖÃ£¨ÓÃÓÚÏÔÊ¾£©
+     *  åŠŸèƒ½ï¼šæŠŠæ§ä»¶ç§»åˆ°é€‚å½“ä½ç½®ï¼ˆç”¨äºæ˜¾ç¤ºï¼‰
      */
     function MoveTo()
     {
@@ -95,17 +95,17 @@ function TypeSelectMenu(head, menu, value)
     }
 
     /*
-     *  ¹¦ÄÜ£º°Ñ¿Ø¼şÖĞÒÑÑ¡µÄcheckbox¸´µ½Ä¿µÄµÄvalue¡£
+     *  åŠŸèƒ½ï¼šæŠŠæ§ä»¶ä¸­å·²é€‰çš„checkboxå¤åˆ°ç›®çš„çš„valueã€‚
      */
     function CopyTo()
     {
         var chks = menu.obj.getElementsByTagName("input");
         var chk = null;
-        var menu_chk = {};  // ¼ÇÂ¼²Ëµ¥ÖĞÑ¡ÖĞµÄÏî
+        var menu_chk = {};  // è®°å½•èœå•ä¸­é€‰ä¸­çš„é¡¹
 
-        menu_chk.value = '';    // Öµ[value]
-        menu_chk.title = '';    // ±êÌâ[title]
-        menu_chk.index = '';    // ĞòºÅ
+        menu_chk.value = '';    // å€¼[value]
+        menu_chk.title = '';    // æ ‡é¢˜[title]
+        menu_chk.index = '';    // åºå·
 
         for(var i=0; (chk=chks[i]); i++)
         {
@@ -116,18 +116,18 @@ function TypeSelectMenu(head, menu, value)
                 menu_chk.index += (i+1) + ',';
             }
         }
-        // È¥µô×îºóµÄ¡°,¡±
+        // å»æ‰æœ€åçš„â€œ,â€
         menu_chk.value = menu_chk.value.slice(0, -1);
         menu_chk.title = menu_chk.title.slice(0, -1);
         menu_chk.index = menu_chk.index ? (head.obj.old_value + "[" + menu_chk.index.slice(0, -1) + "]") : "";
 
-        // ÏÔÊ¾
+        // æ˜¾ç¤º
         head.obj.value = menu_chk[(head.show)] || head.obj.old_value;
-        // ÒªÌá½»µÄÖµ
+        // è¦æäº¤çš„å€¼
         value.obj.value = menu_chk[(value.show)] || value.obj.old_value;
     }
 
-    // ¹Ø±ÕÊ±ÇåµôËùÓĞ²Ëµ¥Ñ¡ÏîÉÏµÄ·´°×ÏÔÊ¾
+    // å…³é—­æ—¶æ¸…æ‰æ‰€æœ‰èœå•é€‰é¡¹ä¸Šçš„åç™½æ˜¾ç¤º
     function ClearBgColor()
     {
         var items = menu.obj.getElementsByTagName('label');
@@ -137,7 +137,7 @@ function TypeSelectMenu(head, menu, value)
         }
     }
 
-    // ¶¯×÷¶¨Òå
+    // åŠ¨ä½œå®šä¹‰
     function Click(event)
     {
         CopyTo();
@@ -152,58 +152,58 @@ function TypeSelectMenu(head, menu, value)
 
         var N = 0;
         var pos = GetPosition(menu.id);
-        var x = pos.x + N;  // ²Ëµ¥×ø±ê
+        var x = pos.x + N;  // èœå•åæ ‡
         var y = pos.y + N;
         var w = pos.w - N;
         var h = pos.h - N;
-        var X = document.body.scrollLeft + event.clientX;   // Êó±êÔÚÆÁÄ»ÉÏµÄ×ø±ê
+        var X = document.body.scrollLeft + event.clientX;   // é¼ æ ‡åœ¨å±å¹•ä¸Šçš„åæ ‡
         var Y = document.body.scrollTop + event.clientY;
 
-        if(Y < y - 30       // ÔÚÉÏ·½
-           || Y > y + h     // ÔÚÏÂ·½
-           || X < pos.x     // ÔÚ×ó±ß
-           || X > x + w)    // ÔÚÓÒ±ß
+        if(Y < y - 30       // åœ¨ä¸Šæ–¹
+           || Y > y + h     // åœ¨ä¸‹æ–¹
+           || X < pos.x     // åœ¨å·¦è¾¹
+           || X > x + w)    // åœ¨å³è¾¹
         {
-            Close(); // ³¬³ö·¶Î§£¬Òş²Ø£»
+            Close(); // è¶…å‡ºèŒƒå›´ï¼Œéšè—ï¼›
         }
     }
 
     /*
-     *  ¹¦ÄÜ£º³õÊ¼»¯£¬ÉèÖÃµã»÷ÊÂ¼ş£¬µ±ÔÚ²Ëµ¥Íâµã»÷Ê±£¬Òş²Ø²Ëµ¥£»
-     *        ×¢Òâ£¬¿Ø¼ş±ØĞëÊÇ .style.visibility ÉèÖÃµÄ¡£
-     *  ÈÕÆÚ£º2008-10-03 15:56:18
+     *  åŠŸèƒ½ï¼šåˆå§‹åŒ–ï¼Œè®¾ç½®ç‚¹å‡»äº‹ä»¶ï¼Œå½“åœ¨èœå•å¤–ç‚¹å‡»æ—¶ï¼Œéšè—èœå•ï¼›
+     *        æ³¨æ„ï¼Œæ§ä»¶å¿…é¡»æ˜¯ .style.visibility è®¾ç½®çš„ã€‚
+     *  æ—¥æœŸï¼š2008-10-03 15:56:18
      */
     function Init()
     {
-        // ÉèÖÃÔÚ²Ëµ¥ÌåÉÏµÄµ¥»÷¡¢ÒÆ¶¯Êó±êµÈ
+        // è®¾ç½®åœ¨èœå•ä½“ä¸Šçš„å•å‡»ã€ç§»åŠ¨é¼ æ ‡ç­‰
         InsertFun(menu.obj, "click", Click);
         InsertFun(document, "mouseover", MouseOver);
 
-        // ÔÚÍ·ÉÏµ¥»÷Ê±
+        // åœ¨å¤´ä¸Šå•å‡»æ—¶
         head.obj.onclick = function()
         {
             Show();
         }
-        // °´ÏÂ»Ø³µ¼üÊ±µ¯³ö²Ëµ¥
+        // æŒ‰ä¸‹å›è½¦é”®æ—¶å¼¹å‡ºèœå•
         head.obj.onkeydown = function(event)
         {
             event = event ? event :  window.event;
 
-            if(13 == event.keyCode) // »Ø³µ£º´ò¿ª/¹Ø±Õ²Ëµ¥¡£
+            if(13 == event.keyCode) // å›è½¦ï¼šæ‰“å¼€/å…³é—­èœå•ã€‚
             {
                 Show();
-                return false; // Ê¹ÓÃ°´ÏÂ»Ø³µÊ±Ò²²»Òª´¥·¢Ìá½»
+                return false; // ä½¿ç”¨æŒ‰ä¸‹å›è½¦æ—¶ä¹Ÿä¸è¦è§¦å‘æäº¤
             }
-            else if(40 == event.keyCode) // ÏÂ¼ıÍ·
+            else if(40 == event.keyCode) // ä¸‹ç®­å¤´
             {
-                // Èç²Ëµ¥Î´´ò¿ª£¬Ôò´ò¿ª£¨ÏÔÊ¾£©Ëü¡£·ñÔò°Ñ½¹µãÒÆµ½µÚÒ»Ïî¡£
+                // å¦‚èœå•æœªæ‰“å¼€ï¼Œåˆ™æ‰“å¼€ï¼ˆæ˜¾ç¤ºï¼‰å®ƒã€‚å¦åˆ™æŠŠç„¦ç‚¹ç§»åˆ°ç¬¬ä¸€é¡¹ã€‚
                 if(IsOpen())
                 {
-                    // ½¹µãÒÆµ½µÚÒ»Ïî
+                    // ç„¦ç‚¹ç§»åˆ°ç¬¬ä¸€é¡¹
                     if(null != menu.obj.first_item)
                     {
                         menu.obj.first_item.focus();
-                        return false;   // ×¢Òâ£¬ÔÚradioÖĞ·µtrue»áÌø¹ıµÚÒ»Ïî
+                        return false;   // æ³¨æ„ï¼Œåœ¨radioä¸­è¿”trueä¼šè·³è¿‡ç¬¬ä¸€é¡¹
                     }
                 }
                 else
@@ -214,7 +214,7 @@ function TypeSelectMenu(head, menu, value)
             return true;
         }
 
-        // ÔÚÑ¡ÔñÏîÉÏµ¥»÷Ê±£¨ÔÚÎÄ×ÖÉÏµ¥»÷Ê±Ò²×ö±ê¼Ç£©
+        // åœ¨é€‰æ‹©é¡¹ä¸Šå•å‡»æ—¶ï¼ˆåœ¨æ–‡å­—ä¸Šå•å‡»æ—¶ä¹Ÿåšæ ‡è®°ï¼‰
         var items = menu.obj.getElementsByTagName('label');
         var o = '';
         var i = 0;
@@ -235,27 +235,27 @@ function TypeSelectMenu(head, menu, value)
                 switch(event.keyCode)
                 {
                 case 39:
-                case 40:             // µ±°´ÏÂ¼ıÍ·Ê±£¬½¹µãÒÆµ½ÏÂÒ»Ïî¡£
+                case 40:             // å½“æŒ‰ä¸‹ç®­å¤´æ—¶ï¼Œç„¦ç‚¹ç§»åˆ°ä¸‹ä¸€é¡¹ã€‚
                     this.blur();
                     this.next.focus();
                     break;
                 case 37:
-                case 38:             // µ±°´ÉÏ¼ıÍ·Ê±£¬½¹µãÒÆµ½ÉÏÒ»Ïî¡£
+                case 38:             // å½“æŒ‰ä¸Šç®­å¤´æ—¶ï¼Œç„¦ç‚¹ç§»åˆ°ä¸Šä¸€é¡¹ã€‚
                     this.blur();
                     this.prev.focus();
                     break;
                 case 27:
-                case 13:             // »Ø³µ£¬¹Ø±Õ²Ëµ¥¡£
+                case 13:             // å›è½¦ï¼Œå…³é—­èœå•ã€‚
                     this.blur();
                     Close();
                     head.obj.focus();
-                    return false;    // ±ØĞë·µ»Øfalse£¬·ñÔò½«´¥·¢Ìá½»¡£
+                    return false;    // å¿…é¡»è¿”å›falseï¼Œå¦åˆ™å°†è§¦å‘æäº¤ã€‚
                     break;
                 case 32:
-                    return true;     // ¿ª·Å¿Õ¸ñ¼ü£¬ÓÃÓÚÖ´ĞĞÑ¡Ôñ¡£
+                    return true;     // å¼€æ”¾ç©ºæ ¼é”®ï¼Œç”¨äºæ‰§è¡Œé€‰æ‹©ã€‚
                     break;
                 }
-                return false;        // ×¢Òâ£¬±ØĞëÓĞÕâ¾ä£¬·ñÔòµ±ÓÃÉÏ¡¢ÏÂ¼ıÍ·Ñ¡ÔñÊ±£¬½«Ìø¹ıÁ½¸öÑ¡Ïî!
+                return false;        // æ³¨æ„ï¼Œå¿…é¡»æœ‰è¿™å¥ï¼Œå¦åˆ™å½“ç”¨ä¸Šã€ä¸‹ç®­å¤´é€‰æ‹©æ—¶ï¼Œå°†è·³è¿‡ä¸¤ä¸ªé€‰é¡¹!
             }
             o.focus = function()
             {
@@ -266,12 +266,12 @@ function TypeSelectMenu(head, menu, value)
             {
                 this.className = '';
             }
-            // ¼ÇÂ¼Ç°¡¢ºóÔªËØ£¨Ë«ÏòÑ­»·£©
+            // è®°å½•å‰ã€åå…ƒç´ ï¼ˆåŒå‘å¾ªç¯ï¼‰
             o.prev = (i==0) ? items[items.length - 1] : items[i-1];
             o.next = (i==items.length - 1) ? items[0] : items[i+1];
         }
 
-        // ÉèÖÃÏÂÀ­¹ö¶¯Ìõ
+        // è®¾ç½®ä¸‹æ‹‰æ»šåŠ¨æ¡
         if(i > 16)
         {
             menu.obj.style.height = '418px';

@@ -447,12 +447,12 @@ int Page::OutHead()
 {
     FUNCTION_TRACK(); // 函数轨迹跟踪
     const string head = ""
-                  "HTTP/1.1 200 OK\n"
-                  "Date: " + GmgTime() + "\n"
-                  "Server: NoteSrv v0.6\n"
-                  "Keep-Alive: timeout=15, max=100\n"
-                  "Content-Type: text/html; charset=GB2312\n"
-                  "\n";
+                  "HTTP/1.1 200 OK\r\n"
+                  "Date: " + GmgTime() + "\r\n"
+                  "Server: NoteSrv v0.7\r\n"
+                  "Keep-Alive: timeout=15, max=100\r\n"
+                  "Content-Type: text/html; charset=utf-8\r\n"
+                  "\r\n";
     // 发送
     m_request->GetConnect()->Send(head);
     return OK;
@@ -504,12 +504,12 @@ int Page::OutBody()
  */
 void Page::ChangeTo(const string &url)
 {
-    const string html = "HTTP/1.0 302 Moved Temporarily\n"
-                        "Server: MoteSrv v0.5\n"
-                        "Connection: close\n"
-                        "Status: 302 Found\n"
-                        "Location: " + url + "\n"
-                        "\n";
+    const string html = "HTTP/1.0 302 Moved Temporarily\r\n"
+                        "Server: MoteSrv v0.5\r\n"
+                        "Connection: close\r\n"
+                        "Status: 302 Found\r\n"
+                        "Location: " + url + "\r\n"
+                        "\r\n";
 
     Connect * const connect = m_request->GetConnect();
     connect->Send(html);

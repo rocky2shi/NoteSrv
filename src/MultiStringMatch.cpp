@@ -16,7 +16,7 @@ namespace MULTISTRINGMATCH_SPACE
 
 
 // 用于查找，strings子串集
-MultiStringMatch::MultiStringMatch(vector<string> &strings, bool bIgnoreCase/*=true*/)
+MultiStringMatch::MultiStringMatch(vector<string> &strings, bool bIgnoreCase/*=false*/)
                     : m_from( strings ),
                       m_bIgnoreCase( bIgnoreCase )
 {
@@ -125,9 +125,13 @@ void MultiStringMatch::MarkStateTable()
                 m_StateTable[ current ][ ch ] = next;
 
                 // 用于不区分大小写操作时
-                if( m_bIgnoreCase && isupper(ch) )
+                if( m_bIgnoreCase )
                 {
-                    int c = tolower(ch);
+                    /* 把字符ch对应的大写或小写同时记录到转换表，及
+                     * 字母出现表；这样，对不区分大小写的操作将花一
+                     * 倍内存；
+                     */
+                    int c = isupper(ch) ? tolower(ch) : toupper(ch);
                     m_StateTable[ current ][ c ] = next;
                     m_CharTable[c] = 1; // 标记出现的字符
                 }
