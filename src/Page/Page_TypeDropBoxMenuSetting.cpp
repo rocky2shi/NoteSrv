@@ -54,7 +54,11 @@ int Page_TypeDropBoxMenuSetting::OutBody()
     if("" != submit_modify)
     {
         Submit::Ptr submit( Submit::New("TypeDropBoxMenuSetting", "ModifyTypeDropBoxMenu") );
-        submit->Deal(this);
+        int ret = submit->Deal(this);
+        if(ret < 0)
+        {
+            LOG_ERROR("Modify deal error, ret=[%d]", ret);
+        }
     }
 
     /*
@@ -64,8 +68,13 @@ int Page_TypeDropBoxMenuSetting::OutBody()
     if("" != submit_new)
     {
         Submit::Ptr submit( Submit::New("TypeDropBoxMenuSetting", "AddTypeDropBoxMenu") );
-        submit->Deal(this);
+        int ret = submit->Deal(this);
+        if(ret < 0)
+        {
+            LOG_ERROR("Create deal error, ret=[%d]", ret);
+        }
     }
+
     LOG_DEBUG("submit_new=[%s]", submit_new.c_str());
 
     return Page::OutBody();

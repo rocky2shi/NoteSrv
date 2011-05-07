@@ -76,7 +76,15 @@ int Submit_AddTypeDropBoxMenu::Deal(Page *page)
     menu->SetItem(key, "hotspot", "0");
 
     // 保存
-    return menu->Save();
+    int ret = menu->Save();
+    if(ret < 0)
+    {
+        LOG_ERROR("Save menu error: [%s]", type_title.c_str());
+        menu->DelItem(key);
+        return ret;
+    }
+
+    return OK;
 }
 
 

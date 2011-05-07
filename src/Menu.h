@@ -59,6 +59,9 @@ class Menu
         // 加载菜单信息（从文件）
         Menu *Load(const string &username, const string &menuname);
 
+        // 检查缓存（不存在返NULL）
+        Menu *CheckCache(const string &username, const string &menuname);
+
     private:
         // [用户, 菜单名] => 菜单
         map< string, map<string, Menu*> > m_MenuList;

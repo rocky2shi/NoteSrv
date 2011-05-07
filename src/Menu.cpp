@@ -48,16 +48,11 @@ Menu *Menu::Cache::Get(const string &username, const string &menuname)
     {
         SHARE_LOCK(m_lock);
 
-        // 菜单是否存在于缓存中，且有效
-        map< string, map<string, Menu*> >::iterator itUser = m_MenuList.find( username );
-        if( m_MenuList.end() != itUser )
+        // 先查缓存
+        Menu *menu = CheckCache(username, menuname);
+        if(NULL != menu)
         {
-            map<string, Menu*> &menu = itUser->second;
-            map<string, Menu*>::iterator itMenu = menu.find( menuname );
-            if(menu.end() != itMenu)
-            {
-                return itMenu->second;
-            }
+            return menu;
         }
     }
 
@@ -65,8 +60,15 @@ Menu *Menu::Cache::Get(const string &username, const string &menuname)
         // 存在多线程操作，需加锁；
         UNIQUE_LOCK(m_lock);
 
+        // 再次查看缓存，因为可能别的线程事先完成了下面的操作；
+        Menu *menu = CheckCache(username, menuname);
+        if(NULL != menu)
+        {
+            return menu;
+        }
+
         // 缓存不存在该菜单信息，则重加载；
-        Menu *menu = Load(username, menuname);
+        menu = Load(username, menuname);
         if(NULL == menu)
         {
             // 返回无数据对象（以避免外部做NULL指针检测）
@@ -77,6 +79,9 @@ Menu *Menu::Cache::Get(const string &username, const string &menuname)
                 }
             };
             static Empty menu;
+            LOG_ERROR("Loading menu error, username=[%s] menuname=[%s], "
+                      "return a empty obj.",
+                        username.c_str(), menuname.c_str());
             return &menu;
         }
         return menu;
@@ -117,14 +122,10 @@ Menu *Menu::Cache::Load(const string &username, const string &menuname)
     Menu *menu = new Menu(username, menuname);
     if(NULL == menu)
     {
+        LOG_ERROR("new Menu error: [%s] [%s]", username.c_str(), menuname.c_str());
         return NULL;
     }
-    // 无效（或空菜单）
-    if( ! menu->isValid() )
-    {
-        delete menu;
-        return NULL;
-    }
+
     // 先去掉旧数据（注：即使m_MenuList[ username ] [ menuname ]为NULL，delete NULL也不会出错；）
     delete m_MenuList[ username ] [ menuname ];
     m_MenuList[ username ] [ menuname ] = menu;
@@ -133,6 +134,23 @@ Menu *Menu::Cache::Load(const string &username, const string &menuname)
 }
 
 
+// 检查缓存（不存在返NULL）
+Menu *Menu::Cache::CheckCache(const string &username, const string &menuname)
+{
+    // 菜单是否存在于缓存中，且有效
+    map< string, map<string, Menu*> >::iterator itUser = m_MenuList.find( username );
+    if( m_MenuList.end() != itUser )
+    {
+        map<string, Menu*> &menu = itUser->second;
+        map<string, Menu*>::iterator itMenu = menu.find( menuname );
+        if(menu.end() != itMenu)
+        {
+            return itMenu->second;
+        }
+    }
+
+    return NULL;
+}
 
 
 
@@ -285,7 +303,13 @@ int Menu::Save()
 {
     // 执行设置完后，执行排序；
     m_items.sort();
-    return m_menu.Write(m_cfg);
+    int ret = m_menu.Write(m_cfg);
+    if(ret < 0)
+    {
+        LOG_ERROR("Write error: [%s]", m_cfg.c_str());
+        return ret;
+    }
+    return OK;
 }
 
 // 查找指定的字段（默认为title），找到则返回key值，否则返回空串；

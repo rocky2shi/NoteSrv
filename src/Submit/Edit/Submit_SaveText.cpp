@@ -117,9 +117,15 @@ int Submit_SaveText::AdjustType(Page *page, const string &types)
     for(it = items.begin(); items.end() != it; it++)
     {
         const string &key = *it;
+
         // 更新排序所用的index字段为当前的最大值（秒数是一顺序值），使之靠前；
         menu->SetItem(key, "index", NowTime(""));
+
+        // 增加引用计数
+        const string &hotspot = menu->GetItem(key, "hotspot");
+        menu->SetItem(key, "hotspot", Inc(hotspot));
     }
+
     // 保存
     return menu->Save();
 }
