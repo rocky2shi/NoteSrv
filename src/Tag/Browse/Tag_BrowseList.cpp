@@ -111,6 +111,7 @@ int Tag_BrowseList::Filter(const string &key, const Conf *pack, Page *page, map<
     }
 
     /*
+<<<<<<< HEAD
      * 关键字过滤
      *   对于查找的是标题，还是正文，操作都是相同的，只是主串值不同
      */

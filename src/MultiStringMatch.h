@@ -104,5 +104,4 @@ history:
  2010-05-21: v0.3，修改MultiStringMatch::MatchKey()中的int ch改为unsigned char ch；
  2011-05-05: v0.4，修改构造转换表的函数，加入忽略大小写查找（替换的没改）；
 
-
 ***/
