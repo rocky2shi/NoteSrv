@@ -93,7 +93,15 @@ int Tag_BrowseList::Filter(const string &key, const Conf *pack, Page *page, map<
     if("1" == timebeginchk && item < qtbegin)
     {
         LOG_DEBUG("Filter [%s] ...", key.c_str());
-        return 1;
+
+        if("create" == time_type)
+        {
+            /* 注意，这个1有特殊作用，见Filter()调用处对
+             * 返回值的处理。[XXX]
+             */
+            return 1; 
+        }
+        return 11;
     }
     if("1" == timeendchk && item > qtend)
     {
@@ -111,7 +119,6 @@ int Tag_BrowseList::Filter(const string &key, const Conf *pack, Page *page, map<
     }
 
     /*
-<<<<<<< HEAD
      * 关键字过滤
      *   对于查找的是标题，还是正文，操作都是相同的，只是主串值不同
      */
@@ -230,13 +237,11 @@ string Tag_BrowseList::Get(Page *page)
     } AutoMatchsFree( matchs ); // 自动释放执行对象
 
 
-    // 取当前客户端用户所用的屏幕宽度，转换为每行应显示的字节数；
-    const string &width = page->GetRequest()->GetCookie("window.screen.width");
-    const string &byte = EmptyStringToDefault(cfg->Get("screen.width.to.byte", width), "90");
-    const int LINE_LENl = atoi(byte.c_str());
-
-    LOG_DEBUG("width=[%s] LINE_LENl=[%d]", width.c_str(), LINE_LENl);
-
+    // // 取当前客户端用户所用的屏幕宽度，转换为每行应显示的字节数；
+    // const string &width = page->GetRequest()->GetCookie("window.screen.width");
+    // const string &byte = EmptyStringToDefault(cfg->Get("screen.width.to.byte", width), "90");
+    // const int LINE_LENl = atoi(byte.c_str());
+    const int LINE_LENl = 280; // 对于大多数屏幕来说够了
     const string &datapath = user->DataDir();
     Connect * const connect = page->GetRequest()->GetConnect();
 
@@ -286,7 +291,7 @@ string Tag_BrowseList::Get(Page *page)
         {
             /*
              * 注意，这里返回值为1时，表示当前这条数据以后的数
-             * 据时间都比设定的早，直接退出，不需是读取往后的文
+             * 据时间都比设定的早，直接退出，不需再读取往后的文
              * 件。因为取出的文件是接日期顺序排序的。
              */
             if(1 == ret)

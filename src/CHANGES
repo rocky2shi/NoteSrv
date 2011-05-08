@@ -165,4 +165,13 @@
 [2011-05-07]
 1. 去掉Menu::Cache::Load()中的菜单有效性检测，因为菜单可能是新建的；
 2. 修改菜单项的引用计数，在Submit_SaveText::AdjustType()中；
+3. 去掉Tag/Browse/Tag_BrowseList.cpp中根据前浏览器截取长度的代码，设
+   为固定值，再由前台的css代码来自动隐藏超出部分；
+
+[2011-05-08] 祝：天出所有母亲建康活乐！
+1. 在编码转换ChineseCoding类中加入编码检测接口TestCoding()、
+   ChineseCoding::GB18030ToUTF8()； 
+2. Ini.cpp、Tag/Tag_Text.cpp中加入utf8转编码；
+3. 修改Tag/Browse/Tag_BrowseList.cpp中的过滤条件；
+4. 编写用于修改附件中文件名的包装脚本system/tool/b.sh；
 

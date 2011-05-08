@@ -1,5 +1,6 @@
 // Rocky 2010-04-29 18:24:51
 #include "Ini.h"
+#include "ChineseCoding.h"
 namespace INI_SPACE
 {
 
@@ -135,7 +136,7 @@ int Ini::Read(const string &filename)
         /*
          * 取属性值
          */
-        string value = end + 1;
+        string value = (end + 1);
         //LOG_DEBUG("%s=%s", attribute, value);
 
         // 如取一行还不完全取完数据，接着再取；
@@ -145,6 +146,17 @@ int Ini::Read(const string &filename)
             // 删除回车换行符，并查看是否取到了一完整行
             CUT_CR(buf, ret);
             value += buf;
+        }
+
+        /* [Rocky 2011-05-08 14:56:17]
+         * gb18030转换为utf-8；
+         *  （注：对于被加密的正文部分在Tag_Text::Get()中转换，因
+         *    为在此处密码不可知；）
+         */
+        int ret = ChineseCoding::GB18030ToUTF8(value);
+        if(ret < 0)
+        {
+            LOG_ERROR("gb18030 to utf-8 error, key=[%s]", section.c_str());
         }
 
         // 插入

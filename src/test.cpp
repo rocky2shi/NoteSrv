@@ -214,13 +214,13 @@ int main(int argc, char *argv[])
                     break;
                 }
                 buf[ret] = '\0';
-                LOG_DEBUG("%d. [%s]", i, buf);
+                Debug("%d. [%s]", i, buf);
                 i++;
             }
 
             pConnect->Close();
 
-            LOG_DEBUG("已断开");
+            Debug("已断开");
 
 
             if( strstr(buf, "exit") != NULL )
@@ -238,7 +238,7 @@ int main(int argc, char *argv[])
 
         Connect *p =Connect::New();
 
-        LOG_DEBUG("p=[%p]", p);
+        Debug("p=[%p]", p);
         ConnectQueue::instance()->push(p);
         ConnectQueue::instance()->push(p);
         ConnectQueue::instance()->push(p);
@@ -246,16 +246,16 @@ int main(int argc, char *argv[])
         Connect *p2;
 
         p2 = ConnectQueue::instance()->pop();
-        LOG_DEBUG("p2=[%p]", p2);
+        Debug("p2=[%p]", p2);
 
         p2 = ConnectQueue::instance()->pop();
-        LOG_DEBUG("p2=[%p]", p2);
+        Debug("p2=[%p]", p2);
 
         p2 = ConnectQueue::instance()->pop();
-        LOG_DEBUG("p2=[%p]", p2);
+        Debug("p2=[%p]", p2);
 
         p2 = ConnectQueue::instance()->pop();
-        LOG_DEBUG("p2=[%p]", p2);
+        Debug("p2=[%p]", p2);
 
     #endif
     }
@@ -276,7 +276,7 @@ int main(int argc, char *argv[])
 
         while( (ret = file.GetLine(buf, 8)) > 0 )
         {
-            LOG_DEBUG("[%d] [%s]", ret, buf);
+            Debug("[%d] [%s]", ret, buf);
         }
 
 
@@ -299,13 +299,13 @@ int main(int argc, char *argv[])
             printf("[%s]\n", file.name());
         }
 
-        LOG_DEBUG("-----------------------------------------");
+        Debug("-----------------------------------------");
 
 //        GetFileList::dir_iterator dir(list);
 //
 //        while( dir.next() )
 //        {
-//            LOG_DEBUG("[%s]", dir.name());
+//            Debug("[%s]", dir.name());
 //        }
 
     #endif
@@ -321,13 +321,13 @@ int main(int argc, char *argv[])
 //
 //        ini.Dump();
 //
-//        LOG_DEBUG("-------------------------------------------");
+//        Debug("-------------------------------------------");
 //
 //        ini.Del("8", "port");
 //
 //        ini.Dump();
 //
-//        LOG_DEBUG("-------------------------------------------");
+//        Debug("-------------------------------------------");
 //
 //        ini.Set("a", "name", "rocky");
 //        ini.Set("a", "name2", "rocky2");
@@ -364,7 +364,7 @@ int main(int argc, char *argv[])
                 printf("%s=%s\n", itPack.GetName(), itPack.GetValue());
             }
 
-            LOG_DEBUG("*****************************************");
+            Debug("*****************************************");
         }
 
 
@@ -768,14 +768,14 @@ int main(int argc, char *argv[])
 
         pack.Dump();
 
-        LOG_DEBUG("------------------------");
+        Debug("------------------------");
 
         Ini all;
         all.Set("20100515020544", Conf());
         user.Get( all ); // 读出所有数据
         all.Dump();
 
-        LOG_DEBUG("------------------------");
+        Debug("------------------------");
 
         {
         Ini all;
@@ -784,7 +784,7 @@ int main(int argc, char *argv[])
         all.Dump();
         }
 
-        LOG_DEBUG("------------------------");
+        Debug("------------------------");
 
     #endif
     }
@@ -806,11 +806,11 @@ int main(int argc, char *argv[])
 
         code.Converter(from, to);
 
-        LOG_DEBUG("---------------------------");
-        LOG_DEBUG("[%s]", from.c_str());
-        LOG_DEBUG("---------------------------");
-        LOG_DEBUG("[%s]", to.c_str());
-        LOG_DEBUG("---------------------------");
+        Debug("---------------------------");
+        Debug("[%s]", from.c_str());
+        Debug("---------------------------");
+        Debug("[%s]", to.c_str());
+        Debug("---------------------------");
 
 
 
@@ -1019,7 +1019,7 @@ int main(int argc, char *argv[])
 
         sleep(3);
 
-        LOG_DEBUG("****************** begin *******************************");
+        Debug("****************** begin *******************************");
 
         char s[] = "aaaaaa";
 
@@ -1030,7 +1030,7 @@ int main(int argc, char *argv[])
 
         sleep(35);
 
-        LOG_DEBUG("****************** end *******************************");
+        Debug("****************** end *******************************");
 
     #endif
     }
@@ -1131,7 +1131,7 @@ int main(int argc, char *argv[])
                                    "'" + tmpfile2 + "' "
                                    "'" + tmpfile3 + "' ";
                 int ret = system(cmd.c_str());
-                LOG_DEBUG("ret=[%d] cmd=[%s]", ret, cmd.c_str());
+                Debug("ret=[%d] cmd=[%s]", ret, cmd.c_str());
                 if(0 != ret)
                 {
                     LOG_ERROR("Command error: [%s]", cmd.c_str());
@@ -1315,7 +1315,7 @@ int main(int argc, char *argv[])
     }
 
     {// 测试 WebHtmlToText
-    #if 1
+    #if 0
 
         // string s = "s<span id=\"rk_v3_20100611191030\">sss&lt;papas-lt--mspss[pa]ssssAs</span>d";
         string s = argc>1?argv[1]:"---abc---def---d--e--f---ghi";
@@ -1377,7 +1377,57 @@ int main(int argc, char *argv[])
     #endif
     }
 
+    {// 测试 XXX
+    #if 0
 
+        FileObj file(argv[1]);
+        ChineseCoding code(argv[2], argv[3]);
+
+        char *p = new char[ file.Size() + 1 ];
+
+        int ret = file.Read(p, file.Size());
+
+        p[ret] = '\0';
+
+        const string from = p;
+        string to;
+
+        ret = code.Converter(from, to);
+
+        Debug("ret=[%d]", ret);
+        Debug("---------------------------");
+        Debug("from=[%s]", from.c_str());
+        Debug("---------------------------");
+        Debug("to=[%s]", to.c_str());
+        Debug("---------------------------");
+
+
+
+    #endif
+    }
+
+    {// 测试 XXX    Rocky 2011-05-08 14:35:56
+    #if 1
+
+        FileObj file(argv[1]);
+        char *p = new char[ file.Size() + 1 ];
+        int ret = file.Read(p, file.Size());
+        p[ret] = '\0';
+
+        ret = ChineseCoding::TestCoding(p, "utf-8");
+        Debug("utf-8=[%d]", ret);
+
+        ret = ChineseCoding::TestCoding(p, "utf8");
+        Debug("utf8=[%d]", ret);
+
+        ret = ChineseCoding::TestCoding(p, "gb18030");
+        Debug("gb18030=[%d]", ret);
+
+        ret = ChineseCoding::TestCoding(p, "gb2312");
+        Debug("gb2312=[%d]", ret);
+
+    #endif
+    }
     //sleep(2);
     return 0;
 }

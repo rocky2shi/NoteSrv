@@ -3,6 +3,7 @@
 #include "Encrypt.h"
 #include "Page.h"
 #include "UserData.h"
+#include "ChineseCoding.h"
 namespace TAG_TEXT_SPACE
 {
 
@@ -92,8 +93,19 @@ string Tag_Text::Get(Page *page)
     {
         // 该key对应数据的密码（注意，是客户端传来的明文密码）
         const string &paswd = page->GetRequest()->GetField("password");
-        const string &str = Encrypt(paswd).decrypt( text );
-        LOG_DEBUG("Decrypt...");
+        string str = Encrypt(paswd).decrypt( text );
+
+        /* gb18030转换为utf-8；
+         *   （注：对于被加密的正文部分在这里解密，未加密部分已
+         *     在Ini::Read()中转换；）
+         */
+        int ret = ChineseCoding::GB18030ToUTF8(str);
+        if(ret < 0)
+        {
+            LOG_ERROR("gb18030 to utf-8 error, key=[%s]",
+                            page->GetCurrentKey().c_str());
+        }
+
         return ThisTextToWeb( str );
     }
 
