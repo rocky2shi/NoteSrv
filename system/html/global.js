@@ -73,7 +73,7 @@ if(document.title != '')
     str += '  </tr>';
     str += '</table>';
 
-    str += '<table width="200" border=0 align=right cellpadding=0 style="position:absolute;width:16%;z-index:30;right:5%;">';
+    str += '<table width="200" border=0 align=right cellpadding=0 style="position:absolute;width:16%;z-index:30;right:2%;">';
     str += '    <tr>';
     str += '        <td width=98% height=18 align=right colspan="2">';
 

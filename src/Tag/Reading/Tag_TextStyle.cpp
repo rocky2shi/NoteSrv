@@ -72,8 +72,7 @@ string Tag_TextStyle::Get(Page *page)
     const string &font_family = EmptyStringToDefault(pack->Get("font_family"), "楷体_GB2312");
     const string &font_bgcolor = EmptyStringToDefault(pack->Get("font_bgcolor"), "#000000");
 
-    string html = "margin: 13px 20px; padding:6px; "
-                  "font-weight:" + font_weight + "; "
+    string html = "font-weight:" + font_weight + "; "
                   "font-style:" + font_style + "; "
                   "text-decoration:" + font_text_decoration + "; "
                   "font-size:" + font_size + "pt; "

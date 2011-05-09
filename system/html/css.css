@@ -8,8 +8,8 @@
 
 body{
 	font-size:14px;
-	margin-left: 5%;
-	margin-right: 5%;
+	margin-left: 2%;
+	margin-right: 2%;
 	background-color:#808080;
 }
 
@@ -142,10 +142,10 @@ a:hover.time{
 }
 
 #title_item{
-	color:#FA8072; font-size:38px; font-family:"华文新魏"; position:absolute; top:28px; left:190px; z-Index:12; white-space: nowrap;
+	color:#FA8072; font-size:38px; font-family:"华文新魏"; position:absolute; top:28px; left:156px; z-Index:12; white-space: nowrap;
 }
 #title_item2{
-	color:#ADD8E6; font-size:38px; font-family:"华文新魏"; position:absolute; top:30px; left:192px; z-Index:11; white-space: nowrap;
+	color:#ADD8E6; font-size:38px; font-family:"华文新魏"; position:absolute; top:30px; left:158px; z-Index:11; white-space: nowrap;
 }
 
 #login_user{

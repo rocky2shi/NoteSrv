@@ -8,11 +8,13 @@
     color:#FA8072;
     margin-top:3px;
     white-space: nowrap;
-
+}
+.auto_hide{
     /* 自动隐藏超出的部分  */
     width: 98%;
     overflow: hidden;          
     text-overflow: ellipsis;
+    margin-top:-21px;
 }
 </style> 
  
@@ -338,6 +340,7 @@ function Init()
     one_obj = GetObj('choice_one');
     more_obj = GetObj('choice_more');
  
+    new MoveLayer('div_query');
     ShowToCenter.MoveToCenter('div_query');
     ShowToCenter.MoveToCenter('div_dosome');
     ShowToCenter.MoveToCenter('div_backup');
@@ -362,9 +365,11 @@ function Init()
 </script>
 
 <!-- 数据列表 -->
+<div class="auto_hide">
 <ol id='date_list' class='DISCOLOR'>
 <!--$BrowseList$-->
 </ol>
+</div>
 
 
 <!-- 搜索对话框 -->
