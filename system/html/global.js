@@ -25,7 +25,7 @@ function DefaultInitProc()
     //Calculator();                   // 计算器
     LoginUser();
     OutErrMsg();                    // 输出信息
-    LoginWin();                     // 登录处理
+    Online();                       // 在线检测
     Loadding();                     // 预加载
     // Jump("scroll_up_down");      // 初始化转跳
     SetClock('clock');              // 设置显示时钟
@@ -120,14 +120,12 @@ document.write('<script language=javascript src="/Common.js"><\/script>\n');
 document.write('<link rel="stylesheet" href="/css.css" type="text/css">\n');
 document.write('<script language=javascript src="/library.js"><\/script>\n');
 document.write('<script language=javascript src="/clock.js"><\/script>\n');
-//document.write('<script language=javascript src="/calendar.js"><\/script>\n');
-//document.write('<script language=javascript src="/calculator.js"><\/script>\n');
 document.write('<script language=javascript src="/OverLayer.js"><\/script>\n');
 document.write('<script language=javascript src="/ShowToCenter.js"><\/script>\n');
 document.write('<script language=javascript src="/Keyboard.js"><\/script>\n');
 document.write('<script language=javascript src="/Menu.js"><\/script>\n');
 document.write('<script language=javascript src="/Bookmark.js"><\/script>\n');
 document.write('<script language=javascript src="/Logo.js"><\/script>\n');
-document.write('<script language=javascript src="/Tips.js"><\/script>\n');  // [Rocky 2009-12-08 01:04:48]
-document.write('<script language=javascript src="/Login.js"><\/script>\n'); // [Rocky 2010-05-29 17:13:05]
+document.write('<script language=javascript src="/Tips.js"><\/script>\n');      // [Rocky 2009-12-08 01:04:48]
+document.write('<script language=javascript src="/Online.js"><\/script>\n');    // [Rocky 2010-11-18 17:58:40]
 

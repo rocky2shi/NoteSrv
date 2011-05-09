@@ -7,7 +7,7 @@ namespace VERSION_SPACE
 
 
 // 版本号
-#define VV      "v0.6.12"
+#define VV      "v0.7"
 
 
 
