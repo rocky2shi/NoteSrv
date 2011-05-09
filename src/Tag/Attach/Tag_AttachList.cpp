@@ -2,6 +2,7 @@
 #include "Page.h"
 #include "UserData.h"
 #include "Tag_AttachList.h"
+#include "ChineseCoding.h"
 namespace TAG_ATTACHLIST_SPACE
 {
 
@@ -106,25 +107,33 @@ string Tag_AttachList::Get(Page *page)
         // 跳过前缀(key + '.')
         basename += key.length() + 1;
 
-        // 文件名转为url编码
-        const string sFileOrg = FilenameDecode(basename);  // 文件名，解码为可显示形式；
-        const string sFileUrl = UrlCode(basename);         // 文件名，url格式；
-
+        // 文件名转为url编码 （类似代码还位于Tag_ImageList.cpp中 [XXX]）
+        string sFileOrg = FilenameDecode(basename); // 文件名，解码为可显示形式；
+        const string sFileUrl = UrlCode(basename);  // 文件名，url格式；
+        ChineseCoding::GB18030ToUTF8(sFileOrg);     /* 早期代码中，存放的文件名
+                                                     * 是gb2312格式，需转换；
+                                                     */
         /*
          * 不同的页面输出不同的处理形式
          */
         if("reading" == pagename)
         {
             // reading页面（顶上的附件列表）
-            // <a href='download?key=20100521163715&file=logo%2Egif%2Epng' title='2.29KB' target='tmp_iframe'>logo.gif.png </a>
-            html += " <a href='download?key=" + key + "&file=" + sFileUrl + "' title='" + sFileSize + "' target='tmp_iframe'>" + sFileOrg + " </a>\n";
+            // <a href='download?key=20100521163715&file=logo%2Egif%2Epng'
+            //        title='2.29KB' target='tmp_iframe'>logo.gif.png </a>
+            html += " <a href='download?key=" + key + "&file=" + sFileUrl
+                 + "' title='" + sFileSize + "' target='tmp_iframe'>"
+                 + sFileOrg
+                 + " </a>\n";
         }
         else
         {
             // 其它（附件）页面的输出
             html += "  <li>\n"
-                    "    <a href='download?key=" + key + "&file=" + sFileUrl + "' title='" + sFileSize + "' target='tmp_iframe'>" + sFileOrg + " </a>\n"
-                    "    <a href='#' title='删除文件' OnClick=\"Delete(this, '" + key + "', '" + sFileUrl + "', '" + sFileOrg + "')\">×</a>\n"
+                    "    <a href='download?key=" + key + "&file=" + sFileUrl
+                 +  "' title='" + sFileSize + "' target='tmp_iframe'>" + sFileOrg + " </a>\n"
+                    "    <a href='#' title='删除文件' OnClick=\"Delete(this, '"
+                 +  key + "', '" + sFileUrl + "', '" + sFileOrg + "')\">×</a>\n"
                     "  </li>\n"
                     "\n";
         }

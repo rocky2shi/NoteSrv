@@ -99,7 +99,7 @@ int Tag_BrowseList::Filter(const string &key, const Conf *pack, Page *page, map<
             /* 注意，这个1有特殊作用，见Filter()调用处对
              * 返回值的处理。[XXX]
              */
-            return 1; 
+            return 1;
         }
         return 11;
     }

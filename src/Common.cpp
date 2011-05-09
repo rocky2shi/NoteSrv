@@ -1163,59 +1163,37 @@ const string Crypt(const string &key, const string salt)
 // 是否为图片：jpg, jpeg, png, gif, ...
 bool isImage(const string &type)
 {
-    static const string suffix[] = {
-        "bmp",
-        "gif",
-        "ico",
-        "jpeg",
-        "jpg",
-        "png",
-        "tif",
-        ""
-    };
-
     if("" == type)
     {
         return false;
     }
-
-    int i;
-    for(i=0; "" != suffix[i]; i++)
-    {
-        if(type == suffix[i])
-        {
-            return true;
-        }
-    }
-    return false;
+    vector<string> suffix;
+    suffix.push_back("png");
+    suffix.push_back("jpg");
+    suffix.push_back("gif");
+    suffix.push_back("jpeg");
+    suffix.push_back("ico");
+    suffix.push_back("tif");
+    suffix.push_back("bmp");
+    static MultiStringMatch s(suffix, true); // true: 忽略大小写
+    return s.MatchOneKey(type);
 }
 
 // 是否为文本文件：txt, js, css, html, htm, ...
 bool isText(const string &type)
 {
-    static const string suffix[] = {
-        "htm",
-        "js",
-        "css",
-        "txt",
-        "html",
-        ""
-    };
-
     if("" == type)
     {
         return false;
     }
-
-    int i;
-    for(i=0; "" != suffix[i]; i++)
-    {
-        if(type == suffix[i])
-        {
-            return true;
-        }
-    }
-    return false;
+    vector<string> suffix;
+    suffix.push_back("htm");
+    suffix.push_back("html");
+    suffix.push_back("js");
+    suffix.push_back("css");
+    suffix.push_back("txt");
+    static MultiStringMatch s(suffix, true); // true: 忽略大小写
+    return s.MatchOneKey(type);
 }
 
 /*

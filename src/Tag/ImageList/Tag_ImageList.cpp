@@ -3,6 +3,7 @@
 #include "User.h"
 #include "GetFileList.h"
 #include "Tag_ImageList.h"
+#include "ChineseCoding.h"
 namespace TAG_IMAGELIST_SPACE
 {
 
@@ -97,11 +98,13 @@ string Tag_ImageList::Get(Page *page)
         // 跳过前缀(key + '.')
         basename += key.length() + 1;
 
-        // 文件名转为url编码
-        const string sFileOrg = FilenameDecode(basename);  // 文件名，解码为可显示形式；
-        const string sFileUrl = UrlCode(basename);         // 文件名，url格式；
+        // 文件名转为url编码（类似代码还位于Tag_AttachList.cpp中 [XXX]）
+        string sFileOrg = FilenameDecode(basename); // 文件名，解码为可显示形式；
+        const string sFileUrl = UrlCode(basename);  // 文件名，url格式；
+        ChineseCoding::GB18030ToUTF8(sFileOrg);      /* 早期代码中，存放的文件名
+                                                     * 是gb2312格式，需转换；
+                                                     */
 
-        // 跳过非图片文件
         const char *type = GetFileType( sFileOrg.c_str() );
         if( ! isImage(type) )
         {
